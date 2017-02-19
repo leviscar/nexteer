@@ -1,0 +1,5 @@
+CREATE TABLE TestModel(
+  id INT IDENTITY,
+  firstName VARCHAR(30) NOT NULL ,
+  lastName VARCHAR(30) NOT NULL
+);
