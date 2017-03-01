@@ -2,6 +2,6 @@
   "name": "ng-spring-boot",
   "dependencies": {
     "jQuery": "latest",
-    "bootstrap-css-only": "latest"
+    "bootstrap": "latest"
   }
 }

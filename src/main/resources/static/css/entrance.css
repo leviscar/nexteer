@@ -1,0 +1,32 @@
+.bg-primary {
+    background-color: #cf4646;
+}
+.bg-primary {
+    color: #fff;
+    background-color: #337ab7;
+}
+header {
+    min-height: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+header, header .header-content {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+header{
+    display: block;
+}
+*{
+    box-sizing: border-box;
+}
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+}
