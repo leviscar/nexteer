@@ -62,7 +62,7 @@ public class SafetyDateRepo {
         String newDate = sdf.format(calendar.getTime());
         List<SafetyDate> res = findByDate(newDate.substring(0, 4), newDate.substring(4, 6), newDate.substring(6, 8));
         if (res.isEmpty()) {
-            jdbc.update("INSERT INTO SafetyDate (year, month, day, safeDates, isSafe) VALUES (?,?,?,?,?)", year, month, day, 1, 1);
+            jdbc.update("INSERT INTO SafetyDate (year, month, day, safeDates, isSafe) VALUES (?,?,?,?,?)", year, month, day, 0, 1);
         } else {
             jdbc.update("INSERT INTO SafetyDate (year, month, day, safeDates, isSafe) VALUES (?,?,?,?,?)", year, month, day, res.get(0).getSafeDates() + 1, 1);
         }
@@ -70,12 +70,14 @@ public class SafetyDateRepo {
 
     /**
      * 重置安全天数
-     *
      * @param safetyDate
      */
     public SafetyDate resetSafetyDate(SafetyDate safetyDate) {
-        safetyDate.setIsSafe(0);
-        safetyDate.setSafeDates(1);
+        if (safetyDate.getSafeDates() == 0){
+            safetyDate.setIsSafe(0);
+        } else {
+            safetyDate.setIsSafe(1);
+        }
         jdbc.update("UPDATE SafetyDate SET isSafe = ?, safeDates = ? WHERE YEAR = ? and MONTH  = ? and DAY = ?",
                 safetyDate.getIsSafe(), safetyDate.getSafeDates(), safetyDate.getYear(), safetyDate.getMonth(), safetyDate.getDay());
         return safetyDate;
