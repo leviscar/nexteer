@@ -32,11 +32,11 @@ public class SafetyDateRepo {
             @Override
             public SafetyDate mapRow(ResultSet resultSet, int i) throws SQLException {
                 SafetyDate safetyDate = new SafetyDate();
-                safetyDate.setIsSafe(resultSet.getInt("isSafe"));
+                safetyDate.setIs_safe(resultSet.getInt("is_safe"));
                 safetyDate.setYear(resultSet.getString("year"));
                 safetyDate.setMonth(resultSet.getString("month"));
                 safetyDate.setDay(resultSet.getString("day"));
-                safetyDate.setSafeDates(resultSet.getInt("safeDates"));
+                safetyDate.setSafe_dates(resultSet.getInt("safe_dates"));
                 return safetyDate;
             }
         });
@@ -62,24 +62,25 @@ public class SafetyDateRepo {
         String newDate = sdf.format(calendar.getTime());
         List<SafetyDate> res = findByDate(newDate.substring(0, 4), newDate.substring(4, 6), newDate.substring(6, 8));
         if (res.isEmpty()) {
-            jdbc.update("INSERT INTO SafetyDate (year, month, day, safeDates, isSafe) VALUES (?,?,?,?,?)", year, month, day, 0, 1);
+            jdbc.update("INSERT INTO SafetyDate (year, month, day, safe_dates, is_safe) VALUES (?,?,?,?,?)", year, month, day, 1, 1);
         } else {
-            jdbc.update("INSERT INTO SafetyDate (year, month, day, safeDates, isSafe) VALUES (?,?,?,?,?)", year, month, day, res.get(0).getSafeDates() + 1, 1);
+            jdbc.update("INSERT INTO SafetyDate (year, month, day, safe_dates, is_safe) VALUES (?,?,?,?,?)", year, month, day, res.get(0).getSafe_dates() + 1, 1);
         }
     }
 
     /**
      * 重置安全天数
+     *
      * @param safetyDate
      */
     public SafetyDate resetSafetyDate(SafetyDate safetyDate) {
-        if (safetyDate.getSafeDates() == 0){
-            safetyDate.setIsSafe(0);
+        if (safetyDate.getSafe_dates() == 0) {
+            safetyDate.setIs_safe(0);
         } else {
-            safetyDate.setIsSafe(1);
+            safetyDate.setIs_safe(1);
         }
-        jdbc.update("UPDATE SafetyDate SET isSafe = ?, safeDates = ? WHERE YEAR = ? and MONTH  = ? and DAY = ?",
-                safetyDate.getIsSafe(), safetyDate.getSafeDates(), safetyDate.getYear(), safetyDate.getMonth(), safetyDate.getDay());
+        jdbc.update("UPDATE SafetyDate SET is_safe = ?, safe_dates = ? WHERE YEAR = ? and MONTH  = ? and DAY = ?",
+                safetyDate.getIs_safe(), safetyDate.getSafe_dates(), safetyDate.getYear(), safetyDate.getMonth(), safetyDate.getDay());
         return safetyDate;
     }
 }

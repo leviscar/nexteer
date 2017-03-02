@@ -5,37 +5,21 @@ package com.example.model;
  * 安全运行天数
  */
 public class SafetyDate {
-    private Integer iD;
-    private Integer safeDates;
+    private Integer safe_dates;
     private String year;
     private String month;
     private String day;
-    private Integer isSafe; // 0表示不安全，1表示安全
+    private Integer is_safe; // 0表示不安全，1表示安全
 
     public SafetyDate() {
     }
 
-    public SafetyDate(String year, String month, String day, Integer isSafe) {
-        this.year = year;
-        this.month = month;
-        this.day = day;
-        this.isSafe = isSafe;
+    public Integer getSafe_dates() {
+        return safe_dates;
     }
 
-    public Integer getiD() {
-        return iD;
-    }
-
-    public void setiD(Integer iD) {
-        this.iD = iD;
-    }
-
-    public Integer getSafeDates() {
-        return safeDates;
-    }
-
-    public void setSafeDates(Integer safeDates) {
-        this.safeDates = safeDates;
+    public void setSafe_dates(Integer safe_dates) {
+        this.safe_dates = safe_dates;
     }
 
     public String getYear() {
@@ -54,19 +38,19 @@ public class SafetyDate {
         this.month = month;
     }
 
+    public Integer getIs_safe() {
+        return is_safe;
+    }
+
+    public void setIs_safe(Integer is_safe) {
+        this.is_safe = is_safe;
+    }
+
     public String getDay() {
         return day;
     }
 
     public void setDay(String day) {
         this.day = day;
-    }
-
-    public Integer getIsSafe() {
-        return isSafe;
-    }
-
-    public void setIsSafe(Integer issafe) {
-        isSafe = issafe;
     }
 }
