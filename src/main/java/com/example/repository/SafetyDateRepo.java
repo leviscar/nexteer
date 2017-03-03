@@ -1,5 +1,6 @@
 package com.example.repository;
 
+import com.example.mapper.SafetyDateMapper;
 import com.example.model.SafetyDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,19 +28,37 @@ public class SafetyDateRepo {
         this.jdbc = jdbc;
     }
 
+    /**
+     * 根据日期查询相关日期
+     *
+     * @param year
+     * @param month
+     * @param day
+     * @return
+     */
     public List<SafetyDate> findByDate(String year, String month, String day) {
-        return jdbc.query("select * " + "from SafetyDate WHERE YEAR = ? and MONTH = ? and DAY = ?", new Object[]{year, month, day}, new RowMapper<SafetyDate>() {
-            @Override
-            public SafetyDate mapRow(ResultSet resultSet, int i) throws SQLException {
-                SafetyDate safetyDate = new SafetyDate();
-                safetyDate.setIs_safe(resultSet.getInt("is_safe"));
-                safetyDate.setYear(resultSet.getString("year"));
-                safetyDate.setMonth(resultSet.getString("month"));
-                safetyDate.setDay(resultSet.getString("day"));
-                safetyDate.setSafe_dates(resultSet.getInt("safe_dates"));
-                return safetyDate;
-            }
-        });
+        String sql = "select * " + "from safety_date WHERE year = ? and month = ? and day = ?";
+        return jdbc.query(sql, new Object[]{year, month, day}, new SafetyDateMapper());
+    }
+
+    /**
+     * 获得所有日期的相关信息
+     *
+     * @return
+     */
+    public List<SafetyDate> findAll() {
+        String sql = "select * from safety_date";
+        return jdbc.query(sql, new SafetyDateMapper());
+    }
+
+    /**
+     * 获得所有非安全的信息
+     *
+     * @return
+     */
+    public List<SafetyDate> findAllUnsafeDate() {
+        String sql = "select * from safety_date where is_safe = 0";
+        return jdbc.query(sql, new SafetyDateMapper());
     }
 
     /**
@@ -62,9 +81,9 @@ public class SafetyDateRepo {
         String newDate = sdf.format(calendar.getTime());
         List<SafetyDate> res = findByDate(newDate.substring(0, 4), newDate.substring(4, 6), newDate.substring(6, 8));
         if (res.isEmpty()) {
-            jdbc.update("INSERT INTO SafetyDate (year, month, day, safe_dates, is_safe) VALUES (?,?,?,?,?)", year, month, day, 1, 1);
+            jdbc.update("INSERT INTO safety_date (year, month, day, safe_dates, is_safe) VALUES (?,?,?,?,?)", year, month, day, 1, 1);
         } else {
-            jdbc.update("INSERT INTO SafetyDate (year, month, day, safe_dates, is_safe) VALUES (?,?,?,?,?)", year, month, day, res.get(0).getSafe_dates() + 1, 1);
+            jdbc.update("INSERT INTO safety_date (year, month, day, safe_dates, is_safe) VALUES (?,?,?,?,?)", year, month, day, res.get(0).getSafe_dates() + 1, 1);
         }
     }
 
@@ -79,8 +98,18 @@ public class SafetyDateRepo {
         } else {
             safetyDate.setIs_safe(1);
         }
-        jdbc.update("UPDATE SafetyDate SET is_safe = ?, safe_dates = ? WHERE YEAR = ? and MONTH  = ? and DAY = ?",
-                safetyDate.getIs_safe(), safetyDate.getSafe_dates(), safetyDate.getYear(), safetyDate.getMonth(), safetyDate.getDay());
+        if (safetyDate.getLog() == null || "".equals(safetyDate.getLog())) {
+            safetyDate.setLog("Today is running safe!");
+        }
+        List<SafetyDate> res = findByDate(safetyDate.getYear(), safetyDate.getMonth(), safetyDate.getDay());
+        if (res.size() == 0) {
+            jdbc.update("INSERT INTO safety_date (year, month, day, safe_dates, is_safe, log) VALUES (?,?,?,?,?,?)", safetyDate.getYear(), safetyDate.getMonth(),
+                    safetyDate.getDay(), safetyDate.getSafe_dates(), safetyDate.getIs_safe(), safetyDate.getLog());
+        } else {
+            jdbc.update("UPDATE safety_date SET is_safe = ?, safe_dates = ?, log = ? WHERE year = ? and month  = ? and day = ?",
+                    safetyDate.getIs_safe(), safetyDate.getSafe_dates(), safetyDate.getLog(), safetyDate.getYear(), safetyDate.getMonth(),
+                    safetyDate.getDay());
+        }
         return safetyDate;
     }
 }
