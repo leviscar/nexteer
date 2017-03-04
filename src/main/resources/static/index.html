@@ -10,28 +10,61 @@
 <body>
 <table class="data-models-js table table-striped">
     <tr>
-        <th>Name</th>
-        <th>Telephone</th>
-        <th>Email</th>
+        <th>year</th>
+        <th>month</th>
+        <th>day</th>
+        <th>is_safe</th>
+        <th>safety_date</th>
+        <th>log</th>
     </tr>
 </table>
-<button id="fetchModels" class="btn btn-default" type="submit">Button</button>
+<div id="res"></div>
+<button id="fetchModels" class="btn btn-default" type="submit">getAllDates</button>
+<button id="getDates" class="btn btn-default" type="submit">getDates</button>
 <script type="text/javascript">
+    function safety_date(year, month, day, is_safe, safety_date, log) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.is_safe = is_safe;
+        this.safety_date = safety_date;
+        this.log = log;
+    }
 
     $("#fetchModels").bind("click", function () {
 
-        $.get("http://localhost:8080/findAll", function (data) {
+        $.get("http://localhost:8080/safetyDate/getAllDates", function (data) {
 
             $.each(data, function (i, model) {
 
                 $(".data-models-js").append(
-                        "<tr><td>" + model.id + "</td>" +
-                        "<td>" + model.firstName + "</td>" +
-                        "<td>" + model.lastName + "</td></tr>");
+                        "<tr><td>" + model.year + "</td>" +
+                        "<td>" + model.month + "</td>" +
+                        "<td>" + model.day + "</td>" +
+                        "<td>" + model.is_safe + "</td>" +
+                        "<td>" + model.safety_date + "</td>" +
+                        "<td>" + model.log + "</td></tr>");
             });
 
         });
     });
+    var jsonString = new safety_date("2016", "03", "17");
+    $("#getDates").bind("click", function () {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/safetyDate/getDates",
+            data: JSON.stringify(jsonString),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $("#res").html(JSON.stringify(data));
+            },
+            failure: function (errMsg) {
+                console.log(errMsg);
+            }
+        });
+    });
 </script>
+
 </body>
 </html>
