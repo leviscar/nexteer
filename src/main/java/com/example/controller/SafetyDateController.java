@@ -27,10 +27,10 @@ public class SafetyDateController {
     }
 
     /**
-     * 得到安全运行天数
+     * 根据日期获得信息
      *
      * @param json
-     * @return
+     * @return SafetyDate
      */
     @RequestMapping(value = "/getDates", method = RequestMethod.POST)
     public SafetyDate getDates(@RequestBody String json) {
@@ -48,6 +48,26 @@ public class SafetyDateController {
         } else {
             return new SafetyDate();
         }
+    }
+
+    /**
+     * 获取所有日期的信息
+     *
+     * @return list
+     */
+    @RequestMapping(value = "/getAllDates", method = RequestMethod.GET)
+    public List<SafetyDate> getDates() {
+        return repo.findAll();
+    }
+
+    /**
+     * 获得所有不安全的日期
+     *
+     * @return list
+     */
+    @RequestMapping(value = "/getUnsafeDates", method = RequestMethod.GET)
+    public List<SafetyDate> getUnsafeDates() {
+        return repo.findAllUnsafeDate();
     }
 
     /**

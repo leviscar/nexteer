@@ -2,6 +2,7 @@
   "name": "ng-spring-boot",
   "dependencies": {
     "jQuery": "latest",
-    "bootstrap": "latest"
+    "bootstrap": "latest",
+    "bootstrap-year-calendar": "^1.1.0"
   }
 }

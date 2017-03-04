@@ -10,6 +10,7 @@ public class SafetyDate {
     private String month;
     private String day;
     private Integer is_safe; // 0表示不安全，1表示安全
+    private String log; // 记录出错原因
 
     public SafetyDate() {
     }
@@ -52,5 +53,13 @@ public class SafetyDate {
 
     public void setDay(String day) {
         this.day = day;
+    }
+
+    public String getLog() {
+        return log;
+    }
+
+    public void setLog(String log) {
+        this.log = log;
     }
 }

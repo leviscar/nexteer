@@ -85,26 +85,29 @@
 </nav>
 
 <div>
-    <div class="col-md-3 col-md-offset-3">
+    <div class="col-md-6 ">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title" id="safeTitle">安全运行天数</h3>
-                <button type="button" value="txt" class="btn btn-sm " id="addDay">增加日期</button>
-                <button type="button" value="txt" class="btn btn-sm " id="getDay">获得日期</button>
-                <button type="button" value="txt" class="btn btn-sm " id="resetDay">重设日期</button>
+                <h3 class="panel-title" id="safeTitle"><a href="http://localhost:8080/calendar.html">安全运行天数</a></h3>
             </div>
             <div class="panel-body">
                 <h4 id="safeDay">未初始化</h4>
-
             </div>
         </div>
         <form>
+
             <div>年: <input type="text" id="myYear" name="year" class="text"></div>
             <div>月:  <input type="text" id="myMonth" name="month" class="text"></div>
             <div>日:  <input type="text" id="myDay" name="day" class="text"></div>
+            <div>
+                <button type="button" value="txt" class="btn btn-sm " id="addDay">添加安全日期</button>
+                <button type="button" value="txt" class="btn btn-sm " id="getDay">获得安全日期</button>
+                <button type="button" value="txt" class="btn btn-sm " id="resetDay">重设日期</button>
+            </div>
             时间:<p id="submit-day"></p>
         </form>
         <div class="loading"></div>
+        <div id="res"></div>
         <div id="time"></div>
         <!--<div>-->
             <!--<form action="">-->
