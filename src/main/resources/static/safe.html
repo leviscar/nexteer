@@ -88,7 +88,7 @@
     <div class="col-md-6 ">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title" id="safeTitle"><a href="http://localhost:8080/calendar.html">安全运行天数</a></h3>
+                <h3 class="panel-title" id="safeTitle"><a href="http://localhost:8080/calendar.html " target="_blank">安全运行天数</a></h3>
             </div>
             <div class="panel-body">
                 <h4 id="safeDay">未初始化</h4>
@@ -96,19 +96,47 @@
         </div>
         <form>
 
-            <div>年: <input type="text" id="myYear" name="year" class="text"></div>
-            <div>月:  <input type="text" id="myMonth" name="month" class="text"></div>
-            <div>日:  <input type="text" id="myDay" name="day" class="text"></div>
             <div>
+                <p>选择指定日期</p>
+                年: <input type="text" id="myYear" name="year" class="text">
+                月:  <input type="text" id="myMonth" name="month" class="text">
+                日:  <input type="text" id="myDay" name="day" class="text">
+            </div>
+            <hr class="active">
+            <div>
+                <p>初始化部分</p>
+                初始化年: <input type="text" id="startYear" name="year" class="text">
+                初始化月：<input type="text" id="startMonth" name="year" class="text">
+                初始化日：<input type="text" id="startDay" name="year" class="text">
+                初始化安全天数：<input type="text" id="startSafeDay" name="year" class="text">
+            </div>
+            <hr class="active">
+            <div>
+                <p>输入发生事故日期</p>
+                不安全年: <input type="text" id="resetYear" name="year" class="text">
+                不安全月：<input type="text" id="resetMonth" name="year" class="text">
+                不安全日：<input type="text" id="resetDay" name="year" class="text">
+                输入错误信息：<input type="text" id="resetMessage" name="year" class="text">
+
+            </div>
+            <hr class="active">
+            <div>
+                <p>按钮区</p>
                 <button type="button" value="txt" class="btn btn-sm " id="addDay">添加安全日期</button>
                 <button type="button" value="txt" class="btn btn-sm " id="getDay">获得安全日期</button>
-                <button type="button" value="txt" class="btn btn-sm " id="resetDay">重设日期</button>
+                <button type="button" value="txt" class="btn btn-sm " id="startDate">初始化安全日期</button>
+                <button type="button" value="txt" class="btn btn-sm " id="resetDate">重置安全日期为0</button>
             </div>
-            时间:<p id="submit-day"></p>
         </form>
-        <div class="loading"></div>
-        <div id="res"></div>
-        <div id="time"></div>
+        <hr class="active">
+        <div>
+            时间:<p id="submit-day"></p>
+            loading:<p class="loading"></p>
+            res: <p id="res"></p>
+            time:<p id="time"></p>
+            查询的安全运行天数: <p id="safeSearch"></p>
+        </div>
+        <div id="logMessage"></div>
         <!--<div>-->
             <!--<form action="">-->
                 <!--<input type="text">-->
