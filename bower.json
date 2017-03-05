@@ -3,6 +3,7 @@
   "dependencies": {
     "jQuery": "latest",
     "bootstrap": "latest",
-    "bootstrap-year-calendar": "^1.1.0"
+    "bootstrap-year-calendar": "^1.1.0",
+	"jquery-json":"latest"
   }
 }
