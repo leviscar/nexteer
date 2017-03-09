@@ -31,7 +31,8 @@ public class WorkShiftRepo {
      */
     public JsonObject addOneShift(WorkShift workShift) throws ParseException {
         JsonObject object = new JsonObject();
-        if (workShift.getMorning_shift() != null && workShift.getSetting_time() != null) {
+        if (workShift.getMorning_shift() != null
+                && !"".equals(workShift.getMorning_shift())) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String sql = "INSERT INTO work_shift (morning_shift, setting_time) VALUES(?, ?)";
             jdbc.update(sql, workShift.getMorning_shift(), sdf.format(new Date()));
@@ -52,8 +53,8 @@ public class WorkShiftRepo {
      */
     public JsonObject addTwoShift(WorkShift workShift) throws ParseException {
         JsonObject object = new JsonObject();
-        if (workShift.getMorning_shift() != null && workShift.getMiddle_shift() != null
-                && workShift.getNight_shift() != null && workShift.getSetting_time() != null) {
+        if (workShift.getMorning_shift() != null && workShift.getNight_shift() != null
+                && !"".equals(workShift.getMorning_shift()) && !"".equals(workShift.getNight_shift())) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String sql = "INSERT INTO work_shift (morning_shift, night_shift, setting_time) VALUES(?, ?, ?)";
             jdbc.update(sql, workShift.getMorning_shift(), workShift.getNight_shift(), sdf.format(new Date()));
@@ -74,7 +75,8 @@ public class WorkShiftRepo {
      */
     public JsonObject addThreeShift(WorkShift workShift) {
         JsonObject object = new JsonObject();
-        if (workShift.getMorning_shift() != null && workShift.getNight_shift() != null && workShift.getSetting_time() != null) {
+        if (workShift.getMorning_shift() != null && workShift.getMiddle_shift() != null && workShift.getNight_shift() != null
+                && !"".equals(workShift.getMorning_shift()) && !"".equals(workShift.getMiddle_shift()) && !"".equals(workShift.getNight_shift())) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String sql = "INSERT INTO work_shift (morning_shift, middle_shift, night_shift, setting_time) VALUES(?, ?, ?, ?)";
             jdbc.update(sql, workShift.getMorning_shift(), workShift.getMiddle_shift(), workShift.getNight_shift(), sdf.format(new Date()));

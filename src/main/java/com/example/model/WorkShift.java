@@ -61,7 +61,7 @@ public class WorkShift {
     @Override
     public String toString() {
         return "id = " + id
-                + ", setting_time = " + setting_time.toString()
+                + ", setting_time = " + setting_time
                 + ", + morning_shift = " + morning_shift
                 + ", middle_shift = " + middle_shift
                 + ", + night_shift = " + night_shift;
