@@ -1,0 +1,23 @@
+package com.example.mapper;
+
+import com.example.model.WorkShift;
+import org.springframework.jdbc.core.RowMapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+/**
+ * Created by mrpan on 2017/3/9.
+ */
+public class WorkShiftMapper implements RowMapper {
+    @Override
+    public Object mapRow(ResultSet resultSet, int i) throws SQLException {
+        WorkShift workShift = new WorkShift();
+        workShift.setId(resultSet.getInt("id"));
+        workShift.setMorning_shift(resultSet.getString("morning_shift"));
+        workShift.setMiddle_shift(resultSet.getString("middle_shift"));
+        workShift.setNight_shift(resultSet.getString("night_shift"));
+        workShift.setSetting_time(resultSet.getTimestamp("setting_time"));
+        return workShift;
+    }
+}

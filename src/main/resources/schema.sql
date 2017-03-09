@@ -14,3 +14,10 @@ CREATE TABLE scrap_amount (
   value INT,
   PRIMARY KEY (year, month, day)
 );
+CREATE TABLE work_shift (
+  id            INT IDENTITY NOT NULL,
+  morning_shift VARCHAR(8), --早班
+  middle_shift  VARCHAR(8), --中班
+  night_shift   VARCHAR(8), --晚班
+  setting_time  DATETIME --设置班次的时间
+);
