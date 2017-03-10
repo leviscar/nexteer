@@ -11,7 +11,12 @@ CREATE TABLE scrap_amount (
   year  NCHAR(4) NOT NULL,
   month NCHAR(2) NOT NULL,
   day   NCHAR(2) NOT NULL,
-  value INT,
+  ishaft1_value INT,
+  ishaft2_value INT,
+  ishaft3_value INT,
+  ishaft4_value INT,
+  ceps_value INT,
+  beps_value INT,
   PRIMARY KEY (year, month, day)
 );
 CREATE TABLE work_shift (

@@ -17,7 +17,12 @@ public class ScrapAmountMapper implements RowMapper<ScrapAmount> {
         scrapAmount.setYear(resultSet.getString("year"));
         scrapAmount.setMonth(resultSet.getString("month"));
         scrapAmount.setDay(resultSet.getString("day"));
-        scrapAmount.setValue(resultSet.getInt("value"));
+        scrapAmount.setIshaft1_value(resultSet.getInt("ishaft1_value"));
+        scrapAmount.setIshaft2_value(resultSet.getInt("ishaft2_value"));
+        scrapAmount.setIshaft3_value(resultSet.getInt("ishaft3_value"));
+        scrapAmount.setIshaft4_value(resultSet.getInt("ishaft4_value"));
+        scrapAmount.setBeps_value(resultSet.getInt("beps_value"));
+        scrapAmount.setCeps_value(resultSet.getInt("ceps_value"));
         return scrapAmount;
     }
 }
