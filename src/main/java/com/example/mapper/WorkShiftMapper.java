@@ -14,10 +14,15 @@ public class WorkShiftMapper implements RowMapper {
     public Object mapRow(ResultSet resultSet, int i) throws SQLException {
         WorkShift workShift = new WorkShift();
         workShift.setId(resultSet.getInt("id"));
-        workShift.setMorning_shift(resultSet.getString("morning_shift"));
-        workShift.setMiddle_shift(resultSet.getString("middle_shift"));
-        workShift.setNight_shift(resultSet.getString("night_shift"));
+        workShift.setMorning_shift_start(resultSet.getString("morning_shift_start"));
+        workShift.setMorning_shift_end(resultSet.getString("morning_shift_end"));
+        workShift.setMiddle_shift_start(resultSet.getString("middle_shift_start"));
+        workShift.setMiddle_shift_end(resultSet.getString("middle_shift_end"));
+        workShift.setNight_shift_start(resultSet.getString("night_shift_start"));
+        workShift.setNight_shift_end(resultSet.getString("night_shift_end"));
         workShift.setSetting_time(resultSet.getTimestamp("setting_time"));
+        workShift.setTarget_value(resultSet.getInt("target_value"));
+        workShift.setStandard_beats(resultSet.getInt("standard_beats"));
         return workShift;
     }
 }

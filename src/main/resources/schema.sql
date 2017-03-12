@@ -8,21 +8,26 @@ CREATE TABLE safety_date (
   PRIMARY KEY (year, month, day)
 );
 CREATE TABLE scrap_amount (
-  year  NCHAR(4) NOT NULL,
-  month NCHAR(2) NOT NULL,
-  day   NCHAR(2) NOT NULL,
+  year          NCHAR(4) NOT NULL,
+  month         NCHAR(2) NOT NULL,
+  day           NCHAR(2) NOT NULL,
   ishaft1_value INT,
   ishaft2_value INT,
   ishaft3_value INT,
   ishaft4_value INT,
-  ceps_value INT,
-  beps_value INT,
+  ceps_value    INT,
+  beps_value    INT,
   PRIMARY KEY (year, month, day)
 );
 CREATE TABLE work_shift (
-  id            INT IDENTITY NOT NULL,
-  morning_shift VARCHAR(5), --早班
-  middle_shift  VARCHAR(5), --中班
-  night_shift   VARCHAR(5), --晚班
-  setting_time  DATETIME --设置班次的时间
+  id                 INT IDENTITY NOT NULL,
+  morning_shif_start VARCHAR(5), --早班开始
+  morning_shif_end   VARCHAR(5), --早班结束
+  middle_shift_start VARCHAR(5), --中班开始
+  middle_shift_end   VARCHAR(5), --中班结束
+  night_shift_start  VARCHAR(5), --晚班开始
+  night_shift_end    VARCHAR(5), --晚班结束
+  target_value       INT, -- 目标数量
+  standard_beats     INT, -- 标准节拍
+  setting_time       DATETIME --设置班次的时间
 );

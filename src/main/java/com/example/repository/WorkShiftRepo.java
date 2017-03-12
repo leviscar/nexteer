@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,23 +23,26 @@ public class WorkShiftRepo {
     }
 
     /**
-     * 添加早班一个班次
+     * 添加班次
      *
      * @param workShift
      * @return
      */
     public JsonObject addOneShift(WorkShift workShift) throws ParseException {
         JsonObject object = new JsonObject();
-        if (workShift.getMorning_shift() != null
-                && !"".equals(workShift.getMorning_shift())) {
+        // 早中晚班的
+        if (workShift.getMorning_shift_start() != null && workShift.getMorning_shift_start().length() > 0
+                && workShift.getMorning_shift_end() != null && workShift.getMorning_shift_end().length() > 0
+                && workShift.getTarget_value() > 0 && workShift.getStandard_beats() > 0) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String sql = "INSERT INTO work_shift (morning_shift, setting_time) VALUES(?, ?)";
-            jdbc.update(sql, workShift.getMorning_shift(), sdf.format(new Date()));
+            String sql = "INSERT INTO work_shift (morning_shift_start, morning_shift_end, target_value, standard_beats,setting_time) VALUES(?, ?, ?, ?, ?)";
+            jdbc.update(sql, workShift.getMorning_shift_start(), workShift.getMorning_shift_end(),
+                    workShift.getTarget_value(), workShift.getStandard_beats(), sdf.format(new Date()));
             object.addProperty("status", true);
             object.addProperty("log", "add " + workShift.toString() + " ok");
         } else {
             object.addProperty("status", false);
-            object.addProperty("log", "所需输入的参数为空，请检查后重新输入");
+            object.addProperty("log", "所需输入的参数有误，请检查后重新输入");
         }
         return object;
     }
@@ -53,16 +55,21 @@ public class WorkShiftRepo {
      */
     public JsonObject addTwoShift(WorkShift workShift) throws ParseException {
         JsonObject object = new JsonObject();
-        if (workShift.getMorning_shift() != null && workShift.getNight_shift() != null
-                && !"".equals(workShift.getMorning_shift()) && !"".equals(workShift.getNight_shift())) {
+        if (workShift.getMorning_shift_start() != null && workShift.getMorning_shift_start().length() > 0
+                && workShift.getMorning_shift_end() != null && workShift.getMorning_shift_end().length() > 0
+                && workShift.getNight_shift_start() != null && workShift.getNight_shift_start().length() > 0
+                && workShift.getNight_shift_end() != null && workShift.getNight_shift_end().length() > 0) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String sql = "INSERT INTO work_shift (morning_shift, night_shift, setting_time) VALUES(?, ?, ?)";
-            jdbc.update(sql, workShift.getMorning_shift(), workShift.getNight_shift(), sdf.format(new Date()));
+            String sql = "INSERT INTO work_shift (morning_shift_start, morning_shift_end, " +
+                    "night_shift_start, night_shift_end, target_value, standard_beats, setting_time) VALUES(?, ?, ?, ?, ?, ?, ?)";
+            jdbc.update(sql, workShift.getMorning_shift_start(), workShift.getMorning_shift_end(),
+                    workShift.getNight_shift_start(), workShift.getNight_shift_end(),
+                    workShift.getTarget_value(), workShift.getStandard_beats(), sdf.format(new Date()));
             object.addProperty("status", true);
             object.addProperty("log", "add " + workShift.toString() + " ok");
         } else {
             object.addProperty("status", false);
-            object.addProperty("log", "所需输入的参数为空，请检查后重新输入");
+            object.addProperty("log", "所需输入的参数有误，请检查后重新输入");
         }
         return object;
     }
@@ -75,11 +82,19 @@ public class WorkShiftRepo {
      */
     public JsonObject addThreeShift(WorkShift workShift) {
         JsonObject object = new JsonObject();
-        if (workShift.getMorning_shift() != null && workShift.getMiddle_shift() != null && workShift.getNight_shift() != null
-                && !"".equals(workShift.getMorning_shift()) && !"".equals(workShift.getMiddle_shift()) && !"".equals(workShift.getNight_shift())) {
+        if (workShift.getMorning_shift_start() != null && workShift.getMorning_shift_start().length() > 0
+                && workShift.getMorning_shift_end() != null && workShift.getMorning_shift_end().length() > 0
+                && workShift.getMiddle_shift_start() != null && workShift.getMiddle_shift_end().length() > 0
+                && workShift.getMiddle_shift_end() != null && workShift.getMiddle_shift_end().length() > 0
+                && workShift.getNight_shift_start() != null && workShift.getNight_shift_start().length() > 0
+                && workShift.getNight_shift_end() != null && workShift.getNight_shift_end().length() > 0) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String sql = "INSERT INTO work_shift (morning_shift, middle_shift, night_shift, setting_time) VALUES(?, ?, ?, ?)";
-            jdbc.update(sql, workShift.getMorning_shift(), workShift.getMiddle_shift(), workShift.getNight_shift(), sdf.format(new Date()));
+            String sql = "INSERT INTO work_shift (morning_shift_start, morning_shift_end, middle_shift_start, middle_shift_end, " +
+                    "night_shift_start, night_shift_end, target_value, standard_beats, setting_time) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            jdbc.update(sql, workShift.getMorning_shift_start(), workShift.getMorning_shift_end(),
+                    workShift.getMiddle_shift_start(), workShift.getMiddle_shift_end(),
+                    workShift.getNight_shift_start(), workShift.getNight_shift_end(),
+                    workShift.getTarget_value(), workShift.getStandard_beats(), sdf.format(new Date()));
             object.addProperty("status", true);
             object.addProperty("log", "add " + workShift.toString() + " ok");
         } else {
