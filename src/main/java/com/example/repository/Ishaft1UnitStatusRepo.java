@@ -50,7 +50,8 @@ public class Ishaft1UnitStatusRepo {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         Date curTime = sdf.parse(unitStatus.getCurr_time().substring(11, 16));
         // 判断当前时刻所属班次
-        if (curTime.before(sdf.parse(workShift.getMorning_shift_end())) && curTime.after(sdf.parse(workShift.getMorning_shift_start()))) {
+        if (workShift.getMorning_shift_start() != null && workShift.getMorning_shift_end() != null
+                && curTime.before(sdf.parse(workShift.getMorning_shift_end())) && curTime.after(sdf.parse(workShift.getMorning_shift_start()))) {
             unitStatus.setShift_type(ShiftType.MORNING_SHIFT);
             // 根据班次信息得到小时目标
             hours = (sdf.parse(workShift.getMorning_shift_end()).getTime() - sdf.parse(workShift.getMorning_shift_start()).getTime()) / (60 * 60 * 1000);
@@ -63,7 +64,8 @@ public class Ishaft1UnitStatusRepo {
             minutes = (curDate.getTime() - startTime.getTime()) / (60 * 1000);
             // 获得到当前时刻的产品信息
             products = repo.getByPeriod(startTime, curDate);
-        } else if (curTime.before(sdf.parse(workShift.getNight_shift_end())) && curTime.after(sdf.parse(workShift.getNight_shift_start()))) {
+        } else if (workShift.getNight_shift_start() != null && workShift.getNight_shift_end() != null
+                && curTime.before(sdf.parse(workShift.getNight_shift_end())) && curTime.after(sdf.parse(workShift.getNight_shift_start()))) {
             unitStatus.setShift_type(ShiftType.NIGHT_SHIFT);
             // 根据班次信息得到小时目标
             hours = (sdf.parse(workShift.getNight_shift_end()).getTime() - sdf.parse(workShift.getNight_shift_start()).getTime()) / (60 * 60 * 1000);
@@ -76,7 +78,8 @@ public class Ishaft1UnitStatusRepo {
             minutes = (curDate.getTime() - startTime.getTime()) / (60 * 1000);
             // 获得到当前时刻的产品信息
             products = repo.getByPeriod(startTime, curDate);
-        } else if (curTime.before(sdf.parse(workShift.getMiddle_shift_end())) && curTime.after(sdf.parse(workShift.getMiddle_shift_start()))) {
+        } else if (workShift.getMiddle_shift_end() != null &&  workShift.getMiddle_shift_end() != null
+                && curTime.before(sdf.parse(workShift.getMiddle_shift_end())) && curTime.after(sdf.parse(workShift.getMiddle_shift_start()))) {
             unitStatus.setShift_type(ShiftType.MIDDLE_SHIFT);
             hours = (sdf.parse(workShift.getMiddle_shift_end()).getTime() - sdf.parse(workShift.getMiddle_shift_start()).getTime()) / (60 * 60 * 1000);
             // 设置起始时刻
