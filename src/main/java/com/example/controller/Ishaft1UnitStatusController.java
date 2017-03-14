@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
-import java.util.List;
 
 /**
  * Created by mrpan on 2017/3/13.
@@ -24,8 +23,9 @@ public class Ishaft1UnitStatusController {
     public Ishaft1UnitStatusController(Ishaft1UnitStatusRepo repo) {
         this.repo = repo;
     }
+
     @RequestMapping(value = "/getByCurTime", method = RequestMethod.POST)
-    public Ishaft1UnitStatus getByCurTime(@RequestBody String json) throws ParseException {
+    public String getByCurTime(@RequestBody String json) throws ParseException {
         Gson gson = new Gson();
         Ishaft1UnitStatus status = gson.fromJson(json, Ishaft1UnitStatus.class);
         return repo.getByCurTime(status);
