@@ -9,9 +9,9 @@ import java.sql.SQLException;
 /**
  * Created by mrpan on 2017/3/12.
  */
-public class Ishaft1ProductMapper implements RowMapper {
+public class Ishaft1ProductMapper implements RowMapper<Ishaft1Product> {
     @Override
-    public Object mapRow(ResultSet resultSet, int i) throws SQLException {
+    public Ishaft1Product mapRow(ResultSet resultSet, int i) throws SQLException {
         Ishaft1Product product = new Ishaft1Product();
         product.setTime(resultSet.getTimestamp("Timestamp"));
         product.setModel(resultSet.getString("Model"));

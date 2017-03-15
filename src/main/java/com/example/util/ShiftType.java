@@ -17,4 +17,8 @@ public enum ShiftType {
     public String toString() {
         return this.shift;
     }
+
+    public void setShift(String shift) {
+        this.shift = shift;
+    }
 }
