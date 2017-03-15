@@ -7,7 +7,12 @@ public class ScrapAmount {
     private String year;
     private String month;
     private String day;
-    private int value;
+    private int ishaft1_value;
+    private int ishaft2_value;
+    private int ishaft3_value;
+    private int ishaft4_value;
+    private int beps_value;
+    private int ceps_value;
 
     public ScrapAmount() {
     }
@@ -43,11 +48,51 @@ public class ScrapAmount {
         this.day = day;
     }
 
-    public int getValue() {
-        return value;
+    public int getIshaft1_value() {
+        return ishaft1_value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setIshaft1_value(int ishaft1_value) {
+        this.ishaft1_value = ishaft1_value;
+    }
+
+    public int getIshaft2_value() {
+        return ishaft2_value;
+    }
+
+    public void setIshaft2_value(int ishaft2_value) {
+        this.ishaft2_value = ishaft2_value;
+    }
+
+    public int getIshaft3_value() {
+        return ishaft3_value;
+    }
+
+    public void setIshaft3_value(int ishaft3_value) {
+        this.ishaft3_value = ishaft3_value;
+    }
+
+    public int getIshaft4_value() {
+        return ishaft4_value;
+    }
+
+    public void setIshaft4_value(int ishaft4_value) {
+        this.ishaft4_value = ishaft4_value;
+    }
+
+    public int getBeps_value() {
+        return beps_value;
+    }
+
+    public void setBeps_value(int beps_value) {
+        this.beps_value = beps_value;
+    }
+
+    public int getCeps_value() {
+        return ceps_value;
+    }
+
+    public void setCeps_value(int ceps_value) {
+        this.ceps_value = ceps_value;
     }
 }

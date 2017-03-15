@@ -118,11 +118,15 @@ public class ScrapAmountRepo {
      */
     public JsonObject addAmount(ScrapAmount scrapAmount) {
         if (!getByDate(scrapAmount).isEmpty()) {
-            String sql = "UPDATE scrap_amount SET value = ? WHERE year = ? AND month = ? AND day = ?";
-            jdbc.update(sql, scrapAmount.getValue(), scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay());
+            String sql = "UPDATE scrap_amount SET ishaft1_value = ?, ishaft2_value = ?, ishaft3_value = ?, ishaft4_value = ?, ceps_value = ?, beps_value = ?" +
+                    " WHERE year = ? AND month = ? AND day = ?";
+            jdbc.update(sql, scrapAmount.getIshaft1_value(), scrapAmount.getIshaft2_value(), scrapAmount.getIshaft3_value(), scrapAmount.getIshaft4_value(),
+                    scrapAmount.getCeps_value(), scrapAmount.getBeps_value(), scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay());
         } else {
-            String sql = "INSERT INTO scrap_amount (year, month, day, value) VALUES(?,?,?,?)";
-            jdbc.update(sql, scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay(), scrapAmount.getValue());
+            String sql = "INSERT INTO scrap_amount (year, month, day, ishaft1_value, ishaft2_value, ishaft3_value, ishaft4_value, ceps_value, beps_value)" +
+                    " VALUES(?,?,?,?,?,?,?,?,?)";
+            jdbc.update(sql, scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay(), scrapAmount.getIshaft1_value(), scrapAmount.getIshaft2_value(),
+                    scrapAmount.getIshaft3_value(), scrapAmount.getIshaft4_value(), scrapAmount.getCeps_value(), scrapAmount.getBeps_value());
         }
         JsonObject object = new JsonObject();
         object.addProperty("status", true);
@@ -139,8 +143,10 @@ public class ScrapAmountRepo {
     public JsonObject updateAmount(ScrapAmount scrapAmount) {
         JsonObject jsonObject = new JsonObject();
         if (!getByDate(scrapAmount).isEmpty()) {
-            String sql = "UPDATE scrap_amount SET value = ? WHERE year = ? AND month = ? AND day = ?";
-            jdbc.update(sql, scrapAmount.getValue(), scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay());
+            String sql = "UPDATE scrap_amount SET ishaft1_value = ?, ishaft2_value = ?, ishaft3_value = ?, ishaft4_value = ?, ceps_value = ?, beps_value = ?" +
+                    " WHERE year = ? AND month = ? AND day = ?";
+            jdbc.update(sql, scrapAmount.getIshaft1_value(), scrapAmount.getIshaft2_value(), scrapAmount.getIshaft3_value(), scrapAmount.getIshaft4_value(),
+                    scrapAmount.getCeps_value(), scrapAmount.getBeps_value(), scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay());
             jsonObject.addProperty("status", true);
             jsonObject.addProperty("log", "reset ok");
         } else {

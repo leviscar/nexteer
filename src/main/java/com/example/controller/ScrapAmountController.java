@@ -41,12 +41,14 @@ public class ScrapAmountController {
         ScrapAmount scrapAmount = gson.fromJson(json, ScrapAmount.class);
         List<ScrapAmount> res = repo.getByDate(scrapAmount);
         if (!res.isEmpty()) {
-            return gson.toJson(res.get(0));
+            ScrapAmount tmp = res.get(0);
+            object.addProperty("value", tmp.getIshaft1_value() + tmp.getIshaft2_value() +
+                    tmp.getIshaft3_value() + tmp.getIshaft4_value() + tmp.getCeps_value() + tmp.getBeps_value());
         } else {
             object.addProperty("status", false);
             object.addProperty("log", "当前日期没有记录");
-            return object.toString();
         }
+        return object.toString();
     }
 
     /**
