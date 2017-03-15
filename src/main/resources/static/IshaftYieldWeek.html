@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="images/favicon.ico">
+    <title>Nexteer</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
+    <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <style type="text/css">
+        body {
+            background-color: #F7F7F7;
+        }
+        .main{
+            width: 100%;
+            margin:0 0 0 3% ;
+            padding: 0 0 0 2%;
+            box-sizing: border-box;
+        }
+        .main{
+            height: 680px;
+        }
+        .main .item {
+            margin: 0 2% 2% 0;
+            position: relative;
+            background-color: #FFF;
+            float: left;
+            box-shadow: 2px 2px 5px #CCC;
+            height: 100%;
+        }
+        .item2{
+            width: 93.75%;
+        }
+        .row{
+            height: 45%;
+        }
+        .border-line{
+            border: 1px solid #293c55;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="images/icon.png" alt="Nexteer"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <p class="navbar-text">产量信息展示I-shaft周视图</p>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VSS-Ishaft <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">日视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">周视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">月视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">年视图</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BEPS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">日视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">周视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">月视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">年视图</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">日视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">周视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">月视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">年视图</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="main">
+    <div class="row">
+        <div class="col-md-12 item item2 border-line " id="IshaftOneWeekChart"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 item item2 border-line"></div>
+    </div>
+</div>
+
+
+<script src="bower_components/jquery/dist/jquery.min.js" ></script>
+<script src="bower_components/jquery-json/dist/jquery.json.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/echarts/dist/echarts.min.js"></script>
+<script src="js/defineGlobal.js"></script>
+<script src="js/showScrapAmount.js"></script>
+<script type="application/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('IshaftOneWeekChart'));
+    option = {
+        title: {
+            text: 'Ishaft产量信息展示（周视图)'
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        legend: {
+            data: ['F102', 'R103', 'H50'],
+            align: 'right',
+            right: 10
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [{
+            type: 'category',
+            data: ['周一', '周二','周三', '周四', '周五','周六','周天']
+        }],
+        yAxis: [{
+            type: 'value',
+            name: '产品数(件)',
+            axisLabel: {
+                formatter: '{value}'
+            }
+        }],
+        series: [{
+            name: 'F102',
+            type: 'bar',
+            data: [20, 12, 31, 34, 31]
+        }, {
+            name: 'R103',
+            type: 'bar',
+            data: [10, 20, 5, 9, 3]
+        }, {
+            name: 'H50',
+            type: 'bar',
+            data: [1, 1, 2, 3, 1]
+        }]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>

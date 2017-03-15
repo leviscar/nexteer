@@ -91,91 +91,106 @@
 
 <div>
     <div class="col-md-6 ">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title" id="safeTitle"><a href="http://localhost:8080/calendar.html " target="_blank">安全运行天数</a></h3>
+        </div>
+        <div class="panel-body">
+            <h4 id="safeDay">未初始化</h4>
+        </div>
+    </div>
+    <form>
+
+        <div>
+            <p>选择指定日期</p>
+            年: <input type="text" id="myYear" name="year" class="text">
+            月:  <input type="text" id="myMonth" name="month" class="text">
+            日:  <input type="text" id="myDay" name="day" class="text">
+        </div>
+        <hr class="active">
+        <div>
+            <p>初始化部分</p>
+            初始化年: <input type="text" id="startYear" name="year" class="text">
+            初始化月：<input type="text" id="startMonth" name="year" class="text">
+            初始化日：<input type="text" id="startDay" name="year" class="text">
+            初始化安全天数：<input type="text" id="startSafeDay" name="year" class="text">
+        </div>
+        <hr class="active">
+        <div>
+            <p>输入发生事故日期</p>
+            不安全年: <input type="text" id="resetYear" name="year" class="text">
+            不安全月：<input type="text" id="resetMonth" name="year" class="text">
+            不安全日：<input type="text" id="resetDay" name="year" class="text">
+            输入错误信息：<input type="text" id="resetMessage" name="year" class="text">
+
+        </div>
+        <hr class="active">
+        <div>
+            <p>按钮区</p>
+            <!--<button type="button" value="txt" class="btn btn-sm " id="addDay">添加当前日期为安全日期</button>-->
+            <button type="button" value="txt" class="btn btn-sm " id="getDay">获得指定日期的安全数据</button>
+            <button type="button" value="txt" class="btn btn-sm " id="startDate">初始化安全日期</button>
+            <button type="button" value="txt" class="btn btn-sm " id="resetDate">重置安全日期为0</button>
+            <button type="button" value="txt" class="btn btn-sm " id="getAllSafeDate">获得全部日期信息</button>
+            <button type="button" value="txt" class="btn btn-sm " id="getAllUnsafeDate">获得全部不安全的日期信息</button>
+        </div>
+    </form>
+    <hr class="active">
+    <div>
+        提交日期为: <p id="submitDay"></p>
+        服务器返回值:<p class="loading"></p>
+        操作状态: <p id="actionStatus"></p>
+        当前日期:<p id="time"></p>
+        安全运行天数的查询值: <p id="safeSearch"></p>
+    </div>
+    <hr class="active">
+    <div>
+        全部安全日期信息:
+        <table id="logSafeMessage" class="table  table-bordered black-color">
+            <tr>
+                <th>行数</th>
+                <th>年</th>
+                <th>月</th>
+                <th>日</th>
+                <th>安全状态</th>
+                <th>截止此天安全运行天数</th>
+                <th>运行信息</th>
+            </tr>
+        </table>
+        全部不安全的日期信息:
+        <table id="logUnSafeMessage" class="table  table-bordered red-color">
+            <tr>
+                <th>行数</th>
+                <th>年</th>
+                <th>月</th>
+                <th>日</th>
+                <th>安全状态</th>
+                <th>截止此天安全运行天数</th>
+                <th>运行信息</th>
+            </tr>
+        </table>
+    </div>
+
+    <!--<div>-->
+    <!--<form action="">-->
+    <!--<input type="text">-->
+    <!--</form>-->
+    <!--</div>-->
+</div>
+    <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title" id="safeTitle"><a href="http://localhost:8080/calendar.html " target="_blank">安全运行天数</a></h3>
+                <h3 class="panel-title" id="scrapTitle"><a href="http://localhost:8080/scrapAmount.html " target="_blank">报废金额</a></h3>
             </div>
             <div class="panel-body">
-                <h4 id="safeDay">未初始化</h4>
+                <h4 id="scrapAmount">未初始化</h4>
             </div>
-        </div>
-        <form>
-
-            <div>
-                <p>选择指定日期</p>
-                年: <input type="text" id="myYear" name="year" class="text">
-                月:  <input type="text" id="myMonth" name="month" class="text">
-                日:  <input type="text" id="myDay" name="day" class="text">
-            </div>
-            <hr class="active">
-            <div>
-                <p>初始化部分</p>
-                初始化年: <input type="text" id="startYear" name="year" class="text">
-                初始化月：<input type="text" id="startMonth" name="year" class="text">
-                初始化日：<input type="text" id="startDay" name="year" class="text">
-                初始化安全天数：<input type="text" id="startSafeDay" name="year" class="text">
-            </div>
-            <hr class="active">
-            <div>
-                <p>输入发生事故日期</p>
-                不安全年: <input type="text" id="resetYear" name="year" class="text">
-                不安全月：<input type="text" id="resetMonth" name="year" class="text">
-                不安全日：<input type="text" id="resetDay" name="year" class="text">
-                输入错误信息：<input type="text" id="resetMessage" name="year" class="text">
-
-            </div>
-            <hr class="active">
-            <div>
-                <p>按钮区</p>
-                <!--<button type="button" value="txt" class="btn btn-sm " id="addDay">添加当前日期为安全日期</button>-->
-                <button type="button" value="txt" class="btn btn-sm " id="getDay">获得指定日期的安全数据</button>
-                <button type="button" value="txt" class="btn btn-sm " id="startDate">初始化安全日期</button>
-                <button type="button" value="txt" class="btn btn-sm " id="resetDate">重置安全日期为0</button>
-                <button type="button" value="txt" class="btn btn-sm " id="getAllSafeDate">获得全部日期信息</button>
-                <button type="button" value="txt" class="btn btn-sm " id="getAllUnsafeDate">获得全部不安全的日期信息</button>
-            </div>
-        </form>
-        <hr class="active">
+    </div>
         <div>
-            提交日期为: <p id="submitDay"></p>
-            服务器返回值:<p class="loading"></p>
-            操作状态: <p id="actionStatus"></p>
-            当前日期:<p id="time"></p>
-            安全运行天数的查询值: <p id="safeSearch"></p>
+            <p id="showScrapDate"></p>
+            <p id="showScrapMsg"></p>
+            <p id="showScrapActMsg"></p>
         </div>
-        <hr class="active">
-        <div>
-            全部安全日期信息:
-            <table id="logSafeMessage" class="table  table-bordered black-color">
-                <tr>
-                    <th>行数</th>
-                    <th>年</th>
-                    <th>月</th>
-                    <th>日</th>
-                    <th>安全状态</th>
-                    <th>截止此天安全运行天数</th>
-                    <th>运行信息</th>
-                </tr>
-            </table>
-            全部不安全的日期信息:
-            <table id="logUnSafeMessage" class="table  table-bordered red-color">
-                <tr>
-                    <th>行数</th>
-                    <th>年</th>
-                    <th>月</th>
-                    <th>日</th>
-                    <th>安全状态</th>
-                    <th>截止此天安全运行天数</th>
-                    <th>运行信息</th>
-                </tr>
-            </table>
-        </div>
-
-        <!--<div>-->
-            <!--<form action="">-->
-                <!--<input type="text">-->
-            <!--</form>-->
-        <!--</div>-->
     </div>
 </div>
 
@@ -183,6 +198,8 @@
 <script src="bower_components/jquery/dist/jquery.min.js" ></script>
 <script src="bower_components/jquery-json/dist/jquery.json.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/defineGlobal.js"></script>
 <script src="js/safeset.js"></script>
+<script src="js/scrapAmount.js"></script>
 </body>
 </html>

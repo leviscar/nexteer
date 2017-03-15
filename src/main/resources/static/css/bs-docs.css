@@ -69,4 +69,11 @@ section.container{
 .carousel img{
     width: 100%;
 }
+.header-title{
+    text-align: center;
+    font-size: medium;
+    line-height: 45px;
+    /*color: #aa314d;*/
+    color:#d43f3a;
+}
 

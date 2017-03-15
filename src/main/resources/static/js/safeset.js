@@ -1,81 +1,18 @@
 /**
  * Created by Administrator on 2017/3/2.
  */
-function safety_date(year, month, day, is_safe, safety_date, log) {
-    this.year = year;
-    this.month = month;
-    this.day = day;
-    this.is_safe = is_safe;
-    this.safety_date = safety_date;
-    this.log = log;
-}
-    var Udate=new Date();
-    var Uyear=Udate.getFullYear();
-    var Umonth=Udate.getMonth()+1;
-    var Uday=Udate.getDate();
-    $("#time").html("公元"+Uyear+"年"+Umonth+"月"+Uday+"日");
-    var UsafeMonth=Umonth.toString();
-    var UsafeDay=Uday.toString();
-    if(Umonth<10&&Umonth>0){
-        USafeMonth="0"+Umonth.toString();
-    }
-    if(UsafeDay<10&&UsafeDay>0){
-        UsafeDay="0"+UsafeDay.toString();
-    }
-
-    var jsonString = new safety_date(Uyear.toString(),UsafeMonth , UsafeDay);
-$("#safeDay").html("未初始");
-    //更新当前安全天数
-function getNowData() {
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/safetyDate/addDate",
-        data: JSON.stringify(jsonString),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            $(".loading").html(JSON.stringify(data));
-
-        },
-        failure: function (errMsg) {
-            console.log(errMsg);
-        }
-    });
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/safetyDate/getDates",
-        data: JSON.stringify(jsonString),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            $(".loading").html(JSON.stringify(data));
-            $("#safeDay").html(data.safe_dates);
-            $("#actionStatus").html("更新当前日期为安全日期操作成功");
-        },
-        failure: function (errMsg) {
-            console.log(errMsg);
-        }
-    });
-    $("#submitDay").html("公元"+Uyear+"年"+Umonth+"月"+Uday+"日");
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/safetyDate/getDates",
-        data: JSON.stringify(jsonString),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            $(".loading").html(JSON.stringify(data));
-            $("#safeDay").html(data.safe_dates);
-            $("#actionStatus").html("更新当前日期为安全日期操作成功");
-        },
-        failure: function (errMsg) {
-            console.log(errMsg);
-        }
-    });
-}
-getNowData();
-// $("#addDay").bind("click",);
-
+// function safety_date(year, month, day, is_safe, safety_date, log) {
+//     this.year = year;
+//     this.month = month;
+//     this.day = day;
+//     this.is_safe = is_safe;
+//     this.safety_date = safety_date;
+//     this.log = log;
+// }
+//     Udate=new Date();
+//     Uyear=Udate.getFullYear();
+//     Umonth=Udate.getMonth()+1;
+//     Uday=Udate.getDate();
 
 //获得指定日期安全天数
 $("#getDay").bind("click", function () {

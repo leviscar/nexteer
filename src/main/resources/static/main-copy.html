@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="images/favicon.ico">
+    <title>Nexteer</title>
+    <!-- Bootstrap core CSS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
+    <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <style type="text/css">
+        body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 {
+            font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+        }
+        body {
+            background-color: #F7F7F7;
+        }
+        .wrapper {
+            width: 1260px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .main .item {
+            width: 280px;
+            height: 240px;
+            margin: 0 30px 30px 0;
+            padding: 0;
+            /*display: flex;*/
+            position: relative;
+            background-color: #FFF;
+            float: left;
+            box-shadow: 2px 2px 5px #CCC;
+        }
+
+        .main .item2{
+            width: 280px;
+            height: 300px;
+            margin: 0 30px 30px 0;
+            padding: 0;
+            position: relative;
+            background-color: #FFF;
+            float: left;
+            box-shadow: 2px 2px 5px #CCC;
+        }
+
+        .item3{
+            width: 900px;
+            height: 300px;
+            margin: 0 30px 30px 0;
+            padding: 0;
+            position: relative;
+            background-color: #FFF;
+            float: left;
+            box-shadow: 2px 2px 5px #CCC;
+        }
+       .textHeader{
+            font-size: 25px;
+            text-align: center;
+            position: absolute;
+            width: 100%;
+            /*height: 80px;*/
+            height: 26%;
+
+
+        }
+
+       .textHeader>h1{
+           display:table;
+           width: 100%;
+           /*margin-left: auto;*/
+           /*margin-right: auto;*/
+       }
+       .textHeader{
+           background-color: #293c55;
+           color: #aa314d;
+       }
+       .numHeader{
+           position: absolute;
+           /*top: 80px;*/
+           top:60%;
+           width: 100%;
+           /*height: 158px;*/
+           height: 74%;
+       }
+       .numHeader{
+           text-align: center;
+           /*line-height: 158px;*/
+           line-height: 60%;
+       }
+        #scrapTitle{
+            position: absolute;
+            text-align: center;
+        }
+
+        #scrapTitle{
+            position: absolute;
+            top:50%;
+            -webkit-transform: translateY(-50%);
+            -moz-transform:  translateY(-50%);
+            -ms-transform:  translateY(-50%);
+            -o-transform:  translateY(-50%);
+            transform:  translateY(-50%);
+        }
+
+        .border-line{
+            border: 1px solid #293c55;
+        }
+        .header-title{
+            text-align: center;
+            font-size: medium;
+            line-height: 45px;
+            color: darkred;
+        }
+
+        .textTitle>a{
+            color:#aa314d;
+            text-align: center;
+
+        }
+
+        .numContent{
+            font-size: 3em;
+        }
+
+        .tableHeader{
+            text-align: center;
+            position: absolute;
+            width: 100%;
+            height: 20%;
+            background-color: #293c55;
+            line-height: 20%;
+        }
+
+        .tableDiv{
+            position:absolute;
+            width: 100%;
+            top:21%;
+        }
+
+        table>tr>th{
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body class="MainBoard">
+<div class="wrapper">
+
+
+    <!--top navigation-->
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="images/icon.png" alt="Nexteer"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse header-title" id="bs-example-navbar-collapse-1">
+                <span>Main DashBoard</span>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="main">
+
+        <div class="row">
+            <div class="col-md-3 item border-line">
+                <div class="textHeader border-line center-block" >
+                    <h2 class="textTitle text-center " id="scrapTitle center"><a href="http://localhost:8080/scrapAmount.html " target="_blank">报废金额</a></h2>
+                </div>
+                <div class="numHeader">
+                    <span class="numContent" id="scrapAmount">0000</span>
+                </div>
+            </div>
+            <div class="col-md-3 item border-line">
+                <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-heading">-->
+                    <!--<h3 class="panel-title" id="safeTitle"><a href="http://localhost:8080/calendar.html " target="_blank">安全运行天数</a></h3>-->
+                <!--</div>-->
+                    <!--<div class="panel-body">-->
+                        <!--<h4 id="safeDay">未初始化</h4>-->
+                    <!--</div>-->
+
+                    <div class="textHeader border-line center-block" >
+                        <h2 class="textTitle text-center " id="safeTitle"><a href="http://localhost:8080/calendar.html " target="_blank">安全运行天数</a></h2>
+                    </div>
+                    <div class="numHeader">
+                        <span class="numContent" id="safeDay">0000</span>
+                    </div>
+            </div>
+            <div class="col-md-3 item border-line">
+                <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-heading">-->
+                        <!--<h3 class="panel-title" id="showFTQTitle"><a href="http://localhost:8080/calendar.html " target="_blank">直通率</a></h3>-->
+                    <!--</div>-->
+                    <!--<div class="panel-body">-->
+                        <!--<h4 id="showFTQcontent">未初始化</h4>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+                <div class="textHeader border-line center-block" >
+                    <h2 class="textTitle text-center " id="showFTQTitle"><a href="http://localhost:8080/calendar.html " target="_blank">直通率</a></h2>
+                </div>
+                <div class="numHeader">
+                    <span class="numContent" id="showFTQcontent">0000</span>
+                </div>
+            </div>
+            <div class="col-md-3 item border-line">
+                <div class="textHeader border-line center-block" >
+                    <h2 class="textTitle text-center " id="main-time"><a href="http://localhost:8080/calendar.html " target="_blank">今日时间</a></h2>
+                </div>
+                <div class="numHeader">
+                    <span class="numContent" id="showMainTime">00:00</span>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-4 item2 border-line">
+                <div class="tableHeader " >
+                    <h2 class="textTitle text-center " id=""><a href="http://localhost:8080/calendar.html " target="_blank">可动率</a></h2>
+                </div>
+                <!--<div class="content-panel">-->
+                    <!--<h3>-->
+                        <!--可动率-->
+                    <!--</h3>-->
+                <!--</div>-->
+                <div class="tableDiv numHeader ">
+                    <table class="table ">
+                        <tr>
+                            <th>BEPS</th>
+                            <th>EPS</th>
+                            <th>I-Shaft</th>
+                        </tr>
+                        <tr>
+                            <td>95%</td>
+                            <td>88%</td>
+                            <td>98%</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-8 item3 border-line">
+                <div class="tableHeader border-line " >
+                    <h2 class="textTitle text-center " id=""><a href="http://localhost:8080/calendar.html " target="_blank">产量信息</a></h2>
+                </div>
+                <div class="tableDiv">
+                    <table class="table ">
+                        <tr>
+                            <th>产量展示</th>
+                            <th>目标产量</th>
+                            <th>当前产量</th>
+                            <th>达成率</th>
+                            <th>当前状态</th>
+                        </tr>
+                        <tr>
+                            <td>BEPS</td>
+                            <td>1000</td>
+                            <td>980</td>
+                            <td>98%</td>
+                            <td>pic</td>
+                        </tr>
+                        <tr>
+                            <td>CEPS</td>
+                            <td>1000</td>
+                            <td>600</td>
+                            <td>60%</td>
+                            <td>pic</td>
+                        </tr>
+                        <tr>
+                            <td>I-Shaft</td>
+                            <td>1000</td>
+                            <td>720</td>
+                            <td>72%</td>
+                            <td>pic</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="bower_components/jquery/dist/jquery.min.js" ></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/defineGlobal.js"></script>
+<!--<script src="js/safeShow.js"></script>-->
+<script src="js/scrapAmount.js"></script>
+</body>
+</html>

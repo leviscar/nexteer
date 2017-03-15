@@ -8,6 +8,22 @@
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-year-calendar/css/bootstrap-year-calendar.min.css">
     <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
     <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <style>
+        body {
+            background-color: #F7F7F7;
+        }
+        .main{
+            width:100%;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .calendar{
+            width:100%;
+            height:100%;
+            padding:20px;
+        }
+    </style>
 </head>
 <body class="MainBoard">
 <!--top navigation-->
@@ -26,70 +42,14 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <!--<li class="dropdown">-->
-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">I-Shaft <span class="caret"></span></a>-->
-                    <!--<ul class="dropdown-menu">-->
-                        <!--<li><a href="#">直通率</a></li>-->
-                        <!--<li role="separator" class="divider"></li>-->
-                        <!--<li><a href="#">可动率</a></li>-->
-                        <!--<li role="separator" class="divider"></li>-->
-                        <!--<li><a href="#">产量信息展示</a></li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-                <!--<li class="dropdown">-->
-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VSS-Ishaft <span class="caret"></span></a>-->
-                    <!--<ul class="dropdown-menu">-->
-                        <!--<li><a href="#">直通率</a></li>-->
-                        <!--<li role="separator" class="divider"></li>-->
-                        <!--<li><a href="#">可动率</a></li>-->
-                        <!--<li role="separator" class="divider"></li>-->
-                        <!--<li><a href="#">产量信息展示</a></li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-                <!--<li class="dropdown">-->
-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BEPS <span class="caret"></span></a>-->
-                    <!--<ul class="dropdown-menu">-->
-                        <!--<li><a href="#">直通率</a></li>-->
-                        <!--<li role="separator" class="divider"></li>-->
-                        <!--<li><a href="#">可动率</a></li>-->
-                        <!--<li role="separator" class="divider"></li>-->
-                        <!--<li><a href="#">产量信息展示</a></li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-                <!--<li class="dropdown">-->
-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS<span class="caret"></span></a>-->
-                    <!--<ul class="dropdown-menu">-->
-                        <!--<li><a href="#">直通率</a></li>-->
-                        <!--<li role="separator" class="divider"></li>-->
-                        <!--<li><a href="#">可动率</a></li>-->
-                        <!--<li role="separator" class="divider"></li>-->
-                        <!--<li><a href="#">产量信息展示</a></li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-            </ul>
+            <span> 安全天数二级页面</span>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<!--<div id="my-calendar"></div>-->
-<div id="calendar" class="calendar"></div>
+<div class="main">
+    <div id="calendar" class="calendar"></div>
+</div>
 
-
-<!--<div class="col-md-6 col-md-offset-2">-->
-    <!--<form>-->
-
-        <!--<div>年: <input type="text" id="calendarUnSafeYear" name="year" class="text"></div>-->
-        <!--<div>月:  <input type="text" id="calendarUnSafeMonth" name="month" class="text"></div>-->
-        <!--<div>日:  <input type="text" id="calendarUnSafeDay" name="day" class="text"></div>-->
-        <!--<div>-->
-            <!--<button type="button" value="txt" class="btn btn-sm " id="calendarUnSafeDate">提交不安全日期</button>-->
-            <!--<button type="button" value="txt" class="btn btn-sm " id="calendarDelUnSafeDate">删除不安全日期</button>-->
-        <!--</div>-->
-
-    <!--</form>-->
-    <!--<div id="calendarUnSafeLog"></div>-->
-    <!--<div id="calendarUnSafeTime"></div>-->
-<!--</div>-->
 <script src="bower_components/jquery/dist/jquery.min.js" ></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/bootstrap-year-calendar/js/bootstrap-year-calendar.min.js"></script>

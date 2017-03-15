@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="images/favicon.ico">
+    <title>Nexteer</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
+    <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <style type="text/css">
+        body {
+            background-color: #F7F7F7;
+        }
+        .main{
+            width: 100%;
+            margin:0 0 0 3% ;
+            padding: 0 0 0 2%;
+            box-sizing: border-box;
+        }
+        .main{
+            height: 680px;
+        }
+        .main .item {
+            margin: 0 2% 2% 0;
+            position: relative;
+            background-color: #FFF;
+            float: left;
+            box-shadow: 2px 2px 5px #CCC;
+            height: 100%;
+        }
+        .row{
+            height: 85%;
+        }
+        .border-line{
+            border: 1px solid #293c55;
+        }
+        .innerItem{
+            width: 100%;
+            margin: 0 0 10% 0;
+            padding: 0;
+            box-shadow: 2px 2px 5px #CCC;
+            height: 48.1%;
+        }
+        #firstItem{
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="images/icon.png" alt="Nexteer"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <p class="navbar-text">产量信息展示I-shaft日视图</p>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VSS-Ishaft <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">日视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">周视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">月视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">年视图</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BEPS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">日视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">周视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">月视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">年视图</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">日视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">周视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">月视图</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">年视图</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="main">
+    <div class="row">
+        <div class="col-md-3 item  " id="firstItem">
+            <div class="innerItem border-line"></div>
+            <div class="innerItem border-line"></div>
+        </div>
+        <div class="col-md-8 item border-line" id="IshaftOneYieldDayChart"></div>
+    </div>
+</div>
+
+
+<script src="bower_components/jquery/dist/jquery.min.js" ></script>
+<script src="bower_components/jquery-json/dist/jquery.json.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/echarts/dist/echarts.min.js"></script>
+<script src="js/defineGlobal.js"></script>
+<script src="js/showScrapAmount.js"></script>
+<script type="application/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('IshaftOneYieldDayChart'));
+    //配置echarts
+    option = {
+        title: {
+            text: 'Ishaft产量信息展示日视图'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        toolbox: {
+            feature: {
+                dataView: {
+                    show: true,
+                    readOnly: false
+                },
+                restore: {
+                    show: true
+                },
+                saveAsImage: {
+                    show: true
+                }
+            }
+        },
+        grid: {
+            containLabel: true
+        },
+        legend: {
+            data: ['AccOutput','Output per Hour','Hourly Target']
+        },
+        xAxis: [{
+            type: 'category',
+            axisTick: {
+                alignWithLabel: true
+            },
+            data: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00']
+        }],
+        yAxis: [{
+            type: 'value',
+            name: 'AccOutput',
+            min: 0,
+            max: 50,
+            position: 'right',
+            axisLabel: {
+                formatter: '{value} %'
+            }
+        }, {
+            type: 'value',
+            name: '产品数（件）',
+            min: 0,
+            max: 3000,
+            position: 'left'
+        }],
+        series: [{
+            name: 'AccOutput',
+            type: 'line',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+            lineStyle: {
+                normal: {
+                    width: 3,
+                    shadowColor: 'rgba(0,0,0,0.4)',
+                    shadowBlur: 10,
+                    shadowOffsetY: 10
+                }
+            },
+            data: [1,13,37,35,15,13,25,21,6,45,32,2]
+        }, {
+            name: 'Output per Hour',
+            type: 'bar',
+            yAxisIndex: 1,
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+            data: [209,236,325,439,507,576,722,879,938,1364,1806,1851,1931]
+        },
+            {
+                name: 'Hourly Target',
+                type: 'line',
+                yAxisIndex: 1,
+                stack: '总量',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                data: [300,330,325,300,400,676,822,979,1038,1464,1906,1951,1931]
+            }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>
