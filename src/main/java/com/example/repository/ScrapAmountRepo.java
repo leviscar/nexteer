@@ -53,8 +53,8 @@ public class ScrapAmountRepo {
         Date start = sdf.parse(startYear + startMonth + startDay);
         Date end = sdf.parse(endYear + endMonth + endDay);
         if (start.getTime() - end.getTime() <= 0) {
-            String sql = "SELECT * FROM scrap_amount WHERE year BETWEEN ? AND ? AND month BETWEEN ? AND ? AND day BETWEEN ? AND ?";
-            return jdbc.query(sql, new Object[]{startYear, endYear, startMonth, endMonth, startDay, endDay}, new ScrapAmountMapper());
+            String sql = "SELECT * FROM scrap_amount WHERE year + month + day BETWEEN ? AND ?";
+            return jdbc.query(sql, new Object[]{startYear + startMonth + startDay, endYear + endMonth + endDay}, new ScrapAmountMapper());
         } else {
             return new ArrayList<>();
         }
