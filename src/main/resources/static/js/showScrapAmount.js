@@ -14,11 +14,22 @@ var showScrapJson = new safety_date(Uyear.toString(), UscrapMonth.toString(), Us
 scrapYearArr=[];
 scrapMonthArr=[];
 scrapDayArr=[];
-scrapValueArr=[];
+IshaftOnescrapValueArr=[];
+IsTwoscrapValueArr=[];
+IsThrscrapValueArr=[];
+IsThrscrapValueArr=[];
+IsForscrapValueArr=[];
+BEPSscrapValueArr=[];
+CEPSscrapValueArr=[];
 scrapShowX=[];
 
 // 基于准备好的dom，初始化echarts实例
-var scrapChart=echarts.init(document.getElementById('showWeekSheet'));
+var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
+var IsTwoscrapChart=echarts.init(document.getElementById('showIsTwoWeekSheet'));
+var IsThrscrapChart=echarts.init(document.getElementById('showIsThrWeekSheet'));
+var IsForscrapChart=echarts.init(document.getElementById('showIsForWeekSheet'));
+var BEPSscrapChart=echarts.init(document.getElementById('showBEPSWeekSheet'));
+var CEPSscrapChart=echarts.init(document.getElementById('showCEPSWeekSheet'));
 //按周显示
 $("#showWeek").bind("click", function () {
 
@@ -33,18 +44,23 @@ $("#showWeek").bind("click", function () {
                scrapYearArr[i]=model.year;
                scrapMonthArr[i]=model.month;
                scrapDayArr[i]=model.day;
-                scrapValueArr[i]=model.value;
+                IshaftOnescrapValueArr[i]=model.ishaft1_value;
+                IsTwoscrapValueArr[i]=model.ishaft2_value;
+                IsThrscrapValueArr[i]=model.ishaft3_value;
+                IsForscrapValueArr[i]=model.ishaft4_value;
+                BEPSscrapValueArr[i]=model.beps_value;
+                CEPSscrapValueArr[i]=model.ceps_value;
                 scrapShowX[i]=model.year+"."+model.month+"."+model.day;
             });
             console.log(JSON.stringify(data));
             console.log('nice');
             console.log(scrapYearArr);
-            console.log(scrapValueArr);
+            console.log(IshaftOnescrapValueArr);
             console.log(scrapShowX);
             // 指定图表的配置项和数据
-            var option = {
+            var Firstoption = {
                 title: {
-                    text: '报废金额周视图'
+                    text: 'Ishaft1报废金额周视图'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -64,12 +80,148 @@ $("#showWeek").bind("click", function () {
                     {
                         name: '报废金额',
                         type: 'line',
-                        data: scrapValueArr
+                        data: IshaftOnescrapValueArr
+                    }
+                ]
+            };
+            var SecOption= {
+                title: {
+                    text: 'Ishaft1报废金额周视图'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                },
+                legend: {
+                    data:['报废金额（元）'],
+                    align: 'right',
+                    right: 10
+                },
+                xAxis: {
+                    data: scrapShowX
+                },
+                yAxis: {},
+                series: [
+
+                    {
+                        name: '报废金额',
+                        type: 'line',
+                        data: IshaftOnescrapValueArr
+                    }
+                ]
+            };
+            var ThrOption= {
+                title: {
+                    text: 'Ishaft1报废金额周视图'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                },
+                legend: {
+                    data:['报废金额（元）'],
+                    align: 'right',
+                    right: 10
+                },
+                xAxis: {
+                    data: scrapShowX
+                },
+                yAxis: {},
+                series: [
+
+                    {
+                        name: '报废金额',
+                        type: 'line',
+                        data: IshaftOnescrapValueArr
+                    }
+                ]
+            };
+            var ForOption= {
+                title: {
+                    text: 'Ishaft1报废金额周视图'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                },
+                legend: {
+                    data:['报废金额（元）'],
+                    align: 'right',
+                    right: 10
+                },
+                xAxis: {
+                    data: scrapShowX
+                },
+                yAxis: {},
+                series: [
+
+                    {
+                        name: '报废金额',
+                        type: 'line',
+                        data: IshaftOnescrapValueArr
+                    }
+                ]
+            };
+            var BEPSOption={
+                title: {
+                    text: 'Ishaft1报废金额周视图'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                },
+                legend: {
+                    data:['报废金额（元）'],
+                    align: 'right',
+                    right: 10
+                },
+                xAxis: {
+                    data: scrapShowX
+                },
+                yAxis: {},
+                series: [
+
+                    {
+                        name: '报废金额',
+                        type: 'line',
+                        data: IshaftOnescrapValueArr
+                    }
+                ]
+            };
+            var CEPSOption={
+                title: {
+                    text: 'Ishaft1报废金额周视图'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                },
+                legend: {
+                    data:['报废金额（元）'],
+                    align: 'right',
+                    right: 10
+                },
+                xAxis: {
+                    data: scrapShowX
+                },
+                yAxis: {},
+                series: [
+
+                    {
+                        name: '报废金额',
+                        type: 'line',
+                        data: IshaftOnescrapValueArr
                     }
                 ]
             };
             // 使用刚指定的配置项和数据显示图表。
-            scrapChart.setOption(option);
+            IsOnescrapChart.setOption(Firstoption);
+            IsTwoscrapChart.setOption(SecOption);
+            IsThrscrapChart.setOption(ThrOption);
+            IsForscrapChart.setOption(ForOption);
+            BEPSscrapChart.setOption(BEPSOption);
+            CEPSscrapChart.setOption(CEPSOption);
+
         },
         failure: function (errMsg) {
             console.log(errMsg);

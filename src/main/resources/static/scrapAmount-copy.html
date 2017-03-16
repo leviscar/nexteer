@@ -60,16 +60,16 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <p class="navbar-text">报废金额二级页面</p>
             <form class="navbar-form navbar-left">
-                <button type="submit" class="btn btn-danger btn-xs ">周视图</button>
-                <button type="submit" class="btn btn-danger btn-xs ">月视图</button>
-                <button type="submit" class="btn btn-danger btn-xs">年视图</button>
+                <button type="submit" class="btn btn-danger btn-xs " id="showWeek" onclick="showWeek()">周视图</button>
+                <button type="submit" class="btn btn-danger btn-xs " id="showMonth">月视图</button>
+                <button type="submit" class="btn btn-danger btn-xs" id="showYear">年视图</button>
 
             </form>
             <form class="navbar-form navbar-right">
-                <input type="date">
+                <input id="startScrapTime"type="date">
                 <span>-</span>
-                <input type="date">
-                <button type="submit" class="btn btn-danger btn-xs ">按日期显示</button>
+                <input id="endScrapTime"type="date">
+                <button type="submit" class="btn btn-danger btn-xs " id="showPeriod">按日期显示</button>
             </form>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -101,14 +101,14 @@
 <!--</div>-->
 <div class="main">
     <div class="row">
-        <div class=" scrapSheet item col-md-4  border-line" id="showWeekSheet" ></div>
-        <div class=" scrapSheet item col-md-4  border-line" ></div>
-        <div class=" scrapSheet item col-md-4  border-line" ></div>
+        <div class=" scrapSheet item col-md-4  " id="showIsOneWeekSheet" ></div>
+        <div class=" scrapSheet item col-md-4  " id="showIsTwoWeekSheet"></div>
+        <div class=" scrapSheet item col-md-4  " id="showIsThrWeekSheet"></div>
     </div>
     <div class="row">
-        <div class=" scrapSheet item col-md-4  border-line" ></div>
-        <div class=" scrapSheet item col-md-4  border-line" ></div>
-        <div class=" scrapSheet item col-md-4  border-line" ></div>
+        <div class=" scrapSheet item col-md-4  " id="showIsForWeekSheet"></div>
+        <div class=" scrapSheet item col-md-4  " id="showBEPSWeekSheet"></div>
+        <div class=" scrapSheet item col-md-4  " id="showCEPSWeekSheet"></div>
     </div>
 
 </div>
@@ -119,6 +119,6 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/echarts/dist/echarts.min.js"></script>
 <script src="js/defineGlobal.js"></script>
-<script src="js/showScrapAmount.js"></script>
+<script src="js/showScrapAmountSe.js"></script>
 </body>
 </html>
