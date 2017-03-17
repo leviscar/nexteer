@@ -2,6 +2,7 @@ package com.example.repository;
 
 import com.example.config.TargetDataSource;
 import com.example.mapper.Ishaft1ProductMapper;
+import com.example.model.Ishaft1Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -33,7 +34,7 @@ public class Ishaft1ProductRepo {
      * @return
      */
     @TargetDataSource("ds1")
-    public List getByPeriod(Date startTime, Date endTime) {
+    public List<Ishaft1Product> getByPeriod(Date startTime, Date endTime) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String start = sdf.format(startTime);
         String end = sdf.format(endTime);

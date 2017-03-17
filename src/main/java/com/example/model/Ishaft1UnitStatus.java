@@ -2,6 +2,8 @@ package com.example.model;
 
 import com.example.util.ShiftType;
 
+import java.util.Map;
+
 /**
  * Created by mrpan on 2017/3/10.
  */
@@ -17,6 +19,7 @@ public class Ishaft1UnitStatus {
     private int curr_beats; // 当前节拍
     private int loss_time; // 损失时间
     private int movable_rate; // 可动率
+    private Map<String, Integer> hourly_output; // 小时产量
 
     public Ishaft1UnitStatus() {
     }
@@ -107,5 +110,13 @@ public class Ishaft1UnitStatus {
 
     public void setHourly_target(double hourly_target) {
         this.hourly_target = hourly_target;
+    }
+
+    public Map<String, Integer> getHourly_output() {
+        return hourly_output;
+    }
+
+    public void setHourly_output(Map<String, Integer> hourly_output) {
+        this.hourly_output = hourly_output;
     }
 }

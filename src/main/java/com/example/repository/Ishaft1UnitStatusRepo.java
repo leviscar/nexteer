@@ -1,12 +1,10 @@
 package com.example.repository;
 
-import com.example.model.Ishaft1UnitStatus;
-import com.example.model.RestEvent;
-import com.example.model.RestEventWithWorkShift;
-import com.example.model.WorkShift;
+import com.example.model.*;
 import com.example.util.Function;
 import com.example.util.ShiftType;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,9 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by mrpan on 2017/3/10.
@@ -63,7 +59,7 @@ public class Ishaft1UnitStatusRepo {
         Date startDate = changeShiftDate(curDate, workShift, shiftType);
         curDate = Function.addOneDay(startDate, curDate);
 
-        List products = repo.getByPeriod(startDate, curDate);
+        List<Ishaft1Product> products = repo.getByPeriod(startDate, curDate);
         // 当前生产量
         int curNum = products.size();
         unitStatus.setCurr_num(curNum);
@@ -120,8 +116,36 @@ public class Ishaft1UnitStatusRepo {
         int oee = (int) (standardBeats * curNum * 100 / (minutes * 60 - restSeconds));
         unitStatus.setMovable_rate(oee);
 
+        // 得到小时产量
+        Map<String, Integer> map = getHourlyOutput(products, startDate);
+        unitStatus.setHourly_output(map);
+
         Gson gson = new Gson();
         return gson.toJson(unitStatus);
+    }
+
+    private Map<String, Integer> getHourlyOutput(List<Ishaft1Product> products, Date startDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        Map<String, Integer> map = new TreeMap<>();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate);
+        calendar.add(Calendar.HOUR_OF_DAY, 1);
+        Date endDate = calendar.getTime();
+        int count = 0;
+        for (Ishaft1Product product : products) {
+            if (product.getTime().before(endDate) && product.getTime().after(startDate)) {
+                count++;
+            } else {
+                map.put(sdf.format(startDate), count);
+                calendar.add(Calendar.HOUR_OF_DAY, 1);
+                startDate = endDate;
+                endDate = calendar.getTime();
+                count = 0;
+            }
+        }
+        map.put(sdf.format(startDate), count);
+        return map;
     }
 
     /**
