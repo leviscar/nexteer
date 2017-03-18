@@ -1,22 +1,20 @@
 package com.example.repository;
 
-import com.example.model.Ishaft1UnitStatus;
-import com.example.model.RestEvent;
-import com.example.model.RestEventWithWorkShift;
-import com.example.model.WorkShift;
+import com.example.model.*;
 import com.example.util.Function;
+import com.example.util.ScheduledTask;
 import com.example.util.ShiftType;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by mrpan on 2017/3/10.
@@ -61,9 +59,9 @@ public class Ishaft1UnitStatusRepo {
         SimpleDateFormat dateSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date curDate = dateSdf.parse(unitStatus.getCurr_time());
         Date startDate = changeShiftDate(curDate, workShift, shiftType);
-        curDate = Function.addOneDay(startDate, curDate);
-
-        List products = repo.getByPeriod(startDate, curDate);
+        Map<Date, Boolean> addDateRes = Function.addOneDay(startDate, curDate);
+        curDate = (Date) addDateRes.keySet().toArray()[0];
+        List<Ishaft1Product> products = repo.getByPeriod(startDate, curDate);
         // 当前生产量
         int curNum = products.size();
         unitStatus.setCurr_num(curNum);
@@ -120,8 +118,43 @@ public class Ishaft1UnitStatusRepo {
         int oee = (int) (standardBeats * curNum * 100 / (minutes * 60 - restSeconds));
         unitStatus.setMovable_rate(oee);
 
+        // 得到小时产量
+        Map<String, Integer> map = getHourlyOutput(products, startDate);
+        unitStatus.setHourly_output(map);
+
         Gson gson = new Gson();
         return gson.toJson(unitStatus);
+    }
+
+    /**
+     * 获得小时产量
+     *
+     * @param products
+     * @param startDate
+     * @return
+     */
+    private Map<String, Integer> getHourlyOutput(List<Ishaft1Product> products, Date startDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        Map<String, Integer> map = new TreeMap<>();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate);
+        calendar.add(Calendar.HOUR_OF_DAY, 1);
+        Date endDate = calendar.getTime();
+        int count = 0;
+        for (Ishaft1Product product : products) {
+            if (product.getTime().before(endDate) && product.getTime().after(startDate)) {
+                count++;
+            } else {
+                map.put(sdf.format(startDate), count);
+                calendar.add(Calendar.HOUR_OF_DAY, 1);
+                startDate = endDate;
+                endDate = calendar.getTime();
+                count = 0;
+            }
+        }
+        map.put(sdf.format(startDate), count);
+        return map;
     }
 
     /**
@@ -168,8 +201,8 @@ public class Ishaft1UnitStatusRepo {
         if (workShift.getMorning_shift_start() != null && workShift.getMorning_shift_end() != null) {
             Date startTime = sdf.parse(workShift.getMorning_shift_start());
             Date endTime = sdf.parse(workShift.getMorning_shift_end());
-            endTime = Function.addOneDay(startTime, endTime);
-            curTime = Function.addOneDay(startTime, curTime);
+            endTime = (Date) Function.addOneDay(startTime, endTime).keySet().toArray()[0];
+            curTime = (Date) Function.addOneDay(startTime, curTime).keySet().toArray()[0];
             if (curTime.before(endTime) && curTime.after(startTime)) {
                 return ShiftType.MORNING_SHIFT;
             }
@@ -177,8 +210,8 @@ public class Ishaft1UnitStatusRepo {
         if (workShift.getNight_shift_start() != null && workShift.getNight_shift_end() != null) {
             Date startTime = sdf.parse(workShift.getNight_shift_start());
             Date endTime = sdf.parse(workShift.getNight_shift_end());
-            endTime = Function.addOneDay(startTime, endTime);
-            curTime = Function.addOneDay(startTime, curTime);
+            endTime = (Date) Function.addOneDay(startTime, endTime).keySet().toArray()[0];
+            curTime = (Date) Function.addOneDay(startTime, curTime).keySet().toArray()[0];
             if (curTime.before(endTime) && curTime.after(startTime)) {
                 return ShiftType.NIGHT_SHIFT;
             }
@@ -186,8 +219,8 @@ public class Ishaft1UnitStatusRepo {
         if (workShift.getMiddle_shift_end() != null && workShift.getMiddle_shift_end() != null) {
             Date startTime = sdf.parse(workShift.getMiddle_shift_start());
             Date endTime = sdf.parse(workShift.getMiddle_shift_end());
-            endTime = Function.addOneDay(startTime, endTime);
-            curTime = Function.addOneDay(startTime, curTime);
+            endTime = (Date) Function.addOneDay(startTime, endTime).keySet().toArray()[0];
+            curTime = (Date) Function.addOneDay(startTime, curTime).keySet().toArray()[0];
             if (curTime.before(endTime) && curTime.after(startTime)) {
                 return ShiftType.MIDDLE_SHIFT;
             }
@@ -245,19 +278,19 @@ public class Ishaft1UnitStatusRepo {
             case MORNING_SHIFT:
                 start = sdf.parse(workShift.getMorning_shift_start());
                 end = sdf.parse(workShift.getMorning_shift_end());
-                end = Function.addOneDay(start, end);
+                end = (Date) Function.addOneDay(start, end).keySet().toArray()[0];
                 times = end.getTime() - start.getTime();
                 break;
             case MIDDLE_SHIFT:
                 start = sdf.parse(workShift.getMiddle_shift_start());
                 end = sdf.parse(workShift.getMiddle_shift_end());
-                end = Function.addOneDay(start, end);
+                end = (Date) Function.addOneDay(start, end).keySet().toArray()[0];
                 times = end.getTime() - start.getTime();
                 break;
             case NIGHT_SHIFT:
                 start = sdf.parse(workShift.getNight_shift_start());
                 end = sdf.parse(workShift.getNight_shift_end());
-                end = Function.addOneDay(start, end);
+                end = (Date) Function.addOneDay(start, end).keySet().toArray()[0];
                 times = end.getTime() - start.getTime();
                 break;
         }

@@ -47,3 +47,9 @@ CREATE TABLE rest_event_with_work_shift (
   rest_event_id INT,
   work_shift_id INT
 );
+CREATE TABLE ishaft1_output_info (
+  id           INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
+  add_date     DATE,
+  model        VARCHAR(100), -- 型号
+  output_count INT -- 当天产量
+);
