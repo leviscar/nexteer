@@ -26,6 +26,11 @@ public class ScheduledTask {
         this.ishaft1ProductRepo = ishaft1ProductRepo;
     }
 
+    /**
+     * 定时插入当天产量
+     *
+     * @throws ParseException
+     */
     @Scheduled(cron = "0 0 0 * * ?")
     public void insertIntoDatabase() throws ParseException {
         // 设置一天的时间
