@@ -27,9 +27,6 @@ CREATE TABLE work_shift (
   middle_shift_end             VARCHAR(5), --中班结束
   night_shift_start            VARCHAR(5), --晚班开始
   night_shift_end              VARCHAR(5), --晚班结束
-  morning_shift_target_value   INT, -- 早班目标数量
-  middle_shift_target_value    INT, -- 中班目标数量
-  night_shift_target_value     INT, -- 晚班目标数量
   morning_shift_standard_beats INT, -- 早班标准节拍
   middle_shift_standard_beats  INT, -- 中班标准节拍
   night_shift_standard_beats   INT, -- 晚班标准节拍

@@ -16,9 +16,6 @@ public class WorkShift {
     private String night_shift_start;
     private String night_shift_end;
     private Date setting_time;
-    private int morning_shift_target_value;
-    private int middle_shift_target_value;
-    private int night_shift_target_value;
     private int morning_shift_standard_beats;
     private int middle_shift_standard_beats;
     private int night_shift_standard_beats;
@@ -89,30 +86,6 @@ public class WorkShift {
 
     public void setNight_shift_end(String night_shift_end) {
         this.night_shift_end = night_shift_end;
-    }
-
-    public int getMorning_shift_target_value() {
-        return morning_shift_target_value;
-    }
-
-    public void setMorning_shift_target_value(int morning_shift_target_value) {
-        this.morning_shift_target_value = morning_shift_target_value;
-    }
-
-    public int getMiddle_shift_target_value() {
-        return middle_shift_target_value;
-    }
-
-    public void setMiddle_shift_target_value(int middle_shift_target_value) {
-        this.middle_shift_target_value = middle_shift_target_value;
-    }
-
-    public int getNight_shift_target_value() {
-        return night_shift_target_value;
-    }
-
-    public void setNight_shift_target_value(int night_shift_target_value) {
-        this.night_shift_target_value = night_shift_target_value;
     }
 
     public int getMorning_shift_standard_beats() {

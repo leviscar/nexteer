@@ -12,7 +12,7 @@ public class Ishaft1UnitStatus {
     private String curr_time; // 当前时间
     private WorkShift curr_shift_info; // 班次信息
     private ShiftType shift_type; // 班次
-    private double hourly_target; // 小时目标
+    private Map<String, Integer> hourly_target; // 小时目标
     private int curr_num; // 已完成数量
     private int defective_num; // 残次品数量
     private int status; // 0表示哭脸，1表示笑脸
@@ -104,19 +104,19 @@ public class Ishaft1UnitStatus {
         this.id = id;
     }
 
-    public double getHourly_target() {
-        return hourly_target;
-    }
-
-    public void setHourly_target(double hourly_target) {
-        this.hourly_target = hourly_target;
-    }
-
     public Map<String, Integer> getHourly_output() {
         return hourly_output;
     }
 
     public void setHourly_output(Map<String, Integer> hourly_output) {
         this.hourly_output = hourly_output;
+    }
+
+    public Map<String, Integer> getHourly_target() {
+        return hourly_target;
+    }
+
+    public void setHourly_target(Map<String, Integer> hourly_target) {
+        this.hourly_target = hourly_target;
     }
 }

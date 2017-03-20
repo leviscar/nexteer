@@ -68,35 +68,19 @@ public class Ishaft1UnitStatusRepo {
 
         // 根据班次信息得到小时目标
         double hours = getHours(workShift, shiftType);
-        int targetValue = 0;
         int standardBeats = 0;
         switch (shiftType) {
             case MORNING_SHIFT:
-                targetValue = workShift.getMorning_shift_target_value();
                 standardBeats = workShift.getMorning_shift_standard_beats();
                 break;
             case MIDDLE_SHIFT:
-                targetValue = workShift.getMiddle_shift_target_value();
                 standardBeats = workShift.getMiddle_shift_standard_beats();
                 break;
             case NIGHT_SHIFT:
-                targetValue = workShift.getNight_shift_target_value();
                 standardBeats = workShift.getNight_shift_standard_beats();
                 break;
         }
-        unitStatus.setHourly_target(targetValue / hours);
 
-        // 根据当前产量确定当前生产状态
-        long minutes = (curDate.getTime() - startDate.getTime()) / (60 * 1000);
-
-        // 当前值大于计划值
-        if (curNum >= Function.targetPerMinute(targetValue, hours * 60, minutes)) {
-            // 笑脸
-            unitStatus.setStatus(1);
-        } else {
-            // 哭脸
-            unitStatus.setStatus(0);
-        }
         // 计算当前节拍
         // 取前31件计算平均值
         int topN = 30;
@@ -111,19 +95,110 @@ public class Ishaft1UnitStatusRepo {
         }
         unitStatus.setCurr_beats(curBeats);
 
-        // 计算OEE = curBeats * (合格产品数) / （经历时间-休息时间）
+        // 当前节拍小于等于标准节拍
+        if (curBeats <= standardBeats) {
+            // 笑脸
+            unitStatus.setStatus(1);
+        } else {
+            // 哭脸
+            unitStatus.setStatus(0);
+        }
+
         // 首先根据班次信息获得当前时刻经历的休息时间
+        long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
         long restSeconds = getRestSeconds(workShift.getId(), shiftType, curTime);
-        // 计算oee
-        int oee = (int) (standardBeats * curNum * 100 / (minutes * 60 - restSeconds));
+        // 计算OEE = curBeats * (合格产品数) / （经历时间-休息时间）
+        int oee = (int) (standardBeats * curNum * 100 / (totalSeconds - restSeconds));
         unitStatus.setMovable_rate(oee);
 
         // 得到小时产量
         Map<String, Integer> map = getHourlyOutput(products, startDate);
         unitStatus.setHourly_output(map);
 
+        // 得到小时目标产量
+        Map<String, Integer> targetMap = getHourlyTargetValue(standardBeats, shiftType, workShift);
+        unitStatus.setHourly_target(targetMap);
+
         Gson gson = new Gson();
         return gson.toJson(unitStatus);
+    }
+
+    /**
+     * 根据当前班次以及标准节拍，获得该班次每个小时的target
+     *
+     * @param standardBeats
+     * @param shiftType
+     * @param workShift
+     * @return
+     * @throws ParseException
+     */
+    private Map<String, Integer> getHourlyTargetValue(int standardBeats, ShiftType shiftType, WorkShift workShift) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        Date startTime = new Date(), endTime = new Date();
+        switch (shiftType) {
+            case MORNING_SHIFT:
+                startTime = sdf.parse(workShift.getMorning_shift_start());
+                endTime = sdf.parse(workShift.getMorning_shift_end());
+                break;
+            case MIDDLE_SHIFT:
+                startTime = sdf.parse(workShift.getMiddle_shift_start());
+                endTime = sdf.parse(workShift.getMiddle_shift_end());
+                break;
+            case NIGHT_SHIFT:
+                startTime = sdf.parse(workShift.getNight_shift_start());
+                endTime = sdf.parse(workShift.getNight_shift_end());
+                break;
+        }
+        Map<String, Integer> map = new TreeMap<>();
+        while (endTime.getTime() > startTime.getTime()) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(startTime);
+            calendar.add(Calendar.HOUR_OF_DAY, 1);
+            long restSeconds = getHourlyRestSeconds(workShift.getId(), shiftType, startTime, calendar.getTime());
+            if (restSeconds < 3600) {
+                int hourlyTarget;
+                if (calendar.getTime().getTime() > endTime.getTime()) {
+                    hourlyTarget = (int) (((endTime.getTime() - startTime.getTime()) / 1000 - restSeconds) / standardBeats);
+                } else {
+                    hourlyTarget = (int) ((3600 - restSeconds) / standardBeats);
+                }
+                map.put(sdf.format(startTime), hourlyTarget);
+            } else {
+                map.put(sdf.format(startTime), 0);
+            }
+            startTime = calendar.getTime();
+        }
+        return map;
+    }
+
+    private long getHourlyRestSeconds(int workShiftId, ShiftType shiftType, Date startTime, Date endTime) throws ParseException {
+        List<RestEventWithWorkShift> restEventWithWorkShiftList = restEventWithWorkShiftRepo.getByWorkShiftId(workShiftId);
+        if (restEventWithWorkShiftList.isEmpty()) {
+            return 0;
+        } else {
+            long restSeconds = 0;
+            for (RestEventWithWorkShift restEventWithWorkShift : restEventWithWorkShiftList) {
+                RestEvent event = restEventRepo.getById(restEventWithWorkShift.getId());
+                // 若休息时间在班次内
+                if (shiftType.toString().equals(event.getShift_type())) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                    Date eventStartTime = sdf.parse(event.getEvent_start_time());
+                    Date eventEndTime = sdf.parse(event.getEvent_end_time());
+                    if (endTime.before(eventStartTime) || startTime.after(eventEndTime)) {
+                        restSeconds += 0;
+                    } else if (startTime.after(eventStartTime) && endTime.before(eventEndTime)) {
+                        restSeconds += (endTime.getTime() - startTime.getTime()) / 1000;
+                    } else if (startTime.before(eventStartTime) && endTime.before(eventEndTime)) {
+                        restSeconds += (endTime.getTime() - eventStartTime.getTime()) / 1000;
+                    } else if (startTime.after(eventStartTime) && endTime.after(eventEndTime)) {
+                        restSeconds += (eventEndTime.getTime() - startTime.getTime()) / 1000;
+                    } else if (startTime.before(eventStartTime) && endTime.after(eventEndTime)) {
+                        restSeconds += (eventEndTime.getTime() - eventStartTime.getTime()) / 1000;
+                    }
+                }
+            }
+            return restSeconds;
+        }
     }
 
     /**

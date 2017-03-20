@@ -35,11 +35,11 @@ public class WorkShiftRepo {
         // 早中晚班的
         if (workShift.getMorning_shift_start() != null && workShift.getMorning_shift_start().length() > 0
                 && workShift.getMorning_shift_end() != null && workShift.getMorning_shift_end().length() > 0
-                && workShift.getMorning_shift_target_value() > 0 && workShift.getMorning_shift_standard_beats() > 0) {
+                && workShift.getMorning_shift_standard_beats() > 0) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String sql = "INSERT INTO work_shift (morning_shift_start, morning_shift_end, morning_shift_target_value, morning_shift_standard_beats,setting_time) VALUES(?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO work_shift (morning_shift_start, morning_shift_end, morning_shift_standard_beats,setting_time) VALUES(?, ?, ?, ?)";
             jdbc.update(sql, workShift.getMorning_shift_start(), workShift.getMorning_shift_end(),
-                    workShift.getMorning_shift_target_value(), workShift.getMorning_shift_standard_beats(), sdf.format(new Date()));
+                    workShift.getMorning_shift_standard_beats(), sdf.format(new Date()));
             object.addProperty("status", true);
             object.addProperty("log", "add ok");
         } else {
@@ -63,11 +63,10 @@ public class WorkShiftRepo {
                 && workShift.getNight_shift_end() != null && workShift.getNight_shift_end().length() > 0) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String sql = "INSERT INTO work_shift (morning_shift_start, morning_shift_end, " +
-                    "night_shift_start, night_shift_end, morning_shift_target_value, night_shift_target_value, " +
-                    "morning_shift_standard_beats, night_shift_standard_beats, setting_time) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "night_shift_start, night_shift_end, morning_shift_standard_beats, " +
+                    "night_shift_standard_beats, setting_time) VALUES(?, ?, ?, ?, ?, ?, ?)";
             jdbc.update(sql, workShift.getMorning_shift_start(), workShift.getMorning_shift_end(),
                     workShift.getNight_shift_start(), workShift.getNight_shift_end(),
-                    workShift.getMorning_shift_target_value(), workShift.getNight_shift_target_value(),
                     workShift.getMorning_shift_standard_beats(), workShift.getNight_shift_standard_beats(), sdf.format(new Date()));
             object.addProperty("status", true);
             object.addProperty("log", "add ok");
@@ -94,12 +93,11 @@ public class WorkShiftRepo {
                 && workShift.getNight_shift_end() != null && workShift.getNight_shift_end().length() > 0) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String sql = "INSERT INTO work_shift (morning_shift_start, morning_shift_end, middle_shift_start, middle_shift_end," +
-                    "night_shift_start, night_shift_end, morning_shift_target_value, middle_shift_target_value, night_shift_target_value, " +
-                    "morning_shift_standard_beats,middle_shift_standard_beats, night_shift_standard_beats, setting_time) VALUES(?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "night_shift_start, night_shift_end, morning_shift_standard_beats,middle_shift_standard_beats," +
+                    "night_shift_standard_beats, setting_time) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             jdbc.update(sql, workShift.getMorning_shift_start(), workShift.getMorning_shift_end(),
-                    workShift.getNight_shift_start(), workShift.getNight_shift_end(),
-                    workShift.getMorning_shift_target_value(), workShift.getMiddle_shift_target_value(), workShift.getNight_shift_target_value(),
-                    workShift.getMorning_shift_standard_beats(), workShift.getMiddle_shift_standard_beats(), workShift.getNight_shift_standard_beats(), sdf.format(new Date()));
+                    workShift.getNight_shift_start(), workShift.getNight_shift_end(), workShift.getMorning_shift_standard_beats(),
+                    workShift.getMiddle_shift_standard_beats(), workShift.getNight_shift_standard_beats(), sdf.format(new Date()));
             object.addProperty("status", true);
             object.addProperty("log", "add ok");
         } else {
