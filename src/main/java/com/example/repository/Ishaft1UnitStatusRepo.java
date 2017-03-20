@@ -2,14 +2,11 @@ package com.example.repository;
 
 import com.example.model.*;
 import com.example.util.Function;
-import com.example.util.ScheduledTask;
 import com.example.util.ShiftType;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
 import java.text.ParseException;
