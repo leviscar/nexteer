@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="images/favicon.ico">
+    <title>Nexteer</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
+    <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <link rel="stylesheet" href="css/dropdown.css">
+    <style type="text/css">
+        body {
+            background-color: #F7F7F7;
+        }
+        .main{
+            width: 100%;
+            margin:0 0 0 3% ;
+            padding: 0 0 0 2%;
+            box-sizing: border-box;
+        }
+        .main{
+            height: 680px;
+        }
+        .main .item {
+            margin: 0 2% 2% 0;
+            position: relative;
+            background-color: #FFF;
+            float: left;
+            /*box-shadow: 2px 2px 5px #CCC;*/
+            height: 100%;
+        }
+        .row{
+            height: 95%;
+        }
+        .border-line{
+            border: 1px solid #293c55;
+        }
+        .innerItem{
+            width: 100%;
+            margin: 0 0 1% 0;
+            padding: 0;
+            box-shadow: 2px 2px 5px #CCC;
+            height: 24%;
+        }
+        #firstItem{
+            box-shadow: none;
+        }
+        .innerHead{
+            width: 100%;
+            height: 20%;
+            color: red;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .table{
+            margin-top: 1%;
+        }
+        .firstTable>thead>tr>th{
+            background-color: #2aabd2;
+            height: 1.3em;
+            font-size: 1.4em;
+        }
+        .table>thead>tr>th{
+            background-color: #2aabd2;
+            font-size: 0.7em;
+        }
+        .inputIns{
+            width: 50%;
+        }
+        p{
+            font-size: 1.3em;
+            font-weight: bold;
+            color: black;
+        }
+        p>input{
+            width: 20%;
+        }
+        select{
+            width: 20%;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                ·················                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost:8080/mainIndex.html"><img src="images/icon.png" alt="Nexteer"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <p class="navbar-text">班次功能设置</p>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VSS-Ishaft <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu"><a href="#">I-shaft1</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">日视图</a></li>
+                                <li><a href="#">周视图</a></li>
+                                <li><a href="#">月视图</a></li>
+                                <li><a href="#">年视图</a></li>
+                            </ul>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="#">I-shaft2</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">日视图</a></li>
+                                <li><a href="#">周视图</a></li>
+                                <li><a href="#">月视图</a></li>
+                                <li><a href="#">年视图</a></li>
+                            </ul>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="#">I-shaft3</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">日视图</a></li>
+                                <li><a href="#">周视图</a></li>
+                                <li><a href="#">月视图</a></li>
+                                <li><a href="#">年视图</a></li>
+                            </ul>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="#">I-shaft4</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">日视图</a></li>
+                                <li><a href="#">周视图</a></li>
+                                <li><a href="#">月视图</a></li>
+                                <li><a href="#">年视图</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BEPS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu"><a href="#">Cell1</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">日视图</a></li>
+                                <li><a href="#">周视图</a></li>
+                                <li><a href="#">月视图</a></li>
+                                <li><a href="#">年视图</a></li>
+                            </ul>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="#">Cell2</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">日视图</a></li>
+                                <li><a href="#">周视图</a></li>
+                                <li><a href="#">月视图</a></li>
+                                <li><a href="#">年视图</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu"><a href="#">Cell1</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">日视图</a></li>
+                                <li><a href="#">周视图</a></li>
+                                <li><a href="#">月视图</a></li>
+                                <li><a href="#">年视图</a></li>
+                            </ul>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="#">Cell2</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">日视图</a></li>
+                                <li><a href="#">周视图</a></li>
+                                <li><a href="#">月视图</a></li>
+                                <li><a href="#">年视图</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="main">
+    <div class="row">
+        <!--<div class="col-md-1 item  border-line" id="firstItem"></div>-->
+        <div class="col-md-12 item  ">
+            <div class="innerItem ">
+                <div  class="innerHead ">当前班次信息</div>
+                <table class="table table-bordered">
+                </table>
+            </div>
+            <div class="innerItem ">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myMorFirModal">
+                    增加早班班次
+                </button>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myMorSecModal">
+                    增加早班事件
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="myMorFirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">增加早班班次设置</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p><label for="oneStart">早班开始时间</label><input type="time" id="oneStart"></p>
+                                <p><label for="oneEnd">早班结束时间</label><input type="time" id="oneEnd"></p>
+                                <p><label for="oneTarget">目标产量(件)</label><input type="text" id="oneTarget"></p>
+                                <p><label for="oneStdBeats">早班标准节拍</label><input type="text" id="oneStdBeats"></p>
+                                <p id="oneStatus">未知</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="oneSub">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="myMorSecModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myMorSecModalLabel">增加早班事件设置</h4>
+                            </div>
+                            <div class="modal-body">
+                                <!--<p><label for="addType">班次</label><input type="text" id="addType"></p>-->
+                                <p><label for="addEvent">事件</label><input type="text" id="addEvent"></p>
+                                <p><label for="addStart">事件开始时间</label><input type="time" id="addStart"></p>
+                                <p><label for="addEnd">事件结束时间</label><input type="time" id="addEnd"></p>
+                                <p id="addStatus">未知</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="oneEventSub">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="innerItem ">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myMidFirModal">增加早晚班</button>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myMidSecModal">
+                    增加早晚班事件
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="myMidFirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myMidModalLabel">增加早晚班次设置</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p><label for="twoMStart">早班开始时间</label><input type="time" id="twoMStart"></p>
+                                <p><label for="twoMEnd">早班结束时间</label><input type="time" id="twoMEnd"></p>
+                                <p><label for="twoNStart">晚班开始时间</label><input type="time" id="twoNStart"></p>
+                                <p><label for="twoNEnd">晚班结束时间</label><input type="time" id="twoNEnd"></p>
+                                <p><label for="twoMTarget">早班目标产量（件）</label><input type="text" class="inputIns" id="twoMTarget"></p>
+                                <p><label for="twoNTarget">晚班目标产量（件）</label><input type="text" class="inputIns" id="twoNTarget"></p>
+                                <p><label for="twoMStdBeats">早班标准节拍</label><input type="text" class="inputIns" id="twoMStdBeats"></p>
+                                <p><label for="twoNStdBeats">晚班标准节拍</label><input type="text" class="inputIns" id="twoNStdBeats"></p>
+                                <p id="twoStatus">未知</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="twoSub">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="myMidSecModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myMidSecModalLabel">增加早午班事件设置</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p><label for="addSecType">班次</label>
+                                    <select  class="form-control" id="addSecType">
+                                    <option>早班</option>
+                                    <option>晚班</option>
+                                    </select>
+                                </p>
+                                <p><label for="addSecEvent">事件</label><input type="text" id="addSecEvent"></p>
+                                <p><label for="addSecStart">事件开始时间</label><input type="time" id="addSecStart"></p>
+                                <p><label for="addSecEnd">事件结束时间</label><input type="time" id="addSecEnd"></p>
+                                <p id="addSecStatus">未知</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="twoEventSub">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="innerItem ">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myNtFirModal">增加早中晚班</button>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myNtSecModal">
+                    增加早中晚班事件
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="myNtFirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myNtModalLabel">增加早中晚班次设置</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p><label for="thiMorStart">早班开始时间</label><input type="time" id="thiMorStart"></p>
+                                <p><label for="thiMorEnd">早班结束时间</label><input type="time" id="thiMorEnd"></p>
+                                <p><label for="thiMidStart">中班开始时间</label><input type="time" id="thiMidStart"></p>
+                                <p><label for="thiMidEnd">中班结束时间</label><input type="time" id="thiMidEnd"></p>
+                                <p><label for="thiNStart">晚班开始时间</label><input type="time" id="thiNStart"></p>
+                                <p><label for="thiNEnd">晚班结束时间</label><input type="time" id="thiNEnd"></p>
+                                <p><label for="thiMorTar">早班目标产量（件）</label><input type="text" class="inputIns" id="thiMorTar"></p>
+                                <p><label for="thiMidTar">早班目标产量（件）</label><input type="text" class="inputIns" id="thiMidTar"></p>
+                                <p><label for="thiNTar">晚班目标产量（件）</label><input type="text" class="inputIns" id="thiNTar"></p>
+                                <p><label for="thiMorBeats">早班标准节拍</label><input type="text" class="inputIns" id="thiMorBeats"></p>
+                                <p><label for="thiMidBeats">中班标准节拍</label><input type="text" class="inputIns" id="thiMidBeats"></p>
+                                <p><label for="thiNBeats">晚班标准节拍</label><input type="text" class="inputIns" id="thiNBeats"></p>
+                                <p id="thiStatus">未知</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="thiSub">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="myNtSecModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myNtSecModalLabel">增加早班事件设置</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p><label for="addThiType">班次</label>
+                                    <select  class="form-control" id="addThiType">
+                                    <option>早班</option>
+                                    <option>中班</option>
+                                    <option>晚班</option>
+                                    </select>
+                                </p>
+                                <p><label for="addThiEvent">事件</label><input type="text" id="addThiEvent"></p>
+                                <p><label for="addThiStart">事件开始时间</label><input type="time" id="addThiStart"></p>
+                                <p><label for="addThiEnd">事件结束时间</label><input type="time" id="addThiEnd"></p>
+                                <p id="addThiStatus">未知</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="thiEventSub">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script src="bower_components/jquery/dist/jquery.min.js" ></script>
+<script src="bower_components/jquery-json/dist/jquery.json.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/defineGlobal.js"></script>
+<script src="js/banciSet.js"></script>
+</body>
+</html>

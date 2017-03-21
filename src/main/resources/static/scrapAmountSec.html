@@ -15,16 +15,16 @@
             background-color: #F7F7F7;
         }
         .main{
-            width: 100%;
-            margin:0 0 0 3% ;
-            padding: 0 0 0 2%;
+            width: 98%;
+            margin:0 3% 0 3% ;
+            padding: 0 4% 0 2%;
             box-sizing: border-box;
         }
         .main{
             height: 680px;
         }
         .main .item {
-            margin: 0 2% 2% 0;
+            margin: 0 0 1% 0;
             position: relative;
             background-color: #FFF;
             float: left;
@@ -35,7 +35,7 @@
             width: 93.75%;
         }
         .row{
-            height: 45%;
+            height: 100%;
         }
         .border-line{
             border: 1px solid #293c55;
@@ -53,54 +53,32 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="images/icon.png" alt="Nexteer"></a>
+            <a class="navbar-brand" href="http://localhost:8080/mainIndex.html"><img src="images/icon.png" alt="Nexteer"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">I-Shaft <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">直通率</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">可动率</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">产量信息展示</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VSS-Ishaft <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">直通率</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">可动率</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">产量信息展示</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BEPS <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">直通率</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">可动率</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">产量信息展示</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <p class="navbar-text">报废金额二级页面</p>
+            <form class="navbar-form navbar-left">
+                <button type="button" class="btn btn-danger btn-xs " id="showWeek" >周视图</button>
+                <button type="button" class="btn btn-danger btn-xs " id="showMonth">月视图</button>
+                <button type="button" class="btn btn-danger btn-xs" id="showYear">年视图</button>
+
+            </form>
+            <form class="navbar-form navbar-right">
+                <input id="startScrapTime" type="date">
+                <span>-</span>
+                <input id="endScrapTime" type="date">
+                <button type="button" class="btn btn-danger btn-xs " id="showPeriod">按日期显示</button>
+            </form>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
 <div class="main">
     <div class="row">
-        <div class="col-md-8 item border-line "></div>
-        <div class="col-md-3 item border-line"></div>
+        <div class=" scrapSheet item col-md-12" id="showIsOneWeekSheet" ></div>
     </div>
-    <div class="row">
-        <div class="col-md-12 item item2 border-line"></div>
-    </div>
+
 </div>
 
 
@@ -109,6 +87,6 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/echarts/dist/echarts.min.js"></script>
 <script src="js/defineGlobal.js"></script>
-<script src="htmlTest/showScrapAmount.js"></script>
+<script src="js/showScrapAmountThi.js"></script>
 </body>
 </html>

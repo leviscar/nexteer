@@ -10,6 +10,7 @@
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
     <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <link rel="stylesheet" href="css/dropdown.css" type="text/css">
     <style type="text/css">
         body {
             background-color: #F7F7F7;
@@ -53,7 +54,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="images/icon.png" alt="Nexteer"></a>
+            <a class="navbar-brand" href="http://localhost:8080/mainIndex.html"><img src="images/icon.png" alt="Nexteer"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -63,38 +64,86 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VSS-Ishaft <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">日视图</a></li>
+                        <li class="dropdown-submenu"><a href="#">I-shaft1</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="http://localhost:8080/IshaftYieldDay.html">日视图</a></li>
+                                <li><a href="http://localhost:8080/IshaftYieldWeek.html">周视图</a></li>
+                                <li><a href="http://localhost:8080/IshaftYieldMonth.html">月视图</a></li>
+                                <li><a href="http://localhost:8080/IshaftYieldYear.html">年视图</a></li>
+                            </ul>
+                        </li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">周视图</a></li>
+                        <li class="dropdown-submenu"><a href="#">I-shaft2</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">日视图</a></li>
+                                <li><a href="#">周视图</a></li>
+                                <li><a href="#">月视图</a></li>
+                                <li><a href="#">年视图</a></li>
+                            </ul>
+                        </li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">月视图</a></li>
+                        <li class="dropdown-submenu"><a href="#">I-shaft3</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">日视图</a></li>
+                                <li><a href="#">周视图</a></li>
+                                <li><a href="#">月视图</a></li>
+                                <li><a href="#">年视图</a></li>
+                            </ul>
+                        </li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">年视图</a></li>
+                        <li class="dropdown-submenu"><a href="#">I-shaft4</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">日视图</a></li>
+                                <li><a href="#">周视图</a></li>
+                                <li><a href="#">月视图</a></li>
+                                <li><a href="#">年视图</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BEPS <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">日视图</a></li>
+                        <li class="dropdown-submenu"><a href="#">Cell1</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">日视图</a></li>
+                                <li><a href="#">周视图</a></li>
+                                <li><a href="#">月视图</a></li>
+                                <li><a href="#">年视图</a></li>
+                            </ul>
+                        </li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">周视图</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">月视图</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">年视图</a></li>
+                        <li class="dropdown-submenu"><a href="#">Cell2</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">日视图</a></li>
+                                <li><a href="#">周视图</a></li>
+                                <li><a href="#">月视图</a></li>
+                                <li><a href="#">年视图</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">日视图</a></li>
+                        <li class="dropdown-submenu"><a href="#">Cell1</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">日视图</a></li>
+                                <li><a href="#">周视图</a></li>
+                                <li><a href="#">月视图</a></li>
+                                <li><a href="#">年视图</a></li>
+                            </ul>
+                        </li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">周视图</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">月视图</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">年视图</a></li>
+                        <li class="dropdown-submenu"><a href="#">Cell2</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">日视图</a></li>
+                                <li><a href="#">周视图</a></li>
+                                <li><a href="#">月视图</a></li>
+                                <li><a href="#">年视图</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
 
@@ -118,7 +167,7 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/echarts/dist/echarts.min.js"></script>
 <script src="js/defineGlobal.js"></script>
-<script src="js/showScrapAmount.js"></script>
+<script src="htmlTest/showScrapAmount.js"></script>
 
 <script type="application/javascript">
     // 基于准备好的dom，初始化echarts实例
@@ -126,8 +175,8 @@
     var myPieChart = echarts.init(document.getElementById('IshaftOneYieldMonthPie'));
     barOption = {
         title: {
-            text: '世界人口总量',
-            subtext: '数据来自网络'
+            text: 'Ishaft1产量信息展示月视图'
+//            subtext: '数据来自网络'
         },
         tooltip: {
             trigger: 'axis',
@@ -136,7 +185,7 @@
             }
         },
         legend: {
-            data: ['2011年', '2012年']
+            data: ['F102', 'R103','H50']
         },
         grid: {
             left: '3%',
@@ -150,27 +199,32 @@
         },
         yAxis: {
             type: 'category',
-            data: ['巴西','印尼','美国','印度','中国','世界人口(万)']
+            data: ['产量信息展示当月视图']
         },
         series: [
             {
-                name: '2011年',
+                name: 'F102',
                 type: 'bar',
-                data: [18203, 23489, 29034, 104970, 131744, 630230]
+                data: [1500]
             },
             {
-                name: '2012年',
+                name: 'R103',
                 type: 'bar',
-                data: [19325, 23438, 31000, 121594, 134141, 681807]
+                data: [1400]
+            },
+            {
+                name: 'H50',
+                type: 'bar',
+                data: [1700]
             }
         ]
     };
 
     pieOption= {
         title : {
-            text: '某站点用户访问来源',
-            subtext: '纯属虚构',
-            x:'center'
+            text: '产量信息展示当月',
+//            subtext: '纯属虚构',
+            x:'right'
         },
         tooltip : {
             trigger: 'item',
@@ -179,20 +233,19 @@
         legend: {
             orient: 'vertical',
             left: 'left',
-            data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+            data: ['F102','R103','H50']
         },
         series : [
             {
-                name: '访问来源',
+                name: 'F102',
                 type: 'pie',
                 radius : '55%',
                 center: ['50%', '60%'],
                 data:[
-                    {value:335, name:'直接访问'},
-                    {value:310, name:'邮件营销'},
-                    {value:234, name:'联盟广告'},
-                    {value:135, name:'视频广告'},
-                    {value:1548, name:'搜索引擎'}
+                    {value:1500, name:'F102'},
+                    {value:1400, name:'R103'},
+                    {value:1700, name:'H50'}
+
                 ],
                 itemStyle: {
                     emphasis: {

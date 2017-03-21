@@ -4,14 +4,13 @@
 scrapYearArr=[];
 scrapMonthArr=[];
 scrapDayArr=[];
-IshaftOnescrapValueArr=[];
-IsTwoscrapValueArr=[];
-IsThrscrapValueArr=[];
-IsThrscrapValueArr=[];
-IsForscrapValueArr=[];
-BEPSscrapValueArr=[];
-CEPSscrapValueArr=[];
-scrapShowX=[];
+// IshaftOnescrapValueArr=[];
+// IsTwoscrapValueArr=[];
+// IsThrscrapValueArr=[];
+// IsForscrapValueArr=[];
+// BEPSscrapValueArr=[];
+// CEPSscrapValueArr=[];
+// scrapShowX=[];
 function getDateJson(){
     showScrapDay=Uday-1;
     var UscrapMonth=Umonth.toString();
@@ -43,1367 +42,1397 @@ colorFir=['#442323','#000000'];
 colorSix=['#383838','#000000'];
 
 function showWeek() {
-
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/scrap-amount/getByWeek",
-        data: JSON.stringify(showScrapJson),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            $.each(data, function (i, model) {
-                scrapYearArr[i]=model.year;
-                scrapMonthArr[i]=model.month;
-                scrapDayArr[i]=model.day;
-                IshaftOnescrapValueArr[i]=model.ishaft1_value;
-                IsTwoscrapValueArr[i]=model.ishaft2_value;
-                IsThrscrapValueArr[i]=model.ishaft3_value;
-                IsForscrapValueArr[i]=model.ishaft4_value;
-                BEPSscrapValueArr[i]=model.beps_value;
-                CEPSscrapValueArr[i]=model.ceps_value;
-                scrapShowX[i]=model.year+"."+model.month+"."+model.day;
-            });
-            console.log(JSON.stringify(data));
-            console.log('nice');
-            console.log(scrapYearArr);
-            console.log(IshaftOnescrapValueArr);
-            console.log(IsTwoscrapValueArr);
-            console.log(IsThrscrapValueArr);
-            console.log(IsForscrapValueArr);
-            console.log(BEPSscrapValueArr);
-            console.log(CEPSscrapValueArr);
-            console.log(scrapShowX);
-            // 指定图表的配置项和数据
-            var firstOption = {
-                title: {
-                    text: 'Ishaft1报废金额周视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
-                        }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%',
-                    backgroudColor:'#ffffff'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
+    {
+        var IshaftOnescrapValueArr=[];
+        var IsTwoscrapValueArr=[];
+        var IsThrscrapValueArr=[];
+        var IsForscrapValueArr=[];
+        var BEPSscrapValueArr=[];
+        var CEPSscrapValueArr=[];
+        var scrapShowX=[];
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/scrap-amount/getByWeek",
+            data: JSON.stringify(showScrapJson),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, model) {
+                    scrapYearArr[i]=model.year;
+                    scrapMonthArr[i]=model.month;
+                    scrapDayArr[i]=model.day;
+                    IshaftOnescrapValueArr[i]=model.ishaft1_value;
+                    IsTwoscrapValueArr[i]=model.ishaft2_value;
+                    IsThrscrapValueArr[i]=model.ishaft3_value;
+                    IsForscrapValueArr[i]=model.ishaft4_value;
+                    BEPSscrapValueArr[i]=model.beps_value;
+                    CEPSscrapValueArr[i]=model.ceps_value;
+                    scrapShowX[i]=model.year+"."+model.month+"."+model.day;
+                });
+                console.log(JSON.stringify(data));
+                console.log('nice');
+                console.log(scrapYearArr);
+                console.log(IshaftOnescrapValueArr);
+                console.log(IsTwoscrapValueArr);
+                console.log(IsThrscrapValueArr);
+                console.log(IsForscrapValueArr);
+                console.log(BEPSscrapValueArr);
+                console.log(CEPSscrapValueArr);
+                console.log(scrapShowX);
+                // 指定图表的配置项和数据
+                var firstOption = {
+                    title: {
+                        text: 'Ishaft1报废金额周视图'
                     },
-                    nameTextStyle:{
-                      fontStyle:'italic',
-                        fontWeight:'bold'
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                     },
-                    data: ["周一","周二","周三","周四","周五","周六","周日"]
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorOne,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'bar',
-                        label: {
-                            normal: {
+                    toolbox: {
+                        feature: {
+                            dataView: {
                                 show: true,
-                                position: 'top'
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
                             }
-                        },
-                        data: IshaftOnescrapValueArr
-                    }
-                ]
-            };
-            var SecOption= {
-                title: {
-                    text: 'Ishaft2报废金额周视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
                         }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
                     },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
                     },
-                    data: ["周一","周二","周三","周四","周五","周六","周日"]
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorTwo,
-                series: [
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%',
+                        backgroudColor:'#ffffff'
+                    },
 
-                    {
-                        name: '报废金额',
-                        type: 'bar',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
                         },
-                        data: IsTwoscrapValueArr
-                    }
-                ]
-            };
-            var ThrOption= {
-                title: {
-                    text: 'Ishaft3报废金额周视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
                         },
-                        saveAsImage: {
-                            show: true
+                        data: ["周一","周二","周三","周四","周五","周六","周日"]
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
                         }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
+                    }],
+                    color:colorOne,
+                    series: [
 
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
-                    },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
-                    },
-                    data: ["周一","周二","周三","周四","周五","周六","周日"]
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorThr,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'bar',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
-                        },
-                        data: IsThrscrapValueArr
-                    }
-                ]
-            };
-            var ForOption= {
-                title: {
-                    text: 'Ishaft3报废金额周视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOnescrapValueArr
                         }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
+                    ]
+                };
+                var SecOption= {
+                    title: {
+                        text: 'Ishaft2报废金额周视图'
                     },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                     },
-                    data: ["周一","周二","周三","周四","周五","周六","周日"]
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorFor,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'bar',
-                        label: {
-                            normal: {
+                    toolbox: {
+                        feature: {
+                            dataView: {
                                 show: true,
-                                position: 'top'
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
                             }
-                        },
-                        data: IsForscrapValueArr
-                    }
-                ]
-            };
-            var BEPSOption={
-                title: {
-                    text: 'BEPS报废金额周视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
                         }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
                     },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
                     },
-                    data: ["周一","周二","周三","周四","周五","周六","周日"]
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorFir,
-                series: [
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
 
-                    {
-                        name: '报废金额',
-                        type: 'bar',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
                         },
-                        data: BEPSscrapValueArr
-                    }
-                ]
-            };
-            var CEPSOption={
-                title: {
-                    text: 'CEPS报废金额周视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
                         },
-                        saveAsImage: {
-                            show: true
+                        data: ["周一","周二","周三","周四","周五","周六","周日"]
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
                         }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
+                    }],
+                    color:colorTwo,
+                    series: [
 
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsTwoscrapValueArr
+                        }
+                    ]
+                };
+                var ThrOption= {
+                    title: {
+                        text: 'Ishaft3报废金额周视图'
                     },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                     },
-                    data: ["周一","周二","周三","周四","周五","周六","周日"]
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorSix,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'bar',
-                        label: {
-                            normal: {
+                    toolbox: {
+                        feature: {
+                            dataView: {
                                 show: true,
-                                position: 'top'
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
                             }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
                         },
-                        data: CEPSscrapValueArr
-                    }
-                ]
-            };
-            // 使用刚指定的配置项和数据显示图表。
-            IsOnescrapChart.setOption(firstOption);
-            IsTwoscrapChart.setOption(SecOption);
-            IsThrscrapChart.setOption(ThrOption);
-            IsForscrapChart.setOption(ForOption);
-            BEPSscrapChart.setOption(BEPSOption);
-            CEPSscrapChart.setOption(CEPSOption);
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: ["周一","周二","周三","周四","周五","周六","周日"]
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorThr,
+                    series: [
 
-        },
-        failure: function (errMsg) {
-            console.log(errMsg);
-            console.log('fail');
-        }
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsThrscrapValueArr
+                        }
+                    ]
+                };
+                var ForOption= {
+                    title: {
+                        text: 'Ishaft3报废金额周视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
 
-    });
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: ["周一","周二","周三","周四","周五","周六","周日"]
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorFor,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsForscrapValueArr
+                        }
+                    ]
+                };
+                var BEPSOption={
+                    title: {
+                        text: 'BEPS报废金额周视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: ["周一","周二","周三","周四","周五","周六","周日"]
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorFir,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: BEPSscrapValueArr
+                        }
+                    ]
+                };
+                var CEPSOption={
+                    title: {
+                        text: 'CEPS报废金额周视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: ["周一","周二","周三","周四","周五","周六","周日"]
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorSix,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: CEPSscrapValueArr
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                IsOnescrapChart.setOption(firstOption);
+                IsTwoscrapChart.setOption(SecOption);
+                IsThrscrapChart.setOption(ThrOption);
+                IsForscrapChart.setOption(ForOption);
+                BEPSscrapChart.setOption(BEPSOption);
+                CEPSscrapChart.setOption(CEPSOption);
+
+            },
+            failure: function (errMsg) {
+                console.log(errMsg);
+                console.log('fail');
+            }
+
+        });
+    }
 }
 function showMonth() {
-
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/scrap-amount/getByMonth",
-        data: JSON.stringify(showScrapJson),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            $.each(data, function (i, model) {
-                scrapYearArr[i]=model.year;
-                scrapMonthArr[i]=model.month;
-                scrapDayArr[i]=model.day;
-                IshaftOnescrapValueArr[i]=model.ishaft1_value;
-                IsTwoscrapValueArr[i]=model.ishaft2_value;
-                IsThrscrapValueArr[i]=model.ishaft3_value;
-                IsForscrapValueArr[i]=model.ishaft4_value;
-                BEPSscrapValueArr[i]=model.beps_value;
-                CEPSscrapValueArr[i]=model.ceps_value;
-                scrapShowX[i]=model.year+"."+model.month+"."+model.day;
-            });
-            console.log(JSON.stringify(data));
-            console.log('nice');
-            console.log(scrapYearArr);
-            console.log(IshaftOnescrapValueArr);
-            console.log(IsTwoscrapValueArr);
-            console.log(IsThrscrapValueArr);
-            console.log(IsForscrapValueArr);
-            console.log(BEPSscrapValueArr);
-            console.log(CEPSscrapValueArr);
-            console.log(scrapShowX);
-            // 指定图表的配置项和数据
-            var firstOption = {
-                title: {
-                    text: 'Ishaft1报废金额月视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
-                        }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
+    {
+        var IshaftOnescrapValueArr=[];
+        var IsTwoscrapValueArr=[];
+        var IsThrscrapValueArr=[];
+        var IsForscrapValueArr=[];
+        var BEPSscrapValueArr=[];
+        var CEPSscrapValueArr=[];
+        var scrapShowX=[];
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/scrap-amount/getByMonth",
+            data: JSON.stringify(showScrapJson),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, model) {
+                    scrapYearArr[i]=model.year;
+                    scrapMonthArr[i]=model.month;
+                    scrapDayArr[i]=model.day;
+                    IshaftOnescrapValueArr[i]=model.ishaft1_value;
+                    IsTwoscrapValueArr[i]=model.ishaft2_value;
+                    IsThrscrapValueArr[i]=model.ishaft3_value;
+                    IsForscrapValueArr[i]=model.ishaft4_value;
+                    BEPSscrapValueArr[i]=model.beps_value;
+                    CEPSscrapValueArr[i]=model.ceps_value;
+                    scrapShowX[i]=model.year+"."+model.month+"."+model.day;
+                });
+                console.log(JSON.stringify(data));
+                console.log('nice');
+                console.log(scrapYearArr);
+                console.log(IshaftOnescrapValueArr);
+                console.log(IsTwoscrapValueArr);
+                console.log(IsThrscrapValueArr);
+                console.log(IsForscrapValueArr);
+                console.log(BEPSscrapValueArr);
+                console.log(CEPSscrapValueArr);
+                console.log(scrapShowX);
+                // 指定图表的配置项和数据
+                var firstOption = {
+                    title: {
+                        text: 'Ishaft1报废金额月视图'
                     },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                     },
-                    data: scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorOne,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'bar',
-                        label: {
-                            normal: {
+                    toolbox: {
+                        feature: {
+                            dataView: {
                                 show: true,
-                                position: 'top'
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
                             }
-                        },
-                        data: IshaftOnescrapValueArr
-                    }
-                ]
-            };
-            var SecOption= {
-                title: {
-                    text: 'Ishaft2报废金额月视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
                         }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
                     },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
                     },
-                    data: scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorTwo,
-                series: [
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
 
-                    {
-                        name: '报废金额',
-                        type: 'bar',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
                         },
-                        data: IsTwoscrapValueArr
-                    }
-                ]
-            };
-            var ThrOption= {
-                title: {
-                    text: 'Ishaft3报废金额月视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
                         },
-                        saveAsImage: {
-                            show: true
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
                         }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
+                    }],
+                    color:colorOne,
+                    series: [
 
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
-                    },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
-                    },
-                    data: scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorThr,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'bar',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
-                        },
-                        data: IsThrscrapValueArr
-                    }
-                ]
-            };
-            var ForOption= {
-                title: {
-                    text: 'Ishaft3报废金额月视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOnescrapValueArr
                         }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
+                    ]
+                };
+                var SecOption= {
+                    title: {
+                        text: 'Ishaft2报废金额月视图'
                     },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                     },
-                    data:scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorFor,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'bar',
-                        label: {
-                            normal: {
+                    toolbox: {
+                        feature: {
+                            dataView: {
                                 show: true,
-                                position: 'top'
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
                             }
-                        },
-                        data: IsForscrapValueArr
-                    }
-                ]
-            };
-            var BEPSOption={
-                title: {
-                    text: 'BEPS报废金额月视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
                         }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
                     },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
                     },
-                    data: scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorFir,
-                series: [
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
 
-                    {
-                        name: '报废金额',
-                        type: 'bar',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
                         },
-                        data: BEPSscrapValueArr
-                    }
-                ]
-            };
-            var CEPSOption={
-                title: {
-                    text: 'CEPS报废金额月视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
                         },
-                        saveAsImage: {
-                            show: true
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
                         }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
+                    }],
+                    color:colorTwo,
+                    series: [
 
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsTwoscrapValueArr
+                        }
+                    ]
+                };
+                var ThrOption= {
+                    title: {
+                        text: 'Ishaft3报废金额月视图'
                     },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                     },
-                    data: scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorSix,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'bar',
-                        label: {
-                            normal: {
+                    toolbox: {
+                        feature: {
+                            dataView: {
                                 show: true,
-                                position: 'top'
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
                             }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
                         },
-                        data: CEPSscrapValueArr
-                    }
-                ]
-            };
-            // 使用刚指定的配置项和数据显示图表。
-            IsOnescrapChart.setOption(firstOption);
-            IsTwoscrapChart.setOption(SecOption);
-            IsThrscrapChart.setOption(ThrOption);
-            IsForscrapChart.setOption(ForOption);
-            BEPSscrapChart.setOption(BEPSOption);
-            CEPSscrapChart.setOption(CEPSOption);
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorThr,
+                    series: [
 
-        },
-        failure: function (errMsg) {
-            console.log(errMsg);
-            console.log('fail');
-        }
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsThrscrapValueArr
+                        }
+                    ]
+                };
+                var ForOption= {
+                    title: {
+                        text: 'Ishaft3报废金额月视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
 
-    });
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data:scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorFor,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsForscrapValueArr
+                        }
+                    ]
+                };
+                var BEPSOption={
+                    title: {
+                        text: 'BEPS报废金额月视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorFir,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: BEPSscrapValueArr
+                        }
+                    ]
+                };
+                var CEPSOption={
+                    title: {
+                        text: 'CEPS报废金额月视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorSix,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: CEPSscrapValueArr
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                IsOnescrapChart.setOption(firstOption);
+                IsTwoscrapChart.setOption(SecOption);
+                IsThrscrapChart.setOption(ThrOption);
+                IsForscrapChart.setOption(ForOption);
+                BEPSscrapChart.setOption(BEPSOption);
+                CEPSscrapChart.setOption(CEPSOption);
+
+            },
+            failure: function (errMsg) {
+                console.log(errMsg);
+                console.log('fail');
+            }
+
+        });
+    }
 }
 function showYear() {
-
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/scrap-amount/getByYear",
-        data: JSON.stringify(showScrapJson),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            $.each(data, function (i, model) {
-                scrapYearArr[i]=model.year;
-                scrapMonthArr[i]=model.month;
-                scrapDayArr[i]=model.day;
-                IshaftOnescrapValueArr[i]=model.ishaft1_value;
-                IsTwoscrapValueArr[i]=model.ishaft2_value;
-                IsThrscrapValueArr[i]=model.ishaft3_value;
-                IsForscrapValueArr[i]=model.ishaft4_value;
-                BEPSscrapValueArr[i]=model.beps_value;
-                CEPSscrapValueArr[i]=model.ceps_value;
-                scrapShowX[i]=model.year+"."+model.month+"."+model.day;
-            });
-            console.log(JSON.stringify(data));
-            console.log('nice');
-            console.log(scrapYearArr);
-            console.log(IshaftOnescrapValueArr);
-            console.log(IsTwoscrapValueArr);
-            console.log(IsThrscrapValueArr);
-            console.log(IsForscrapValueArr);
-            console.log(BEPSscrapValueArr);
-            console.log(CEPSscrapValueArr);
-            console.log(scrapShowX);
-            // 指定图表的配置项和数据
-            var firstOption = {
-                title: {
-                    text: 'Ishaft1报废金额年视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
-                        }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%',
-                    backgroudColor:'#ffffff'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
+    {
+        var IshaftOnescrapValueArr=[];
+        var IsTwoscrapValueArr=[];
+        var IsThrscrapValueArr=[];
+        var IsForscrapValueArr=[];
+        var BEPSscrapValueArr=[];
+        var CEPSscrapValueArr=[];
+        var scrapShowX=[];
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/scrap-amount/getByYear",
+            data: JSON.stringify(showScrapJson),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, model) {
+                    scrapYearArr[i]=model.year;
+                    scrapMonthArr[i]=model.month;
+                    scrapDayArr[i]=model.day;
+                    IshaftOnescrapValueArr[i]=model.ishaft1_value;
+                    IsTwoscrapValueArr[i]=model.ishaft2_value;
+                    IsThrscrapValueArr[i]=model.ishaft3_value;
+                    IsForscrapValueArr[i]=model.ishaft4_value;
+                    BEPSscrapValueArr[i]=model.beps_value;
+                    CEPSscrapValueArr[i]=model.ceps_value;
+                    scrapShowX[i]=model.year+"."+model.month+"."+model.day;
+                });
+                console.log(JSON.stringify(data));
+                console.log('nice');
+                console.log(scrapYearArr);
+                console.log(IshaftOnescrapValueArr);
+                console.log(IsTwoscrapValueArr);
+                console.log(IsThrscrapValueArr);
+                console.log(IsForscrapValueArr);
+                console.log(BEPSscrapValueArr);
+                console.log(CEPSscrapValueArr);
+                console.log(scrapShowX);
+                // 指定图表的配置项和数据
+                var firstOption = {
+                    title: {
+                        text: 'Ishaft1报废金额年视图'
                     },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                     },
-                    data: scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorOne,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'line',
-                        label: {
-                            normal: {
+                    toolbox: {
+                        feature: {
+                            dataView: {
                                 show: true,
-                                position: 'top'
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
                             }
-                        },
-                        data: IshaftOnescrapValueArr
-                    }
-                ]
-            };
-            var SecOption= {
-                title: {
-                    text: 'Ishaft2报废金额年视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
                         }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
                     },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
                     },
-                    data: scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorTwo,
-                series: [
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%',
+                        backgroudColor:'#ffffff'
+                    },
 
-                    {
-                        name: '报废金额',
-                        type: 'line',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
                         },
-                        data: IsTwoscrapValueArr
-                    }
-                ]
-            };
-            var ThrOption= {
-                title: {
-                    text: 'Ishaft3报废金额年视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
                         },
-                        saveAsImage: {
-                            show: true
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
                         }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
+                    }],
+                    color:colorOne,
+                    series: [
 
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
-                    },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
-                    },
-                    data: scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorThr,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'line',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
-                        },
-                        data: IsThrscrapValueArr
-                    }
-                ]
-            };
-            var ForOption= {
-                title: {
-                    text: 'Ishaft3报废金额年视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
+                        {
+                            name: '报废金额',
+                            type: 'line',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOnescrapValueArr
                         }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
+                    ]
+                };
+                var SecOption= {
+                    title: {
+                        text: 'Ishaft2报废金额年视图'
                     },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                     },
-                    data: scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorFor,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'line',
-                        label: {
-                            normal: {
+                    toolbox: {
+                        feature: {
+                            dataView: {
                                 show: true,
-                                position: 'top'
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
                             }
-                        },
-                        data: IsForscrapValueArr
-                    }
-                ]
-            };
-            var BEPSOption={
-                title: {
-                    text: 'BEPS报废金额年视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
                         }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
                     },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
                     },
-                    data: scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorFir,
-                series: [
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
 
-                    {
-                        name: '报废金额',
-                        type: 'line',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
                         },
-                        data: BEPSscrapValueArr
-                    }
-                ]
-            };
-            var CEPSOption={
-                title: {
-                    text: 'CEPS报废金额年视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
                         },
-                        saveAsImage: {
-                            show: true
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
                         }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
+                    }],
+                    color:colorTwo,
+                    series: [
 
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
+                        {
+                            name: '报废金额',
+                            type: 'line',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsTwoscrapValueArr
+                        }
+                    ]
+                };
+                var ThrOption= {
+                    title: {
+                        text: 'Ishaft3报废金额年视图'
                     },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                     },
-                    data:scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorSix,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'line',
-                        label: {
-                            normal: {
+                    toolbox: {
+                        feature: {
+                            dataView: {
                                 show: true,
-                                position: 'top'
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
                             }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
                         },
-                        data: CEPSscrapValueArr
-                    }
-                ]
-            };
-            // 使用刚指定的配置项和数据显示图表。
-            IsOnescrapChart.setOption(firstOption);
-            IsTwoscrapChart.setOption(SecOption);
-            IsThrscrapChart.setOption(ThrOption);
-            IsForscrapChart.setOption(ForOption);
-            BEPSscrapChart.setOption(BEPSOption);
-            CEPSscrapChart.setOption(CEPSOption);
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorThr,
+                    series: [
 
-        },
-        failure: function (errMsg) {
-            console.log(errMsg);
-            console.log('fail');
-        }
+                        {
+                            name: '报废金额',
+                            type: 'line',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsThrscrapValueArr
+                        }
+                    ]
+                };
+                var ForOption= {
+                    title: {
+                        text: 'Ishaft3报废金额年视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
 
-    });
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorFor,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'line',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsForscrapValueArr
+                        }
+                    ]
+                };
+                var BEPSOption={
+                    title: {
+                        text: 'BEPS报废金额年视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorFir,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'line',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: BEPSscrapValueArr
+                        }
+                    ]
+                };
+                var CEPSOption={
+                    title: {
+                        text: 'CEPS报废金额年视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data:scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorSix,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'line',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: CEPSscrapValueArr
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                IsOnescrapChart.setOption(firstOption);
+                IsTwoscrapChart.setOption(SecOption);
+                IsThrscrapChart.setOption(ThrOption);
+                IsForscrapChart.setOption(ForOption);
+                BEPSscrapChart.setOption(BEPSOption);
+                CEPSscrapChart.setOption(CEPSOption);
+
+            },
+            failure: function (errMsg) {
+                console.log(errMsg);
+                console.log('fail');
+            }
+
+        });
+    }
 }
 function showPeriod() {
     function showPeriodTime(startyear, startmonth, startday,endyear, endmonth, endday) {
-        this.startyear = startyear;
-        this.startmonth = startmonth;
-        this.startday = startday;
-        this.endyear = endyear;
-        this.endmonth = endmonth;
-        this.endday=endday;
+        this.startYear = startyear;
+        this.startMonth = startmonth;
+        this.startDay = startday;
+        this.endYear = endyear;
+        this.endMonth = endmonth;
+        this.endDay=endday;
     }
-
+    var IshaftOnescrapValueArr=[];
+    var IsTwoscrapValueArr=[];
+    var IsThrscrapValueArr=[];
+    var IsForscrapValueArr=[];
+    var BEPSscrapValueArr=[];
+    var CEPSscrapValueArr=[];
+    var scrapShowX=[];
     var startScrapTime=$("#startScrapTime").val().split("-");
     var endScrapTIme=$("#endScrapTime").val().split("-");
     console.log(startScrapTime);
@@ -1415,482 +1444,8 @@ function showPeriod() {
     var endyear=endScrapTIme[0];
     var endmonth=endScrapTIme[1];
     var endday=endScrapTIme[2];
-    var showPeriodJson=showPeriodTime(startyear,startmonth,startday,endyear,endmonth,endday);
-    console.log(showPeriodTime());
-
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/scrap-amount/getByMonth",
-        data: JSON.stringify(showPeriodJson),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            $.each(data, function (i, model) {
-                scrapYearArr[i]=model.year;
-                scrapMonthArr[i]=model.month;
-                scrapDayArr[i]=model.day;
-                IshaftOnescrapValueArr[i]=model.ishaft1_value;
-                IsTwoscrapValueArr[i]=model.ishaft2_value;
-                IsThrscrapValueArr[i]=model.ishaft3_value;
-                IsForscrapValueArr[i]=model.ishaft4_value;
-                BEPSscrapValueArr[i]=model.beps_value;
-                CEPSscrapValueArr[i]=model.ceps_value;
-                scrapShowX[i]=model.year+"."+model.month+"."+model.day;
-            });
-            console.log(JSON.stringify(data));
-            console.log('nice');
-            console.log(scrapYearArr);
-            console.log(IshaftOnescrapValueArr);
-            console.log(IsTwoscrapValueArr);
-            console.log(IsThrscrapValueArr);
-            console.log(IsForscrapValueArr);
-            console.log(BEPSscrapValueArr);
-            console.log(CEPSscrapValueArr);
-            console.log(scrapShowX);
-            // 指定图表的配置项和数据
-            var firstOption = {
-                title: {
-                    text: 'Ishaft1报废金额时间段视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
-                        }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%',
-                    backgroudColor:'#ffffff'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
-                    },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
-                    },
-                    data: scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorOne,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'line',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
-                        },
-                        data: IshaftOnescrapValueArr
-                    }
-                ]
-            };
-            var SecOption= {
-                title: {
-                    text: 'Ishaft2报废金额时间段视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
-                        }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
-                    },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
-                    },
-                    data: scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorTwo,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'line',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
-                        },
-                        data: IsTwoscrapValueArr
-                    }
-                ]
-            };
-            var ThrOption= {
-                title: {
-                    text: 'Ishaft3报废金额时间段视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
-                        }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
-                    },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
-                    },
-                    data: scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorThr,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'line',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
-                        },
-                        data: IsThrscrapValueArr
-                    }
-                ]
-            };
-            var ForOption= {
-                title: {
-                    text: 'Ishaft3报废金额时间段视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
-                        }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
-                    },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
-                    },
-                    data: scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorFor,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'line',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
-                        },
-                        data: IsForscrapValueArr
-                    }
-                ]
-            };
-            var BEPSOption={
-                title: {
-                    text: 'BEPS报废金额时间段视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
-                        }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
-                    },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
-                    },
-                    data: scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorFir,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'line',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
-                        },
-                        data: BEPSscrapValueArr
-                    }
-                ]
-            };
-            var CEPSOption={
-                title: {
-                    text: 'CEPS报废金额时间段视图'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
-                        }
-                    }
-                },
-                grid: {
-                    containLabel: true,
-                    left:'4%',
-                    bottom:'2%'
-                },
-                legend: {
-                    data:['报废金额'],
-                    align: 'right',
-                    right: '15%',
-                    top:'3%'
-                },
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
-                    },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
-                    },
-                    data:scrapShowX
-                },
-                yAxis:[{
-                    type:'value',
-                    name:'报废金额（元）',
-                    position:'left',
-                    nameTextStyle:{
-                        fontStyle:'normal',
-                        fontWeight:'bold'
-                    }
-                }],
-                color:colorSix,
-                series: [
-
-                    {
-                        name: '报废金额',
-                        type: 'line',
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
-                        },
-                        data: CEPSscrapValueArr
-                    }
-                ]
-            };
-            // 使用刚指定的配置项和数据显示图表。
-            IsOnescrapChart.setOption(firstOption);
-            IsTwoscrapChart.setOption(SecOption);
-            IsThrscrapChart.setOption(ThrOption);
-            IsForscrapChart.setOption(ForOption);
-            BEPSscrapChart.setOption(BEPSOption);
-            CEPSscrapChart.setOption(CEPSOption);
-
-        },
-        failure: function (errMsg) {
-            console.log(errMsg);
-            console.log('fail');
-        }
-
-    });
-}
-
-setInterval(function () {
-    function showPeriodTime(startyear, startmonth, startday,endyear, endmonth, endday) {
-        this.startyear = startyear;
-        this.startmonth = startmonth;
-        this.startday = startday;
-        this.endyear = endyear;
-        this.endmonth = endmonth;
-        this.endday=endday;
-    }
-
-    var startScrapTime=$("#startScrapTime").val().split("-");
-    var endScrapTIme=$("#endScrapTime").val().split("-");
-    console.log(startScrapTime);
-    console.log(endScrapTIme);
-
-    var startyear=startScrapTime[0];
-    var startmonth=startScrapTime[1];
-    var startday=startScrapTime[2];
-    var endyear=endScrapTIme[0];
-    var endmonth=endScrapTIme[1];
-    var endday=endScrapTIme[2];
-    var showPeriodJson=showPeriodTime(startScrapTime[0],startScrapTime[1],startScrapTime[2],endScrapTIme[0],endScrapTIme[1],endScrapTIme[2]);
-    console.log("showPeriodJson");
+    var showPeriodJson=new showPeriodTime(startScrapTime[0].toString(),startScrapTime[1].toString(),startScrapTime[2].toString(),endScrapTIme[0].toString(),endScrapTIme[1].toString(),endScrapTIme[2].toString());
+    console.log(startyear);
 
     $.ajax({
         type: "POST",
@@ -2340,134 +1895,1866 @@ setInterval(function () {
         }
 
     });
-},1000*10);
-// showWeek();
-// showMonth();
-// showYear();
+}
+showWeek();
 //按周显示
-// $("#showWeek").bind("click",showWeek);
-// $("#showWeek").click(showWeek());
+$("#showWeek").bind("click",function () {
+    {
+        var IshaftOnescrapValueArr=[];
+        var IsTwoscrapValueArr=[];
+        var IsThrscrapValueArr=[];
+        var IsForscrapValueArr=[];
+        var BEPSscrapValueArr=[];
+        var CEPSscrapValueArr=[];
+        var scrapShowX=[];
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/scrap-amount/getByWeek",
+            data: JSON.stringify(showScrapJson),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, model) {
+                    scrapYearArr[i]=model.year;
+                    scrapMonthArr[i]=model.month;
+                    scrapDayArr[i]=model.day;
+                    IshaftOnescrapValueArr[i]=model.ishaft1_value;
+                    IsTwoscrapValueArr[i]=model.ishaft2_value;
+                    IsThrscrapValueArr[i]=model.ishaft3_value;
+                    IsForscrapValueArr[i]=model.ishaft4_value;
+                    BEPSscrapValueArr[i]=model.beps_value;
+                    CEPSscrapValueArr[i]=model.ceps_value;
+                    scrapShowX[i]=model.year+"."+model.month+"."+model.day;
+                });
+                console.log(JSON.stringify(data));
+                console.log('nice');
+                console.log(scrapYearArr);
+                console.log(IshaftOnescrapValueArr);
+                console.log(IsTwoscrapValueArr);
+                console.log(IsThrscrapValueArr);
+                console.log(IsForscrapValueArr);
+                console.log(BEPSscrapValueArr);
+                console.log(CEPSscrapValueArr);
+                console.log(scrapShowX);
+                // 指定图表的配置项和数据
+                var firstOption = {
+                    title: {
+                        text: 'Ishaft1报废金额周视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%',
+                        backgroudColor:'#ffffff'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: ["周一","周二","周三","周四","周五","周六","周日"]
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorOne,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOnescrapValueArr
+                        }
+                    ]
+                };
+                var SecOption= {
+                    title: {
+                        text: 'Ishaft2报废金额周视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: ["周一","周二","周三","周四","周五","周六","周日"]
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorTwo,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsTwoscrapValueArr
+                        }
+                    ]
+                };
+                var ThrOption= {
+                    title: {
+                        text: 'Ishaft3报废金额周视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: ["周一","周二","周三","周四","周五","周六","周日"]
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorThr,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsThrscrapValueArr
+                        }
+                    ]
+                };
+                var ForOption= {
+                    title: {
+                        text: 'Ishaft3报废金额周视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: ["周一","周二","周三","周四","周五","周六","周日"]
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorFor,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsForscrapValueArr
+                        }
+                    ]
+                };
+                var BEPSOption={
+                    title: {
+                        text: 'BEPS报废金额周视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: ["周一","周二","周三","周四","周五","周六","周日"]
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorFir,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: BEPSscrapValueArr
+                        }
+                    ]
+                };
+                var CEPSOption={
+                    title: {
+                        text: 'CEPS报废金额周视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: ["周一","周二","周三","周四","周五","周六","周日"]
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorSix,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: CEPSscrapValueArr
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                IsOnescrapChart.setOption(firstOption);
+                IsTwoscrapChart.setOption(SecOption);
+                IsThrscrapChart.setOption(ThrOption);
+                IsForscrapChart.setOption(ForOption);
+                BEPSscrapChart.setOption(BEPSOption);
+                CEPSscrapChart.setOption(CEPSOption);
+
+            },
+            failure: function (errMsg) {
+                console.log(errMsg);
+                console.log('fail');
+            }
+
+        });
+    }
+});
 //按月显示
-// $("#showMonth").bind("click",function (){showMonth();});
+$("#showMonth").bind("click",function (){
+    {
+        var IshaftOnescrapValueArr=[];
+        var IsTwoscrapValueArr=[];
+        var IsThrscrapValueArr=[];
+        var IsForscrapValueArr=[];
+        var BEPSscrapValueArr=[];
+        var CEPSscrapValueArr=[];
+        var scrapShowX=[];
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/scrap-amount/getByMonth",
+            data: JSON.stringify(showScrapJson),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, model) {
+                    scrapYearArr[i]=model.year;
+                    scrapMonthArr[i]=model.month;
+                    scrapDayArr[i]=model.day;
+                    IshaftOnescrapValueArr[i]=model.ishaft1_value;
+                    IsTwoscrapValueArr[i]=model.ishaft2_value;
+                    IsThrscrapValueArr[i]=model.ishaft3_value;
+                    IsForscrapValueArr[i]=model.ishaft4_value;
+                    BEPSscrapValueArr[i]=model.beps_value;
+                    CEPSscrapValueArr[i]=model.ceps_value;
+                    scrapShowX[i]=model.year+"."+model.month+"."+model.day;
+                });
+                console.log(JSON.stringify(data));
+                console.log('nice');
+                console.log(scrapYearArr);
+                console.log(IshaftOnescrapValueArr);
+                console.log(IsTwoscrapValueArr);
+                console.log(IsThrscrapValueArr);
+                console.log(IsForscrapValueArr);
+                console.log(BEPSscrapValueArr);
+                console.log(CEPSscrapValueArr);
+                console.log(scrapShowX);
+                // 指定图表的配置项和数据
+                var firstOption = {
+                    title: {
+                        text: 'Ishaft1报废金额月视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorOne,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOnescrapValueArr
+                        }
+                    ]
+                };
+                var SecOption= {
+                    title: {
+                        text: 'Ishaft2报废金额月视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorTwo,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsTwoscrapValueArr
+                        }
+                    ]
+                };
+                var ThrOption= {
+                    title: {
+                        text: 'Ishaft3报废金额月视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorThr,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsThrscrapValueArr
+                        }
+                    ]
+                };
+                var ForOption= {
+                    title: {
+                        text: 'Ishaft3报废金额月视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data:scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorFor,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsForscrapValueArr
+                        }
+                    ]
+                };
+                var BEPSOption={
+                    title: {
+                        text: 'BEPS报废金额月视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorFir,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: BEPSscrapValueArr
+                        }
+                    ]
+                };
+                var CEPSOption={
+                    title: {
+                        text: 'CEPS报废金额月视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorSix,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: CEPSscrapValueArr
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                IsOnescrapChart.setOption(firstOption);
+                IsTwoscrapChart.setOption(SecOption);
+                IsThrscrapChart.setOption(ThrOption);
+                IsForscrapChart.setOption(ForOption);
+                BEPSscrapChart.setOption(BEPSOption);
+                CEPSscrapChart.setOption(CEPSOption);
+
+            },
+            failure: function (errMsg) {
+                console.log(errMsg);
+                console.log('fail');
+            }
+
+        });
+    }
+});
 
 //按年显示
-// $("#showYear").bind("click", function () {
-//
-//     $.ajax({
-//         type: "POST",
-//         url: "http://localhost:8080/scrap-amount/getByYear",
-//         data: JSON.stringify(showScrapJson),
-//         contentType: "application/json; charset=utf-8",
-//         dataType: "json",
-//         success: function (data) {
-//             $.each(data, function (i, model) {
-//                 scrapYearArr[i]=model.year;
-//                 scrapMonthArr[i]=model.month;
-//                 scrapDayArr[i]=model.day;
-//                 scrapValueArr[i]=model.value;
-//                 scrapShowX[i]=model.year+"."+model.month+"."+model.day;
-//             });
-//             console.log(JSON.stringify(data));
-//             console.log('nice');
-//             console.log(scrapYearArr);
-//             console.log(scrapValueArr);
-//             console.log(scrapShowX);
-//             // 指定图表的配置项和数据
-//             var option = {
-//                 title: {
-//                     text: '报废金额年视图'
-//                 },
-//                 tooltip: {},
-//                 legend: {
-//                     data:['报废金额（元）']
-//                 },
-//                 xAxis: {
-//                     data: scrapShowX
-//                 },
-//                 yAxis: {},
-//                 series: [
-//
-//                     {
-//                         name: '报废金额',
-//                         type: 'line',
-//                         data: scrapValueArr
-//                     }
-//                 ]
-//             };
-//             // 使用刚指定的配置项和数据显示图表。
-//             scrapChart.setOption(option);
-//         },
-//         failure: function (errMsg) {
-//             console.log(errMsg);
-//         }
-//
-//     });
-// });
+$("#showYear").bind("click",function () {
+    {
+        var IshaftOnescrapValueArr=[];
+        var IsTwoscrapValueArr=[];
+        var IsThrscrapValueArr=[];
+        var IsForscrapValueArr=[];
+        var BEPSscrapValueArr=[];
+        var CEPSscrapValueArr=[];
+        var scrapShowX=[];
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/scrap-amount/getByYear",
+            data: JSON.stringify(showScrapJson),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, model) {
+                    scrapYearArr[i]=model.year;
+                    scrapMonthArr[i]=model.month;
+                    scrapDayArr[i]=model.day;
+                    IshaftOnescrapValueArr[i]=model.ishaft1_value;
+                    IsTwoscrapValueArr[i]=model.ishaft2_value;
+                    IsThrscrapValueArr[i]=model.ishaft3_value;
+                    IsForscrapValueArr[i]=model.ishaft4_value;
+                    BEPSscrapValueArr[i]=model.beps_value;
+                    CEPSscrapValueArr[i]=model.ceps_value;
+                    scrapShowX[i]=model.year+"."+model.month+"."+model.day;
+                });
+                console.log(JSON.stringify(data));
+                console.log('nice');
+                console.log(scrapYearArr);
+                console.log(IshaftOnescrapValueArr);
+                console.log(IsTwoscrapValueArr);
+                console.log(IsThrscrapValueArr);
+                console.log(IsForscrapValueArr);
+                console.log(BEPSscrapValueArr);
+                console.log(CEPSscrapValueArr);
+                console.log(scrapShowX);
+                // 指定图表的配置项和数据
+                var firstOption = {
+                    title: {
+                        text: 'Ishaft1报废金额年视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%',
+                        backgroudColor:'#ffffff'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorOne,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'line',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOnescrapValueArr
+                        }
+                    ]
+                };
+                var SecOption= {
+                    title: {
+                        text: 'Ishaft2报废金额年视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorTwo,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'line',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsTwoscrapValueArr
+                        }
+                    ]
+                };
+                var ThrOption= {
+                    title: {
+                        text: 'Ishaft3报废金额年视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorThr,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'line',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsThrscrapValueArr
+                        }
+                    ]
+                };
+                var ForOption= {
+                    title: {
+                        text: 'Ishaft3报废金额年视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorFor,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'line',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IsForscrapValueArr
+                        }
+                    ]
+                };
+                var BEPSOption={
+                    title: {
+                        text: 'BEPS报废金额年视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data: scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorFir,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'line',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: BEPSscrapValueArr
+                        }
+                    ]
+                };
+                var CEPSOption={
+                    title: {
+                        text: 'CEPS报废金额年视图'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: {
+                        containLabel: true,
+                        left:'4%',
+                        bottom:'2%'
+                    },
+                    legend: {
+                        data:['报废金额'],
+                        align: 'right',
+                        right: '15%',
+                        top:'3%'
+                    },
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        data:scrapShowX
+                    },
+                    yAxis:[{
+                        type:'value',
+                        name:'报废金额（元）',
+                        position:'left',
+                        nameTextStyle:{
+                            fontStyle:'normal',
+                            fontWeight:'bold'
+                        }
+                    }],
+                    color:colorSix,
+                    series: [
+
+                        {
+                            name: '报废金额',
+                            type: 'line',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: CEPSscrapValueArr
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                IsOnescrapChart.setOption(firstOption);
+                IsTwoscrapChart.setOption(SecOption);
+                IsThrscrapChart.setOption(ThrOption);
+                IsForscrapChart.setOption(ForOption);
+                BEPSscrapChart.setOption(BEPSOption);
+                CEPSscrapChart.setOption(CEPSOption);
+
+            },
+            failure: function (errMsg) {
+                console.log(errMsg);
+                console.log('fail');
+            }
+
+        });
+    }
+});
 
 //按时期显示
-// $("#showPeriod").bind("click", function () {
-//     function showPeriodTime(startyear, startmonth, startday,endyear, endmonth, endday) {
-//         this.startyear = startyear;
-//         this.startmonth = startmonth;
-//         this.startday = startday;
-//         this.endyear = endyear;
-//         this.endmonth = endmonth;
-//         this.endday=endday;
-//     }
-//     var startyear=$("#showStartYear").val();
-//     var startmonth=$("#showStartMonth").val();
-//     var startday=$("#showStartDay").val();
-//     var endyear=$("#showEndYear").val();
-//     var endmonth=$("#showEndMonth").val();
-//     var endday=$("#showEndDay").val();
-//     var showPeriodJson=showPeriodTime(startyear.toString(),startmonth.toString(),startday.toString(),endyear.toString(),endmonth.toString(),endday.toString());
-//     $.ajax({
-//         type: "POST",
-//         url: "http://localhost:8080/scrap-amount/getByPeriod",
-//         data: JSON.stringify(showPeriodJson),
-//         contentType: "application/json; charset=utf-8",
-//         dataType: "json",
-//         success: function (data) {
-//             $.each(data, function (i, model) {
-//                 scrapYearArr[i]=model.year;
-//                 scrapMonthArr[i]=model.month;
-//                 scrapDayArr[i]=model.day;
-//                 scrapValueArr[i]=model.value;
-//                 scrapShowX[i]=model.year+"."+model.month+"."+model.day;
-//             });
-//             console.log(JSON.stringify(data));
-//             console.log('nice');
-//             console.log(scrapYearArr);
-//             console.log(scrapValueArr);
-//             console.log(scrapShowX);
-//             // 指定图表的配置项和数据
-//             var option = {
-//                 title: {
-//                     text: '报废金额指定起止日期视图'
-//                 },
-//                 tooltip: {},
-//                 legend: {
-//                     data:['报废金额（元）']
-//                 },
-//                 xAxis: {
-//                     data: scrapShowX
-//                 },
-//                 yAxis: {},
-//                 series: [
-//
-//                     {
-//                         name: '报废金额',
-//                         type: 'line',
-//                         data: scrapValueArr
-//                     }
-//                 ]
-//             };
-//             // 使用刚指定的配置项和数据显示图表。
-//             scrapChart.setOption(option);
-//         },
-//         failure: function (errMsg) {
-//             console.log(errMsg);
-//         }
-//
-//     });
-// });
+$("#showPeriod").bind("click",function () {
+    function showPeriodTime(startyear, startmonth, startday,endyear, endmonth, endday) {
+        this.startYear = startyear;
+        this.startMonth = startmonth;
+        this.startDay = startday;
+        this.endYear = endyear;
+        this.endMonth = endmonth;
+        this.endDay=endday;
+    }
+    var IshaftOnescrapValueArr=[];
+    var IsTwoscrapValueArr=[];
+    var IsThrscrapValueArr=[];
+    var IsForscrapValueArr=[];
+    var BEPSscrapValueArr=[];
+    var CEPSscrapValueArr=[];
+    var scrapShowX=[];
+    var startScrapTime=$("#startScrapTime").val().split("-");
+    var endScrapTIme=$("#endScrapTime").val().split("-");
+    console.log(startScrapTime);
+    console.log(endScrapTIme);
+
+    var startyear=startScrapTime[0];
+    var startmonth=startScrapTime[1];
+    var startday=startScrapTime[2];
+    var endyear=endScrapTIme[0];
+    var endmonth=endScrapTIme[1];
+    var endday=endScrapTIme[2];
+    var showPeriodJson=new showPeriodTime(startScrapTime[0].toString(),startScrapTime[1].toString(),startScrapTime[2].toString(),endScrapTIme[0].toString(),endScrapTIme[1].toString(),endScrapTIme[2].toString());
+    console.log(startyear);
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/scrap-amount/getByPeriod",
+        data: JSON.stringify(showPeriodJson),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            $.each(data, function (i, model) {
+                scrapYearArr[i]=model.year;
+                scrapMonthArr[i]=model.month;
+                scrapDayArr[i]=model.day;
+                IshaftOnescrapValueArr[i]=model.ishaft1_value;
+                IsTwoscrapValueArr[i]=model.ishaft2_value;
+                IsThrscrapValueArr[i]=model.ishaft3_value;
+                IsForscrapValueArr[i]=model.ishaft4_value;
+                BEPSscrapValueArr[i]=model.beps_value;
+                CEPSscrapValueArr[i]=model.ceps_value;
+                scrapShowX[i]=model.year+"."+model.month+"."+model.day;
+            });
+            console.log(JSON.stringify(data));
+            console.log('nice');
+            console.log(scrapYearArr);
+            console.log(IshaftOnescrapValueArr);
+            console.log(IsTwoscrapValueArr);
+            console.log(IsThrscrapValueArr);
+            console.log(IsForscrapValueArr);
+            console.log(BEPSscrapValueArr);
+            console.log(CEPSscrapValueArr);
+            console.log(scrapShowX);
+            // 指定图表的配置项和数据
+            var firstOption = {
+                title: {
+                    text: 'Ishaft1报废金额时间段视图'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                },
+                toolbox: {
+                    feature: {
+                        dataView: {
+                            show: true,
+                            readOnly: false
+                        },
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+                grid: {
+                    containLabel: true,
+                    left:'4%',
+                    bottom:'2%'
+                },
+                legend: {
+                    data:['报废金额'],
+                    align: 'right',
+                    right: '15%',
+                    top:'3%',
+                    backgroudColor:'#ffffff'
+                },
+
+                xAxis: {
+                    type: 'category',
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    nameTextStyle:{
+                        fontStyle:'italic',
+                        fontWeight:'bold'
+                    },
+                    data: scrapShowX
+                },
+                yAxis:[{
+                    type:'value',
+                    name:'报废金额（元）',
+                    position:'left',
+                    nameTextStyle:{
+                        fontStyle:'normal',
+                        fontWeight:'bold'
+                    }
+                }],
+                color:colorOne,
+                series: [
+
+                    {
+                        name: '报废金额',
+                        type: 'line',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: IshaftOnescrapValueArr
+                    }
+                ]
+            };
+            var SecOption= {
+                title: {
+                    text: 'Ishaft2报废金额时间段视图'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                },
+                toolbox: {
+                    feature: {
+                        dataView: {
+                            show: true,
+                            readOnly: false
+                        },
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+                grid: {
+                    containLabel: true,
+                    left:'4%',
+                    bottom:'2%'
+                },
+                legend: {
+                    data:['报废金额'],
+                    align: 'right',
+                    right: '15%',
+                    top:'3%'
+                },
+
+                xAxis: {
+                    type: 'category',
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    nameTextStyle:{
+                        fontStyle:'italic',
+                        fontWeight:'bold'
+                    },
+                    data: scrapShowX
+                },
+                yAxis:[{
+                    type:'value',
+                    name:'报废金额（元）',
+                    position:'left',
+                    nameTextStyle:{
+                        fontStyle:'normal',
+                        fontWeight:'bold'
+                    }
+                }],
+                color:colorTwo,
+                series: [
+
+                    {
+                        name: '报废金额',
+                        type: 'line',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: IsTwoscrapValueArr
+                    }
+                ]
+            };
+            var ThrOption= {
+                title: {
+                    text: 'Ishaft3报废金额时间段视图'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                },
+                toolbox: {
+                    feature: {
+                        dataView: {
+                            show: true,
+                            readOnly: false
+                        },
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+                grid: {
+                    containLabel: true,
+                    left:'4%',
+                    bottom:'2%'
+                },
+                legend: {
+                    data:['报废金额'],
+                    align: 'right',
+                    right: '15%',
+                    top:'3%'
+                },
+
+                xAxis: {
+                    type: 'category',
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    nameTextStyle:{
+                        fontStyle:'italic',
+                        fontWeight:'bold'
+                    },
+                    data: scrapShowX
+                },
+                yAxis:[{
+                    type:'value',
+                    name:'报废金额（元）',
+                    position:'left',
+                    nameTextStyle:{
+                        fontStyle:'normal',
+                        fontWeight:'bold'
+                    }
+                }],
+                color:colorThr,
+                series: [
+
+                    {
+                        name: '报废金额',
+                        type: 'line',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: IsThrscrapValueArr
+                    }
+                ]
+            };
+            var ForOption= {
+                title: {
+                    text: 'Ishaft3报废金额时间段视图'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                },
+                toolbox: {
+                    feature: {
+                        dataView: {
+                            show: true,
+                            readOnly: false
+                        },
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+                grid: {
+                    containLabel: true,
+                    left:'4%',
+                    bottom:'2%'
+                },
+                legend: {
+                    data:['报废金额'],
+                    align: 'right',
+                    right: '15%',
+                    top:'3%'
+                },
+
+                xAxis: {
+                    type: 'category',
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    nameTextStyle:{
+                        fontStyle:'italic',
+                        fontWeight:'bold'
+                    },
+                    data: scrapShowX
+                },
+                yAxis:[{
+                    type:'value',
+                    name:'报废金额（元）',
+                    position:'left',
+                    nameTextStyle:{
+                        fontStyle:'normal',
+                        fontWeight:'bold'
+                    }
+                }],
+                color:colorFor,
+                series: [
+
+                    {
+                        name: '报废金额',
+                        type: 'line',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: IsForscrapValueArr
+                    }
+                ]
+            };
+            var BEPSOption={
+                title: {
+                    text: 'BEPS报废金额时间段视图'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                },
+                toolbox: {
+                    feature: {
+                        dataView: {
+                            show: true,
+                            readOnly: false
+                        },
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+                grid: {
+                    containLabel: true,
+                    left:'4%',
+                    bottom:'2%'
+                },
+                legend: {
+                    data:['报废金额'],
+                    align: 'right',
+                    right: '15%',
+                    top:'3%'
+                },
+
+                xAxis: {
+                    type: 'category',
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    nameTextStyle:{
+                        fontStyle:'italic',
+                        fontWeight:'bold'
+                    },
+                    data: scrapShowX
+                },
+                yAxis:[{
+                    type:'value',
+                    name:'报废金额（元）',
+                    position:'left',
+                    nameTextStyle:{
+                        fontStyle:'normal',
+                        fontWeight:'bold'
+                    }
+                }],
+                color:colorFir,
+                series: [
+
+                    {
+                        name: '报废金额',
+                        type: 'line',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: BEPSscrapValueArr
+                    }
+                ]
+            };
+            var CEPSOption={
+                title: {
+                    text: 'CEPS报废金额时间段视图'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                },
+                toolbox: {
+                    feature: {
+                        dataView: {
+                            show: true,
+                            readOnly: false
+                        },
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+                grid: {
+                    containLabel: true,
+                    left:'4%',
+                    bottom:'2%'
+                },
+                legend: {
+                    data:['报废金额'],
+                    align: 'right',
+                    right: '15%',
+                    top:'3%'
+                },
+
+                xAxis: {
+                    type: 'category',
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    nameTextStyle:{
+                        fontStyle:'italic',
+                        fontWeight:'bold'
+                    },
+                    data:scrapShowX
+                },
+                yAxis:[{
+                    type:'value',
+                    name:'报废金额（元）',
+                    position:'left',
+                    nameTextStyle:{
+                        fontStyle:'normal',
+                        fontWeight:'bold'
+                    }
+                }],
+                color:colorSix,
+                series: [
+
+                    {
+                        name: '报废金额',
+                        type: 'line',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: CEPSscrapValueArr
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            IsOnescrapChart.setOption(firstOption);
+            IsTwoscrapChart.setOption(SecOption);
+            IsThrscrapChart.setOption(ThrOption);
+            IsForscrapChart.setOption(ForOption);
+            BEPSscrapChart.setOption(BEPSOption);
+            CEPSscrapChart.setOption(CEPSOption);
+
+        },
+        failure: function (errMsg) {
+            console.log(errMsg);
+            console.log('fail');
+        }
+
+    });
+});

@@ -24,6 +24,13 @@
         .main{
             height: 680px;
         }
+        .form-control{
+            width: 10%;
+            float: left;
+        }
+        p{
+            float: left;
+        }
         .main .item {
             margin: 0 2% 2% 0;
             position: relative;
@@ -32,8 +39,11 @@
             box-shadow: 2px 2px 5px #CCC;
             height: 100%;
         }
-        .row{
-            height: 85%;
+        .row1{
+            height:10%;
+        }
+        .row2{
+            height: 90%;
         }
         .border-line{
             border: 1px solid #293c55;
@@ -43,30 +53,64 @@
             margin: 0 0 10% 0;
             padding: 0;
             box-shadow: 2px 2px 5px #CCC;
-            height: 48.1%;
+            height: 100%;
+        }
+        .innerItemSec{
+            width: 100%;
+            margin: 0 0 3% 0;
+            padding: 0;
+            height: 60%;
+        }
+        .innerItemThi{
+            width: 100%;
+            margin: 0 0 0 0;
+            padding: 0;
+            height: 35%;
         }
         #firstItem{
             box-shadow: none;
+        }
+        .unitTitle{
+            text-align: center;
+            font-size: 2.5em;
+            color: #0f0f0f;
+        }
+        .unitHeader{
+            position: absolute;
+            left: 30%;
+            width: 40%;
         }
     </style>
     <style type="text/css">
         .table tr{
             text-align: center;
         }
-        .table>tbody td{
+        .firstTable>tbody td{
             font-size: 1.8em;
             color: #aa314d;
         }
-        .table>tbody>tr>td:nth-child(2){
+        .secTable>thead>tr>td{
+            font-size: 1.8em;
+            color: #aa314d;
+            vertical-align: middle;
+            height: 4em;
+        }
+        .secTable>tbody>tr>td{
+            font-size: 3em;
+            vertical-align: middle;
+            height: 2em;
+        }
+        .firstTable>tbody>tr>td:nth-child(2){
             color:black ;
         }
         .table-hover > tbody > tr:hover {
             background-color: gray;
         }
-        .table>tbody>tr>td{
+        .firstTable>tbody>tr>td{
             vertical-align: middle;
-            height: 1.2em;
+            height: 4.8em;
         }
+
     </style>
 </head>
 <body>
@@ -109,60 +153,78 @@
     </div><!-- /.container-fluid -->
 </nav>
 <div class="main">
-    <div class="row">
+    <div class="row row1">
+        <div class="col-md-12">
+            <div class="unitHeader">
+                <p class="unitTitle">单元状态看板--</p>
+                <select class="form-control" style="font-size: 2em;height: 100%;width: 25%">
+                    <option>Isahft1</option>
+                    <option>Ishaft2</option>
+                    <option>Ishaft3</option>
+                    <option>Ishaft4</option>
+                </select>
+                <p class="unitTitle">--总装</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="row row2">
         <div class="col-md-3 item  " id="firstItem">
             <div class="innerItem ">
-                <table class="table table-hover">
+                <table class="table table-hover firstTable">
                     <tbody>
-                        <tr>
-                            <td>班次</td>
-                            <td id="banci">0000</td>
-                        </tr>
-                        <tr>
-                            <td>目标值</td>
-                            <td id="target">0000</td>
-                        </tr>
-                        <tr>
-                            <td>已完成</td>
-                            <td id="finish">0000</td>
-                        </tr>
-                        <tr>
-                            <td>不良品</td>
-                            <td id="defct">0000</td>
-                        </tr>
-                        <tr>
-                            <td>单元状态</td>
-                            <td id="status">status</td>
-                        </tr>
+                    <tr>
+                        <td>班次</td>
+                        <td id="banci">0000</td>
+                    </tr>
+                    <tr>
+                        <td>目标值</td>
+                        <td id="target">0000</td>
+                    </tr>
+                    <tr>
+                        <td>已完成</td>
+                        <td id="finish">0000</td>
+                    </tr>
+                    <tr>
+                        <td>不良品</td>
+                        <td id="defct">0000</td>
+                    </tr>
+                    <tr>
+                        <td>单元状态</td>
+                        <td id="status">status</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="innerItem ">
-                <table class="table table-hover">
+        </div>
+        <div class="col-md-8 item " >
+            <div class="innerItemSec" id="IshaftOneYieldDayChart"></div>
+            <div class="innerItemThi ">
+                <table class="table table-hover secTable">
+                    <thead>
                     <tr>
                         <td>当前节拍</td>
-                        <td id="curBeats">0000</td>
-                    </tr>
-                    <tr>
                         <td>标准节拍</td>
-                        <td id="stdBeats">0000</td>
-                    </tr>
-                    <tr>
                         <td>损失时间</td>
-                        <td id="lossTime">0000</td>
-                    </tr>
-                    <tr>
                         <td>可动率</td>
-                        <td id="movRate">0000</td>
-                    </tr>
-                    <tr>
                         <td>人员利用率</td>
-                        <td id="personUse">0000</td>
+                        <td>当前时间</td>
                     </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td id="curBeats">0000</td>
+                        <td id="stdBeats">0000</td>
+                        <td id="lossTime">0000</td>
+                        <td id="movRate">0000</td>
+                        <td id="personUse">0000</td>
+                        <td id="showMainTime">0000</td>
+                    </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
-        <div class="col-md-8 item " id="main"></div>
+
     </div>
 </div>
 
@@ -172,33 +234,8 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/echarts/dist/echarts.min.js"></script>
 <script src="js/defineGlobal.js"></script>
+<script src="js/showTime.js"></script>
+<script src="js/showIshaftDay.js"></script>
 
-<script type="application/javascript">
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
-
-    // 指定图表的配置项和数据
-    var option = {
-        title: {
-            text: 'ECharts 入门示例'
-        },
-        tooltip: {},
-        legend: {
-            data:['销量']
-        },
-        xAxis: {
-            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-        },
-        yAxis: {},
-        series: [{
-            name: '销量',
-            type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
-        }]
-    };
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-</script>
 </body>
 </html>
