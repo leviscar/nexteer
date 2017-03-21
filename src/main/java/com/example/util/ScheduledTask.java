@@ -2,8 +2,10 @@ package com.example.util;
 
 import com.example.model.Ishaft1OutputInfo;
 import com.example.model.Ishaft1Product;
+import com.example.model.SafetyDate;
 import com.example.repository.Ishaft1OutputInfoRepo;
 import com.example.repository.Ishaft1ProductRepo;
+import com.example.repository.SafetyDateRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -19,11 +21,13 @@ import java.util.*;
 public class ScheduledTask {
     private Ishaft1OutputInfoRepo ishaft1OutputInfoRepo;
     private Ishaft1ProductRepo ishaft1ProductRepo;
+    private SafetyDateRepo safetyDateRepo;
 
     @Autowired
-    public ScheduledTask(Ishaft1OutputInfoRepo ishaft1OutputInfoRepo, Ishaft1ProductRepo ishaft1ProductRepo) {
+    public ScheduledTask(Ishaft1OutputInfoRepo ishaft1OutputInfoRepo, Ishaft1ProductRepo ishaft1ProductRepo, SafetyDateRepo safetyDateRepo) {
         this.ishaft1OutputInfoRepo = ishaft1OutputInfoRepo;
         this.ishaft1ProductRepo = ishaft1ProductRepo;
+        this.safetyDateRepo = safetyDateRepo;
     }
 
     /**
@@ -76,5 +80,21 @@ public class ScheduledTask {
             ishaft1OutputInfo.setOutput_count(entry.getValue());
             ishaft1OutputInfoRepo.add(ishaft1OutputInfo);
         }
+    }
+
+    /**
+     * 每天零点定时添加安全运行天数
+     *
+     * @throws ParseException
+     */
+    @Scheduled(cron = "0 0 0 * * ?")
+    public void addSafetyDate() throws ParseException {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        SafetyDate safetyDate = new SafetyDate();
+        safetyDate.setYear(String.valueOf(calendar.get(Calendar.YEAR)));
+        safetyDate.setMonth(String.valueOf(calendar.get(Calendar.MONTH) + 1));
+        safetyDate.setDay(String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
+        safetyDateRepo.addSafetyDate(safetyDate);
     }
 }
