@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="images/favicon.ico">
+    <title>Nexteer</title>
+    <!-- Bootstrap core CSS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
+    <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <style type="text/css">
+        body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 {
+            font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+        }
+        body {
+            background-color:#000000;
+        }
+
+        .border-line{
+            border: 1px solid #ffffff;
+        }
+        .main{
+            width: 100%;
+            height: 680px;
+            margin: 0 0 0 2%;
+        }
+        .row{
+            width: 100%;
+            height: 100%;
+        }
+        .item1{
+            width: 40%;
+            height: 100%;
+            padding: 0;
+        }
+        .item2{
+            width: 60%;
+            height: 100%;
+        }
+
+        .innerItemOne{
+            width: 100%;
+            height: 23%;
+            margin: 0 0 3% 0;
+        }
+        .innerItemTwo{
+            width: 100%;
+            height: 30%;
+            margin: 0 0 2% 0;
+        }
+        .innerItemThi{
+            width: 100%;
+            height: 68%;
+            margin: 0 0 2% 0;
+        }
+        .itemBackCol{
+            background-color: #2a2a2a;
+        }
+        .firstheader{
+            width:100% ;
+            height: 24%;
+            position: relative;
+        }
+        .proHeader{
+            width:100% ;
+            height: 10%;
+            position: relative;
+        }
+        .content{
+            width: 100%;
+            height: 76%;
+        }
+        .proContent{
+            width:100% ;
+            height: 90%;
+            position: relative;
+        }
+        .firstheader>span{
+            display: block;
+            color: #FFFFFF;
+            font-weight:bold;
+            font-style: italic;
+            font-size:1.2em;
+            letter-spacing: 0.3em;
+        }
+        .header{
+            width: 50%;
+            height: 100%;
+            position: absolute;
+            top: 30%;
+            left: 4%;
+            color: #A93439;
+            font-weight:bold;
+            font-style: italic;
+            font-size:1.2em;
+            letter-spacing: 0.3em;
+        }
+        .timeItem1{
+             width: 70%;
+             height: 100%;
+             margin: 0;
+             padding: 0;
+            position: relative;
+
+         }
+        .timeItem2{
+            width: 30%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .timeContent{
+            width: 70%;
+            height: 100%;
+            position: absolute;
+            left: 28%;
+            top:12%;
+            color: #cccccc;
+            font-size:4em;
+            text-align: right;
+
+        }
+        .dateContent{
+            text-align: left;
+            width: 70%;
+            height: 20%;
+            position: absolute;
+            top: 50%;
+            color: #cccccc;
+            font-size:1em;
+            font-style: italic;
+        }
+        .iconContent{
+            text-align: left;
+            width: 70%;
+            height: 100%;
+            position: absolute;
+        }
+        .innerFour{
+            width: 25%;
+            height: 85%;
+            margin: 3% 0 2% 0;
+            position: relative;
+            border-right: 1px dashed #ffffff;
+        }
+        .textLeft{
+            text-align: left;
+        }
+        .textCenter{
+            text-align: center;
+        }
+        .numStyle{
+            color: #cccccc;
+            font-size:1em;
+            font-style: italic;
+        }
+        .ftqHeadr{
+            width: 100%;
+            height: 30%;
+            position: absolute;
+        }
+        .ftqNum{
+            width: 100%;
+            height: 70%;
+            top: 45%;
+            position: relative;
+        }
+        .ftqTitle{
+            width: 70%;
+            height: 100%;
+        }
+        .ftqStatus{
+            width: 30%;
+            height: 100%;
+        }
+        .ftqTitle>a{
+            color:#ffffff ;
+            font-size: 2.5em;
+            font-style: italic;
+            
+        }
+        .ftqNumCon{
+            width: 100%;
+            height: 80%;
+            color:#cccccc ;
+            font-size: 3.5em;
+        }
+        .ftqName{
+            width: 100%;
+            height: 80%;
+            position: relative;
+            top: 35%;
+            left:15%;
+            color:#cccccc ;
+            font-size: 2.3em;
+            font-weight:bold;
+        }
+        .ftqName>a{
+            color: #ffffff;
+            font-style: italic;
+            letter-spacing: 0.3em;
+        }
+
+        .navbar-collapse>span{
+            color: #ffffff;
+            font-weight:600;
+        }
+        .navbar{
+            background-color: #000000;
+        }
+        td>a{
+            color: #cccccc;
+            font-style: italic;
+        }
+        table{
+            color: #FFFFFF;
+        }
+        .table th{
+            height: 3.5em;
+            font-size: 1.5em;
+            text-align: center;
+            vertical-align: middle !important;
+
+        }
+        .table td{
+            height: 4em;
+            font-size: 2em;
+            text-align: center;
+            color: #cccccc;
+            vertical-align: middle !important;
+
+        }
+        .table-hover>tbody>tr:hover{
+            background-color: #888888 !important;
+        }
+        .table,.table th,.table td,.table tr{
+            border: none !important;
+        }
+        .green{
+            background-color: #46754d;
+        }
+        .red{
+            background-color: #A93439;
+        }
+        .white{
+            color: white;
+        }
+        .dateIcon{
+            width: 100%;
+            height: 50%;
+            position: absolute;
+            top:10%;
+            /*background-color: #FFFFFF;*/
+            color: #70B27C;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 5em;
+        }
+        .ftqStatus{
+            color: #70B27C;
+            font-size: 3em;
+            text-align: center;
+        }
+        td>span{
+            color: #70B27C;
+        }
+        button>span{
+            color: #1b6d85;
+        }
+        button{
+            background-color: #cccccc !important;
+            border: none !important;
+        }
+    </style>
+
+</head>
+<body class="MainBoard">
+<div class="wrapper">
+
+
+    <!--top navigation-->
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="images/icon.png" alt="Nexteer"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse header-title" id="bs-example-navbar-collapse-1">
+                <span>Main DashBoard</span>
+                <form class="navbar-right">
+                    <button type="button" class="btn btn-danger" aria-label="Right Align">
+                        <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>&nbsp;Login
+                    </button>
+                </form>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="main">
+          <div class="row ">
+                <div class="col-md-4  item1" >
+
+                    <div class="innerItemOne  itemBackCol">
+                        <div class="firstheader ">
+                            <div class="header ">
+                                HCE
+                            </div>
+                        </div>
+                        <div class="content ">
+                            <div class="col-md-6  timeItem1 e">
+
+                                <div class="timeContent" >
+                                    90%
+                                </div>
+                            </div>
+                            <div class="col-md-6  timeItem2">
+                                <div class="iconContent " >
+                                    <div class="dateIcon">
+                                        <span class="glyphicon glyphicon-triangle-top"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="innerItemOne  itemBackCol">
+                        <div class="firstheader ">
+                            <div class="header ">
+                                报废金额
+                            </div>
+                        </div>
+                        <div class="content ">
+                            <div class="col-md-6  timeItem1 ">
+
+                                <div class="timeContent" >
+                                    1024
+                                </div>
+                            </div>
+                            <div class="col-md-6  timeItem2">
+                                <div class="iconContent " >
+                                    <div class="dateIcon">
+                                        <span class="glyphicon glyphicon-triangle-top"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="innerItemOne  itemBackCol">
+                        <div class="firstheader ">
+                            <div class="header ">
+                                安全运行天数
+                            </div>
+                        </div>
+                        <div class="content ">
+                            <div class="col-md-6  timeItem1 ">
+
+                                <div class="timeContent" >
+                                    100
+                                </div>
+                            </div>
+                            <div class="col-md-6  timeItem2">
+                                <div class="iconContent " >
+                                    <div class="dateIcon">
+                                        <span class="glyphicon glyphicon-triangle-top"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="innerItemOne  itemBackCol">
+                        <div class="firstheader ">
+                            <div class="header ">
+                                当前时间
+                            </div>
+                        </div>
+                        <div class="content  row">
+                            <div class="col-md-6  timeItem1">
+
+                                <div class="timeContent" id="showMainTime">
+                                    00:00:00
+                                </div>
+                            </div>
+                            <div class="col-md-6  timeItem2">
+                                <div class="dateContent " id="showMainDate">
+                                    00:00:00
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7  item2">
+                    <div class="innerItemTwo  itemBackCol">
+                        <div class="row ">
+                            <div class="col-md-3 innerFour ">
+                                <div class="ftqName"><a href="">直通率</a></div>
+                            </div>
+                            <div class="col-md-3 innerFour ">
+                                <div class="row ftqHeadr ">
+                                    <div class="col-md-8 ftqTitle text-center"><a href="">BEPS</a></div>
+                                    <div class="col-md-4 ftqStatus ">
+                                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                                    </div>
+                                </div>
+                                <div class="ftqNum ">
+                                    <div class="ftqNumCon text-center">94%</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 innerFour ">
+                                <div class="row ftqHeadr ">
+                                    <div class="col-md-8 ftqTitle text-center"><a href="">CEPS</a></div>
+                                    <div class="col-md-4 ftqStatus ">
+                                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                                    </div>
+                                </div>
+                                <div class="ftqNum ">
+                                    <div class="ftqNumCon text-center">94%</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 innerFour ">
+                                <div class="row ftqHeadr ">
+                                    <div class="col-md-8 ftqTitle text-center"><a href="">Ishaft1</a></div>
+                                    <div class="col-md-4 ftqStatus ">
+                                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                                    </div>
+                                </div>
+                                <div class="ftqNum ">
+                                    <div class="ftqNumCon text-center">94%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="innerItemThi  itemBackCol">
+                        <div class="proHeader ">
+                            <div class="header ">
+                                产量信息
+                            </div>
+                        </div>
+                        <div class="proContent ">
+                            <table class="table secTable table-hover text-center"  id="#secTable">
+                                <thead class="text-center">
+                                <tr >
+                                    <th>产量展示</th>
+                                    <th>目标产量</th>
+                                    <th>当前产量</th>
+                                    <th>达成率</th>
+                                    <th>当前状态</th>
+                                    <th>单元状态面板</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr >
+                                    <td class="green"><a href="">BEPS</a></td>
+                                    <td class="red">1000</td>
+                                    <td class="green">980</td>
+                                    <td class="red">98%</td>
+                                    <td ><span class="glyphicon glyphicon-thumbs-up"></span></td>
+                                    <td ><a href="">进入BEPS单元</a></td>
+                                </tr>
+                                <tr >
+                                    <td  class="red"><a href="">CEPS</a></td>
+                                    <td class="green">1000</td>
+                                    <td class="red">600</td>
+                                    <td class="green">60%</td>
+                                    <td ><span class="glyphicon glyphicon-thumbs-up"></span></td>
+                                    <td><a href="">进入CEPS单元</a></td>
+                                </tr>
+                                <tr >
+                                    <td class="green"><a href="http://localhost:8080/IshaftYieldWeek.html ">I-Shaft1</a></td>
+                                    <td class="red">1000</td>
+                                    <td class="green">720</td>
+                                    <td class="red">72%</td>
+                                    <td><span class="glyphicon glyphicon-thumbs-up"></span></td>
+                                    <td><a href="http://localhost:8080/IshaftOneUnit.html">进入Ishaft1单元</a></td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+          </div>
+    </div>
+</div>
+<script src="bower_components/jquery/dist/jquery.min.js" ></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/defineGlobal.js"></script>
+<script src="js/safeShow.js"></script>
+<script src="js/scrapAmount.js"></script>
+<script src="js/showTime.js"></script>
+</body>
+</html>

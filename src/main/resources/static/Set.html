@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="images/favicon.ico">
+    <title>Nexteer</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
+    <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <style type="text/css">
+        .black-color{
+            color:black;
+        }
+        .red-color{
+            color:red;
+        }
+        #bs-example-navbar-collapse-1{
+            text-align: center;
+        }
+        p{
+            display: block;
+            font-size:1.4em;
+        }
+        span{
+            font-size: 1.5em;
+        }
+        .navbar-collapse>ul>p
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost:8080/mainIndex.html"><img src="images/icon.png" alt="Nexteer"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <p class="navbar-text center-block" >系统基本设置</p>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">设置选项<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="http://localhost:8080/Set.html">系统基本功能设置</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">系统高级功能设置</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+
+            <form class="navbar-form navbar-right">
+
+            </form>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="row">
+    <!--效果html开始-->
+    <div class="col-md-2">
+        <ul class="vertical-nav dark red">
+            <li class="active"><a href="http://www.internetke.com/">首页</a></li>
+
+            <li><a href="http://www.internetke.com/">安全天数设置</a></li>
+            <li><a href="http://www.internetke.com/">报废金额设置</a></li>
+            <li><a href="http://www.internetke.com/">安全天数设置
+                <span class="submenu-icon"></span></a>
+                <ul>
+                    <li><a href="http://www.internetke.com/">二级导航</a></li>
+                    <li><a href="http://www.internetke.com/">二级导航</a></li>
+                    <li><a href="http://www.internetke.com/">二级导航</a></li>
+                    <li><a href="http://www.internetke.com/">二级导航</a></li>
+                    <li><a href="http://www.internetke.com/">二级导航</a></li>
+                    <li><a href="http://www.internetke.com/">二级导航</a></li>
+                </ul>
+            </li>
+            <li><a href="http://www.internetke.com/">产品
+                <span class="submenu-icon"></span></a>
+                <ul>
+                    <li><a href="http://www.internetke.com/">二级导航</a></li>
+                    <li><a href="http://www.internetke.com/">二级导航</a></li>
+                    <li><a href="http://www.internetke.com/">二级导航<span class="submenu-icon"></span></a><ul>
+                        <li><a href="http://www.internetke.com/">三级导航</a></li>
+                        <li><a href="http://www.internetke.com/">三级导航</a></li>
+                        <li><a href="http://www.internetke.com/">三级导航 <span class="submenu-icon"></span>
+                        </a>
+                            <ul>
+                                <li><a href="http://www.internetke.com/">四级导航</a></li>
+                                <li><a href="http://www.internetke.com/">四级导航</a></li>
+                                <li><a href="http://www.internetke.com/">四级导航</a></li>
+                                <li><a href="http://www.internetke.com/">四级导航</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="http://www.internetke.com/">三级导航</a></li>
+                    </ul>
+                    </li>
+                    <li><a href="http://www.internetke.com/">二级导航</a></li>
+                    <li><a href="http://www.internetke.com/">二级导航</a></li>
+                </ul>
+            </li>
+            <li><a href="http://www.internetke.com/">导航</a></li>
+            <li><a href="http://www.internetke.com/">信息</a></li>
+            <li><a href="http://www.internetke.com/">团队</a></li>
+            <li><a href="http://www.internetke.com/">常见问题</a></li>
+            <li><a href="http://www.internetke.com/">案例</a></li>
+            <li><a href="http://www.internetke.com/">联系我们</a></li>
+        </ul>
+
+    </div>
+    <!--&lt;!&ndash;效果html结束&ndash;&gt;-->
+    <!--<div class="clear"></div>-->
+    <div class="col-md-10">
+        <form>
+            <div class="panel panel-default">
+                <div class="panel-heading"><p>当前日期:</p></div>
+                <div class="panel-body">
+                    <span   id="showMainDate"></span>&nbsp<span id="showMainTime"></span>
+                </div>
+            </div>
+            <hr class="active">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p>报废金额设置</p>
+                </div>
+                <div class="panel-body">
+                    <button type="button" class="btn btn-sm " data-toggle="modal" data-target="#myAddScrapModal" >添加报废金额</button>
+                    <button type="button"  class="btn btn-sm " data-toggle="modal" data-target="#myResScrapModal" >更新报废金额</button>
+                    <div class="modal fade" id="myAddScrapModal" tabindex="-1" role="dialog" aria-labelledby="myAddScrapModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myAddScrapModalLabel">添加报废金额</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="scrapAddTime">报废时间</label>&nbsp;&nbsp;<input type="time" id="scrapAddTime"></p>
+                                    <hr class="active">
+                                    <p><label for="scrapAddValue">报废金额值</label>&nbsp;&nbsp;<input type="number" id="scrapAddValue"></p>
+                                    <hr class="active">
+                                    <p id="addScrapStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="addScrap">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myResScrapModal" tabindex="-1" role="dialog" aria-labelledby="myResScrapModal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" >更新报废金额</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="scrapAddTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="scrapResTime"></p>
+                                    <hr class="active">
+                                    <p><label for="scrapAddValue">报废金额值</label>&nbsp;&nbsp;<input type="number" id="scrapResValue"></p>
+                                    <hr class="active">
+                                    <p id="resScrapStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="resetScrap">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr class="active">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p>安全运行天数设置</p>
+                </div>
+                <div class="panel-body">
+                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#getDayModal">获得指定日期的安全数据</button>
+                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#startDateModal">更新安全日期</button>
+                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#resetDateModal">重置安全日期为0</button>
+                    <div class="modal fade" id="getDayModal" tabindex="-1" role="dialog" aria-labelledby="mygetDayModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="mygetDayModalLabel">获取指定日期安全天数</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="getDayTime">选择指定日期</label>&nbsp;&nbsp;<input type="time" id="getDayTime"></p>
+                                    <hr class="active">
+                                    <p id="getDayStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="getDay">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="startDateModal" tabindex="-1" role="dialog" aria-labelledby="mystartDateModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="mystartDateModalLabel">更新安全日期</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="startDateTime">更新时间</label>&nbsp;&nbsp;<input type="time" id="startDateTime"></p>
+                                    <hr class="active">
+                                    <p><label for="startDateValue">更新安全天数</label>&nbsp;&nbsp;<input type="number" id="startDateValue"></p>
+                                    <hr class="active">
+                                    <p id="startDateStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="startDate">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="resetDateModal" tabindex="-1" role="dialog" aria-labelledby="myresetDateModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myresetDateModalLabel">重置安全天数</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="resetDateTime">重置时间</label>&nbsp;&nbsp;<input type="time" id="resetDateTime"></p>
+                                    <hr class="active">
+                                    <p><label for="resetDateValue">输入错误信息</label>&nbsp;&nbsp;<input type="text" id="resetDateValue"></p>
+                                    <hr class="active">
+                                    <p id="resetDateStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="resetDate">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr class="active">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p>班次设置</p>
+                </div>
+                <div class="panel-body">
+                    <button type="button" value="txt" class="btn btn-sm " id="">增加早班班次</button>
+                    <button type="button" value="txt" class="btn btn-sm " id="">增加早班事件</button>
+                </div>
+
+            </div>
+            <hr class="active">
+            <!--<div class="panel panel-default">-->
+            <!--<div class="panel-heading">-->
+            <!--<p>按钮区</p>-->
+            <!--</div>-->
+            <!--<div class="panel-body">-->
+            <!--&lt;!&ndash;<button type="button" value="txt" class="btn btn-sm " id="addDay">添加当前日期为安全日期</button>&ndash;&gt;-->
+            <!--<button type="button" value="txt" class="btn btn-sm " id="addScrap">添加报废金额值</button>-->
+            <!--<button type="button" value="txt" class="btn btn-sm " id="resetScrap">更新报废金额</button>-->
+            <!--</div>-->
+            <!--</div>-->
+        </form>
+        <hr class="active">
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-heading">提交日期为:</div>
+                <div class="panel-body">
+                    <p id="submitDay"></p>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">服务器返回值:</div>
+                <div class="panel-body">
+                    <p class="loading"></p>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">操作状态: </div>
+                <div class="panel-body">
+                    <p id="actionStatus"></p>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">安全运行天数的查询值: </div>
+                <div class="panel-body">
+                    <p id="safeSearch"></p>
+                </div>
+            </div>
+        </div>
+        <hr class="active">
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-heading">全部安全日期信息: </div>
+                <div class="panel-body">
+                    <table id="logSafeMessage" class="table  table-bordered black-color">
+                        <tr>
+                            <th>行数</th>
+                            <th>年</th>
+                            <th>月</th>
+                            <th>日</th>
+                            <th>安全状态</th>
+                            <th>截止此天安全运行天数</th>
+                            <th>运行信息</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">全部不安全的日期信息:</div>
+                <div class="panel-body">
+                    <table id="logUnSafeMessage" class="table  table-bordered red-color">
+                        <tr>
+                            <th>行数</th>
+                            <th>年</th>
+                            <th>月</th>
+                            <th>日</th>
+                            <th>安全状态</th>
+                            <th>截止此天安全运行天数</th>
+                            <th>运行信息</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/google-maps.js"></script>
+<script src="js/defineGlobal.js"></script>
+<script src="js/scrapAmount.js"></script>
+<script src="js/showTime.js"></script>
+<script>$(document).ready(function(){$(".vertical-nav").verticalnav({speed: 400,align: "left"});});</script>
+</body>
+</html>
