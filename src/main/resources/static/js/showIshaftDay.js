@@ -23,13 +23,37 @@ Uday=Udate.getDate();
 // var curTimeJson={
 //     "curr_time":"2016-08-14 21:00:00"
 // };
-var curTime="2016-08-14 21:00:00";
+// var curTime="2016-08-14 15:00:00";
+var curTime="2016"+"-"+"08"+"-"+"14"+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
 var curTimeJson= new curTimeInput(curTime.toString());
 var timeRow=[];
 var hourlyTar=[];
 var hourlyOut=[];
 var hourlyTime=[];
 console.log("start");
+
+var myLegend={data:['AccOutput','Output per Hour','Hourly Target']};
+var myyAxis=[{
+    type: 'value',
+    name: '产品数（件）',
+    position: 'left',
+    nameTextStyle:{
+        fontStyle:'normal',
+        fontWeight:'bold',
+        fontSize:16
+    },
+    axisLabel:{
+        textStyle:{
+            fontSize:14,
+            fontWeight:'bold'
+        }
+    }
+}];
+var myGrid= {
+    containLabel: true,
+    left:'4%',
+    bottom:'2%'
+};
 // // 基于准备好的dom，初始化echarts实例
 // var myChart = echarts.init(document.getElementById('IshaftOneYieldDayChart'));
 $.ajax({
@@ -42,15 +66,15 @@ $.ajax({
         console.log(JSON.stringify(data));
         console.log("操作正常");
         console.log(data.shift_type);
-        if(data.shift_type="NIGHT_SHIFT"){
+        if(data.shift_type=="NIGHT_SHIFT"){
             $("#banci").html("夜班");
             $("#stdBeats").html(data.curr_shift_info.night_shift_standard_beats);
         }
-        if(data.shift_type="MORNING_SHIFT"){
+        if(data.shift_type=="MORNING_SHIFT"){
             $("#banci").html("早班");
             $("#stdBeats").html(data.curr_shift_info.morning_shift_standard_beats);
         }
-        if(data.shift_type="MIDDLE_SHIFT"){
+        if(data.shift_type=="MIDDLE_SHIFT"){
             $("#banci").html("中班");
             $("#stdBeats").html(data.curr_shift_info.middle_shift_standard_beats);
         }
@@ -75,6 +99,7 @@ $.ajax({
             timeRow[j]=key;
             j++;
         }
+        $("#target").html(hourlyTar[i-1]);
 
         console.log(hourlyOut);
         console.log(hourlyTime);
@@ -85,22 +110,79 @@ $.ajax({
 
         // 指定图表的配置项和数据
         var option = {
-            title: {
-                text: 'ECharts 入门示例'
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { type:'shadow'}
             },
-            tooltip: {},
-            legend: {
-                data:['销量']
+            toolbox: {
+                feature: {
+                    dataView: {
+                        show: true,
+                        readOnly: false,
+                        optionToContent: function (opt) {
+                            var axisData = opt.xAxis[0].data;
+                            var series = opt.series;
+                            var table = '<table style="width:100%;text-align:center"><tbody><tr>'
+                                + '<td>时间</td>'
+                                + '<td>' + series[0].name + '</td>'
+                                + '<td>' + series[1].name + '</td>'
+                                + '</tr>';
+                            for (var i = 0, l = axisData.length; i < l; i++) {
+                                table += '<tr>'
+                                    + '<td>' + axisData[i] + '</td>'
+                                    + '<td>' + series[0].data[i] + '</td>'
+                                    + '<td>' + series[1].data[i] + '</td>'
+                                    + '</tr>';
+                            }
+                            table += '</tbody></table>';
+                            return table;
+                        }
+                    },
+                    saveAsImage: {
+                        show: true
+                    }
+                }
             },
-            xAxis: {
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-            },
-            yAxis: {},
+            legend: myLegend,
+            grid:myGrid,
+            xAxis: [{
+                type: 'category',
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLabel:{
+                    textStyle:{
+                        fontWeight:'bold',
+                        fontSize:14
+                    }
+                },
+                // data: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00']
+                data: timeRow
+            }],
+            yAxis: myyAxis,
             series: [{
-                name: '销量',
+                name: 'Output per Hour',
                 type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
-            }]
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                data: hourlyOut
+            },
+                {
+                    name: 'Hourly Target',
+                    type: 'line',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+
+                    data:hourlyTar
+                }]
         };
 
         // 使用刚指定的配置项和数据显示图表。
@@ -114,93 +196,4 @@ $.ajax({
     }
 });
 
-//
-// //配置echarts
-// option = {
-//     title: {
-//         text: 'Ishaft1报废金额时间段视图'
-//     },
-//     tooltip: {
-//         trigger: 'axis'
-//     },
-//     toolbox: {
-//         feature: {
-//             dataView: {
-//                 show: true,
-//                 readOnly: false
-//             },
-//             saveAsImage: {
-//                 show: true
-//             }
-//         }
-//     },
-//     grid: {
-//         containLabel: true
-//     },
-//     legend: {
-//         data: ['AccOutput','Output per Hour','Hourly Target']
-//     },
-//     xAxis: [{
-//         type: 'category',
-//         axisTick: {
-//             alignWithLabel: true
-//         },
-//         data: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00']
-//         // data: timeRow
-//     }],
-//     yAxis: [{
-//         type: 'value',
-//         name: '产品数（件）',
-//         position: 'left'
-//     }],
-//     series: [{
-//         name: 'AccOutput',
-//         type: 'line',
-//         stack: '总量',
-//         label: {
-//             normal: {
-//                 show: true,
-//                 position: 'top'
-//             }
-//         },
-//         lineStyle: {
-//             normal: {
-//                 width: 3,
-//                 shadowColor: 'rgba(0,0,0,0.4)',
-//                 shadowBlur: 10,
-//                 shadowOffsetY: 10
-//             }
-//         },
-//         data: [1,13,37,35,15,13,25,21,6,45,32,2]
-//     },
-//         {
-//             name: 'Output per Hour',
-//             type: 'bar',
-//             yAxisIndex: 1,
-//             stack: '总量',
-//             label: {
-//                 normal: {
-//                     show: true,
-//                     position: 'top'
-//                 }
-//             }
-//             // data: hourlyOut
-//         },
-//         {
-//             name: 'Hourly Target',
-//             type: 'line',
-//             yAxisIndex: 1,
-//             stack: '总量',
-//             label: {
-//                 normal: {
-//                     show: true,
-//                     position: 'top'
-//                 }
-//             },
-//             data: [300,330,325,300,400,676,822,979,1038,1464,1906,1951,1931]
-//             // data:hourlyTar
-//         }]
-// };
-//
-// //使用刚指定的配置项和数据显示图表。
-// myChart.setOption(option);
+

@@ -42,7 +42,33 @@
             border: 1px solid #293c55;
         }
     </style>
-</head>
+    <style type="text/css">
+        .table{
+            margin: 3% 0 0 0;
+        }
+        .table>thead>tr>td{
+            color: white;
+            /*background-color: #5B9BD5;*/
+            background-color: #6ab0b8;
+            font-size:1.6em;
+            height: 3em;
+        }
+        .table>tbody>tr>td{
+            font-size:1.2em;
+        }
+        .table>tbody>tr:nth-child(1)>td{
+            color: #000000;
+            background-color: #D2DEEF;
+        }
+        .table>tbody>tr:nth-child(2)>td{
+            color: #000000;
+            background-color: #EAEFF7;
+        }
+        .table>tbody>tr:nth-child(3)>td{
+            color: #000000;
+            background-color: #D2DEEF;
+        }
+    </style></head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
     <div class="container-fluid">
@@ -59,14 +85,13 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <p class="navbar-text">产量信息展示I-shaft年视图</p>
+            <p class="navbar-text">产量信息展示I-shaft周视图</p>
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VSS-Ishaft <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-submenu"><a href="#">I-shaft1</a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="http://localhost:8080/IshaftYieldDay.html">日视图</a></li>
                                 <li><a href="http://localhost:8080/IshaftYieldWeek.html">周视图</a></li>
                                 <li><a href="http://localhost:8080/IshaftYieldMonth.html">月视图</a></li>
                                 <li><a href="http://localhost:8080/IshaftYieldYear.html">年视图</a></li>
@@ -75,7 +100,6 @@
                         <li role="separator" class="divider"></li>
                         <li class="dropdown-submenu"><a href="#">I-shaft2</a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="#">日视图</a></li>
                                 <li><a href="#">周视图</a></li>
                                 <li><a href="#">月视图</a></li>
                                 <li><a href="#">年视图</a></li>
@@ -84,7 +108,6 @@
                         <li role="separator" class="divider"></li>
                         <li class="dropdown-submenu"><a href="#">I-shaft3</a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="#">日视图</a></li>
                                 <li><a href="#">周视图</a></li>
                                 <li><a href="#">月视图</a></li>
                                 <li><a href="#">年视图</a></li>
@@ -93,7 +116,6 @@
                         <li role="separator" class="divider"></li>
                         <li class="dropdown-submenu"><a href="#">I-shaft4</a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="#">日视图</a></li>
                                 <li><a href="#">周视图</a></li>
                                 <li><a href="#">月视图</a></li>
                                 <li><a href="#">年视图</a></li>
@@ -106,7 +128,6 @@
                     <ul class="dropdown-menu">
                         <li class="dropdown-submenu"><a href="#">Cell1</a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="#">日视图</a></li>
                                 <li><a href="#">周视图</a></li>
                                 <li><a href="#">月视图</a></li>
                                 <li><a href="#">年视图</a></li>
@@ -115,7 +136,6 @@
                         <li role="separator" class="divider"></li>
                         <li class="dropdown-submenu"><a href="#">Cell2</a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="#">日视图</a></li>
                                 <li><a href="#">周视图</a></li>
                                 <li><a href="#">月视图</a></li>
                                 <li><a href="#">年视图</a></li>
@@ -129,7 +149,6 @@
                     <ul class="dropdown-menu">
                         <li class="dropdown-submenu"><a href="#">Cell1</a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="#">日视图</a></li>
                                 <li><a href="#">周视图</a></li>
                                 <li><a href="#">月视图</a></li>
                                 <li><a href="#">年视图</a></li>
@@ -138,7 +157,6 @@
                         <li role="separator" class="divider"></li>
                         <li class="dropdown-submenu"><a href="#">Cell2</a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="#">日视图</a></li>
                                 <li><a href="#">周视图</a></li>
                                 <li><a href="#">月视图</a></li>
                                 <li><a href="#">年视图</a></li>
@@ -157,7 +175,89 @@
         <div class="col-md-3 item border-line " id="IshaftOneYieldYearPie"></div>
     </div>
     <div class="row">
-        <div class="col-md-12 item item2 border-line"></div>
+        <div class="col-md-12 item item2 border-line">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <td>型号/日期</td>
+                    <td>一月</td>
+                    <td>二月</td>
+                    <td>三月</td>
+                    <td>四月</td>
+                    <td>五月</td>
+                    <td>六月</td>
+                    <td>七月</td>
+                    <td>八月</td>
+                    <td>九月</td>
+                    <td>十月</td>
+                    <td>十一月</td>
+                    <td>十二月</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>XXXX</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>XXXX</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>XXXX</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>XXXX</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
