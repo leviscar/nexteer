@@ -34,6 +34,7 @@ function showScrapData() {
         }
     });
 }
+showScrapData();
 setInterval(function () {
     showScrapData();
-},1000);
+},1000*10*20);

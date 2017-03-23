@@ -178,7 +178,7 @@
         }
 
         .firstTable th{
-               font-size: 2em;
+               font-size: 1.8em;
            }
         .firstTable a{
             color: #293c55;
@@ -280,7 +280,7 @@
         <div class="row1">
             <div class="col-md-3 item ">
                 <div class="textHeader border-line center-block" >
-                    <h2 class="textTitle text-center " id="scrapTitle center"><a href="http://localhost:8080/scrapAmount.html " target="_blank">报废金额</a></h2>
+                    <h2 class="textTitle text-center " id="scrapTitle center"><a href="http://localhost:8080/scrapAmountSec.html " target="_blank">报废金额</a></h2>
                 </div>
                 <div class="numHeader">
                     <span class="numContent" id="scrapAmount">0000</span>
@@ -296,7 +296,7 @@
             </div>
             <div class="col-md-3 item ">
                 <div class="textHeader border-line center-block" >
-                    <h2 class="textTitle text-center " id="showFTQTitle"><a href="http://localhost:8080/calendar.html " target="_blank">直通率</a></h2>
+                    <h2 class="textTitle text-center " id="showFTQTitle"><a href="http://localhost:8080/calendar.html " target="_blank">HCE</a></h2>
                 </div>
                 <div class="numHeader">
                     <span class="numContent" id="showFTQcontent">0000</span>
@@ -326,7 +326,7 @@
                         <tr>
                             <th class="active"><a href="">BEPS</a></th>
                             <th class="active"><a href="">EPS</a></th>
-                            <th class="active"><a href="">I-Shaft</a></th>
+                            <th class="active"><a href="">I-Shaft1</a></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -354,6 +354,7 @@
                             <th>当前产量</th>
                             <th>达成率</th>
                             <th>当前状态</th>
+                            <th>单元状态面板</th>
                         </tr>
                         </thead>
 
@@ -364,6 +365,7 @@
                             <td>980</td>
                             <td>98%</td>
                             <td>pic</td>
+                            <td><a href="">进入BEPS单元</a></td>
                         </tr>
                         <tr >
                             <td><a href="">CEPS</a></td>
@@ -371,13 +373,15 @@
                             <td>600</td>
                             <td>60%</td>
                             <td>pic</td>
+                            <td><a href="">进入CEPS单元</a></td>
                         </tr>
                         <tr >
-                            <td><a href="http://localhost:8080/IshaftYieldDay.html ">I-Shaft</a></td>
+                            <td><a href="http://localhost:8080/IshaftYieldWeek.html ">I-Shaft1</a></td>
                             <td>1000</td>
                             <td>720</td>
                             <td>72%</td>
                             <td>pic</td>
+                            <td><a href="http://localhost:8080/IshaftOneUnit.html">进入Ishaft1单元</a></td>
                         </tr>
                         </tbody>
 
@@ -393,32 +397,6 @@
 <script src="js/defineGlobal.js"></script>
 <script src="js/safeShow.js"></script>
 <script src="js/scrapAmount.js"></script>
-<script type="application/javascript">
-    function judgeTime(time) {
-        var timeStr="";
-        if (time<10){
-            timeStr="0"+time.toString()
-        }
-        else {
-            timeStr=time.toString()
-        }
-        return timeStr;
-    }
-    function myTimer(){
-        var hours = new Date().getHours();
-        var minutes = new Date().getMinutes();
-        var seconds = new Date().getSeconds();
-        $("#showMainTime").html(judgeTime(hours)+":"+judgeTime(minutes)+":"+judgeTime(seconds));
-    }
-    function myDate() {
-        var year = new Date().getFullYear();
-        var month = new Date().getMonth()+1;
-        var day = new Date().getDate();
-        $("#showMainDate").html(judgeTime(year)+"年"+judgeTime(month )+"月"+judgeTime(day)+"日");
-    }
-    setInterval(function(){myTimer()},1000);
-    setInterval(function () {myDate()},1000);
-
-</script>
+<script src="js/showTime.js"></script>
 </body>
 </html>
