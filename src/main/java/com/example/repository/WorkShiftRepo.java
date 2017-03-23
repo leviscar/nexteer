@@ -37,9 +37,11 @@ public class WorkShiftRepo {
                 && workShift.getMorning_shift_end() != null && workShift.getMorning_shift_end().length() > 0
                 && workShift.getMorning_shift_standard_beats() > 0) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String sql = "INSERT INTO work_shift (morning_shift_start, morning_shift_end, morning_shift_standard_beats,setting_time) VALUES(?, ?, ?, ?)";
+            String sql = "INSERT INTO work_shift (morning_shift_start, morning_shift_end, morning_shift_standard_beats, setting_time, " +
+                    "std, morning_worker_num, morning_overtime_worker_num) VALUES(?, ?, ?, ?, ?, ?, ?)";
             jdbc.update(sql, workShift.getMorning_shift_start(), workShift.getMorning_shift_end(),
-                    workShift.getMorning_shift_standard_beats(), sdf.format(new Date()));
+                    workShift.getMorning_shift_standard_beats(), sdf.format(new Date()),
+                    workShift.getStd(), workShift.getMorning_worker_num(), workShift.getMorning_overtime_worker_num());
             object.addProperty("status", true);
             object.addProperty("log", "add ok");
         } else {
@@ -64,10 +66,13 @@ public class WorkShiftRepo {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String sql = "INSERT INTO work_shift (morning_shift_start, morning_shift_end, " +
                     "night_shift_start, night_shift_end, morning_shift_standard_beats, " +
-                    "night_shift_standard_beats, setting_time) VALUES(?, ?, ?, ?, ?, ?, ?)";
+                    "night_shift_standard_beats, setting_time, std, morning_worker_num, " +
+                    "night_worker_num, morning_overtime_worker_num, night_overtime_worker_num) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             jdbc.update(sql, workShift.getMorning_shift_start(), workShift.getMorning_shift_end(),
                     workShift.getNight_shift_start(), workShift.getNight_shift_end(),
-                    workShift.getMorning_shift_standard_beats(), workShift.getNight_shift_standard_beats(), sdf.format(new Date()));
+                    workShift.getMorning_shift_standard_beats(), workShift.getNight_shift_standard_beats(), sdf.format(new Date()),
+                    workShift.getStd(), workShift.getMorning_worker_num(), workShift.getNight_worker_num(),
+                    workShift.getMorning_overtime_worker_num(), workShift.getNight_overtime_worker_num());
             object.addProperty("status", true);
             object.addProperty("log", "add ok");
         } else {
@@ -94,10 +99,13 @@ public class WorkShiftRepo {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String sql = "INSERT INTO work_shift (morning_shift_start, morning_shift_end, middle_shift_start, middle_shift_end," +
                     "night_shift_start, night_shift_end, morning_shift_standard_beats,middle_shift_standard_beats," +
-                    "night_shift_standard_beats, setting_time) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "night_shift_standard_beats, setting_time, std, morning_worker_num, middle_worker_num, night_worker_num," +
+                    "morning_overtime_worker_num, middle_overtime_worker_num, night_overtime_worker_num) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             jdbc.update(sql, workShift.getMorning_shift_start(), workShift.getMorning_shift_end(),
                     workShift.getNight_shift_start(), workShift.getNight_shift_end(), workShift.getMorning_shift_standard_beats(),
-                    workShift.getMiddle_shift_standard_beats(), workShift.getNight_shift_standard_beats(), sdf.format(new Date()));
+                    workShift.getMiddle_shift_standard_beats(), workShift.getNight_shift_standard_beats(), sdf.format(new Date()),
+                    workShift.getStd(), workShift.getMorning_worker_num(), workShift.getMiddle_worker_num(), workShift.getNight_worker_num(),
+                    workShift.getMorning_overtime_worker_num(), workShift.getMiddle_overtime_worker_num(), workShift.getNight_overtime_worker_num());
             object.addProperty("status", true);
             object.addProperty("log", "add ok");
         } else {

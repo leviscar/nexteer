@@ -18,6 +18,13 @@ public class WorkShift {
     private int morning_shift_standard_beats;
     private int middle_shift_standard_beats;
     private int night_shift_standard_beats;
+    private double std;
+    private int morning_worker_num;
+    private int middle_worker_num;
+    private int night_worker_num;
+    private int morning_overtime_worker_num;
+    private int middle_overtime_worker_num;
+    private int night_overtime_worker_num;
 
     public WorkShift() {
     }
@@ -109,5 +116,61 @@ public class WorkShift {
 
     public void setNight_shift_standard_beats(int night_shift_standard_beats) {
         this.night_shift_standard_beats = night_shift_standard_beats;
+    }
+
+    public double getStd() {
+        return std;
+    }
+
+    public void setStd(double std) {
+        this.std = std;
+    }
+
+    public int getMorning_worker_num() {
+        return morning_worker_num;
+    }
+
+    public void setMorning_worker_num(int morning_worker_num) {
+        this.morning_worker_num = morning_worker_num;
+    }
+
+    public int getMiddle_worker_num() {
+        return middle_worker_num;
+    }
+
+    public void setMiddle_worker_num(int middle_worker_num) {
+        this.middle_worker_num = middle_worker_num;
+    }
+
+    public int getNight_worker_num() {
+        return night_worker_num;
+    }
+
+    public void setNight_worker_num(int night_worker_num) {
+        this.night_worker_num = night_worker_num;
+    }
+
+    public int getMorning_overtime_worker_num() {
+        return morning_overtime_worker_num;
+    }
+
+    public void setMorning_overtime_worker_num(int morning_overtime_worker_num) {
+        this.morning_overtime_worker_num = morning_overtime_worker_num;
+    }
+
+    public int getMiddle_overtime_worker_num() {
+        return middle_overtime_worker_num;
+    }
+
+    public void setMiddle_overtime_worker_num(int middle_overtime_worker_num) {
+        this.middle_overtime_worker_num = middle_overtime_worker_num;
+    }
+
+    public int getNight_overtime_worker_num() {
+        return night_overtime_worker_num;
+    }
+
+    public void setNight_overtime_worker_num(int night_overtime_worker_num) {
+        this.night_overtime_worker_num = night_overtime_worker_num;
     }
 }

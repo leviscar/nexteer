@@ -63,18 +63,29 @@ public class Ishaft1UnitStatusRepo {
         int curNum = products.size();
         unitStatus.setCurr_num(curNum);
 
-        // 根据班次信息得到小时目标
-        double hours = getHours(workShift, shiftType);
+
         int standardBeats = 0;
+        int workerNum = 0;
+        int overtimeWorkerNum = 0;
+        Date startTime = new Date();
         switch (shiftType) {
             case MORNING_SHIFT:
                 standardBeats = workShift.getMorning_shift_standard_beats();
+                workerNum = workShift.getMorning_worker_num();
+                overtimeWorkerNum = workShift.getMorning_overtime_worker_num();
+                startTime = sdf.parse(workShift.getMorning_shift_start());
                 break;
             case MIDDLE_SHIFT:
                 standardBeats = workShift.getMiddle_shift_standard_beats();
+                workerNum = workShift.getMiddle_worker_num();
+                overtimeWorkerNum = workShift.getMiddle_overtime_worker_num();
+                startTime = sdf.parse(workShift.getMiddle_shift_start());
                 break;
             case NIGHT_SHIFT:
                 standardBeats = workShift.getNight_shift_standard_beats();
+                workerNum = workShift.getNight_worker_num();
+                overtimeWorkerNum = workShift.getNight_overtime_worker_num();
+                startTime = sdf.parse(workShift.getNight_shift_start());
                 break;
         }
 
@@ -107,6 +118,26 @@ public class Ishaft1UnitStatusRepo {
         // 计算OEE = curBeats * (合格产品数) / （经历时间-休息时间）
         int oee = (int) (standardBeats * curNum * 100 / (totalSeconds - restSeconds));
         unitStatus.setMovable_rate(oee);
+
+        // 计算hce
+        int standardMinutes = 8 * 60;
+        double hce;
+        if (totalSeconds / 60 > standardMinutes) {
+            // 当前为止的加班时间
+            int overMinutes = (int) (totalSeconds / 60 - standardMinutes);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(startDate);
+            calendar.add(Calendar.MINUTE, standardMinutes);
+            Date endTime = calendar.getTime();
+            // 正常工作的总休息时间
+            int normalRestMinute = (int) (getHourlyRestSeconds(workShift.getId(), shiftType, startTime, endTime) / 60);
+            // 加班时间内的休息时间
+            int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
+            hce = 100 * curNum * workShift.getStd() * 60 / ((standardMinutes - normalRestMinute) * workerNum + (overMinutes - overRestMinutes) * overtimeWorkerNum);
+        } else {
+            hce = 100 * curNum * workShift.getStd() * 60 * 60 / ((totalSeconds - restSeconds) * workerNum);
+        }
+        unitStatus.setHce(hce);
 
         // 得到小时产量
         Map<String, Integer> map = getHourlyOutput(products, startDate);
