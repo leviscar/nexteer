@@ -3,6 +3,7 @@ package com.example.repository;
 import com.example.mapper.SafetyDateMapper;
 import com.example.model.SafetyDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,7 @@ public class SafetyDateRepo {
     private JdbcTemplate jdbc;
 
     @Autowired
-    public SafetyDateRepo(JdbcTemplate jdbc) {
+    public SafetyDateRepo(@Qualifier("oneJdbcTemplate") JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
 
@@ -37,7 +38,7 @@ public class SafetyDateRepo {
      * @return
      */
     public List<SafetyDate> findByDate(String year, String month, String day) {
-        String sql = "select * " + "from safety_date WHERE year = ? and month = ? and day = ?";
+        String sql = "SELECT * " + "FROM safety_date WHERE year = ? AND month = ? AND day = ?";
         return jdbc.query(sql, new Object[]{year, month, day}, new SafetyDateMapper());
     }
 
@@ -47,7 +48,7 @@ public class SafetyDateRepo {
      * @return
      */
     public List<SafetyDate> findAll() {
-        String sql = "select * from safety_date";
+        String sql = "SELECT * FROM safety_date";
         return jdbc.query(sql, new SafetyDateMapper());
     }
 
@@ -57,7 +58,7 @@ public class SafetyDateRepo {
      * @return
      */
     public List<SafetyDate> findAllUnsafeDate() {
-        String sql = "select * from safety_date where is_safe = 0";
+        String sql = "SELECT * FROM safety_date WHERE is_safe = 0";
         return jdbc.query(sql, new SafetyDateMapper());
     }
 
@@ -106,7 +107,7 @@ public class SafetyDateRepo {
             jdbc.update("INSERT INTO safety_date (year, month, day, safe_dates, is_safe, log) VALUES (?,?,?,?,?,?)", safetyDate.getYear(), safetyDate.getMonth(),
                     safetyDate.getDay(), safetyDate.getSafe_dates(), safetyDate.getIs_safe(), safetyDate.getLog());
         } else {
-            jdbc.update("UPDATE safety_date SET is_safe = ?, safe_dates = ?, log = ? WHERE year = ? and month  = ? and day = ?",
+            jdbc.update("UPDATE safety_date SET is_safe = ?, safe_dates = ?, log = ? WHERE year = ? AND month  = ? AND day = ?",
                     safetyDate.getIs_safe(), safetyDate.getSafe_dates(), safetyDate.getLog(), safetyDate.getYear(), safetyDate.getMonth(),
                     safetyDate.getDay());
         }

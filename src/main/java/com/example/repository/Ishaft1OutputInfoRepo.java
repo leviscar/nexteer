@@ -4,6 +4,7 @@ import com.example.mapper.Ishaft1OutputInfoMapper;
 import com.example.model.Ishaft1OutputInfo;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +21,7 @@ public class Ishaft1OutputInfoRepo {
     private JdbcTemplate jdbc;
 
     @Autowired
-    public Ishaft1OutputInfoRepo(JdbcTemplate jdbc) {
+    public Ishaft1OutputInfoRepo(@Qualifier("oneJdbcTemplate") JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
 

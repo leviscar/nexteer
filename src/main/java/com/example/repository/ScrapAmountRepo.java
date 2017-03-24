@@ -4,6 +4,7 @@ import com.example.mapper.ScrapAmountMapper;
 import com.example.model.ScrapAmount;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +23,7 @@ public class ScrapAmountRepo {
     private JdbcTemplate jdbc;
 
     @Autowired
-    public ScrapAmountRepo(JdbcTemplate jdbc) {
+    public ScrapAmountRepo(@Qualifier("oneJdbcTemplate") JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
 

@@ -4,6 +4,7 @@ import com.example.mapper.WorkShiftMapper;
 import com.example.model.WorkShift;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +21,7 @@ public class WorkShiftRepo {
     private JdbcTemplate jdbc;
 
     @Autowired
-    public WorkShiftRepo(JdbcTemplate jdbc) {
+    public WorkShiftRepo(@Qualifier("oneJdbcTemplate") JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
 

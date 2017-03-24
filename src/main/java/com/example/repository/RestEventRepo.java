@@ -5,6 +5,7 @@ import com.example.model.RestEvent;
 import com.example.model.WorkShift;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -26,7 +27,7 @@ public class RestEventRepo {
     private RestEventWithWorkShiftRepo restEventWithWorkShiftRepo;
 
     @Autowired
-    public RestEventRepo(JdbcTemplate jdbc, WorkShiftRepo repo, RestEventWithWorkShiftRepo restEventWithWorkShiftRepo) {
+    public RestEventRepo(@Qualifier("oneJdbcTemplate") JdbcTemplate jdbc, WorkShiftRepo repo, RestEventWithWorkShiftRepo restEventWithWorkShiftRepo) {
         this.jdbc = jdbc;
         this.repo = repo;
         this.restEventWithWorkShiftRepo = restEventWithWorkShiftRepo;

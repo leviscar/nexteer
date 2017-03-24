@@ -6,9 +6,13 @@ import com.example.util.ShiftType;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -25,7 +29,7 @@ public class Ishaft1UnitStatusRepo {
     private RestEventRepo restEventRepo;
 
     @Autowired
-    public Ishaft1UnitStatusRepo(JdbcTemplate jdbc, Ishaft1ProductRepo repo, WorkShiftRepo workShiftRepo
+    public Ishaft1UnitStatusRepo(@Qualifier("threeJdbcTemplate") JdbcTemplate jdbc, Ishaft1ProductRepo repo, WorkShiftRepo workShiftRepo
             , RestEventWithWorkShiftRepo restEventWithWorkShiftRepo, RestEventRepo restEventRepo) {
         this.jdbc = jdbc;
         this.repo = repo;
@@ -67,25 +71,21 @@ public class Ishaft1UnitStatusRepo {
         int standardBeats = 0;
         int workerNum = 0;
         int overtimeWorkerNum = 0;
-        Date startTime = new Date();
         switch (shiftType) {
             case MORNING_SHIFT:
                 standardBeats = workShift.getMorning_shift_standard_beats();
                 workerNum = workShift.getMorning_worker_num();
                 overtimeWorkerNum = workShift.getMorning_overtime_worker_num();
-                startTime = sdf.parse(workShift.getMorning_shift_start());
                 break;
             case MIDDLE_SHIFT:
                 standardBeats = workShift.getMiddle_shift_standard_beats();
                 workerNum = workShift.getMiddle_worker_num();
                 overtimeWorkerNum = workShift.getMiddle_overtime_worker_num();
-                startTime = sdf.parse(workShift.getMiddle_shift_start());
                 break;
             case NIGHT_SHIFT:
                 standardBeats = workShift.getNight_shift_standard_beats();
                 workerNum = workShift.getNight_worker_num();
                 overtimeWorkerNum = workShift.getNight_overtime_worker_num();
-                startTime = sdf.parse(workShift.getNight_shift_start());
                 break;
         }
 
@@ -130,7 +130,7 @@ public class Ishaft1UnitStatusRepo {
             calendar.add(Calendar.MINUTE, standardMinutes);
             Date endTime = calendar.getTime();
             // 正常工作的总休息时间
-            int normalRestMinute = (int) (getHourlyRestSeconds(workShift.getId(), shiftType, startTime, endTime) / 60);
+            int normalRestMinute = (int) (getHourlyRestSeconds(workShift.getId(), shiftType, startDate, endTime) / 60);
             // 加班时间内的休息时间
             int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
             hce = 100 * curNum * workShift.getStd() * 60 / ((standardMinutes - normalRestMinute) * workerNum + (overMinutes - overRestMinutes) * overtimeWorkerNum);
@@ -147,8 +147,36 @@ public class Ishaft1UnitStatusRepo {
         Map<String, Integer> targetMap = getHourlyTargetValue(standardBeats, shiftType, workShift);
         unitStatus.setHourly_target(targetMap);
 
+        // 得到损失时间
+        unitStatus.setLoss_time(getLossTime(startDate, curDate));
         Gson gson = new Gson();
         return gson.toJson(unitStatus);
+    }
+
+    /**
+     * 根据开始时间和结束时间查询总损失时间
+     *
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    public int getLossTime(Date startTime, Date endTime) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sql = "SELECT TIME1, TIME3 FROM D03_CALL WHERE TIME1 BETWEEN ? AND ? AND TIME3 BETWEEN ? AND ?";
+        List<LossTime> lossTimeList = jdbc.query(sql, new Object[]{sdf.format(startTime), sdf.format(endTime), sdf.format(startTime), sdf.format(endTime)}, new RowMapper<LossTime>() {
+            @Override
+            public LossTime mapRow(ResultSet resultSet, int i) throws SQLException {
+                LossTime lossTime = new LossTime();
+                lossTime.setStartTime(resultSet.getTimestamp("TIME1"));
+                lossTime.setEndTime(resultSet.getTimestamp("TIME3"));
+                return lossTime;
+            }
+        });
+        int totalTime = 0;
+        for (LossTime lossTime : lossTimeList) {
+            totalTime += lossTime.getEndTime().getTime() - lossTime.getStartTime().getTime();
+        }
+        return totalTime / 1000;
     }
 
     /**
