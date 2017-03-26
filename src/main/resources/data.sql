@@ -46,6 +46,8 @@ INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std]
 VALUES (39, N'38028798', N'R103转向下轴总成', N'Ishaft1', 0.35)
 INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
 VALUES (40, N'38028807', N'R103加长杆总成', N'Ishaft1', 0.16)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (41, N'38028838', N'ishaft1测试型号', N'Ishaft1', 0.16)
 SET IDENTITY_INSERT [dbo].[product_model] OFF
 
 DELETE FROM "safety_date";

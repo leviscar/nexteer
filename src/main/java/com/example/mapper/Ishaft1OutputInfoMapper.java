@@ -18,6 +18,7 @@ public class Ishaft1OutputInfoMapper implements RowMapper<Ishaft1OutputInfo> {
         outputInfo.setAdd_date(resultSet.getString("add_date"));
         outputInfo.setOutput_count(resultSet.getInt("output_count"));
         outputInfo.setModel(resultSet.getString("model"));
+        outputInfo.setModel_name(resultSet.getString("model_name"));
         return outputInfo;
     }
 }
