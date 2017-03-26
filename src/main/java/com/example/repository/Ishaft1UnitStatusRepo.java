@@ -2,6 +2,7 @@ package com.example.repository;
 
 import com.example.model.*;
 import com.example.util.Function;
+import com.example.util.ModelOutput;
 import com.example.util.ShiftType;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -22,16 +23,19 @@ public class Ishaft1UnitStatusRepo {
     private RestEventWithWorkShiftRepo restEventWithWorkShiftRepo;
     private RestEventRepo restEventRepo;
     private LossTimeRepo lossTimeRepo;
+    private ProductModelRepo productModelRepo;
 
     @Autowired
     public Ishaft1UnitStatusRepo(Ishaft1ProductRepo repo, WorkShiftRepo workShiftRepo
             , RestEventWithWorkShiftRepo restEventWithWorkShiftRepo
-            , RestEventRepo restEventRepo, LossTimeRepo lossTimeRepo) {
+            , RestEventRepo restEventRepo, LossTimeRepo lossTimeRepo
+            , ProductModelRepo productModelRepo) {
         this.lossTimeRepo = lossTimeRepo;
         this.repo = repo;
         this.workShiftRepo = workShiftRepo;
         this.restEventWithWorkShiftRepo = restEventWithWorkShiftRepo;
         this.restEventRepo = restEventRepo;
+        this.productModelRepo = productModelRepo;
     }
 
     public String getByCurTime(Ishaft1UnitStatus unitStatus) throws ParseException {
@@ -62,7 +66,6 @@ public class Ishaft1UnitStatusRepo {
         // 当前生产量
         int curNum = products.size();
         unitStatus.setCurr_num(curNum);
-
 
         int standardBeats = 0;
         int workerNum = 0;
@@ -118,6 +121,14 @@ public class Ishaft1UnitStatusRepo {
         // 计算hce
         int standardMinutes = 8 * 60;
         double hce;
+        // 计算所有型号乘对应的std的值
+        Map<String, Integer> modelOutputMap = ModelOutput.getEachModelOutput(products);
+        float stdMultiplyOutput = 0;
+        for (Map.Entry<String, Integer> entry : modelOutputMap.entrySet()) {
+            String modelId = entry.getKey();
+            ProductModel model = productModelRepo.getStdByModelId(modelId);
+            stdMultiplyOutput += model.getStd() * entry.getValue();
+        }
         if (totalSeconds / 60 > standardMinutes) {
             // 当前为止的加班时间
             int overMinutes = (int) (totalSeconds / 60 - standardMinutes);
@@ -129,9 +140,9 @@ public class Ishaft1UnitStatusRepo {
             int normalRestMinute = (int) (getHourlyRestSeconds(workShift.getId(), shiftType, startDate, endTime) / 60);
             // 加班时间内的休息时间
             int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
-            hce = 100 * curNum * workShift.getStd() * 60 / ((standardMinutes - normalRestMinute) * workerNum + (overMinutes - overRestMinutes) * overtimeWorkerNum);
+            hce = 100 * stdMultiplyOutput * 60 / ((standardMinutes - normalRestMinute) * workerNum + (overMinutes - overRestMinutes) * overtimeWorkerNum);
         } else {
-            hce = 100 * curNum * workShift.getStd() * 60 * 60 / ((totalSeconds - restSeconds) * workerNum);
+            hce = 100 * stdMultiplyOutput * 60 * 60 / ((totalSeconds - restSeconds) * workerNum);
         }
         unitStatus.setHce(hce);
 

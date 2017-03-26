@@ -18,7 +18,6 @@ public class WorkShift {
     private int morning_shift_standard_beats;
     private int middle_shift_standard_beats;
     private int night_shift_standard_beats;
-    private double std;
     private int morning_worker_num;
     private int middle_worker_num;
     private int night_worker_num;
@@ -116,14 +115,6 @@ public class WorkShift {
 
     public void setNight_shift_standard_beats(int night_shift_standard_beats) {
         this.night_shift_standard_beats = night_shift_standard_beats;
-    }
-
-    public double getStd() {
-        return std;
-    }
-
-    public void setStd(double std) {
-        this.std = std;
     }
 
     public int getMorning_worker_num() {

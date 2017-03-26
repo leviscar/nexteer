@@ -50,30 +50,7 @@ public class ScheduledTask {
         // 获得一天所有产量信息
         List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, endDate);
         // 将产量根据型号排序
-        Collections.sort(products, new Comparator<Ishaft1Product>() {
-
-            @Override
-            public int compare(Ishaft1Product o1, Ishaft1Product o2) {
-                if (Integer.valueOf(o1.getModel()) > Integer.valueOf(o2.getModel())) {
-                    return -1;
-                }
-                if (Integer.valueOf(o1.getModel()) < Integer.valueOf(o2.getModel())) {
-                    return 1;
-                }
-                return 0;
-            }
-        });
-        // 统计所有型号的产量
-        Map<String, Integer> map = new HashMap<>();
-        int count = 0;
-        for (Ishaft1Product product : products) {
-            if (map.containsKey(product.getModel())) {
-                map.put(product.getModel(), ++count);
-            } else {
-                count = 0;
-                map.put(product.getModel(), ++count);
-            }
-        }
+        Map<String, Integer> map = ModelOutput.getEachModelOutput(products);
         // 将不同型号的产量插入表中
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             ishaft1OutputInfo.setModel(entry.getKey());
