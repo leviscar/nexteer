@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * Created by mrpan on 2017/3/26.
  */
@@ -32,5 +34,15 @@ public class ProductModelController {
         Gson gson = new Gson();
         ProductModel model = gson.fromJson(json, ProductModel.class);
         return repo.addModel(model);
+    }
+
+    /**
+     * 获得所有型号的信息
+     *
+     * @return
+     */
+    @RequestMapping(value = "product-model", method = RequestMethod.GET)
+    public List<ProductModel> get() {
+        return repo.getAllModel();
     }
 }

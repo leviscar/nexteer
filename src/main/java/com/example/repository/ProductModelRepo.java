@@ -61,4 +61,14 @@ public class ProductModelRepo {
         String sql = "SELECT * FROM product_model WHERE cell_name = ?";
         return jdbc.query(sql, new Object[]{cellName}, new ProductModelMapper());
     }
+
+    /**
+     * 获得所有型号的信息
+     *
+     * @return list
+     */
+    public List<ProductModel> getAllModel() {
+        String sql = "SELECT * FROM product_model";
+        return jdbc.query(sql, new ProductModelMapper());
+    }
 }
