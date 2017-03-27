@@ -8,6 +8,7 @@ public class Ishaft1OutputInfo {
     private String add_date;
     private String model;
     private int output_count;
+    private String model_name; // R103等
 
     public Ishaft1OutputInfo() {
     }
@@ -43,5 +44,13 @@ public class Ishaft1OutputInfo {
 
     public void setOutput_count(int output_count) {
         this.output_count = output_count;
+    }
+
+    public String getModel_name() {
+        return model_name;
+    }
+
+    public void setModel_name(String model_name) {
+        this.model_name = model_name;
     }
 }

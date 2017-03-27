@@ -4,6 +4,7 @@ import com.example.mapper.RestEventWithWorkShiftMapper;
 import com.example.model.RestEventWithWorkShift;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +18,7 @@ public class RestEventWithWorkShiftRepo {
     private JdbcTemplate jdbc;
 
     @Autowired
-    public RestEventWithWorkShiftRepo(JdbcTemplate jdbc) {
+    public RestEventWithWorkShiftRepo(@Qualifier("oneJdbcTemplate") JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
 
@@ -29,7 +30,7 @@ public class RestEventWithWorkShiftRepo {
      * @return
      */
     public JsonObject add(int rest_event_id, int work_shift_id) {
-        String sql = "insert into rest_event_with_work_shift (rest_event_id, work_shift_id) values (?,?)";
+        String sql = "INSERT INTO rest_event_with_work_shift (rest_event_id, work_shift_id) VALUES (?,?)";
         jdbc.update(sql, rest_event_id, work_shift_id);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("status", true);
@@ -39,11 +40,12 @@ public class RestEventWithWorkShiftRepo {
 
     /**
      * 根据班次id获得所有的休息id
+     *
      * @param work_shift_id
      * @return
      */
-    public List<RestEventWithWorkShift> getByWorkShiftId(int work_shift_id){
-        String sql = "select * from rest_event_with_work_shift where work_shift_id = ?";
+    public List<RestEventWithWorkShift> getByWorkShiftId(int work_shift_id) {
+        String sql = "SELECT * FROM rest_event_with_work_shift WHERE work_shift_id = ?";
         return jdbc.query(sql, new Object[]{work_shift_id}, new RestEventWithWorkShiftMapper());
     }
 }

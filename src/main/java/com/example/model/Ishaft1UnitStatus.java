@@ -19,6 +19,7 @@ public class Ishaft1UnitStatus {
     private int curr_beats; // 当前节拍
     private int loss_time; // 损失时间
     private int movable_rate; // 可动率
+    private double hce;
     private Map<String, Integer> hourly_output; // 小时产量
 
     public Ishaft1UnitStatus() {
@@ -118,5 +119,13 @@ public class Ishaft1UnitStatus {
 
     public void setHourly_target(Map<String, Integer> hourly_target) {
         this.hourly_target = hourly_target;
+    }
+
+    public double getHce() {
+        return hce;
+    }
+
+    public void setHce(double hce) {
+        this.hce = hce;
     }
 }

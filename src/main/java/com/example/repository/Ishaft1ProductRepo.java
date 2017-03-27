@@ -1,9 +1,9 @@
 package com.example.repository;
 
-import com.example.config.TargetDataSource;
 import com.example.mapper.Ishaft1ProductMapper;
 import com.example.model.Ishaft1Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -22,7 +22,7 @@ public class Ishaft1ProductRepo {
     private JdbcTemplate jdbc;
 
     @Autowired
-    public Ishaft1ProductRepo(JdbcTemplate jdbc) {
+    public Ishaft1ProductRepo(@Qualifier("twoJdbcTemplate") JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
 
@@ -33,7 +33,6 @@ public class Ishaft1ProductRepo {
      * @param endTime
      * @return
      */
-    @TargetDataSource("ds1")
     public List<Ishaft1Product> getByPeriod(Date startTime, Date endTime) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String start = sdf.format(startTime);
@@ -50,7 +49,6 @@ public class Ishaft1ProductRepo {
      * @param topN
      * @return
      */
-    @TargetDataSource("ds1")
     public List<Date> getCurBeats(Date startDate, Date curDate, int topN) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sql = "SELECT TOP (?) Timestamp FROM ._status WHERE ID IN (SELECT MIN(ID) FROM ._status WHERE Timestamp BETWEEN ? AND ? AND Status = '9999' AND StationName = 'LABELBENCH' GROUP BY Serial) ORDER BY Timestamp DESC";

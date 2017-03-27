@@ -24,6 +24,12 @@ public class WorkShiftMapper implements RowMapper<WorkShift> {
         workShift.setMorning_shift_standard_beats(resultSet.getInt("morning_shift_standard_beats"));
         workShift.setMiddle_shift_standard_beats(resultSet.getInt("middle_shift_standard_beats"));
         workShift.setNight_shift_standard_beats(resultSet.getInt("night_shift_standard_beats"));
+        workShift.setMorning_worker_num(resultSet.getInt("morning_worker_num"));
+        workShift.setMiddle_worker_num(resultSet.getInt("middle_worker_num"));
+        workShift.setNight_worker_num(resultSet.getInt("night_worker_num"));
+        workShift.setMorning_overtime_worker_num(resultSet.getInt("morning_overtime_worker_num"));
+        workShift.setMiddle_overtime_worker_num(resultSet.getInt("middle_overtime_worker_num"));
+        workShift.setNight_overtime_worker_num(resultSet.getInt("night_overtime_worker_num"));
         return workShift;
     }
 }

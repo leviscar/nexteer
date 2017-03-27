@@ -1,16 +1,55 @@
--- --------------------------------------------------------
--- 主机:                           127.0.0.1
--- 服务器版本:                        Microsoft SQL Server 2016 (RTM) - 13.0.1601.5
--- 服务器操作系统:                      Windows 10 Pro 6.3 <X64> (Build 14393: )
--- HeidiSQL 版本:                  9.4.0.5125
--- --------------------------------------------------------
+USE [nexteer]
+DELETE FROM "product_model";
+ALTER TABLE product_model
+  ALTER COLUMN model_name NVARCHAR(100) COLLATE Chinese_PRC_CI_AS;
+GO
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES  */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+SET IDENTITY_INSERT [dbo].[product_model] ON
 
--- 正在导出表  nexteer.safety_date 的数据：-1 rows
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (21, N'38028772', N'R103转向上轴总成', N'BEPS', 0.1)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (22, N'38028815', N'F102转向柱总成 MSCL', N'BEPS', 0.2)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (23, N'38206242', N'B311转向柱总成MSCL', N'BEPS', 0.12)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (24, N'38206243', N'B311转向柱总成ESCL ', N'BEPS', 0.15)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (25, N'38210474', N'H20转向柱总成MCL', N'BEPS', 0.3)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (26, N'38210495', N'H20转向柱总成ECL', N'BEPS', 0.15)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (27, N'38227093', N'F102转向柱总成ESCL', N'BEPS', 0.5)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (28, N'38205893', N'C301转向柱总成 MSCL', N'CEPS', 0.3)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (29, N'38205894', N'C301转向柱总成 ESCL', N'CEPS', 0.5)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (30, N'38205895', N'C301转向柱总成ESCL', N'CEPS', 0.4)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (31, N'38207140', N'S201转向柱总成', N'CEPS', 0.14)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (32, N'38207141', N'S201转向柱总成', N'CEPS', 0.36)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (33, N'38207142', N'S201转向柱总成', N'CEPS', 0.24)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (34, N'38207143', N'S201转向柱总成', N'CEPS', 0.16)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (35, N'38219717', N'H50转向柱总成 MSCL', N'CEPS', 0.35)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (36, N'38219718', N'H50转向柱总成 ESCL', N'CEPS', 0.39)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (37, N'38027705', N'VSS 9BXX I-Shaft LHD', N'Ishaft2', 0.37)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (38, N'38028088', N'VSS 9BXX I-Shaft RHD', N'Ishaft2', 0.28)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (39, N'38028798', N'R103转向下轴总成', N'Ishaft1', 0.35)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (40, N'38028807', N'R103加长杆总成', N'Ishaft1', 0.16)
+INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
+VALUES (41, N'38028838', N'ishaft1测试型号', N'Ishaft1', 0.16)
+SET IDENTITY_INSERT [dbo].[product_model] OFF
+
 DELETE FROM "safety_date";
 /*!40000 ALTER TABLE "safety_date" DISABLE KEYS */;
 INSERT INTO "safety_date" ("year", "month", "day", "safe_dates", "is_safe", "log") VALUES
@@ -380,8 +419,3 @@ INSERT INTO "safety_date" ("year", "month", "day", "safe_dates", "is_safe", "log
   ('2016', '12', '29', 36, 1, 'Today is running safe!'),
   ('2016', '12', '30', 37, 1, 'Today is running safe!'),
   ('2016', '12', '31', 38, 1, 'Today is running safe!');
-/*!40000 ALTER TABLE "safety_date" ENABLE KEYS */;
-
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

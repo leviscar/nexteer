@@ -30,7 +30,13 @@ CREATE TABLE work_shift (
   morning_shift_standard_beats INT, -- 早班标准节拍
   middle_shift_standard_beats  INT, -- 中班标准节拍
   night_shift_standard_beats   INT, -- 晚班标准节拍
-  setting_time                 DATETIME --设置班次的时间
+  setting_time                 DATETIME, --设置班次的时间
+  morning_worker_num           INT, -- 早班工作人次
+  middle_worker_num            INT, -- 中班工作人次
+  night_worker_num             INT, -- 晚班工作人次
+  morning_overtime_worker_num  INT, -- 早班加班工作人次
+  middle_overtime_worker_num   INT, -- 中班加班工作人次
+  night_overtime_worker_num    INT -- 晚班加班工作人次
 );
 CREATE TABLE rest_event (
   id               INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
@@ -48,5 +54,13 @@ CREATE TABLE ishaft1_output_info (
   id           INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
   add_date     DATE,
   model        VARCHAR(100), -- 型号
+  model_name   NVARCHAR(100), -- 型号名称
   output_count INT -- 当天产量
 );
+CREATE TABLE product_model (
+  id         INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
+  model_id   VARCHAR(100), -- 型号id
+  model_name NVARCHAR(100), -- 型号名
+  cell_name  NVARCHAR(100), -- 所属单元名
+  std        REAL -- 标准std 用于计算hce
+)

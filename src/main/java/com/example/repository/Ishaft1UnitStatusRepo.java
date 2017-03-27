@@ -2,11 +2,11 @@ package com.example.repository;
 
 import com.example.model.*;
 import com.example.util.Function;
+import com.example.util.ModelOutput;
 import com.example.util.ShiftType;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.text.ParseException;
@@ -18,20 +18,24 @@ import java.util.*;
  */
 @Repository
 public class Ishaft1UnitStatusRepo {
-    private JdbcTemplate jdbc;
     private Ishaft1ProductRepo repo;
     private WorkShiftRepo workShiftRepo;
     private RestEventWithWorkShiftRepo restEventWithWorkShiftRepo;
     private RestEventRepo restEventRepo;
+    private LossTimeRepo lossTimeRepo;
+    private ProductModelRepo productModelRepo;
 
     @Autowired
-    public Ishaft1UnitStatusRepo(JdbcTemplate jdbc, Ishaft1ProductRepo repo, WorkShiftRepo workShiftRepo
-            , RestEventWithWorkShiftRepo restEventWithWorkShiftRepo, RestEventRepo restEventRepo) {
-        this.jdbc = jdbc;
+    public Ishaft1UnitStatusRepo(Ishaft1ProductRepo repo, WorkShiftRepo workShiftRepo
+            , RestEventWithWorkShiftRepo restEventWithWorkShiftRepo
+            , RestEventRepo restEventRepo, LossTimeRepo lossTimeRepo
+            , ProductModelRepo productModelRepo) {
+        this.lossTimeRepo = lossTimeRepo;
         this.repo = repo;
         this.workShiftRepo = workShiftRepo;
         this.restEventWithWorkShiftRepo = restEventWithWorkShiftRepo;
         this.restEventRepo = restEventRepo;
+        this.productModelRepo = productModelRepo;
     }
 
     public String getByCurTime(Ishaft1UnitStatus unitStatus) throws ParseException {
@@ -63,18 +67,24 @@ public class Ishaft1UnitStatusRepo {
         int curNum = products.size();
         unitStatus.setCurr_num(curNum);
 
-        // 根据班次信息得到小时目标
-        double hours = getHours(workShift, shiftType);
         int standardBeats = 0;
+        int workerNum = 0;
+        int overtimeWorkerNum = 0;
         switch (shiftType) {
             case MORNING_SHIFT:
                 standardBeats = workShift.getMorning_shift_standard_beats();
+                workerNum = workShift.getMorning_worker_num();
+                overtimeWorkerNum = workShift.getMorning_overtime_worker_num();
                 break;
             case MIDDLE_SHIFT:
                 standardBeats = workShift.getMiddle_shift_standard_beats();
+                workerNum = workShift.getMiddle_worker_num();
+                overtimeWorkerNum = workShift.getMiddle_overtime_worker_num();
                 break;
             case NIGHT_SHIFT:
                 standardBeats = workShift.getNight_shift_standard_beats();
+                workerNum = workShift.getNight_worker_num();
+                overtimeWorkerNum = workShift.getNight_overtime_worker_num();
                 break;
         }
 
@@ -93,7 +103,7 @@ public class Ishaft1UnitStatusRepo {
         unitStatus.setCurr_beats(curBeats);
 
         // 当前节拍小于等于标准节拍
-        if (curBeats <= standardBeats) {
+        if (curBeats <= standardBeats && curBeats > 0) {
             // 笑脸
             unitStatus.setStatus(1);
         } else {
@@ -108,6 +118,34 @@ public class Ishaft1UnitStatusRepo {
         int oee = (int) (standardBeats * curNum * 100 / (totalSeconds - restSeconds));
         unitStatus.setMovable_rate(oee);
 
+        // 计算hce
+        int standardMinutes = 8 * 60;
+        double hce;
+        // 计算所有型号乘对应的std的值
+        Map<String, Integer> modelOutputMap = ModelOutput.getEachModelOutput(products);
+        float stdMultiplyOutput = 0;
+        for (Map.Entry<String, Integer> entry : modelOutputMap.entrySet()) {
+            String modelId = entry.getKey();
+            ProductModel model = productModelRepo.getStdByModelId(modelId);
+            stdMultiplyOutput += model.getStd() * entry.getValue();
+        }
+        if (totalSeconds / 60 > standardMinutes) {
+            // 当前为止的加班时间
+            int overMinutes = (int) (totalSeconds / 60 - standardMinutes);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(startDate);
+            calendar.add(Calendar.MINUTE, standardMinutes);
+            Date endTime = calendar.getTime();
+            // 正常工作的总休息时间
+            int normalRestMinute = (int) (getHourlyRestSeconds(workShift.getId(), shiftType, startDate, endTime) / 60);
+            // 加班时间内的休息时间
+            int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
+            hce = 100 * stdMultiplyOutput * 60 / ((standardMinutes - normalRestMinute) * workerNum + (overMinutes - overRestMinutes) * overtimeWorkerNum);
+        } else {
+            hce = 100 * stdMultiplyOutput * 60 * 60 / ((totalSeconds - restSeconds) * workerNum);
+        }
+        unitStatus.setHce(hce);
+
         // 得到小时产量
         Map<String, Integer> map = getHourlyOutput(products, startDate);
         unitStatus.setHourly_output(map);
@@ -116,8 +154,27 @@ public class Ishaft1UnitStatusRepo {
         Map<String, Integer> targetMap = getHourlyTargetValue(standardBeats, shiftType, workShift);
         unitStatus.setHourly_target(targetMap);
 
+        // 得到损失时间
+        unitStatus.setLoss_time(getLossTime(8, startDate, curDate));
         Gson gson = new Gson();
         return gson.toJson(unitStatus);
+    }
+
+    /**
+     * 根据开始时间和结束时间查询总损失时间
+     *
+     * @param cellId
+     * @param startTime
+     * @param endTime
+     * @return 损失时间 int
+     */
+    public int getLossTime(int cellId, Date startTime, Date endTime) {
+        List<LossTime> lossTimeList = lossTimeRepo.getLossTimeByCellId(cellId, startTime, endTime);
+        int totalTime = 0;
+        for (LossTime lossTime : lossTimeList) {
+            totalTime += lossTime.getEndTime().getTime() - lossTime.getStartTime().getTime();
+        }
+        return totalTime / 1000;
     }
 
     /**
@@ -215,7 +272,7 @@ public class Ishaft1UnitStatusRepo {
         Date endDate = calendar.getTime();
         int count = 0;
         for (Ishaft1Product product : products) {
-            if (product.getTime().before(endDate) && product.getTime().after(startDate)) {
+            if (product.getTime().getTime() > startDate.getTime() && product.getTime().getTime() < endDate.getTime()) {
                 count++;
             } else {
                 map.put(sdf.format(startDate), count);
@@ -333,39 +390,4 @@ public class Ishaft1UnitStatusRepo {
         return calendar.getTime();
     }
 
-    /**
-     * 根据班次信息获得班次的间隔时长
-     *
-     * @param workShift
-     * @param shiftType
-     * @return
-     * @throws ParseException
-     */
-    private double getHours(WorkShift workShift, ShiftType shiftType) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        long times = 0;
-        Date start;
-        Date end;
-        switch (shiftType) {
-            case MORNING_SHIFT:
-                start = sdf.parse(workShift.getMorning_shift_start());
-                end = sdf.parse(workShift.getMorning_shift_end());
-                end = (Date) Function.addOneDay(start, end).keySet().toArray()[0];
-                times = end.getTime() - start.getTime();
-                break;
-            case MIDDLE_SHIFT:
-                start = sdf.parse(workShift.getMiddle_shift_start());
-                end = sdf.parse(workShift.getMiddle_shift_end());
-                end = (Date) Function.addOneDay(start, end).keySet().toArray()[0];
-                times = end.getTime() - start.getTime();
-                break;
-            case NIGHT_SHIFT:
-                start = sdf.parse(workShift.getNight_shift_start());
-                end = sdf.parse(workShift.getNight_shift_end());
-                end = (Date) Function.addOneDay(start, end).keySet().toArray()[0];
-                times = end.getTime() - start.getTime();
-                break;
-        }
-        return times / (60 * 60 * 1000);
-    }
 }
