@@ -21,12 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import static com.example.enumtype.Cell.*;
+import static com.example.enumtype.Cell.ISHAFT1;
 
 /**
  * Created by mrpan on 2017/3/28.

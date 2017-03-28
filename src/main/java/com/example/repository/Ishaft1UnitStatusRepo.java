@@ -1,20 +1,18 @@
 package com.example.repository;
 
+import com.example.enumtype.ShiftType;
 import com.example.model.*;
 import com.example.util.Function;
 import com.example.util.ModelOutput;
-import com.example.enumtype.ShiftType;
 import com.example.util.OutputTool;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.Date;
 
 /**
  * Created by mrpan on 2017/3/10.
