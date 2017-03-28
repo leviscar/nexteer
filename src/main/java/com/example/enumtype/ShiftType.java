@@ -1,4 +1,4 @@
-package com.example.util;
+package com.example.enumtype;
 
 /**
  * Created by mrpan on 2017/3/10.

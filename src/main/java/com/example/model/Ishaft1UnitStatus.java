@@ -1,6 +1,6 @@
 package com.example.model;
 
-import com.example.util.ShiftType;
+import com.example.enumtype.ShiftType;
 
 import java.util.Map;
 
@@ -20,6 +20,7 @@ public class Ishaft1UnitStatus {
     private int loss_time; // 损失时间
     private int movable_rate; // 可动率
     private double hce;
+    private int target;
     private Map<String, Integer> hourly_output; // 小时产量
 
     public Ishaft1UnitStatus() {
@@ -127,5 +128,13 @@ public class Ishaft1UnitStatus {
 
     public void setHce(double hce) {
         this.hce = hce;
+    }
+
+    public int getTarget() {
+        return target;
+    }
+
+    public void setTarget(int target) {
+        this.target = target;
     }
 }

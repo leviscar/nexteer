@@ -3,15 +3,18 @@ package com.example.repository;
 import com.example.model.*;
 import com.example.util.Function;
 import com.example.util.ModelOutput;
-import com.example.util.ShiftType;
+import com.example.enumtype.ShiftType;
+import com.example.util.OutputTool;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 /**
  * Created by mrpan on 2017/3/10.
@@ -47,7 +50,7 @@ public class Ishaft1UnitStatusRepo {
         // 班次小时分钟格式化
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         Date curTime = sdf.parse(unitStatus.getCurr_time().substring(11, 16));
-        ShiftType shiftType = getShiftType(workShift, curTime);
+        ShiftType shiftType = OutputTool.getShiftType(workShift, curTime);
 
         JsonObject object = new JsonObject();
         if (shiftType == null) {
@@ -59,9 +62,13 @@ public class Ishaft1UnitStatusRepo {
         // 设置当前年月日
         SimpleDateFormat dateSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date curDate = dateSdf.parse(unitStatus.getCurr_time());
-        Date startDate = changeShiftDate(curDate, workShift, shiftType);
+        List<Date> dateList = OutputTool.changeShiftDate(curDate, workShift, shiftType);
+        Date startDate = dateList.get(0);
+        Date endDate = dateList.get(1);
         Map<Date, Boolean> addDateRes = Function.addOneDay(startDate, curDate);
         curDate = (Date) addDateRes.keySet().toArray()[0];
+        addDateRes = Function.addOneDay(startDate, endDate);
+        endDate = (Date) addDateRes.keySet().toArray()[0];
         List<Ishaft1Product> products = repo.getByPeriod(startDate, curDate);
         // 当前生产量
         int curNum = products.size();
@@ -88,29 +95,17 @@ public class Ishaft1UnitStatusRepo {
                 break;
         }
 
+        // 计算目标值
+        int target = (int) ((endDate.getTime() - startDate.getTime()) / (1000 * standardBeats));
+        unitStatus.setTarget(target);
+
         // 计算当前节拍
-        // 取前31件计算平均值
+        // 取前30件计算平均值
         int topN = 30;
-        int curBeats;
         List<Date> topNProduct = repo.getCurBeats(startDate, curDate, topN);
-        if (topNProduct.size() < topN) {
-            curBeats = 0;
-        } else {
-            Date finalProductDate = topNProduct.get(0);
-            Date firstProductDate = topNProduct.get(topN - 1);
-            curBeats = (int) ((finalProductDate.getTime() - firstProductDate.getTime()) / (1000 * (topN - 1)));
-        }
+        int curBeats = OutputTool.calcCurBeats(topNProduct, topN);
         unitStatus.setCurr_beats(curBeats);
-
-        // 当前节拍小于等于标准节拍
-        if (curBeats <= standardBeats && curBeats > 0) {
-            // 笑脸
-            unitStatus.setStatus(1);
-        } else {
-            // 哭脸
-            unitStatus.setStatus(0);
-        }
-
+        unitStatus.setStatus(OutputTool.getStatus(curBeats, standardBeats));
         // 首先根据班次信息获得当前时刻经历的休息时间
         long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
         long restSeconds = getRestSeconds(workShift.getId(), shiftType, curTime);
@@ -317,77 +312,6 @@ public class Ishaft1UnitStatusRepo {
             }
             return restSeconds / 1000;
         }
-    }
-
-    /**
-     * 根据班次信息，判断所属班次
-     *
-     * @return
-     */
-    private ShiftType getShiftType(WorkShift workShift, Date curTime) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        // 判断当前时刻所属班次
-        if (workShift.getMorning_shift_start() != null && workShift.getMorning_shift_end() != null) {
-            Date startTime = sdf.parse(workShift.getMorning_shift_start());
-            Date endTime = sdf.parse(workShift.getMorning_shift_end());
-            endTime = (Date) Function.addOneDay(startTime, endTime).keySet().toArray()[0];
-            curTime = (Date) Function.addOneDay(startTime, curTime).keySet().toArray()[0];
-            if (curTime.before(endTime) && curTime.after(startTime)) {
-                return ShiftType.MORNING_SHIFT;
-            }
-        }
-        if (workShift.getNight_shift_start() != null && workShift.getNight_shift_end() != null) {
-            Date startTime = sdf.parse(workShift.getNight_shift_start());
-            Date endTime = sdf.parse(workShift.getNight_shift_end());
-            endTime = (Date) Function.addOneDay(startTime, endTime).keySet().toArray()[0];
-            curTime = (Date) Function.addOneDay(startTime, curTime).keySet().toArray()[0];
-            if (curTime.before(endTime) && curTime.after(startTime)) {
-                return ShiftType.NIGHT_SHIFT;
-            }
-        }
-        if (workShift.getMiddle_shift_end() != null && workShift.getMiddle_shift_end() != null) {
-            Date startTime = sdf.parse(workShift.getMiddle_shift_start());
-            Date endTime = sdf.parse(workShift.getMiddle_shift_end());
-            endTime = (Date) Function.addOneDay(startTime, endTime).keySet().toArray()[0];
-            curTime = (Date) Function.addOneDay(startTime, curTime).keySet().toArray()[0];
-            if (curTime.before(endTime) && curTime.after(startTime)) {
-                return ShiftType.MIDDLE_SHIFT;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * 根据当前日期修改班次信息中的日期
-     *
-     * @param curDate
-     * @param workShift
-     * @param shiftType
-     * @return
-     */
-
-    private Date changeShiftDate(Date curDate, WorkShift workShift, ShiftType shiftType) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(curDate);
-        switch (shiftType) {
-            case MORNING_SHIFT:
-                calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(workShift.getMorning_shift_start().substring(0, 2)));
-                calendar.set(Calendar.MINUTE, Integer.parseInt(workShift.getMorning_shift_start().substring(3, 5)));
-                calendar.set(Calendar.SECOND, 0);
-                break;
-            case MIDDLE_SHIFT:
-                calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(workShift.getMiddle_shift_start().substring(0, 2)));
-                calendar.set(Calendar.MINUTE, Integer.parseInt(workShift.getMiddle_shift_start().substring(3, 5)));
-                calendar.set(Calendar.SECOND, 0);
-                break;
-            case NIGHT_SHIFT:
-                calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(workShift.getNight_shift_start().substring(0, 2)));
-                calendar.set(Calendar.MINUTE, Integer.parseInt(workShift.getNight_shift_start().substring(3, 5)));
-                calendar.set(Calendar.SECOND, 0);
-                break;
-
-        }
-        return calendar.getTime();
     }
 
 }
