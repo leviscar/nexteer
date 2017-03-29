@@ -11,7 +11,7 @@ function addProInput(modelID, modelName, cellName,std) {
 console.log("开始运行");
 $("#addProSub").bind("click", function () {
 
-    var addProJson=new OneShiftInput($("#addProID").val().toString(),$("#addProName").val().toString(),$("#addProCell").val(),parseFloat($("#addProSTD").val()));
+    var addProJson=new addProInput($("#addProID").val().toString(),$("#addProName").val().toString(),$("#addProCell").val(),Number($("#addProSTD").val()));
     console.log("start");
     console.log(JSON.stringify(addProJson));
     $.ajax({
@@ -35,13 +35,13 @@ $("#addProSub").bind("click", function () {
             console.log(errMsg);
         }
     });
-    $.get("http://localhost:8080/product-model", function (data) {
-        $("#proLine").append("<td>"+"第"+(data.length)+"列"+"</td>");
-        $("#proLineId").append("<td>"+data[data.length-1].modelId+"</td>");
-        $("#proLineName").append("<td>"+data[data.length-1].modelName+"</td>");
-        $("#proLineCell").append("<td>"+data[data.length-1].cellName+"</td>");
-        $("#proLineSTD").append("<td>"+data[data.length-1].std+"</td>");
-    });
+    // $.get("http://localhost:8080/product-model", function (data) {
+    //     $("#proLine").append("<td>"+"第"+(data.length)+"列"+"</td>");
+    //     $("#proLineId").append("<td>"+data[data.length-1].modelId+"</td>");
+    //     $("#proLineName").append("<td>"+data[data.length-1].modelName+"</td>");
+    //     $("#proLineCell").append("<td>"+data[data.length-1].cellName+"</td>");
+    //     $("#proLineSTD").append("<td>"+data[data.length-1].std+"</td>");
+    // });
 });
 
 //获取全部型号信息

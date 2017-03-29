@@ -91,9 +91,19 @@
                                     <h4 class="modal-title" id="myAddScrapModalLabel">添加报废金额</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p><label for="scrapAddTime">报废时间</label>&nbsp;&nbsp;<input type="time" id="scrapAddTime"></p>
+                                    <p><label for="scrapAddTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="scrapAddTime"></p>
                                     <hr class="active">
-                                    <p><label for="scrapAddValue">报废金额值</label>&nbsp;&nbsp;<input type="number" id="scrapAddValue"></p>
+                                    <p><label for="scrapIshaft1AddValue">Ishaft1报废金额值</label>&nbsp;&nbsp;<input type="number" id="scrapIshaft1AddValue"></p>
+                                    <hr class="active">
+                                    <p><label for="scrapIshaft2AddValue">Ishaft2报废金额值</label>&nbsp;&nbsp;<input type="number" id="scrapIshaft2AddValue"></p>
+                                    <hr class="active">
+                                    <p><label for="scrapIshaft3AddValue">Ishaft3报废金额值</label>&nbsp;&nbsp;<input type="number" id="scrapIshaft3AddValue"></p>
+                                    <hr class="active">
+                                    <p><label for="scrapIshaft4AddValue">Ishaft4报废金额值</label>&nbsp;&nbsp;<input type="number" id="scrapIshaft4AddValue"></p>
+                                    <hr class="active">
+                                    <p><label for="scrapCEPSAddValue">CEPS报废金额值</label>&nbsp;&nbsp;<input type="number" id="scrapCEPSAddValue"></p>
+                                    <hr class="active">
+                                    <p><label for="scrapBEPSAddValue">BEPS报废金额值</label>&nbsp;&nbsp;<input type="number" id="scrapBEPSAddValue"></p>
                                     <hr class="active">
                                     <p id="addScrapStu">未知</p>
                                 </div>
@@ -112,9 +122,19 @@
                                     <h4 class="modal-title" >更新报废金额</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p><label for="scrapAddTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="scrapResTime"></p>
+                                    <p><label for="scrapResTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="scrapResTime"></p>
                                     <hr class="active">
-                                    <p><label for="scrapAddValue">报废金额值</label>&nbsp;&nbsp;<input type="number" id="scrapResValue"></p>
+                                    <p><label for="scrapIshaft1ResValue">Ishaft1报废金额更新值</label>&nbsp;&nbsp;<input type="number" id="scrapIshaft1ResValue"></p>
+                                    <hr class="active">
+                                    <p><label for="scrapIshaft2ResValue">Ishaft2报废金额更新值</label>&nbsp;&nbsp;<input type="number" id="scrapIshaft2ResValue"></p>
+                                    <hr class="active">
+                                    <p><label for="scrapIshaft3ResValue">Ishaft3报废金额更新值</label>&nbsp;&nbsp;<input type="number" id="scrapIshaft3ResValue"></p>
+                                    <hr class="active">
+                                    <p><label for="scrapIshaft4ResValue">Ishaft4报废金额更新值</label>&nbsp;&nbsp;<input type="number" id="scrapIshaft4ResValue"></p>
+                                    <hr class="active">
+                                    <p><label for="scrapCEPSResValue">CEPS报废金额更新值</label>&nbsp;&nbsp;<input type="number" id="scrapCEPSResValue"></p>
+                                    <hr class="active">
+                                    <p><label for="scrapBEPSResValue">BEPS报废金额更新值</label>&nbsp;&nbsp;<input type="number" id="scrapBEPSResValue"></p>
                                     <hr class="active">
                                     <p id="resScrapStu">未知</p>
                                 </div>
@@ -414,7 +434,7 @@
                 <div class="panel-heading">
                     <p>型号信息显示值: </p>
                     <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myShowProModal">
-                        增加早中晚班事件
+                       增加型号信息
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="myShowProModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -475,7 +495,7 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/google-maps.js"></script>
 <script src="js/defineGlobal.js"></script>
-<script src="js/scrapAmount.js"></script>
+<script src="js/scrapSet.js"></script>
 <script src="js/showTime.js"></script>
 <script>$(document).ready(function(){$(".vertical-nav").verticalnav({speed: 400,align: "left"});});</script>
 <script src="js/banciSet.js"></script>
