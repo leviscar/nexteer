@@ -48,6 +48,9 @@ $("#addScrap").bind("click",function () {
         }
 
     });
+    setInterval(function () {
+        $("#addScrapStu").html("");
+    },1000*3)
 });
 
 
@@ -90,4 +93,7 @@ $("#resetScrap").bind("click",function () {
         }
 
     });
+    setInterval(function () {
+        $("#addScrapStu").html("");
+    },1000*3)
 });

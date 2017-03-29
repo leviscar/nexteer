@@ -165,7 +165,7 @@
                                     <h4 class="modal-title" id="mygetDayModalLabel">获取指定日期安全天数</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p><label for="getDayTime">选择指定日期</label>&nbsp;&nbsp;<input type="time" id="getDayTime"></p>
+                                    <p><label for="getDayTime">选择指定日期</label>&nbsp;&nbsp;<input type="date" id="getDayTime"></p>
                                     <hr class="active">
                                     <p id="getDayStu">未知</p>
                                 </div>
@@ -184,7 +184,7 @@
                                     <h4 class="modal-title" id="mystartDateModalLabel">更新安全日期</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p><label for="startDateTime">更新时间</label>&nbsp;&nbsp;<input type="time" id="startDateTime"></p>
+                                    <p><label for="startDateTime">更新时间</label>&nbsp;&nbsp;<input type="date" id="startDateTime"></p>
                                     <hr class="active">
                                     <p><label for="startDateValue">更新安全天数</label>&nbsp;&nbsp;<input type="number" id="startDateValue"></p>
                                     <hr class="active">
@@ -205,7 +205,7 @@
                                     <h4 class="modal-title" id="myresetDateModalLabel">重置安全天数</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p><label for="resetDateTime">重置时间</label>&nbsp;&nbsp;<input type="time" id="resetDateTime"></p>
+                                    <p><label for="resetDateTime">重置时间</label>&nbsp;&nbsp;<input type="date" id="resetDateTime"></p>
                                     <hr class="active">
                                     <p><label for="resetDateValue">输入错误信息</label>&nbsp;&nbsp;<input type="text" id="resetDateValue"></p>
                                     <hr class="active">
@@ -229,10 +229,10 @@
                 </div>
                 <div class="panel-body">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myMorFirModal">
+                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myMorFirModal">
                         增加早班班次
                     </button>
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myMorSecModal">
+                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myMorSecModal">
                         增加早班事件
                     </button>
                     <!-- Modal -->
@@ -282,8 +282,8 @@
                     </div>
 
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myMidFirModal">增加早晚班</button>
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myMidSecModal">
+                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myMidFirModal">增加早晚班</button>
+                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myMidSecModal">
                         增加早晚班事件
                     </button>
                     <!-- Modal -->
@@ -342,8 +342,8 @@
                     </div>
 
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myNtFirModal">增加早中晚班</button>
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myNtSecModal">
+                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myNtFirModal">增加早中晚班</button>
+                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myNtSecModal">
                         增加早中晚班事件
                     </button>
                     <!-- Modal -->
@@ -412,29 +412,26 @@
             </div>
             <hr class="active">
         </form>
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p>当前班次信息显示: </p>
+                </div>
+                <div class="panel-body">
+                    <table id="showBanci" class="table  table-bordered black-color">
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
         <hr class="active">
         <div>
             <div class="panel panel-default">
                 <div class="panel-heading"><p>型号信息</p></div>
                 <div class="panel-body">
-                    <p id="submitDay"></p>
-                </div>
-            </div>
-
-            <!--<div class="panel panel-default">-->
-                <!--<div class="panel-heading">安全运行天数的查询值: </div>-->
-                <!--<div class="panel-body">-->
-                    <!--<p id="safeSearch"></p>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-        <hr class="active">
-        <div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <p>型号信息显示值: </p>
                     <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myShowProModal">
-                       增加型号信息
+                        增加型号信息
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="myShowProModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -465,6 +462,22 @@
                             </div>
                         </div>
                     </div>
+
+                </div>
+            </div>
+
+            <!--<div class="panel panel-default">-->
+                <!--<div class="panel-heading">安全运行天数的查询值: </div>-->
+                <!--<div class="panel-body">-->
+                    <!--<p id="safeSearch"></p>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <hr class="active">
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p>型号信息显示值: </p>
                 </div>
                 <div class="panel-body">
                     <table id="productMessage" class="table  table-bordered black-color">
@@ -500,5 +513,6 @@
 <script>$(document).ready(function(){$(".vertical-nav").verticalnav({speed: 400,align: "left"});});</script>
 <script src="js/banciSet.js"></script>
 <script src="js/proCountSet.js"></script>
+<script src="js/safeset.js"></script>
 </body>
 </html>

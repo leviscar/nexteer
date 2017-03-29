@@ -102,8 +102,8 @@ $("#thiSub").bind("click", function () {
 
 
     var ThishiftJson=new ThreeShiftInput($("#thiMorStart").val(),$("#thiMorEnd").val(),$("#thiMidStart").val(),
-        $("#thiMidEnd").val(),$("#thiNStart").val(),$("#thiNEnd").val(), $("#thiMorBeats").val(),$("#thiMidBeats").val(),$("#thiNBeats").val(),
-    $("#thiMWorkNum").val(),$("#thiMidWorkNum").val(),$("#thiNWorkNum").val(),$("#thiMW"));
+        $("#thiMidEnd").val(),$("#thiNStart").val(),$("#thiNEnd").val(), Number($("#thiMorBeats").val()),Number($("#thiMidBeats").val()),Number($("#thiNBeats").val()),
+        Number($("#thiMWorkNum").val()),Number($("#thiMidWorkNum").val()),Number($("#thiNWorkNum").val()),Number($("#thiMWorkOverNum").val()),Number($("#thiMidWorkOverNum").val()),Number($("#thiNWorkOverNum").val()));
 
     // $("#thiMorStart").val(),$("#thiMorEnd").val(),$("#thiMidStart").val(),
     //     $("#thiMidEnd").val(),$("#thiNStart").val(),$("#thiNEnd").val(),parseInt($("#thiMorTar").val()),parseInt($("#thiMidTar").val()),parseInt($("#thiNTar").

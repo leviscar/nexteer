@@ -14,13 +14,16 @@
 //     Umonth=Udate.getMonth()+1;
 //     Uday=Udate.getDate();
 
+console.log("开始运行safeSet");
 //获得指定日期安全天数
 $("#getDay").bind("click", function () {
-    var getDayYear = $("#myYear").val();
-    var getDayMonth = $("#myMonth").val();
-    var getDayDay = $("#myDay").val();
-    $("#submitDay").html(getDayYear+"年"+getDayMonth+"月"+getDayDay+"日");
-    var getDayJson = new safety_date(getDayYear.toString(), getDayMonth.toString(), getDayDay.toString());
+
+    var addScrapTime=$("#getDayTime").val().split("-");
+    var getDayYear = addScrapTime[0];
+    var getDayMonth = addScrapTime[1];
+    var getDayDay = addScrapTime[2];
+    console.log(getDayYear+"年"+getDayMonth+"月"+getDayDay+"日");
+    var getDayJson = new safety_date(String(getDayYear), String(getDayMonth), String(getDayDay));
     $.ajax({
         type: "POST",
         url: "http://localhost:8080/safetyDate/getDates",
@@ -28,14 +31,17 @@ $("#getDay").bind("click", function () {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            $(".loading").html(JSON.stringify(data));
-            $("#safeSearch").html(data.safe_dates);
-            $("#actionStatus").html("获取指定日期正常");
+            console.log(JSON.stringify(data));
+            console.log(data.safe_dates);
+            $("#getDayStu").html("获取指定日期的安全天数为:"+ data.safe_dates);
         },
         failure: function (errMsg) {
             console.log(errMsg);
         }
     });
+    setTimeout(function () {
+        $("#getDayStu").html("");
+    },1000*showSeconds)
 });
 
 //单击重置安全日期
@@ -47,13 +53,14 @@ $("#startDate").bind("click",function () {
         this.safe_dates = safe_dates;
         this.log = log;
     }
-    var startDateYear=$("#startYear").val();
-    var startDateMonth=$("#startMonth").val();
-    var startDateDay=$("#startDay").val();
-    var startCount=$("#startSafeDay").val();
+    var startDateTime= $("#startDateTime").val().split("-");
+    var startDateYear= startDateTime[0];
+    var startDateMonth= startDateTime[1];
+    var startDateDay= startDateTime[2];
+    var startCount=Number($("#startDateValue").val());
     var startLog="";
-    $("#submitDay").html(startDateYear+"年"+startDateMonth+"月"+startDateDay+"日");
-    var getStartJson=new startDay(startDateYear.toString(),startDateMonth.toString(),startDateDay.toString(),startCount.toString(),startLog.toString());
+    console.log(startDateYear+"年"+startDateMonth+"月"+startDateDay+"日");
+    var getStartJson=new startDay(startDateYear.toString(),startDateMonth.toString(),startDateDay.toString(),startCount,startLog.toString());
     $.ajax({
         type: "POST",
         url: "http://localhost:8080/safetyDate/reset",
@@ -61,14 +68,17 @@ $("#startDate").bind("click",function () {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            $(".loading").html(JSON.stringify(data));
-            $("#safeDay").html(data.safe_dates);
-            $("#actionStatus").html("普通重置按钮操作成功");
+            console.log(JSON.stringify(data));
+            console.log(data.safe_dates);
+            $("#startDateStu").html("重置"+data.year+"/"+data.month+"/"+data.day+"安全运行天数为:"+ data.safe_dates);
         },
         failure: function (errMsg) {
             console.log(errMsg);
         }
     });
+    setTimeout(function () {
+        $("#startDateStu").html("");
+    },1000*showSeconds)
 });
 
 
@@ -81,11 +91,12 @@ $("#resetDate").bind("click",function () {
         this.safe_dates = safety_date;
         this.log = log;
     }
-    var resetYear=$("#resetYear").val().toString();
-    var resetMonth=$("#resetMonth").val().toString();
-    var resetDay=$("#resetDay").val().toString();
-    var resetMessage=$("#resetMessage").val().toString();
-    $("#submitDay").html(resetYear+"年"+resetMonth+"月"+resetDay+"日");
+    var resetDateTime= $("#resetDateTime").val().split("-");
+    var resetYear= resetDateTime[0];
+    var resetMonth= resetDateTime[1];
+    var resetDay= resetDateTime[2];
+    var resetMessage=$("#resetDateValue").val().toString();
+    console.log(resetYear+"年"+resetMonth+"月"+resetDay+"日");
     var getResetJson=new resetDate(resetYear,resetMonth,resetDay,0,resetMessage);
     $.ajax({
         type: "POST",
@@ -94,14 +105,18 @@ $("#resetDate").bind("click",function () {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            $(".loading").html(JSON.stringify(data));
-            $("#safeDay").html(data.safe_dates);
-            $("#actionStatus").html("发生事故重置按钮运行成功");
+            console.log(JSON.stringify(data));
+            console.log(data.safe_dates);
+            $("#resetDateStu").html("重置"+data.year+"/"+data.month+"/"+data.day+"安全运行天数为:"+ data.safe_dates+"<br>"+"事故信息为:"+data.log);
+
         },
         failure: function (errMsg) {
             console.log(errMsg);
         }
     });
+    setTimeout(function () {
+        $("#resetDateStu").html("");
+    },1000*showSeconds)
 });
 
 //获取全部的日期信息
