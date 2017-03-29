@@ -89,7 +89,6 @@ public class DashboardController {
      */
     @RequestMapping(value = "/oee", method = RequestMethod.POST)
     public String getOee(@RequestBody String json) throws ParseException {
-        int topN = 30;
         JsonParser parser = new JsonParser();
         JsonElement element = parser.parse(json);
         JsonObject jsonObject = element.getAsJsonObject();
@@ -116,9 +115,24 @@ public class DashboardController {
         Cell cell = Cell.valueOf(cellName);
         switch (cell) {
             case ISHAFT1:
-                List<Date> topNProducts = ishaft1ProductRepo.getCurBeats(startDate, curDate, topN);
-                int curBeats = OutputTool.calcCurBeats(topNProducts, topN);
-                object.addProperty("oee", curBeats);
+                int standardBeats = 0;
+                switch (shiftType) {
+                    case MORNING_SHIFT:
+                        standardBeats = workShift.getMorning_shift_standard_beats();
+                        break;
+                    case MIDDLE_SHIFT:
+                        standardBeats = workShift.getMiddle_shift_standard_beats();
+                        break;
+                    case NIGHT_SHIFT:
+                        standardBeats = workShift.getNight_shift_standard_beats();
+                        break;
+                }
+                long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
+                long restSeconds = getRestSeconds(workShift.getId(), shiftType, sdf.parse(curTime));
+                // 计算OEE = standardBeats * (合格产品数) / （经历时间-休息时间）
+                List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, curDate);
+                int oee = (int) (standardBeats * products.size() * 100 / (totalSeconds - restSeconds));
+                object.addProperty("oee", oee);
                 break;
             case ISHAFT2:
                 break;
