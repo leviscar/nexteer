@@ -67,60 +67,7 @@
     </div><!-- /.container-fluid -->
 </nav>
 <div class="row">
-    <!--效果html开始-->
-    <div class="col-md-2">
-        <ul class="vertical-nav dark red">
-            <li class="active"><a href="http://www.internetke.com/">首页</a></li>
-
-            <li><a href="http://www.internetke.com/">安全天数设置</a></li>
-            <li><a href="http://www.internetke.com/">报废金额设置</a></li>
-            <li><a href="http://www.internetke.com/">安全天数设置
-                <span class="submenu-icon"></span></a>
-                <ul>
-                    <li><a href="http://www.internetke.com/">二级导航</a></li>
-                    <li><a href="http://www.internetke.com/">二级导航</a></li>
-                    <li><a href="http://www.internetke.com/">二级导航</a></li>
-                    <li><a href="http://www.internetke.com/">二级导航</a></li>
-                    <li><a href="http://www.internetke.com/">二级导航</a></li>
-                    <li><a href="http://www.internetke.com/">二级导航</a></li>
-                </ul>
-            </li>
-            <li><a href="http://www.internetke.com/">产品
-                <span class="submenu-icon"></span></a>
-                <ul>
-                    <li><a href="http://www.internetke.com/">二级导航</a></li>
-                    <li><a href="http://www.internetke.com/">二级导航</a></li>
-                    <li><a href="http://www.internetke.com/">二级导航<span class="submenu-icon"></span></a><ul>
-                        <li><a href="http://www.internetke.com/">三级导航</a></li>
-                        <li><a href="http://www.internetke.com/">三级导航</a></li>
-                        <li><a href="http://www.internetke.com/">三级导航 <span class="submenu-icon"></span>
-                        </a>
-                            <ul>
-                                <li><a href="http://www.internetke.com/">四级导航</a></li>
-                                <li><a href="http://www.internetke.com/">四级导航</a></li>
-                                <li><a href="http://www.internetke.com/">四级导航</a></li>
-                                <li><a href="http://www.internetke.com/">四级导航</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="http://www.internetke.com/">三级导航</a></li>
-                    </ul>
-                    </li>
-                    <li><a href="http://www.internetke.com/">二级导航</a></li>
-                    <li><a href="http://www.internetke.com/">二级导航</a></li>
-                </ul>
-            </li>
-            <li><a href="http://www.internetke.com/">导航</a></li>
-            <li><a href="http://www.internetke.com/">信息</a></li>
-            <li><a href="http://www.internetke.com/">团队</a></li>
-            <li><a href="http://www.internetke.com/">常见问题</a></li>
-            <li><a href="http://www.internetke.com/">案例</a></li>
-            <li><a href="http://www.internetke.com/">联系我们</a></li>
-        </ul>
-
-    </div>
-    <!--&lt;!&ndash;效果html结束&ndash;&gt;-->
-    <!--<div class="clear"></div>-->
-    <div class="col-md-10">
+    <div class="col-md-12">
         <form>
             <div class="panel panel-default">
                 <div class="panel-heading"><p>当前日期:</p></div>
@@ -251,6 +198,7 @@
                             </div>
                         </div>
                     </div>
+                    <p id="safeSearch"></p>
                 </div>
 
             </div>
@@ -260,86 +208,265 @@
                     <p>班次设置</p>
                 </div>
                 <div class="panel-body">
-                    <button type="button" value="txt" class="btn btn-sm " id="">增加早班班次</button>
-                    <button type="button" value="txt" class="btn btn-sm " id="">增加早班事件</button>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myMorFirModal">
+                        增加早班班次
+                    </button>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myMorSecModal">
+                        增加早班事件
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myMorFirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">增加早班班次设置</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="oneStart">早班开始时间</label><input type="time" id="oneStart"></p>
+                                    <p><label for="oneEnd">早班结束时间</label><input type="time" id="oneEnd"></p>
+                                    <p><label for="oneStdBeats">早班标准节拍</label><input type="text" id="oneStdBeats"></p>
+                                    <p><label for="oneWorkNum">早班工作人数</label><input type="text" id="oneWorkNum"></p>
+                                    <p><label for="oneWorkOverNum">早班加班人数</label><input type="text" id="oneWorkOverNum"></p>
+
+                                    <p id="oneStatus">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="oneSub">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myMorSecModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myMorSecModalLabel">增加早班事件设置</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <!--<p><label for="addType">班次</label><input type="text" id="addType"></p>-->
+                                    <p><label for="addEvent">事件</label><input type="text" id="addEvent"></p>
+                                    <p><label for="addStart">事件开始时间</label><input type="time" id="addStart"></p>
+                                    <p><label for="addEnd">事件结束时间</label><input type="time" id="addEnd"></p>
+                                    <p id="addStatus">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="oneEventSub">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myMidFirModal">增加早晚班</button>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myMidSecModal">
+                        增加早晚班事件
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myMidFirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myMidModalLabel">增加早晚班次设置</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="twoMStart">早班开始时间</label><input type="time" id="twoMStart"></p>
+                                    <p><label for="twoMEnd">早班结束时间</label><input type="time" id="twoMEnd"></p>
+                                    <p><label for="twoNStart">晚班开始时间</label><input type="time" id="twoNStart"></p>
+                                    <p><label for="twoNEnd">晚班结束时间</label><input type="time" id="twoNEnd"></p>
+                                    <p><label for="twoMStdBeats">早班标准节拍</label><input type="number" class="inputIns" id="twoMStdBeats"></p>
+                                    <p><label for="twoNStdBeats">晚班标准节拍</label><input type="number" class="inputIns" id="twoNStdBeats"></p>
+                                    <p><label for="twoMWorkNum">早班工作人数</label><input type="number" class="inputIns" id="twoMWorkNum"></p>
+                                    <p><label for="twoNWorkNum">晚班工作人数</label><input type="number" class="inputIns" id="twoNWorkNum"></p>
+                                    <p><label for="twoMWorkOverNum">早班加班人数</label><input type="number" class="inputIns" id="twoMWorkOverNum"></p>
+                                    <p><label for="twoNWorkOverNum">晚班加班人数</label><input type="number" class="inputIns" id="twoNWorkOverNum"></p>
+                                    <p id="twoStatus">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="twoSub">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myMidSecModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myMidSecModalLabel">增加早午班事件设置</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="addSecType">班次</label>
+                                        <select  class="form-control" id="addSecType">
+                                            <option>早班</option>
+                                            <option>晚班</option>
+                                        </select>
+                                    </p>
+                                    <p><label for="addSecEvent">事件</label><input type="text" id="addSecEvent"></p>
+                                    <p><label for="addSecStart">事件开始时间</label><input type="time" id="addSecStart"></p>
+                                    <p><label for="addSecEnd">事件结束时间</label><input type="time" id="addSecEnd"></p>
+                                    <p id="addSecStatus">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="twoEventSub">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myNtFirModal">增加早中晚班</button>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myNtSecModal">
+                        增加早中晚班事件
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myNtFirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myNtModalLabel">增加早中晚班次设置</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="thiMorStart">早班开始时间</label><input type="time" id="thiMorStart"></p>
+                                    <p><label for="thiMorEnd">早班结束时间</label><input type="time" id="thiMorEnd"></p>
+                                    <p><label for="thiMidStart">中班开始时间</label><input type="time" id="thiMidStart"></p>
+                                    <p><label for="thiMidEnd">中班结束时间</label><input type="time" id="thiMidEnd"></p>
+                                    <p><label for="thiNStart">晚班开始时间</label><input type="time" id="thiNStart"></p>
+                                    <p><label for="thiNEnd">晚班结束时间</label><input type="time" id="thiNEnd"></p>
+                                    <p><label for="thiMorBeats">早班标准节拍</label><input type="number" class="inputIns" id="thiMorBeats"></p>
+                                    <p><label for="thiMidBeats">中班标准节拍</label><input type="number" class="inputIns" id="thiMidBeats"></p>
+                                    <p><label for="thiNBeats">晚班标准节拍</label><input type="number" class="inputIns" id="thiNBeats"></p>
+                                    <p><label for="thiMWorkNum">早班工作人数（人）</label><input type="number" class="inputIns" id="thiMWorkNum"></p>
+                                    <p><label for="thiMidWorkNum">午班工作人数（人）</label><input type="number" class="inputIns" id="thiMidWorkNum"></p>
+                                    <p><label for="thiNWorkNum">晚班工作人数（人）</label><input type="number" class="inputIns" id="thiNWorkNum"></p>
+                                    <p><label for="thiMWorkOverNum">早班加班人数（人）</label><input type="number" class="inputIns" id="thiMWorkOverNum"></p>
+                                    <p><label for="thiMidWorkOverNum">午班加班人数（人）</label><input type="number" class="inputIns" id="thiMidWorkOverNum"></p>
+                                    <p><label for="thiNWorkOverNum">晚班加班人数（人）</label><input type="number" class="inputIns" id="thiNWorkOverNum"></p>
+                                    <p id="thiStatus">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="thiSub">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myNtSecModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myNtSecModalLabel">增加早班事件设置</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="addThiType">班次</label>
+                                        <select  class="form-control" id="addThiType">
+                                            <option>早班</option>
+                                            <option>中班</option>
+                                            <option>晚班</option>
+                                        </select>
+                                    </p>
+                                    <p><label for="addThiEvent">事件</label><input type="text" id="addThiEvent"></p>
+                                    <p><label for="addThiStart">事件开始时间</label><input type="time" id="addThiStart"></p>
+                                    <p><label for="addThiEnd">事件结束时间</label><input type="time" id="addThiEnd"></p>
+                                    <p id="addThiStatus">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="thiEventSub">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
             <hr class="active">
-            <!--<div class="panel panel-default">-->
-            <!--<div class="panel-heading">-->
-            <!--<p>按钮区</p>-->
-            <!--</div>-->
-            <!--<div class="panel-body">-->
-            <!--&lt;!&ndash;<button type="button" value="txt" class="btn btn-sm " id="addDay">添加当前日期为安全日期</button>&ndash;&gt;-->
-            <!--<button type="button" value="txt" class="btn btn-sm " id="addScrap">添加报废金额值</button>-->
-            <!--<button type="button" value="txt" class="btn btn-sm " id="resetScrap">更新报废金额</button>-->
-            <!--</div>-->
-            <!--</div>-->
         </form>
         <hr class="active">
         <div>
             <div class="panel panel-default">
-                <div class="panel-heading">提交日期为:</div>
+                <div class="panel-heading"><p>型号信息</p></div>
                 <div class="panel-body">
                     <p id="submitDay"></p>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">服务器返回值:</div>
-                <div class="panel-body">
-                    <p class="loading"></p>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">操作状态: </div>
-                <div class="panel-body">
-                    <p id="actionStatus"></p>
-                </div>
-            </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">安全运行天数的查询值: </div>
-                <div class="panel-body">
-                    <p id="safeSearch"></p>
-                </div>
-            </div>
+            <!--<div class="panel panel-default">-->
+                <!--<div class="panel-heading">安全运行天数的查询值: </div>-->
+                <!--<div class="panel-body">-->
+                    <!--<p id="safeSearch"></p>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
         <hr class="active">
         <div>
             <div class="panel panel-default">
-                <div class="panel-heading">全部安全日期信息: </div>
+                <div class="panel-heading">
+                    <p>型号信息显示值: </p>
+                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myShowProModal">
+                        增加早中晚班事件
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myShowProModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myAddProLabel">增加型号</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="addProID">型号ID</label><input type="number" id="addProID"></p>
+                                    <p><label for="addProName">型号名称</label><input type="text" id="addProName"></p>
+                                    <p><label for="addProCell">所属单元</label><select  class="form-control" id="addProCell">
+                                        <option>isahft1</option>
+                                        <option>ishaft2</option>
+                                        <option>ishaft3</option>
+                                        <option>ishaft4</option>
+                                        <option>CEPS</option>
+                                        <option>BEPS</option>
+                                    </select>
+                                    <p><label for="addProSTD">STD</label><input type="text" id="addProSTD"></p>
+                                    <p id="addProStatus">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="addProSub">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="panel-body">
-                    <table id="logSafeMessage" class="table  table-bordered black-color">
-                        <tr>
-                            <th>行数</th>
-                            <th>年</th>
-                            <th>月</th>
-                            <th>日</th>
-                            <th>安全状态</th>
-                            <th>截止此天安全运行天数</th>
-                            <th>运行信息</th>
+                    <table id="productMessage" class="table  table-bordered black-color">
+                        <tr id="proLine">
+                            <td>行数</td>
+                        </tr>
+                        <tr id="proLineId">
+                            <td>型号ID</td>
+                        </tr>
+                        <tr id="proLineName">
+                            <td>型号名称</td>
+                        </tr>
+                        <tr id="proLineCell">
+                            <td>所属单元</td>
+                        </tr>
+                        <tr id="proLineSTD">
+                            <td>STD</td>
                         </tr>
                     </table>
                 </div>
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">全部不安全的日期信息:</div>
-                <div class="panel-body">
-                    <table id="logUnSafeMessage" class="table  table-bordered red-color">
-                        <tr>
-                            <th>行数</th>
-                            <th>年</th>
-                            <th>月</th>
-                            <th>日</th>
-                            <th>安全状态</th>
-                            <th>截止此天安全运行天数</th>
-                            <th>运行信息</th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -351,5 +478,7 @@
 <script src="js/scrapAmount.js"></script>
 <script src="js/showTime.js"></script>
 <script>$(document).ready(function(){$(".vertical-nav").verticalnav({speed: 400,align: "left"});});</script>
+<script src="js/banciSet.js"></script>
+<script src="js/proCountSet.js"></script>
 </body>
 </html>

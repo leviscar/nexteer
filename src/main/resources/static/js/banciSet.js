@@ -1,36 +1,42 @@
 /**
  * Created by Administrator on 2017/3/18.
  */
-function OneShiftInput(morStart, morEnd, mtValue,Beats) {
+function OneShiftInput(morStart, morEnd,Beats,morWorkNum,morWorkOverNum) {
     this.morning_shift_start  = morStart;
     this.morning_shift_end = morEnd;
-    this.morning_shift_target_value = mtValue;
     this.morning_shift_standard_beats= Beats;
+    this.morning_worker_num = morWorkNum;
+    this.morning_overtime_worker_num = morWorkOverNum;
 }
-function TwoShiftInput(morStart, morEnd,nigStart,nigEnd ,mtValue,ntValue,MBeats,NBeats) {
+function TwoShiftInput(morStart, morEnd,nigStart,nigEnd ,MBeats,NBeats,MWorkNum,NWorkNum,MWorkOverNum,NWorkOverNum) {
     this.morning_shift_start  = morStart;
     this.morning_shift_end = morEnd;
     this.night_shift_start=nigStart;
     this.night_shift_end=nigEnd;
-    this.morning_shift_target_value = mtValue;
-    this.night_shift_target_value=ntValue;
     this.morning_shift_standard_beats= MBeats;
     this.night_shift_standard_beats= NBeats;
+    this.morning_worker_num=MWorkNum;
+    this.night_worker_num = NWorkNum;
+    this.morning_overtime_worker_num=MWorkOverNum;
+    this.night_overtime_worker_num=NWorkOverNum;
 }
 
-function ThreeShiftInput(morStart, morEnd,midStart,midEnd,nigStart,nigEnd ,motValue,midtValue,ntValue,morBeats,midBeats,nBeats) {
+function ThreeShiftInput(morStart, morEnd,midStart,midEnd,nigStart,nigEnd ,morBeats,midBeats,nBeats,morWorkNum,midWorkNum,ntWorkNum,morWorkOverNum,midWorkOverNum,ntWorkOverNum) {
     this.morning_shift_start  = morStart;
     this.morning_shift_end = morEnd;
     this.middle_shift_start=midStart;
     this.middle_shift_end=midEnd;
     this.night_shift_start=nigStart;
     this.night_shift_end=nigEnd;
-    this.morning_shift_target_value = motValue;
-    this.middle_shift_target_value=midtValue;
-    this.night_shift_target_value=ntValue;
     this.morning_shift_standard_beats=morBeats;
     this.middle_shift_standard_beats=midBeats;
     this.night_shift_standard_beats= nBeats;
+    this.morning_worker_num=morWorkNum;
+    this.middle_worker_num=midWorkNum;
+    this.night_worker_num=ntWorkNum;
+    this.morning_overtime_worker_num = morWorkOverNum;
+    this.middle_overtime_worker_num = midWorkOverNum;
+    this.night_overtime_worker_num = ntWorkOverNum;
 }
 function  eventInput(type,event,eventStart,eventEnd) {
     this.shift_type=type;
@@ -41,7 +47,7 @@ function  eventInput(type,event,eventStart,eventEnd) {
 console.log("开始运行");
 $("#oneSub").bind("click", function () {
 
-    var OneshiftJson=new OneShiftInput($("#oneStart").val().toString(),$("#oneEnd").val().toString(),$("#oneTarget").val(),$("#oneStdBeats").val());
+    var OneshiftJson=new OneShiftInput($("#oneStart").val().toString(),$("#oneEnd").val().toString(),$("#oneStdBeats").val(),$("#oneWorkNum").val(),$("#oneWorkOverNum").val());
     console.log("start");
     console.log(JSON.stringify(OneshiftJson));
     $.ajax({
@@ -67,7 +73,7 @@ $("#oneSub").bind("click", function () {
 });
 
 $("#twoSub").bind("click", function () {
-    var TwoshiftJson =new TwoShiftInput($("#twoMStart").val().toString(),$("#twoMEnd").val().toString(),$("#twoNStart").val().toString(),$("#twoNEnd").val().toString(),$("#twoMTarget").val(),$("#twoNTarget").val(),$("#twoMStdBeats").val(),$("#twoNStdBeats").val());
+    var TwoshiftJson =new TwoShiftInput($("#twoMStart").val().toString(),$("#twoMEnd").val().toString(),$("#twoNStart").val().toString(),$("#twoNEnd").val().toString(),$("#twoMStdBeats").val(),$("#twoNStdBeats").val(),$("#twoMWorkNum").val(),$("#twoNWorkNum").val(),$("#twoMWorkOverNum").val(),$("#twoNWorkOverNum").val());
 
     console.log( JSON.stringify(TwoshiftJson));
 
@@ -96,8 +102,8 @@ $("#thiSub").bind("click", function () {
 
 
     var ThishiftJson=new ThreeShiftInput($("#thiMorStart").val(),$("#thiMorEnd").val(),$("#thiMidStart").val(),
-        $("#thiMidEnd").val(),$("#thiNStart").val(),$("#thiNEnd").val(),$("#thiMorTar").val(),$("#thiMidTar").val(),$("#thiNTar").
-        val(),$("#thiMorBeats").val(),$("#thiMidBeats").val(),$("#thiNBeats").val());
+        $("#thiMidEnd").val(),$("#thiNStart").val(),$("#thiNEnd").val(), $("#thiMorBeats").val(),$("#thiMidBeats").val(),$("#thiNBeats").val(),
+    $("#thiMWorkNum").val(),$("#thiMidWorkNum").val(),$("#thiNWorkNum").val(),$("#thiMW"));
 
     // $("#thiMorStart").val(),$("#thiMorEnd").val(),$("#thiMidStart").val(),
     //     $("#thiMidEnd").val(),$("#thiNStart").val(),$("#thiNEnd").val(),parseInt($("#thiMorTar").val()),parseInt($("#thiMidTar").val()),parseInt($("#thiNTar").

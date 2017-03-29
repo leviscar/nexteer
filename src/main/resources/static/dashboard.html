@@ -238,7 +238,7 @@
             background-color: #888888 !important;
         }
         .table,.table th,.table td,.table tr{
-            border: none !important;
+            /*border: none !important;*/
         }
         .green{
             background-color: #46754d;
@@ -269,10 +269,10 @@
             color: #70B27C;
         }
         button>span{
-            color: #1b6d85;
+            color: #cccccc;
         }
         button{
-            background-color: #cccccc !important;
+            background-color: #A93439 !important;
             border: none !important;
         }
     </style>
@@ -403,7 +403,7 @@
                     <div class="innerItemTwo  itemBackCol">
                         <div class="row ">
                             <div class="col-md-3 innerFour ">
-                                <div class="ftqName"><a href="">直通率</a></div>
+                                <div class="ftqName"><a href="">可动率</a></div>
                             </div>
                             <div class="col-md-3 innerFour ">
                                 <div class="row ftqHeadr ">
@@ -429,13 +429,13 @@
                             </div>
                             <div class="col-md-3 innerFour ">
                                 <div class="row ftqHeadr ">
-                                    <div class="col-md-8 ftqTitle text-center"><a href="">Ishaft1</a></div>
+                                    <div class="col-md-8 ftqTitle text-center" ><a href="" id="showIshaft">Ishaft1</a></div>
                                     <div class="col-md-4 ftqStatus ">
                                         <span class="glyphicon glyphicon-thumbs-up"></span>
                                     </div>
                                 </div>
                                 <div class="ftqNum ">
-                                    <div class="ftqNumCon text-center">94%</div>
+                                    <div class="ftqNumCon text-center" id="showIshaftValue">94%</div>
                                 </div>
                             </div>
                         </div>
@@ -461,26 +461,26 @@
 
                                 <tbody>
                                 <tr >
-                                    <td class="green"><a href="">BEPS</a></td>
-                                    <td class="red">1000</td>
-                                    <td class="green">980</td>
-                                    <td class="red">98%</td>
+                                    <td ><a href="">BEPS</a></td>
+                                    <td >1000</td>
+                                    <td >980</td>
+                                    <td >98%</td>
                                     <td ><span class="glyphicon glyphicon-thumbs-up"></span></td>
                                     <td ><a href="">进入BEPS单元</a></td>
                                 </tr>
                                 <tr >
-                                    <td  class="red"><a href="">CEPS</a></td>
-                                    <td class="green">1000</td>
-                                    <td class="red">600</td>
-                                    <td class="green">60%</td>
+                                    <td><a href="">CEPS</a></td>
+                                    <td>1000</td>
+                                    <td>600</td>
+                                    <td>60%</td>
                                     <td ><span class="glyphicon glyphicon-thumbs-up"></span></td>
                                     <td><a href="">进入CEPS单元</a></td>
                                 </tr>
-                                <tr >
-                                    <td class="green"><a href="http://localhost:8080/IshaftYieldWeek.html ">I-Shaft1</a></td>
-                                    <td class="red">1000</td>
-                                    <td class="green">720</td>
-                                    <td class="red">72%</td>
+                                <tr id="IshaftTable">
+                                    <td><a href="http://localhost:8080/IshaftYieldWeek.html ">I-Shaft1</a></td>
+                                    <td>1000</td>
+                                    <td>720</td>
+                                    <td>72%</td>
                                     <td><span class="glyphicon glyphicon-thumbs-up"></span></td>
                                     <td><a href="http://localhost:8080/IshaftOneUnit.html">进入Ishaft1单元</a></td>
                                 </tr>
@@ -499,5 +499,6 @@
 <script src="js/safeShow.js"></script>
 <script src="js/scrapAmount.js"></script>
 <script src="js/showTime.js"></script>
+<script src="js/ishaftDrop.js"></script>
 </body>
 </html>
