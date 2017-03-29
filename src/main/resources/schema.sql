@@ -63,10 +63,10 @@ CREATE TABLE product_model (
   model_name NVARCHAR(100), -- 型号名
   cell_name  NVARCHAR(100), -- 所属单元名
   std        REAL -- 标准std 用于计算hce
-)
+);
 CREATE TABLE oee (
   id        INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
   oee       INT,
   cell_name VARCHAR(10),
   add_date  DATE
-)
+);

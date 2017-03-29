@@ -1,7 +1,7 @@
 USE [nexteer]
-DELETE FROM "product_model";
-ALTER TABLE product_model
-  ALTER COLUMN model_name NVARCHAR(100) COLLATE Chinese_PRC_CI_AS;
+DELETE FROM product_model;
+DELETE FROM oee;
+DELETE FROM ishaft1_output_info;
 GO
 
 SET IDENTITY_INSERT [dbo].[product_model] ON
@@ -49,6 +49,33 @@ VALUES (40, N'38028807', N'R103加长杆总成', N'Ishaft1', 0.16)
 INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std])
 VALUES (41, N'38028838', N'ishaft1测试型号', N'Ishaft1', 0.16)
 SET IDENTITY_INSERT [dbo].[product_model] OFF
+
+SET IDENTITY_INSERT [dbo].[ishaft1_output_info] ON
+
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1002, CAST(N'2017-03-01' AS Date), N'38028838', N'ishaft1测试型号', 68)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1003, CAST(N'2017-03-02' AS Date), N'38028838', N'ishaft1测试型号', 58)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1004, CAST(N'2017-03-03' AS Date), N'38028838', N'ishaft1测试型号', 110)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1005, CAST(N'2017-03-04' AS Date), N'38028838', N'ishaft1测试型号', 120)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1006, CAST(N'2017-03-05' AS Date), N'38028838', N'ishaft1测试型号', 99)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1007, CAST(N'2017-03-06' AS Date), N'38028838', N'ishaft1测试型号', 100)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1008, CAST(N'2017-03-07' AS Date), N'38028838', N'ishaft1测试型号', 85)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1009, CAST(N'2017-03-08' AS Date), N'38028838', N'ishaft1测试型号', 76)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1010, CAST(N'2017-03-09' AS Date), N'38028838', N'ishaft1测试型号', 66)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1011, CAST(N'2017-03-10' AS Date), N'38028838', N'ishaft1测试型号', 105)
+SET IDENTITY_INSERT [dbo].[ishaft1_output_info] OFF
+SET IDENTITY_INSERT [dbo].[oee] ON
+
+INSERT [dbo].[oee] ([id], [oee], [cell_name], [add_date]) VALUES (5, 39, N'ISHAFT1', CAST(N'2017-03-01' AS Date))
+INSERT [dbo].[oee] ([id], [oee], [cell_name], [add_date]) VALUES (6, 20, N'ISHAFT1', CAST(N'2017-03-02' AS Date))
+INSERT [dbo].[oee] ([id], [oee], [cell_name], [add_date]) VALUES (7, 15, N'ISHAFT1', CAST(N'2017-03-03' AS Date))
+INSERT [dbo].[oee] ([id], [oee], [cell_name], [add_date]) VALUES (8, 20, N'ISHAFT1', CAST(N'2017-03-04' AS Date))
+INSERT [dbo].[oee] ([id], [oee], [cell_name], [add_date]) VALUES (9, 78, N'ISHAFT1', CAST(N'2017-03-05' AS Date))
+INSERT [dbo].[oee] ([id], [oee], [cell_name], [add_date]) VALUES (10, 58, N'ISHAFT1', CAST(N'2017-03-06' AS Date))
+INSERT [dbo].[oee] ([id], [oee], [cell_name], [add_date]) VALUES (11, 46, N'ISHAFT1', CAST(N'2017-03-07' AS Date))
+INSERT [dbo].[oee] ([id], [oee], [cell_name], [add_date]) VALUES (12, 35, N'ISHAFT1', CAST(N'2017-03-08' AS Date))
+INSERT [dbo].[oee] ([id], [oee], [cell_name], [add_date]) VALUES (13, 49, N'ISHAFT1', CAST(N'2017-03-09' AS Date))
+INSERT [dbo].[oee] ([id], [oee], [cell_name], [add_date]) VALUES (14, 56, N'ISHAFT1', CAST(N'2017-03-10' AS Date))
+SET IDENTITY_INSERT [dbo].[oee] OFF
 
 DELETE FROM "safety_date";
 /*!40000 ALTER TABLE "safety_date" DISABLE KEYS */;
