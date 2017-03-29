@@ -5,6 +5,7 @@
     "bootstrap": "latest",
     "bootstrap-year-calendar": "^1.1.0",
     "jquery-json": "latest",
-    "echarts": "^3.4.0"
+    "echarts": "^3.4.0",
+    "font-awesome": "^4.7.0"
   }
 }

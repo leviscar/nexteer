@@ -59,11 +59,9 @@ section.container{
 }
 
 .carousel{
-    height: 600px;
     background-color: #000000;
 }
 .carousel .item{
-    height: 600px;
     background-color: #000000;
 }
 .carousel img{
