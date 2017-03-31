@@ -30,7 +30,7 @@ CREATE TABLE work_shift (
   morning_shift_standard_beats INT, -- 早班标准节拍
   middle_shift_standard_beats  INT, -- 中班标准节拍
   night_shift_standard_beats   INT, -- 晚班标准节拍
-  setting_time                 DATETIME, --设置班次的时间
+  setting_time                 DATE, --设置班次的时间
   morning_worker_num           INT, -- 早班工作人次
   middle_worker_num            INT, -- 中班工作人次
   night_worker_num             INT, -- 晚班工作人次

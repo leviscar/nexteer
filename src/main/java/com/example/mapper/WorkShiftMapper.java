@@ -20,7 +20,7 @@ public class WorkShiftMapper implements RowMapper<WorkShift> {
         workShift.setMiddle_shift_end(resultSet.getString("middle_shift_end"));
         workShift.setNight_shift_start(resultSet.getString("night_shift_start"));
         workShift.setNight_shift_end(resultSet.getString("night_shift_end"));
-        workShift.setSetting_time(resultSet.getTimestamp("setting_time"));
+        workShift.setSetting_time(resultSet.getDate("setting_time"));
         workShift.setMorning_shift_standard_beats(resultSet.getInt("morning_shift_standard_beats"));
         workShift.setMiddle_shift_standard_beats(resultSet.getInt("middle_shift_standard_beats"));
         workShift.setNight_shift_standard_beats(resultSet.getInt("night_shift_standard_beats"));
