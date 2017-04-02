@@ -83,7 +83,7 @@ $.ajax({
         $("#finish").html(data.curr_num);
         $("#defct").html(data.defective_num);
         $("#status").html(data.status);
-
+        $("#personUse").html(data.hce.toFixed(2));
         $("#curBeats").html(data.curr_beats);
         $("#lossTime").html(data.loss_time);
         $("#movRate").html(data.movable_rate);

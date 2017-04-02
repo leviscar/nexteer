@@ -76,13 +76,14 @@ var myYaxis= [{
 var myGrid= {
     containLabel: true,
     left:'4%',
+    right:'5%',
     bottom:'2%'
 };
 var myLengend = {
     data:['Ishaft1','Ishaft2','Ishaft3','Ishaft4','BEPS','CEPS'],
     align: 'right',
     right: '9%',
-    top:'3%'
+    top:'6%'
 };
 function showDataView(opt) {
     var axisData = opt.xAxis[0].data;

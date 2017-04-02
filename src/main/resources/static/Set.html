@@ -292,19 +292,19 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myMidModalLabel">增加早晚班次设置</h4>
+                                    <h4 class="modal-title" id="myMidModalLabel">添加中班</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p><label for="twoMStart">早班开始时间</label><input type="time" id="twoMStart"></p>
-                                    <p><label for="twoMEnd">早班结束时间</label><input type="time" id="twoMEnd"></p>
-                                    <p><label for="twoNStart">晚班开始时间</label><input type="time" id="twoNStart"></p>
-                                    <p><label for="twoNEnd">晚班结束时间</label><input type="time" id="twoNEnd"></p>
-                                    <p><label for="twoMStdBeats">早班标准节拍</label><input type="number" class="inputIns" id="twoMStdBeats"></p>
-                                    <p><label for="twoNStdBeats">晚班标准节拍</label><input type="number" class="inputIns" id="twoNStdBeats"></p>
-                                    <p><label for="twoMWorkNum">早班工作人数</label><input type="number" class="inputIns" id="twoMWorkNum"></p>
-                                    <p><label for="twoNWorkNum">晚班工作人数</label><input type="number" class="inputIns" id="twoNWorkNum"></p>
-                                    <p><label for="twoMWorkOverNum">早班加班人数</label><input type="number" class="inputIns" id="twoMWorkOverNum"></p>
-                                    <p><label for="twoNWorkOverNum">晚班加班人数</label><input type="number" class="inputIns" id="twoNWorkOverNum"></p>
+                                    <p><label for="twoMStart">中班开始时间</label><input type="time" id="twoMStart"></p>
+                                    <p><label for="twoMEnd">中班结束时间</label><input type="time" id="twoMEnd"></p>
+                                    <!--<p><label for="twoNStart">晚班开始时间</label><input type="time" id="twoNStart"></p>-->
+                                    <!--<p><label for="twoNEnd">晚班结束时间</label><input type="time" id="twoNEnd"></p>-->
+                                    <p><label for="twoMStdBeats">中班班标准节拍</label><input type="number" class="inputIns" id="twoMStdBeats"></p>
+                                    <!--<p><label for="twoNStdBeats">晚班标准节拍</label><input type="number" class="inputIns" id="twoNStdBeats"></p>-->
+                                    <p><label for="twoMWorkNum">中班班工作人数</label><input type="number" class="inputIns" id="twoMWorkNum"></p>
+                                    <!--<p><label for="twoNWorkNum">晚班工作人数</label><input type="number" class="inputIns" id="twoNWorkNum"></p>-->
+                                    <p><label for="twoMWorkOverNum">中班班加班人数</label><input type="number" class="inputIns" id="twoMWorkOverNum"></p>
+                                    <!--<p><label for="twoNWorkOverNum">晚班加班人数</label><input type="number" class="inputIns" id="twoNWorkOverNum"></p>-->
                                     <p id="twoStatus">未知</p>
                                 </div>
                                 <div class="modal-footer">
@@ -342,9 +342,9 @@
                     </div>
 
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myNtFirModal">增加早中晚班</button>
+                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myNtFirModal">添加晚班</button>
                     <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myNtSecModal">
-                        增加早中晚班事件
+                        增加事件
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="myNtFirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -352,23 +352,23 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myNtModalLabel">增加早中晚班次设置</h4>
+                                    <h4 class="modal-title" id="myNtModalLabel">添加晚班</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p><label for="thiMorStart">早班开始时间</label><input type="time" id="thiMorStart"></p>
-                                    <p><label for="thiMorEnd">早班结束时间</label><input type="time" id="thiMorEnd"></p>
-                                    <p><label for="thiMidStart">中班开始时间</label><input type="time" id="thiMidStart"></p>
-                                    <p><label for="thiMidEnd">中班结束时间</label><input type="time" id="thiMidEnd"></p>
+                                    <!--<p><label for="thiMorStart">早班开始时间</label><input type="time" id="thiMorStart"></p>-->
+                                    <!--<p><label for="thiMorEnd">早班结束时间</label><input type="time" id="thiMorEnd"></p>-->
+                                    <!--<p><label for="thiMidStart">中班开始时间</label><input type="time" id="thiMidStart"></p>-->
+                                    <!--<p><label for="thiMidEnd">中班结束时间</label><input type="time" id="thiMidEnd"></p>-->
                                     <p><label for="thiNStart">晚班开始时间</label><input type="time" id="thiNStart"></p>
                                     <p><label for="thiNEnd">晚班结束时间</label><input type="time" id="thiNEnd"></p>
-                                    <p><label for="thiMorBeats">早班标准节拍</label><input type="number" class="inputIns" id="thiMorBeats"></p>
-                                    <p><label for="thiMidBeats">中班标准节拍</label><input type="number" class="inputIns" id="thiMidBeats"></p>
+                                    <!--<p><label for="thiMorBeats">早班标准节拍</label><input type="number" class="inputIns" id="thiMorBeats"></p>-->
+                                    <!--<p><label for="thiMidBeats">中班标准节拍</label><input type="number" class="inputIns" id="thiMidBeats"></p>-->
                                     <p><label for="thiNBeats">晚班标准节拍</label><input type="number" class="inputIns" id="thiNBeats"></p>
-                                    <p><label for="thiMWorkNum">早班工作人数（人）</label><input type="number" class="inputIns" id="thiMWorkNum"></p>
-                                    <p><label for="thiMidWorkNum">午班工作人数（人）</label><input type="number" class="inputIns" id="thiMidWorkNum"></p>
+                                    <!--<p><label for="thiMWorkNum">早班工作人数（人）</label><input type="number" class="inputIns" id="thiMWorkNum"></p>-->
+                                    <!--<p><label for="thiMidWorkNum">午班工作人数（人）</label><input type="number" class="inputIns" id="thiMidWorkNum"></p>-->
                                     <p><label for="thiNWorkNum">晚班工作人数（人）</label><input type="number" class="inputIns" id="thiNWorkNum"></p>
-                                    <p><label for="thiMWorkOverNum">早班加班人数（人）</label><input type="number" class="inputIns" id="thiMWorkOverNum"></p>
-                                    <p><label for="thiMidWorkOverNum">午班加班人数（人）</label><input type="number" class="inputIns" id="thiMidWorkOverNum"></p>
+                                    <!--<p><label for="thiMWorkOverNum">早班加班人数（人）</label><input type="number" class="inputIns" id="thiMWorkOverNum"></p>-->
+                                    <!--<p><label for="thiMidWorkOverNum">午班加班人数（人）</label><input type="number" class="inputIns" id="thiMidWorkOverNum"></p>-->
                                     <p><label for="thiNWorkOverNum">晚班加班人数（人）</label><input type="number" class="inputIns" id="thiNWorkOverNum"></p>
                                     <p id="thiStatus">未知</p>
                                 </div>
@@ -384,7 +384,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myNtSecModalLabel">增加早班事件设置</h4>
+                                    <h4 class="modal-title" id="myNtSecModalLabel">添加事件</h4>
                                 </div>
                                 <div class="modal-body">
                                     <p><label for="addThiType">班次</label>
