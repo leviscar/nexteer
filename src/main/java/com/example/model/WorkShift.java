@@ -1,6 +1,6 @@
 package com.example.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Created by mrpan on 2017/3/9.
@@ -34,15 +34,6 @@ public class WorkShift {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-
-    public Date getSetting_time() {
-        return setting_time;
-    }
-
-    public void setSetting_time(Date setting_time) {
-        this.setting_time = setting_time;
     }
 
     public String getMorning_shift_start() {
@@ -163,5 +154,13 @@ public class WorkShift {
 
     public void setNight_overtime_worker_num(int night_overtime_worker_num) {
         this.night_overtime_worker_num = night_overtime_worker_num;
+    }
+
+    public Date getSetting_time() {
+        return setting_time;
+    }
+
+    public void setSetting_time(Date setting_time) {
+        this.setting_time = setting_time;
     }
 }
