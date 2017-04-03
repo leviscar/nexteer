@@ -41,10 +41,16 @@ public class RestEventRepo {
      */
     public String addEvent(RestEvent event) {
         // 插入rest_event表并获得自增的id值
+        JsonObject object = new JsonObject();
         if (event.getShift_type() == null || event.getEvent_start_time() == null || event.getEvent_end_time() == null) {
-            JsonObject object = new JsonObject();
-            object.addProperty("status", true);
+            object.addProperty("status", false);
             object.addProperty("log", "所需输入的参数为空，请检查后重新输入");
+            return object.toString();
+        }
+        if (jdbc.query("SELECT * FROM rest_event WHERE shift_type =? AND event_start_time = ? AND rest_event.event_end_time = ?",
+                new Object[]{event.getShift_type(), event.getEvent_start_time(), event.getEvent_end_time()}, new RestEventMapper()).size() != 0) {
+            object.addProperty("status", false);
+            object.addProperty("log", "该记录已存在，请勿重复添加");
             return object.toString();
         }
         String sql = "INSERT INTO rest_event (shift_type, event, event_start_time, event_end_time) VALUES (?,?,?,?)";
@@ -71,7 +77,6 @@ public class RestEventRepo {
         WorkShift workShift = repo.getLatestWorkShift().get(0);
         restEventWithWorkShiftRepo.add(rest_event_id, workShift.getId());
 
-        JsonObject object = new JsonObject();
         object.addProperty("status", true);
         object.addProperty("log", "add ok");
         return object.toString();
