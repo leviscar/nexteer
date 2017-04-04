@@ -9,6 +9,7 @@ public class Oee {
     private int id;
     private int oee;
     private Date addDate;
+    private int targetOee;
     private String cellName;
 
     public Oee() {
@@ -44,5 +45,13 @@ public class Oee {
 
     public void setAddDate(Date addDate) {
         this.addDate = addDate;
+    }
+
+    public int getTargetOee() {
+        return targetOee;
+    }
+
+    public void setTargetOee(int targetOee) {
+        this.targetOee = targetOee;
     }
 }

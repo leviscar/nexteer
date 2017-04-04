@@ -9,6 +9,7 @@ public class Hce {
     private int id;
     private int hce;
     private Date addDate;
+    private int targetHce;
     private String cellName;
 
     public Hce() {
@@ -44,5 +45,13 @@ public class Hce {
 
     public void setCellName(String cellName) {
         this.cellName = cellName;
+    }
+
+    public int getTargetHce() {
+        return targetHce;
+    }
+
+    public void setTargetHce(int targetHce) {
+        this.targetHce = targetHce;
     }
 }

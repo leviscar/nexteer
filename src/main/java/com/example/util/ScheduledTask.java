@@ -112,11 +112,11 @@ public class ScheduledTask {
         }
         oee.setOee((int) (sumMulti * 100 / sumSeconds));
         oee.setCellName("ISHAFT1");
-        oeeRepo.add(oee);
+        oeeRepo.addActualOee(oee);
 
         hce.setHce(calcHce(workShift));
         hce.setCellName("ISHAFT1");
-        hceRepo.add(hce);
+        hceRepo.addActualHce(hce);
     }
 
     /**

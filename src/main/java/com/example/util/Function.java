@@ -1,5 +1,10 @@
 package com.example.util;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,5 +33,19 @@ public class Function {
             map.put(endDate, false);
             return map;
         }
+    }
+
+    /**
+     * sql date json 解析
+     *
+     * @return
+     */
+    public static ObjectMapper sqlDateMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+        mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
+        return mapper;
     }
 }

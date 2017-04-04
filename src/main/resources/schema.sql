@@ -65,14 +65,16 @@ CREATE TABLE product_model (
   std        REAL -- 标准std 用于计算hce
 );
 CREATE TABLE oee (
-  id        INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
-  oee       INT,
-  cell_name VARCHAR(10),
-  add_date  DATE
+  id         INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
+  oee        INT,
+  target_oee INT,
+  cell_name  VARCHAR(10),
+  add_date   DATE
 );
 CREATE TABLE hce (
-  id        INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
-  hce       INT,
-  cell_name VARCHAR(10),
-  add_date  DATE
+  id         INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
+  hce        INT,
+  target_hce INT,
+  cell_name  VARCHAR(10),
+  add_date   DATE
 );

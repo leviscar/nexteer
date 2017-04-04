@@ -2,6 +2,9 @@ package com.example.controller;
 
 import com.example.model.Oee;
 import com.example.repository.OeeRepo;
+import com.example.util.Function;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
@@ -24,6 +28,25 @@ public class OeeController {
     @Autowired
     public OeeController(OeeRepo oeeRepo) {
         this.oeeRepo = oeeRepo;
+    }
+
+    /**
+     * 设置target oee
+     *
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/oee/target")
+    public String addTargetOee(@RequestBody String json) {
+        ObjectMapper mapper = Function.sqlDateMapper();
+        try {
+            Oee oee = mapper.readValue(json, new TypeReference<Oee>() {
+            });
+            return oeeRepo.addTargetOee(oee);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return e.toString();
+        }
     }
 
     /**

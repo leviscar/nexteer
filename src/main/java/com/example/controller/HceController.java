@@ -2,6 +2,9 @@ package com.example.controller;
 
 import com.example.model.Hce;
 import com.example.repository.HceRepo;
+import com.example.util.Function;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
@@ -24,6 +28,25 @@ public class HceController {
     @Autowired
     public HceController(HceRepo hceRepo) {
         this.hceRepo = hceRepo;
+    }
+
+    /**
+     * 设置target hce
+     *
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/hce/target")
+    public String addTargetHce(@RequestBody String json) {
+        ObjectMapper mapper = Function.sqlDateMapper();
+        try {
+            Hce hce = mapper.readValue(json, new TypeReference<Hce>() {
+            });
+            return hceRepo.addTargetHce(hce);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return e.toString();
+        }
     }
 
     /**
