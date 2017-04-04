@@ -70,3 +70,9 @@ CREATE TABLE oee (
   cell_name VARCHAR(10),
   add_date  DATE
 );
+CREATE TABLE hce (
+  id        INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
+  hce       INT,
+  cell_name VARCHAR(10),
+  add_date  DATE
+);
