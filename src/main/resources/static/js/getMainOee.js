@@ -3,7 +3,7 @@
  */
 var IshaftTitle=["Ishaft1","Ishaft2","Ishaft3","Ishaft4"];
 IshaftOEEValue=["00","00","00","00"];
-IshaftOEEHref = ["http://localhost:8080/OEEIshaftOneWeekView.html","http://localhost:8080/OEEIshaftTwoWeekView.html","http://localhost:8080/OEEIshaftThrWeekView.html","http://localhost:8080/OEEIshaftFouWeekView.html"];
+IshaftOEEHref = ["http://localhost:8080/OEESecView.html","http://localhost:8080/OEEIshaftTwoWeekView.html","http://localhost:8080/OEEIshaftThrWeekView.html","http://localhost:8080/OEEIshaftFouWeekView.html"];
 
 function judgeTime(time) {
     var timeStr="";
