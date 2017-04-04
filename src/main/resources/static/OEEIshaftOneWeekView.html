@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="application/javascript">
+
+    function transferDate(date) {
+        var yearTemp = date.getFullYear();
+        var monthTemp = date.getMonth()+1;
+        var dayTemp = date.getDate();
+        if(parseInt(monthTemp) < 10) {
+            monthTemp = "0" + monthTemp;
+        }
+
+        if(parseInt(dayTemp) < 10) {
+            dayTemp = "0" + dayTemp;
+        }
+        return yearTemp + "-" + monthTemp + "-" + dayTemp;
+    }
+    function formOnload()
+    {
+//按周日为一周的最后一天计算
+        var date = new Date();
+        var this_day = date.getDay(); //今天是这周的第几天
+        var step_s = -this_day+1; //上周日距离今天的天数（负数表示）
+        if (this_day == 0) {
+            step_s = -7; // 如果今天是周日
+        }
+        var step_m = 7 - this_day; // 周日距离今天的天数（负数表示）
+        var thisTime = date.getTime();
+        var Monday = transferDate(new Date(thisTime +  step_s * 24 * 3600* 1000));
+        var Tuesday= transferDate(new Date(thisTime +  (step_s+1) * 24 * 3600* 1000));
+        var Wednesday= transferDate(new Date(thisTime +  (step_s+2) * 24 * 3600* 1000));
+        var Thursday= transferDate(new Date(thisTime +  (step_s+3) * 24 * 3600* 1000));
+        var Friday= transferDate(new Date(thisTime +  (step_s+4) * 24 * 3600* 1000));
+        var Saturday= transferDate(new Date(thisTime +  (step_s+5) * 24 * 3600* 1000));
+        var Sunday = transferDate(new Date(thisTime +  step_m * 24 * 3600* 1000));
+        return [Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday];
+    }
+    var nice=formOnload();
+    console.log(nice);
+</script>
+</body>
+</html>

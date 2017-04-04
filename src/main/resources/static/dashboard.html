@@ -311,11 +311,32 @@
     <div class="main container">
           <div class="row ">
                 <div class="col-md-4  item1" >
-
                     <div class="innerItemOne  itemBackCol">
                         <div class="firstheader ">
                             <div class="header ">
-                                HCE
+                                <a href="http://localhost:8080/calendar.html">安全运行天数</a>
+                            </div>
+                        </div>
+                        <div class="content ">
+                            <div class="col-md-6  timeItem1 ">
+
+                                <div class="timeContent" id="safeDay" >
+                                    100
+                                </div>
+                            </div>
+                            <div class="col-md-6  timeItem2">
+                                <div class="iconContent " >
+                                    <div class="dateIcon">
+                                        <span class="glyphicon glyphicon-triangle-top"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="innerItemOne  itemBackCol">
+                        <div class="firstheader ">
+                            <div class="header ">
+                                <a href="http://localhost:8080/HCESecView.html">人员利用率</a>
                             </div>
                         </div>
                         <div class="content ">
@@ -337,36 +358,14 @@
                     <div class="innerItemOne  itemBackCol">
                         <div class="firstheader ">
                             <div class="header ">
-                                报废金额
+                                <a href="http://localhost:8080/scrapAmountSec.html">报废金额</a>
                             </div>
                         </div>
                         <div class="content ">
                             <div class="col-md-6  timeItem1 ">
 
                                 <div class="timeContent" id="scrapAmount" >
-                                    1024
-                                </div>
-                            </div>
-                            <div class="col-md-6  timeItem2">
-                                <div class="iconContent " >
-                                    <div class="dateIcon">
-                                        <span class="glyphicon glyphicon-triangle-top"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="innerItemOne  itemBackCol">
-                        <div class="firstheader ">
-                            <div class="header ">
-                                安全运行天数
-                            </div>
-                        </div>
-                        <div class="content ">
-                            <div class="col-md-6  timeItem1 ">
 
-                                <div class="timeContent" id="safeDay" >
-                                    100
                                 </div>
                             </div>
                             <div class="col-md-6  timeItem2">
@@ -429,13 +428,13 @@
                             </div>
                             <div class="col-md-3 innerFour ">
                                 <div class="row ftqHeadr ">
-                                    <div class="col-md-8 ftqTitle text-center" ><a href="" id="showIshaft">Ishaft1</a></div>
+                                    <div class="col-md-8 ftqTitle text-center" id="showIshaft"><a href="http://localhost:8080/OEEIshaftOneWeekView.html" >Ishaft1</a></div>
                                     <div class="col-md-4 ftqStatus ">
                                         <span class="glyphicon glyphicon-thumbs-up"></span>
                                     </div>
                                 </div>
                                 <div class="ftqNum ">
-                                    <div class="ftqNumCon text-center" id="showIshaftValue">94%</div>
+                                    <div class="ftqNumCon text-center" id="showIshaftValue"></div>
                                 </div>
                             </div>
                         </div>
@@ -443,7 +442,7 @@
                     <div class="innerItemThi  itemBackCol">
                         <div class="proHeader ">
                             <div class="header ">
-                                <a href="http://localhost:8080/IsahftOneUnit">产量信息</a>
+                                <a href="http://localhost:8080/IshaftOneUnit.html">产量信息</a>
                             </div>
                         </div>
                         <div class="proContent ">
@@ -466,7 +465,7 @@
                                     <td >980</td>
                                     <td >98%</td>
                                     <td ><span class="glyphicon glyphicon-thumbs-up"></span></td>
-                                    <td ><a href="">进入BEPS单元</a></td>
+                                    <td ><a href="http://localhost:8080/BEPSUnit.html">进入BEPS单元</a></td>
                                 </tr>
                                 <tr >
                                     <td><a href="">CEPS</a></td>
@@ -474,10 +473,10 @@
                                     <td>600</td>
                                     <td>60%</td>
                                     <td ><span class="glyphicon glyphicon-thumbs-up"></span></td>
-                                    <td><a href="">进入CEPS单元</a></td>
+                                    <td><a href="http://localhost:8080/CEPSUnit.html">进入CEPS单元</a></td>
                                 </tr>
                                 <tr id="IshaftTable">
-                                    <td><a href="http://localhost:8080/IshaftYieldWeek.html ">I-Shaft1</a></td>
+                                    <td><a href="http://localhost:8080/IshaftYieldWeek.html">Ishaft1</a></td>
                                     <td>1000</td>
                                     <td>720</td>
                                     <td>72%</td>
@@ -499,8 +498,9 @@
 <script src="js/safeShow.js"></script>
 <script src="js/scrapAmount.js"></script>
 <script src="js/showTime.js"></script>
-<script src="js/ishaftDrop.js"></script>
+<!--<script src="js/ishaftDrop.js"></script>-->
 <script src="js/getMainHce.js"></script>
-<!--<script src="js/getMainOee.js"></script>-->
+<script src="js/getMainOee.js"></script>
+<script src="js/getMainIshaftTable.js"></script>
 </body>
 </html>

@@ -24,6 +24,20 @@ console.log(jsonString);
 function getNowData() {
     $.ajax({
         type: "POST",
+        url: "http://localhost:8080/safetyDate/addDate",
+        data: JSON.stringify(jsonString),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            console.log(JSON.stringify(data));
+            console.log("添加当前日期为安全日期操作成功");
+        },
+        failure: function (errMsg) {
+            console.log(errMsg);
+        }
+    });
+    $.ajax({
+        type: "POST",
         url: "http://localhost:8080/safetyDate/getDates",
         data: JSON.stringify(jsonString),
         contentType: "application/json; charset=utf-8",
@@ -37,7 +51,40 @@ function getNowData() {
             console.log(errMsg);
         }
     });
+    // $.ajax({
+    //     type: "POST",
+    //     url: "http://localhost:8080/safetyDate/getDates",
+    //     data: JSON.stringify(jsonString),
+    //     contentType: "application/json; charset=utf-8",
+    //     dataType: "json",
+    //     success: function (data) {
+    //         console.log(JSON.stringify(data));
+    //         $("#safeDay").html(data.safe_dates);
+    //         console.log("获取安全日期操作成功");
+    //     },
+    //     failure: function (errMsg) {
+    //         console.log(errMsg);
+    //     }
+    // });
     console.log("公元"+Uyear+"年"+Umonth+"月"+Uday+"日");
 }
+function getSafeDay() {
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/safetyDate/getDates",
+        data: JSON.stringify(jsonString),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            console.log(JSON.stringify(data));
+            $("#safeDay").html(data.safe_dates);
+            console.log("获取安全日期操作成功");
+        },
+        failure: function (errMsg) {
+            console.log(errMsg);
+        }
+    });
+}
 getNowData();
+getSafeDay();
 setInterval(getNowData(),1000*60*60);

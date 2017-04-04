@@ -9,6 +9,8 @@ function safety_date(year, month, day, is_safe, safety_date, log) {
     this.safety_date = safety_date;
     this.log = log;
 }
+
+
 Udate=new Date();
 Uyear=Udate.getFullYear();
 Umonth=Udate.getMonth()+1;

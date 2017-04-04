@@ -4,20 +4,24 @@
     background-color: white;
     padding-bottom: 15px;
 }
+/*.wrap{*/
+    /*width: 1200px;*/
+    /*margin:0 auto;*/
+/*}*/
 .wrap{
-    width: 1200px;
+    width: 100%;
     margin:0 auto;
 }
 .logo{
-    height: 80px;
+    height: 6.67%;
 }
 .logo_left{
-    width: 264px;
+    width: 22%;
     float: left;
 }
 .logo_left img{
-    width: 250px;
-    height: 74px;
+    width: 20.8%;
+    height: 10.8%;
     float: left;
 }
 .logo_right{
@@ -50,7 +54,7 @@ section.container{
 /*}*/
 
 .entry-button{
-    padding-bottom: 70px;
+    padding-bottom: 10%;
 }
 
 .system-name h1,p{

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
     <link rel="stylesheet" href="css/mainboard.css" type="text/css">
     <link rel="stylesheet" href="css/dropdown.css" type="text/css">
+    <link rel="stylesheet" href="css/height.css" type="text/css">
     <style type="text/css">
         body {
             background-color: #F7F7F7;
@@ -21,9 +22,7 @@
             padding: 0 0 0 2%;
             box-sizing: border-box;
         }
-        .main{
-            height: 680px;
-        }
+
         .main .item {
             margin: 0 2% 2% 0;
             position: relative;
@@ -36,7 +35,7 @@
             width: 93.75%;
         }
         .row{
-            height: 45%;
+            height: 100%;
         }
         .border-line{
             border: 1px solid #293c55;
@@ -56,18 +55,15 @@
         .table>tbody>tr>td{
             font-size:1.2em;
         }
-        .table>tbody>tr:nth-child(1)>td{
+        .table>tbody>tr:nth-child(2n+1)>td{
             color: #000000;
             background-color: #D2DEEF;
         }
-        .table>tbody>tr:nth-child(2)>td{
+        .table>tbody>tr:nth-child(2n)>td{
             color: #000000;
             background-color: #EAEFF7;
         }
-        .table>tbody>tr:nth-child(3)>td{
-            color: #000000;
-            background-color: #D2DEEF;
-        }
+
     </style></head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
@@ -85,7 +81,7 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <p class="navbar-text">产量信息展示I-shaft周视图</p>
+            <p class="navbar-text">产量信息展示I-shaft1年视图</p>
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VSS-Ishaft <span class="caret"></span></a>
@@ -171,94 +167,94 @@
 </nav>
 <div class="main">
     <div class="row">
-        <div class="col-md-8 item border-line " id="IshaftOneYieldYearBar"></div>
-        <div class="col-md-3 item border-line " id="IshaftOneYieldYearPie"></div>
+        <div class="col-md-8 item" id="IshaftOneYieldYearBar"></div>
+        <div class="col-md-3 item " id="IshaftOneYieldYearPie"></div>
     </div>
-    <div class="row">
-        <div class="col-md-12 item item2 border-line">
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <td>型号/日期</td>
-                    <td>一月</td>
-                    <td>二月</td>
-                    <td>三月</td>
-                    <td>四月</td>
-                    <td>五月</td>
-                    <td>六月</td>
-                    <td>七月</td>
-                    <td>八月</td>
-                    <td>九月</td>
-                    <td>十月</td>
-                    <td>十一月</td>
-                    <td>十二月</td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>XXXX</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>XXXX</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>XXXX</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>XXXX</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <!--<div class="row">-->
+        <!--<div class="col-md-12 item item2 border-line">-->
+            <!--<table class="table table-bordered table-hover">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<td>型号/日期</td>-->
+                    <!--<td>一月</td>-->
+                    <!--<td>二月</td>-->
+                    <!--<td>三月</td>-->
+                    <!--<td>四月</td>-->
+                    <!--<td>五月</td>-->
+                    <!--<td>六月</td>-->
+                    <!--<td>七月</td>-->
+                    <!--<td>八月</td>-->
+                    <!--<td>九月</td>-->
+                    <!--<td>十月</td>-->
+                    <!--<td>十一月</td>-->
+                    <!--<td>十二月</td>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr>-->
+                    <!--<td>XXXX</td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>XXXX</td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>XXXX</td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>XXXX</td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                    <!--<td></td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
+    <!--</div>-->
 </div>
 
 
@@ -267,100 +263,442 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/echarts/dist/echarts.min.js"></script>
 <script src="js/defineGlobal.js"></script>
-<script src="htmlTest/showScrapAmount.js"></script>
 <script type="application/javascript">
+    //判断日期格式是否为xx
+    function judgeMyTime(time) {
+        var timeStr="";
+        if (time<10){
+            timeStr="0"+time.toString()
+        }
+        else {
+            timeStr=time.toString()
+        }
+        return timeStr;
+    }
+    //构造传输时间对象
+    function endTime(endTime) {
+        this.end_time = endTime;
+    }
+    //传入时间
+    //    var getIshaftOneWeekJson= new endTime(Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday));
+    var getIshaftOneMonthJson =new endTime("2017-04-06");
     // 基于准备好的dom，初始化echarts实例
-    var myBarChart = echarts.init(document.getElementById('IshaftOneYieldYearBar'));
+    var myChart = echarts.init(document.getElementById('IshaftOneYieldYearBar'));
     var myPieChart = echarts.init(document.getElementById('IshaftOneYieldYearPie'));
-    barOption = {
-        title: {
-            text: '产量信息展示年视图'
-//            subtext: '数据来自网络'
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
-        },
-        legend: {
-            data: ['F102', 'R103','H50']
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: {
-            name:"产量（件）",
-            type: 'value',
-            boundaryGap: [0, 0.01]
-        },
-        yAxis: {
-            name:"月份",
-            type: 'category',
-            data: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月']
-        },
-        series: [
-            {
-                name: 'F102',
-                type: 'bar',
-                data: [1400, 1600,1500, 1700, 1900, 1400,1320,1290,1700,1500,1100,1560]
-            },
-            {
-                name: 'R103',
-                type: 'bar',
-                data: [1500, 1400,1260, 1790, 1300, 1590,1120,1340,1600,1700,1400,1260]
-            }
-            ,
-            {
-                name: 'H50',
-                type: 'bar',
-                data: [1300, 1100,1700, 1200, 1400, 1500,1620,1490,1800,1600,1500,1360]
-            }
-        ]
-    };
+    //    var myDataOne= [];
+    //    var worker = new Worker('http://localhost:8080/IshaftYieldWeekFirstWork.js');
 
-    pieOption= {
-        title : {
-            text: '年产量信息',
-//            subtext: '纯属虚构',
-            x:'right'
-        },
-        tooltip : {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left',
-            data: ['F102','R103','H50']
-        },
-        series : [
-            {
-                name: '访问来源',
-                type: 'pie',
-                radius : '55%',
-                center: ['50%', '60%'],
-                data:[
-                    {value:335, name:'F102'},
-                    {value:310, name:'R103'},
-                    {value:234, name:'H50'}
-                ],
-                itemStyle: {
-                    emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
+    function getIshaftOneMonthData() {
+        var proIDMsg=[];
+        var proNameMsg=[];
+        var myData=[];
+        var myAjaxData=[];
+        var sum=[];
+        var myPieData=[];
+        //声明一个30行366列的零二维数组
+        for(var i=0;i<30;i++){    //一维长度为i,i为变量，可以根据实际情况改变
+            myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
+            sum[i]=0;
+            for(var myJ=0;myJ<366;myJ++){
+                myData[i][myJ]=0;
             }
-        ]
-    };
-    // 使用刚指定的配置项和数据显示图表。
-    myBarChart.setOption(barOption);
-    myPieChart.setOption(pieOption);
+        }
+//        var myXDate=[];
+//        for(var jX=0;jX<30;jX++){    //一维长度为i,i为变量，可以根据实际情况改变
+//            myXDate[jX]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
+//        }
+        var YearDate=[];
+        for(var yIndex=0;yIndex<12;yIndex++){
+            var d=new Date(Uyear,yIndex,0);
+            for(var Mindex=1;Mindex<d.getDate();Mindex++){
+                YearDate.push(Uyear+"-"+judgeMyTime(yIndex+1)+"-"+judgeMyTime(Mindex))
+            }
+        }
+
+        console.log("当前年份天数"+YearDate);
+
+        $.get("http://localhost:8080/product-model", function (data) {
+            $.each(data, function (i, model) {
+                if(model.cellName=="Ishaft1"){
+//                    ProMsg.push({"modelId":model.modelId,"modelName":model.modelName})
+                    proIDMsg.push(model.modelId);
+                    proNameMsg.push(model.modelName);
+                }
+            });
+        });
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/output-info/getByYear",
+            data: JSON.stringify(getIshaftOneMonthJson),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                myAjaxData = JSON.stringify(data);
+                for(var j=0,len=proIDMsg.length;j<len;j++){
+//                    for(var myIndex = 0,myLen = myAjaxData.length;myIndex<myLen;myIndex++){
+//                        if(myAjaxData[myIndex].)
+//                        myData[j].push({"add_date":myAjaxData[myIndex].add_date,"output_count":myAjaxData[myIndex].output_count});
+//                    }
+                    $.each(data,function (index,model) {
+                        if(data[index].model==proIDMsg[j]){
+                            for(var MDIndex=0;MDIndex<366;MDIndex++){
+                                if (data[index].add_date==YearDate[MDIndex]){
+                                    myData[j][MDIndex]=data[index].output_count;
+                                    sum[j]+=data[index].output_count;
+                                }
+
+                            }
+//                            myXDate[j].push(data[index].add_date);
+//                            myData[j].push(data[index].output_count);
+//                            myData[j].push(data[index].output_count);
+                        }
+
+                    })
+                }
+//                for(var jD=0,jLen = myData[iD].length;jD<jLen;jD++){
+//                }
+//                for(var iD=0;iD<30;iD++){
+//
+//                }
+                for(var sumIndex=0;sumIndex<proNameMsg.length;sumIndex++){
+                    myPieData[sumIndex]={value:sum[sumIndex],name:proNameMsg[sumIndex]};
+                }
+                var myTitle= {
+                    text: 'Ishaft1产量信息展示（年视图）',
+                    left:'40%',
+                    textStyle:{
+                        fontSize:24
+                    }
+                };
+
+
+                var myYaxis= [{
+                    type:'value',
+                    name:'产品数（件）',
+                    position:'left',
+                    nameTextStyle:{
+                        fontStyle:'normal',
+                        fontWeight:'bold',
+                        fontSize:'20'
+                    },
+                    axisLabel:{
+                        textStyle:{
+                            fontSize:20
+                        }
+                    }
+                }];
+                var myGrid= {
+                    containLabel: true,
+                    left:'4%',
+                    right:'5%',
+                    bottom:'2%'
+                };
+                var myLengend = {
+                    data:[],
+                    align: 'right',
+                    right: '9%',
+                    top:'6%'
+                };
+                myLengend.data=proNameMsg;
+                var sData=[];
+                for(var pI in proNameMsg){
+                    sData[pI]={name:proNameMsg[pI],type:'line',data:myData[pI]};
+                }
+                console.log(sData);
+//                var mySeriesData =  [{
+//                    name: 'F102',
+//                    type: 'bar',
+//                    data: [20, 12, 31, 34, 31]
+//                }, {
+//                    name: 'R103',
+//                    type: 'bar',
+//                    data: [10, 20, 5, 9, 3]
+//                }, {
+//                    name: 'H50',
+//                    type: 'bar',
+//                    data: [1, 1, 2, 3, 1]
+//                }];
+
+                option = {
+                    title: myTitle,
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false,
+                                optionToContent: function (opt) {
+                                    var axisData = opt.xAxis[0].data;
+                                    var series = opt.series;
+                                    var table = '<table class="table" style="width:100%;text-align:center"><tbody><tr><td>时间/型号</td>';
+                                    for (var i = 0, l = series.length; i < l; i++){
+                                        table += '<td>' + series[i].name+ '</td>'
+
+                                    }
+                                    table += '</tr>';
+                                    for (var j = 0, len = axisData.length; j < len; j++) {
+                                        table += '<tr>'
+                                            + '<td>' + axisData[j] + '</td>';
+                                        for(var k=0,secLen = series.length;k<secLen;k++){
+                                            if(series[k].data[j]==undefined){
+                                                table +='<td>'+'</td>'
+                                            }
+                                            else {
+                                                table += '<td>' + series[k].data[j] + '</td>'
+                                            }
+
+                                        }
+                                        table +='</tr>';
+                                    }
+                                    table += '</tbody></table>';
+                                    return table;
+                                }
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    legend: myLengend,
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: [{
+                        type: 'category',
+                        data: YearDate
+                    }],
+                    yAxis: myYaxis,
+                    dataZoom: [
+                        {
+                            id: 'dataZoomX',
+                            type: 'slider',
+                            xAxisIndex: [0],
+                            filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
+                            start: 20,
+                            end: 50
+                        }],
+                    series: sData
+                };
+                pieOption= {
+                    title : {
+                        text: '产量信息展示当月',
+//            subtext: '纯属虚构',
+                        x:'right'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        left: 'left',
+                        data: proNameMsg
+                    },
+                    series : [
+                        {
+                            name: 'Ishaft1',
+                            type: 'pie',
+                            radius : '55%',
+                            center: ['50%', '60%'],
+                            data:myPieData,
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+                myPieChart.setOption(pieOption);
+
+                console.log(proNameMsg);
+                console.log(proIDMsg);
+                console.log(myData);
+                console.log(myAjaxData);
+            },
+            failure: function (errMsg) {
+                console.log(errMsg);
+            }
+        });
+    }
+    getIshaftOneMonthData();
+
+
 </script>
+<!--<script type="application/javascript">-->
+    <!--// 基于准备好的dom，初始化echarts实例-->
+    <!--var myBarChart = echarts.init(document.getElementById('IshaftOneYieldYearBar'));-->
+    <!--var myPieChart = echarts.init(document.getElementById('IshaftOneYieldYearPie'));-->
+    <!--var myTitle= {-->
+        <!--text: 'Ishaft1产量信息展示（年视图）',-->
+        <!--left:'40%',-->
+        <!--textStyle:{-->
+            <!--fontSize:24-->
+        <!--}-->
+    <!--};-->
+
+
+    <!--var myYaxis= [{-->
+        <!--type:'value',-->
+        <!--name:'产品数（件）',-->
+        <!--position:'left',-->
+        <!--nameTextStyle:{-->
+            <!--fontStyle:'normal',-->
+            <!--fontWeight:'bold',-->
+            <!--fontSize:'20'-->
+        <!--},-->
+        <!--axisLabel:{-->
+            <!--textStyle:{-->
+                <!--fontSize:20-->
+            <!--}-->
+        <!--}-->
+    <!--}];-->
+    <!--var myGrid= {-->
+        <!--containLabel: true,-->
+        <!--left:'4%',-->
+        <!--right:'5%',-->
+        <!--bottom:'2%'-->
+    <!--};-->
+    <!--var myLengend = {-->
+        <!--data:['F102', 'R103', 'H50'],-->
+        <!--align: 'right',-->
+        <!--right: '9%',-->
+        <!--top:'6%'-->
+    <!--};-->
+    <!--var xData = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];-->
+    <!--var seriesData = [{-->
+        <!--name: 'F102',-->
+        <!--type: 'line',-->
+        <!--data: [1,2,3,4,5,11,12,8,9,10,11,12]-->
+    <!--}, {-->
+        <!--name: 'R103',-->
+        <!--type: 'line',-->
+        <!--data: [3,4,5,6,7,8,9,10,11,12,13,14]-->
+    <!--}, {-->
+        <!--name: 'H50',-->
+        <!--type: 'line',-->
+        <!--data: [5,6,7,8,9,10,11,12,13,14,15,16]-->
+    <!--}];-->
+
+
+    <!--var sum =[{name:'',value:0},{name:'',value:0},{name:'',value:0},{name:'',value:0},{name:'',value:0},{name:'',value:0}];-->
+    <!--for (var count = 0,aLen=seriesData.length;count<aLen;count++){-->
+        <!--sum[count].name=seriesData[count].name;-->
+        <!--sum[count].value=0;-->
+        <!--for (var inCou=0,bLen=seriesData[count].data.length;inCou<bLen;inCou++){-->
+            <!--sum[count].value+=seriesData[count].data[inCou];-->
+        <!--}-->
+    <!--}-->
+
+    <!--var myPieLegend= {-->
+        <!--orient: 'vertical',-->
+        <!--left: 'left',-->
+        <!--data: ['F102','R103','H50']-->
+    <!--};-->
+    <!--var myPieData=[-->
+        <!--{value:sum[0].value, name:'F102'},-->
+        <!--{value:sum[1].value, name:'R103'},-->
+        <!--{value:sum[2].value, name:'H50'}-->
+    <!--];-->
+    <!--console.log(sum);-->
+    <!--barOption = {-->
+        <!--title: myTitle,-->
+        <!--tooltip: {-->
+            <!--trigger: 'axis',-->
+            <!--axisPointer: { // 坐标轴指示器，坐标轴触发有效-->
+                <!--type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'-->
+            <!--}-->
+        <!--},-->
+        <!--toolbox: {-->
+            <!--feature: {-->
+                <!--dataView: {-->
+                    <!--show: true,-->
+                    <!--readOnly: false,-->
+                    <!--optionToContent: function (opt) {-->
+                        <!--var axisData = opt.xAxis[0].data;-->
+                        <!--var series = opt.series;-->
+                        <!--var table = '<table class="table" style="width:100%;text-align:center"><tbody><tr>'-->
+                            <!--+ '<td>时间</td>';-->
+                        <!--for(var j = 0,seLen= series.length;j<seLen;j++){-->
+                            <!--table += '<td>' + series[j].name + '</td>';-->
+                        <!--}-->
+                        <!--table +='</tr>';-->
+                        <!--for (var i = 0, l = axisData.length; i < l; i++) {-->
+                            <!--table += '<tr>'-->
+                                <!--+ '<td>' + axisData[i] + '</td>';-->
+                            <!--for(var k=0,tLen=series.length;k<tLen;k++){-->
+                                <!--table +='<td>' + series[k].data[i] + '</td>';-->
+
+                            <!--}-->
+                            <!--table +='</tr>';-->
+                        <!--}-->
+                        <!--table += '</tbody></table>';-->
+                        <!--return table;-->
+                    <!--}-->
+                <!--},-->
+                <!--saveAsImage: {-->
+                    <!--show: true-->
+                <!--}-->
+            <!--}-->
+        <!--},-->
+        <!--legend: myLengend,-->
+        <!--grid: {-->
+            <!--left: '3%',-->
+            <!--right: '4%',-->
+            <!--bottom: '3%',-->
+            <!--containLabel: true-->
+        <!--},-->
+        <!--xAxis: [{-->
+            <!--type: 'category',-->
+            <!--data: xData-->
+        <!--}],-->
+        <!--yAxis: myYaxis,-->
+        <!--series: seriesData-->
+    <!--};-->
+
+    <!--pieOption= {-->
+        <!--title : {-->
+            <!--text: '年产量信息',-->
+<!--//            subtext: '纯属虚构',-->
+            <!--x:'right'-->
+        <!--},-->
+        <!--tooltip : {-->
+            <!--trigger: 'item',-->
+            <!--formatter: "{a} <br/>{b} : {c} ({d}%)"-->
+        <!--},-->
+        <!--legend:myPieLegend,-->
+        <!--series : [-->
+            <!--{-->
+                <!--name: '访问来源',-->
+                <!--type: 'pie',-->
+                <!--radius : '55%',-->
+                <!--center: ['50%', '60%'],-->
+                <!--data:myPieData,-->
+                <!--itemStyle: {-->
+                    <!--emphasis: {-->
+                        <!--shadowBlur: 10,-->
+                        <!--shadowOffsetX: 0,-->
+                        <!--shadowColor: 'rgba(0, 0, 0, 0.5)'-->
+                    <!--}-->
+                <!--}-->
+            <!--}-->
+        <!--]-->
+    <!--};-->
+    <!--// 使用刚指定的配置项和数据显示图表。-->
+    <!--myBarChart.setOption(barOption);-->
+    <!--myPieChart.setOption(pieOption);-->
+<!--</script>-->
 </body>
 </html>

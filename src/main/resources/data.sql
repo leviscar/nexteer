@@ -51,17 +51,92 @@ VALUES (41, N'38028838', N'ishaft1测试型号', N'Ishaft1', 0.16)
 SET IDENTITY_INSERT [dbo].[product_model] OFF
 
 SET IDENTITY_INSERT [dbo].[ishaft1_output_info] ON
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1012, CAST(N'2017-03-11' AS Date), N'38028838', N'ishaft1测试型号', 68)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1013, CAST(N'2017-03-11' AS Date), N'38028807', N'R103加长杆总成', 78)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1014, CAST(N'2017-03-11' AS Date), N'38028798', N'R103转向下轴总成', 88)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1015, CAST(N'2017-03-12' AS Date), N'38028838', N'ishaft1测试型号', 58)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1016, CAST(N'2017-03-12' AS Date), N'38028807', N'R103加长杆总成', 68)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1017, CAST(N'2017-03-12' AS Date), N'38028798', N'R103转向下轴总成', 78)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1018, CAST(N'2017-03-13' AS Date), N'38028838', N'ishaft1测试型号', 110)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1019, CAST(N'2017-03-13' AS Date), N'38028807', N'R103加长杆总成', 68)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1020, CAST(N'2017-03-13' AS Date), N'38028798', N'R103转向下轴总成', 66)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1021, CAST(N'2017-03-14' AS Date), N'38028838', N'ishaft1测试型号', 120)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1023, CAST(N'2017-03-14' AS Date), N'38028807', N'R103加长杆总成', 68)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1024, CAST(N'2017-03-14' AS Date), N'38028798', N'R103转向下轴总成', 134)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1025, CAST(N'2017-03-15' AS Date), N'38028838', N'ishaft1测试型号', 99)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1026, CAST(N'2017-03-15' AS Date), N'38028807', N'R103加长杆总成', 100)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1027, CAST(N'2017-03-15' AS Date), N'38028798', N'R103转向下轴总成', 68)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1028, CAST(N'2017-03-16' AS Date), N'38028838', N'ishaft1测试型号', 100)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1029, CAST(N'2017-03-16' AS Date), N'38028807', N'R103加长杆总成', 81)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1030, CAST(N'2017-03-16' AS Date), N'38028798', N'R103转向下轴总成', 82)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1031, CAST(N'2017-03-17' AS Date), N'38028838', N'ishaft1测试型号', 85)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1032, CAST(N'2017-03-17' AS Date), N'38028807', N'R103加长杆总成', 98)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1033, CAST(N'2017-03-17' AS Date), N'38028798', N'R103转向下轴总成', 156)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1034, CAST(N'2017-03-18' AS Date), N'38028838', N'ishaft1测试型号', 134)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1035, CAST(N'2017-03-18' AS Date), N'38028807', N'R103加长杆总成', 122)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1036, CAST(N'2017-03-18' AS Date), N'38028798', N'R103转向下轴总成', 113)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1037, CAST(N'2017-03-19' AS Date), N'38028838', N'ishaft1测试型号', 112)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1038, CAST(N'2017-03-19' AS Date), N'38028807', N'R103加长杆总成', 167)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1039, CAST(N'2017-03-19' AS Date), N'38028798', N'R103转向下轴总成', 160)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1040, CAST(N'2017-03-20' AS Date), N'38028838', N'ishaft1测试型号', 105)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1041, CAST(N'2017-03-20' AS Date), N'38028807', N'R103加长杆总成', 200)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1042, CAST(N'2017-03-20' AS Date), N'38028798', N'R103转向下轴总成', 134)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1043, CAST(N'2017-03-21' AS Date), N'38028838', N'ishaft1测试型号', 68)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1044, CAST(N'2017-03-21' AS Date), N'38028807', N'R103加长杆总成', 78)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1045, CAST(N'2017-03-21' AS Date), N'38028798', N'R103转向下轴总成', 88)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1046, CAST(N'2017-03-22' AS Date), N'38028838', N'ishaft1测试型号', 58)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1047, CAST(N'2017-03-22' AS Date), N'38028807', N'R103加长杆总成', 68)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1048, CAST(N'2017-03-22' AS Date), N'38028798', N'R103转向下轴总成', 78)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1049, CAST(N'2017-03-23' AS Date), N'38028838', N'ishaft1测试型号', 110)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1050, CAST(N'2017-03-23' AS Date), N'38028807', N'R103加长杆总成', 68)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1051, CAST(N'2017-03-23' AS Date), N'38028798', N'R103转向下轴总成', 66)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1052, CAST(N'2017-03-24' AS Date), N'38028838', N'ishaft1测试型号', 120)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1053, CAST(N'2017-03-24' AS Date), N'38028807', N'R103加长杆总成', 68)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1054, CAST(N'2017-03-24' AS Date), N'38028798', N'R103转向下轴总成', 134)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1055, CAST(N'2017-03-25' AS Date), N'38028838', N'ishaft1测试型号', 99)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1056, CAST(N'2017-03-25' AS Date), N'38028807', N'R103加长杆总成', 100)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1057, CAST(N'2017-03-25' AS Date), N'38028798', N'R103转向下轴总成', 68)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1058, CAST(N'2017-03-26' AS Date), N'38028838', N'ishaft1测试型号', 100)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1059, CAST(N'2017-03-26' AS Date), N'38028807', N'R103加长杆总成', 81)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1060, CAST(N'2017-03-26' AS Date), N'38028798', N'R103转向下轴总成', 82)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1061, CAST(N'2017-03-27' AS Date), N'38028838', N'ishaft1测试型号', 85)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1062, CAST(N'2017-03-27' AS Date), N'38028807', N'R103加长杆总成', 98)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1063, CAST(N'2017-03-27' AS Date), N'38028798', N'R103转向下轴总成', 156)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1064, CAST(N'2017-03-28' AS Date), N'38028838', N'ishaft1测试型号', 134)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1065, CAST(N'2017-03-28' AS Date), N'38028807', N'R103加长杆总成', 122)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1066, CAST(N'2017-03-28' AS Date), N'38028798', N'R103转向下轴总成', 113)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1067, CAST(N'2017-03-29' AS Date), N'38028838', N'ishaft1测试型号', 112)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1068, CAST(N'2017-03-29' AS Date), N'38028807', N'R103加长杆总成', 167)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1069, CAST(N'2017-03-29' AS Date), N'38028798', N'R103转向下轴总成', 160)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1070, CAST(N'2017-03-30' AS Date), N'38028838', N'ishaft1测试型号', 105)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1071, CAST(N'2017-03-30' AS Date), N'38028807', N'R103加长杆总成', 200)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1072, CAST(N'2017-03-30' AS Date), N'38028798', N'R103转向下轴总成', 134)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1073, CAST(N'2017-03-31' AS Date), N'38028838', N'ishaft1测试型号', 100)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1074, CAST(N'2017-03-31' AS Date), N'38028807', N'R103加长杆总成', 81)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1075, CAST(N'2017-03-31' AS Date), N'38028798', N'R103转向下轴总成', 82)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1076, CAST(N'2017-04-01' AS Date), N'38028838', N'ishaft1测试型号', 85)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1077, CAST(N'2017-04-01' AS Date), N'38028807', N'R103加长杆总成', 98)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1078, CAST(N'2017-04-01' AS Date), N'38028798', N'R103转向下轴总成', 156)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1079, CAST(N'2017-04-02' AS Date), N'38028838', N'ishaft1测试型号', 134)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1080, CAST(N'2017-04-02' AS Date), N'38028807', N'R103加长杆总成', 122)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1081, CAST(N'2017-04-02' AS Date), N'38028798', N'R103转向下轴总成', 113)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1082, CAST(N'2017-04-03' AS Date), N'38028838', N'ishaft1测试型号', 112)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1083, CAST(N'2017-04-03' AS Date), N'38028807', N'R103加长杆总成', 167)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1084, CAST(N'2017-04-03' AS Date), N'38028798', N'R103转向下轴总成', 160)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1085, CAST(N'2017-04-04' AS Date), N'38028838', N'ishaft1测试型号', 105)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1086, CAST(N'2017-04-04' AS Date), N'38028807', N'R103加长杆总成', 200)
+INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1087, CAST(N'2017-04-04' AS Date), N'38028798', N'R103转向下轴总成', 134)
 
-INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1002, CAST(N'2017-03-01' AS Date), N'38028838', N'ishaft1测试型号', 68)
-INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1003, CAST(N'2017-03-02' AS Date), N'38028838', N'ishaft1测试型号', 58)
-INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1004, CAST(N'2017-03-03' AS Date), N'38028838', N'ishaft1测试型号', 110)
-INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1005, CAST(N'2017-03-04' AS Date), N'38028838', N'ishaft1测试型号', 120)
-INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1006, CAST(N'2017-03-05' AS Date), N'38028838', N'ishaft1测试型号', 99)
-INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1007, CAST(N'2017-03-06' AS Date), N'38028838', N'ishaft1测试型号', 100)
-INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1008, CAST(N'2017-03-07' AS Date), N'38028838', N'ishaft1测试型号', 85)
-INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1009, CAST(N'2017-03-08' AS Date), N'38028838', N'ishaft1测试型号', 76)
-INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1010, CAST(N'2017-03-09' AS Date), N'38028838', N'ishaft1测试型号', 66)
-INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1011, CAST(N'2017-03-10' AS Date), N'38028838', N'ishaft1测试型号', 105)
+-- INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1002, CAST(N'2017-03-01' AS Date), N'38028838', N'ishaft1测试型号', 68)
+-- INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1003, CAST(N'2017-03-02' AS Date), N'38028838', N'ishaft1测试型号', 58)
+-- INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1004, CAST(N'2017-03-03' AS Date), N'38028838', N'ishaft1测试型号', 110)
+-- INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1005, CAST(N'2017-03-04' AS Date), N'38028838', N'ishaft1测试型号', 120)
+-- INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1006, CAST(N'2017-03-05' AS Date), N'38028838', N'ishaft1测试型号', 99)
+-- INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1007, CAST(N'2017-03-06' AS Date), N'38028838', N'ishaft1测试型号', 100)
+-- INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1008, CAST(N'2017-03-07' AS Date), N'38028838', N'ishaft1测试型号', 85)
+-- INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1009, CAST(N'2017-03-08' AS Date), N'38028838', N'ishaft1测试型号', 76)
+-- INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1010, CAST(N'2017-03-09' AS Date), N'38028838', N'ishaft1测试型号', 66)
+-- INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1011, CAST(N'2017-03-10' AS Date), N'38028838', N'ishaft1测试型号', 105)
 SET IDENTITY_INSERT [dbo].[ishaft1_output_info] OFF
 SET IDENTITY_INSERT [dbo].[oee] ON
 
@@ -445,95 +520,4 @@ SET IDENTITY_INSERT [dbo].[oee] OFF
 --   ('2016', '12', '28', 35, 1, 'Today is running safe!'),
 --   ('2016', '12', '29', 36, 1, 'Today is running safe!'),
 --   ('2016', '12', '30', 37, 1, 'Today is running safe!'),
---   ('2016', '12', '31', 38, 1, 'Today is running safe!'),
---   ('2017', '01', '01', 39, 1, 'Today is running safe!'),
---   ('2017', '01', '02', 40, 1, 'Today is running safe!'),
---   ('2017', '01', '03', 41, 1, 'Today is running safe!'),
---   ('2017', '01', '04', 42, 1, 'Today is running safe!'),
---   ('2017', '01', '05', 43, 1, 'Today is running safe!'),
---   ('2017', '01', '06', 44, 1, 'Today is running safe!'),
---   ('2017', '01', '07', 45, 1, 'Today is running safe!'),
---   ('2017', '01', '08', 46, 1, 'Today is running safe!'),
---   ('2017', '01', '09', 47, 1, 'Today is running safe!'),
---   ('2017', '01', '10', 48, 1, 'Today is running safe!'),
---   ('2017', '01', '11', 49, 1, 'Today is running safe!'),
---   ('2017', '01', '12', 50, 1, 'Today is running safe!'),
---   ('2017', '01', '13', 51, 1, 'Today is running safe!'),
---   ('2017', '01', '14', 52, 1, 'Today is running safe!'),
---   ('2017', '01', '15', 53, 1, 'Today is running safe!'),
---   ('2017', '01', '16', 54, 1, 'Today is running safe!'),
---   ('2017', '01', '17', 55, 1, 'Today is running safe!'),
---   ('2017', '01', '18', 56, 1, 'Today is running safe!'),
---   ('2017', '01', '19', 57, 1, 'Today is running safe!'),
---   ('2017', '01', '20', 58, 1, 'Today is running safe!'),
---   ('2017', '01', '21', 59, 1, 'Today is running safe!'),
---   ('2017', '01', '22', 60, 1, 'Today is running safe!'),
---   ('2017', '01', '23', 61, 1, 'Today is running safe!'),
---   ('2017', '01', '24', 62, 1, 'Today is running safe!'),
---   ('2017', '01', '25', 63, 1, 'Today is running safe!'),
---   ('2017', '01', '26', 64, 1, 'Today is running safe!'),
---   ('2017', '01', '27', 65, 1, 'Today is running safe!'),
---   ('2017', '01', '28', 66, 1, 'Today is running safe!'),
---   ('2017', '01', '29', 67, 1, 'Today is running safe!'),
---   ('2017', '01', '30', 68, 1, 'Today is running safe!'),
---   ('2017', '01', '31', 69, 1, 'Today is running safe!'),
---   ('2017', '02', '01', 70, 1, 'Today is running safe!'),
---   ('2017', '02', '02', 71, 1, 'Today is running safe!'),
---   ('2017', '02', '03', 72, 1, 'Today is running safe!'),
---   ('2017', '02', '04', 73, 1, 'Today is running safe!'),
---   ('2017', '02', '05', 74, 1, 'Today is running safe!'),
---   ('2017', '02', '06', 75, 1, 'Today is running safe!'),
---   ('2017', '02', '07', 76, 1, 'Today is running safe!'),
---   ('2017', '02', '08', 77, 1, 'Today is running safe!'),
---   ('2017', '02', '09', 78, 1, 'Today is running safe!'),
---   ('2017', '02', '10', 79, 1, 'Today is running safe!'),
---   ('2017', '02', '11', 80, 1, 'Today is running safe!'),
---   ('2017', '02', '12', 81, 1, 'Today is running safe!'),
---   ('2017', '02', '13', 82, 1, 'Today is running safe!'),
---   ('2017', '02', '14', 83, 1, 'Today is running safe!'),
---   ('2017', '02', '15', 84, 1, 'Today is running safe!'),
---   ('2017', '02', '16', 85, 1, 'Today is running safe!'),
---   ('2017', '02', '17', 86, 1, 'Today is running safe!'),
---   ('2017', '02', '18', 87, 1, 'Today is running safe!'),
---   ('2017', '02', '19', 88, 1, 'Today is running safe!'),
---   ('2017', '02', '20', 89, 1, 'Today is running safe!'),
---   ('2017', '02', '21', 90, 1, 'Today is running safe!'),
---   ('2017', '02', '22', 91, 1, 'Today is running safe!'),
---   ('2017', '02', '23', 92, 1, 'Today is running safe!'),
---   ('2017', '02', '24', 93, 1, 'Today is running safe!'),
---   ('2017', '02', '25', 94, 1, 'Today is running safe!'),
---   ('2017', '02', '26', 95, 1, 'Today is running safe!'),
---   ('2017', '02', '27', 96, 1, 'Today is running safe!'),
---   ('2017', '02', '28', 97, 1, 'Today is running safe!'),
---   ('2017', '02', '29', 98, 1, 'Today is running safe!'),
---   ('2017', '03', '01', 99, 1, 'Today is running safe!'),
---   ('2017', '03', '02', 100, 1, 'Today is running safe!'),
---   ('2017', '03', '03', 101, 1, 'Today is running safe!'),
---   ('2017', '03', '04', 102, 1, 'Today is running safe!'),
---   ('2017', '03', '05', 103, 1, 'Today is running safe!'),
---   ('2017', '03', '06', 104, 1, 'Today is running safe!'),
---   ('2017', '03', '07', 105, 1, 'Today is running safe!'),
---   ('2017', '03', '08', 106, 1, 'Today is running safe!'),
---   ('2017', '03', '09', 107, 1, 'Today is running safe!'),
---   ('2017', '03', '10', 108, 1, 'Today is running safe!'),
---   ('2017', '03', '11', 109, 1, 'Today is running safe!'),
---   ('2017', '03', '12', 110, 1, 'Today is running safe!'),
---   ('2017', '03', '13', 111, 1, 'Today is running safe!'),
---   ('2017', '03', '14', 112, 1, 'Today is running safe!'),
---   ('2017', '03', '15', 113, 1, 'Today is running safe!'),
---   ('2017', '03', '16', 114, 1, 'Today is running safe!'),
---   ('2017', '03', '17', 115, 1, 'Today is running safe!'),
---   ('2017', '03', '18', 116, 1, 'Today is running safe!'),
---   ('2017', '03', '19', 117, 1, 'Today is running safe!'),
---   ('2017', '03', '20', 118, 1, 'Today is running safe!'),
---   ('2017', '03', '21', 119, 1, 'Today is running safe!'),
---   ('2017', '03', '22', 120, 1, 'Today is running safe!'),
---   ('2017', '03', '23', 121, 1, 'Today is running safe!'),
---   ('2017', '03', '24', 122, 1, 'Today is running safe!'),
---   ('2017', '03', '25', 123, 1, 'Today is running safe!'),
---   ('2017', '03', '26', 124, 1, 'Today is running safe!'),
---   ('2017', '03', '27', 125, 1, 'Today is running safe!'),
---   ('2017', '03', '28', 126, 1, 'Today is running safe!'),
---   ('2017', '03', '29', 127, 1, 'Today is running safe!'),
---   ('2017', '03', '30', 128, 1, 'Today is running safe!')
-  ;
+--   ('2016', '12', '31', 38, 1, 'Today is running safe!');
