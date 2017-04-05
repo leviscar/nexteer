@@ -306,7 +306,7 @@ public class DashboardController {
         dashboardOutput.setTargetOutput(target);
 
         // 计算达成率
-        int reachRate = curNum / target * 100;
+        int reachRate = curNum * 100 / target;
         dashboardOutput.setReachRate(reachRate);
         return new Gson().toJson(dashboardOutput);
     }
