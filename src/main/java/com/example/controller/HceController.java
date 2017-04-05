@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.example.model.Oee;
-import com.example.repository.OeeRepo;
+import com.example.model.Hce;
+import com.example.repository.HceRepo;
 import com.example.util.Function;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,30 +19,30 @@ import java.sql.Date;
 import java.util.List;
 
 /**
- * Created by mrpan on 2017/3/29.
+ * Created by mrpan on 2017/4/4.
  */
 @RestController
-public class OeeController {
-    private OeeRepo oeeRepo;
+public class HceController {
+    private HceRepo hceRepo;
 
     @Autowired
-    public OeeController(OeeRepo oeeRepo) {
-        this.oeeRepo = oeeRepo;
+    public HceController(HceRepo hceRepo) {
+        this.hceRepo = hceRepo;
     }
 
     /**
-     * 设置target oee
+     * 设置target hce
      *
      * @param json
      * @return
      */
-    @RequestMapping(value = "/oee/target")
-    public String addTargetOee(@RequestBody String json) {
+    @RequestMapping(value = "/hce/target")
+    public String addTargetHce(@RequestBody String json) {
         ObjectMapper mapper = Function.sqlDateMapper();
         try {
-            Oee oee = mapper.readValue(json, new TypeReference<Oee>() {
+            Hce hce = mapper.readValue(json, new TypeReference<Hce>() {
             });
-            return oeeRepo.addTargetOee(oee);
+            return hceRepo.addTargetHce(hce);
         } catch (IOException e) {
             e.printStackTrace();
             return e.toString();
@@ -50,68 +50,68 @@ public class OeeController {
     }
 
     /**
-     * 按周获取指定产线的oee
+     * 按周获取指定产线的hce
      *
      * @param json
      * @return
      */
-    @RequestMapping(value = "/oee/week")
-    public List<Oee> getWeeklyOeeByCellName(@RequestBody String json) {
+    @RequestMapping(value = "/hce/week")
+    public List<Hce> getWeeklyHceByCellName(@RequestBody String json) {
         JsonParser parser = new JsonParser();
         JsonElement element = parser.parse(json);
         JsonObject object = element.getAsJsonObject();
         java.util.Date curDate = new Gson().fromJson(object.get("curr_time"), java.util.Date.class);
         String cellName = new Gson().fromJson(object.get("cell_name"), String.class);
-        return oeeRepo.getWeeklyOeeByCellName(cellName, new Date(curDate.getTime()));
+        return hceRepo.getWeeklyHceByCellName(cellName, new Date(curDate.getTime()));
     }
 
     /**
-     * 按周期获取指定产线的oee
+     * 按周期获取指定产线的hce
      *
      * @param json
      * @return
      */
-    @RequestMapping(value = "/oee/period")
-    public List<Oee> getPeriodOeeByCellName(@RequestBody String json) {
+    @RequestMapping(value = "/hce/period")
+    public List<Hce> getPeriodHceByCellName(@RequestBody String json) {
         JsonParser parser = new JsonParser();
         JsonElement element = parser.parse(json);
         JsonObject object = element.getAsJsonObject();
         java.util.Date endDate = new Gson().fromJson(object.get("end_time"), java.util.Date.class);
         java.util.Date startDate = new Gson().fromJson(object.get("start_time"), java.util.Date.class);
         String cellName = new Gson().fromJson(object.get("cell_name"), String.class);
-        return oeeRepo.getPeriodOeeByCellName(cellName, new Date(startDate.getTime()), new Date(endDate.getTime()));
+        return hceRepo.getPeriodHceByCellName(cellName, new Date(startDate.getTime()), new Date(endDate.getTime()));
     }
 
     /**
-     * 按月获取指定产线的oee
+     * 按月获取指定产线的hce
      *
      * @param json
      * @return
      */
-    @RequestMapping(value = "/oee/month")
-    public List<Oee> getMonthlyOeeByCellName(@RequestBody String json) {
+    @RequestMapping(value = "/hce/month")
+    public List<Hce> getMonthlyHceByCellName(@RequestBody String json) {
         JsonParser parser = new JsonParser();
         JsonElement element = parser.parse(json);
         JsonObject object = element.getAsJsonObject();
         java.util.Date curDate = new Gson().fromJson(object.get("curr_time"), java.util.Date.class);
         String cellName = new Gson().fromJson(object.get("cell_name"), String.class);
-        return oeeRepo.getMonthlyOeeByCellName(cellName, new Date(curDate.getTime()));
+        return hceRepo.getMonthlyHceByCellName(cellName, new Date(curDate.getTime()));
     }
 
     /**
-     * 按年获取指定产线的oee
+     * 按年获取指定产线的hce
      *
      * @param json
      * @return
      */
-    @RequestMapping(value = "/oee/year")
-    public List<Oee> getYearlyOeeByCellName(@RequestBody String json) {
+    @RequestMapping(value = "/hce/year")
+    public List<Hce> getYearlyHceByCellName(@RequestBody String json) {
         JsonParser parser = new JsonParser();
         JsonElement element = parser.parse(json);
         JsonObject object = element.getAsJsonObject();
         java.util.Date curDate = new Gson().fromJson(object.get("curr_time"), java.util.Date.class);
         String cellName = new Gson().fromJson(object.get("cell_name"), String.class);
-        return oeeRepo.getYearlyOeeByCellName(cellName, new Date(curDate.getTime()));
+        return hceRepo.getYearlyHceByCellName(cellName, new Date(curDate.getTime()));
     }
 
 }

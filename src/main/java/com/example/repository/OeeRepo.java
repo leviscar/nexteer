@@ -30,9 +30,27 @@ public class OeeRepo {
      * @param oee
      * @return
      */
-    public String add(Oee oee) {
-        String sql = "INSERT INTO oee (oee, add_date, cell_name) VALUES(?, ?, ?)";
-        jdbc.update(sql, oee.getOee(), oee.getAddDate(), oee.getCellName());
+    public String addActualOee(Oee oee) {
+        jdbc.update("IF NOT EXISTS (SELECT * FROM oee WHERE add_date = ? AND cell_name = ?)" +
+                        "INSERT INTO oee (oee, add_date, cell_name) VALUES (?, ?, ?)" +
+                        "ELSE UPDATE oee SET oee = ? WHERE add_date = ? AND cell_name = ?"
+                , oee.getAddDate(), oee.getCellName(), oee.getOee(), oee.getAddDate(), oee.getCellName()
+                , oee.getOee(), oee.getAddDate(), oee.getCellName());
+        return new Gson().toJson(oee);
+    }
+
+    /**
+     * 添加目标oee记录
+     *
+     * @param oee
+     * @return
+     */
+    public String addTargetOee(Oee oee) {
+        jdbc.update("IF NOT EXISTS (SELECT * FROM oee WHERE add_date = ? AND cell_name = ?)" +
+                        "INSERT INTO oee (target_oee, add_date, cell_name) VALUES (?, ?, ?)" +
+                        "ELSE UPDATE oee SET target_oee = ? WHERE add_date = ? AND cell_name = ?"
+                , oee.getAddDate(), oee.getCellName(), oee.getTargetOee(), oee.getAddDate(), oee.getCellName()
+                , oee.getTargetOee(), oee.getAddDate(), oee.getCellName());
         return new Gson().toJson(oee);
     }
 
