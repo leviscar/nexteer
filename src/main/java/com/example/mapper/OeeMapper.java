@@ -16,6 +16,7 @@ public class OeeMapper implements RowMapper<Oee> {
         oee.setId(resultSet.getInt("id"));
         oee.setOee(resultSet.getInt("oee"));
         oee.setCellName(resultSet.getString("cell_name"));
+        oee.setTargetOee(resultSet.getInt("target_oee"));
         oee.setAddDate(resultSet.getDate("add_date"));
         return oee;
     }

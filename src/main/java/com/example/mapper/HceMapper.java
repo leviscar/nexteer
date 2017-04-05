@@ -16,6 +16,7 @@ public class HceMapper implements RowMapper<Hce> {
         hce.setId(resultSet.getInt("id"));
         hce.setHce(resultSet.getInt("hce"));
         hce.setAddDate(resultSet.getDate("add_date"));
+        hce.setTargetHce(resultSet.getInt("target_hce"));
         hce.setCellName(resultSet.getString("cell_name"));
         return hce;
     }
