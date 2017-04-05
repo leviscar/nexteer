@@ -84,7 +84,7 @@ var myGrid= {
     bottom:'2%'
 };
 var myLengend = {
-    data:['Ishaft1','Ishaft2','Ishaft3','Ishaft4','BEPS','CEPS'],
+    data:['hce','target'],
     align: 'right',
     right: '9%',
     top:'6%'
@@ -95,6 +95,7 @@ function showWeek() {
     var curr_time="2017-03-09";
     var showhceJson = new hceInput(curr_time,"ISHAFT1");
     var IshaftOnehceValueArr=[];
+    var IshaftOnehceTarArr=[];
     var IsTwohceValueArr=[];
     var IsThrhceValueArr=[];
     var IsForhceValueArr=[];
@@ -111,6 +112,7 @@ function showWeek() {
             $.each(data, function (i, model) {
                 hceDate[i]=data[i].addDate;
                 IshaftOnehceValueArr[i]=model.hce;
+                IshaftOnehceTarArr[i]=model.targetHce;
                 // IsTwohceValueArr[i]=model.ishaft2_value;
                 // IsThrhceValueArr[i]=model.ishaft3_value;
                 // IsForhceValueArr[i]=model.ishaft4_value;
@@ -168,8 +170,8 @@ function showWeek() {
                 series: [
 
                     {
-                        name: 'Ishaft1',
-                        type: 'bar',
+                        name: 'hce',
+                        type: 'line',
                         barMaxWidth:40,
                         label: {
                             normal: {
@@ -178,6 +180,18 @@ function showWeek() {
                             }
                         },
                         data: IshaftOnehceValueArr
+                    },
+                    {
+                        name: 'target',
+                        type: 'line',
+                        barMaxWidth:40,
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: IshaftOnehceTarArr
                     }
                     // ,
                     // {
@@ -253,10 +267,11 @@ showWeek();
 
 //按周显示
 $("#showWeek").bind("click",function () {
-    // var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-    var curr_time="2017-03-09";
+    var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
+    // var curr_time="2017-03-09";
     var showhceJson = new hceInput(curr_time,"ISHAFT1");
     var IshaftOnehceValueArr=[];
+    var IshaftOnehceTarArr=[];
     var IsTwohceValueArr=[];
     var IsThrhceValueArr=[];
     var IsForhceValueArr=[];
@@ -273,6 +288,7 @@ $("#showWeek").bind("click",function () {
             $.each(data, function (i, model) {
                 hceDate[i]=data[i].addDate;
                 IshaftOnehceValueArr[i]=model.hce;
+                IshaftOnehceTarArr[i]=model.targetHce;
                 // IsTwohceValueArr[i]=model.ishaft2_value;
                 // IsThrhceValueArr[i]=model.ishaft3_value;
                 // IsForhceValueArr[i]=model.ishaft4_value;
@@ -330,8 +346,8 @@ $("#showWeek").bind("click",function () {
                 series: [
 
                     {
-                        name: 'Ishaft1',
-                        type: 'bar',
+                        name: 'hce',
+                        type: 'line',
                         barMaxWidth:40,
                         label: {
                             normal: {
@@ -340,6 +356,18 @@ $("#showWeek").bind("click",function () {
                             }
                         },
                         data: IshaftOnehceValueArr
+                    },
+                    {
+                        name: 'target',
+                        type: 'line',
+                        barMaxWidth:40,
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: IshaftOnehceTarArr
                     }
                     // ,
                     // {
@@ -413,10 +441,11 @@ $("#showWeek").bind("click",function () {
 //按月显示
 $("#showMonth").bind("click",function (){
     {
-        // var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-        var curr_time="2017-03-13";
+        var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
+        // var curr_time="2017-03-13";
         var showhceJson = new hceInput(curr_time,"ISHAFT1");
         var IshaftOnehceValueArr=[];
+        var IshaftOnehceTarArr=[];
         var IsTwohceValueArr=[];
         var IsThrhceValueArr=[];
         var IsForhceValueArr=[];
@@ -433,6 +462,7 @@ $("#showMonth").bind("click",function (){
                 $.each(data, function (i, model) {
                     hceDate[i]=data[i].addDate;
                     IshaftOnehceValueArr[i]=model.hce;
+                    IshaftOnehceTarArr[i]=model.targetHce;
                     // IsTwohceValueArr[i]=model.ishaft2_value;
                     // IsThrhceValueArr[i]=model.ishaft3_value;
                     // IsForhceValueArr[i]=model.ishaft4_value;
@@ -527,7 +557,7 @@ $("#showMonth").bind("click",function (){
                     series: [
 
                         {
-                            name: 'Ishaft1',
+                            name: 'hce',
                             type: 'line',
                             barMaxWidth:40,
                             label: {
@@ -537,6 +567,18 @@ $("#showMonth").bind("click",function (){
                                 }
                             },
                             data: IshaftOnehceValueArr
+                        },
+                        {
+                            name: 'target',
+                            type: 'line',
+                            barMaxWidth:40,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOnehceTarArr
                         }
                         // ,
                         // {
@@ -613,10 +655,11 @@ $("#showMonth").bind("click",function (){
 //按年显示
 $("#showYear").bind("click",function () {
     {
-        // var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-        var curr_time="2017-04-04";
+        var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
+        // var curr_time="2017-04-04";
         var showhceJson = new hceInput(curr_time,"ISHAFT1");
         var IshaftOnehceValueArr=[];
+        var IshaftOnehceTarArr=[];
         var IsTwohceValueArr=[];
         var IsThrhceValueArr=[];
         var IsForhceValueArr=[];
@@ -633,6 +676,7 @@ $("#showYear").bind("click",function () {
                 $.each(data, function (i, model) {
                     hceDate[i]=data[i].addDate;
                     IshaftOnehceValueArr[i]=model.hce;
+                    IshaftOnehceTarArr[i]=model.targetHce;
                     // IsTwohceValueArr[i]=model.ishaft2_value;
                     // IsThrhceValueArr[i]=model.ishaft3_value;
                     // IsForhceValueArr[i]=model.ishaft4_value;
@@ -726,7 +770,7 @@ $("#showYear").bind("click",function () {
                     series: [
 
                         {
-                            name: 'Ishaft1',
+                            name: 'hce',
                             type: 'line',
                             barMaxWidth:40,
                             label: {
@@ -736,6 +780,18 @@ $("#showYear").bind("click",function () {
                                 }
                             },
                             data: IshaftOnehceValueArr
+                        },
+                        {
+                            name: 'target',
+                            type: 'line',
+                            barMaxWidth:40,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOnehceTarArr
                         }
                         // ,
                         // {
@@ -819,6 +875,7 @@ $("#showPeriod").bind("click",function () {
         this.endDay=endday;
     }
     var IshaftOnehceValueArr=[];
+    var IshaftOnehceTarArr=[];
     var IsTwohceValueArr=[];
     var IsThrhceValueArr=[];
     var IsForhceValueArr=[];

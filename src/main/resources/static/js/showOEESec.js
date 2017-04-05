@@ -81,17 +81,18 @@ var myGrid= {
     bottom:'2%'
 };
 var myLengend = {
-    data:['Ishaft1','Ishaft2','Ishaft3','Ishaft4','BEPS','CEPS'],
+    data:['oee','target'],
     align: 'right',
     right: '9%',
     top:'6%'
 };
 
 function showWeek() {
-    // var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-    var curr_time="2017-03-09";
+    var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
+    // var curr_time="2017-03-09";
     var showOeeJson = new oeeInput(curr_time,"ISHAFT1");
     var IshaftOneOeeValueArr=[];
+    var IshaftOneOeeTarArr= [];
     var IsTwoOeeValueArr=[];
     var IsThrOeeValueArr=[];
     var IsForOeeValueArr=[];
@@ -107,7 +108,9 @@ function showWeek() {
         success: function (data) {
             $.each(data, function (i, model) {
                 oeeDate[i]=data[i].addDate;
+
                 IshaftOneOeeValueArr[i]=model.oee;
+                IshaftOneOeeTarArr[i] = model.targetOee;
                 // IsTwoOeeValueArr[i]=model.ishaft2_value;
                 // IsThrOeeValueArr[i]=model.ishaft3_value;
                 // IsForOeeValueArr[i]=model.ishaft4_value;
@@ -165,8 +168,8 @@ function showWeek() {
                 series: [
 
                     {
-                        name: 'Ishaft1',
-                        type: 'bar',
+                        name: 'oee',
+                        type: 'line',
                         barMaxWidth:40,
                         label: {
                             normal: {
@@ -175,6 +178,18 @@ function showWeek() {
                             }
                         },
                         data: IshaftOneOeeValueArr
+                    },
+                    {
+                        name: 'target',
+                        type: 'line',
+                        barMaxWidth:40,
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: IshaftOneOeeTarArr
                     }
                     // ,
                     // {
@@ -250,10 +265,11 @@ showWeek();
 
 //按周显示
 $("#showWeek").bind("click",function () {
-    // var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-    var curr_time="2017-03-09";
+    var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
+    // var curr_time="2017-03-09";
     var showOeeJson = new oeeInput(curr_time,"ISHAFT1");
     var IshaftOneOeeValueArr=[];
+    var IshaftOneOeeTarArr= [];
     var IsTwoOeeValueArr=[];
     var IsThrOeeValueArr=[];
     var IsForOeeValueArr=[];
@@ -269,7 +285,9 @@ $("#showWeek").bind("click",function () {
         success: function (data) {
             $.each(data, function (i, model) {
                 oeeDate[i]=data[i].addDate;
+
                 IshaftOneOeeValueArr[i]=model.oee;
+                IshaftOneOeeTarArr[i] = model.targetOee;
                 // IsTwoOeeValueArr[i]=model.ishaft2_value;
                 // IsThrOeeValueArr[i]=model.ishaft3_value;
                 // IsForOeeValueArr[i]=model.ishaft4_value;
@@ -327,8 +345,8 @@ $("#showWeek").bind("click",function () {
                 series: [
 
                     {
-                        name: 'Ishaft1',
-                        type: 'bar',
+                        name: 'oee',
+                        type: 'line',
                         barMaxWidth:40,
                         label: {
                             normal: {
@@ -337,6 +355,18 @@ $("#showWeek").bind("click",function () {
                             }
                         },
                         data: IshaftOneOeeValueArr
+                    },
+                    {
+                        name: 'target',
+                        type: 'line',
+                        barMaxWidth:40,
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: IshaftOneOeeTarArr
                     }
                     // ,
                     // {
@@ -410,10 +440,11 @@ $("#showWeek").bind("click",function () {
 //按月显示
 $("#showMonth").bind("click",function (){
     {
-        // var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-        var curr_time="2017-03-13";
+        var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
+        // var curr_time="2017-03-13";
         var showOeeJson = new oeeInput(curr_time,"ISHAFT1");
         var IshaftOneOeeValueArr=[];
+        var IshaftOneOeeTarArr = [];
         var IsTwoOeeValueArr=[];
         var IsThrOeeValueArr=[];
         var IsForOeeValueArr=[];
@@ -430,6 +461,7 @@ $("#showMonth").bind("click",function (){
                 $.each(data, function (i, model) {
                     oeeDate[i]=data[i].addDate;
                     IshaftOneOeeValueArr[i]=model.oee;
+                    IshaftOneOeeTarArr[i]=model.targetOee;
                     // IsTwoOeeValueArr[i]=model.ishaft2_value;
                     // IsThrOeeValueArr[i]=model.ishaft3_value;
                     // IsForOeeValueArr[i]=model.ishaft4_value;
@@ -524,7 +556,7 @@ $("#showMonth").bind("click",function (){
                     series: [
 
                         {
-                            name: 'Ishaft1',
+                            name: 'oee',
                             type: 'line',
                             barMaxWidth:40,
                             label: {
@@ -534,6 +566,18 @@ $("#showMonth").bind("click",function (){
                                 }
                             },
                             data: IshaftOneOeeValueArr
+                        },
+                        {
+                            name: 'target',
+                            type: 'line',
+                            barMaxWidth:40,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOneOeeTarArr
                         }
                         // ,
                         // {
@@ -610,10 +654,11 @@ $("#showMonth").bind("click",function (){
 //按年显示
 $("#showYear").bind("click",function () {
     {
-        // var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-        var curr_time="2017-04-04";
+        var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
+        // var curr_time="2017-04-04";
         var showOeeJson = new oeeInput(curr_time,"ISHAFT1");
         var IshaftOneOeeValueArr=[];
+        var IshaftOneOeeTarArr=[];
         var IsTwoOeeValueArr=[];
         var IsThrOeeValueArr=[];
         var IsForOeeValueArr=[];
@@ -630,6 +675,7 @@ $("#showYear").bind("click",function () {
                 $.each(data, function (i, model) {
                     oeeDate[i]=data[i].addDate;
                     IshaftOneOeeValueArr[i]=model.oee;
+                    IshaftOneOeeTarArr[i] = model.targetOee;
                     // IsTwoOeeValueArr[i]=model.ishaft2_value;
                     // IsThrOeeValueArr[i]=model.ishaft3_value;
                     // IsForOeeValueArr[i]=model.ishaft4_value;
@@ -723,7 +769,7 @@ $("#showYear").bind("click",function () {
                     series: [
 
                         {
-                            name: 'Ishaft1',
+                            name: 'oee',
                             type: 'line',
                             barMaxWidth:40,
                             label: {
@@ -733,6 +779,18 @@ $("#showYear").bind("click",function () {
                                 }
                             },
                             data: IshaftOneOeeValueArr
+                        },
+                        {
+                            name: 'target',
+                            type: 'line',
+                            barMaxWidth:40,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOneOeeTarArr
                         }
                         // ,
                         // {

@@ -23,8 +23,8 @@ Uday=Udate.getDate();
 // var curTimeJson={
 //     "curr_time":"2016-08-14 21:00:00"
 // };
-// var curTime="2016-08-14 15:00:00";
-var curTime="2016"+"-"+"08"+"-"+"14"+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
+// var curTime="2016-10-14 09:00:00";
+var curTime=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday)+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
 var curTimeJson= new curTimeInput(curTime.toString());
 var timeRow=[];
 var hourlyTar=[];
@@ -32,7 +32,7 @@ var hourlyOut=[];
 var hourlyTime=[];
 console.log("start");
 
-var myLegend={data:['AccOutput','Output per Hour','Hourly Target']};
+var myLegend={data:['Output per Hour','Hourly Target']};
 var myyAxis=[{
     type: 'value',
     name: '产品数（件）',
