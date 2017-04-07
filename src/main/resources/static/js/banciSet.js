@@ -248,7 +248,7 @@ $("#thiEventSub").bind("click",function () {
     });
     setInterval(function () {
         $("#addThiStatus").html("");
-    },1000*3);
+    },1000*5);
     showBance();
 });
 
