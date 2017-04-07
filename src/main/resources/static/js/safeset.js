@@ -26,7 +26,7 @@ $("#getDay").bind("click", function () {
     var getDayJson = new safety_date(String(getDayYear), String(getDayMonth), String(getDayDay));
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/safetyDate/getDates",
+        url: "http://localhost:8080/nexteer/safetyDate/getDates",
         data: JSON.stringify(getDayJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -63,7 +63,7 @@ $("#startDate").bind("click",function () {
     var getStartJson=new startDay(startDateYear.toString(),startDateMonth.toString(),startDateDay.toString(),startCount,startLog.toString());
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/safetyDate/reset",
+        url: "http://localhost:8080/nexteer/safetyDate/reset",
         data: JSON.stringify(getStartJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -100,7 +100,7 @@ $("#resetDate").bind("click",function () {
     var getResetJson=new resetDate(resetYear,resetMonth,resetDay,0,resetMessage);
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/safetyDate/reset",
+        url: "http://localhost:8080/nexteer/safetyDate/reset",
         data: JSON.stringify(getResetJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -121,7 +121,7 @@ $("#resetDate").bind("click",function () {
 
 //获取全部的日期信息
 $("#getAllSafeDate").bind("click",function () {
-    $.get("http://localhost:8080/safetyDate/getAllDates", function (data) {
+    $.get("http://localhost:8080/nexteer/safetyDate/getAllDates", function (data) {
         $.each(data, function (i, model) {
             $("#logSafeMessage").append(
                 "<tr><th>"+"第"+(i+1)+"行"+"</th>"+"<td>" + model.year+"年" + "</td>" +
@@ -136,7 +136,7 @@ $("#getAllSafeDate").bind("click",function () {
 
 //获取全部不安全的日期信息
 $("#getAllUnsafeDate").bind("click",function () {
-    $.get("http://localhost:8080/safetyDate/getUnsafeDates", function (data) {
+    $.get("http://localhost:8080/nexteer/safetyDate/getUnsafeDates", function (data) {
         $.each(data, function (i, model) {
             $("#logUnSafeMessage").append(
                 "<tr><th>"+"第"+(i+1)+"行"+"</th>"+"<td>" + model.year+"年" + "</td>" +

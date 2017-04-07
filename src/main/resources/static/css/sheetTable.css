@@ -1,0 +1,23 @@
+.table{
+    text-align: center;
+}
+.table>thead>tr>td{
+    color: white;
+    background-color: #5B9BD5;
+    /*font-size:2em;*/
+    /*height: 3.6em;*/
+}
+.table>tbody>tr>td{
+    /*font-size:1.6em;*/
+}
+.table>tbody>tr:nth-child(2n+1)>td{
+    color: #000000;
+    background-color: #D2DEEF;
+}
+.table>tbody>tr:nth-child(2n)>td{
+    color: #000000;
+    background-color: #EAEFF7;
+}
+.row>div>div>div{
+    overflow: scroll !important;
+}

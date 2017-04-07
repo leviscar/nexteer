@@ -27,7 +27,7 @@ $("#addScrap").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/scrap-amount/add",
+        url: "http://localhost:8080/nexteer/scrap-amount/add",
         data: JSON.stringify(addScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -69,7 +69,7 @@ $("#resetScrap").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/scrap-amount/add",
+        url: "http://localhost:8080/nexteer/scrap-amount/add",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",

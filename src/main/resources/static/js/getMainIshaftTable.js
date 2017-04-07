@@ -2,12 +2,12 @@
  * Created by Administrator on 2017/4/2.
  */
 var IshaftTitle=["Ishaft1","Ishaft2","Ishaft3","Ishaft4"];
-var targetOut = [1000,2000,3000,4000];
-var nowOut = [720,820,920,1020];
-var achevive = ["72%","82%","92%","102%"];
+var targetOut = [0,0,0,0];
+var nowOut = [0,0,0,0];
+var achevive = ["00%","00%","00%","00%"];
 var status = [0,1,0,1];
-var titleLink = ["http://localhost:8080/IshaftYieldWeek.html ","http://localhost:8080/IshaftYieldWeek.html ","http://localhost:8080/IshaftYieldWeek.html ","http://localhost:8080/IshaftYieldWeek.html ","http://localhost:8080/IshaftYieldWeek.html "];
-var link = ["http://localhost:8080/IshaftOneUnit.html","http://localhost:8080/IshaftOneUnit.html","http://localhost:8080/IshaftTwoUnit.html","http://localhost:8080/IshaftTwoUnit.html"];
+var titleLink = ["http://localhost:8080/nexteer/IshaftYieldWeek.html ","http://localhost:8080/nexteer/IshaftYieldWeek.html ","http://localhost:8080/nexteer/IshaftYieldWeek.html ","http://localhost:8080/nexteer/IshaftYieldWeek.html ","http://localhost:8080/nexteer/IshaftYieldWeek.html "];
+var link = ["http://localhost:8080/nexteer/IshaftOneUnit.html","http://localhost:8080/nexteer/IshaftOneUnit.html","http://localhost:8080/nexteer/IshaftTwoUnit.html","http://localhost:8080/nexteer/IshaftTwoUnit.html"];
 
 function change(n){
     getMainOee();

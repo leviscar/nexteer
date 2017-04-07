@@ -16,14 +16,15 @@ function mainHceInput(curr_time,cell_name) {
     this.cell_name=cell_name;
 }
 function getMainHce() {
-    var currTime = judgeTime(Uyear)+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday)+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
+    // var currTime = judgeTime(Uyear)+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday)+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
+    var currTime ="2017-03-23 15:00:00";
     var cellName = "ISHAFT1";
     var mainHceJson = new mainHceInput(currTime,cellName);
     console.log(mainHceJson);
     console.log("getMainHce开始");
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/dashboard/hce",
+        url: "http://localhost:8080/nexteer/dashboard/hce",
         data: JSON.stringify(mainHceJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",

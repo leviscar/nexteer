@@ -101,7 +101,7 @@ function showWeek() {
     var OeeShowX=[];
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/oee/week",
+        url: "http://localhost:8080/nexteer/oee/week",
         data: JSON.stringify(showOeeJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -278,7 +278,7 @@ $("#showWeek").bind("click",function () {
     var OeeShowX=[];
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/oee/week",
+        url: "http://localhost:8080/nexteer/oee/week",
         data: JSON.stringify(showOeeJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -453,7 +453,7 @@ $("#showMonth").bind("click",function (){
         var OeeShowX=[];
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/oee/month",
+            url: "http://localhost:8080/nexteer/oee/month",
             data: JSON.stringify(showOeeJson),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -486,36 +486,6 @@ $("#showMonth").bind("click",function (){
                     },
                     toolbox: {
                         feature: {
-                            dataView: {
-                                show: true,
-                                readOnly: false,
-                                optionToContent: function (opt) {
-                                    var axisData = opt.xAxis[0].data;
-                                    var series = opt.series;
-                                    var table = '<table style="width:100%;text-align:center"><tbody><tr>'
-                                        + '<td>时间</td>'
-                                        + '<td>' + series[0].name + '</td>'
-                                        + '<td>' + series[1].name + '</td>'
-                                        + '<td>' + series[2].name + '</td>'
-                                        + '<td>' + series[3].name + '</td>'
-                                        + '<td>' + series[4].name + '</td>'
-                                        + '<td>' + series[5].name + '</td>'
-                                        + '</tr>';
-                                    for (var i = 0, l = axisData.length; i < l; i++) {
-                                        table += '<tr>'
-                                            + '<td>' + axisData[i] + '</td>'
-                                            + '<td>' + series[0].data[i] + '</td>'
-                                            + '<td>' + series[1].data[i] + '</td>'
-                                            + '<td>' + series[2].data[i] + '</td>'
-                                            + '<td>' + series[3].data[i] + '</td>'
-                                            + '<td>' + series[4].data[i] + '</td>'
-                                            + '<td>' + series[5].data[i] + '</td>'
-                                            + '</tr>';
-                                    }
-                                    table += '</tbody></table>';
-                                    return table;
-                                }
-                            },
                             saveAsImage: {
                                 show: true
                             }
@@ -667,7 +637,7 @@ $("#showYear").bind("click",function () {
         var OeeShowX=[];
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/oee/year",
+            url: "http://localhost:8080/nexteer/oee/year",
             data: JSON.stringify(showOeeJson),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -700,36 +670,6 @@ $("#showYear").bind("click",function () {
                     },
                     toolbox: {
                         feature: {
-                            dataView: {
-                                show: true,
-                                readOnly: false,
-                                optionToContent: function (opt) {
-                                    var axisData = opt.xAxis[0].data;
-                                    var series = opt.series;
-                                    var table = '<table style="width:100%;text-align:center"><tbody><tr>'
-                                        + '<td>时间</td>'
-                                        + '<td>' + series[0].name + '</td>'
-                                        + '<td>' + series[1].name + '</td>'
-                                        + '<td>' + series[2].name + '</td>'
-                                        + '<td>' + series[3].name + '</td>'
-                                        + '<td>' + series[4].name + '</td>'
-                                        + '<td>' + series[5].name + '</td>'
-                                        + '</tr>';
-                                    for (var i = 0, l = axisData.length; i < l; i++) {
-                                        table += '<tr>'
-                                            + '<td>' + axisData[i] + '</td>'
-                                            + '<td>' + series[0].data[i] + '</td>'
-                                            + '<td>' + series[1].data[i] + '</td>'
-                                            + '<td>' + series[2].data[i] + '</td>'
-                                            + '<td>' + series[3].data[i] + '</td>'
-                                            + '<td>' + series[4].data[i] + '</td>'
-                                            + '<td>' + series[5].data[i] + '</td>'
-                                            + '</tr>';
-                                    }
-                                    table += '</tbody></table>';
-                                    return table;
-                                }
-                            },
                             saveAsImage: {
                                 show: true
                             }
@@ -764,7 +704,7 @@ $("#showYear").bind("click",function () {
                             xAxisIndex: [0],
                             filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
                             start: 1,
-                            end: 50
+                            end: 100
                         }],
                     series: [
 
@@ -896,7 +836,7 @@ $("#showPeriod").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/Oee-amount/getByPeriod",
+        url: "http://localhost:8080/nexteer/Oee-amount/getByPeriod",
         data: JSON.stringify(showPeriodJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -932,36 +872,6 @@ $("#showPeriod").bind("click",function () {
                 },
                 toolbox: {
                     feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false,
-                            optionToContent: function (opt) {
-                                var axisData = opt.xAxis[0].data;
-                                var series = opt.series;
-                                var table = '<table style="width:100%;text-align:center"><tbody><tr>'
-                                    + '<td>时间</td>'
-                                    + '<td>' + series[0].name + '</td>'
-                                    + '<td>' + series[1].name + '</td>'
-                                    + '<td>' + series[2].name + '</td>'
-                                    + '<td>' + series[3].name + '</td>'
-                                    + '<td>' + series[4].name + '</td>'
-                                    + '<td>' + series[5].name + '</td>'
-                                    + '</tr>';
-                                for (var i = 0, l = axisData.length; i < l; i++) {
-                                    table += '<tr>'
-                                        + '<td>' + axisData[i] + '</td>'
-                                        + '<td>' + series[0].data[i] + '</td>'
-                                        + '<td>' + series[1].data[i] + '</td>'
-                                        + '<td>' + series[2].data[i] + '</td>'
-                                        + '<td>' + series[3].data[i] + '</td>'
-                                        + '<td>' + series[4].data[i] + '</td>'
-                                        + '<td>' + series[5].data[i] + '</td>'
-                                        + '</tr>';
-                                }
-                                table += '</tbody></table>';
-                                return table;
-                            }
-                        },
                         saveAsImage: {
                             show: true
                         }

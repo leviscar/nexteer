@@ -5,13 +5,13 @@
 
 var circleDateTime=[];
 var safeCalendarTime=[];
-$.get("http://localhost:8080/safetyDate/getAllDates", function (data) {
+$.get("http://localhost:8080/nexteer/safetyDate/getAllDates", function (data) {
     $.each(data, function (i, model) {
         safeCalendarTime[i]=new Date(model.year,model.month-1,model.day).getTime();
     })
 });
 
-$.get("http://localhost:8080/safetyDate/getUnsafeDates", function (data) {
+$.get("http://localhost:8080/nexteer/safetyDate/getUnsafeDates", function (data) {
     $.each(data, function (i, model) {
         circleDateTime[i]=new Date(model.year,model.month-1,model.day).getTime();
     })

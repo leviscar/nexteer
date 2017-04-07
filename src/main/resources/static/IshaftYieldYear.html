@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/mainboard.css" type="text/css">
     <link rel="stylesheet" href="css/dropdown.css" type="text/css">
     <link rel="stylesheet" href="css/height.css" type="text/css">
+    <link rel="stylesheet" href="css/sheetTable.css" type="text/css">
     <style type="text/css">
         body {
             background-color: #F7F7F7;
@@ -41,30 +42,7 @@
             border: 1px solid #293c55;
         }
     </style>
-    <style type="text/css">
-        .table{
-            margin: 3% 0 0 0;
-        }
-        .table>thead>tr>td{
-            color: white;
-            /*background-color: #5B9BD5;*/
-            background-color: #6ab0b8;
-            font-size:1.6em;
-            height: 3em;
-        }
-        .table>tbody>tr>td{
-            font-size:1.2em;
-        }
-        .table>tbody>tr:nth-child(2n+1)>td{
-            color: #000000;
-            background-color: #D2DEEF;
-        }
-        .table>tbody>tr:nth-child(2n)>td{
-            color: #000000;
-            background-color: #EAEFF7;
-        }
 
-    </style></head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
     <div class="container-fluid">
@@ -76,7 +54,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://localhost:8080/mainIndex.html"><img src="images/icon.png" alt="Nexteer"></a>
+            <a class="navbar-brand" href="http://localhost:8080/nexteer/index.html"><img src="images/icon.png" alt="Nexteer"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -88,9 +66,9 @@
                     <ul class="dropdown-menu">
                         <li class="dropdown-submenu"><a href="#">I-shaft1</a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="http://localhost:8080/IshaftYieldWeek.html">周视图</a></li>
-                                <li><a href="http://localhost:8080/IshaftYieldMonth.html">月视图</a></li>
-                                <li><a href="http://localhost:8080/IshaftYieldYear.html">年视图</a></li>
+                                <li><a href="http://localhost:8080/nexteer/IshaftYieldWeek.html">周视图</a></li>
+                                <li><a href="http://localhost:8080/nexteer/IshaftYieldMonth.html">月视图</a></li>
+                                <li><a href="http://localhost:8080/nexteer/IshaftYieldYear.html">年视图</a></li>
                             </ul>
                         </li>
                         <li role="separator" class="divider"></li>
@@ -170,91 +148,6 @@
         <div class="col-md-8 item" id="IshaftOneYieldYearBar"></div>
         <div class="col-md-3 item " id="IshaftOneYieldYearPie"></div>
     </div>
-    <!--<div class="row">-->
-        <!--<div class="col-md-12 item item2 border-line">-->
-            <!--<table class="table table-bordered table-hover">-->
-                <!--<thead>-->
-                <!--<tr>-->
-                    <!--<td>型号/日期</td>-->
-                    <!--<td>一月</td>-->
-                    <!--<td>二月</td>-->
-                    <!--<td>三月</td>-->
-                    <!--<td>四月</td>-->
-                    <!--<td>五月</td>-->
-                    <!--<td>六月</td>-->
-                    <!--<td>七月</td>-->
-                    <!--<td>八月</td>-->
-                    <!--<td>九月</td>-->
-                    <!--<td>十月</td>-->
-                    <!--<td>十一月</td>-->
-                    <!--<td>十二月</td>-->
-                <!--</tr>-->
-                <!--</thead>-->
-                <!--<tbody>-->
-                <!--<tr>-->
-                    <!--<td>XXXX</td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td>XXXX</td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td>XXXX</td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td>XXXX</td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                    <!--<td></td>-->
-                <!--</tr>-->
-                <!--</tbody>-->
-            <!--</table>-->
-        <!--</div>-->
-    <!--</div>-->
 </div>
 
 
@@ -280,13 +173,13 @@
         this.end_time = endTime;
     }
     //传入时间
-    //    var getIshaftOneWeekJson= new endTime(Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday));
-    var getIshaftOneMonthJson =new endTime("2017-04-06");
+    var getIshaftOneMonthJson= new endTime(Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday));
+//    var getIshaftOneMonthJson =new endTime("2017-04-06");
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('IshaftOneYieldYearBar'));
     var myPieChart = echarts.init(document.getElementById('IshaftOneYieldYearPie'));
     //    var myDataOne= [];
-    //    var worker = new Worker('http://localhost:8080/IshaftYieldWeekFirstWork.js');
+    //    var worker = new Worker('http://localhost:8080/nexteer/IshaftYieldWeekFirstWork.js');
 
     function getIshaftOneMonthData() {
         var proIDMsg=[];
@@ -295,6 +188,7 @@
         var myAjaxData=[];
         var sum=[];
         var myPieData=[];
+        var percent=50;
         //声明一个30行366列的零二维数组
         for(var i=0;i<30;i++){    //一维长度为i,i为变量，可以根据实际情况改变
             myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
@@ -308,16 +202,16 @@
 //            myXDate[jX]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
 //        }
         var YearDate=[];
-        for(var yIndex=0;yIndex<12;yIndex++){
+        for(var yIndex=1;yIndex<13;yIndex++){
             var d=new Date(Uyear,yIndex,0);
-            for(var Mindex=1;Mindex<d.getDate();Mindex++){
-                YearDate.push(Uyear+"-"+judgeMyTime(yIndex+1)+"-"+judgeMyTime(Mindex))
+            for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
+                YearDate.push(Uyear+"-"+judgeMyTime(yIndex)+"-"+judgeMyTime(Mindex))
             }
         }
 
         console.log("当前年份天数"+YearDate);
 
-        $.get("http://localhost:8080/product-model", function (data) {
+        $.get("http://localhost:8080/nexteer/product-model", function (data) {
             $.each(data, function (i, model) {
                 if(model.cellName=="Ishaft1"){
 //                    ProMsg.push({"modelId":model.modelId,"modelName":model.modelName})
@@ -328,7 +222,7 @@
         });
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/output-info/getByYear",
+            url: "http://localhost:8080/nexteer/output-info/getByYear",
             data: JSON.stringify(getIshaftOneMonthJson),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -345,6 +239,7 @@
                                 if (data[index].add_date==YearDate[MDIndex]){
                                     myData[j][MDIndex]=data[index].output_count;
                                     sum[j]+=data[index].output_count;
+                                    percent=100*MDIndex/366;
                                 }
 
                             }
@@ -482,8 +377,8 @@
                             type: 'slider',
                             xAxisIndex: [0],
                             filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
-                            start: 20,
-                            end: 50
+                            start: 1,
+                            end: percent
                         }],
                     series: sData
                 };

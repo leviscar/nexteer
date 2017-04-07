@@ -24,7 +24,7 @@ console.log(jsonString);
 function getNowData() {
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/safetyDate/addDate",
+        url: "http://localhost:8080/nexteer/safetyDate/addDate",
         data: JSON.stringify(jsonString),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -38,7 +38,7 @@ function getNowData() {
     });
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/safetyDate/getDates",
+        url: "http://localhost:8080/nexteer/safetyDate/getDates",
         data: JSON.stringify(jsonString),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -53,7 +53,7 @@ function getNowData() {
     });
     // $.ajax({
     //     type: "POST",
-    //     url: "http://localhost:8080/safetyDate/getDates",
+    //     url: "http://localhost:8080/nexteer/safetyDate/getDates",
     //     data: JSON.stringify(jsonString),
     //     contentType: "application/json; charset=utf-8",
     //     dataType: "json",
@@ -71,7 +71,7 @@ function getNowData() {
 function getSafeDay() {
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/safetyDate/getDates",
+        url: "http://localhost:8080/nexteer/safetyDate/getDates",
         data: JSON.stringify(jsonString),
         contentType: "application/json; charset=utf-8",
         dataType: "json",

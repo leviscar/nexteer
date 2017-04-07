@@ -18,7 +18,7 @@ console.log(nowScrapString);
 function showScrapData() {
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/scrap-amount/getByDate",
+        url: "http://localhost:8080/nexteer/scrap-amount/getByDate",
         data: JSON.stringify(nowScrapString),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
