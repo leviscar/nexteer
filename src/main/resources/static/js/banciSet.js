@@ -34,44 +34,39 @@ function  eventInput(type,event,eventStart,eventEnd) {
 }
 function showEvent() {
     $.get("http://localhost:8080/nexteer/rest-event/getAllEvent", function (data) {
-        $("#test").html(JSON.stringify(data));
-        console.log(JSON.stringify(data));
-        // $.each(data, function (i, model) {
-        //
-        //     $("#showEvent").append("<tbody><tr><td>"+model.id+"</td><td>"+model.shift_type+"</td><td>"+model.event+"</td><td>"+model.event_start_time+"</td><td>"+model.event_end_time+"</td></tr></tbody>");
-        // });
+        console.log($.parseJSON(data));
+        $.each($.parseJSON(data), function (i, model) {
+
+            $("#showEvent").append("<tbody><tr><td>"+model.shift_type+"</td><td>"+model.event+"</td><td>"+model.event_start_time+"</td><td>"+model.event_end_time+"</td></tr></tbody>");
+        });
     });
 
 }
 showEvent();
 function showBance() {
-    // $.ajax({
-    //     type: "GET",
-    //     url: "http://localhost:8080/nexteer/work-shift/now",
-    //     contentType: "application/json; charset=utf-8",
-    //     dataType: "json",
-    //     success: function (data) {
-    //             $("#ms").html(data.morning_shift_start);
-    //             $("#me").html(data.morning_shift_end);
-    //             $("#mis").html(data.middle_shift_start);
-    //             $("#mie").html(data.middle_shift_end);
-    //             $("#ns").html(data.night_shift_start);
-    //             $("#ne").html(data.night_shift_end);
-    //             $("#mb").html(data.morning_shift_standard_beats);
-    //             $("#mib").html(data.middle_shift_standard_beats);
-    //             $("#nb").html(data.night_shift_standard_beats);
-    //             $("#mw").html(data.morning_worker_num);
-    //             $("#miw").html(data.middle_worker_num);
-    //             $("#nw").html(data.night_worker_num);
-    //             $("#mow").html(data.morning_overtime_worker_num);
-    //             $("#miow").html(data.middle_overtime_worker_num);
-    //             $("#now").html(data.night_overtime_worker_num);
-    //     },
-    //     failure: function (errMsg) {
-    //         console.log(errMsg);
-    //     }
-    // });
+    $.get("http://localhost:8080//nexteer/work-shift/now", function (data) {
+        console.log(typeof (data));
+        console.log($.parseJSON(data));
+        // $("#productMessage").append("<tbody><tr><td>"+data.morning_shift_start+"</td><td>"+data.morning_shift_end+"</td><td>"+data.middle_shift_start+"</td><td>"+data.middle_shift_end+"</td><td>"+data.night_shift_start+"</td><td>"+data.night_shift_end+"</td><td>"+data.morning_shift_standard_beats+"</td><td>"
+        //     +data.middle_shift_standard_beats+"</td><td>"+data.night_shift_standard_beats+"</td><td>"+data.morning_worker_num+"</td><td>"+data.middle_worker_num+"</td><td>"+data.night_worker_num+"</td><td>"+data.morning_overtime_worker_num+"</td><td>"+data.middle_overtime_worker_num+"</td><td>"+data.night_overtime_worker_num+"</td></tr></tbody>");
+        console.log($.parseJSON(data).id);
+        $("#ms").html($.parseJSON(data).morning_shift_start);
+        $("#me").html($.parseJSON(data).morning_shift_end);
+        $("#mis").html($.parseJSON(data).middle_shift_start);
+        $("#mie").html($.parseJSON(data).middle_shift_end);
+        $("#ns").html($.parseJSON(data).night_shift_start);
+        $("#ne").html($.parseJSON(data).night_shift_end);
+        $("#mb").html($.parseJSON(data).morning_shift_standard_beats);
+        $("#mib").html($.parseJSON(data).middle_shift_standard_beats);
+        $("#nb").html($.parseJSON(data).night_shift_standard_beats);
+        $("#mw").html($.parseJSON(data).morning_worker_num);
+        $("#miw").html($.parseJSON(data).middle_worker_num);
+        $("#nw").html($.parseJSON(data).night_worker_num);
+        $("#mow").html($.parseJSON(data).morning_overtime_worker_num);
+        $("#miow").html($.parseJSON(data).middle_overtime_worker_num);
+        $("#now").html($.parseJSON(data).night_overtime_worker_num);
 
+    });
 }
 showBance();
 console.log("开始运行");
