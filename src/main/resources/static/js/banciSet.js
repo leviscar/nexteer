@@ -34,6 +34,7 @@ function  eventInput(type,event,eventStart,eventEnd) {
 }
 function showEvent() {
     $.get("http://localhost:8080/nexteer/rest-event/getAllEvent", function (data) {
+        $("#test").html(JSON.stringify(data));
         console.log(JSON.stringify(data));
         // $.each(data, function (i, model) {
         //
