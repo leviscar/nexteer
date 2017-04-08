@@ -6,6 +6,7 @@ import com.example.util.Function;
 import com.example.util.ModelOutput;
 import com.example.util.OutputTool;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -149,7 +150,7 @@ public class Ishaft1UnitStatusRepo {
 
         // 得到损失时间
         unitStatus.setLoss_time(getLossTime(8, startDate, curDate));
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         return gson.toJson(unitStatus);
     }
 
