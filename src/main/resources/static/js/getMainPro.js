@@ -63,6 +63,7 @@ $.ajax({
             }
             break;
             default:
+                break;
         }
 
 

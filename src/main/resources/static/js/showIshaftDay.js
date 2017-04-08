@@ -21,8 +21,8 @@ function judgeTime(time) {
 //     "curr_time":"2016-08-14 21:00:00"
 // };
 function getNowStatus() {
-    var curTime="2017-03-23 15:00:00";
-// var curTime= "2016"+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday)+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
+    // var curTime="2017-03-23 15:00:00";
+    var curTime= "2016"+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday)+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
     var curTimeJson= new curTimeInput(curTime);
     var timeRow=[];
     var hourlyTar=[];

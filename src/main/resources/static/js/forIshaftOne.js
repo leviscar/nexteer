@@ -24,8 +24,8 @@ function mainOeeInput(curr_time,cell_name) {
     this.cell_name=cell_name;
 }
 function getMainOee() {
-    // var currTime = judgeTime(Uyear)+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday)+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
-    var currTime = "2017-03-23 15:00:00";
+    var currTime = judgeTime(Uyear)+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday)+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
+    // var currTime = "2017-03-23 15:00:00";
     var cellName = "ISHAFT1";
     var mainOeeJson = new mainOeeInput(currTime,cellName);
     console.log(mainOeeJson);
@@ -54,8 +54,8 @@ function getMainOee() {
 
 }
 function getMainPro() {
-    // var currTime = judgeTime(Uyear)+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday)+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
-    var currTime = "2017-03-23 15:00:00";
+    var currTime = judgeTime(Uyear)+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday)+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
+    // var currTime = "2017-03-23 15:00:00";
     var cellName = "ISHAFT1";
     var mainOeeJson = new mainOeeInput(currTime,cellName);
     console.log(mainOeeJson);
