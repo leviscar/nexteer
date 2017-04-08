@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -121,6 +122,6 @@ public class WorkShiftController {
             object.addProperty("log", "未查询到任何班次信息，请先初始化");
             return object.toString();
         }
-        return new Gson().toJson(res.get(0));
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(res.get(0));
     }
 }

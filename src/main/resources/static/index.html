@@ -48,16 +48,17 @@
 
         });
     });
-    var jsonString = new safety_date("2016", "03", "17");
+//    var jsonString = new safety_date("2016", "03", "17");
     $("#getDates").bind("click", function () {
         $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/safetyDate/getDates",
-            data: JSON.stringify(jsonString),
+            type: "GET",
+            url: "http://localhost:8081/nexteer/work-shift/now",
+//            data: JSON.stringify(jsonString),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
                 $("#res").html(JSON.stringify(data));
+                console.log(JSON.stringify(data))
             },
             failure: function (errMsg) {
                 console.log(errMsg);
