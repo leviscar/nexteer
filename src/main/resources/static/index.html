@@ -316,10 +316,13 @@
             <div class="collapse navbar-collapse header-title" id="bs-example-navbar-collapse-1">
                 <span>Main DashBoard</span>
                 <form class="navbar-right">
-                    <button type="button" class="btn btn-danger" aria-label="Right Align">
-                        <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>&nbsp;<a href="http://localhost:8080/nexteer/Set.html">Login</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myLoginModal" id="login" aria-label="Right Align">
+                        <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>&nbsp Login
+                        <!--<span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>&nbsp;<a href="http://localhost:8080/nexteer/Set.html">Login</a>-->
                     </button>
+
                 </form>
+
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
@@ -509,6 +512,27 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="myLoginModal" tabindex="-1" role="dialog" aria-labelledby="myLoginModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myLoginModalLabel">登录管理系统</h4>
+            </div>
+            <div class="modal-body">
+                <p><label for="userName">用户名</label>&nbsp;&nbsp;<input type="text" id="userName"></p>
+                <hr class="active">
+                <p><label for="passWord">密码</label>&nbsp;&nbsp;<input type="text" id="passWord"></p>
+                <hr class="active">
+                <p id="loginStu"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="loginSub">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="bower_components/jquery/dist/jquery.min.js" ></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="js/defineGlobal.js"></script>
@@ -520,5 +544,6 @@
 <!--<script src="js/getMainOee.js"></script>-->
 <!--<script src="js/getMainIshaftTable.js"></script>-->
 <script src="js/forIshaftOne.js"></script>
+<script src="js/login.js"></script>
 </body>
 </html>
