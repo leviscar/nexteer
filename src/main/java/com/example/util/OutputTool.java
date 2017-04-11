@@ -76,7 +76,7 @@ public class OutputTool {
             Date endTime = sdf.parse(workShift.getMorning_shift_end());
             endTime = (Date) Function.addOneDay(startTime, endTime).keySet().toArray()[0];
             curTime = (Date) Function.addOneDay(startTime, curTime).keySet().toArray()[0];
-            if (curTime.before(endTime) && curTime.after(startTime)) {
+            if (curTime.compareTo(endTime) <= 0 && curTime.compareTo(startTime) >= 0) {
                 return ShiftType.MORNING_SHIFT;
             }
         }
@@ -85,7 +85,7 @@ public class OutputTool {
             Date endTime = sdf.parse(workShift.getNight_shift_end());
             endTime = (Date) Function.addOneDay(startTime, endTime).keySet().toArray()[0];
             curTime = (Date) Function.addOneDay(startTime, curTime).keySet().toArray()[0];
-            if (curTime.before(endTime) && curTime.after(startTime)) {
+            if (curTime.compareTo(endTime) <= 0 && curTime.compareTo(startTime) >= 0) {
                 return ShiftType.NIGHT_SHIFT;
             }
         }
@@ -94,7 +94,7 @@ public class OutputTool {
             Date endTime = sdf.parse(workShift.getMiddle_shift_end());
             endTime = (Date) Function.addOneDay(startTime, endTime).keySet().toArray()[0];
             curTime = (Date) Function.addOneDay(startTime, curTime).keySet().toArray()[0];
-            if (curTime.before(endTime) && curTime.after(startTime)) {
+            if (curTime.compareTo(endTime) <= 0 && curTime.compareTo(startTime) >= 0) {
                 return ShiftType.MIDDLE_SHIFT;
             }
         }

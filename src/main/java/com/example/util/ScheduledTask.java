@@ -288,15 +288,15 @@ public class ScheduledTask {
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                     Date eventStartTime = sdf.parse(event.getEvent_start_time());
                     Date eventEndTime = sdf.parse(event.getEvent_end_time());
-                    if (endTime.before(eventStartTime) || startTime.after(eventEndTime)) {
+                    if (endTime.compareTo(eventStartTime) <= 0 || startTime.compareTo(eventEndTime) >= 0) {
                         restSeconds += 0;
-                    } else if (startTime.after(eventStartTime) && endTime.before(eventEndTime)) {
+                    } else if (startTime.compareTo(eventStartTime) >= 0 && endTime.compareTo(eventEndTime) <= 0) {
                         restSeconds += (endTime.getTime() - startTime.getTime()) / 1000;
-                    } else if (startTime.before(eventStartTime) && endTime.before(eventEndTime)) {
+                    } else if (startTime.compareTo(eventStartTime) <= 0 && endTime.compareTo(eventEndTime) <= 0) {
                         restSeconds += (endTime.getTime() - eventStartTime.getTime()) / 1000;
-                    } else if (startTime.after(eventStartTime) && endTime.after(eventEndTime)) {
+                    } else if (startTime.compareTo(eventStartTime) >= 0 && endTime.compareTo(eventEndTime) >= 0) {
                         restSeconds += (eventEndTime.getTime() - startTime.getTime()) / 1000;
-                    } else if (startTime.before(eventStartTime) && endTime.after(eventEndTime)) {
+                    } else if (startTime.compareTo(eventStartTime) <= 0 && endTime.compareTo(eventEndTime) >= 0) {
                         restSeconds += (eventEndTime.getTime() - eventStartTime.getTime()) / 1000;
                     }
                 }
@@ -319,9 +319,9 @@ public class ScheduledTask {
                     Date startTime = sdf.parse(event.getEvent_start_time());
                     Date endTime = sdf.parse(event.getEvent_end_time());
                     // 若当前时刻在休息时间之中
-                    if (curTime.before(endTime) && curTime.after(startTime)) {
+                    if (curTime.compareTo(endTime) <= 0 && curTime.compareTo(startTime) >= 0) {
                         restSeconds += curTime.getTime() - startTime.getTime();
-                    } else if (curTime.after(endTime)) {
+                    } else if (curTime.compareTo(endTime) >= 0) {
                         restSeconds += endTime.getTime() - startTime.getTime();
                     }
                 }
