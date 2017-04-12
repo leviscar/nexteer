@@ -118,7 +118,7 @@ public class WorkShiftController {
         JsonObject object = new JsonObject();
         List<WorkShift> res = repo.getLatestWorkShift();
         if (res.size() == 0) {
-            object.addProperty("status", false);
+            object.addProperty("system_status", false);
             object.addProperty("log", "未查询到任何班次信息，请先初始化");
             return object.toString();
         }

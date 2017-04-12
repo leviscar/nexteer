@@ -1,8 +1,4 @@
 USE [nexteer]
-DELETE FROM product_model;
-DELETE FROM oee;
-DELETE FROM ishaft1_output_info;
-DELETE FROM hce;
 GO
 
 SET IDENTITY_INSERT [dbo].[product_model] ON

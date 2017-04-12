@@ -148,10 +148,10 @@ public class ScrapAmountRepo {
                     " WHERE year = ? AND month = ? AND day = ?";
             jdbc.update(sql, scrapAmount.getIshaft1_value(), scrapAmount.getIshaft2_value(), scrapAmount.getIshaft3_value(), scrapAmount.getIshaft4_value(),
                     scrapAmount.getCeps_value(), scrapAmount.getBeps_value(), scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay());
-            jsonObject.addProperty("status", true);
+            jsonObject.addProperty("system_status", true);
             jsonObject.addProperty("log", "reset ok");
         } else {
-            jsonObject.addProperty("status", false);
+            jsonObject.addProperty("system_status", false);
             jsonObject.addProperty("log", "数据库没有该日期的记录，请先添加记录");
         }
         return jsonObject;

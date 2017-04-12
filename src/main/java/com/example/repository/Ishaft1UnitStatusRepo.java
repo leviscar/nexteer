@@ -53,7 +53,7 @@ public class Ishaft1UnitStatusRepo {
 
         JsonObject object = new JsonObject();
         if (shiftType == null) {
-            object.addProperty("status", false);
+            object.addProperty("system_status", false);
             object.addProperty("log", "当前时刻不在任何班次中");
             return object.toString();
         }

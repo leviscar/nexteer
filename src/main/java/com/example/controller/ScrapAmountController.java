@@ -45,7 +45,7 @@ public class ScrapAmountController {
             object.addProperty("value", tmp.getIshaft1_value() + tmp.getIshaft2_value() +
                     tmp.getIshaft3_value() + tmp.getIshaft4_value() + tmp.getCeps_value() + tmp.getBeps_value());
         } else {
-            object.addProperty("status", false);
+            object.addProperty("system_status", false);
             object.addProperty("log", "当前日期没有记录");
         }
         return object.toString();
@@ -74,14 +74,14 @@ public class ScrapAmountController {
                 return gson.toJson(res);
             } else {
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("status", false);
+                jsonObject.addProperty("system_status", false);
                 jsonObject.addProperty("log", "没有搜索到这段时期的信息");
                 return jsonObject.toString();
             }
         } catch (ParseException e) {
             e.printStackTrace();
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("status", false);
+            jsonObject.addProperty("system_status", false);
             jsonObject.addProperty("log", "传入的json格式有误");
             return jsonObject.toString();
         }
@@ -100,7 +100,7 @@ public class ScrapAmountController {
         List<ScrapAmount> res = repo.getByWeek(scrapAmount);
         if (res.isEmpty()) {
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("status", false);
+            jsonObject.addProperty("system_status", false);
             jsonObject.addProperty("log", "没有搜索到这段时期的报废金额信息");
             return jsonObject.toString();
         } else {
@@ -122,7 +122,7 @@ public class ScrapAmountController {
         try {
             List<ScrapAmount> res = repo.getByMonth(scrapAmount);
             if (res.isEmpty()) {
-                jsonObject.addProperty("status", false);
+                jsonObject.addProperty("system_status", false);
                 jsonObject.addProperty("log", "没有该月的报废金额信息");
                 return jsonObject.toString();
             } else {
@@ -130,7 +130,7 @@ public class ScrapAmountController {
             }
         } catch (ParseException e) {
             e.printStackTrace();
-            jsonObject.addProperty("status", false);
+            jsonObject.addProperty("system_status", false);
             jsonObject.addProperty("log", "传入的json格式有误");
             return jsonObject.toString();
         }
@@ -150,7 +150,7 @@ public class ScrapAmountController {
         try {
             List<ScrapAmount> res = repo.getByYear(scrapAmount);
             if (res.isEmpty()) {
-                jsonObject.addProperty("status", false);
+                jsonObject.addProperty("system_status", false);
                 jsonObject.addProperty("log", "没有该年的报废金额信息");
                 return jsonObject.toString();
             } else {
@@ -158,7 +158,7 @@ public class ScrapAmountController {
             }
         } catch (ParseException e) {
             e.printStackTrace();
-            jsonObject.addProperty("status", false);
+            jsonObject.addProperty("system_status", false);
             jsonObject.addProperty("log", "传入的json格式有误");
             return jsonObject.toString();
         }

@@ -47,10 +47,10 @@ public class WorkShiftRepo {
                     workShift.getMorning_overtime_worker_num(), workShift.getMorning_shift_start(), workShift.getMorning_shift_end(),
                     workShift.getMorning_shift_standard_beats(), workShift.getMorning_worker_num(), workShift.getMorning_overtime_worker_num(),
                     workShift.getSetting_time());
-            object.addProperty("status", true);
+            object.addProperty("system_status", true);
             object.addProperty("log", "add ok");
         } else {
-            object.addProperty("status", false);
+            object.addProperty("system_status", false);
             object.addProperty("log", "所需输入的参数有误，请检查后重新输入");
         }
         return object;
@@ -77,10 +77,10 @@ public class WorkShiftRepo {
                     workShift.getMiddle_overtime_worker_num(), workShift.getMiddle_shift_start(), workShift.getMiddle_shift_end(),
                     workShift.getMiddle_shift_standard_beats(), workShift.getMiddle_worker_num(), workShift.getMiddle_overtime_worker_num(),
                     workShift.getSetting_time());
-            object.addProperty("status", true);
+            object.addProperty("system_status", true);
             object.addProperty("log", "add ok");
         } else {
-            object.addProperty("status", false);
+            object.addProperty("system_status", false);
             object.addProperty("log", "所需输入的参数有误，请检查后重新输入");
         }
         return object;
@@ -109,10 +109,10 @@ public class WorkShiftRepo {
                     workShift.getNight_overtime_worker_num(), workShift.getNight_shift_start(), workShift.getNight_shift_end(),
                     workShift.getNight_shift_standard_beats(), workShift.getNight_worker_num(), workShift.getNight_overtime_worker_num(),
                     workShift.getSetting_time());
-            object.addProperty("status", true);
+            object.addProperty("system_status", true);
             object.addProperty("log", "add ok");
         } else {
-            object.addProperty("status", false);
+            object.addProperty("system_status", false);
             object.addProperty("log", "所需输入的参数有误，请检查后重新输入");
         }
         return object;
