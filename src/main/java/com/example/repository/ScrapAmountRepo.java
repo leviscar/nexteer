@@ -130,7 +130,7 @@ public class ScrapAmountRepo {
                     scrapAmount.getIshaft3_value(), scrapAmount.getIshaft4_value(), scrapAmount.getCeps_value(), scrapAmount.getBeps_value());
         }
         JsonObject object = new JsonObject();
-        object.addProperty("status", true);
+        object.addProperty("system_status", true);
         object.addProperty("log", "add success");
         return object;
     }

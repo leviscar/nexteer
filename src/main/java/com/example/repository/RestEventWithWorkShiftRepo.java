@@ -33,7 +33,7 @@ public class RestEventWithWorkShiftRepo {
         String sql = "INSERT INTO rest_event_with_work_shift (rest_event_id, work_shift_id) VALUES (?,?)";
         jdbc.update(sql, rest_event_id, work_shift_id);
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("status", true);
+        jsonObject.addProperty("system_status", true);
         jsonObject.addProperty("log", "add ok");
         return jsonObject;
     }

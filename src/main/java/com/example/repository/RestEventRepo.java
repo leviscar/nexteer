@@ -77,7 +77,7 @@ public class RestEventRepo {
         WorkShift workShift = repo.getLatestWorkShift().get(0);
         restEventWithWorkShiftRepo.add(rest_event_id, workShift.getId());
 
-        object.addProperty("status", true);
+        object.addProperty("system_status", true);
         object.addProperty("log", "add ok");
         return object.toString();
     }

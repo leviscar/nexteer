@@ -35,7 +35,7 @@ public class Ishaft1OutputInfoRepo {
         String sql = "INSERT INTO ishaft1_output_info (add_date, model, output_count, model_name) VALUES(?, ?, ?, ?)";
         jdbc.update(sql, outputInfo.getAdd_date(), outputInfo.getModel(), outputInfo.getOutput_count(), outputInfo.getModel_name());
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("status", true);
+        jsonObject.addProperty("system_status", true);
         jsonObject.addProperty("log", "add ok");
         return jsonObject.toString();
     }
