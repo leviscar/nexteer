@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.enumtype.Cell;
 import com.example.model.RestEvent;
 import com.example.model.RestEventWithWorkShift;
 import com.example.model.WorkShift;
@@ -50,7 +51,7 @@ public class RestEventController {
     @RequestMapping(value = "/getAllEvent")
     public String getAllEvent() {
         // 获得最新的班次信息
-        List<WorkShift> workShiftList = workShiftRepo.getLatestWorkShift();
+        List<WorkShift> workShiftList = workShiftRepo.getLatestWorkShift(Cell.ISHAFT1.toString());
         JsonObject object = new JsonObject();
         if (workShiftList.size() == 0) {
             object.addProperty("system_status", false);

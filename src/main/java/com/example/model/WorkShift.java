@@ -24,6 +24,7 @@ public class WorkShift {
     private int morning_overtime_worker_num;
     private int middle_overtime_worker_num;
     private int night_overtime_worker_num;
+    private String cell_name;
 
     public WorkShift() {
     }
@@ -162,5 +163,13 @@ public class WorkShift {
 
     public void setSetting_time(Date setting_time) {
         this.setting_time = setting_time;
+    }
+
+    public String getCell_name() {
+        return cell_name;
+    }
+
+    public void setCell_name(String cell_name) {
+        this.cell_name = cell_name;
     }
 }

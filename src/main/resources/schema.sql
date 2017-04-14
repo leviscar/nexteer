@@ -36,7 +36,8 @@ CREATE TABLE work_shift (
   night_worker_num             INT, -- 晚班工作人次
   morning_overtime_worker_num  INT, -- 早班加班工作人次
   middle_overtime_worker_num   INT, -- 中班加班工作人次
-  night_overtime_worker_num    INT -- 晚班加班工作人次
+  night_overtime_worker_num    INT, -- 晚班加班工作人次
+  cell_name                    VARCHAR(10)
 );
 CREATE TABLE rest_event (
   id               INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
@@ -77,4 +78,11 @@ CREATE TABLE hce (
   target_hce INT,
   cell_name  VARCHAR(10),
   add_date   DATE
+);
+CREATE TABLE task_info (
+  id          INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
+  cron        VARCHAR(20),
+  cell_name   VARCHAR(10),
+  task_name   VARCHAR(200),
+  task_status VARCHAR(20)
 );

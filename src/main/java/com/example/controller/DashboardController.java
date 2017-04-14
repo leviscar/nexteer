@@ -96,7 +96,7 @@ public class DashboardController {
         String cellName = new Gson().fromJson(jsonObject.get("cell_name"), String.class);
 
         // 获得最新的班次信息
-        WorkShift workShift = workShiftRepo.getLatestWorkShift().get(0);
+        WorkShift workShift = workShiftRepo.getLatestWorkShift(Cell.ISHAFT1.toString()).get(0);
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String curTime = sdf.format(curDate);
         ShiftType shiftType = OutputTool.getShiftType(workShift, sdf.parse(curTime));
@@ -163,7 +163,7 @@ public class DashboardController {
         String cellName = new Gson().fromJson(jsonObject.get("cell_name"), String.class);
         Date curDate = new Gson().fromJson(jsonObject.get("curr_time"), Date.class);
         // 获得最新的班次信息
-        WorkShift workShift = workShiftRepo.getLatestWorkShift().get(0);
+        WorkShift workShift = workShiftRepo.getLatestWorkShift(Cell.ISHAFT1.toString()).get(0);
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String curTime = sdf.format(curDate);
         ShiftType shiftType = OutputTool.getShiftType(workShift, sdf.parse(curTime));
@@ -250,7 +250,7 @@ public class DashboardController {
      * @throws ParseException
      */
     private String getIshaf1Output(String curTime) throws ParseException {
-        WorkShift workShift = workShiftRepo.getLatestWorkShift().get(0);
+        WorkShift workShift = workShiftRepo.getLatestWorkShift(Cell.ISHAFT1.toString()).get(0);
         // 班次小时分钟格式化
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         ShiftType shiftType = OutputTool.getShiftType(workShift, sdf.parse(curTime.substring(11, 16)));

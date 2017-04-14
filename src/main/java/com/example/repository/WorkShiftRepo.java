@@ -26,7 +26,7 @@ public class WorkShiftRepo {
     }
 
     /**
-     * 添加早班班次
+     * add morning shift
      *
      * @param workShift
      * @return
@@ -37,16 +37,16 @@ public class WorkShiftRepo {
         if (workShift.getMorning_shift_start() != null && workShift.getMorning_shift_end() != null
                 && workShift.getMorning_shift_standard_beats() > 0 && workShift.getSetting_time() != null
                 && workShift.getMorning_worker_num() > 0 && workShift.getMorning_overtime_worker_num() >= 0) {
-            String sql = "IF NOT exists(SELECT * FROM work_shift WHERE setting_time = ?)" +
+            String sql = "IF NOT exists(SELECT * FROM work_shift WHERE setting_time = ? AND cell_name = ?)" +
                     "INSERT INTO work_shift (morning_shift_start, morning_shift_end, morning_shift_standard_beats, setting_time, " +
-                    "morning_worker_num, morning_overtime_worker_num) VALUES(?, ?, ?, ?, ?, ?)" +
+                    "morning_worker_num, morning_overtime_worker_num, cell_name) VALUES(?, ?, ?, ?, ?, ?, ?)" +
                     "ELSE UPDATE work_shift SET morning_shift_start = ?, morning_shift_end = ?, morning_shift_standard_beats = ?, " +
-                    "morning_worker_num=? , morning_overtime_worker_num = ? WHERE setting_time = ?";
-            jdbc.update(sql, workShift.getSetting_time(), workShift.getMorning_shift_start(), workShift.getMorning_shift_end(),
+                    "morning_worker_num=? , morning_overtime_worker_num = ? WHERE setting_time = ? AND cell_name = ?";
+            jdbc.update(sql, workShift.getSetting_time(), workShift.getCell_name(), workShift.getMorning_shift_start(), workShift.getMorning_shift_end(),
                     workShift.getMorning_shift_standard_beats(), workShift.getSetting_time(), workShift.getMorning_worker_num(),
-                    workShift.getMorning_overtime_worker_num(), workShift.getMorning_shift_start(), workShift.getMorning_shift_end(),
+                    workShift.getMorning_overtime_worker_num(), workShift.getCell_name(), workShift.getMorning_shift_start(), workShift.getMorning_shift_end(),
                     workShift.getMorning_shift_standard_beats(), workShift.getMorning_worker_num(), workShift.getMorning_overtime_worker_num(),
-                    workShift.getSetting_time());
+                    workShift.getSetting_time(), workShift.getCell_name());
             object.addProperty("system_status", true);
             object.addProperty("log", "add ok");
         } else {
@@ -57,7 +57,7 @@ public class WorkShiftRepo {
     }
 
     /**
-     * 添加中班班次
+     * add middle shift
      *
      * @param workShift
      * @return
@@ -67,16 +67,16 @@ public class WorkShiftRepo {
         if (workShift.getMiddle_shift_start() != null && workShift.getMiddle_shift_end() != null
                 && workShift.getMiddle_shift_standard_beats() > 0 && workShift.getSetting_time() != null
                 && workShift.getMiddle_worker_num() > 0 && workShift.getMiddle_overtime_worker_num() >= 0) {
-            String sql = "IF NOT exists(SELECT * FROM work_shift WHERE setting_time = ?)" +
+            String sql = "IF NOT exists(SELECT * FROM work_shift WHERE setting_time = ? AND cell_name = ?)" +
                     "INSERT INTO work_shift (middle_shift_start, middle_shift_end, middle_shift_standard_beats, setting_time, " +
-                    "middle_worker_num, middle_overtime_worker_num) VALUES(?, ?, ?, ?, ?, ?)" +
+                    "middle_worker_num, middle_overtime_worker_num, cell_name) VALUES(?, ?, ?, ?, ?, ?, ?)" +
                     "ELSE UPDATE work_shift SET middle_shift_start = ?, middle_shift_end = ?, middle_shift_standard_beats = ?, " +
-                    "middle_worker_num=? , middle_overtime_worker_num = ? WHERE setting_time = ?";
-            jdbc.update(sql, workShift.getSetting_time(), workShift.getMiddle_shift_start(), workShift.getMiddle_shift_end(),
+                    "middle_worker_num=? , middle_overtime_worker_num = ? WHERE setting_time = ? AND cell_name = ?";
+            jdbc.update(sql, workShift.getSetting_time(), workShift.getCell_name(), workShift.getMiddle_shift_start(), workShift.getMiddle_shift_end(),
                     workShift.getMiddle_shift_standard_beats(), workShift.getSetting_time(), workShift.getMiddle_worker_num(),
-                    workShift.getMiddle_overtime_worker_num(), workShift.getMiddle_shift_start(), workShift.getMiddle_shift_end(),
+                    workShift.getMiddle_overtime_worker_num(), workShift.getCell_name(), workShift.getMiddle_shift_start(), workShift.getMiddle_shift_end(),
                     workShift.getMiddle_shift_standard_beats(), workShift.getMiddle_worker_num(), workShift.getMiddle_overtime_worker_num(),
-                    workShift.getSetting_time());
+                    workShift.getSetting_time(), workShift.getCell_name());
             object.addProperty("system_status", true);
             object.addProperty("log", "add ok");
         } else {
@@ -88,7 +88,7 @@ public class WorkShiftRepo {
 
 
     /**
-     * 增加晚班班次
+     * add night shift
      *
      * @param workShift
      * @return
@@ -99,16 +99,16 @@ public class WorkShiftRepo {
         if (workShift.getNight_shift_start() != null && workShift.getNight_shift_end() != null
                 && workShift.getNight_shift_standard_beats() > 0 && workShift.getSetting_time() != null
                 && workShift.getNight_worker_num() > 0 && workShift.getNight_overtime_worker_num() >= 0) {
-            String sql = "IF NOT exists(SELECT * FROM work_shift WHERE setting_time = ?)" +
+            String sql = "IF NOT exists(SELECT * FROM work_shift WHERE setting_time = ? AND cell_name = ?)" +
                     "INSERT INTO work_shift (night_shift_start, night_shift_end, night_shift_standard_beats, setting_time, " +
-                    "night_worker_num, night_overtime_worker_num) VALUES(?, ?, ?, ?, ?, ?)" +
+                    "night_worker_num, night_overtime_worker_num, cell_name) VALUES(?, ?, ?, ?, ?, ?, ?)" +
                     "ELSE UPDATE work_shift SET night_shift_start = ?, night_shift_end = ?, night_shift_standard_beats = ?, " +
-                    "night_worker_num=? , night_overtime_worker_num = ? WHERE setting_time = ?";
-            jdbc.update(sql, workShift.getSetting_time(), workShift.getNight_shift_start(), workShift.getNight_shift_end(),
+                    "night_worker_num = ? , night_overtime_worker_num = ? WHERE setting_time = ? AND cell_name = ?";
+            jdbc.update(sql, workShift.getSetting_time(), workShift.getCell_name(), workShift.getNight_shift_start(), workShift.getNight_shift_end(),
                     workShift.getNight_shift_standard_beats(), workShift.getSetting_time(), workShift.getNight_worker_num(),
-                    workShift.getNight_overtime_worker_num(), workShift.getNight_shift_start(), workShift.getNight_shift_end(),
+                    workShift.getNight_overtime_worker_num(), workShift.getCell_name(), workShift.getNight_shift_start(), workShift.getNight_shift_end(),
                     workShift.getNight_shift_standard_beats(), workShift.getNight_worker_num(), workShift.getNight_overtime_worker_num(),
-                    workShift.getSetting_time());
+                    workShift.getSetting_time(), workShift.getCell_name());
             object.addProperty("system_status", true);
             object.addProperty("log", "add ok");
         } else {
@@ -119,13 +119,25 @@ public class WorkShiftRepo {
     }
 
     /**
-     * 获得班次信息
+     * get latest work shift based on cell name
      *
+     * @param cellName
      * @return
      */
-    public List<WorkShift> getLatestWorkShift() {
-        String sql = "SELECT TOP 1 * FROM work_shift ORDER BY id DESC";
-        return jdbc.query(sql, new WorkShiftMapper());
+    public List<WorkShift> getLatestWorkShift(String cellName) {
+        String sql = "SELECT TOP 1 * FROM work_shift WHERE cell_name = ? ORDER BY id DESC";
+        return jdbc.query(sql, new Object[]{cellName}, new WorkShiftMapper());
     }
 
+    /**
+     * get work shift base on cell name which is nearest close to current time
+     *
+     * @param cellName
+     * @param curTime
+     * @return
+     */
+    public List<WorkShift> getLatestWorkShiftByCurTime(String cellName, String curTime) {
+        return jdbc.query("SELECT TOP 1 * FROM work_shift WHERE cell_name = ? AND setting_time >= ? ORDER BY id DESC"
+                , new Object[]{cellName, curTime}, new WorkShiftMapper());
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.repository;
 
+import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
 import com.example.model.*;
 import com.example.util.Function;
@@ -8,6 +9,8 @@ import com.example.util.OutputTool;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +29,6 @@ public class Ishaft1UnitStatusRepo {
     private RestEventRepo restEventRepo;
     private LossTimeRepo lossTimeRepo;
     private ProductModelRepo productModelRepo;
-
     @Autowired
     public Ishaft1UnitStatusRepo(Ishaft1ProductRepo repo, WorkShiftRepo workShiftRepo
             , RestEventWithWorkShiftRepo restEventWithWorkShiftRepo
@@ -43,7 +45,7 @@ public class Ishaft1UnitStatusRepo {
     public String getByCurTime(Ishaft1UnitStatus unitStatus) throws ParseException {
 
         // 获得最新的班次信息
-        WorkShift workShift = workShiftRepo.getLatestWorkShift().get(0);
+        WorkShift workShift = workShiftRepo.getLatestWorkShift(Cell.ISHAFT1.toString()).get(0);
         unitStatus.setCurr_shift_info(workShift);
 
         // 班次小时分钟格式化

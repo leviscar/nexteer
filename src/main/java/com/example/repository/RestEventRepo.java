@@ -1,5 +1,6 @@
 package com.example.repository;
 
+import com.example.enumtype.Cell;
 import com.example.mapper.RestEventMapper;
 import com.example.model.RestEvent;
 import com.example.model.WorkShift;
@@ -74,7 +75,7 @@ public class RestEventRepo {
         }
 
         // 将新增的rest_event与workshift关联
-        WorkShift workShift = repo.getLatestWorkShift().get(0);
+        WorkShift workShift = repo.getLatestWorkShift(Cell.ISHAFT1.toString()).get(0);
         restEventWithWorkShiftRepo.add(rest_event_id, workShift.getId());
 
         object.addProperty("system_status", true);

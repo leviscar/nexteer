@@ -30,6 +30,7 @@ public class WorkShiftMapper implements RowMapper<WorkShift> {
         workShift.setMorning_overtime_worker_num(resultSet.getInt("morning_overtime_worker_num"));
         workShift.setMiddle_overtime_worker_num(resultSet.getInt("middle_overtime_worker_num"));
         workShift.setNight_overtime_worker_num(resultSet.getInt("night_overtime_worker_num"));
+        workShift.setCell_name(resultSet.getString("cell_name"));
         return workShift;
     }
 }

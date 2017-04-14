@@ -1,8 +1,12 @@
-package com.example.util;
+package com.example.task;
 
+import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
 import com.example.model.*;
 import com.example.repository.*;
+import com.example.util.Function;
+import com.example.util.ModelOutput;
+import com.example.util.OutputTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -40,37 +44,6 @@ public class ScheduledTask {
     }
 
     /**
-     * 定时插入当天产量
-     *
-     * @throws ParseException
-     */
-    @Scheduled(cron = "0 0 12 * * ?")
-    public void insertIsahft1OutputIntoDatabase() throws ParseException {
-        // 设置一天的时间
-        Date endDate = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(endDate);
-        calendar.add(Calendar.DAY_OF_MONTH, -1);
-        Date startDate = calendar.getTime();
-        // 设置插入的时间
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Ishaft1OutputInfo ishaft1OutputInfo = new Ishaft1OutputInfo();
-        ishaft1OutputInfo.setAdd_date(sdf.format(startDate));
-        // 获得一天所有产量信息
-        List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, endDate);
-        // 获得不同型号的产量
-        Map<String, Integer> map = ModelOutput.getEachModelOutput(products);
-        // 将不同型号的产量插入表中
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            ProductModel model = productModelRepo.getStdByModelId(entry.getKey());
-            ishaft1OutputInfo.setModel_name(model.getModelName());
-            ishaft1OutputInfo.setModel(entry.getKey());
-            ishaft1OutputInfo.setOutput_count(entry.getValue());
-            ishaft1OutputInfoRepo.add(ishaft1OutputInfo);
-        }
-    }
-
-    /**
      * 每天零点定时添加安全运行天数
      *
      * @throws ParseException
@@ -101,7 +74,7 @@ public class ScheduledTask {
         oee.setAddDate(new java.sql.Date(calendar.getTime().getTime()));
         hce.setAddDate(new java.sql.Date(calendar.getTime().getTime()));
         // 获得最新的班次信息
-        WorkShift workShift = workShiftRepo.getLatestWorkShift().get(0);
+        WorkShift workShift = workShiftRepo.getLatestWorkShift(Cell.ISHAFT1.toString()).get(0);
         // 获得所有班次的工作时间及分子乘积
         Map<Long, Integer> allShiftRes = getAllShiftsBeatsMultiOutput(workShift);
         long sumSeconds = 0;
@@ -129,8 +102,8 @@ public class ScheduledTask {
     public int calcHce(WorkShift workShift) throws ParseException {
         Date curDate = new Date();
         // test
-        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        curDate = sdf2.parse("2017-02-04 15:50:00");
+//        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        curDate = sdf2.parse("2017-02-04 15:50:00");
         // end
         // 总std*产量
         float totalStdMultiplyOutput = 0;
