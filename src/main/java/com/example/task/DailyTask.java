@@ -38,6 +38,7 @@ public class DailyTask implements Job {
     private ProductModelRepo productModelRepo;
     @Autowired
     private Ishaft1OutputInfoRepo ishaft1OutputInfoRepo;
+
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         logger.info("TaskName: {}", jobExecutionContext.getJobDetail().getKey().getName());
@@ -55,11 +56,10 @@ public class DailyTask implements Job {
         Ishaft1OutputInfo ishaft1OutputInfo = new Ishaft1OutputInfo();
         // get the last date
         Date curDate = new Date();
-
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         // test
 //        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        curDate = sdf2.parse("2017-02-04 15:50:00");
+//        curDate = sdf2.parse("2017-02-14 15:50:00");
         //end
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(curDate);
