@@ -51,6 +51,9 @@ function showEvent() {
     });
 
 }
+$('#addThiEvent').editableSelect({
+    effects: 'slide'
+});
 showEvent();
 function showBance() {
     $.get("http://localhost:8080//nexteer/work-shift/ISHAFT1", function (data) {
@@ -74,6 +77,9 @@ function showBance() {
         $("#mow").html($.parseJSON(data).morning_overtime_worker_num);
         $("#miow").html($.parseJSON(data).middle_overtime_worker_num);
         $("#now").html($.parseJSON(data).night_overtime_worker_num);
+        $("#oneTar").html($.parseJSON(data).morning_shift_target);
+        $("#twoTar").html($.parseJSON(data).morning_shift_target);
+        $("#thiTar").html($.parseJSON(data).morning_shift_target);
         $("#cellName").html($.parseJSON(data).cell_name);
 
     });
@@ -82,7 +88,7 @@ showBance();
 console.log("开始运行");
 $("#oneSub").bind("click", function () {
 
-    var OneshiftJson=new OneShiftInput( $("#oneTime").val(),$("#oneStart").val().toString(),$("#oneEnd").val().toString(),Number($("#oneStdBeats").val()),Number($("#oneWorkNum").val()),Number($("#oneWorkOverNum").val()),$("#oneCellName").val());
+    var OneshiftJson=new OneShiftInput( $("#oneTime").val(),$("#oneStart").val().toString(),$("#oneEnd").val().toString(),Number($("#oneStdBeats").val()),Number($("#oneWorkNum").val()),Number($("#oneWorkOverNum").val()),Number($("#oneTar").val()),$("#oneCellName").val());
     console.log("start");
     console.log(JSON.stringify(OneshiftJson));
     $.ajax({
@@ -112,7 +118,7 @@ $("#oneSub").bind("click", function () {
 });
 
 $("#twoSub").bind("click", function () {
-    var TwoshiftJson =new TwoShiftInput($("#twoTime").val(),$("#twoMStart").val().toString(),$("#twoMEnd").val().toString(),Number($("#twoMStdBeats").val()),Number($("#twoMWorkNum").val()),Number($("#twoMWorkOverNum").val()),$("#twoCellName").val());
+    var TwoshiftJson =new TwoShiftInput($("#twoTime").val(),$("#twoMStart").val().toString(),$("#twoMEnd").val().toString(),Number($("#twoMStdBeats").val()),Number($("#twoMWorkNum").val()),Number($("#twoMWorkOverNum").val()),Number($("#twoTar").val()),$("#twoCellName").val());
 
     console.log( JSON.stringify(TwoshiftJson));
 
@@ -144,7 +150,7 @@ $("#twoSub").bind("click", function () {
 $("#thiSub").bind("click", function () {
 
 
-    var ThishiftJson=new ThreeShiftInput($("#thiTime").val(),$("#thiNStart").val(),$("#thiNEnd").val(), Number($("#thiNBeats").val()), Number($("#thiNWorkNum").val()),Number($("#thiNWorkOverNum").val()),$("#thiCellName").val());
+    var ThishiftJson=new ThreeShiftInput($("#thiTime").val(),$("#thiNStart").val(),$("#thiNEnd").val(), Number($("#thiNBeats").val()), Number($("#thiNWorkNum").val()),Number($("#thiNWorkOverNum").val()),umber($("#thiTar").val()),$("#thiCellName").val());
 
     // $("#thiMorStart").val(),$("#thiMorEnd").val(),$("#thiMidStart").val(),
     //     $("#thiMidEnd").val(),$("#thiNStart").val(),$("#thiNEnd").val(),parseInt($("#thiMorTar").val()),parseInt($("#thiMidTar").val()),parseInt($("#thiNTar").

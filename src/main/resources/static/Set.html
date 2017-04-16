@@ -8,6 +8,7 @@
     <link rel="icon" href="images/favicon.ico">
     <title>Nexteer</title>
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/jquery-editable-select/dist/jquery-editable-select.min.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
     <link rel="stylesheet" href="css/mainboard.css" type="text/css">
@@ -567,7 +568,13 @@
                                             <option>晚班</option>
                                         </select>
                                     </p>
-                                    <p><label for="addThiEvent">事件</label><input type="text" id="addThiEvent"></p>
+                                    <!--<p><label for="addThiEvent">事件</label><input type="text" id="addThiEvent"></p>-->
+                                    <p><label for="addThiEvent">事件</label>
+                                        <select id="addThiEvent">
+                                            <option>吃饭</option>
+                                            <option>休息</option>
+                                        </select>
+                                    </p>
                                     <p><label for="addThiStart">事件开始时间</label><input type="time" id="addThiStart"></p>
                                     <p><label for="addThiEnd">事件结束时间</label><input type="time" id="addThiEnd"></p>
                                     <p id="addThiStatus">未知</p>
@@ -821,6 +828,7 @@
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/google-maps.js"></script>
+<script type="application/javascript" src="bower_components/jquery-editable-select/dist/jquery-editable-select.min.js"></script>
 <script src="js/defineGlobal.js"></script>
 <script src="js/scrapSet.js"></script>
 <script src="js/showTime.js"></script>
