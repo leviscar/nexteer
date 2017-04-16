@@ -27,6 +27,7 @@ public class Ishaft1UnitStatusRepo {
     private RestEventRepo restEventRepo;
     private LossTimeRepo lossTimeRepo;
     private ProductModelRepo productModelRepo;
+
     @Autowired
     public Ishaft1UnitStatusRepo(Ishaft1ProductRepo ishaft1ProductRepo, WorkShiftRepo workShiftRepo
             , RestEventWithWorkShiftRepo restEventWithWorkShiftRepo
@@ -76,28 +77,31 @@ public class Ishaft1UnitStatusRepo {
         int standardBeats = 0;
         int workerNum = 0;
         int overtimeWorkerNum = 0;
+        int target = 0;
         switch (shiftType) {
             case Ashift:
                 standardBeats = workShift.getMorning_shift_standard_beats();
                 workerNum = workShift.getMorning_worker_num();
                 overtimeWorkerNum = workShift.getMorning_overtime_worker_num();
+                target = workShift.getMorning_shift_target();
                 break;
             case Bshift:
                 standardBeats = workShift.getMiddle_shift_standard_beats();
                 workerNum = workShift.getMiddle_worker_num();
                 overtimeWorkerNum = workShift.getMiddle_overtime_worker_num();
+                target = workShift.getMiddle_shift_target();
                 break;
             case Cshift:
                 standardBeats = workShift.getNight_shift_standard_beats();
                 workerNum = workShift.getNight_worker_num();
                 overtimeWorkerNum = workShift.getNight_overtime_worker_num();
+                target = workShift.getNight_shift_target();
                 break;
         }
 
         // get the total rest seconds in this shift
-        int totalRestSeconds = (int) getRestSeconds(workShift.getId(), shiftType, sdf.parse(sdf.format(endDate)));
-        // calculate the target value
-        int target = (int) (((endDate.getTime() - startDate.getTime()) / 1000 - totalRestSeconds)  / standardBeats);
+//        int totalRestSeconds = (int) getRestSeconds(workShift.getId(), shiftType, sdf.parse(sdf.format(endDate)));
+        // set the target value
         unitStatus.setTarget(target);
 
         // 计算当前节拍
