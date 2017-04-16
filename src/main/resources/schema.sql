@@ -37,6 +37,9 @@ CREATE TABLE work_shift (
   morning_overtime_worker_num  INT, -- 早班加班工作人次
   middle_overtime_worker_num   INT, -- 中班加班工作人次
   night_overtime_worker_num    INT, -- 晚班加班工作人次
+  morning_shift_target         INT, -- 早班目标
+  middle_shift_target          INT, -- 中班目标
+  night_shift_target           INT, -- 晚班目标
   cell_name                    VARCHAR(10)
 );
 CREATE TABLE rest_event (

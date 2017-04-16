@@ -15,6 +15,9 @@ public class WorkShift {
     private String night_shift_start;
     private String night_shift_end;
     private Date setting_time;
+    private int morning_shift_target;
+    private int middle_shift_target;
+    private int night_shift_target;
     private int morning_shift_standard_beats;
     private int middle_shift_standard_beats;
     private int night_shift_standard_beats;
@@ -171,5 +174,29 @@ public class WorkShift {
 
     public void setCell_name(String cell_name) {
         this.cell_name = cell_name;
+    }
+
+    public int getMorning_shift_target() {
+        return morning_shift_target;
+    }
+
+    public void setMorning_shift_target(int morning_shift_target) {
+        this.morning_shift_target = morning_shift_target;
+    }
+
+    public int getMiddle_shift_target() {
+        return middle_shift_target;
+    }
+
+    public void setMiddle_shift_target(int middle_shift_target) {
+        this.middle_shift_target = middle_shift_target;
+    }
+
+    public int getNight_shift_target() {
+        return night_shift_target;
+    }
+
+    public void setNight_shift_target(int night_shift_target) {
+        this.night_shift_target = night_shift_target;
     }
 }
