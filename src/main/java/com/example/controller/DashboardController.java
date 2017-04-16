@@ -117,13 +117,13 @@ public class DashboardController {
             case ISHAFT1:
                 int standardBeats = 0;
                 switch (shiftType) {
-                    case MORNING_SHIFT:
+                    case Ashift:
                         standardBeats = workShift.getMorning_shift_standard_beats();
                         break;
-                    case MIDDLE_SHIFT:
+                    case Bshift:
                         standardBeats = workShift.getMiddle_shift_standard_beats();
                         break;
-                    case NIGHT_SHIFT:
+                    case Cshift:
                         standardBeats = workShift.getNight_shift_standard_beats();
                         break;
                 }
@@ -186,15 +186,15 @@ public class DashboardController {
                 int workerNum = 0;
                 int overtimeWorkerNum = 0;
                 switch (shiftType) {
-                    case MORNING_SHIFT:
+                    case Ashift:
                         workerNum = workShift.getMorning_worker_num();
                         overtimeWorkerNum = workShift.getMorning_overtime_worker_num();
                         break;
-                    case MIDDLE_SHIFT:
+                    case Bshift:
                         workerNum = workShift.getMiddle_worker_num();
                         overtimeWorkerNum = workShift.getMiddle_overtime_worker_num();
                         break;
-                    case NIGHT_SHIFT:
+                    case Cshift:
                         workerNum = workShift.getNight_worker_num();
                         overtimeWorkerNum = workShift.getNight_overtime_worker_num();
                         break;
@@ -284,13 +284,13 @@ public class DashboardController {
         int curBeats = OutputTool.calcCurBeats(topNProduct, topN);
         int standardBeats = 0;
         switch (shiftType) {
-            case MORNING_SHIFT:
+            case Ashift:
                 standardBeats = workShift.getMorning_shift_standard_beats();
                 break;
-            case MIDDLE_SHIFT:
+            case Bshift:
                 standardBeats = workShift.getMiddle_shift_standard_beats();
                 break;
-            case NIGHT_SHIFT:
+            case Cshift:
                 standardBeats = workShift.getNight_shift_standard_beats();
                 break;
         }

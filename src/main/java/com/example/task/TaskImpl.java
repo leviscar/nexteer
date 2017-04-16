@@ -68,6 +68,43 @@ public class TaskImpl {
     }
 
     /**
+     * get all tasks in specific group
+     *
+     * @param taskGroup
+     * @return
+     */
+    public List<TaskInfo> getTasksByGroup(String taskGroup) {
+        List<TaskInfo> taskInfos = new ArrayList<>();
+        try {
+            // get all jobs in the group
+            for (JobKey jobKey : scheduler.getJobKeys(GroupMatcher.groupEquals(taskGroup))) {
+                // get all triggers in the job
+                List<? extends Trigger> triggers = scheduler.getTriggersOfJob(jobKey);
+                for (Trigger trigger : triggers) {
+                    // get trigger state
+                    Trigger.TriggerState state = scheduler.getTriggerState(trigger.getKey());
+                    String cron = "";
+                    // get cron expression
+                    if (trigger instanceof CronTrigger) {
+                        CronTrigger cronTrigger = (CronTrigger) trigger;
+                        cron = cronTrigger.getCronExpression();
+                    }
+                    TaskInfo taskInfo = new TaskInfo();
+                    taskInfo.setCron(cron);
+                    taskInfo.setCellName(jobKey.getGroup());
+                    taskInfo.setTaskName(jobKey.getName());
+                    taskInfo.setTaskStatus(state.name());
+                    taskInfos.add(taskInfo);
+                }
+            }
+        } catch (SchedulerException e) {
+            logger.info("it happens when get all tasks list:" + e.toString());
+            e.printStackTrace();
+        }
+        return taskInfos;
+    }
+
+    /**
      * add task and insert into database
      *
      * @param taskInfo
@@ -132,6 +169,7 @@ public class TaskImpl {
 
             scheduler.scheduleJob(jobDetail, triggerSet, true);
             taskInfoRepo.updateCron(taskInfo);
+            logger.info("update success, taskGroup:{}, taskName:{}, cron:{}", taskGroup, taskName, cron);
         } catch (SchedulerException e) {
             logger.error("it happens when checking the task existence, e:{}", e.toString());
             e.printStackTrace();

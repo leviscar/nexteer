@@ -125,7 +125,7 @@ public class WorkShiftRepo {
      * @return
      */
     public List<WorkShift> getLatestWorkShift(String cellName) {
-        String sql = "SELECT TOP 1 * FROM work_shift WHERE cell_name = ? ORDER BY id DESC";
+        String sql = "SELECT TOP 1 * FROM work_shift WHERE cell_name = ? ORDER BY setting_time DESC";
         return jdbc.query(sql, new Object[]{cellName}, new WorkShiftMapper());
     }
 
@@ -136,8 +136,8 @@ public class WorkShiftRepo {
      * @param curTime
      * @return
      */
-    public List<WorkShift> getLatestWorkShiftByCurTime(String cellName, String curTime) {
-        return jdbc.query("SELECT TOP 1 * FROM work_shift WHERE cell_name = ? AND setting_time >= ? ORDER BY id DESC"
+    public List<WorkShift> getLatestWorkShiftByCurTime(String cellName, java.sql.Date curTime) {
+        return jdbc.query("SELECT TOP 1 * FROM work_shift WHERE cell_name = ? AND setting_time <= ? ORDER BY setting_time DESC"
                 , new Object[]{cellName, curTime}, new WorkShiftMapper());
     }
 }

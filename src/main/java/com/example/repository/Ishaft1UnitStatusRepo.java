@@ -9,8 +9,6 @@ import com.example.util.OutputTool;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,34 +21,34 @@ import java.util.*;
  */
 @Repository
 public class Ishaft1UnitStatusRepo {
-    private Ishaft1ProductRepo repo;
+    private Ishaft1ProductRepo ishaft1ProductRepo;
     private WorkShiftRepo workShiftRepo;
     private RestEventWithWorkShiftRepo restEventWithWorkShiftRepo;
     private RestEventRepo restEventRepo;
     private LossTimeRepo lossTimeRepo;
     private ProductModelRepo productModelRepo;
     @Autowired
-    public Ishaft1UnitStatusRepo(Ishaft1ProductRepo repo, WorkShiftRepo workShiftRepo
+    public Ishaft1UnitStatusRepo(Ishaft1ProductRepo ishaft1ProductRepo, WorkShiftRepo workShiftRepo
             , RestEventWithWorkShiftRepo restEventWithWorkShiftRepo
             , RestEventRepo restEventRepo, LossTimeRepo lossTimeRepo
             , ProductModelRepo productModelRepo) {
         this.lossTimeRepo = lossTimeRepo;
-        this.repo = repo;
+        this.ishaft1ProductRepo = ishaft1ProductRepo;
         this.workShiftRepo = workShiftRepo;
         this.restEventWithWorkShiftRepo = restEventWithWorkShiftRepo;
         this.restEventRepo = restEventRepo;
         this.productModelRepo = productModelRepo;
     }
 
-    public String getByCurTime(Ishaft1UnitStatus unitStatus) throws ParseException {
-
+    public String getIshaftUnitStatusByCurTime(String date) throws ParseException {
+        Ishaft1UnitStatus unitStatus = new Ishaft1UnitStatus();
         // 获得最新的班次信息
         WorkShift workShift = workShiftRepo.getLatestWorkShift(Cell.ISHAFT1.toString()).get(0);
         unitStatus.setCurr_shift_info(workShift);
 
         // 班次小时分钟格式化
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        Date curTime = sdf.parse(unitStatus.getCurr_time().substring(11, 16));
+        Date curTime = sdf.parse(date.substring(11, 16));
         ShiftType shiftType = OutputTool.getShiftType(workShift, curTime);
 
         JsonObject object = new JsonObject();
@@ -62,7 +60,7 @@ public class Ishaft1UnitStatusRepo {
         unitStatus.setShift_type(shiftType);
         // 设置当前年月日
         SimpleDateFormat dateSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date curDate = dateSdf.parse(unitStatus.getCurr_time());
+        Date curDate = dateSdf.parse(date);
         List<Date> dateList = OutputTool.changeShiftDate(curDate, workShift, shiftType);
         Date startDate = dateList.get(0);
         Date endDate = dateList.get(1);
@@ -70,7 +68,7 @@ public class Ishaft1UnitStatusRepo {
         curDate = (Date) addDateRes.keySet().toArray()[0];
         addDateRes = Function.addOneDay(startDate, endDate);
         endDate = (Date) addDateRes.keySet().toArray()[0];
-        List<Ishaft1Product> products = repo.getByPeriod(startDate, curDate);
+        List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, curDate);
         // 当前生产量
         int curNum = products.size();
         unitStatus.setCurr_num(curNum);
@@ -79,17 +77,17 @@ public class Ishaft1UnitStatusRepo {
         int workerNum = 0;
         int overtimeWorkerNum = 0;
         switch (shiftType) {
-            case MORNING_SHIFT:
+            case Ashift:
                 standardBeats = workShift.getMorning_shift_standard_beats();
                 workerNum = workShift.getMorning_worker_num();
                 overtimeWorkerNum = workShift.getMorning_overtime_worker_num();
                 break;
-            case MIDDLE_SHIFT:
+            case Bshift:
                 standardBeats = workShift.getMiddle_shift_standard_beats();
                 workerNum = workShift.getMiddle_worker_num();
                 overtimeWorkerNum = workShift.getMiddle_overtime_worker_num();
                 break;
-            case NIGHT_SHIFT:
+            case Cshift:
                 standardBeats = workShift.getNight_shift_standard_beats();
                 workerNum = workShift.getNight_worker_num();
                 overtimeWorkerNum = workShift.getNight_overtime_worker_num();
@@ -105,7 +103,7 @@ public class Ishaft1UnitStatusRepo {
         // 计算当前节拍
         // 取前30件计算平均值
         int topN = 30;
-        List<Date> topNProduct = repo.getCurBeats(startDate, curDate, topN);
+        List<Date> topNProduct = ishaft1ProductRepo.getCurBeats(startDate, curDate, topN);
         int curBeats = OutputTool.calcCurBeats(topNProduct, topN);
         unitStatus.setCurr_beats(curBeats);
         unitStatus.setStatus(OutputTool.getStatus(curBeats, standardBeats));
@@ -188,15 +186,15 @@ public class Ishaft1UnitStatusRepo {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         Date startTime = new Date(), endTime = new Date();
         switch (shiftType) {
-            case MORNING_SHIFT:
+            case Ashift:
                 startTime = sdf.parse(workShift.getMorning_shift_start());
                 endTime = sdf.parse(workShift.getMorning_shift_end());
                 break;
-            case MIDDLE_SHIFT:
+            case Bshift:
                 startTime = sdf.parse(workShift.getMiddle_shift_start());
                 endTime = sdf.parse(workShift.getMiddle_shift_end());
                 break;
-            case NIGHT_SHIFT:
+            case Cshift:
                 startTime = sdf.parse(workShift.getNight_shift_start());
                 endTime = sdf.parse(workShift.getNight_shift_end());
                 break;

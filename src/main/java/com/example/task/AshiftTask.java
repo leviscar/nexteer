@@ -1,7 +1,8 @@
 package com.example.task;
 
-import com.example.enumtype.Cell;
-import com.example.repository.WorkShiftRepo;
+import com.example.enumtype.ShiftType;
+import com.example.model.ShiftUnitStatus;
+import com.example.repository.Ishaft1UnitStatusRepo;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -12,6 +13,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by mrpan on 2017/4/13.
  */
@@ -21,10 +26,12 @@ import org.springframework.stereotype.Component;
 public class AshiftTask implements Job {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private WorkShiftRepo workShiftRepo;
+    private ShiftTask shiftTask;
+
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        logger.info("TaskName: {}", jobExecutionContext.getJobDetail().getKey().getName());
-        logger.info("workShift: {}", workShiftRepo.getLatestWorkShift(Cell.ISHAFT1.toString()));
+        logger.info("TaskName: {}, TaskGroup:{}", jobExecutionContext.getJobDetail().getKey().getName()
+                , jobExecutionContext.getJobDetail().getKey().getGroup());
+        shiftTask.addIshaft1UnitStatus(ShiftType.Ashift);
     }
 }
