@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="images/favicon.ico">
+    <title>Nexteer</title>
+    <!-- Bootstrap core CSS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
+    <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/height.css" type="text/css">
+    <style type="text/css">
+        body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 {
+            font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+        }
+
+        body {
+            background-color:#000000;
+            padding-top: 1%;
+        }
+        body{background: url(images/background.png) no-repeat center 0}
+        .wrapper{
+            width: 100%;
+            height: 100%;
+        }
+        .border-line{
+            border: 1px solid #ffffff;
+        }
+        .main{
+            width: 100%;
+            /*height: 680px;*/
+            height: 100%;
+            margin: 0 0 0 2%;
+        }
+        .row{
+            width: 100%;
+            height: 100%;
+        }
+        .item1{
+            width: 50%;
+            height: 100%;
+            padding: 0;
+        }
+        .item2{
+            width: 50%;
+            height: 100%;
+        }
+
+        .innerItemOne{
+            width: 100%;
+            height: 30.5%;
+            margin: 0 0 3% 0;
+        }
+        .innerItemTwo{
+            width: 100%;
+            height: 25%;
+            padding: 0;
+            margin: 0 0 2% 0;
+            position: relative;
+        }
+        .innerFour{
+            position: absolute;
+        }
+        .innerItemThi{
+            width: 100%;
+            height: 52%;
+            margin: 0 0 2% 0;
+        }
+        .innerItemFor{
+            width: 100%;
+            height: 15%;
+            position: relative;
+        }
+        .innerItemFor>div>div:nth-child(1){
+            width: 25%;
+            height: 30%;
+            position: absolute;
+            left: 20%;
+        }
+        .innerItemFor>div>div:nth-child(1)>img{
+            width: 100%;
+            height: 100%;
+        }
+        .innerItemFor>div>div:nth-child(2){
+            width: 60%;
+            height: 30%;
+            color: #ffffff;
+            font-size: 1.5em;
+            position: absolute;
+            left: 50%;
+        }
+        .innerItemFor>div>div:nth-child(3){
+            width: 100%;
+            height: 50%;
+            top:50%;
+            text-align: center;
+            color: #ffffff;
+            font-size: 1.5em;
+        }
+
+        .innerItemFor>div:nth-child(2)>div:nth-child(1){
+            width: 50%;
+            left: 0;
+            color: #ffffff;
+            font-size: 1.5em;
+            text-align: right;
+            height: 100%;
+        }
+        .innerItemFor>div:nth-child(2)>div:nth-child(2){
+            width: 50%;
+            left: 50%;
+            height: 100%;
+        }
+
+        .itemBackCol{
+            background-color: #727272;
+        }
+        .firstheader{
+            width:100% ;
+            height: 40%;
+            padding: 0;
+            position: relative;
+        }
+        .proHeader{
+            width:100% ;
+            height: 20%;
+            position: relative;
+        }
+        .proHeader>div:nth-child(1){
+            left: 2% !important;
+        }
+        .proHeader>div:nth-child(2){
+            left: 0 !important;
+        }
+        .content{
+            width: 100%;
+            height: 60%;
+        }
+        .proContent{
+            width:100% ;
+            height: 80%;
+            position: relative;
+        }
+        .firstheader>span{
+            display: block;
+            color: #FFFFFF;
+            font-weight:bold;
+            font-style: italic;
+            font-size:1.2em;
+            letter-spacing: 0.3em;
+        }
+        .header,.safeTitle{
+            width: 50%;
+            height: 60%;
+            position: absolute;
+            left: 1%;
+            color: #D9D9D9;
+            font-size:2.2em;
+            letter-spacing: 0.1em;
+        }
+        .safeTitle{
+            width:100%;
+
+        }
+        .headerDes,.safeHeader{
+            width: 110%;
+            height: 40%;
+            position: absolute;
+            top: 60%;
+        }
+        .safeHeader{
+            padding: 0;
+            margin: 0;
+            height: 40%;
+            left: -5%;
+            /*letter-spacing: 0.1em;*/
+            font-size:0.69em;
+        }
+        .headerDes>div:nth-child(1){
+            width: 10%;
+            height: 100%;
+            text-align: left;
+            color: #D9D9D9;
+            font-weight:bold;
+            font-size: 2em;
+            position: relative;
+        }
+        .headerDes>div:nth-child(2){
+            width: 75%;
+            height: 100%;
+            color: #D9D9D9;
+            vertical-align: text-bottom;
+            font-style: italic;
+            font-size: 1.3em;
+            position: absolute;
+            top:28%;
+            left: 8%;
+        }
+        .innerFour{
+            width: 33%;
+            height: 100%;
+            margin: 0 0 2% 0;
+            position: relative;
+            border-right: 1px dashed #ffffff;
+        }
+        .innerTwo{
+            width: 49%;
+            height: 100%;
+            margin: 0 0 2% 0;
+            position: relative;
+            border-right: 1px dashed #ffffff;
+        }
+        .ftqHeadr,.secHeader{
+            width: 100%;
+            height: 30%;
+            position: absolute;
+        }
+        .secHeader>div{
+            width: 90%;
+            height: 100%;
+            text-align: center;
+            color: #ffffff;
+            font-size: 2em;;
+        }
+
+        .ftqNum{
+            width: 100%;
+            height: 70%;
+            top: 30%;
+            position: relative;
+        }
+
+        .secNum{
+            width: 100%;
+            height: 70%;
+            top: 30%;
+            position: relative;
+        }
+
+        .ftqNum>div:nth-child(2){
+            width: 50%;
+            height: 100%;
+            position: absolute;
+            left: 60%;
+            top:15%;
+        }
+        .ftqTitle{
+            width: 100%;
+            height: 100%;
+        }
+
+        .ftqTitle>a{
+            color:#ffffff ;
+            font-size: 2.5em;
+
+        }
+        .ftqNumCon{
+            width: 50%;
+            height: 100%;
+            color:#ffffff ;
+            position: absolute;
+            top:15%;
+            font-size: 3em;
+        }
+
+        .innerItemTwo>div{
+            width: 50%;
+            height: 100%;
+        }
+        .safeHeader>div{
+            width: 90%;
+            height: 100%;
+            text-align: left;
+            color: #D9D9D9;
+            font-weight:bold;
+            font-size: 2em;
+        }
+        .navbar-collapse>span{
+            color: #ffffff;
+            font-weight:600;
+        }
+        .navbar{
+            background-color: #000000;
+        }
+        td>a{
+            color: #ffffff;
+        }
+        table{
+            color: #FFFFFF;
+        }
+        .table th{
+            height: 2em;
+            font-size: 1.5em;
+            text-align: center;
+            vertical-align: bottom !important;
+
+        }
+        .table td{
+            height: 2em;
+            font-size: 1.3em;
+            text-align: center;
+            color: #ffffff;
+            vertical-align: middle !important;
+
+        }
+        tr>td:nth-child(5){
+
+        }
+        .table-hover>tbody>tr:hover{
+            background-color: #888888 !important;
+        }
+        .table,.table th,.table td,.table tr{
+            /*border: none !important;*/
+        }
+        .green{
+            background-color: #46754d;
+        }
+        .red{
+            background-color: #A93439;
+        }
+        .white{
+            color: white;
+        }
+        .
+        td>span{
+            color: #70B27C;
+        }
+        button>span{
+            color: #cccccc;
+        }
+        button{
+            background-color: #A93439 !important;
+            border: none !important;
+        }
+        .header>a,.safeTitle>a{
+            color: #D9D9D9 !important;
+        }
+        button>a{
+            color: #cccccc !important;
+        }
+        .ftqNum>div>img{
+            width: 80%;
+            height: 70%;
+        }
+        td>img{
+            width: 40%;
+            height: 100%;
+        }
+        #scrapHeaderOne{
+            width: 30%;
+        }
+        #scrapHeaderTwo{
+            width: 60%;
+            left: 22%;
+        }
+    </style>
+
+</head>
+<body class="MainBoard">
+<div class="wrapper">
+    <div class="main container">
+        <div class="row ">
+            <div class="col-md-6  item1" >
+                <div class="innerItemOne  itemBackCol">
+                    <div class="firstheader ">
+                        <div class="header ">
+                            <a href="http://localhost:8080/nexteer/calendar.html">可动率</a>
+                        </div>
+                        <div class="headerDes ">
+                            <div class="col-md-2 ">OEE</div>
+                            <div class="col-md-9 ">Overall &nbsp;Equipment &nbsp;Effectiveness</div>
+                        </div>
+                    </div>
+                    <div class="content ">
+                        <div class="col-md-4 innerFour ">
+                            <div class="row ftqHeadr ">
+                                <div class="col-md-8 ftqTitle text-center "><a href="">BEPS</a></div>
+                            </div>
+                            <div class="ftqNum ">
+                                <div class=" col-md-6 ftqNumCon text-center ">98%</div>
+                                <div class="col-md-6 "><img src="images/sun.png" alt="NICE"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 innerFour ">
+                            <div class="row ftqHeadr ">
+                                <div class="col-md-8 ftqTitle text-center "><a href="">CEPS</a></div>
+                            </div>
+                            <div class="ftqNum ">
+                                <div class=" col-md-6 ftqNumCon text-center ">98%</div>
+                                <div class="col-md-6 "><img src="images/cloud.png" alt="NICE"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 innerFour ">
+                            <div class="row ftqHeadr ">
+                                <div class="col-md-8 ftqTitle text-center "><a href="">ISHAFT</a></div>
+                            </div>
+                            <div class="ftqNum ">
+                                <div class=" col-md-6 ftqNumCon text-center ">98%</div>
+                                <div class="col-md-6 "><img src="images/rain.png" alt="NICE"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="innerItemOne  itemBackCol">
+                    <div class="firstheader ">
+                        <div class="header ">
+                            <a href="http://localhost:8080/nexteer/calendar.html">人员利用率</a>
+                        </div>
+                        <div class="headerDes ">
+                            <div class="col-md-2 ">HCE</div>
+                            <div class="col-md-9 ">Human &nbsp;Resource &nbsp;Effectiveness</div>
+                        </div>
+                    </div>
+                    <div class="content ">
+                        <div class="col-md-4 innerFour ">
+                            <div class="row ftqHeadr ">
+                                <div class="col-md-8 ftqTitle text-center "><a href="">BEPS</a></div>
+                            </div>
+                            <div class="ftqNum ">
+                                <div class=" col-md-6 ftqNumCon text-center ">98%</div>
+                                <div class="col-md-6 "><img src="images/sun.png" alt="NICE"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 innerFour ">
+                            <div class="row ftqHeadr ">
+                                <div class="col-md-8 ftqTitle text-center "><a href="">CEPS</a></div>
+                            </div>
+                            <div class="ftqNum ">
+                                <div class=" col-md-6 ftqNumCon text-center ">98%</div>
+                                <div class="col-md-6 "><img src="images/cloud.png" alt="NICE"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 innerFour ">
+                            <div class="row ftqHeadr ">
+                                <div class="col-md-8 ftqTitle text-center "><a href="">ISHAFT</a></div>
+                            </div>
+                            <div class="ftqNum ">
+                                <div class=" col-md-6 ftqNumCon text-center ">98%</div>
+                                <div class="col-md-6 "><img src="images/rain.png" alt="NICE"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="innerItemOne  itemBackCol">
+                    <div class="firstheader s">
+                        <div class="header">
+                            <a href="http://localhost:8080/nexteer/calendar.html">报废成本</a>
+                        </div>
+                        <div class="headerDes">
+                            <div class="col-md-2 " id="scrapHeaderOne">Scrap &nbsp;Cost</div>
+                            <div class="col-md-9 " id="scrapHeaderTwo">Set &nbsp;CNY </div>
+                        </div>
+                    </div>
+                    <div class="content ">
+                        <div class="col-md-4 innerFour ">
+                            <div class="row ftqHeadr ">
+                                <div class="col-md-8 ftqTitle text-center "><a href="">BEPS</a></div>
+                            </div>
+                            <div class="ftqNum ">
+                                <div class=" col-md-6 ftqNumCon text-center ">98%</div>
+                                <div class="col-md-6 "><img src="images/sun.png" alt="NICE"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 innerFour ">
+                            <div class="row ftqHeadr ">
+                                <div class="col-md-8 ftqTitle text-center "><a href="">CEPS</a></div>
+                            </div>
+                            <div class="ftqNum ">
+                                <div class=" col-md-6 ftqNumCon text-center ">98%</div>
+                                <div class="col-md-6 "><img src="images/cloud.png" alt="NICE"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 innerFour ">
+                            <div class="row ftqHeadr ">
+                                <div class="col-md-8 ftqTitle text-center "><a href="">ISHAFT</a></div>
+                            </div>
+                            <div class="ftqNum ">
+                                <div class=" col-md-6 ftqNumCon text-center ">98%</div>
+                                <div class="col-md-6 "><img src="images/rain.png" alt="NICE"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6  item2">
+                <div class="innerItemTwo  itemBackCol ">
+                    <div class="col-md-6 ">
+                        <div class="firstheader">
+                            <div class="safeTitle">
+                                <a href="http://localhost:8080/nexteer/calendar.html">安全生产天数</a>
+                            </div>
+                            <div class="safeHeader ">
+                                <div class="col-md-9 ">Numbers of Days in Safety</div>
+                            </div>
+                        </div>
+                        <div class="content ">
+                            <div class="col-md-4 innerTwo ">
+                                <div class="row secHeader ">
+                                    <div class="col-md-8 ftqTitle text-center ">当前</div>
+                                </div>
+                                <div class="secNum">
+                                    <div class=" col-md-6 ftqNumCon text-center " id="safeDay">--</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 innerTwo ">
+                                <div class="row secHeader">
+                                    <div class="col-md-8 ftqTitle text-center ">最高值</div>
+                                </div>
+                                <div class="secNum">
+                                    <div class=" col-md-6 ftqNumCon text-center ">98%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="firstheader">
+                            <div class="safeTitle">
+                                <a href="http://localhost:8080/nexteer/calendar.html">质量无抱怨天数</a>
+                            </div>
+                            <div class="safeHeader ">
+                                <div class="col-md-9 ">Numbers of Days in Quality</div>
+                            </div>
+                        </div>
+                        <div class="content ">
+                            <div class="col-md-4 innerTwo ">
+                                <div class="row secHeader ">
+                                    <div class="col-md-8 ftqTitle text-center ">当前</div>
+                                </div>
+                                <div class="secNum">
+                                    <div class=" col-md-6 ftqNumCon text-center ">1000</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 innerTwo ">
+                                <div class="row secHeader">
+                                    <div class="col-md-8 ftqTitle text-center ">最高值</div>
+                                </div>
+                                <div class="secNum">
+                                    <div class=" col-md-6 ftqNumCon text-center ">98%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="innerItemThi  itemBackCol">
+                    <div class="proHeader">
+                        <div class="safeTitle ">
+                            <a href="http://localhost:8080/nexteer/IshaftOneUnit.html">产线实时数据</a>
+                        </div>
+                        <div class="safeHeader ">
+                            <div class="col-md-9 ">Numbers of Days in Quality</div>
+                        </div>
+                    </div>
+                    <div class="proContent ">
+                        <table class="table secTable table-hover text-center"  id="#secTable">
+                            <thead class="text-center">
+                            <tr >
+                                <th>产量展示</th>
+                                <th>目标产量</th>
+                                <th>当前产量</th>
+                                <th>达成率</th>
+                                <th>当前状态</th>
+                                <th>单元状态面板</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr >
+                                <td ><a href="">BEPS &nbsp; L1</a></td>
+                                <td >--</td>
+                                <td >--</td>
+                                <td >--</td>
+                                <td ><img src="images/up.png" alt="NICE"></td>
+                                <td ><a href="http://localhost:8080/nexteer/BEPSUnit.html">Click</a></td>
+                            </tr>
+                            <tr >
+                                <td><a href="">CEPS &nbsp; L1</a></td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td><img src="images/down.png" alt="NICE"></td>
+                                <td><a href="http://localhost:8080/nexteer/CEPSUnit.html">Click</a></td>
+                            </tr>
+                            <tr id="IshaftTable">
+                                <td><a href="http://localhost:8080/nexteer/IshaftYieldWeek.html">I-SHAFT &nbsp; L1</a></td>
+                                <td id="tarOut">--</td>
+                                <td id="curOut">--</td>
+                                <td id="reachRate">--</td>
+                                <td id="status"><img src="images/slider.png" alt="NICE"></td>
+                                <td><a href="http://localhost:8080/nexteer/IshaftOneUnit.html">Click</a></td>
+                            </tr>
+                            <tr id="IshaftTwoTable">
+                                <td><a href="http://localhost:8080/nexteer/IshaftYieldWeek.html">I-SHAFT &nbsp; L2</a></td>
+                                <td id="tarTwoOut">--</td>
+                                <td id="curTwoOut">--</td>
+                                <td id="reachTwoRate">--</td>
+                                <td id="statusTwo"><img src="images/up.png" alt="NICE"></td>
+                                <td><a href="http://localhost:8080/nexteer/IshaftOneUnit.html">Click</a></td>
+                            </tr>
+                            <tr id="IshaftThiTable">
+                                <td><a href="http://localhost:8080/nexteer/IshaftYieldWeek.html">I-SHAFT &nbsp; L2</a></td>
+                                <td id="tarThiOut">--</td>
+                                <td id="curThiOut">--</td>
+                                <td id="reachThiRate">--</td>
+                                <td id="statusThi"><img src="images/up.png" alt="NICE"></td>
+                                <td><a href="http://localhost:8080/nexteer/IshaftOneUnit.html">Click</a></td>
+                            </tr>
+                            <tr id="IshaftForTable">
+                                <td><a href="http://localhost:8080/nexteer/IshaftYieldWeek.html">I-SHAFT &nbsp; L2</a></td>
+                                <td id="tarForOut">--</td>
+                                <td id="curForOut">--</td>
+                                <td id="reachTForRate">--</td>
+                                <td id="statusFor"><img src="images/up.png" alt="NICE"></span></td>
+                                <td><a href="http://localhost:8080/nexteer/IshaftOneUnit.html">Click</a></td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <div class="innerItemFor ">
+                    <div class="content ">
+                        <div class="col-md-4 "><img src="images/logoNew.png" alt="Nexteer"></div>
+                        <div class="col-md-7 ">生产线实时数据看板</div>
+                        <div class="col-md-12 ">CQ-Nexteer Production Line Real-time Data Board</div>
+                    </div>
+                    <div class="firstheader ">
+                        <div class="col-md-6" id="showMainTime">00:00:00</div>
+                        <div class="col-md-6 " id="showMainDate">0000/00/00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myLoginModal" tabindex="-1" role="dialog" aria-labelledby="myLoginModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myLoginModalLabel">登录管理系统</h4>
+            </div>
+            <div class="modal-body">
+                <p><label for="userName">用户名</label>&nbsp;&nbsp;<input type="text" id="userName"></p>
+                <hr class="active">
+                <p><label for="passWord">密码</label>&nbsp;&nbsp;<input type="password" id="passWord"></p>
+                <hr class="active">
+                <p id="loginStu"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="loginSub">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="bower_components/jquery/dist/jquery.min.js" ></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/defineGlobal.js"></script>
+<script src="js/safeShow.js"></script>
+<!--<script src="js/scrapAmount.js"></script>-->
+<script src="js/showTime.js"></script>
+<!--&lt;!&ndash;<script src="js/ishaftDrop.js"></script>&ndash;&gt;-->
+<!--<script src="js/getMainHce.js"></script>-->
+<!--&lt;!&ndash;<script src="js/getMainOee.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;<script src="js/getMainIshaftTable.js"></script>&ndash;&gt;-->
+<script src="js/forIshaftOne.js"></script>
+<!--<script src="js/login.js"></script>-->
+</body>
+</html>

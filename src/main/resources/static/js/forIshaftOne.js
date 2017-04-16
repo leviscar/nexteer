@@ -38,7 +38,6 @@ function getMainOee() {
         dataType: "json",
         success: function (data) {
             if(data.status==false){
-                $("#showIshaftValue").html("00%");
             }
             else {
                 console.log(JSON.stringify(data));
@@ -67,11 +66,13 @@ function getMainPro() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
+            if (data.status!=false){
                 console.log(JSON.stringify(data));
                 console.log("获取"+cellName+"OutPut成功");
                 $("#tarOut").html(data.targetOutput);
                 $("#curOut").html(data.curOutput);
                 $("#reachRate").html(data.reachRate+"%");
+            }
 
         },
         failure: function (errMsg) {
