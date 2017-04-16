@@ -39,7 +39,7 @@ public class ShiftTask {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             //test
-            date = sdf.parse("2017-04-07 15:50:00");
+//            date = sdf.parse("2017-04-07 15:50:00");
             // set add date
             shiftUnitStatus.setAddDate(new java.sql.Date(date.getTime()));
             // get unit status
