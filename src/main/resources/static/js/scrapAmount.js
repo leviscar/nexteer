@@ -23,7 +23,7 @@ function showScrapData() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            $("#scrapAmount").html(data.value);
+            $("#Ishaft1ScrapAmount").html(data.value);
             console.log(JSON.stringify(data));
             console.log("载入报废金额成功。。");
 

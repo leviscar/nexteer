@@ -37,12 +37,13 @@ function getMainOee() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            if(data.status==false){
+            if(data.system_status ==false){
+                console.log(JSON.stringify(data));
             }
             else {
                 console.log(JSON.stringify(data));
                 console.log("获取"+cellName+"Oee成功");
-                $("#showIshaftValue").html(data.oee+"%");
+                $("#showIshaft1OeeValue").html(data.oee+"%");
             }
 
         },
@@ -66,7 +67,7 @@ function getMainPro() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            if (data.status!=false){
+            if (data.system_status !=false){
                 console.log(JSON.stringify(data));
                 console.log("获取"+cellName+"OutPut成功");
                 $("#tarOut").html(data.targetOutput);

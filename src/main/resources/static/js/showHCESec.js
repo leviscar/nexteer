@@ -172,6 +172,9 @@ function showWeek() {
                     {
                         name: 'hce',
                         type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         barMaxWidth:40,
                         label: {
                             normal: {
@@ -184,6 +187,9 @@ function showWeek() {
                     {
                         name: 'target',
                         type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         barMaxWidth:40,
                         label: {
                             normal: {
@@ -344,6 +350,9 @@ $("#showWeek").bind("click",function () {
                     {
                         name: 'hce',
                         type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         barMaxWidth:40,
                         label: {
                             normal: {
@@ -356,6 +365,9 @@ $("#showWeek").bind("click",function () {
                     {
                         name: 'target',
                         type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         barMaxWidth:40,
                         label: {
                             normal: {
@@ -525,6 +537,9 @@ $("#showMonth").bind("click",function (){
                         {
                             name: 'hce',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             barMaxWidth:40,
                             label: {
                                 normal: {
@@ -537,6 +552,9 @@ $("#showMonth").bind("click",function (){
                         {
                             name: 'target',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             barMaxWidth:40,
                             label: {
                                 normal: {
@@ -708,6 +726,9 @@ $("#showYear").bind("click",function () {
                         {
                             name: 'hce',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             barMaxWidth:40,
                             label: {
                                 normal: {
@@ -720,6 +741,9 @@ $("#showYear").bind("click",function () {
                         {
                             name: 'target',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             barMaxWidth:40,
                             label: {
                                 normal: {
