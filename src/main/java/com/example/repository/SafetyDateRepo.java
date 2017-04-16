@@ -82,9 +82,15 @@ public class SafetyDateRepo {
         String newDate = sdf.format(calendar.getTime());
         List<SafetyDate> res = findByDate(newDate.substring(0, 4), newDate.substring(4, 6), newDate.substring(6, 8));
         if (res.isEmpty()) {
-            jdbc.update("INSERT INTO safety_date (year, month, day, safe_dates, is_safe) VALUES (?,?,?,?,?)", year, month, day, 1, 1);
+            jdbc.update("if not exists(SELECT * from safety_date WHERE year = ? and month = ? and day = ?)" +
+                    "INSERT INTO safety_date (year, month, day, safe_dates, is_safe) VALUES (?,?,?,?,?)" +
+                    "ELSE UPDATE safety_date SET safe_dates = ?, is_safe = ? WHERE year = ? and month = ? and day = ?",
+                    year, month, day, year, month, day, 1, 1, 1, 1, year, month, day);
         } else {
-            jdbc.update("INSERT INTO safety_date (year, month, day, safe_dates, is_safe) VALUES (?,?,?,?,?)", year, month, day, res.get(0).getSafe_dates() + 1, 1);
+            jdbc.update("if not exists(SELECT * from safety_date WHERE year = ? and month = ? and day = ?)" +
+            "INSERT INTO safety_date (year, month, day, safe_dates, is_safe) VALUES (?,?,?,?,?)" +
+                    "ELSE UPDATE safety_date SET safe_dates = ?, is_safe = ? WHERE year = ? and month = ? and day = ?",
+                    year, month, day, year, month, day, res.get(0).getSafe_dates() + 1, 1, res.get(0).getSafe_dates() + 1, 1, year, month, day);
         }
     }
 

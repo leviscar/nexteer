@@ -96,14 +96,14 @@ public class DashboardController {
         String cellName = new Gson().fromJson(jsonObject.get("cell_name"), String.class);
 
         // 获得最新的班次信息
-        WorkShift workShift = workShiftRepo.getLatestWorkShift().get(0);
+        WorkShift workShift = workShiftRepo.getLatestWorkShift(Cell.ISHAFT1.toString()).get(0);
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String curTime = sdf.format(curDate);
         ShiftType shiftType = OutputTool.getShiftType(workShift, sdf.parse(curTime));
 
         JsonObject object = new JsonObject();
         if (shiftType == null) {
-            object.addProperty("status", false);
+            object.addProperty("system_status", false);
             object.addProperty("log", "当前时刻不在任何班次中");
             return object.toString();
         }
@@ -117,13 +117,13 @@ public class DashboardController {
             case ISHAFT1:
                 int standardBeats = 0;
                 switch (shiftType) {
-                    case MORNING_SHIFT:
+                    case Ashift:
                         standardBeats = workShift.getMorning_shift_standard_beats();
                         break;
-                    case MIDDLE_SHIFT:
+                    case Bshift:
                         standardBeats = workShift.getMiddle_shift_standard_beats();
                         break;
-                    case NIGHT_SHIFT:
+                    case Cshift:
                         standardBeats = workShift.getNight_shift_standard_beats();
                         break;
                 }
@@ -163,14 +163,14 @@ public class DashboardController {
         String cellName = new Gson().fromJson(jsonObject.get("cell_name"), String.class);
         Date curDate = new Gson().fromJson(jsonObject.get("curr_time"), Date.class);
         // 获得最新的班次信息
-        WorkShift workShift = workShiftRepo.getLatestWorkShift().get(0);
+        WorkShift workShift = workShiftRepo.getLatestWorkShift(Cell.ISHAFT1.toString()).get(0);
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String curTime = sdf.format(curDate);
         ShiftType shiftType = OutputTool.getShiftType(workShift, sdf.parse(curTime));
 
         JsonObject object = new JsonObject();
         if (shiftType == null) {
-            object.addProperty("status", false);
+            object.addProperty("system_status", false);
             object.addProperty("log", "当前时刻不在任何班次中");
             return object.toString();
         }
@@ -186,15 +186,15 @@ public class DashboardController {
                 int workerNum = 0;
                 int overtimeWorkerNum = 0;
                 switch (shiftType) {
-                    case MORNING_SHIFT:
+                    case Ashift:
                         workerNum = workShift.getMorning_worker_num();
                         overtimeWorkerNum = workShift.getMorning_overtime_worker_num();
                         break;
-                    case MIDDLE_SHIFT:
+                    case Bshift:
                         workerNum = workShift.getMiddle_worker_num();
                         overtimeWorkerNum = workShift.getMiddle_overtime_worker_num();
                         break;
-                    case NIGHT_SHIFT:
+                    case Cshift:
                         workerNum = workShift.getNight_worker_num();
                         overtimeWorkerNum = workShift.getNight_overtime_worker_num();
                         break;
@@ -250,14 +250,14 @@ public class DashboardController {
      * @throws ParseException
      */
     private String getIshaf1Output(String curTime) throws ParseException {
-        WorkShift workShift = workShiftRepo.getLatestWorkShift().get(0);
+        WorkShift workShift = workShiftRepo.getLatestWorkShift(Cell.ISHAFT1.toString()).get(0);
         // 班次小时分钟格式化
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         ShiftType shiftType = OutputTool.getShiftType(workShift, sdf.parse(curTime.substring(11, 16)));
 
         JsonObject object = new JsonObject();
         if (shiftType == null) {
-            object.addProperty("status", false);
+            object.addProperty("system_status", false);
             object.addProperty("log", "当前时刻不在任何班次中");
             return object.toString();
         }
@@ -284,13 +284,13 @@ public class DashboardController {
         int curBeats = OutputTool.calcCurBeats(topNProduct, topN);
         int standardBeats = 0;
         switch (shiftType) {
-            case MORNING_SHIFT:
+            case Ashift:
                 standardBeats = workShift.getMorning_shift_standard_beats();
                 break;
-            case MIDDLE_SHIFT:
+            case Bshift:
                 standardBeats = workShift.getMiddle_shift_standard_beats();
                 break;
-            case NIGHT_SHIFT:
+            case Cshift:
                 standardBeats = workShift.getNight_shift_standard_beats();
                 break;
         }
@@ -301,8 +301,10 @@ public class DashboardController {
 
         // 设置结束时间的日期
 
-        // 计算产量目标
-        int target = (int) ((endDate.getTime() - startDate.getTime()) / (1000 * standardBeats));
+        // get the total rest seconds in this shift
+        int totalRestSeconds = (int) getRestSeconds(workShift.getId(), shiftType, sdf.parse(sdf.format(endDate)));
+        // calculate the target value
+        int target = (int) (((endDate.getTime() - startDate.getTime()) / 1000 - totalRestSeconds)  / standardBeats);
         dashboardOutput.setTargetOutput(target);
 
         // 计算达成率
@@ -324,15 +326,15 @@ public class DashboardController {
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                     Date eventStartTime = sdf.parse(event.getEvent_start_time());
                     Date eventEndTime = sdf.parse(event.getEvent_end_time());
-                    if (endTime.before(eventStartTime) || startTime.after(eventEndTime)) {
+                    if (endTime.compareTo(eventStartTime) <= 0 || startTime.compareTo(eventEndTime) >= 0) {
                         restSeconds += 0;
-                    } else if (startTime.after(eventStartTime) && endTime.before(eventEndTime)) {
+                    } else if (startTime.compareTo(eventStartTime) >= 0 && endTime.compareTo(eventEndTime) <= 0) {
                         restSeconds += (endTime.getTime() - startTime.getTime()) / 1000;
-                    } else if (startTime.before(eventStartTime) && endTime.before(eventEndTime)) {
+                    } else if (startTime.compareTo(eventStartTime) <= 0 && endTime.compareTo(eventEndTime) <= 0) {
                         restSeconds += (endTime.getTime() - eventStartTime.getTime()) / 1000;
-                    } else if (startTime.after(eventStartTime) && endTime.after(eventEndTime)) {
+                    } else if (startTime.compareTo(eventStartTime) >= 0 && endTime.compareTo(eventEndTime) >= 0) {
                         restSeconds += (eventEndTime.getTime() - startTime.getTime()) / 1000;
-                    } else if (startTime.before(eventStartTime) && endTime.after(eventEndTime)) {
+                    } else if (startTime.compareTo(eventStartTime) <= 0 && endTime.compareTo(eventEndTime) >= 0) {
                         restSeconds += (eventEndTime.getTime() - eventStartTime.getTime()) / 1000;
                     }
                 }
@@ -355,9 +357,9 @@ public class DashboardController {
                     Date startTime = sdf.parse(event.getEvent_start_time());
                     Date endTime = sdf.parse(event.getEvent_end_time());
                     // 若当前时刻在休息时间之中
-                    if (curTime.before(endTime) && curTime.after(startTime)) {
+                    if (curTime.compareTo(endTime) <= 0 && curTime.compareTo(startTime) >= 0) {
                         restSeconds += curTime.getTime() - startTime.getTime();
-                    } else if (curTime.after(endTime)) {
+                    } else if (curTime.compareTo(endTime) >= 0) {
                         restSeconds += endTime.getTime() - startTime.getTime();
                     }
                 }

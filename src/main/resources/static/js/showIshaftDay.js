@@ -22,7 +22,9 @@ function judgeTime(time) {
 // };
 function getNowStatus() {
     // var curTime="2017-03-23 19:00:00";
-    var curTime= Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday)+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
+    // var curTime= Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday)+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
+    // var curTime="2017-03-23 15:00:00";
+    var curTime= judgeTime(Uyear)+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday)+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
     var curTimeJson= new curTimeInput(curTime);
     var timeRow=[];
     var hourlyTar=[];
@@ -70,19 +72,18 @@ function getNowStatus() {
                     console.log("操作正常");
                     console.log(data.shift_type);
                     if(data.shift_type=="NIGHT_SHIFT"){
-                        $("#banci").html("夜班");
+                        $("#banci").html("C班");
                         $("#stdBeats").html(data.curr_shift_info.night_shift_standard_beats);
                     }
                     if(data.shift_type=="MORNING_SHIFT"){
-                        $("#banci").html("早班");
+                        $("#banci").html("A班");
                         $("#stdBeats").html(data.curr_shift_info.morning_shift_standard_beats);
                     }
                     if(data.shift_type=="MIDDLE_SHIFT"){
-                        $("#banci").html("中班");
+                        $("#banci").html("B班");
                         $("#stdBeats").html(data.curr_shift_info.middle_shift_standard_beats);
                     }
-                    // var hourlyTarget=data.hourly_target.toFixed(2);
-                    // $("#target").html(data.hourly_target);
+
                     $("#finish").html(data.curr_num);
                     $("#defct").html(data.defective_num);
                     $("#status").html(data.status);

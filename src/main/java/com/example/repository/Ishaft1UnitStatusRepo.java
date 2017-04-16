@@ -1,5 +1,6 @@
 package com.example.repository;
 
+import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
 import com.example.model.*;
 import com.example.util.Function;
@@ -20,47 +21,46 @@ import java.util.*;
  */
 @Repository
 public class Ishaft1UnitStatusRepo {
-    private Ishaft1ProductRepo repo;
+    private Ishaft1ProductRepo ishaft1ProductRepo;
     private WorkShiftRepo workShiftRepo;
     private RestEventWithWorkShiftRepo restEventWithWorkShiftRepo;
     private RestEventRepo restEventRepo;
     private LossTimeRepo lossTimeRepo;
     private ProductModelRepo productModelRepo;
-
     @Autowired
-    public Ishaft1UnitStatusRepo(Ishaft1ProductRepo repo, WorkShiftRepo workShiftRepo
+    public Ishaft1UnitStatusRepo(Ishaft1ProductRepo ishaft1ProductRepo, WorkShiftRepo workShiftRepo
             , RestEventWithWorkShiftRepo restEventWithWorkShiftRepo
             , RestEventRepo restEventRepo, LossTimeRepo lossTimeRepo
             , ProductModelRepo productModelRepo) {
         this.lossTimeRepo = lossTimeRepo;
-        this.repo = repo;
+        this.ishaft1ProductRepo = ishaft1ProductRepo;
         this.workShiftRepo = workShiftRepo;
         this.restEventWithWorkShiftRepo = restEventWithWorkShiftRepo;
         this.restEventRepo = restEventRepo;
         this.productModelRepo = productModelRepo;
     }
 
-    public String getByCurTime(Ishaft1UnitStatus unitStatus) throws ParseException {
-
+    public String getIshaftUnitStatusByCurTime(String date) throws ParseException {
+        Ishaft1UnitStatus unitStatus = new Ishaft1UnitStatus();
         // 获得最新的班次信息
-        WorkShift workShift = workShiftRepo.getLatestWorkShift().get(0);
+        WorkShift workShift = workShiftRepo.getLatestWorkShift(Cell.ISHAFT1.toString()).get(0);
         unitStatus.setCurr_shift_info(workShift);
 
         // 班次小时分钟格式化
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        Date curTime = sdf.parse(unitStatus.getCurr_time().substring(11, 16));
+        Date curTime = sdf.parse(date.substring(11, 16));
         ShiftType shiftType = OutputTool.getShiftType(workShift, curTime);
 
         JsonObject object = new JsonObject();
         if (shiftType == null) {
-            object.addProperty("status", false);
+            object.addProperty("system_status", false);
             object.addProperty("log", "当前时刻不在任何班次中");
             return object.toString();
         }
         unitStatus.setShift_type(shiftType);
         // 设置当前年月日
         SimpleDateFormat dateSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date curDate = dateSdf.parse(unitStatus.getCurr_time());
+        Date curDate = dateSdf.parse(date);
         List<Date> dateList = OutputTool.changeShiftDate(curDate, workShift, shiftType);
         Date startDate = dateList.get(0);
         Date endDate = dateList.get(1);
@@ -68,7 +68,7 @@ public class Ishaft1UnitStatusRepo {
         curDate = (Date) addDateRes.keySet().toArray()[0];
         addDateRes = Function.addOneDay(startDate, endDate);
         endDate = (Date) addDateRes.keySet().toArray()[0];
-        List<Ishaft1Product> products = repo.getByPeriod(startDate, curDate);
+        List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, curDate);
         // 当前生产量
         int curNum = products.size();
         unitStatus.setCurr_num(curNum);
@@ -77,31 +77,33 @@ public class Ishaft1UnitStatusRepo {
         int workerNum = 0;
         int overtimeWorkerNum = 0;
         switch (shiftType) {
-            case MORNING_SHIFT:
+            case Ashift:
                 standardBeats = workShift.getMorning_shift_standard_beats();
                 workerNum = workShift.getMorning_worker_num();
                 overtimeWorkerNum = workShift.getMorning_overtime_worker_num();
                 break;
-            case MIDDLE_SHIFT:
+            case Bshift:
                 standardBeats = workShift.getMiddle_shift_standard_beats();
                 workerNum = workShift.getMiddle_worker_num();
                 overtimeWorkerNum = workShift.getMiddle_overtime_worker_num();
                 break;
-            case NIGHT_SHIFT:
+            case Cshift:
                 standardBeats = workShift.getNight_shift_standard_beats();
                 workerNum = workShift.getNight_worker_num();
                 overtimeWorkerNum = workShift.getNight_overtime_worker_num();
                 break;
         }
 
-        // 计算目标值
-        int target = (int) ((endDate.getTime() - startDate.getTime()) / (1000 * standardBeats));
+        // get the total rest seconds in this shift
+        int totalRestSeconds = (int) getRestSeconds(workShift.getId(), shiftType, sdf.parse(sdf.format(endDate)));
+        // calculate the target value
+        int target = (int) (((endDate.getTime() - startDate.getTime()) / 1000 - totalRestSeconds)  / standardBeats);
         unitStatus.setTarget(target);
 
         // 计算当前节拍
         // 取前30件计算平均值
         int topN = 30;
-        List<Date> topNProduct = repo.getCurBeats(startDate, curDate, topN);
+        List<Date> topNProduct = ishaft1ProductRepo.getCurBeats(startDate, curDate, topN);
         int curBeats = OutputTool.calcCurBeats(topNProduct, topN);
         unitStatus.setCurr_beats(curBeats);
         unitStatus.setStatus(OutputTool.getStatus(curBeats, standardBeats));
@@ -184,15 +186,15 @@ public class Ishaft1UnitStatusRepo {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         Date startTime = new Date(), endTime = new Date();
         switch (shiftType) {
-            case MORNING_SHIFT:
+            case Ashift:
                 startTime = sdf.parse(workShift.getMorning_shift_start());
                 endTime = sdf.parse(workShift.getMorning_shift_end());
                 break;
-            case MIDDLE_SHIFT:
+            case Bshift:
                 startTime = sdf.parse(workShift.getMiddle_shift_start());
                 endTime = sdf.parse(workShift.getMiddle_shift_end());
                 break;
-            case NIGHT_SHIFT:
+            case Cshift:
                 startTime = sdf.parse(workShift.getNight_shift_start());
                 endTime = sdf.parse(workShift.getNight_shift_end());
                 break;
@@ -232,15 +234,15 @@ public class Ishaft1UnitStatusRepo {
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                     Date eventStartTime = sdf.parse(event.getEvent_start_time());
                     Date eventEndTime = sdf.parse(event.getEvent_end_time());
-                    if (endTime.before(eventStartTime) || startTime.after(eventEndTime)) {
+                    if (endTime.compareTo(eventStartTime) <= 0 || startTime.compareTo(eventEndTime) >= 0) {
                         restSeconds += 0;
-                    } else if (startTime.after(eventStartTime) && endTime.before(eventEndTime)) {
+                    } else if (startTime.compareTo(eventStartTime) >= 0 && endTime.compareTo(eventEndTime) <= 0) {
                         restSeconds += (endTime.getTime() - startTime.getTime()) / 1000;
-                    } else if (startTime.before(eventStartTime) && endTime.before(eventEndTime)) {
+                    } else if (startTime.compareTo(eventStartTime) <= 0 && endTime.compareTo(eventEndTime) <= 0) {
                         restSeconds += (endTime.getTime() - eventStartTime.getTime()) / 1000;
-                    } else if (startTime.after(eventStartTime) && endTime.after(eventEndTime)) {
+                    } else if (startTime.compareTo(eventStartTime) >= 0 && endTime.compareTo(eventEndTime) >= 0) {
                         restSeconds += (eventEndTime.getTime() - startTime.getTime()) / 1000;
-                    } else if (startTime.before(eventStartTime) && endTime.after(eventEndTime)) {
+                    } else if (startTime.compareTo(eventStartTime) <= 0 && endTime.compareTo(eventEndTime) >= 0) {
                         restSeconds += (eventEndTime.getTime() - eventStartTime.getTime()) / 1000;
                     }
                 }
@@ -266,14 +268,14 @@ public class Ishaft1UnitStatusRepo {
         Date endDate = calendar.getTime();
         int count = 0;
         for (Ishaft1Product product : products) {
-            if (product.getTime().getTime() > startDate.getTime() && product.getTime().getTime() < endDate.getTime()) {
+            if (product.getTime().getTime() >= startDate.getTime() && product.getTime().getTime() <= endDate.getTime()) {
                 count++;
             } else {
                 map.put(sdf.format(startDate), count);
                 calendar.add(Calendar.HOUR_OF_DAY, 1);
                 startDate = endDate;
                 endDate = calendar.getTime();
-                count = 0;
+                count = 1;
             }
         }
         map.put(sdf.format(startDate), count);
@@ -302,9 +304,9 @@ public class Ishaft1UnitStatusRepo {
                     Date startTime = sdf.parse(event.getEvent_start_time());
                     Date endTime = sdf.parse(event.getEvent_end_time());
                     // 若当前时刻在休息时间之中
-                    if (curTime.before(endTime) && curTime.after(startTime)) {
+                    if (curTime.compareTo(endTime) <= 0 && curTime.compareTo(startTime) >= 0) {
                         restSeconds += curTime.getTime() - startTime.getTime();
-                    } else if (curTime.after(endTime)) {
+                    } else if (curTime.compareTo(endTime) >= 0) {
                         restSeconds += endTime.getTime() - startTime.getTime();
                     }
                 }

@@ -35,7 +35,7 @@ public class ProductModelRepo {
         jdbc.update(sql, model.getModelId(), model.getModelId(), model.getModelName(), model.getStd(), model.getCellName()
                 , model.getModelName(), model.getStd(), model.getCellName(), model.getModelId());
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("status", true);
+        jsonObject.addProperty("system_status", true);
         jsonObject.addProperty("log", "add OK");
         return jsonObject.toString();
     }

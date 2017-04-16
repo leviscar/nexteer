@@ -5,7 +5,7 @@ package com.example.enumtype;
  * 班次类型
  */
 public enum ShiftType {
-    MORNING_SHIFT("早班"), MIDDLE_SHIFT("中班"), NIGHT_SHIFT("晚班");
+    Ashift("Ashift"), Bshift("Bshift"), Cshift("Cshift");
 
     private String shift;
 
