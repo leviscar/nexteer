@@ -23,6 +23,12 @@ public class ScrapAmountMapper implements RowMapper<ScrapAmount> {
         scrapAmount.setIshaft4_value(resultSet.getInt("ishaft4_value"));
         scrapAmount.setBeps_value(resultSet.getInt("beps_value"));
         scrapAmount.setCeps_value(resultSet.getInt("ceps_value"));
+        scrapAmount.setIshaft1_target_value(resultSet.getInt("ishaft1_target_value"));
+        scrapAmount.setIshaft2_target_value(resultSet.getInt("ishaft2_target_value"));
+        scrapAmount.setIshaft3_target_value(resultSet.getInt("ishaft3_target_value"));
+        scrapAmount.setIshaft4_target_value(resultSet.getInt("ishaft4_target_value"));
+        scrapAmount.setBeps_target_value(resultSet.getInt("beps_target_value"));
+        scrapAmount.setCeps_target_value(resultSet.getInt("ceps_target_value"));
         return scrapAmount;
     }
 }

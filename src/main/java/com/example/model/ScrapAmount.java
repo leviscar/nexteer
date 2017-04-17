@@ -8,11 +8,17 @@ public class ScrapAmount {
     private String month;
     private String day;
     private int ishaft1_value;
+    private int ishaft1_target_value;
     private int ishaft2_value;
+    private int ishaft2_target_value;
     private int ishaft3_value;
+    private int ishaft3_target_value;
     private int ishaft4_value;
+    private int ishaft4_target_value;
     private int beps_value;
+    private int beps_target_value;
     private int ceps_value;
+    private int ceps_target_value;
 
     public ScrapAmount() {
     }
@@ -94,5 +100,53 @@ public class ScrapAmount {
 
     public void setCeps_value(int ceps_value) {
         this.ceps_value = ceps_value;
+    }
+
+    public int getIshaft1_target_value() {
+        return ishaft1_target_value;
+    }
+
+    public void setIshaft1_target_value(int ishaft1_target_value) {
+        this.ishaft1_target_value = ishaft1_target_value;
+    }
+
+    public int getIshaft2_target_value() {
+        return ishaft2_target_value;
+    }
+
+    public void setIshaft2_target_value(int ishaft2_target_value) {
+        this.ishaft2_target_value = ishaft2_target_value;
+    }
+
+    public int getIshaft3_target_value() {
+        return ishaft3_target_value;
+    }
+
+    public void setIshaft3_target_value(int ishaft3_target_value) {
+        this.ishaft3_target_value = ishaft3_target_value;
+    }
+
+    public int getIshaft4_target_value() {
+        return ishaft4_target_value;
+    }
+
+    public void setIshaft4_target_value(int ishaft4_target_value) {
+        this.ishaft4_target_value = ishaft4_target_value;
+    }
+
+    public int getBeps_target_value() {
+        return beps_target_value;
+    }
+
+    public void setBeps_target_value(int beps_target_value) {
+        this.beps_target_value = beps_target_value;
+    }
+
+    public int getCeps_target_value() {
+        return ceps_target_value;
+    }
+
+    public void setCeps_target_value(int ceps_target_value) {
+        this.ceps_target_value = ceps_target_value;
     }
 }
