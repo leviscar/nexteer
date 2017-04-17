@@ -22,8 +22,8 @@ function judgeTime(time) {
 // };
 function getNowStatus() {
     // var curTime="2017-03-23 19:00:00";
-    // var curTime= Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday)+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
-    var curTime="2017-03-23 15:00:00";
+    var curTime= Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday)+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
+    // var curTime="2017-03-23 15:00:00";
     // var curTime= judgeTime(Uyear)+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday)+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds());
     var curTimeJson= new curTimeInput(curTime);
     var timeRow=[];
