@@ -187,11 +187,15 @@ function showWeek() {
                     data: ["周一","周二","周三","周四","周五","周六","周日"]
                 },
                 yAxis:myYaxis,
+
                 series: [
 
                     {
                         name: 'Ishaft1',
-                        type: 'bar',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         label: {
                             normal: {
                                 show: true,
@@ -202,7 +206,10 @@ function showWeek() {
                     },
                     {
                         name: 'Ishaft2',
-                        type: 'bar',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         label: {
                             normal: {
                                 show: true,
@@ -213,7 +220,10 @@ function showWeek() {
                     },
                     {
                         name: 'Ishaft3',
-                        type: 'bar',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         label: {
                             normal: {
                                 show: true,
@@ -224,7 +234,10 @@ function showWeek() {
                     },
                     {
                         name: 'Ishaft4',
-                        type: 'bar',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         label: {
                             normal: {
                                 show: true,
@@ -235,7 +248,10 @@ function showWeek() {
                     },
                     {
                         name: 'BEPS',
-                        type: 'bar',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         label: {
                             normal: {
                                 show: true,
@@ -246,7 +262,10 @@ function showWeek() {
                     },
                     {
                         name: 'CEPS',
-                        type: 'bar',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         label: {
                             normal: {
                                 show: true,
@@ -320,33 +339,7 @@ $("#showWeek").bind("click",function () {
                     feature: {
                         dataView: {
                             show: true,
-                            readOnly: false,
-                            optionToContent: function (opt) {
-                                var axisData = opt.xAxis[0].data;
-                                var series = opt.series;
-                                var table = '<table style="width:100%;text-align:center"><tbody><tr>'
-                                    + '<td>时间</td>'
-                                    + '<td>' + series[0].name + '</td>'
-                                    + '<td>' + series[1].name + '</td>'
-                                    + '<td>' + series[2].name + '</td>'
-                                    + '<td>' + series[3].name + '</td>'
-                                    + '<td>' + series[4].name + '</td>'
-                                    + '<td>' + series[5].name + '</td>'
-                                    + '</tr>';
-                                for (var i = 0, l = axisData.length; i < l; i++) {
-                                    table += '<tr>'
-                                        + '<td>' + axisData[i] + '</td>'
-                                        + '<td>' + series[0].data[i] + '</td>'
-                                        + '<td>' + series[1].data[i] + '</td>'
-                                        + '<td>' + series[2].data[i] + '</td>'
-                                        + '<td>' + series[3].data[i] + '</td>'
-                                        + '<td>' + series[4].data[i] + '</td>'
-                                        + '<td>' + series[5].data[i] + '</td>'
-                                        + '</tr>';
-                                }
-                                table += '</tbody></table>';
-                                return table;
-                            }
+                            readOnly: false
                         },
                         saveAsImage: {
                             show: true
@@ -374,11 +367,15 @@ $("#showWeek").bind("click",function () {
                     data: ["周一","周二","周三","周四","周五","周六","周日"]
                 },
                 yAxis:myYaxis,
+
                 series: [
 
                     {
                         name: 'Ishaft1',
-                        type: 'bar',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         label: {
                             normal: {
                                 show: true,
@@ -389,7 +386,10 @@ $("#showWeek").bind("click",function () {
                     },
                     {
                         name: 'Ishaft2',
-                        type: 'bar',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         label: {
                             normal: {
                                 show: true,
@@ -400,7 +400,10 @@ $("#showWeek").bind("click",function () {
                     },
                     {
                         name: 'Ishaft3',
-                        type: 'bar',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         label: {
                             normal: {
                                 show: true,
@@ -411,7 +414,10 @@ $("#showWeek").bind("click",function () {
                     },
                     {
                         name: 'Ishaft4',
-                        type: 'bar',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         label: {
                             normal: {
                                 show: true,
@@ -422,7 +428,10 @@ $("#showWeek").bind("click",function () {
                     },
                     {
                         name: 'BEPS',
-                        type: 'bar',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         label: {
                             normal: {
                                 show: true,
@@ -433,7 +442,10 @@ $("#showWeek").bind("click",function () {
                     },
                     {
                         name: 'CEPS',
-                        type: 'bar',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         label: {
                             normal: {
                                 show: true,
@@ -483,6 +495,7 @@ $("#showMonth").bind("click",function (){
                     BEPSscrapValueArr[i]=model.beps_value;
                     CEPSscrapValueArr[i]=model.ceps_value;
                     scrapShowX[i]=model.year+"."+model.month+"."+model.day;
+
                 });
                 console.log(JSON.stringify(data));
                 console.log('nice');
@@ -561,11 +574,23 @@ $("#showMonth").bind("click",function (){
                         data: scrapShowX
                     },
                     yAxis:myYaxis,
+                    dataZoom: [
+                        {
+                            id: 'dataZoomX',
+                            type: 'slider',
+                            xAxisIndex: [0],
+                            filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
+                            start: 1,
+                            end: 100
+                        }],
                     series: [
 
                         {
                             name: 'Ishaft1',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             label: {
                                 normal: {
                                     show: true,
@@ -577,6 +602,9 @@ $("#showMonth").bind("click",function (){
                         {
                             name: 'Ishaft2',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             label: {
                                 normal: {
                                     show: true,
@@ -588,6 +616,9 @@ $("#showMonth").bind("click",function (){
                         {
                             name: 'Ishaft3',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             label: {
                                 normal: {
                                     show: true,
@@ -599,6 +630,9 @@ $("#showMonth").bind("click",function (){
                         {
                             name: 'Ishaft4',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             label: {
                                 normal: {
                                     show: true,
@@ -610,6 +644,9 @@ $("#showMonth").bind("click",function (){
                         {
                             name: 'BEPS',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             label: {
                                 normal: {
                                     show: true,
@@ -621,6 +658,9 @@ $("#showMonth").bind("click",function (){
                         {
                             name: 'CEPS',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             label: {
                                 normal: {
                                     show: true,
@@ -749,6 +789,15 @@ $("#showYear").bind("click",function () {
                         data: scrapShowX
                     },
                     yAxis:myYaxis,
+                    dataZoom: [
+                        {
+                            id: 'dataZoomX',
+                            type: 'slider',
+                            xAxisIndex: [0],
+                            filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
+                            start: 1,
+                            end: 100
+                        }],
                     series: [
 
                         {
@@ -951,6 +1000,15 @@ $("#showPeriod").bind("click",function () {
                     data: scrapShowX
                 },
                 yAxis:myYaxis,
+                dataZoom: [
+                    {
+                        id: 'dataZoomX',
+                        type: 'slider',
+                        xAxisIndex: [0],
+                        filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
+                        start: 1,
+                        end: 100
+                    }],
                 series: [
 
                     {

@@ -29,9 +29,12 @@ function getMainHce() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            console.log(JSON.stringify(data));
-            console.log("获取"+cellName+"HCE成功");
-            $("#showMainHce").html(data.hce.toFixed(2)+"%");
+            if(data.system_status != false){
+                console.log(JSON.stringify(data));
+                console.log("获取"+cellName+"HCE成功");
+                $("#showMainIshaft1Hce").html(data.hce.toFixed(1)+"%");
+            }
+
         },
         failure: function (errMsg) {
             console.log(errMsg);

@@ -34,8 +34,8 @@ function getMainOee() {
         sync : false,
         dataType: "json",
         success: function (data) {
-            if(data.status==false){
-                IshaftOEEValue[0]=11;
+            if(data.system_status ==false){
+                console.log(JSON.stringify(data));
             }
             else {
                 console.log(JSON.stringify(data));

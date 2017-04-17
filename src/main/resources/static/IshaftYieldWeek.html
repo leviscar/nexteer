@@ -326,7 +326,9 @@
                 myLengend.data=proNameMsg;
                 var sData=[];
                 for(var pI in proNameMsg){
-                    sData[pI]={name:proNameMsg[pI],type:'bar',data:myData[pI]};
+                    sData[pI]={name:proNameMsg[pI],type:'line',smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',data:myData[pI]};
                 }
                 console.log(sData);
 //                var mySeriesData =  [{
