@@ -4,6 +4,8 @@ import com.example.model.SafetyDate;
 import com.example.repository.SafetyDateRepo;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,10 +16,10 @@ import java.util.List;
 
 /**
  * Created by mrpan on 2017/3/1.
- * 安全运行天数api
+ * safety date api
  */
 @RestController
-@RequestMapping(value = "/safetyDate")
+@RequestMapping(value = "/safety-date")
 public class SafetyDateController {
     private SafetyDateRepo repo;
 
@@ -27,82 +29,75 @@ public class SafetyDateController {
     }
 
     /**
-     * 根据日期获得信息
+     * Get a safety date record on a specific date
      *
-     * @param json
+     * @param curDate
      * @return SafetyDate
      */
-    @RequestMapping(value = "/getDates", method = RequestMethod.POST)
-    public SafetyDate getDates(@RequestBody String json) {
-        ObjectMapper mapper = new ObjectMapper();
-        List<SafetyDate> res = new ArrayList<>();
-        try {
-            SafetyDate safetyDate = mapper.readValue(json, new TypeReference<SafetyDate>() {
-            });
-            res = repo.findByDate(safetyDate.getYear(), safetyDate.getMonth(), safetyDate.getDay());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @RequestMapping(value = "/day", method = RequestMethod.GET)
+    public String getDates(@RequestParam(value = "date") String curDate) throws ParseException {
+        List<SafetyDate> res = repo.findByDate(curDate);
         if (!res.isEmpty()) {
-            return res.get(0);
+            return new Gson().toJson(res.get(0));
         } else {
-            return new SafetyDate();
+            JsonObject object = new JsonObject();
+            object.addProperty("system_status", false);
+            object.addProperty("log", "当前日期没有记录");
+            return object.toString();
         }
     }
 
     /**
-     * 获取所有日期的信息
+     * Get all records
      *
      * @return list
      */
-    @RequestMapping(value = "/getAllDates", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<SafetyDate> getDates() {
         return repo.findAll();
     }
 
     /**
-     * 获得所有不安全的日期
+     * Get all records which is unsafe
      *
      * @return list
      */
-    @RequestMapping(value = "/getUnsafeDates", method = RequestMethod.GET)
+    @RequestMapping(value = "/unsafe", method = RequestMethod.GET)
     public List<SafetyDate> getUnsafeDates() {
-        return repo.findAllUnsafeDate();
+        return repo.findBySafeState();
     }
 
     /**
-     * 添加安全运行天数
+     * Add a safety date record into database
      *
      * @param json
      */
-    @RequestMapping(value = "/addDate", method = RequestMethod.POST)
-    public void addDate(@RequestBody String json) {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            SafetyDate safetyDate = mapper.readValue(json, new TypeReference<SafetyDate>() {
-            });
-            repo.addSafetyDate(safetyDate);
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
+    @RequestMapping(method = RequestMethod.POST)
+    public SafetyDate addDate(@RequestBody String json) throws ParseException {
+        Gson gson = new Gson();
+        SafetyDate safetyDate = gson.fromJson(json, SafetyDate.class);
+        return repo.addSafetyDate(safetyDate);
     }
 
     /**
-     * 重置安全运行天数
+     * Update the safety date record
      *
      * @param json
      */
-    @RequestMapping(value = "/reset", method = RequestMethod.POST)
-    public SafetyDate reset(@RequestBody String json) {
-        ObjectMapper mapper = new ObjectMapper();
-        SafetyDate res = new SafetyDate();
-        try {
-            SafetyDate safetyDate = mapper.readValue(json, new TypeReference<SafetyDate>() {
-            });
-            res = repo.resetSafetyDate(safetyDate);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return res;
+    @RequestMapping(method = RequestMethod.PATCH)
+    public SafetyDate update(@RequestBody String json) throws ParseException {
+        Gson gson = new Gson();
+        SafetyDate safetyDate = gson.fromJson(json, SafetyDate.class);
+        return repo.updateSafetyDate(safetyDate);
+    }
+
+    /**
+     * Get the max safe date value
+     *
+     * @return
+     */
+    @RequestMapping(value = "/max", method = RequestMethod.GET)
+    public int getMax() {
+        return repo.getMax();
     }
 }

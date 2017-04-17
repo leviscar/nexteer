@@ -2,15 +2,15 @@ package com.example.model;
 
 /**
  * Created by mrpan on 2017/3/1.
- * 安全运行天数
+ * safety date
  */
 public class SafetyDate {
     private Integer safe_dates;
     private String year;
     private String month;
     private String day;
-    private Integer is_safe; // 0表示不安全，1表示安全
-    private String log; // 记录出错原因
+    private Integer is_safe; // 0 means unsafe, 1 means safe
+    private String log;
 
     public SafetyDate() {
     }

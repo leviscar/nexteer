@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * Created by mrpan on 2017/3/1.
- * 安全运行天数数据库接口
+ * safety date database repository
  */
 @Repository
 public class SafetyDateRepo {
@@ -30,20 +30,20 @@ public class SafetyDateRepo {
     }
 
     /**
-     * 根据日期查询相关日期
+     * Get a safety date record on a specific date
      *
-     * @param year
-     * @param month
-     * @param day
+     * @param date
      * @return
      */
-    public List<SafetyDate> findByDate(String year, String month, String day) {
-        String sql = "SELECT * " + "FROM safety_date WHERE year = ? AND month = ? AND day = ?";
-        return jdbc.query(sql, new Object[]{year, month, day}, new SafetyDateMapper());
+    public List<SafetyDate> findByDate(String date) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date curDate = sdf.parse(date);
+        String sql = "SELECT * FROM safety_date WHERE year +'-' + month + '-' + day = ?";
+        return jdbc.query(sql, new Object[]{curDate}, new SafetyDateMapper());
     }
 
     /**
-     * 获得所有日期的相关信息
+     * Get all records
      *
      * @return
      */
@@ -53,53 +53,61 @@ public class SafetyDateRepo {
     }
 
     /**
-     * 获得所有非安全的信息
+     * Get all records which is unsafe
      *
      * @return
      */
-    public List<SafetyDate> findAllUnsafeDate() {
+    public List<SafetyDate> findBySafeState() {
         String sql = "SELECT * FROM safety_date WHERE is_safe = 0";
         return jdbc.query(sql, new SafetyDateMapper());
     }
 
     /**
-     * 添加安全天数
+     * Add a safety date record into database
      *
      * @param safetyDate
      * @throws ParseException
      */
-    public void addSafetyDate(SafetyDate safetyDate) throws ParseException {
-        // 获得前一天的安全天数
+    public SafetyDate addSafetyDate(SafetyDate safetyDate) throws ParseException {
+        // get safety date record of the day before
         String year = safetyDate.getYear();
         String month = safetyDate.getMonth();
         String day = safetyDate.getDay();
-        String s = year + month + day;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        Date date = sdf.parse(s);
+        String curDate = year + "-" + month + "-" + day;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = sdf.parse(curDate);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.DAY_OF_YEAR, -1);
         String newDate = sdf.format(calendar.getTime());
-        List<SafetyDate> res = findByDate(newDate.substring(0, 4), newDate.substring(4, 6), newDate.substring(6, 8));
+        List<SafetyDate> res = findByDate(newDate);
         if (res.isEmpty()) {
-            jdbc.update("if not exists(SELECT * from safety_date WHERE year = ? and month = ? and day = ?)" +
-                    "INSERT INTO safety_date (year, month, day, safe_dates, is_safe) VALUES (?,?,?,?,?)" +
-                    "ELSE UPDATE safety_date SET safe_dates = ?, is_safe = ? WHERE year = ? and month = ? and day = ?",
-                    year, month, day, year, month, day, 1, 1, 1, 1, year, month, day);
+            safetyDate.setIs_safe(1);
+            safetyDate.setSafe_dates(1);
+            jdbc.update("IF NOT exists(SELECT * FROM safety_date WHERE year = ? AND month = ? AND day = ?)" +
+                            "INSERT INTO safety_date (year, month, day, safe_dates, is_safe, log) VALUES (?,?,?,?,?,?)" +
+                            "ELSE UPDATE safety_date SET safe_dates = ?, is_safe = ?, log = ?" +
+                            "WHERE year = ? AND month = ? AND day = ?"
+                    , year, month, day, year, month, day, 1, 1, safetyDate.getLog(), 1, 1, safetyDate.getLog(), year, month, day);
         } else {
-            jdbc.update("if not exists(SELECT * from safety_date WHERE year = ? and month = ? and day = ?)" +
-            "INSERT INTO safety_date (year, month, day, safe_dates, is_safe) VALUES (?,?,?,?,?)" +
-                    "ELSE UPDATE safety_date SET safe_dates = ?, is_safe = ? WHERE year = ? and month = ? and day = ?",
-                    year, month, day, year, month, day, res.get(0).getSafe_dates() + 1, 1, res.get(0).getSafe_dates() + 1, 1, year, month, day);
+            safetyDate.setIs_safe(1);
+            safetyDate.setSafe_dates(res.get(0).getSafe_dates() + 1);
+            safetyDate.setLog("Today is running safe!");
+            jdbc.update("IF NOT exists(SELECT * FROM safety_date WHERE year = ? AND month = ? AND day = ?)" +
+                            "INSERT INTO safety_date (year, month, day, safe_dates, is_safe, log) VALUES (?,?,?,?,?,?)" +
+                            "ELSE UPDATE safety_date SET safe_dates = ?, is_safe = ?, log = ? WHERE year = ? AND month = ? AND day = ?"
+                    , year, month, day, year, month, day, res.get(0).getSafe_dates() + 1, 1, safetyDate.getLog()
+                    , res.get(0).getSafe_dates() + 1, 1, safetyDate.getLog(), year, month, day);
         }
+        return safetyDate;
     }
 
     /**
-     * 重置安全天数
+     * Update the safety date record
      *
      * @param safetyDate
      */
-    public SafetyDate resetSafetyDate(SafetyDate safetyDate) {
+    public SafetyDate updateSafetyDate(SafetyDate safetyDate) throws ParseException {
         if (safetyDate.getSafe_dates() == 0) {
             safetyDate.setIs_safe(0);
         } else {
@@ -108,15 +116,27 @@ public class SafetyDateRepo {
         if (safetyDate.getLog() == null || "".equals(safetyDate.getLog())) {
             safetyDate.setLog("Today is running safe!");
         }
-        List<SafetyDate> res = findByDate(safetyDate.getYear(), safetyDate.getMonth(), safetyDate.getDay());
+        String curDate = safetyDate.getYear() + "-" + safetyDate.getMonth() + "-" + safetyDate.getDay();
+        List<SafetyDate> res = findByDate(curDate);
         if (res.size() == 0) {
-            jdbc.update("INSERT INTO safety_date (year, month, day, safe_dates, is_safe, log) VALUES (?,?,?,?,?,?)", safetyDate.getYear(), safetyDate.getMonth(),
-                    safetyDate.getDay(), safetyDate.getSafe_dates(), safetyDate.getIs_safe(), safetyDate.getLog());
+            jdbc.update("INSERT INTO safety_date (year, month, day, safe_dates, is_safe, log) VALUES (?,?,?,?,?,?)"
+                    , safetyDate.getYear(), safetyDate.getMonth(), safetyDate.getDay()
+                    , safetyDate.getSafe_dates(), safetyDate.getIs_safe(), safetyDate.getLog());
         } else {
-            jdbc.update("UPDATE safety_date SET is_safe = ?, safe_dates = ?, log = ? WHERE year = ? AND month  = ? AND day = ?",
-                    safetyDate.getIs_safe(), safetyDate.getSafe_dates(), safetyDate.getLog(), safetyDate.getYear(), safetyDate.getMonth(),
-                    safetyDate.getDay());
+            jdbc.update("UPDATE safety_date SET is_safe = ?, safe_dates = ?, log = ? " +
+                            "WHERE year = ? AND month  = ? AND day = ?"
+                    , safetyDate.getIs_safe(), safetyDate.getSafe_dates(), safetyDate.getLog()
+                    , safetyDate.getYear(), safetyDate.getMonth(), safetyDate.getDay());
         }
         return safetyDate;
+    }
+
+    /**
+     * Get the max safe date value
+     *
+     * @return
+     */
+    public int getMax() {
+        return jdbc.queryForObject("SELECT MAX(safe_dates) FROM safety_date", Integer.class);
     }
 }
