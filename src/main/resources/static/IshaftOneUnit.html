@@ -16,6 +16,7 @@
         body {
             background-color: #F7F7F7;
         }
+        body{background: url(images/background.png) no-repeat center 0}
         .main{
             width: 100%;
             margin:0 0 0 3% ;
@@ -33,9 +34,8 @@
         .main .item {
             margin: 0 2% 2% 0;
             position: relative;
-            background-color: #FFF;
             float: left;
-            box-shadow: 2px 2px 5px #CCC;
+            /*box-shadow: 2px 2px 5px #CCC;*/
             height: 100%;
         }
         .row1{
@@ -50,12 +50,15 @@
         .innerItem{
             width: 100%;
             margin: 0 0 10% 0;
+            /*background-color: #727272;*/
             padding: 0;
-            box-shadow: 2px 2px 5px #CCC;
+            color: #ffffff;
+
             height: 100%;
         }
         .innerItemSec{
             width: 100%;
+            color: #ffffff;
             margin: 0 0 3% 0;
             padding: 0;
             height: 60%;
@@ -63,6 +66,9 @@
         .innerItemThi{
             width: 100%;
             margin: 0 0 0 0;
+            /*color: #ffffff;*/
+            color: white;
+            /*background-color: #727272;*/
             padding: 0;
             height: 35%;
         }
@@ -72,27 +78,44 @@
         .unitTitle{
             text-align: center;
             font-size: 2.5em;
-            color: #0f0f0f;
+            /*color: #0f0f0f;*/
+            color: #ffffff;
         }
         .unitHeader{
             position: absolute;
             left: 30%;
             width: 40%;
         }
+        .form-control{
+            color: #ffffff !important;
+            background-color: inherit !important;
+        }
+
     </style>
     <style type="text/css">
+        .innerItem>table>tbody>tr>td:nth-child(1),.innerItem>table>tbody>tr>td:nth-child(2){
+            padding: 0;
+        }
+
         .table tr{
             text-align: center;
         }
         .firstTable>tbody td{
-            font-size: 1.8em;
-            color: #aa314d;
+              font-size: 2.8em;
+              /*color: #aa314d;*/
+              /*color: #727272;*/
+            color: #D10429;
+          }
+        .table>tbody>tr>td,.table>thead>tr>td{
+            border-top: none;
         }
         .secTable>thead>tr>td{
-            font-size: 1.8em;
-            color: #aa314d;
+            font-size: 2.3em;
+            /*color: #727272;*/
+            color: #D10429;
+            /*color: #aa314d;*/
             vertical-align: middle;
-            height: 4em;
+            height: 3em;
         }
         .secTable>tbody>tr>td{
             font-size: 3em;
@@ -100,14 +123,14 @@
             height: 2em;
         }
         .firstTable>tbody>tr>td:nth-child(2){
-            color:black ;
+            color:white;
         }
         .table-hover > tbody > tr:hover {
             background-color: gray;
         }
         .firstTable>tbody>tr>td{
             vertical-align: middle;
-            height: 4.8em;
+            height: 3em;
         }
 
     </style>
@@ -185,12 +208,12 @@
                         <td id="finish">0000</td>
                     </tr>
                     <tr>
-                        <td>不良品</td>
-                        <td id="defct">0000</td>
-                    </tr>
-                    <tr>
                         <td>单元状态</td>
                         <td id="status">status</td>
+                    </tr>
+                    <tr>
+                        <td>当前时间</td>
+                        <td id="showMainTime">0000</td>
                     </tr>
                     </tbody>
                 </table>
@@ -202,12 +225,11 @@
                 <table class="table table-hover secTable">
                     <thead>
                     <tr>
-                        <td>当前节拍</td>
-                        <td>标准节拍</td>
-                        <td>损失时间</td>
-                        <td>可动率</td>
-                        <td>人员利用率</td>
-                        <td>当前时间</td>
+                        <td>当前节拍/秒</td>
+                        <td>标准节拍/秒</td>
+                        <td>损失时间/秒</td>
+                        <td>可动率/%</td>
+                        <td>人员利用率/%</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -217,7 +239,6 @@
                         <td id="lossTime">0000</td>
                         <td id="movRate">0000</td>
                         <td id="personUse">0000</td>
-                        <td id="showMainTime">0000</td>
                     </tr>
                     </tbody>
                 </table>
