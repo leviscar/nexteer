@@ -58,24 +58,24 @@ public class ProductModelController {
 
     /**
      * Update record
+     *
      * @param model
      * @return
      */
     @RequestMapping(method = RequestMethod.PATCH)
-    public ProductModel update(@RequestBody ProductModel model){
+    public ProductModel update(@RequestBody ProductModel model) {
         return repo.update(model);
     }
 
     /**
      * Delete record based on model id
-     * @param model
-     * @param response
+     *
+     * @param modelId
      * @return
      */
     @RequestMapping(method = RequestMethod.DELETE)
-    public void delete(@RequestBody ProductModel model, HttpServletResponse response){
-        repo.deleteByModelId(model.getModelId());
-        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+    public void delete(@RequestParam(value = "modelId") String modelId) {
+        repo.deleteByModelId(modelId);
     }
 
 }
