@@ -2,19 +2,9 @@ package com.example.controller;
 
 import com.example.model.Oee;
 import com.example.repository.OeeRepo;
-import com.example.util.Function;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
@@ -22,6 +12,7 @@ import java.util.List;
  * Created by mrpan on 2017/3/29.
  */
 @RestController
+@RequestMapping(value = "/oee")
 public class OeeController {
     private OeeRepo oeeRepo;
 
@@ -31,87 +22,112 @@ public class OeeController {
     }
 
     /**
-     * 设置target oee
+     * Set target oee
      *
-     * @param json
+     * @param oee
      * @return
      */
-    @RequestMapping(value = "/oee/target")
-    public String addTargetOee(@RequestBody String json) {
-        ObjectMapper mapper = Function.sqlDateMapper();
-        try {
-            Oee oee = mapper.readValue(json, new TypeReference<Oee>() {
-            });
-            return oeeRepo.addTargetOee(oee);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return e.toString();
-        }
+    @RequestMapping(value = "/target", method = RequestMethod.POST)
+    public Oee addTargetOee(@RequestBody Oee oee) {
+        return oeeRepo.addTargetOee(oee);
     }
 
     /**
-     * 按周获取指定产线的oee
+     * Get all oee records of specific cell during a period based on start date and end date
      *
-     * @param json
+     * @param cell
+     * @param start
+     * @param end
      * @return
      */
-    @RequestMapping(value = "/oee/week")
-    public List<Oee> getWeeklyOeeByCellName(@RequestBody String json) {
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(json);
-        JsonObject object = element.getAsJsonObject();
-        java.util.Date curDate = new Gson().fromJson(object.get("curr_time"), java.util.Date.class);
-        String cellName = new Gson().fromJson(object.get("cell_name"), String.class);
-        return oeeRepo.getWeeklyOeeByCellName(cellName, new Date(curDate.getTime()));
+    @RequestMapping(value = "/period/{cell}")
+    public List<Oee> getPeriodOeeByCellName(@PathVariable(value = "cell") String cell
+            , @RequestParam(value = "start") Date start, @RequestParam(value = "end") Date end) {
+        return oeeRepo.getPeriodOeeByCellName(cell, start, end);
     }
 
     /**
-     * 按周期获取指定产线的oee
+     * Get a week records of specific cell based on current date
      *
-     * @param json
+     * @param cell
+     * @param date
      * @return
      */
-    @RequestMapping(value = "/oee/period")
-    public List<Oee> getPeriodOeeByCellName(@RequestBody String json) {
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(json);
-        JsonObject object = element.getAsJsonObject();
-        java.util.Date endDate = new Gson().fromJson(object.get("end_time"), java.util.Date.class);
-        java.util.Date startDate = new Gson().fromJson(object.get("start_time"), java.util.Date.class);
-        String cellName = new Gson().fromJson(object.get("cell_name"), String.class);
-        return oeeRepo.getPeriodOeeByCellName(cellName, new Date(startDate.getTime()), new Date(endDate.getTime()));
+    @RequestMapping(value = "/week/{cell}")
+    public List<Oee> getWeeklyOeeByCellName(@PathVariable(value = "cell") String cell
+            , @RequestParam(value = "date") Date date) {
+        return oeeRepo.getWeeklyOeeByCellName(cell, date);
     }
 
     /**
-     * 按月获取指定产线的oee
+     * Get a month records of specific cell based on current date
      *
-     * @param json
+     * @param cell
+     * @param date
      * @return
      */
-    @RequestMapping(value = "/oee/month")
-    public List<Oee> getMonthlyOeeByCellName(@RequestBody String json) {
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(json);
-        JsonObject object = element.getAsJsonObject();
-        java.util.Date curDate = new Gson().fromJson(object.get("curr_time"), java.util.Date.class);
-        String cellName = new Gson().fromJson(object.get("cell_name"), String.class);
-        return oeeRepo.getMonthlyOeeByCellName(cellName, new Date(curDate.getTime()));
+    @RequestMapping(value = "/month/{cell}")
+    public List<Oee> getMonthlyOeeByCellName(@PathVariable(value = "cell") String cell
+            , @RequestParam(value = "date") Date date) {
+        return oeeRepo.getMonthlyOeeByCellName(cell, date);
     }
 
     /**
-     * 按年获取指定产线的oee
+     * Get a year records of specific cell based on current date
      *
-     * @param json
+     * @param cell
+     * @param date
      * @return
      */
-    @RequestMapping(value = "/oee/year")
-    public List<Oee> getYearlyOeeByCellName(@RequestBody String json) {
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(json);
-        JsonObject object = element.getAsJsonObject();
-        java.util.Date curDate = new Gson().fromJson(object.get("curr_time"), java.util.Date.class);
-        String cellName = new Gson().fromJson(object.get("cell_name"), String.class);
-        return oeeRepo.getYearlyOeeByCellName(cellName, new Date(curDate.getTime()));
+    @RequestMapping(value = "/year/{cell}")
+    public List<Oee> getYearlyOeeByCellName(@PathVariable(value = "cell") String cell
+            , @RequestParam(value = "date") Date date) {
+        return oeeRepo.getYearlyOeeByCellName(cell, date);
     }
 
+    /**
+     * Get all oee records of all cells during a period based on start date and end date
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    @RequestMapping(value = "/period")
+    public List<Oee> getAllByPeriod(@RequestParam(value = "start") Date start
+            , @RequestParam(value = "end") Date end) {
+        return oeeRepo.getAllCellsPeriodOee(start, end);
+    }
+
+    /**
+     * Get a week records of of all cells based on current date
+     *
+     * @param date
+     * @return
+     */
+    @RequestMapping(value = "/week")
+    public List<Oee> getAllByWeek(@RequestParam(value = "date") Date date) {
+        return oeeRepo.getAllCellsWeeklyOee(date);
+    }
+
+    /**
+     * Get a month records of of all cells based on current date
+     *
+     * @param date
+     * @return
+     */
+    @RequestMapping(value = "/month")
+    public List<Oee> getAllByMonth(@RequestParam(value = "date") Date date) {
+        return oeeRepo.getAllCellsMonthlyOee(date);
+    }
+
+    /**
+     * Get a year records of of all cells based on current date
+     *
+     * @param date
+     * @return
+     */
+    @RequestMapping(value = "/year")
+    public List<Oee> getAllByYear(@RequestParam(value = "date") Date date) {
+        return oeeRepo.getAllCellsYearlyOee(date);
+    }
 }

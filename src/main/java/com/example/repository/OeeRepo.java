@@ -2,7 +2,6 @@ package com.example.repository;
 
 import com.example.mapper.OeeMapper;
 import com.example.model.Oee;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,37 +24,37 @@ public class OeeRepo {
     }
 
     /**
-     * 添加oee
+     * Add oee record into database
      *
      * @param oee
      * @return
      */
-    public String addActualOee(Oee oee) {
+    public Oee addActualOee(Oee oee) {
         jdbc.update("IF NOT EXISTS (SELECT * FROM oee WHERE add_date = ? AND cell_name = ?)" +
                         "INSERT INTO oee (oee, add_date, cell_name) VALUES (?, ?, ?)" +
                         "ELSE UPDATE oee SET oee = ? WHERE add_date = ? AND cell_name = ?"
                 , oee.getAddDate(), oee.getCellName(), oee.getOee(), oee.getAddDate(), oee.getCellName()
                 , oee.getOee(), oee.getAddDate(), oee.getCellName());
-        return new Gson().toJson(oee);
+        return oee;
     }
 
     /**
-     * 添加目标oee记录
+     * Add target oee into database
      *
      * @param oee
      * @return
      */
-    public String addTargetOee(Oee oee) {
+    public Oee addTargetOee(Oee oee) {
         jdbc.update("IF NOT EXISTS (SELECT * FROM oee WHERE add_date = ? AND cell_name = ?)" +
                         "INSERT INTO oee (target_oee, add_date, cell_name) VALUES (?, ?, ?)" +
                         "ELSE UPDATE oee SET target_oee = ? WHERE add_date = ? AND cell_name = ?"
                 , oee.getAddDate(), oee.getCellName(), oee.getTargetOee(), oee.getAddDate(), oee.getCellName()
                 , oee.getTargetOee(), oee.getAddDate(), oee.getCellName());
-        return new Gson().toJson(oee);
+        return oee;
     }
 
     /**
-     * 获得某产线某一个周期的oee
+     * Get all oee records of specific cell during a period based on start date and end date
      *
      * @param cellName
      * @param startDate
@@ -69,7 +68,7 @@ public class OeeRepo {
 
 
     /**
-     * 按周获取某产线的oee
+     * Get a week records of specific cell based on current date
      *
      * @param cellName
      * @param curDate
@@ -84,7 +83,7 @@ public class OeeRepo {
     }
 
     /**
-     * 按月获取某产线的oee
+     * Get a month records of specific cell based on current date
      *
      * @param cellName
      * @param curDate
@@ -98,7 +97,7 @@ public class OeeRepo {
     }
 
     /**
-     * 按年获取某产线的oee
+     * Get a year records of specific cell based on current date
      *
      * @param cellName
      * @param curDate
@@ -110,5 +109,59 @@ public class OeeRepo {
         calendar.set(Calendar.MONTH, 0);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
         return getPeriodOeeByCellName(cellName, new Date(calendar.getTime().getTime()), curDate);
+    }
+
+    /**
+     * Get all oee records of all cells during a period based on start date and end date
+     *
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    public List<Oee> getAllCellsPeriodOee(Date startDate, Date endDate) {
+        String sql = "SELECT * FROM oee WHERE add_date BETWEEN ? AND ?";
+        return jdbc.query(sql, new Object[]{startDate, endDate}, new OeeMapper());
+    }
+
+
+    /**
+     * Get a week records of of all cells based on current date
+     *
+     * @param curDate
+     * @return
+     */
+    public List<Oee> getAllCellsWeeklyOee(Date curDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
+        calendar.setTime(curDate);
+        calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
+        return getAllCellsPeriodOee(new Date(calendar.getTime().getTime()), curDate);
+    }
+
+    /**
+     * Get a month records of of all cells based on current date
+     *
+     * @param curDate
+     * @return
+     */
+    public List<Oee> getAllCellsMonthlyOee(Date curDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(curDate);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        return getAllCellsPeriodOee(new Date(calendar.getTime().getTime()), curDate);
+    }
+
+    /**
+     * Get a year records of of all cells based on current date
+     *
+     * @param curDate
+     * @return
+     */
+    public List<Oee> getAllCellsYearlyOee(Date curDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(curDate);
+        calendar.set(Calendar.MONTH, 0);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        return getAllCellsPeriodOee(new Date(calendar.getTime().getTime()), curDate);
     }
 }
