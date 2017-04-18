@@ -9,15 +9,15 @@ CREATE TABLE safety_date (
 );
 DROP TABLE scrap_amount
 CREATE TABLE scrap_amount (
-  year          NCHAR(4) NOT NULL,
-  month         NCHAR(2) NOT NULL,
-  day           NCHAR(2) NOT NULL,
-  ishaft1_value INT,
-  ishaft2_value INT,
-  ishaft3_value INT,
-  ishaft4_value INT,
-  ceps_value    INT,
-  beps_value    INT,
+  year                 NCHAR(4) NOT NULL,
+  month                NCHAR(2) NOT NULL,
+  day                  NCHAR(2) NOT NULL,
+  ishaft1_value        INT,
+  ishaft2_value        INT,
+  ishaft3_value        INT,
+  ishaft4_value        INT,
+  ceps_value           INT,
+  beps_value           INT,
   ishaft1_target_value INT,
   ishaft2_target_value INT,
   ishaft3_target_value INT,
@@ -103,6 +103,12 @@ CREATE TABLE shift_unit_status (
   unit_status VARCHAR(4000),
   add_date    DATE,
   PRIMARY KEY (id, add_date, cell_name, shift_type)
+);
+CREATE TABLE quality_complain (
+  add_date    DATE PRIMARY KEY not NULL ,
+  no_complain INT,
+  count       INT,
+  log         NVARCHAR(255)
 );
 
 -- Quartz tables
