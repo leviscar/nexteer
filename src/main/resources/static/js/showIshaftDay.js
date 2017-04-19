@@ -36,7 +36,8 @@ function getNowStatus() {
     var myLegend={
         data:['Output per Hour','Hourly Target'],
         textStyle:{
-            color:"#ffffff"
+            // color:"#ffffff"
+            fontSize:22
         }
     };
     var myyAxis=[{
@@ -46,14 +47,14 @@ function getNowStatus() {
         nameTextStyle:{
             fontStyle:'normal',
             fontWeight:'bold',
-            color:"#ffffff",
-            fontSize:16
+            // color:"#ffffff",
+            fontSize:22
         },
         axisLabel:{
             textStyle:{
-                fontSize:14,
-                fontWeight:'bold',
-                color:"#ffffff"
+                fontSize:22,
+                fontWeight:'bold'
+                // color:"#ffffff"
             }
         }
     }];
@@ -159,8 +160,8 @@ function getNowStatus() {
                         axisLabel:{
                             textStyle:{
                                 fontWeight:'bold',
-                                fontSize:12,
-                                color:"#ffffff"
+                                fontSize:20
+                                // color:"#ffffff"
                             }
                         },
                         // data: ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00']
@@ -173,14 +174,14 @@ function getNowStatus() {
                         barMaxWidth:40,
                         itemStyle: {
                             normal: {
-                                barBorderRadius: 5,
-                                color: new echarts.graphic.LinearGradient(
-                                    0, 0, 0, 1,
-                                    [
-                                        {offset: 0, color: '#14c8d4'},
-                                        {offset: 1, color: '#43eec6'}
-                                    ]
-                                )
+                                barBorderRadius: 5
+                                // color: new echarts.graphic.LinearGradient(
+                                //     0, 0, 0, 1,
+                                //     [
+                                //         {offset: 0, color: '#14c8d4'},
+                                //         {offset: 1, color: '#43eec6'}
+                                //     ]
+                                // )
                             }
                         },
                         label: {

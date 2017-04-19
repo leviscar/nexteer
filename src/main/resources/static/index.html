@@ -14,15 +14,24 @@
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/height.css" type="text/css">
     <style type="text/css">
+
         body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 {
-            font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+            font-family: "My Font",Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+            /*font-family: "My Font" !important;*/
         }
 
         body {
             background-color:#000000;
             padding-top: 1%;
+            font-size: 20px !important;
         }
-        body{background: url(images/background.png) no-repeat center 0}
+        /*body{background: url(images/background.png) no-repeat center 0}*/
+        .bg{
+            background-image: url(images/backgroundNew.png);//此为图片地址
+            background-size: 100% 100%;
+            -moz-background-size: 100% 100%;
+            -webkit-background-size: 100% 100%;
+        }
         .wrapper{
             width: 100%;
             height: 100%;
@@ -336,7 +345,6 @@
         .white{
             color: white;
         }
-        .
         td>span{
             color: #70B27C;
         }
@@ -378,7 +386,7 @@
     </style>
 
 </head>
-<body class="MainBoard">
+<body class="MainBoard bg">
 <div class="wrapper">
     <div class="main container">
         <div class="row ">
@@ -400,7 +408,7 @@
                             </div>
                             <div class="ftqNum ">
                                 <div class=" col-md-6 ftqNumCon text-center ">---</div>
-                                <div class="col-md-6 "><img src="images/sun.png" alt="NICE"></div>
+                                <div class="col-md-6 "><img src="images/Sunny.png" alt="NICE"></div>
                             </div>
                         </div>
                         <div class="col-md-4 innerFour ">
@@ -409,7 +417,7 @@
                             </div>
                             <div class="ftqNum ">
                                 <div class=" col-md-6 ftqNumCon text-center ">---</div>
-                                <div class="col-md-6 "><img src="images/cloud.png" alt="NICE"></div>
+                                <div class="col-md-6 "><img src="images/Cloudy.png" alt="NICE"></div>
                             </div>
                         </div>
                         <div class="col-md-4 innerFour ">
@@ -418,7 +426,7 @@
                             </div>
                             <div class="ftqNum ">
                                 <div class=" col-md-6 ftqNumCon text-center " id="showIshaft1OeeValue">---</div>
-                                <div class="col-md-6 "><img src="images/rain.png" alt="NICE"></div>
+                                <div class="col-md-6 "><img src="images/Rainy.png" alt="NICE"></div>
                             </div>
                         </div>
                     </div>
@@ -440,7 +448,7 @@
                             </div>
                             <div class="ftqNum ">
                                 <div class=" col-md-6 ftqNumCon text-center ">---</div>
-                                <div class="col-md-6 "><img src="images/sun.png" alt="NICE"></div>
+                                <div class="col-md-6 "><img src="images/Sunny.png" alt="NICE"></div>
                             </div>
                         </div>
                         <div class="col-md-4 innerFour ">
@@ -449,7 +457,7 @@
                             </div>
                             <div class="ftqNum ">
                                 <div class=" col-md-6 ftqNumCon text-center ">---</div>
-                                <div class="col-md-6 "><img src="images/cloud.png" alt="NICE"></div>
+                                <div class="col-md-6 "><img src="images/Cloudy.png" alt="NICE"></div>
                             </div>
                         </div>
                         <div class="col-md-4 innerFour ">
@@ -458,7 +466,7 @@
                             </div>
                             <div class="ftqNum ">
                                 <div class=" col-md-6 ftqNumCon text-center " id="showMainIshaft1Hce">---</div>
-                                <div class="col-md-6 "><img src="images/rain.png" alt="NICE"></div>
+                                <div class="col-md-6 "><img src="images/Rainy.png" alt="NICE"></div>
                             </div>
                         </div>
                     </div>
@@ -479,8 +487,8 @@
                                 <div class="col-md-8 ftqTitle text-center "><a href="">BEPS</a></div>
                             </div>
                             <div class="ftqNum ">
-                                <div class=" col-md-6 ftqNumCon text-center ">---</div>
-                                <div class="col-md-6 "><img src="images/sun.png" alt="NICE"></div>
+                                <div class=" col-md-6 ftqNumCon text-center " id="BEPSScrapAmount">---</div>
+                                <div class="col-md-6 "><img src="images/Sunny.png" alt="NICE"></div>
                             </div>
                         </div>
                         <div class="col-md-4 innerFour ">
@@ -488,8 +496,8 @@
                                 <div class="col-md-8 ftqTitle text-center "><a href="">CEPS</a></div>
                             </div>
                             <div class="ftqNum ">
-                                <div class=" col-md-6 ftqNumCon text-center ">---</div>
-                                <div class="col-md-6 "><img src="images/cloud.png" alt="NICE"></div>
+                                <div class=" col-md-6 ftqNumCon text-center " id="CEPSScrapAmount">---</div>
+                                <div class="col-md-6 "><img src="images/Cloudy.png" alt="NICE"></div>
                             </div>
                         </div>
                         <div class="col-md-4 innerFour ">
@@ -498,7 +506,7 @@
                             </div>
                             <div class="ftqNum ">
                                 <div class=" col-md-6 ftqNumCon text-center " id="Ishaft1ScrapAmount">---</div>
-                                <div class="col-md-6 "><img src="images/rain.png" alt="NICE"></div>
+                                <div class="col-md-6 "><img src="images/Rainy.png" alt="NICE"></div>
                             </div>
                         </div>
                     </div>
@@ -529,7 +537,7 @@
                                     <div class="col-md-8 ftqTitle text-center ">最高值</div>
                                 </div>
                                 <div class="secNum">
-                                    <div class=" col-md-6 NumCon text-center ">---</div>
+                                    <div class=" col-md-6 NumCon text-center " id="safeHigh">---</div>
                                 </div>
                             </div>
                         </div>

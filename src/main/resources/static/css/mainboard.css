@@ -5,6 +5,73 @@
 .navbar{
     /*background-color: #e51937;*/
 }
+@media screen and (min-width:2100px)
+{
+    body{
+        font-size:21px;
+    }
+}
+@media screen and (min-width:2000px)
+{
+    body{
+        font-size:20px;
+    }
+}
+@media screen and (min-width:1900px)
+{
+    body{
+        font-size:19px;
+    }
+}
+@media screen and (min-width:1800px)
+{
+    body{
+        font-size:18px;
+    }
+}
+@media screen and (min-width:1700px)
+{
+    body{
+        font-size:17px;
+    }
+}
+@media screen and (min-width:1600px)
+{
+    body{
+        font-size:16px;
+    }
+}
+@media screen and (min-width:1500px)
+{
+    body{
+        font-size:15px;
+    }
+}
+@media screen and (min-width:1400px)
+{
+    body{
+        font-size:14px;
+    }
+}
+@media screen and (min-width:1300px)
+{
+    body{
+        font-size:13px;
+    }
+}
+@media screen and (min-width:1200px)
+{
+    body{
+        font-size:12px;
+    }
+}
 body{
     padding-top: 5%;
+}
+@font-face {
+    font-family: "My Font";
+    src: url("static/images/normalZAO.otf");
+}
+body{
+    font-size: 20px !important;
 }

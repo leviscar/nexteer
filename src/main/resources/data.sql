@@ -47,6 +47,27 @@ INSERT [dbo].[product_model] ([id], [model_id], [model_name], [cell_name], [std]
 VALUES (41, N'38028838', N'ishaft1测试型号', N'Ishaft1', 0.16)
 SET IDENTITY_INSERT [dbo].[product_model] OFF
 
+SET IDENTITY_INSERT [dbo].[scrap_amount] ON
+
+INSERT [dbo].[scrap_amount] ([year], [month], [day], [ishaft1_value], [ishaft2_value],[ishaft3_value],[ishaft4_value],[ceps_value],[beps_value])
+VALUES (2017,04,10,1000,2000,1200,1300,1200,1400)
+INSERT [dbo].[scrap_amount] ([year], [month], [day], [ishaft1_value], [ishaft2_value],[ishaft3_value],[ishaft4_value],[ceps_value],[beps_value])
+VALUES (2017,04,11,1000,2000,1200,1300,1200,1400)
+INSERT [dbo].[scrap_amount] ([year], [month], [day], [ishaft1_value], [ishaft2_value],[ishaft3_value],[ishaft4_value],[ceps_value],[beps_value])
+VALUES (2017,04,12,1000,2000,1200,1300,1200,1400)
+INSERT [dbo].[scrap_amount] ([year], [month], [day], [ishaft1_value], [ishaft2_value],[ishaft3_value],[ishaft4_value],[ceps_value],[beps_value])
+VALUES (2017,04,13,1000,2000,1200,1300,1200,1400)
+INSERT [dbo].[scrap_amount] ([year], [month], [day], [ishaft1_value], [ishaft2_value],[ishaft3_value],[ishaft4_value],[ceps_value],[beps_value])
+VALUES (2017,04,14,1000,2000,1200,1300,1200,1400)
+INSERT [dbo].[scrap_amount] ([year], [month], [day], [ishaft1_value], [ishaft2_value],[ishaft3_value],[ishaft4_value],[ceps_value],[beps_value])
+VALUES (2017,04,15,1000,2000,1200,1300,1200,1400)
+INSERT [dbo].[scrap_amount] ([year], [month], [day], [ishaft1_value], [ishaft2_value],[ishaft3_value],[ishaft4_value],[ceps_value],[beps_value])
+VALUES (2017,04,16,1000,2000,1200,1300,1200,1400)
+INSERT [dbo].[scrap_amount] ([year], [month], [day], [ishaft1_value], [ishaft2_value],[ishaft3_value],[ishaft4_value],[ceps_value],[beps_value])
+VALUES (2017,04,17,1045,2000,1200,1300,1200,1400)
+
+SET IDENTITY_INSERT [dbo].[scrap_amount] OFF
+
 SET IDENTITY_INSERT [dbo].[ishaft1_output_info] ON
 INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1012, CAST(N'2017-03-11' AS Date), N'38028838', N'ishaft1测试型号', 68)
 INSERT [dbo].[ishaft1_output_info] ([id], [add_date], [model], [model_name], [output_count]) VALUES (1013, CAST(N'2017-03-11' AS Date), N'38028807', N'R103加长杆总成', 78)
