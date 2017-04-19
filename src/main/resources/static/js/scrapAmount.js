@@ -44,14 +44,13 @@ function showScrapData() {
     //     }
     // });
     $.get("http://localhost:8080/nexteer/scrap-amount/day?date="+curTime,function (data) {
-        if(data.system_status != false){
-            $("#BEPSScrapAmount").html(data.beps_value);
-            $("#CEPSScrapAmount").html(data.ceps_value);
-            console.log(JSON.stringify(data));
-            var result= data.ishaft1_value + data.ishaft2_value + data.ishaft3_value + data.ishaft4_value;
+            $("#BEPSScrapAmount").html($.parseJSON(data).beps_value);
+            $("#CEPSScrapAmount").html($.parseJSON(data).ceps_value);
+            console.log($.parseJSON(data));
+            var result= $.parseJSON(data).ishaft1_value + $.parseJSON(data).ishaft2_value + $.parseJSON(data).ishaft3_value + $.parseJSON(data).ishaft4_value;
             $("#Ishaft1ScrapAmount").html(result);
             console.log("载入报废金额成功。。");
-        }
+
     });
 }
 showScrapData();
