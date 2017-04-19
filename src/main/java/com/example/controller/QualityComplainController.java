@@ -1,42 +1,37 @@
 package com.example.controller;
 
-import com.example.model.SafetyDate;
-import com.example.repository.SafetyDateRepo;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.model.QualityComplain;
+import com.example.repository.QualityComplainRepo;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by mrpan on 2017/3/1.
- * safety date api
+ * Created by mrpan on 2017/4/18.
  */
 @RestController
-@RequestMapping(value = "/safety-date")
-public class SafetyDateController {
-    private SafetyDateRepo repo;
+@RequestMapping(value = "quality-complain")
+public class QualityComplainController {
+    private QualityComplainRepo repo;
 
     @Autowired
-    public SafetyDateController(SafetyDateRepo repo) {
+    public QualityComplainController(QualityComplainRepo repo) {
         this.repo = repo;
     }
 
     /**
-     * Get a safety date record on a specific date
+     * Get a quality complain record on a specific date
      *
      * @param curDate
-     * @return SafetyDate
+     * @return QualityComplain
      */
     @RequestMapping(value = "/day", method = RequestMethod.GET)
     public String getDates(@RequestParam(value = "date") String curDate) throws ParseException {
-        List<SafetyDate> res = repo.findByDate(curDate);
+        List<QualityComplain> res = repo.findByDate(curDate);
         if (!res.isEmpty()) {
             return new Gson().toJson(res.get(0));
         } else {
@@ -53,17 +48,17 @@ public class SafetyDateController {
      * @return list
      */
     @RequestMapping(method = RequestMethod.GET)
-    public List<SafetyDate> getDates() {
+    public List<QualityComplain> getDates() {
         return repo.findAll();
     }
 
     /**
-     * Get all records which is unsafe
+     * Get all records which has no complain
      *
      * @return list
      */
-    @RequestMapping(value = "/unsafe", method = RequestMethod.GET)
-    public List<SafetyDate> getUnsafeDates() {
+    @RequestMapping(value = "/no-complain", method = RequestMethod.GET)
+    public List<QualityComplain> getUnsafeDates() {
         return repo.findBySafeState();
     }
 
@@ -73,10 +68,10 @@ public class SafetyDateController {
      * @param json
      */
     @RequestMapping(method = RequestMethod.POST)
-    public SafetyDate addDate(@RequestBody String json) throws ParseException {
+    public QualityComplain add(@RequestBody String json) throws ParseException {
         Gson gson = new Gson();
-        SafetyDate safetyDate = gson.fromJson(json, SafetyDate.class);
-        return repo.addSafetyDate(safetyDate);
+        QualityComplain QualityComplain = gson.fromJson(json, QualityComplain.class);
+        return repo.add(QualityComplain);
     }
 
     /**
@@ -85,10 +80,10 @@ public class SafetyDateController {
      * @param json
      */
     @RequestMapping(method = RequestMethod.PATCH)
-    public SafetyDate update(@RequestBody String json) throws ParseException {
+    public QualityComplain update(@RequestBody String json) throws ParseException {
         Gson gson = new Gson();
-        SafetyDate safetyDate = gson.fromJson(json, SafetyDate.class);
-        return repo.updateSafetyDate(safetyDate);
+        QualityComplain QualityComplain = gson.fromJson(json, QualityComplain.class);
+        return repo.update(QualityComplain);
     }
 
     /**

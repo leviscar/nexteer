@@ -1,14 +1,17 @@
 package com.example.model;
 
+import com.example.enumtype.ShiftType;
+
 /**
  * Created by mrpan on 2017/3/28.
  */
 public class DashboardOutput {
-    private String cellName; // 产线
-    private int targetOutput; // 目标产量
-    private int curOutput; // 当前产量
-    private int reachRate; // 达成率
-    private int status; // 当前状态
+    private String cellName; // cell name
+    private int targetOutput; // target product output
+    private int curOutput; // current product output
+    private int reachRate; // reach rate
+    private int status; // current status
+    private ShiftType shiftType; // shift type
 
     public DashboardOutput() {
     }
@@ -51,5 +54,13 @@ public class DashboardOutput {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public ShiftType getShiftType() {
+        return shiftType;
+    }
+
+    public void setShiftType(ShiftType shiftType) {
+        this.shiftType = shiftType;
     }
 }

@@ -6,17 +6,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.List;
 
 /**
  * Created by mrpan on 2017/3/7.
- * 报废金额API
+ * scrap amount API
  */
 @RestController
 @RequestMapping(value = "/scrap-amount")
@@ -29,149 +26,114 @@ public class ScrapAmountController {
     }
 
     /**
-     * 根据特定日期查询报废金额
+     * Get a scrap amount record on a specific date
      *
-     * @param json
+     * @param curDate
      * @return
      */
-    @RequestMapping(value = "/getByDate", method = RequestMethod.POST)
-    public String getByDate(@RequestBody String json) {
-        Gson gson = new Gson();
-        JsonObject object = new JsonObject();
-        ScrapAmount scrapAmount = gson.fromJson(json, ScrapAmount.class);
-        List<ScrapAmount> res = repo.getByDate(scrapAmount);
+    @RequestMapping(value = "/day", method = RequestMethod.GET)
+    public String getByDate(@RequestParam(value = "date") String curDate) throws ParseException {
+        List<ScrapAmount> res = repo.getByDate(curDate);
         if (!res.isEmpty()) {
-            ScrapAmount tmp = res.get(0);
-            object.addProperty("value", tmp.getIshaft1_value() + tmp.getIshaft2_value() +
-                    tmp.getIshaft3_value() + tmp.getIshaft4_value() + tmp.getCeps_value() + tmp.getBeps_value());
+            return new Gson().toJson(res.get(0), ScrapAmount.class);
         } else {
+            JsonObject object = new JsonObject();
             object.addProperty("system_status", false);
             object.addProperty("log", "当前日期没有记录");
+            return object.toString();
         }
-        return object.toString();
     }
 
     /**
-     * 获得一段时间内的报废金额
+     * Query all the scrap amount records during the start date and end date
      *
-     * @param json
+     * @param startDate
+     * @param endDate
      * @return
      */
-    @RequestMapping(value = "/getByPeriod", method = RequestMethod.POST)
-    public String getByPeriod(@RequestBody String json) {
+    @RequestMapping(value = "/period", method = RequestMethod.GET)
+    public String getByPeriod(@RequestParam(value = "start") String startDate
+            , @RequestParam(value = "end") String endDate) throws ParseException {
         Gson gson = new Gson();
-        JsonParser parser = new JsonParser();
-        JsonObject object = (JsonObject) parser.parse(json);
-        String startYear = object.get("startYear").getAsString();
-        String startMonth = object.get("startMonth").getAsString();
-        String startDay = object.get("startDay").getAsString();
-        String endYear = object.get("endYear").getAsString();
-        String endMonth = object.get("endMonth").getAsString();
-        String endDay = object.get("endDay").getAsString();
-        try {
-            List<ScrapAmount> res = repo.getByPeriod(startYear, startMonth, startDay, endYear, endMonth, endDay);
-            if (!res.isEmpty()) {
-                return gson.toJson(res);
-            } else {
-                JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("system_status", false);
-                jsonObject.addProperty("log", "没有搜索到这段时期的信息");
-                return jsonObject.toString();
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
+        List<ScrapAmount> res = repo.getByPeriod(startDate, endDate);
+        if (!res.isEmpty()) {
+            return gson.toJson(res);
+        } else {
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("system_status", false);
-            jsonObject.addProperty("log", "传入的json格式有误");
+            jsonObject.addProperty("log", "没有搜索到这段时期的信息");
             return jsonObject.toString();
         }
     }
 
     /**
-     * 根据周获取报废金额
+     * Get all the scrap amount records during the whole week based on current date
      *
-     * @param json
+     * @param curDate
      * @return
      */
-    @RequestMapping(value = "/getByWeek", method = RequestMethod.POST)
-    public String getByWeek(@RequestBody String json) {
+    @RequestMapping(value = "/week", method = RequestMethod.GET)
+    public String getByWeek(@RequestParam(value = "date") String curDate) throws ParseException {
         Gson gson = new Gson();
-        ScrapAmount scrapAmount = gson.fromJson(json, ScrapAmount.class);
-        List<ScrapAmount> res = repo.getByWeek(scrapAmount);
-        if (res.isEmpty()) {
+        List<ScrapAmount> res = repo.getByWeek(curDate);
+        if (!res.isEmpty()) {
+            return gson.toJson(res);
+        } else {
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("system_status", false);
             jsonObject.addProperty("log", "没有搜索到这段时期的报废金额信息");
             return jsonObject.toString();
-        } else {
+        }
+    }
+
+    /**
+     * Get all the scrap amount records during the whole month based on current date
+     *
+     * @param curDate
+     * @return
+     */
+    @RequestMapping(value = "/month", method = RequestMethod.GET)
+    public String getByMonth(@RequestParam(value = "date") String curDate) throws ParseException {
+        Gson gson = new Gson();
+        List<ScrapAmount> res = repo.getByMonth(curDate);
+        if (!res.isEmpty()) {
             return gson.toJson(res);
-        }
-    }
-
-    /**
-     * 根据月份获取报废金额
-     *
-     * @param json
-     * @return
-     */
-    @RequestMapping(value = "/getByMonth", method = RequestMethod.POST)
-    public String getByMonth(@RequestBody String json) {
-        Gson gson = new Gson();
-        ScrapAmount scrapAmount = gson.fromJson(json, ScrapAmount.class);
-        JsonObject jsonObject = new JsonObject();
-        try {
-            List<ScrapAmount> res = repo.getByMonth(scrapAmount);
-            if (res.isEmpty()) {
-                jsonObject.addProperty("system_status", false);
-                jsonObject.addProperty("log", "没有该月的报废金额信息");
-                return jsonObject.toString();
-            } else {
-                return gson.toJson(res);
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } else {
+            JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("system_status", false);
-            jsonObject.addProperty("log", "传入的json格式有误");
+            jsonObject.addProperty("log", "没有该月的报废金额信息");
             return jsonObject.toString();
         }
     }
 
     /**
-     * 获取一年的报废金额信息
+     * Get all the scrap amount records during the whole year based on current date
      *
-     * @param json
+     * @param curDate
      * @return
      */
-    @RequestMapping(value = "/getByYear", method = RequestMethod.POST)
-    public String getByYear(@RequestBody String json) {
+    @RequestMapping(value = "/year", method = RequestMethod.GET)
+    public String getByYear(@RequestParam(value = "date") String curDate) throws ParseException {
         Gson gson = new Gson();
-        ScrapAmount scrapAmount = gson.fromJson(json, ScrapAmount.class);
-        JsonObject jsonObject = new JsonObject();
-        try {
-            List<ScrapAmount> res = repo.getByYear(scrapAmount);
-            if (res.isEmpty()) {
-                jsonObject.addProperty("system_status", false);
-                jsonObject.addProperty("log", "没有该年的报废金额信息");
-                return jsonObject.toString();
-            } else {
-                return gson.toJson(res);
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
+        List<ScrapAmount> res = repo.getByYear(curDate);
+        if (!res.isEmpty()) {
+            return gson.toJson(res);
+        } else {
+            JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("system_status", false);
-            jsonObject.addProperty("log", "传入的json格式有误");
+            jsonObject.addProperty("log", "没有该年的报废金额信息");
             return jsonObject.toString();
         }
     }
 
     /**
-     * 添加报废金额
+     * Add a scrap amount record into database
      *
      * @param json
      * @return
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(@RequestBody String json) {
+    @RequestMapping(method = RequestMethod.POST)
+    public String add(@RequestBody String json) throws ParseException {
         Gson gson = new Gson();
         ScrapAmount scrapAmount = gson.fromJson(json, ScrapAmount.class);
         JsonObject object = repo.addAmount(scrapAmount);
@@ -179,13 +141,13 @@ public class ScrapAmountController {
     }
 
     /**
-     * 重置报废金额
+     * Update the scrap amount record in database
      *
      * @param json
      * @return
      */
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@RequestBody String json) {
+    @RequestMapping(method = RequestMethod.PATCH)
+    public String update(@RequestBody String json) throws ParseException {
         Gson gson = new Gson();
         ScrapAmount scrapAmount = gson.fromJson(json, ScrapAmount.class);
         JsonObject object = repo.updateAmount(scrapAmount);

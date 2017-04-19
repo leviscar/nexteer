@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
@@ -23,25 +24,22 @@ public class ProductModelRepo {
     }
 
     /**
-     * 添加型号
+     * Add product model into database
      *
      * @param model
      * @return json
      */
-    public String addModel(ProductModel model) {
+    public ProductModel add(ProductModel model) {
         String sql = "IF NOT exists(SELECT * FROM product_model WHERE model_id = ?)" +
                 "INSERT INTO product_model (model_id, model_name, std, cell_name) VALUES(?,?,?,?) ELSE " +
                 "UPDATE product_model SET model_name = ?, std = ?, cell_name = ? WHERE model_id = ?";
         jdbc.update(sql, model.getModelId(), model.getModelId(), model.getModelName(), model.getStd(), model.getCellName()
                 , model.getModelName(), model.getStd(), model.getCellName(), model.getModelId());
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("system_status", true);
-        jsonObject.addProperty("log", "add OK");
-        return jsonObject.toString();
+        return model;
     }
 
     /**
-     * 根据型号id获取std
+     * Get std based on model id
      *
      * @param modelId
      * @return
@@ -52,7 +50,7 @@ public class ProductModelRepo {
     }
 
     /**
-     * 根据单元名称获取model信息
+     * Get product model information based on cell name
      *
      * @param cellName
      * @return
@@ -63,12 +61,33 @@ public class ProductModelRepo {
     }
 
     /**
-     * 获得所有型号的信息
+     * Get all the product model records
      *
      * @return list
      */
     public List<ProductModel> getAllModel() {
         String sql = "SELECT * FROM product_model";
         return jdbc.query(sql, new ProductModelMapper());
+    }
+
+    /**
+     * Delete record from database
+     *
+     * @param modelId
+     */
+    public void deleteByModelId(String modelId) {
+        jdbc.update("DELETE FROM product_model WHERE model_id = ?", modelId);
+    }
+
+    /**
+     * update record form database
+     *
+     * @param model
+     * @return
+     */
+    public ProductModel update(ProductModel model) {
+        jdbc.update("UPDATE product_model SET model_id = ?, model_name = ?, cell_name = ?, std = ?"
+                , model.getModelId(), model.getModelName(), model.getCellName(), model.getStd());
+        return model;
     }
 }

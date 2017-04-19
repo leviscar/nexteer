@@ -12,10 +12,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -48,24 +45,20 @@ public class DashboardController {
     }
 
     /**
-     * 主面板产量信息展示
+     * Show product output on dashboard
      *
-     * @param json
+     * @param cellName
+     * @param time
      * @return
      * @throws ParseException
      */
-    @RequestMapping(value = "/output", method = RequestMethod.POST)
-    public String getAllOutput(@RequestBody String json) throws ParseException {
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(json);
-        JsonObject object = element.getAsJsonObject();
-        String curTime = new Gson().fromJson(object.get("curr_time"), String.class);
-        String cellName = new Gson().fromJson(object.get("cell_name"), String.class);
+    @RequestMapping(value = "/output/{cell}", method = RequestMethod.GET)
+    public String getAllOutput(@PathVariable(value = "cell") String cellName, @RequestParam(value = "time") String time) throws ParseException {
         Cell cell = Cell.valueOf(cellName);
         String res = null;
         switch (cell) {
             case ISHAFT1:
-                res = getIshaf1Output(curTime);
+                res = getIshaf1Output(time);
                 break;
             case ISHAFT2:
                 break;
@@ -82,21 +75,19 @@ public class DashboardController {
     }
 
     /**
-     * 获得主面板的oee
+     * Show oee on dashboard
      *
-     * @param json
+     * @param cellName
+     * @param time
      * @return
      */
-    @RequestMapping(value = "/oee", method = RequestMethod.POST)
-    public String getOee(@RequestBody String json) throws ParseException {
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(json);
-        JsonObject jsonObject = element.getAsJsonObject();
-        Date curDate = new Gson().fromJson(jsonObject.get("curr_time"), Date.class);
-        String cellName = new Gson().fromJson(jsonObject.get("cell_name"), String.class);
+    @RequestMapping(value = "/oee/{cell}", method = RequestMethod.GET)
+    public String getOee(@PathVariable(value = "cell") String cellName, @RequestParam(value = "time") String time) throws ParseException {
+        SimpleDateFormat dateSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date curDate = dateSdf.parse(time);
 
         // 获得最新的班次信息
-        WorkShift workShift = workShiftRepo.getLatestWorkShift(Cell.ISHAFT1.toString()).get(0);
+        WorkShift workShift = workShiftRepo.getLatestWorkShift(cellName).get(0);
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String curTime = sdf.format(curDate);
         ShiftType shiftType = OutputTool.getShiftType(workShift, sdf.parse(curTime));
@@ -149,21 +140,19 @@ public class DashboardController {
     }
 
     /**
-     * 获取hce
+     * Show hce on dashboard
      *
-     * @param json
+     * @param cellName
+     * @param time
      * @return
      * @throws ParseException
      */
-    @RequestMapping(value = "hce", method = RequestMethod.POST)
-    public String getHce(@RequestBody String json) throws ParseException {
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(json);
-        JsonObject jsonObject = element.getAsJsonObject();
-        String cellName = new Gson().fromJson(jsonObject.get("cell_name"), String.class);
-        Date curDate = new Gson().fromJson(jsonObject.get("curr_time"), Date.class);
+    @RequestMapping(value = "/hce/{cell}", method = RequestMethod.GET)
+    public String getHce(@PathVariable(value = "cell") String cellName, @RequestParam(value = "time") String time) throws ParseException {
+        SimpleDateFormat dateSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date curDate = dateSdf.parse(time);
         // 获得最新的班次信息
-        WorkShift workShift = workShiftRepo.getLatestWorkShift(Cell.ISHAFT1.toString()).get(0);
+        WorkShift workShift = workShiftRepo.getLatestWorkShift(cellName).get(0);
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String curTime = sdf.format(curDate);
         ShiftType shiftType = OutputTool.getShiftType(workShift, sdf.parse(curTime));
@@ -304,12 +293,14 @@ public class DashboardController {
         // get the total rest seconds in this shift
         int totalRestSeconds = (int) getRestSeconds(workShift.getId(), shiftType, sdf.parse(sdf.format(endDate)));
         // calculate the target value
-        int target = (int) (((endDate.getTime() - startDate.getTime()) / 1000 - totalRestSeconds)  / standardBeats);
+        int target = (int) (((endDate.getTime() - startDate.getTime()) / 1000 - totalRestSeconds) / standardBeats);
         dashboardOutput.setTargetOutput(target);
 
         // 计算达成率
         int reachRate = curNum * 100 / target;
         dashboardOutput.setReachRate(reachRate);
+
+        dashboardOutput.setShiftType(shiftType);
         return new Gson().toJson(dashboardOutput);
     }
 

@@ -28,106 +28,107 @@ public class ScrapAmountRepo {
     }
 
     /**
-     * 根据日期获得报废金额
+     * Get a scrap amount record on a specific date
      *
-     * @param scrapAmount
+     * @param curDate
      * @return
      */
-    public List<ScrapAmount> getByDate(ScrapAmount scrapAmount) {
-        String sql = "SELECT * FROM scrap_amount WHERE year = ? AND month = ? AND day = ?";
-        return jdbc.query(sql, new Object[]{scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay()}, new ScrapAmountMapper());
+    public List<ScrapAmount> getByDate(String curDate) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = sdf.parse(curDate);
+        String sql = "SELECT * FROM scrap_amount WHERE year + month + day = ?";
+        return jdbc.query(sql, new Object[]{start}, new ScrapAmountMapper());
     }
 
     /**
-     * 根据起始日期和终止日期查询报废金额
+     * Query all the scrap amount records during the start date and end date
      *
-     * @param startYear
-     * @param startMonth
-     * @param startDay
-     * @param endYear
-     * @param endMonth
-     * @param endDay
+     * @param startDate
+     * @param endDate
      * @return
      */
-    public List<ScrapAmount> getByPeriod(String startYear, String startMonth, String startDay, String endYear, String endMonth, String endDay) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        Date start = sdf.parse(startYear + startMonth + startDay);
-        Date end = sdf.parse(endYear + endMonth + endDay);
+    public List<ScrapAmount> getByPeriod(String startDate, String endDate) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = sdf.parse(startDate);
+        Date end = sdf.parse(endDate);
         if (start.getTime() - end.getTime() <= 0) {
             String sql = "SELECT * FROM scrap_amount WHERE year + month + day BETWEEN ? AND ?";
-            return jdbc.query(sql, new Object[]{startYear + startMonth + startDay, endYear + endMonth + endDay}, new ScrapAmountMapper());
+            return jdbc.query(sql, new Object[]{start, end}, new ScrapAmountMapper());
         } else {
             return new ArrayList<>();
         }
     }
 
     /**
-     * 获取当前周的所有报废金额
+     * Get all the scrap amount records during the whole week based on current date
      *
-     * @param scrapAmount
+     * @param curDate
      * @return
      */
-    public List<ScrapAmount> getByWeek(ScrapAmount scrapAmount) {
-        String year = scrapAmount.getYear();
-        String month = scrapAmount.getMonth();
-        String day = scrapAmount.getDay();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    public List<ScrapAmount> getByWeek(String curDate) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar date = Calendar.getInstance();
-        try {
-            date.setFirstDayOfWeek(Calendar.MONDAY);
-            date.setTime(sdf.parse(year + month + day));
-            date.set(Calendar.DAY_OF_WEEK, date.getFirstDayOfWeek());
-            String start = sdf.format(date.getTime());
-            return getByPeriod(start.substring(0, 4), start.substring(4, 6), start.substring(6, 8), year, month, day);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return new ArrayList<>();
+        date.setFirstDayOfWeek(Calendar.MONDAY);
+        date.setTime(sdf.parse(curDate));
+        date.set(Calendar.DAY_OF_WEEK, date.getFirstDayOfWeek());
+        String startDate = sdf.format(date.getTime());
+        return getByPeriod(startDate, curDate);
     }
 
     /**
-     * 获取当前月的所有报废金额
+     * Get all the scrap amount records during the whole month based on current date
      *
-     * @param scrapAmount
+     * @param curDate
      * @return
      * @throws ParseException
      */
-    public List<ScrapAmount> getByMonth(ScrapAmount scrapAmount) throws ParseException {
-        String year = scrapAmount.getYear();
-        String month = scrapAmount.getMonth();
-        String day = scrapAmount.getDay();
-        return getByPeriod(year, month, "01", year, month, day);
+    public List<ScrapAmount> getByMonth(String curDate) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(sdf.parse(curDate));
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        String startDate = sdf.format(calendar.getTime());
+        return getByPeriod(startDate, curDate);
     }
 
     /**
-     * 获取当前年的所有报废金额
+     * Get all the scrap amount records during the whole year based on current date
      *
-     * @param scrapAmount
+     * @param curDate
      * @return
      * @throws ParseException
      */
-    public List<ScrapAmount> getByYear(ScrapAmount scrapAmount) throws ParseException {
-        return getByPeriod(scrapAmount.getYear(), "01", "01", scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay());
+    public List<ScrapAmount> getByYear(String curDate) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(sdf.parse(curDate));
+        calendar.set(Calendar.MONTH, 0);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        String startDate = sdf.format(calendar.getTime());
+        return getByPeriod(startDate, curDate);
     }
 
     /**
-     * 添加报废金额
+     * Add a scrap amount record into database
      *
      * @param scrapAmount
      * @return
      */
-    public JsonObject addAmount(ScrapAmount scrapAmount) {
-        if (!getByDate(scrapAmount).isEmpty()) {
-            String sql = "UPDATE scrap_amount SET ishaft1_value = ?, ishaft2_value = ?, ishaft3_value = ?, ishaft4_value = ?, ceps_value = ?, beps_value = ?" +
-                    " WHERE year = ? AND month = ? AND day = ?";
-            jdbc.update(sql, scrapAmount.getIshaft1_value(), scrapAmount.getIshaft2_value(), scrapAmount.getIshaft3_value(), scrapAmount.getIshaft4_value(),
-                    scrapAmount.getCeps_value(), scrapAmount.getBeps_value(), scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay());
+    public JsonObject addAmount(ScrapAmount scrapAmount) throws ParseException {
+        String curDate = scrapAmount.getYear() + "-" + scrapAmount.getMonth() + "-" + scrapAmount.getDay();
+        if (!getByDate(curDate).isEmpty()) {
+            updateAmount(scrapAmount);
         } else {
-            String sql = "INSERT INTO scrap_amount (year, month, day, ishaft1_value, ishaft2_value, ishaft3_value, ishaft4_value, ceps_value, beps_value)" +
-                    " VALUES(?,?,?,?,?,?,?,?,?)";
-            jdbc.update(sql, scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay(), scrapAmount.getIshaft1_value(), scrapAmount.getIshaft2_value(),
-                    scrapAmount.getIshaft3_value(), scrapAmount.getIshaft4_value(), scrapAmount.getCeps_value(), scrapAmount.getBeps_value());
+            String sql = "INSERT INTO scrap_amount (year, month, day, ishaft1_value, ishaft2_value, ishaft3_value" +
+                    ", ishaft4_value, ceps_value, beps_value, ishaft1_target_value, ishaft2_target_value" +
+                    ", ishaft3_target_value, ishaft4_target_value, ceps_target_value, beps_target_value)" +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            jdbc.update(sql, scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay()
+                    , scrapAmount.getIshaft1_value(), scrapAmount.getIshaft2_value(), scrapAmount.getIshaft3_value()
+                    , scrapAmount.getIshaft4_value(), scrapAmount.getCeps_value(), scrapAmount.getBeps_value()
+                    , scrapAmount.getIshaft1_target_value(), scrapAmount.getIshaft2_target_value()
+                    , scrapAmount.getIshaft3_target_value(), scrapAmount.getIshaft4_target_value()
+                    , scrapAmount.getCeps_target_value(), scrapAmount.getBeps_target_value());
         }
         JsonObject object = new JsonObject();
         object.addProperty("system_status", true);
@@ -136,20 +137,27 @@ public class ScrapAmountRepo {
     }
 
     /**
-     * 重新设置报废金额
+     * Update the scrap amount record in database
      *
      * @param scrapAmount
      * @return
      */
-    public JsonObject updateAmount(ScrapAmount scrapAmount) {
+    public JsonObject updateAmount(ScrapAmount scrapAmount) throws ParseException {
+        String curDate = scrapAmount.getYear() + "-" + scrapAmount.getMonth() + "-" + scrapAmount.getDay();
         JsonObject jsonObject = new JsonObject();
-        if (!getByDate(scrapAmount).isEmpty()) {
-            String sql = "UPDATE scrap_amount SET ishaft1_value = ?, ishaft2_value = ?, ishaft3_value = ?, ishaft4_value = ?, ceps_value = ?, beps_value = ?" +
-                    " WHERE year = ? AND month = ? AND day = ?";
-            jdbc.update(sql, scrapAmount.getIshaft1_value(), scrapAmount.getIshaft2_value(), scrapAmount.getIshaft3_value(), scrapAmount.getIshaft4_value(),
-                    scrapAmount.getCeps_value(), scrapAmount.getBeps_value(), scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay());
+        if (!getByDate(curDate).isEmpty()) {
+            String sql = "UPDATE scrap_amount SET ishaft1_value = ?, ishaft2_value = ?, ishaft3_value = ?" +
+                    ", ishaft4_value = ?, ceps_value = ?, beps_value = ?, ishaft1_target_value = ?" +
+                    ", ishaft2_target_value = ?, ishaft3_target_value = ?, ishaft4_target_value = ?" +
+                    ", ceps_target_value = ?, beps_target_value = ? WHERE year = ? AND month = ? AND day = ?";
+            jdbc.update(sql, scrapAmount.getIshaft1_value(), scrapAmount.getIshaft2_value()
+                    , scrapAmount.getIshaft3_value(), scrapAmount.getIshaft4_value(), scrapAmount.getCeps_value()
+                    , scrapAmount.getBeps_value(), scrapAmount.getIshaft1_target_value(), scrapAmount.getIshaft2_target_value()
+                    , scrapAmount.getIshaft3_target_value(), scrapAmount.getIshaft4_target_value()
+                    , scrapAmount.getCeps_target_value(), scrapAmount.getBeps_target_value()
+                    , scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay());
             jsonObject.addProperty("system_status", true);
-            jsonObject.addProperty("log", "reset ok");
+            jsonObject.addProperty("log", "update success");
         } else {
             jsonObject.addProperty("system_status", false);
             jsonObject.addProperty("log", "数据库没有该日期的记录，请先添加记录");

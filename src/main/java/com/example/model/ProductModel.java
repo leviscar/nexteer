@@ -2,14 +2,14 @@ package com.example.model;
 
 /**
  * Created by mrpan on 2017/3/26.
- * 产品型号
+ * product model
  */
 public class ProductModel {
     private int id;
-    private String modelId; // 型号id
-    private String modelName; // 型号名称
+    private String modelId; // model id
+    private String modelName; // model name
     private float std; // std
-    private String cellName; // 所属单元
+    private String cellName; // cell name
 
     public ProductModel() {
     }
