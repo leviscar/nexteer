@@ -15,34 +15,34 @@
 //     Uday=Udate.getDate();
 
 console.log("开始运行safeSet");
-//获得指定日期安全天数
-$("#getDay").bind("click", function () {
-
-    var addScrapTime=$("#getDayTime").val().split("-");
-    var getDayYear = addScrapTime[0];
-    var getDayMonth = addScrapTime[1];
-    var getDayDay = addScrapTime[2];
-    console.log(getDayYear+"年"+getDayMonth+"月"+getDayDay+"日");
-    var getDayJson = new safety_date(String(getDayYear), String(getDayMonth), String(getDayDay));
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/safetyDate/getDates",
-        data: JSON.stringify(getDayJson),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            console.log(JSON.stringify(data));
-            console.log(data.safe_dates);
-            $("#getDayStu").html("获取指定日期的安全天数为:"+ data.safe_dates);
-        },
-        failure: function (errMsg) {
-            console.log(errMsg);
-        }
-    });
-    setTimeout(function () {
-        $("#getDayStu").html("");
-    },1000*showSeconds)
-});
+// //获得指定日期安全天数
+// $("#getDay").bind("click", function () {
+//
+//     var addScrapTime=$("#getDayTime").val().split("-");
+//     var getDayYear = addScrapTime[0];
+//     var getDayMonth = addScrapTime[1];
+//     var getDayDay = addScrapTime[2];
+//     console.log(getDayYear+"年"+getDayMonth+"月"+getDayDay+"日");
+//     var getDayJson = new safety_date(String(getDayYear), String(getDayMonth), String(getDayDay));
+//     $.ajax({
+//         type: "POST",
+//         url: "http://localhost:8080/nexteer/safetyDate/getDates",
+//         data: JSON.stringify(getDayJson),
+//         contentType: "application/json; charset=utf-8",
+//         dataType: "json",
+//         success: function (data) {
+//             console.log(JSON.stringify(data));
+//             console.log(data.safe_dates);
+//             $("#getDayStu").html("获取指定日期的安全天数为:"+ data.safe_dates);
+//         },
+//         failure: function (errMsg) {
+//             console.log(errMsg);
+//         }
+//     });
+//     setTimeout(function () {
+//         $("#getDayStu").html("");
+//     },1000*showSeconds)
+// });
 
 //单击重置安全日期
 $("#startDate").bind("click",function () {
@@ -62,8 +62,8 @@ $("#startDate").bind("click",function () {
     console.log(startDateYear+"年"+startDateMonth+"月"+startDateDay+"日");
     var getStartJson=new startDay(startDateYear.toString(),startDateMonth.toString(),startDateDay.toString(),startCount,startLog.toString());
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/safetyDate/reset",
+        type: "PATCH",
+        url: "http://localhost:8080/nexteer/safety-date",
         data: JSON.stringify(getStartJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -99,8 +99,8 @@ $("#resetDate").bind("click",function () {
     console.log(resetYear+"年"+resetMonth+"月"+resetDay+"日");
     var getResetJson=new resetDate(resetYear,resetMonth,resetDay,0,resetMessage);
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/safetyDate/reset",
+        type: "PATCH",
+        url: "http://localhost:8080/nexteer/safety-date",
         data: JSON.stringify(getResetJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
