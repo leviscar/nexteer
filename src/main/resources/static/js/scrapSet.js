@@ -1,46 +1,52 @@
 /**
  * Created by Administrator on 2017/3/29.
  */
-function addIs1Scrap(year, month, day,is1Value) {
+function addIs1Scrap(year, month, day,is1Value,is1Tar) {
     this.year = year;
     this.month = month;
     this.day = day;
     this.ishaft1_value = is1Value;
+    this.ishaft1_target_value = is1Tar;
 
 }
-function addIs2Scrap(year, month, day, is2Value) {
+function addIs2Scrap(year, month, day, is2Value,is2Tar) {
     this.year = year;
     this.month = month;
     this.day = day;
     this.ishaft2_value = is2Value;
+    this.ishaft2_target_value = is2Tar;
 
 }
-function addIs3Scrap(year, month, day,is3Value) {
+function addIs3Scrap(year, month, day,is3Value,is3Tar) {
     this.year = year;
     this.month = month;
     this.day = day;
 
     this.ishaft3_value= is3Value;
+    this.ishaft3_target_value = is3Tar;
 
 }
-function addIs4Scrap(year, month, day,is4Value) {
+function addIs4Scrap(year, month, day,is4Value,is4Tar) {
     this.year = year;
     this.month = month;
     this.day = day;
     this.ishaft4_value = is4Value;
+    this.ishaft1_target_value = is4Tar;
 
 }
-function addCEPSScrap(year, month, day,cepsValue) {
+function addCEPSScrap(year, month, day,cepsValue,cepsTar) {
     this.year = year;
     this.month = month;
     this.day = day;
     this.ceps_value = cepsValue;
+    this.ceps_target_value = cepsTar;
 }
-function addBEPSScrap(year, month, day,bepsValue) {
+function addBEPSScrap(year, month, day,bepsValue,bepsTar) {
     this.year = year;
     this.month = month;
     this.day = day;
     this.beps_value = bepsValue;
+    this.beps_target_value = bepsTar;
 }
 //添加Is1报废金额
 $("#addIs1Scrap").bind("click",function () {
@@ -52,12 +58,12 @@ $("#addIs1Scrap").bind("click",function () {
     var year=addScrapTime[0];
     var month=addScrapTime[1];
     var startday=addScrapTime[2];
-    var addIs1ScrapJson=new addIs1Scrap(addScrapTime[0].toString(),addScrapTime[1].toString(),addScrapTime[2].toString(),Number($("#Is1ScrapAddValue").val()));
+    var addIs1ScrapJson=new addIs1Scrap(addScrapTime[0].toString(),addScrapTime[1].toString(),addScrapTime[2].toString(),Number($("#Is1ScrapAddValue").val()),Number($("#Is1ScrapTarValue").val()));
     console.log(year);
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount/add",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(addIs1ScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -65,7 +71,7 @@ $("#addIs1Scrap").bind("click",function () {
 
             console.log(JSON.stringify(data));
             console.log('nice');
-            if(data.status==true){
+            if(data.system_status==true){
                 $("#addIs1ScrapStu").html("添加报废金额成功");
             }
 
@@ -91,13 +97,13 @@ $("#addIs2Scrap").bind("click",function () {
 
     var year=addScrapTime[0];
     var month=addScrapTime[1];
-    var startday=addScrapTime[2];
-    var addIs2ScrapJson=new addIs2Scrap(addScrapTime[0].toString(),addScrapTime[1].toString(),addScrapTime[2].toString(),Number($("#Is2ScrapAddValue").val()));
+    var startday=addScrapTime[2]
+    var addIs2ScrapJson=new addIs2Scrap(addScrapTime[0].toString(),addScrapTime[1].toString(),addScrapTime[2].toString(),Number($("#Is2ScrapAddValue").val()),Number($("#Is2ScrapTarValue").val()));
     console.log(year);
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount/add",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(addIs2ScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -105,7 +111,7 @@ $("#addIs2Scrap").bind("click",function () {
 
             console.log(JSON.stringify(data));
             console.log('nice');
-            if(data.status==true){
+            if(data.system_status==true){
                 $("#addIs2ScrapStu").html("添加报废金额成功");
             }
 
@@ -132,12 +138,12 @@ $("#addIs3Scrap").bind("click",function () {
     var year=addScrapTime[0];
     var month=addScrapTime[1];
     var startday=addScrapTime[2];
-    var addIs3ScrapJson=new addIs3Scrap(addScrapTime[0].toString(),addScrapTime[1].toString(),addScrapTime[2].toString(),Number($("#Is3ScrapAddValue").val()));
+    var addIs3ScrapJson=new addIs3Scrap(addScrapTime[0].toString(),addScrapTime[1].toString(),addScrapTime[2].toString(),Number($("#Is3ScrapAddValue").val()),Number($("#Is3ScrapTarValue").val()));
     console.log(year);
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount/add",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(addIs3ScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -145,7 +151,7 @@ $("#addIs3Scrap").bind("click",function () {
 
             console.log(JSON.stringify(data));
             console.log('nice');
-            if(data.status==true){
+            if(data.system_status==true){
                 $("#addIs3ScrapStu").html("添加报废金额成功");
             }
 
@@ -172,12 +178,12 @@ $("#addIs4Scrap").bind("click",function () {
     var year=addScrapTime[0];
     var month=addScrapTime[1];
     var startday=addScrapTime[2];
-    var addIs4ScrapJson=new addIs4Scrap(addScrapTime[0].toString(),addScrapTime[1].toString(),addScrapTime[2].toString(),Number($("#Is4ScrapAddValue").val()));
+    var addIs4ScrapJson=new addIs4Scrap(addScrapTime[0].toString(),addScrapTime[1].toString(),addScrapTime[2].toString(),Number($("#Is4ScrapAddValue").val()),Number($("#Is4ScrapTarValue").val()));
     console.log(year);
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount/add",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(addIs4ScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -185,7 +191,7 @@ $("#addIs4Scrap").bind("click",function () {
 
             console.log(JSON.stringify(data));
             console.log('nice');
-            if(data.status==true){
+            if(data.system_status==true){
                 $("#addIs4ScrapStu").html("添加报废金额成功");
             }
 
@@ -212,12 +218,12 @@ $("#addBEPSScrap").bind("click",function () {
     var year=addScrapTime[0];
     var month=addScrapTime[1];
     var startday=addScrapTime[2];
-    var addBEPSScrapJson=new addBEPSScrap(addScrapTime[0].toString(),addScrapTime[1].toString(),addScrapTime[2].toString(),Number($("#BEPSScrapAddValue").val()));
+    var addBEPSScrapJson=new addBEPSScrap(addScrapTime[0].toString(),addScrapTime[1].toString(),addScrapTime[2].toString(),Number($("#BEPSScrapAddValue").val()),Number($("#BEPSScrapTarValue").val()));
     console.log(year);
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount/add",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(addBEPSScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -225,7 +231,7 @@ $("#addBEPSScrap").bind("click",function () {
 
             console.log(JSON.stringify(data));
             console.log('nice');
-            if(data.status==true){
+            if(data.system_status==true){
                 $("#addBEPSScrapStu").html("添加报废金额成功");
             }
 
@@ -252,12 +258,12 @@ $("#addCEPSScrap").bind("click",function () {
     var year=addScrapTime[0];
     var month=addScrapTime[1];
     var startday=addScrapTime[2];
-    var addCEPSScrapJson=new addCEPSScrap(addScrapTime[0].toString(),addScrapTime[1].toString(),addScrapTime[2].toString(),Number($("#CEPSScrapAddValue").val()));
+    var addCEPSScrapJson=new addCEPSScrap(addScrapTime[0].toString(),addScrapTime[1].toString(),addScrapTime[2].toString(),Number($("#CEPSScrapAddValue").val()),Number($("#CEPSScrapTarValue").val()));
     console.log(year);
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount/add",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(addCEPSScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -265,7 +271,7 @@ $("#addCEPSScrap").bind("click",function () {
 
             console.log(JSON.stringify(data));
             console.log('nice');
-            if(data.status==true){
+            if(data.system_status==true){
                 $("#addCEPSScrapStu").html("添加报废金额成功");
             }
 
@@ -308,7 +314,7 @@ $("#addCEPSScrap").bind("click",function () {
 //
 //             console.log(JSON.stringify(data));
 //             console.log('nice');
-//             if(data.status==true){
+//             if(data.system_status==true){
 //                 $("#addScrapStu").html("添加报废金额成功");
 //             }
 //
@@ -336,12 +342,12 @@ $("#resetIs1Scrap").bind("click",function () {
     var year=resScrapTime[0];
     var month=resScrapTime[1];
     var startday=resScrapTime[2];
-    var resScrapJson=new addIs1Scrap(resScrapTime[0].toString(),resScrapTime[1].toString(),resScrapTime[2].toString(),Number($("#Is1ScrapResValue").val()));
+    var resScrapJson=new addIs1Scrap(resScrapTime[0].toString(),resScrapTime[1].toString(),resScrapTime[2].toString(),Number($("#Is1ScrapResValue").val()),Number($("#Is1ScrapResTarValue").val()));
     console.log(year);
 
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount/add",
+        type: "PATCH",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -349,10 +355,10 @@ $("#resetIs1Scrap").bind("click",function () {
 
             console.log(JSON.stringify(data));
             console.log('nice');
-            if(data.status==true){
+            if(data.system_status==true){
                 $("#resIs1ScrapStu").html("更新报废金额成功");
             }
-            if(data.status==false){
+            if(data.system_status==false){
                 $("#resIs1ScrapStu").html(data.log);
             }
 
@@ -379,12 +385,12 @@ $("#resetIs2Scrap").bind("click",function () {
     var year=resScrapTime[0];
     var month=resScrapTime[1];
     var startday=resScrapTime[2];
-    var resScrapJson=new addIs2Scrap(resScrapTime[0].toString(),resScrapTime[1].toString(),resScrapTime[2].toString(),Number($("#Is2ScrapResValue").val()));
+    var resScrapJson=new addIs2Scrap(resScrapTime[0].toString(),resScrapTime[1].toString(),resScrapTime[2].toString(),Number($("#Is2ScrapResValue").val()),Number($("#Is2ScrapResTarValue").val()));
     console.log(year);
 
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount/add",
+        type: "PATCH",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -392,10 +398,10 @@ $("#resetIs2Scrap").bind("click",function () {
 
             console.log(JSON.stringify(data));
             console.log('nice');
-            if(data.status==true){
+            if(data.system_status==true){
                 $("#resIs2ScrapStu").html("更新报废金额成功");
             }
-            if(data.status==false){
+            if(data.system_status==false){
                 $("#resIs2ScrapStu").html(data.log);
             }
 
@@ -422,12 +428,12 @@ $("#resetIs3Scrap").bind("click",function () {
     var year=resScrapTime[0];
     var month=resScrapTime[1];
     var startday=resScrapTime[2];
-    var resScrapJson=new addIs3Scrap(resScrapTime[0].toString(),resScrapTime[1].toString(),resScrapTime[2].toString(),Number($("#Is3ScrapResValue").val()));
+    var resScrapJson=new addIs3Scrap(resScrapTime[0].toString(),resScrapTime[1].toString(),resScrapTime[2].toString(),Number($("#Is3ScrapResValue").val()),Number($("#Is3ScrapResTarValue").val()));
     console.log(year);
 
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount/add",
+        type: "PATCH",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -435,10 +441,10 @@ $("#resetIs3Scrap").bind("click",function () {
 
             console.log(JSON.stringify(data));
             console.log('nice');
-            if(data.status==true){
+            if(data.system_status==true){
                 $("#resIs3ScrapStu").html("更新报废金额成功");
             }
-            if(data.status==false){
+            if(data.system_status==false){
                 $("#resIs3ScrapStu").html(data.log);
             }
 
@@ -465,12 +471,12 @@ $("#resetIs4Scrap").bind("click",function () {
     var year=resScrapTime[0];
     var month=resScrapTime[1];
     var startday=resScrapTime[2];
-    var resScrapJson=new addIs4Scrap(resScrapTime[0].toString(),resScrapTime[1].toString(),resScrapTime[2].toString(),Number($("#Is4ScrapResValue").val()));
+    var resScrapJson=new addIs4Scrap(resScrapTime[0].toString(),resScrapTime[1].toString(),resScrapTime[2].toString(),Number($("#Is4ScrapResValue").val()),Number($("#Is4ScrapResTarValue").val()));
     console.log(year);
 
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount/add",
+        type: "PATCH",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -478,10 +484,10 @@ $("#resetIs4Scrap").bind("click",function () {
 
             console.log(JSON.stringify(data));
             console.log('nice');
-            if(data.status==true){
+            if(data.system_status==true){
                 $("#resIs4ScrapStu").html("更新报废金额成功");
             }
-            if(data.status==false){
+            if(data.system_status==false){
                 $("#resIs4ScrapStu").html(data.log);
             }
 
@@ -508,12 +514,12 @@ $("#resetBEPSScrap").bind("click",function () {
     var year=resScrapTime[0];
     var month=resScrapTime[1];
     var startday=resScrapTime[2];
-    var resScrapJson=new addBEPSScrap(resScrapTime[0].toString(),resScrapTime[1].toString(),resScrapTime[2].toString(),Number($("#BEPSScrapResValue").val()));
+    var resScrapJson=new addBEPSScrap(resScrapTime[0].toString(),resScrapTime[1].toString(),resScrapTime[2].toString(),Number($("#BEPSScrapResValue").val()),Number($("#BEPSScrapResTarValue").val()));
     console.log(year);
 
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount/add",
+        type: "PATCH",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -521,10 +527,10 @@ $("#resetBEPSScrap").bind("click",function () {
 
             console.log(JSON.stringify(data));
             console.log('nice');
-            if(data.status==true){
+            if(data.system_status==true){
                 $("#resBEPSScrapStu").html("更新报废金额成功");
             }
-            if(data.status==false){
+            if(data.system_status==false){
                 $("#resBEPSScrapStu").html(data.log);
             }
 
@@ -551,12 +557,12 @@ $("#resetCEPSScrap").bind("click",function () {
     var year=resScrapTime[0];
     var month=resScrapTime[1];
     var startday=resScrapTime[2];
-    var resScrapJson=new addCEPSScrap(resScrapTime[0].toString(),resScrapTime[1].toString(),resScrapTime[2].toString(),Number($("#CEPSScrapResValue").val()));
+    var resScrapJson=new addCEPSScrap(resScrapTime[0].toString(),resScrapTime[1].toString(),resScrapTime[2].toString(),Number($("#CEPSScrapResValue").val()),Number($("#CEPSScrapResTarValue").val()));
     console.log(year);
 
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount/add",
+        type: "PATCH",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -564,10 +570,10 @@ $("#resetCEPSScrap").bind("click",function () {
 
             console.log(JSON.stringify(data));
             console.log('nice');
-            if(data.status==true){
+            if(data.system_status==true){
                 $("#resCEPSScrapStu").html("更新报废金额成功");
             }
-            if(data.status==false){
+            if(data.system_status==false){
                 $("#resCEPSScrapStu").html(data.log);
             }
 
@@ -607,10 +613,10 @@ $("#resetCEPSScrap").bind("click",function () {
 //
 //             console.log(JSON.stringify(data));
 //             console.log('nice');
-//             if(data.status==true){
+//             if(data.system_status==true){
 //                 $("#resScrapStu").html("更新报废金额成功");
 //             }
-//             if(data.status==false){
+//             if(data.system_status==false){
 //                 $("#resScrapStu").html(data.log);
 //             }
 //
