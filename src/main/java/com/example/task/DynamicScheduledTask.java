@@ -4,6 +4,7 @@ import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
 import com.example.model.*;
 import com.example.repository.*;
+import com.example.util.DateFormat;
 import com.example.util.Function;
 import com.example.util.ModelOutput;
 import com.example.util.OutputTool;
@@ -25,24 +26,22 @@ public class DynamicScheduledTask {
     private Ishaft1ProductRepo ishaft1ProductRepo;
     private ProductModelRepo productModelRepo;
     private WorkShiftRepo workShiftRepo;
-    private RestEventRepo restEventRepo;
-    private RestEventWithWorkShiftRepo restEventWithWorkShiftRepo;
     private OeeRepo oeeRepo;
     private HceRepo hceRepo;
+    private Ishaft1UnitStatusRepo ishaft1UnitStatusRepo;
     private Ishaft1OutputInfoRepo ishaft1OutputInfoRepo;
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     public DynamicScheduledTask(Ishaft1ProductRepo ishaft1ProductRepo, ProductModelRepo productModelRepo
-            , WorkShiftRepo workShiftRepo, RestEventRepo restEventRepo, RestEventWithWorkShiftRepo restEventWithWorkShiftRepo
-            , OeeRepo oeeRepo, HceRepo hceRepo, Ishaft1OutputInfoRepo ishaft1OutputInfoRepo) {
+            , WorkShiftRepo workShiftRepo, OeeRepo oeeRepo, HceRepo hceRepo, Ishaft1UnitStatusRepo ishaft1UnitStatusRepo
+            , Ishaft1OutputInfoRepo ishaft1OutputInfoRepo) {
         this.ishaft1ProductRepo = ishaft1ProductRepo;
         this.productModelRepo = productModelRepo;
         this.workShiftRepo = workShiftRepo;
-        this.restEventRepo = restEventRepo;
-        this.restEventWithWorkShiftRepo = restEventWithWorkShiftRepo;
         this.oeeRepo = oeeRepo;
         this.hceRepo = hceRepo;
+        this.ishaft1UnitStatusRepo = ishaft1UnitStatusRepo;
         this.ishaft1OutputInfoRepo = ishaft1OutputInfoRepo;
     }
 
@@ -100,10 +99,22 @@ public class DynamicScheduledTask {
         oee.setAddDate(addDate);
         hce.setAddDate(addDate);
 
-        // get the latest shift information
-        WorkShift workShift = workShiftRepo.getLatestWorkShiftByCurTime(Cell.ISHAFT1.toString(), addDate).get(0);
+        // get the latest A, B, C shifts information
+        List<WorkShift> workShifts = new ArrayList<>();
+        List<WorkShift> shiftRes = workShiftRepo.getLatestByCurDate(Cell.ISHAFT1.toString(), ShiftType.Ashift.toString(), addDate);
+        if (!shiftRes.isEmpty()) {
+            workShifts.add(shiftRes.get(0));
+        }
+        shiftRes = workShiftRepo.getLatestByCurDate(Cell.ISHAFT1.toString(), ShiftType.Bshift.toString(), addDate);
+        if (!shiftRes.isEmpty()) {
+            workShifts.add(shiftRes.get(0));
+        }
+        shiftRes = workShiftRepo.getLatestByCurDate(Cell.ISHAFT1.toString(), ShiftType.Cshift.toString(), addDate);
+        if (!shiftRes.isEmpty()) {
+            workShifts.add(shiftRes.get(0));
+        }
 
-        Map<Long, Integer> allShiftRes = getAllShiftsBeatsMultiOutput(workShift, calendar.getTime());
+        Map<Long, Integer> allShiftRes = getAllShiftsBeatsMultiOutput(workShifts, calendar.getTime());
         long sumSeconds = 0;
         long sumMulti = 0;
         for (Map.Entry<Long, Integer> entry : allShiftRes.entrySet()) {
@@ -115,7 +126,7 @@ public class DynamicScheduledTask {
         oeeRepo.addActualOee(oee);
         logger.info("Add Oee:{} into database", oee);
 
-        hce.setHce(calcHce(workShift, addDate));
+        hce.setHce(calcHce(workShifts, addDate));
         hce.setCellName(Cell.ISHAFT1.toString());
         hceRepo.addActualHce(hce);
         logger.info("Add Hce:{} into database", hce);
@@ -124,23 +135,22 @@ public class DynamicScheduledTask {
     /**
      * Calculate hce during the whole shift
      *
-     * @param workShift
+     * @param workShifts
+     * @param addDate
      * @return
      * @throws ParseException
      */
-    public int calcHce(WorkShift workShift, Date addDate) throws ParseException {
+    public int calcHce(List<WorkShift> workShifts, Date addDate) throws ParseException {
         // get result of std multiply product output
         float totalStdMultiplyOutput = 0;
         // get result of total times multiply worker numbers
         float totalTimeMultiWorkerNum = 0;
-        if (workShift.getMorning_shift_start() != null
-                && workShift.getMorning_shift_end() != null) {
-            List<Date> dateList = OutputTool.changeShiftDate(addDate, workShift, ShiftType.Ashift);
+        for (WorkShift ws : workShifts) {
+            List<Date> dateList = OutputTool.changeShiftDate(addDate, ws);
             Date startDate = dateList.get(0);
             Date endDate = dateList.get(1);
-            Map<Date, Boolean> addDateRes = Function.addOneDay(startDate, endDate);
-            endDate = (Date) addDateRes.keySet().toArray()[0];
-            // get A shift product output
+            endDate = Function.addOneDay(startDate, endDate);
+            // get shift product output
             List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, endDate);
             // get various model product output multiply its std
             float stdMultiplyOutput = 0;
@@ -154,8 +164,9 @@ public class DynamicScheduledTask {
 
             // get overtime
             int standardMinutes = 8 * 60;
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-            long restSeconds = getRestSeconds(workShift.getId(), ShiftType.Ashift, sdf.parse(sdf.format(endDate)));
+            SimpleDateFormat sdf = DateFormat.hourFormat();
+            long restSeconds = ishaft1UnitStatusRepo.getRestSeconds(ws.getId(), ShiftType.valueOf(ws.getShiftType())
+                    , sdf.parse(sdf.format(endDate)));
             long totalSeconds = (endDate.getTime() - startDate.getTime()) / 1000;
             if (totalSeconds / 60 > standardMinutes) {
                 // overtime minutes
@@ -166,221 +177,42 @@ public class DynamicScheduledTask {
                 calendar.add(Calendar.MINUTE, standardMinutes);
                 Date overTimeStart = calendar.getTime();
                 // rest time during normal work
-                int normalRestMinute = (int) (getHourlyRestSeconds(workShift.getId(), ShiftType.Ashift, startDate, overTimeStart) / 60);
+                int normalRestMinute = (int) (ishaft1UnitStatusRepo.getHourlyRestSeconds(ws.getId()
+                        , ShiftType.valueOf(ws.getShiftType()), startDate, overTimeStart) / 60);
                 // rest time during overtime
                 int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
-                totalTimeMultiWorkerNum += (standardMinutes - normalRestMinute) * workShift.getMorning_worker_num()
-                        + (overMinutes - overRestMinutes) * workShift.getMorning_overtime_worker_num();
+                totalTimeMultiWorkerNum += (standardMinutes - normalRestMinute) * ws.getNormalWorkerNum()
+                        + (overMinutes - overRestMinutes) * ws.getOvertimeWorkerNum();
             } else {
-                totalTimeMultiWorkerNum += (totalSeconds - restSeconds) * workShift.getMorning_worker_num() / 60;
-            }
-        }
-        if (workShift.getMiddle_shift_start() != null
-                && workShift.getMiddle_shift_end() != null) {
-            List<Date> dateList = OutputTool.changeShiftDate(addDate, workShift, ShiftType.Bshift);
-            Date startDate = dateList.get(0);
-            Date endDate = dateList.get(1);
-            Map<Date, Boolean> addDateRes = Function.addOneDay(startDate, endDate);
-            endDate = (Date) addDateRes.keySet().toArray()[0];
-            // get B shift product output
-            List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, endDate);
-            // get various model product output multiply its std
-            float stdMultiplyOutput = 0;
-            Map<String, Integer> modelOutputMap = ModelOutput.getEachModelOutput(products);
-            for (Map.Entry<String, Integer> entry : modelOutputMap.entrySet()) {
-                String modelId = entry.getKey();
-                ProductModel model = productModelRepo.getStdByModelId(modelId);
-                stdMultiplyOutput += model.getStd() * entry.getValue();
-            }
-            totalStdMultiplyOutput += stdMultiplyOutput;
-
-            // get overtime
-            int standardMinutes = 8 * 60;
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-            long restSeconds = getRestSeconds(workShift.getId(), ShiftType.Bshift, sdf.parse(sdf.format(endDate)));
-            long totalSeconds = (endDate.getTime() - startDate.getTime()) / 1000;
-            if (totalSeconds / 60 > standardMinutes) {
-                // overtime minutes
-                int overMinutes = (int) (totalSeconds / 60 - standardMinutes);
-                // overtime begin time
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(startDate);
-                calendar.add(Calendar.MINUTE, standardMinutes);
-                Date overTimeStart = calendar.getTime();
-                // rest time during normal work
-                int normalRestMinute = (int) (getHourlyRestSeconds(workShift.getId(), ShiftType.Bshift, startDate, overTimeStart) / 60);
-                // rest time during overtime
-                int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
-                totalTimeMultiWorkerNum += (standardMinutes - normalRestMinute) * workShift.getMorning_worker_num()
-                        + (overMinutes - overRestMinutes) * workShift.getMorning_overtime_worker_num();
-            } else {
-                totalTimeMultiWorkerNum += (totalSeconds - restSeconds) * workShift.getMorning_worker_num() / 60;
-            }
-        }
-        if (workShift.getNight_shift_end() != null
-                && workShift.getNight_shift_end() != null) {
-            List<Date> dateList = OutputTool.changeShiftDate(addDate, workShift, ShiftType.Cshift);
-            Date startDate = dateList.get(0);
-            Date endDate = dateList.get(1);
-            Map<Date, Boolean> addDateRes = Function.addOneDay(startDate, endDate);
-            endDate = (Date) addDateRes.keySet().toArray()[0];
-            // get C shift product output
-            List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, endDate);
-            // get various model product output multiply its std
-            float stdMultiplyOutput = 0;
-            Map<String, Integer> modelOutputMap = ModelOutput.getEachModelOutput(products);
-            for (Map.Entry<String, Integer> entry : modelOutputMap.entrySet()) {
-                String modelId = entry.getKey();
-                ProductModel model = productModelRepo.getStdByModelId(modelId);
-                stdMultiplyOutput += model.getStd() * entry.getValue();
-            }
-            totalStdMultiplyOutput += stdMultiplyOutput;
-
-            // get overtime
-            int standardMinutes = 8 * 60;
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-            long restSeconds = getRestSeconds(workShift.getId(), ShiftType.Cshift, sdf.parse(sdf.format(endDate)));
-            long totalSeconds = (endDate.getTime() - startDate.getTime()) / 1000;
-            if (totalSeconds / 60 > standardMinutes) {
-                // overtime minutes
-                int overMinutes = (int) (totalSeconds / 60 - standardMinutes);
-                // overtime begin time
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(startDate);
-                calendar.add(Calendar.MINUTE, standardMinutes);
-                Date overTimeStart = calendar.getTime();
-                // rest time during normal work
-                int normalRestMinute = (int) (getHourlyRestSeconds(workShift.getId(), ShiftType.Cshift, startDate, overTimeStart) / 60);
-                // rest time during overtime
-                int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
-                totalTimeMultiWorkerNum += (standardMinutes - normalRestMinute) * workShift.getMorning_worker_num()
-                        + (overMinutes - overRestMinutes) * workShift.getMorning_overtime_worker_num();
-            } else {
-                totalTimeMultiWorkerNum += (totalSeconds - restSeconds) * workShift.getMorning_worker_num() / 60;
+                totalTimeMultiWorkerNum += (totalSeconds - restSeconds) * ws.getNormalWorkerNum() / 60;
             }
         }
         return (int) (totalStdMultiplyOutput * 60 * 100 / totalTimeMultiWorkerNum);
     }
 
-    /**
-     * Get rest time seconds during specific period
-     *
-     * @param workShiftId
-     * @param shiftType
-     * @param startTime
-     * @param endTime
-     * @return
-     * @throws ParseException
-     */
-    private long getHourlyRestSeconds(int workShiftId, ShiftType shiftType, Date startTime, Date endTime) throws ParseException {
-        List<RestEventWithWorkShift> restEventWithWorkShiftList = restEventWithWorkShiftRepo.getByWorkShiftId(workShiftId);
-        if (restEventWithWorkShiftList.isEmpty()) {
-            return 0;
-        } else {
-            long restSeconds = 0;
-            for (RestEventWithWorkShift restEventWithWorkShift : restEventWithWorkShiftList) {
-                RestEvent event = restEventRepo.getById(restEventWithWorkShift.getId());
-                // if the rest time is in the shift period
-                if (shiftType.toString().equals(event.getShift_type())) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                    Date eventStartTime = sdf.parse(event.getEvent_start_time());
-                    Date eventEndTime = sdf.parse(event.getEvent_end_time());
-                    if (endTime.compareTo(eventStartTime) <= 0 || startTime.compareTo(eventEndTime) >= 0) {
-                        restSeconds += 0;
-                    } else if (startTime.compareTo(eventStartTime) >= 0 && endTime.compareTo(eventEndTime) <= 0) {
-                        restSeconds += (endTime.getTime() - startTime.getTime()) / 1000;
-                    } else if (startTime.compareTo(eventStartTime) <= 0 && endTime.compareTo(eventEndTime) <= 0) {
-                        restSeconds += (endTime.getTime() - eventStartTime.getTime()) / 1000;
-                    } else if (startTime.compareTo(eventStartTime) >= 0 && endTime.compareTo(eventEndTime) >= 0) {
-                        restSeconds += (eventEndTime.getTime() - startTime.getTime()) / 1000;
-                    } else if (startTime.compareTo(eventStartTime) <= 0 && endTime.compareTo(eventEndTime) >= 0) {
-                        restSeconds += (eventEndTime.getTime() - eventStartTime.getTime()) / 1000;
-                    }
-                }
-            }
-            return restSeconds;
-        }
-    }
 
     /**
-     * get the result of all shifts standard beats multiply product output
+     * Get the result of all shifts standard beats multiply product output
      *
-     * @param workShift
+     * @param workShifts
+     * @param addDate
      * @return
      */
-    private Map<Long, Integer> getAllShiftsBeatsMultiOutput(WorkShift workShift, Date addDate) throws ParseException {
+    private Map<Long, Integer> getAllShiftsBeatsMultiOutput(List<WorkShift> workShifts, Date addDate) throws ParseException {
         Map<Long, Integer> map = new HashMap<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        if (workShift.getMorning_shift_start() != null
-                && workShift.getMorning_shift_end() != null) {
-            List<Date> dateList = OutputTool.changeShiftDate(addDate, workShift, ShiftType.Ashift);
+        SimpleDateFormat sdf = DateFormat.hourFormat();
+        for (WorkShift ws : workShifts) {
+            List<Date> dateList = OutputTool.changeShiftDate(addDate, ws);
             Date startDate = dateList.get(0);
             Date endDate = dateList.get(1);
-            Map<Date, Boolean> addDateRes = Function.addOneDay(startDate, endDate);
-            endDate = (Date) addDateRes.keySet().toArray()[0];
+            endDate = Function.addOneDay(startDate, endDate);
             long totalSeconds = (endDate.getTime() - startDate.getTime()) / 1000;
-            long restSeconds = getRestSeconds(workShift.getId(), ShiftType.Ashift, sdf.parse(sdf.format(endDate)));
+            long restSeconds = ishaft1UnitStatusRepo.getRestSeconds(ws.getId(), ShiftType.valueOf(ws.getShiftType())
+                    , sdf.parse(sdf.format(endDate)));
             List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, endDate);
-            map.put(totalSeconds - restSeconds, workShift.getMorning_shift_standard_beats() * products.size());
-        }
-        if (workShift.getMiddle_shift_start() != null
-                && workShift.getMiddle_shift_end() != null) {
-            List<Date> dateList = OutputTool.changeShiftDate(addDate, workShift, ShiftType.Bshift);
-            Date startDate = dateList.get(0);
-            Date endDate = dateList.get(1);
-            Map<Date, Boolean> addDateRes = Function.addOneDay(startDate, endDate);
-            endDate = (Date) addDateRes.keySet().toArray()[0];
-            long totalSeconds = (endDate.getTime() - startDate.getTime()) / 1000;
-            long restSeconds = getRestSeconds(workShift.getId(), ShiftType.Bshift, sdf.parse(sdf.format(endDate)));
-            List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, endDate);
-            map.put(totalSeconds - restSeconds, workShift.getMiddle_shift_standard_beats() * products.size());
-        }
-        if (workShift.getNight_shift_start() != null
-                && workShift.getNight_shift_end() != null) {
-            List<Date> dateList = OutputTool.changeShiftDate(addDate, workShift, ShiftType.Cshift);
-            Date startDate = dateList.get(0);
-            Date endDate = dateList.get(1);
-            Map<Date, Boolean> addDateRes = Function.addOneDay(startDate, endDate);
-            endDate = (Date) addDateRes.keySet().toArray()[0];
-            long totalSeconds = (endDate.getTime() - startDate.getTime()) / 1000;
-            long restSeconds = getRestSeconds(workShift.getId(), ShiftType.Cshift, sdf.parse(sdf.format(endDate)));
-            List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, endDate);
-            map.put(totalSeconds - restSeconds, workShift.getNight_shift_standard_beats() * products.size());
+            map.put(totalSeconds - restSeconds, ws.getStandardBeat() * products.size());
         }
         return map;
     }
 
-    /**
-     * get the rest seconds
-     *
-     * @param workShiftId
-     * @param curShiftType
-     * @param curTime
-     * @return
-     * @throws ParseException
-     */
-    private long getRestSeconds(int workShiftId, ShiftType curShiftType, Date curTime) throws ParseException {
-        List<RestEventWithWorkShift> restEventWithWorkShiftList = restEventWithWorkShiftRepo.getByWorkShiftId(workShiftId);
-        if (restEventWithWorkShiftList.isEmpty()) {
-            return 0;
-        } else {
-            long restSeconds = 0;
-            for (RestEventWithWorkShift restEventWithWorkShift : restEventWithWorkShiftList) {
-                RestEvent event = restEventRepo.getById(restEventWithWorkShift.getId());
-                // if rest time is in the shift period
-                if (curShiftType.toString().equals(event.getShift_type())) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                    Date startTime = sdf.parse(event.getEvent_start_time());
-                    Date endTime = sdf.parse(event.getEvent_end_time());
-                    // if current time is in the rest period
-                    if (curTime.compareTo(endTime) <= 0 && curTime.compareTo(startTime) >= 0) {
-                        restSeconds += curTime.getTime() - startTime.getTime();
-                    } else if (curTime.compareTo(endTime) >= 0) {
-                        restSeconds += endTime.getTime() - startTime.getTime();
-                    }
-                }
-            }
-            return restSeconds / 1000;
-        }
-    }
 }

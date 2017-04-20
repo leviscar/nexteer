@@ -5,14 +5,31 @@ package com.example.model;
  */
 public class RestEvent {
     private int id;
-    private String shift_type; // 所属班次
-    private String event; // 事件类型
-    private String event_start_time; // 事件开始时间
-    private String event_end_time; // 事件结束时间
+    private int workShiftId;
+    private String cellName;
+    private String shiftType;
+    private String event;
+    private String startTime;
+    private String endTime;
 
     public RestEvent() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getWorkShiftId() {
+        return workShiftId;
+    }
+
+    public void setWorkShiftId(int workShiftId) {
+        this.workShiftId = workShiftId;
+    }
 
     public String getEvent() {
         return event;
@@ -22,35 +39,35 @@ public class RestEvent {
         this.event = event;
     }
 
-    public String getEvent_start_time() {
-        return event_start_time;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setEvent_start_time(String event_start_time) {
-        this.event_start_time = event_start_time;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
-    public String getEvent_end_time() {
-        return event_end_time;
+    public String getEndTime() {
+        return endTime;
     }
 
-    public void setEvent_end_time(String event_end_time) {
-        this.event_end_time = event_end_time;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
-    public String getShift_type() {
-        return shift_type;
+    public String getCellName() {
+        return cellName;
     }
 
-    public void setShift_type(String shift_type) {
-        this.shift_type = shift_type;
+    public void setCellName(String cellName) {
+        this.cellName = cellName;
     }
 
-    public int getId() {
-        return id;
+    public String getShiftType() {
+        return shiftType;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setShiftType(String shiftType) {
+        this.shiftType = shiftType;
     }
 }
