@@ -51,19 +51,22 @@ public class OutputTool {
     }
 
     /**
-     * Calculate the status based on standard beat and current beat
+     * Calculate the status based on target output and current output
      *
-     * @param curBeats
-     * @param standardBeats
+     * @param target
+     * @param curOutput
      * @return
      */
-    public static int getStatus(int curBeats, int standardBeats) {
-        if (curBeats <= standardBeats && curBeats > 0) {
-            // smile face
+    public static int getStatus(int target, int curOutput) {
+        if (curOutput >= target) {
+            // sunny day
             return 1;
-        } else {
-            // cry face
+        } else if (curOutput >= 0.9 * target) {
+            // cloudy day
             return 0;
+        } else {
+            // rainy day
+            return -1;
         }
 
     }

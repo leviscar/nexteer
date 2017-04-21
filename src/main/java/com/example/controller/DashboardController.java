@@ -119,6 +119,18 @@ public class DashboardController {
                 List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, curDate);
                 int oee = (int) (standardBeats * products.size() * 100 / (totalSeconds - restSeconds));
                 object.addProperty("oee", oee);
+                int status;
+                if (oee >= 100) {
+                    // sunny
+                    status = 1;
+                } else if (oee >= 90) {
+                    // cloudy
+                    status = 0;
+                } else {
+                    // runny
+                    status = -1;
+                }
+                object.addProperty("status", status);
                 break;
             case ISHAFT2:
                 break;
@@ -177,7 +189,6 @@ public class DashboardController {
                 int standardMinutes = 8 * 60;
                 // get the current product output
                 List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, curDate);
-                int curNum = products.size();
                 // calculate all models' products * std
                 Map<String, Integer> modelOutputMap = ModelOutput.getEachModelOutput(products);
                 float stdMultiplyOutput = 0;
@@ -220,6 +231,18 @@ public class DashboardController {
                 break;
         }
         object.addProperty("hce", hce);
+        int status;
+        if (hce >= 100) {
+            // sunny
+            status = 1;
+        } else if (hce >= 90) {
+            // cloudy
+            status = 0;
+        } else {
+            // rainy
+            status = -1;
+        }
+        object.addProperty("status", status);
         return new Gson().toJson(object);
     }
 
@@ -251,7 +274,7 @@ public class DashboardController {
         // set the year, month, day to work shift's start time and end time based on current date
         List<Date> dateList = OutputTool.changeShiftDate(curDate, workShift);
         Date startDate = dateList.get(0);
-
+        Date endDate = dateList.get(1);
         // add a day when the start time and current time do not in the same day
         curDate = Function.addOneDay(startDate, curDate);
 
@@ -259,11 +282,22 @@ public class DashboardController {
         List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, curDate);
         int curNum = products.size();
         object.addProperty("curr_output", curNum);
-        // take the latest 30 products' beat to calculate the current beat
-        int topN = 30;
-        List<Date> topNProduct = ishaft1ProductRepo.getCurBeats(startDate, curDate, topN);
-        int curBeats = OutputTool.calcCurBeats(topNProduct, topN);
-        int status = OutputTool.getStatus(curBeats, workShift.getStandardBeat());
+
+        // get the hourly output
+        Map<String, Integer> map = ishaft1UnitStatusRepo.getHourlyOutput(products, startDate);
+
+        // format the date with "HH:mm"
+        SimpleDateFormat hourFormat = DateFormat.hourFormat();
+        Date curTime = hourFormat.parse(date.substring(11, 16));
+
+        // get the rest seconds from shift starting till now
+        long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
+        long restSeconds = ishaft1UnitStatusRepo.getRestSeconds(workShift.getId(), shiftType, curTime);
+        // get the current target based on current time
+        int curTarget = (int) (workShift.getTarget() * (totalSeconds - restSeconds) /
+                ((endDate.getTime() - startDate.getTime()) / 1000 - restSeconds));
+        // get status
+        int status = OutputTool.getStatus(curTarget, curNum);
         object.addProperty("status", status);
 
         // calculate the reach rate

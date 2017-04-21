@@ -42,8 +42,8 @@ public class Ishaft1UnitStatusRepo {
         Ishaft1UnitStatus unitStatus = new Ishaft1UnitStatus();
 
         // format the date with "HH:mm"
-        SimpleDateFormat sdf = DateFormat.hourFormat();
-        Date curTime = sdf.parse(date.substring(11, 16));
+        SimpleDateFormat hourFormat = DateFormat.hourFormat();
+        Date curTime = hourFormat.parse(date.substring(11, 16));
 
         // get the latest work shift based on cell name and current time
         List<WorkShift> workShifts = workShiftRepo.getLatestByCurTime(Cell.ISHAFT1.toString(), date.substring(11, 16));
@@ -63,6 +63,7 @@ public class Ishaft1UnitStatusRepo {
         // set the year, month, day to work shift's start time and end time based on current date
         List<Date> dateList = OutputTool.changeShiftDate(curDate, workShift);
         Date startDate = dateList.get(0);
+        Date endDate = dateList.get(1);
 
         // add a day when the start time and current time do not in the same day
         curDate = Function.addOneDay(startDate, curDate);
@@ -83,7 +84,6 @@ public class Ishaft1UnitStatusRepo {
         List<Date> topNProduct = ishaft1ProductRepo.getCurBeats(startDate, curDate, topN);
         int curBeats = OutputTool.calcCurBeats(topNProduct, topN);
         unitStatus.setCurr_beats(curBeats);
-        unitStatus.setStatus(OutputTool.getStatus(curBeats, standardBeats));
 
         // get the rest seconds from shift starting till now
         long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
@@ -114,7 +114,8 @@ public class Ishaft1UnitStatusRepo {
             int normalRestMinute = (int) (getHourlyRestSeconds(workShift.getId(), shiftType, startDate, endTime) / 60);
             // rest minutes during the overtime
             int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
-            hce = 100 * stdMultiplyOutput * 60 / ((standardMinutes - normalRestMinute) * normalWorkerNum + (overMinutes - overRestMinutes) * overtimeWorkerNum);
+            hce = 100 * stdMultiplyOutput * 60 / ((standardMinutes - normalRestMinute) * normalWorkerNum +
+                    (overMinutes - overRestMinutes) * overtimeWorkerNum);
         } else {
             hce = 100 * stdMultiplyOutput * 60 * 60 / ((totalSeconds - restSeconds) * normalWorkerNum);
         }
@@ -123,6 +124,12 @@ public class Ishaft1UnitStatusRepo {
         // get the hourly output
         Map<String, Integer> map = getHourlyOutput(products, startDate);
         unitStatus.setHourly_output(map);
+
+        // get the current target based on current time
+        int curTarget = (int) (target * (totalSeconds - restSeconds) /
+                ((endDate.getTime() - startDate.getTime()) / 1000 - restSeconds));
+        // get status
+        unitStatus.setStatus(OutputTool.getStatus(curTarget, curNum));
 
         // get the hourly target output
         Map<String, Integer> targetMap = getHourlyTargetValue(standardBeats, shiftType, workShift);
@@ -160,7 +167,8 @@ public class Ishaft1UnitStatusRepo {
      * @return
      * @throws ParseException
      */
-    public Map<String, Integer> getHourlyTargetValue(int standardBeats, ShiftType shiftType, WorkShift workShift) throws ParseException {
+    public Map<String, Integer> getHourlyTargetValue(int standardBeats, ShiftType shiftType, WorkShift workShift)
+            throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         Date startTime = sdf.parse(workShift.getStartTime());
         Date endTime = sdf.parse(workShift.getEndTime());
@@ -197,7 +205,8 @@ public class Ishaft1UnitStatusRepo {
      * @return
      * @throws ParseException
      */
-    public long getHourlyRestSeconds(int workShiftId, ShiftType shiftType, Date startTime, Date endTime) throws ParseException {
+    public long getHourlyRestSeconds(int workShiftId, ShiftType shiftType, Date startTime, Date endTime)
+            throws ParseException {
         List<RestEvent> restEvents = restEventRepo.getByWorkShiftId(workShiftId);
         if (restEvents.isEmpty()) {
             return 0;
