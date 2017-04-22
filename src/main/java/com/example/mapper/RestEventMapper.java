@@ -14,10 +14,13 @@ public class RestEventMapper implements RowMapper<RestEvent> {
     @Override
     public RestEvent mapRow(ResultSet resultSet, int i) throws SQLException {
         RestEvent event = new RestEvent();
-        event.setShift_type(resultSet.getString("shift_type"));
+        event.setId(resultSet.getInt("id"));
+        event.setShiftType(resultSet.getString("shift_type"));
+        event.setCellName(resultSet.getString("cell_name"));
+        event.setWorkShiftId(resultSet.getInt("work_shift_id"));
         event.setEvent(resultSet.getString("event"));
-        event.setEvent_start_time(resultSet.getString("event_start_time"));
-        event.setEvent_end_time(resultSet.getString("event_end_time"));
+        event.setStartTime(resultSet.getString("start_time"));
+        event.setEndTime(resultSet.getString("end_time"));
         return event;
     }
 }

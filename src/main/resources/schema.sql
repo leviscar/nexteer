@@ -7,7 +7,7 @@ CREATE TABLE safety_date (
   log        NVARCHAR(255) DEFAULT 'Today is running safe!',
   PRIMARY KEY (year, month, day)
 );
-DROP TABLE scrap_amount
+DROP TABLE if EXISTS scrap_amount
 CREATE TABLE scrap_amount (
   year                 NCHAR(4) NOT NULL,
   month                NCHAR(2) NOT NULL,
@@ -26,40 +26,32 @@ CREATE TABLE scrap_amount (
   beps_target_value    INT,
   PRIMARY KEY (year, month, day)
 );
+DROP TABLE IF EXISTS work_shift;
 CREATE TABLE work_shift (
-  id                           INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
-  morning_shift_start          VARCHAR(5), --早班开始
-  morning_shift_end            VARCHAR(5), --早班结束
-  middle_shift_start           VARCHAR(5), --中班开始
-  middle_shift_end             VARCHAR(5), --中班结束
-  night_shift_start            VARCHAR(5), --晚班开始
-  night_shift_end              VARCHAR(5), --晚班结束
-  morning_shift_standard_beats INT, -- 早班标准节拍
-  middle_shift_standard_beats  INT, -- 中班标准节拍
-  night_shift_standard_beats   INT, -- 晚班标准节拍
-  setting_time                 DATE, --设置班次的时间
-  morning_worker_num           INT, -- 早班工作人次
-  middle_worker_num            INT, -- 中班工作人次
-  night_worker_num             INT, -- 晚班工作人次
-  morning_overtime_worker_num  INT, -- 早班加班工作人次
-  middle_overtime_worker_num   INT, -- 中班加班工作人次
-  night_overtime_worker_num    INT, -- 晚班加班工作人次
-  morning_shift_target         INT, -- 早班目标
-  middle_shift_target          INT, -- 中班目标
-  night_shift_target           INT, -- 晚班目标
-  cell_name                    VARCHAR(10)
+  id                  INT IDENTITY (1, 1) NOT NULL,
+  add_date            DATE,
+  shift_type          VARCHAR(10),
+  cell_name           VARCHAR(10),
+  start_time          VARCHAR(5),
+  end_time            VARCHAR(5),
+  target              INT,
+  standard_beat       INT,
+  normal_worker_num   INT,
+  overtime_worker_num INT,
+  is_open             BIT,
+  PRIMARY KEY (id)
 );
+DROP TABLE if EXISTS rest_event;
 CREATE TABLE rest_event (
   id               INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
+  work_shift_id    INT,
   shift_type       VARCHAR(10),
+  cell_name        VARCHAR(10),
   event            NVARCHAR(255),
-  event_start_time VARCHAR(5),
-  event_end_time   VARCHAR(5)
-);
-CREATE TABLE rest_event_with_work_shift (
-  id            INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
-  rest_event_id INT,
-  work_shift_id INT
+  start_time VARCHAR(5),
+  end_time   VARCHAR(5),
+  CONSTRAINT fk_WorkShift FOREIGN KEY (work_shift_id)
+  REFERENCES work_shift (id)
 );
 CREATE TABLE ishaft1_output_info (
   id           INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
@@ -105,7 +97,7 @@ CREATE TABLE shift_unit_status (
   PRIMARY KEY (id, add_date, cell_name, shift_type)
 );
 CREATE TABLE quality_complain (
-  add_date    DATE PRIMARY KEY not NULL ,
+  add_date    DATE PRIMARY KEY NOT NULL,
   no_complain INT,
   count       INT,
   log         NVARCHAR(255)

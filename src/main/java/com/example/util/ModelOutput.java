@@ -9,7 +9,8 @@ import java.util.*;
  */
 public class ModelOutput {
     /**
-     * 将所有的产品分型号统计数量
+     * Count the output based on various model
+     *
      * @param products
      * @return map
      */
@@ -26,7 +27,7 @@ public class ModelOutput {
                 return 0;
             }
         });
-        // 统计所有型号的产量
+        // get the all models' output
         Map<String, Integer> map = new HashMap<>();
         int count = 0;
         for (Ishaft1Product product : products) {

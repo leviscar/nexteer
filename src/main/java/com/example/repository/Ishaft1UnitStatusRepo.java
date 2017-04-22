@@ -3,6 +3,7 @@ package com.example.repository;
 import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
 import com.example.model.*;
+import com.example.util.DateFormat;
 import com.example.util.Function;
 import com.example.util.ModelOutput;
 import com.example.util.OutputTool;
@@ -23,105 +24,78 @@ import java.util.*;
 public class Ishaft1UnitStatusRepo {
     private Ishaft1ProductRepo ishaft1ProductRepo;
     private WorkShiftRepo workShiftRepo;
-    private RestEventWithWorkShiftRepo restEventWithWorkShiftRepo;
     private RestEventRepo restEventRepo;
     private LossTimeRepo lossTimeRepo;
     private ProductModelRepo productModelRepo;
 
     @Autowired
     public Ishaft1UnitStatusRepo(Ishaft1ProductRepo ishaft1ProductRepo, WorkShiftRepo workShiftRepo
-            , RestEventWithWorkShiftRepo restEventWithWorkShiftRepo
-            , RestEventRepo restEventRepo, LossTimeRepo lossTimeRepo
-            , ProductModelRepo productModelRepo) {
+            , RestEventRepo restEventRepo, LossTimeRepo lossTimeRepo, ProductModelRepo productModelRepo) {
         this.lossTimeRepo = lossTimeRepo;
         this.ishaft1ProductRepo = ishaft1ProductRepo;
         this.workShiftRepo = workShiftRepo;
-        this.restEventWithWorkShiftRepo = restEventWithWorkShiftRepo;
         this.restEventRepo = restEventRepo;
         this.productModelRepo = productModelRepo;
     }
 
     public String getIshaftUnitStatusByCurTime(String date) throws ParseException {
         Ishaft1UnitStatus unitStatus = new Ishaft1UnitStatus();
-        // 获得最新的班次信息
-        WorkShift workShift = workShiftRepo.getLatestWorkShift(Cell.ISHAFT1.toString()).get(0);
-        unitStatus.setCurr_shift_info(workShift);
 
-        // 班次小时分钟格式化
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        Date curTime = sdf.parse(date.substring(11, 16));
-        ShiftType shiftType = OutputTool.getShiftType(workShift, curTime);
+        // format the date with "HH:mm"
+        SimpleDateFormat hourFormat = DateFormat.hourFormat();
+        Date curTime = hourFormat.parse(date.substring(11, 16));
 
+        // get the latest work shift based on cell name and current time
+        List<WorkShift> workShifts = workShiftRepo.getLatestByCurTime(Cell.ISHAFT1.toString(), date.substring(11, 16));
         JsonObject object = new JsonObject();
-        if (shiftType == null) {
+        if (workShifts.isEmpty()) {
             object.addProperty("system_status", false);
             object.addProperty("log", "当前时刻不在任何班次中");
             return object.toString();
         }
-        unitStatus.setShift_type(shiftType);
-        // 设置当前年月日
-        SimpleDateFormat dateSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        WorkShift workShift = workShifts.get(0);
+        unitStatus.setCurr_shift_info(workShift);
+        ShiftType shiftType = ShiftType.valueOf(workShift.getShiftType());
+
+        // format the date with "yyyy-MM-dd HH:mm:ss"
+        SimpleDateFormat dateSdf = DateFormat.timeFormat();
         Date curDate = dateSdf.parse(date);
-        List<Date> dateList = OutputTool.changeShiftDate(curDate, workShift, shiftType);
+        // set the year, month, day to work shift's start time and end time based on current date
+        List<Date> dateList = OutputTool.changeShiftDate(curDate, workShift);
         Date startDate = dateList.get(0);
         Date endDate = dateList.get(1);
-        Map<Date, Boolean> addDateRes = Function.addOneDay(startDate, curDate);
-        curDate = (Date) addDateRes.keySet().toArray()[0];
-        addDateRes = Function.addOneDay(startDate, endDate);
-        endDate = (Date) addDateRes.keySet().toArray()[0];
+
+        // add a day when the start time and current time do not in the same day
+        curDate = Function.addOneDay(startDate, curDate);
+
+        // get the current product output
         List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, curDate);
-        // 当前生产量
         int curNum = products.size();
         unitStatus.setCurr_num(curNum);
 
-        int standardBeats = 0;
-        int workerNum = 0;
-        int overtimeWorkerNum = 0;
-        int target = 0;
-        switch (shiftType) {
-            case Ashift:
-                standardBeats = workShift.getMorning_shift_standard_beats();
-                workerNum = workShift.getMorning_worker_num();
-                overtimeWorkerNum = workShift.getMorning_overtime_worker_num();
-                target = workShift.getMorning_shift_target();
-                break;
-            case Bshift:
-                standardBeats = workShift.getMiddle_shift_standard_beats();
-                workerNum = workShift.getMiddle_worker_num();
-                overtimeWorkerNum = workShift.getMiddle_overtime_worker_num();
-                target = workShift.getMiddle_shift_target();
-                break;
-            case Cshift:
-                standardBeats = workShift.getNight_shift_standard_beats();
-                workerNum = workShift.getNight_worker_num();
-                overtimeWorkerNum = workShift.getNight_overtime_worker_num();
-                target = workShift.getNight_shift_target();
-                break;
-        }
-
-        // get the total rest seconds in this shift
-//        int totalRestSeconds = (int) getRestSeconds(workShift.getId(), shiftType, sdf.parse(sdf.format(endDate)));
-        // set the target value
+        int standardBeats = workShift.getStandardBeat();
+        int normalWorkerNum = workShift.getNormalWorkerNum();
+        int overtimeWorkerNum = workShift.getOvertimeWorkerNum();
+        int target = workShift.getTarget();
         unitStatus.setTarget(target);
 
-        // 计算当前节拍
-        // 取前30件计算平均值
+        // take the latest 30 products' beat to calculate the current beat
         int topN = 30;
         List<Date> topNProduct = ishaft1ProductRepo.getCurBeats(startDate, curDate, topN);
         int curBeats = OutputTool.calcCurBeats(topNProduct, topN);
         unitStatus.setCurr_beats(curBeats);
-        unitStatus.setStatus(OutputTool.getStatus(curBeats, standardBeats));
-        // 首先根据班次信息获得当前时刻经历的休息时间
+
+        // get the rest seconds from shift starting till now
         long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
         long restSeconds = getRestSeconds(workShift.getId(), shiftType, curTime);
-        // 计算OEE = curBeats * (合格产品数) / （经历时间-休息时间）
+        // OEE = current beat * (products output) / （total seconds - rest seconds）%
         int oee = (int) (standardBeats * curNum * 100 / (totalSeconds - restSeconds));
         unitStatus.setMovable_rate(oee);
 
-        // 计算hce
+        // calculate hce
         int standardMinutes = 8 * 60;
         double hce;
-        // 计算所有型号乘对应的std的值
+        // calculate all models' products * std
         Map<String, Integer> modelOutputMap = ModelOutput.getEachModelOutput(products);
         float stdMultiplyOutput = 0;
         for (Map.Entry<String, Integer> entry : modelOutputMap.entrySet()) {
@@ -130,43 +104,50 @@ public class Ishaft1UnitStatusRepo {
             stdMultiplyOutput += model.getStd() * entry.getValue();
         }
         if (totalSeconds / 60 > standardMinutes) {
-            // 当前为止的加班时间
+            // get the overtime seconds till now
             int overMinutes = (int) (totalSeconds / 60 - standardMinutes);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(startDate);
             calendar.add(Calendar.MINUTE, standardMinutes);
             Date endTime = calendar.getTime();
-            // 正常工作的总休息时间
+            // rest minutes during the normal work
             int normalRestMinute = (int) (getHourlyRestSeconds(workShift.getId(), shiftType, startDate, endTime) / 60);
-            // 加班时间内的休息时间
+            // rest minutes during the overtime
             int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
-            hce = 100 * stdMultiplyOutput * 60 / ((standardMinutes - normalRestMinute) * workerNum + (overMinutes - overRestMinutes) * overtimeWorkerNum);
+            hce = 100 * stdMultiplyOutput * 60 / ((standardMinutes - normalRestMinute) * normalWorkerNum +
+                    (overMinutes - overRestMinutes) * overtimeWorkerNum);
         } else {
-            hce = 100 * stdMultiplyOutput * 60 * 60 / ((totalSeconds - restSeconds) * workerNum);
+            hce = 100 * stdMultiplyOutput * 60 * 60 / ((totalSeconds - restSeconds) * normalWorkerNum);
         }
         unitStatus.setHce(hce);
 
-        // 得到小时产量
+        // get the hourly output
         Map<String, Integer> map = getHourlyOutput(products, startDate);
         unitStatus.setHourly_output(map);
 
-        // 得到小时目标产量
+        // get the current target based on current time
+        int curTarget = (int) (target * (totalSeconds - restSeconds) /
+                ((endDate.getTime() - startDate.getTime()) / 1000 - restSeconds));
+        // get status
+        unitStatus.setStatus(OutputTool.getStatus(curTarget, curNum));
+
+        // get the hourly target output
         Map<String, Integer> targetMap = getHourlyTargetValue(standardBeats, shiftType, workShift);
         unitStatus.setHourly_target(targetMap);
 
-        // 得到损失时间
+        // get the loss time
         unitStatus.setLoss_time(getLossTime(8, startDate, curDate));
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         return gson.toJson(unitStatus);
     }
 
     /**
-     * 根据开始时间和结束时间查询总损失时间
+     * Calculate the loss time based on start time and end time
      *
      * @param cellId
      * @param startTime
      * @param endTime
-     * @return 损失时间 int
+     * @return
      */
     public int getLossTime(int cellId, Date startTime, Date endTime) {
         List<LossTime> lossTimeList = lossTimeRepo.getLossTimeByCellId(cellId, startTime, endTime);
@@ -178,7 +159,7 @@ public class Ishaft1UnitStatusRepo {
     }
 
     /**
-     * 根据当前班次以及标准节拍，获得该班次每个小时的target
+     * Calculate the hourly target based on shift and standard beat
      *
      * @param standardBeats
      * @param shiftType
@@ -186,23 +167,12 @@ public class Ishaft1UnitStatusRepo {
      * @return
      * @throws ParseException
      */
-    private Map<String, Integer> getHourlyTargetValue(int standardBeats, ShiftType shiftType, WorkShift workShift) throws ParseException {
+    public Map<String, Integer> getHourlyTargetValue(int standardBeats, ShiftType shiftType, WorkShift workShift)
+            throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        Date startTime = new Date(), endTime = new Date();
-        switch (shiftType) {
-            case Ashift:
-                startTime = sdf.parse(workShift.getMorning_shift_start());
-                endTime = sdf.parse(workShift.getMorning_shift_end());
-                break;
-            case Bshift:
-                startTime = sdf.parse(workShift.getMiddle_shift_start());
-                endTime = sdf.parse(workShift.getMiddle_shift_end());
-                break;
-            case Cshift:
-                startTime = sdf.parse(workShift.getNight_shift_start());
-                endTime = sdf.parse(workShift.getNight_shift_end());
-                break;
-        }
+        Date startTime = sdf.parse(workShift.getStartTime());
+        Date endTime = sdf.parse(workShift.getEndTime());
+
         Map<String, Integer> map = new TreeMap<>();
         while (endTime.getTime() > startTime.getTime()) {
             Calendar calendar = Calendar.getInstance();
@@ -225,19 +195,29 @@ public class Ishaft1UnitStatusRepo {
         return map;
     }
 
-    private long getHourlyRestSeconds(int workShiftId, ShiftType shiftType, Date startTime, Date endTime) throws ParseException {
-        List<RestEventWithWorkShift> restEventWithWorkShiftList = restEventWithWorkShiftRepo.getByWorkShiftId(workShiftId);
-        if (restEventWithWorkShiftList.isEmpty()) {
+    /**
+     * Get the rest seconds based on period
+     *
+     * @param workShiftId
+     * @param shiftType
+     * @param startTime
+     * @param endTime
+     * @return
+     * @throws ParseException
+     */
+    public long getHourlyRestSeconds(int workShiftId, ShiftType shiftType, Date startTime, Date endTime)
+            throws ParseException {
+        List<RestEvent> restEvents = restEventRepo.getByWorkShiftId(workShiftId);
+        if (restEvents.isEmpty()) {
             return 0;
         } else {
             long restSeconds = 0;
-            for (RestEventWithWorkShift restEventWithWorkShift : restEventWithWorkShiftList) {
-                RestEvent event = restEventRepo.getById(restEventWithWorkShift.getId());
-                // 若休息时间在班次内
-                if (shiftType.toString().equals(event.getShift_type())) {
+            for (RestEvent re : restEvents) {
+                // if the rest time is in the shift
+                if (shiftType.toString().equals(re.getShiftType())) {
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                    Date eventStartTime = sdf.parse(event.getEvent_start_time());
-                    Date eventEndTime = sdf.parse(event.getEvent_end_time());
+                    Date eventStartTime = sdf.parse(re.getStartTime());
+                    Date eventEndTime = sdf.parse(re.getEndTime());
                     if (endTime.compareTo(eventStartTime) <= 0 || startTime.compareTo(eventEndTime) >= 0) {
                         restSeconds += 0;
                     } else if (startTime.compareTo(eventStartTime) >= 0 && endTime.compareTo(eventEndTime) <= 0) {
@@ -256,13 +236,13 @@ public class Ishaft1UnitStatusRepo {
     }
 
     /**
-     * 获得小时产量
+     * Get the hourly output
      *
      * @param products
      * @param startDate
      * @return
      */
-    private Map<String, Integer> getHourlyOutput(List<Ishaft1Product> products, Date startDate) {
+    public Map<String, Integer> getHourlyOutput(List<Ishaft1Product> products, Date startDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         Map<String, Integer> map = new TreeMap<>();
 
@@ -287,27 +267,26 @@ public class Ishaft1UnitStatusRepo {
     }
 
     /**
-     * 获得当前时刻之前的所有休息时间
+     * Get total rest seconds till current time
      *
      * @param workShiftId
      * @param curShiftType
      * @return
      * @throws ParseException
      */
-    private long getRestSeconds(int workShiftId, ShiftType curShiftType, Date curTime) throws ParseException {
-        List<RestEventWithWorkShift> restEventWithWorkShiftList = restEventWithWorkShiftRepo.getByWorkShiftId(workShiftId);
-        if (restEventWithWorkShiftList.isEmpty()) {
+    public long getRestSeconds(int workShiftId, ShiftType curShiftType, Date curTime) throws ParseException {
+        List<RestEvent> restEvents = restEventRepo.getByWorkShiftId(workShiftId);
+        if (restEvents.isEmpty()) {
             return 0;
         } else {
             long restSeconds = 0;
-            for (RestEventWithWorkShift restEventWithWorkShift : restEventWithWorkShiftList) {
-                RestEvent event = restEventRepo.getById(restEventWithWorkShift.getId());
-                // 若休息时间在班次内
-                if (curShiftType.toString().equals(event.getShift_type())) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                    Date startTime = sdf.parse(event.getEvent_start_time());
-                    Date endTime = sdf.parse(event.getEvent_end_time());
-                    // 若当前时刻在休息时间之中
+            for (RestEvent re : restEvents) {
+                // if the rest time is in the shift
+                if (curShiftType.toString().equals(re.getShiftType())) {
+                    SimpleDateFormat sdf = DateFormat.hourFormat();
+                    Date startTime = sdf.parse(re.getStartTime());
+                    Date endTime = sdf.parse(re.getEndTime());
+                    // if current time is in the rest time
                     if (curTime.compareTo(endTime) <= 0 && curTime.compareTo(startTime) >= 0) {
                         restSeconds += curTime.getTime() - startTime.getTime();
                     } else if (curTime.compareTo(endTime) >= 0) {

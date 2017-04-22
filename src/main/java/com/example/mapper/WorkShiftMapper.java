@@ -14,28 +14,16 @@ public class WorkShiftMapper implements RowMapper<WorkShift> {
     public WorkShift mapRow(ResultSet resultSet, int i) throws SQLException {
         WorkShift workShift = new WorkShift();
         workShift.setId(resultSet.getInt("id"));
-        workShift.setMorning_shift_start(resultSet.getString("morning_shift_start"));
-        workShift.setMorning_shift_end(resultSet.getString("morning_shift_end"));
-        workShift.setMiddle_shift_start(resultSet.getString("middle_shift_start"));
-        workShift.setMiddle_shift_end(resultSet.getString("middle_shift_end"));
-        workShift.setNight_shift_start(resultSet.getString("night_shift_start"));
-        workShift.setNight_shift_end(resultSet.getString("night_shift_end"));
-        workShift.setSetting_time(resultSet.getDate("setting_time"));
-        workShift.setMorning_shift_standard_beats(resultSet.getInt("morning_shift_standard_beats"));
-        workShift.setMiddle_shift_standard_beats(resultSet.getInt("middle_shift_standard_beats"));
-        workShift.setNight_shift_standard_beats(resultSet.getInt("night_shift_standard_beats"));
-        workShift.setMorning_worker_num(resultSet.getInt("morning_worker_num"));
-        workShift.setMiddle_worker_num(resultSet.getInt("middle_worker_num"));
-        workShift.setNight_worker_num(resultSet.getInt("night_worker_num"));
-        workShift.setMorning_overtime_worker_num(resultSet.getInt("morning_overtime_worker_num"));
-        workShift.setMiddle_overtime_worker_num(resultSet.getInt("middle_overtime_worker_num"));
-        workShift.setNight_overtime_worker_num(resultSet.getInt("night_overtime_worker_num"));
-        workShift.setMorning_shift_target(resultSet.getInt("morning_shift_target"));
-        workShift.setMiddle_shift_target(resultSet.getInt("middle_shift_target"));
-        workShift.setNight_shift_target(resultSet.getInt("night_shift_target"));
-        workShift.setMiddle_overtime_worker_num(resultSet.getInt("middle_overtime_worker_num"));
-        workShift.setNight_overtime_worker_num(resultSet.getInt("night_overtime_worker_num"));
-        workShift.setCell_name(resultSet.getString("cell_name"));
+        workShift.setAddDate(resultSet.getDate("add_date"));
+        workShift.setShiftType(resultSet.getString("shift_type"));
+        workShift.setCellName(resultSet.getString("cell_name"));
+        workShift.setStartTime(resultSet.getString("start_time"));
+        workShift.setEndTime(resultSet.getString("end_time"));
+        workShift.setTarget(resultSet.getInt("target"));
+        workShift.setStandardBeat(resultSet.getInt("standard_beat"));
+        workShift.setNormalWorkerNum(resultSet.getInt("normal_worker_num"));
+        workShift.setOvertimeWorkerNum(resultSet.getInt("overtime_worker_num"));
+        workShift.setOpen(resultSet.getBoolean("is_open"));
         return workShift;
     }
 }

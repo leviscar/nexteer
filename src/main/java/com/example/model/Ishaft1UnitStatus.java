@@ -1,7 +1,5 @@
 package com.example.model;
 
-import com.example.enumtype.ShiftType;
-
 import java.util.Map;
 
 /**
@@ -9,29 +7,19 @@ import java.util.Map;
  */
 public class Ishaft1UnitStatus {
     private int id;
-    private String curr_time; // 当前时间
-    private WorkShift curr_shift_info; // 班次信息
-    private ShiftType shift_type; // 班次
-    private Map<String, Integer> hourly_target; // 小时目标
-    private int curr_num; // 已完成数量
-    private int defective_num; // 残次品数量
-    private int status; // 0表示哭脸，1表示笑脸
-    private int curr_beats; // 当前节拍
-    private int loss_time; // 损失时间
-    private int movable_rate; // 可动率
+    private String curr_time;
+    private WorkShift curr_shift_info;
+    private Map<String, Integer> hourly_target;
+    private int curr_num;
+    private int status;
+    private int curr_beats;
+    private int loss_time;
+    private int movable_rate;
     private double hce;
     private int target;
-    private Map<String, Integer> hourly_output; // 小时产量
+    private Map<String, Integer> hourly_output;
 
     public Ishaft1UnitStatus() {
-    }
-
-    public ShiftType getShift_type() {
-        return shift_type;
-    }
-
-    public void setShift_type(ShiftType shift_type) {
-        this.shift_type = shift_type;
     }
 
     public String getCurr_time() {
@@ -56,14 +44,6 @@ public class Ishaft1UnitStatus {
 
     public void setCurr_num(int curr_num) {
         this.curr_num = curr_num;
-    }
-
-    public int getDefective_num() {
-        return defective_num;
-    }
-
-    public void setDefective_num(int defective_num) {
-        this.defective_num = defective_num;
     }
 
     public int getStatus() {
