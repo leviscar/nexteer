@@ -24,12 +24,32 @@ function getMainIshaft1Hce() {
     var mainHceJson = new mainHceInput(currTime,cellName);
     console.log(mainHceJson);
     console.log("getMainHce开始");
-    $.get("http://localhost:8080/nexteer/dashboard/hce/ISHAFT1?time="+curTime,function (data) {
-        if(data.system_status != false){
-            console.log(JSON.stringify(data));
+    $.get("http://localhost:8080/nexteer/dashboard/hce/ISHAFT1?time="+currTime,function (data) {
+        if($.parseJSON(data).system_status != false){
+            if($.parseJSON(data).open != false){
+                console.log(JSON.stringify(data));
 
-            $("#showMainIshaft1Hce").html(data.hce);
-            console.log("获取hce操作成功");
+                $("#showMainIshaft1Hce").html($.parseJSON(data).hce+"%");
+                console.log("获取hce操作成功");
+                switch ($.parseJSON(data).status)
+                {
+                    case -1:
+                        $("#hceISStatus").replaceWith("<div class=\"col-md-6 \" id=\"hceISStatus\"><img src=\"images/Rainy.png\" alt=\"NICE\"></div>");
+                        break;
+                    case 0:
+                        $("#hceISStatus").replaceWith("<div class=\"col-md-6 \" id=\"hceISStatus\"><img src=\"images/Cloudy.png\" alt=\"NICE\"></div>");
+                        break;
+                    case 1:
+                        $("#hceISStatus").replaceWith("<div class=\"col-md-6 \" id=\"hceISStatus\"><img src=\"images/Sunny.png\" alt=\"NICE\"></div>");
+                        break;
+                    default:
+                        $("#hceISStatus").replaceWith("<div class=\"col-md-6 \" id=\"hceISStatus\"></div>");
+                }
+            }
+            else{
+                console.log("休班");
+            }
+
         }
     });
 

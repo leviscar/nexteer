@@ -102,12 +102,14 @@ function showWeek() {
     var BEPShceValueArr=[];
     var CEPShceValueArr=[];
     var hceShowX=[];
+    var urlString = "http://localhost:8080/nexteer/hce/week/ISHAFT1?date="+curr_time;
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/hce/week",
-        data: JSON.stringify(showhceJson),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        type: 'GET',
+        url: urlString,
         success: function (data) {
             $.each(data, function (i, model) {
                 hceDate[i]=data[i].addDate;
@@ -284,12 +286,14 @@ $("#showWeek").bind("click",function () {
     var BEPShceValueArr=[];
     var CEPShceValueArr=[];
     var hceShowX=[];
+    var urlString = "http://localhost:8080/nexteer/hce/week/ISHAFT1?date="+curr_time;
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/hce/week",
-        data: JSON.stringify(showhceJson),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        type: 'GET',
+        url: urlString,
         success: function (data) {
             $.each(data, function (i, model) {
                 hceDate[i]=data[i].addDate;
@@ -460,12 +464,14 @@ $("#showMonth").bind("click",function (){
         var BEPShceValueArr=[];
         var CEPShceValueArr=[];
         var hceShowX=[];
+        var urlString = "http://localhost:8080/nexteer/hce/month/ISHAFT1?date="+curr_time;
         $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/nexteer/hce/month",
-            data: JSON.stringify(showhceJson),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: 'GET',
+            url: urlString,
             success: function (data) {
                 $.each(data, function (i, model) {
                     hceDate[i]=data[i].addDate;
@@ -650,12 +656,14 @@ $("#showYear").bind("click",function () {
         var BEPShceValueArr=[];
         var CEPShceValueArr=[];
         var hceShowX=[];
+        var urlString = "http://localhost:8080/nexteer/hce/year/ISHAFT1?date="+curr_time;
         $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/nexteer/hce/year",
-            data: JSON.stringify(showhceJson),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: 'GET',
+            url: urlString,
             success: function (data) {
                 $.each(data, function (i, model) {
                     hceDate[i]=data[i].addDate;

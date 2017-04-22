@@ -1,9 +1,6 @@
 /**
  * Created by Administrator on 2017/4/4.
  */
-/**
- * Created by Administrator on 2017/3/16.
- */
 var oeeYearArr=[];
 var oeeMonthArr=[];
 var oeeDayArr=[];
@@ -99,12 +96,14 @@ function showWeek() {
     var BEPSOeeValueArr=[];
     var CEPSOeeValueArr=[];
     var OeeShowX=[];
+    var urlString = "http://localhost:8080/nexteer/oee/week/ISHAFT1?date="+curr_time;
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/oee/week",
-        data: JSON.stringify(showOeeJson),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        type: 'GET',
+        url: urlString,
         success: function (data) {
             $.each(data, function (i, model) {
                 oeeDate[i]=data[i].addDate;
@@ -267,175 +266,186 @@ showWeek();
 $("#showWeek").bind("click",function () {
     var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
     // var curr_time="2017-03-09";
+    var urlString = "http://localhost:8080/nexteer/oee/week/ISHAFT1?date="+curr_time;
     var showOeeJson = new oeeInput(curr_time,"ISHAFT1");
     var IshaftOneOeeValueArr=[];
     var IshaftOneOeeTarArr= [];
-    var IsTwoOeeValueArr=[];
-    var IsThrOeeValueArr=[];
-    var IsForOeeValueArr=[];
-    var BEPSOeeValueArr=[];
-    var CEPSOeeValueArr=[];
-    var OeeShowX=[];
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/oee/week",
-        data: JSON.stringify(showOeeJson),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            $.each(data, function (i, model) {
-                oeeDate[i]=data[i].addDate;
-
-                IshaftOneOeeValueArr[i]=model.oee;
-                IshaftOneOeeTarArr[i] = model.targetOee;
-                // IsTwoOeeValueArr[i]=model.ishaft2_value;
-                // IsThrOeeValueArr[i]=model.ishaft3_value;
-                // IsForOeeValueArr[i]=model.ishaft4_value;
-                // BEPSOeeValueArr[i]=model.beps_value;
-                // CEPSOeeValueArr[i]=model.ceps_value;
-                // OeeShowX[i]=model.year+"."+model.month+"."+model.day;
-            });
-            console.log(JSON.stringify(data));
-            console.log(IshaftOneOeeValueArr);
-            // console.log(IsTwoOeeValueArr);
-            // console.log(IsThrOeeValueArr);
-            // console.log(IsForOeeValueArr);
-            // console.log(BEPSOeeValueArr);
-            // console.log(CEPSOeeValueArr);
-            // console.log(OeeShowX);
-            // 指定图表的配置项和数据
-            var firstOption = {
-                title: myWeekTitle,
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                },
-                toolbox: {
-                    feature: {
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        saveAsImage: {
-                            show: true
-                        }
-                    }
-                },
-                grid: myGrid,
-                legend: myLengend,
-
-                xAxis: {
-                    type: 'category',
-                    axisTick: {
-                        alignWithLabel: true
-                    },
-                    nameTextStyle:{
-                        fontStyle:'italic',
-                        fontWeight:'bold'
-                    },
-                    axisLabel:{
-                        textStyle:{
-
-                            fontSize:20
-                        }
-                    },
-                    data: ["周一","周二","周三","周四","周五","周六","周日"]
-                },
-                yAxis:myYaxis,
-                series: [
-
-                    {
-                        name: 'oee',
-                        type: 'line',
-                        barMaxWidth:40,
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
-                        },
-                        data: IshaftOneOeeValueArr
-                    },
-                    {
-                        name: 'target',
-                        type: 'line',
-                        barMaxWidth:40,
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top'
-                            }
-                        },
-                        data: IshaftOneOeeTarArr
-                    }
-                    // ,
-                    // {
-                    //     name: 'Ishaft2',
-                    //     type: 'bar',
-                    //     label: {
-                    //         normal: {
-                    //             show: true,
-                    //             position: 'top'
-                    //         }
-                    //     },
-                    //     data: IsTwoOeeValueArr
-                    // },
-                    // {
-                    //     name: 'Ishaft3',
-                    //     type: 'bar',
-                    //     label: {
-                    //         normal: {
-                    //             show: true,
-                    //             position: 'top'
-                    //         }
-                    //     },
-                    //     data: IsThrOeeValueArr
-                    // },
-                    // {
-                    //     name: 'Ishaft4',
-                    //     type: 'bar',
-                    //     label: {
-                    //         normal: {
-                    //             show: true,
-                    //             position: 'top'
-                    //         }
-                    //     },
-                    //     data: IsForOeeValueArr
-                    // },
-                    // {
-                    //     name: 'BEPS',
-                    //     type: 'bar',
-                    //     label: {
-                    //         normal: {
-                    //             show: true,
-                    //             position: 'top'
-                    //         }
-                    //     },
-                    //     data: BEPSOeeValueArr
-                    // },
-                    // {
-                    //     name: 'CEPS',
-                    //     type: 'bar',
-                    //     label: {
-                    //         normal: {
-                    //             show: true,
-                    //             position: 'top'
-                    //         }
-                    //     },
-                    //     data: CEPSOeeValueArr
-                    // }
-                ]
-            };
-            // 使用刚指定的配置项和数据显示图表。
-            IsOneOeeChart.setOption(firstOption);
-
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         },
-        failure: function (errMsg) {
-            console.log(errMsg);
-            console.log('fail');
-        }
+        type: 'GET',
+        url: urlString,
+        success: function (data) {
+            {
+                $.each(data, function (i, model) {
+                    oeeDate[i]=data[i].addDate;
 
+                    IshaftOneOeeValueArr[i] = model.oee;
+                    IshaftOneOeeTarArr[i] = model.targetOee;
+
+                });
+                console.log(JSON.stringify(data));
+                console.log(IshaftOneOeeValueArr);
+
+                var firstOption = {
+                    title: myWeekTitle,
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {}// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: myGrid,
+                    legend: myLengend,
+
+                    xAxis: {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle: {
+                            fontStyle: 'italic',
+                            fontWeight: 'bold'
+                        },
+                        axisLabel: {
+                            textStyle: {
+
+                                fontSize: 20
+                            }
+                        },
+                        data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+                    },
+                    yAxis: myYaxis,
+                    series: [
+
+                        {
+                            name: 'oee',
+                            type: 'line',
+                            barMaxWidth: 40,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOneOeeValueArr
+                        },
+                        {
+                            name: 'target',
+                            type: 'line',
+                            barMaxWidth: 40,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOneOeeTarArr
+                        }
+
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                IsOneOeeChart.setOption(firstOption);
+
+            }
+        }
     });
+    // $.get("http://localhost:8080/nexteer/oee/week/ISHAFT1?date="+curr_time,function (data) {
+    //     {
+    //         $.each($.parseJSON(data), function (i, model) {
+    //             // oeeDate[i]=data[i].addDate;
+    //
+    //             IshaftOneOeeValueArr[i]=model.oee;
+    //             IshaftOneOeeTarArr[i] = model.targetOee;
+    //
+    //         });
+    //         console.log(JSON.stringify(data));
+    //         console.log(IshaftOneOeeValueArr);
+    //
+    //         var firstOption = {
+    //             title: myWeekTitle,
+    //             tooltip: {
+    //                 trigger: 'axis',
+    //                 axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+    //             },
+    //             toolbox: {
+    //                 feature: {
+    //                     dataView: {
+    //                         show: true,
+    //                         readOnly: false
+    //                     },
+    //                     saveAsImage: {
+    //                         show: true
+    //                     }
+    //                 }
+    //             },
+    //             grid: myGrid,
+    //             legend: myLengend,
+    //
+    //             xAxis: {
+    //                 type: 'category',
+    //                 axisTick: {
+    //                     alignWithLabel: true
+    //                 },
+    //                 nameTextStyle:{
+    //                     fontStyle:'italic',
+    //                     fontWeight:'bold'
+    //                 },
+    //                 axisLabel:{
+    //                     textStyle:{
+    //
+    //                         fontSize:20
+    //                     }
+    //                 },
+    //                 data: ["周一","周二","周三","周四","周五","周六","周日"]
+    //             },
+    //             yAxis:myYaxis,
+    //             series: [
+    //
+    //                 {
+    //                     name: 'oee',
+    //                     type: 'line',
+    //                     barMaxWidth:40,
+    //                     label: {
+    //                         normal: {
+    //                             show: true,
+    //                             position: 'top'
+    //                         }
+    //                     },
+    //                     data: IshaftOneOeeValueArr
+    //                 },
+    //                 {
+    //                     name: 'target',
+    //                     type: 'line',
+    //                     barMaxWidth:40,
+    //                     label: {
+    //                         normal: {
+    //                             show: true,
+    //                             position: 'top'
+    //                         }
+    //                     },
+    //                     data: IshaftOneOeeTarArr
+    //                 }
+    //
+    //             ]
+    //         };
+    //         // 使用刚指定的配置项和数据显示图表。
+    //         IsOneOeeChart.setOption(firstOption);
+    //
+    //     }
+    // });
 });
 //按月显示
 $("#showMonth").bind("click",function (){
@@ -451,12 +461,14 @@ $("#showMonth").bind("click",function (){
         var BEPSOeeValueArr=[];
         var CEPSOeeValueArr=[];
         var OeeShowX=[];
+        var urlString = "http://localhost:8080/nexteer/oee/month/ISHAFT1?date="+curr_time;
         $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/nexteer/oee/month",
-            data: JSON.stringify(showOeeJson),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: 'GET',
+            url: urlString,
             success: function (data) {
                 $.each(data, function (i, model) {
                     oeeDate[i]=data[i].addDate;
@@ -635,12 +647,14 @@ $("#showYear").bind("click",function () {
         var BEPSOeeValueArr=[];
         var CEPSOeeValueArr=[];
         var OeeShowX=[];
+        var urlString = "http://localhost:8080/nexteer/oee/year/ISHAFT1?date="+curr_time;
         $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/nexteer/oee/year",
-            data: JSON.stringify(showOeeJson),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: 'GET',
+            url: urlString,
             success: function (data) {
                 $.each(data, function (i, model) {
                     oeeDate[i]=data[i].addDate;
