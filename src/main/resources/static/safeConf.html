@@ -2,9 +2,175 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="images/favicon.ico">
+    <title>Nexteer</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/jquery-editable-select/dist/jquery-editable-select.min.css">
+    <link rel="stylesheet" href="bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
+    <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <style type="text/css">
+        .black-color{
+            color:black;
+        }
+        .red-color{
+            color:red;
+        }
+        #bs-example-navbar-collapse-1{
+            text-align: center;
+        }
+        p{
+            display: block;
+            font-size:1.4em;
+        }
+        span{
+            font-size: 1.5em;
+        }
+        select{
+            width: 30% !important;
+        }
+    </style>
 </head>
 <body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost:8080/nexteer/index.html"><img src="images/icon.png" alt="Nexteer"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <p class="navbar-text center-block" >系统设置</p>
+                <li >
+                    <a href="http://localhost:8080/nexteer/safeConf.html" >安全运行天数设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/qualityConf.html" >质量无抱怨天数设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/scrapConf.html" >报废金额设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/modelConf.html" >型号信息设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/shiftConf.html" >班次信息设置</a>
+                </li>
+
+            </ul>
+
+            <form class="navbar-form navbar-right">
+
+            </form>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="row">
+    <div class="col-md-12">
+        <form>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p>安全运行天数设置</p>
+                </div>
+                <div class="panel-body">
+                    <!--<button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#getDayModal">获得指定日期安全天数</button>-->
+                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#startDateModal">更新安全天数</button>
+                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#resetDateModal">重置安全天数为0</button>
+                    <div class="modal fade" id="getDayModal" tabindex="-1" role="dialog" aria-labelledby="mygetDayModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="mygetDayModalLabel">获取指定日期安全天数</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="getDayTime">选择指定日期</label>&nbsp;&nbsp;<input type="date" id="getDayTime"></p>
+                                    <hr class="active">
+                                    <p id="getDayStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="getDay">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="startDateModal" tabindex="-1" role="dialog" aria-labelledby="mystartDateModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="mystartDateModalLabel">更新安全天数</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="startDateTime">更新时间</label>&nbsp;&nbsp;<input type="date" id="startDateTime"></p>
+                                    <hr class="active">
+                                    <p><label for="startDateValue">更新安全天数</label>&nbsp;&nbsp;<input type="number" id="startDateValue"></p>
+                                    <hr class="active">
+                                    <p id="startDateStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="startDate">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="resetDateModal" tabindex="-1" role="dialog" aria-labelledby="myresetDateModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myresetDateModalLabel">重置安全天数</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="resetDateTime">重置时间</label>&nbsp;&nbsp;<input type="date" id="resetDateTime"></p>
+                                    <hr class="active">
+                                    <p><label for="resetDateValue">输入错误信息</label>&nbsp;&nbsp;<input type="text" id="resetDateValue"></p>
+                                    <hr class="active">
+                                    <p id="resetDateStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="resetDate">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p id="safeSearch"></p>
+                </div>
+
+            </div>
+            <hr class="active">
+        </form>
+        <input type="text" value="" id="datetimepicker" data-date-format="yyyy-mm">
+
+    </div>
+
+</div>
+
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/google-maps.js"></script>
+<script type="application/javascript" src="bower_components/jquery-editable-select/dist/jquery-editable-select.min.js"></script>
+<script type="application/javascript" src="bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/defineGlobal.js"></script>
+<script src="js/safeset.js"></script>
+<script type="text/javascript">
+    $('#datetimepicker').datetimepicker();
+</script>
 
 </body>
 </html>
