@@ -1,12 +1,7 @@
 /**
  * Created by Administrator on 2017/4/4.
  */
-/**
- * Created by Administrator on 2017/4/4.
- */
-/**
- * Created by Administrator on 2017/3/16.
- */
+
 var hceYearArr=[];
 var hceMonthArr=[];
 var hceDayArr=[];

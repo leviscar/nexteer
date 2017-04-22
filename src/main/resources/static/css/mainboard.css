@@ -5,66 +5,86 @@
 .navbar{
     /*background-color: #e51937;*/
 }
-@media screen and (min-width:2100px)
+@media screen and (min-width:2300px) and (max-width:2500px)
 {
-    body{
-        font-size:21px;
+    .bg{
+        font-size:26px ;
     }
 }
-@media screen and (min-width:2000px)
+@media screen and (min-width:2100px) and (max-width:2300px)
 {
-    body{
-        font-size:20px;
+    .bg{
+        font-size:21px ;
     }
 }
-@media screen and (min-width:1900px)
+@media screen and (min-width:1900px) and (max-width:2100px)
 {
-    body{
-        font-size:19px;
+    .bg{
+        font-size:19px ;
     }
 }
-@media screen and (min-width:1800px)
+@media screen and (min-width:1700px) and (max-width:1900px)
 {
-    body{
-        font-size:18px;
+    .bg{
+        font-size:18px ;
     }
 }
-@media screen and (min-width:1700px)
+@media screen and (min-width:1600px) and (max-width:1700px)
 {
-    body{
-        font-size:17px;
+    .bg{
+        font-size:16px ;
     }
 }
-@media screen and (min-width:1600px)
+@media screen and (min-width:1500px) and (max-width:1600px)
 {
-    body{
-        font-size:16px;
+    .bg{
+        font-size:15px ;
     }
 }
-@media screen and (min-width:1500px)
+@media screen and (min-width:1400px) and (max-width:1500px)
 {
-    body{
-        font-size:15px;
+    .bg{
+        font-size:14px ;
     }
 }
-@media screen and (min-width:1400px)
+@media screen and (min-width:1290px) and (max-width:1400px)
 {
-    body{
-        font-size:14px;
+    .bg{
+        font-size:13px ;
     }
 }
-@media screen and (min-width:1300px)
+@media screen and (min-width:1200px) and (max-width:1290px)
 {
-    body{
-        font-size:13px;
+    .bg{
+        font-size:12px ;
     }
 }
-@media screen and (min-width:1200px)
+@media screen and (min-width:1000px) and (max-width:1200px)
 {
-    body{
-        font-size:12px;
+    .bg{
+        font-size:10px ;
     }
 }
+@media screen and (min-width:920px) and (max-width:1000px)
+{
+    .bg{
+        font-size:9px ;
+    }
+}
+@media screen and (min-width:768px) and (max-width: 920px)
+{
+    .bg{
+        font-size:8px ;
+    }
+}
+
+@media screen and (min-width:540px) and (max-width: 768px)
+{
+    .bg{
+        font-size:6px ;
+    }
+}
+
 body{
     padding-top: 5%;
 }
@@ -72,6 +92,6 @@ body{
     font-family: "My Font";
     src: url("static/images/normalZAO.otf");
 }
-body{
-    font-size: 20px !important;
-}
+/*body{*/
+    /*font-size: 20px !important;*/
+/*}*/
