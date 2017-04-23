@@ -11,7 +11,7 @@ function shiftInput(setTime,shiftType,morStart, morEnd,Beats,morWorkNum,morWorkO
     this.normalWorkerNum = morWorkNum;
     this.overtimeWorkerNum = morWorkOverNum;
     this.target =morTar;
-    this.cell_name = cellName;
+    this.cellName = cellName;
     this.open = open;
 }
 function OneShiftInput(setTime,shiftType,morStart, morEnd,Beats,morWorkNum,morWorkOverNum,morTar , cellName,open) {
@@ -59,14 +59,13 @@ function  eventInput(type,cellName,event,eventStart,eventEnd) {
     this.endTime=eventEnd;
 }
 function showEvent() {
-    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Ashift", function (data) {
-        if(data.system_status ==true){
-            console.log($.parseJSON(data));
-            $.each($.parseJSON(data), function (i, model) {
+    $.get("http://localhost:8080/nexteer/rest-event?work_shift_id=1", function (data) {
+        console.log(data);
+            console.log(data);
+            $.each(data, function (i, model) {
 
-                $("#showEvent").append("<tbody><tr><td>"+model.shiftType+"</td><td>"+model.cellName+"</td><td>"+model.event+"</td><td>"+model.startTime+"</td><td>"+model.endTime+"</td></tr></tbody>");
+                $("#showEvent").append("<tbody><tr><td>"+data[i].shiftType+"</td><td>"+data[i].cellName+"</td><td>"+data[i].event+"</td><td>"+data[i].startTime+"</td><td>"+data[i].endTime+"</td></tr></tbody>");
             });
-        }
 
     });
 
@@ -199,13 +198,12 @@ $("#twoSub").bind("click", function () {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            if(data.system_status==true) {
+            if(data.id!=null) {
                 $("#twoStatus").html("添加班次信息成功");
             }
             else{
                 $("#twoStatus").html("添加班次信息失败");
             }
-            console.log(data.status);
         },
         failure: function (errMsg) {
             console.log(errMsg);
@@ -308,21 +306,25 @@ $("#twoEventSub").bind("click",function () {
 });
 
 $("#thiEventSub").bind("click",function () {
-    var addEventJson= new eventInput($("#addThiType").val().toString(),$("#addThiEvent").val().toString(),$("#addThiStart").val().toString(),$("#addThiEnd").val().toString());
+    var addEventJson= new eventInput($("#addThiType").val().toString(),$("#eventCellName").val().toString(),$("#addThiEvent").val().toString(),$("#addThiStart").val().toString(),$("#addThiEnd").val().toString());
+    console.log(addEventJson);
     $.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
         type: "POST",
         url: "http://localhost:8080/nexteer/rest-event",
         data: JSON.stringify(addEventJson),
-        contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            if(data.system_status==true) {
+            if(data.id != null) {
                 $("#addThiStatus").html("添加事件成功");
             }
             else{
                 $("#addThiStatus").html("添加事件失败");
             }
-            console.log(data.status);
+            console.log(data.event);
         },
         failure: function (errMsg) {
             console.log(errMsg);
