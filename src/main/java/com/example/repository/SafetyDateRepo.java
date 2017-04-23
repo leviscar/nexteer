@@ -58,7 +58,7 @@ public class SafetyDateRepo {
      * @return
      */
     public List<SafetyDate> findBySafeState() {
-        String sql = "SELECT * FROM safety_date WHERE is_safe = 0";
+        String sql = "SELECT * FROM safety_date WHERE is_safe <= 0";
         return jdbc.query(sql, new SafetyDateMapper());
     }
 
@@ -85,17 +85,17 @@ public class SafetyDateRepo {
             safetyDate.setIs_safe(1);
             safetyDate.setSafe_dates(1);
             jdbc.update("IF NOT exists(SELECT * FROM safety_date WHERE year = ? AND month = ? AND day = ?)" +
-                            "INSERT INTO safety_date (year, month, day, safe_dates, is_safe, log) VALUES (?,?,?,?,?,?)" +
-                            "ELSE UPDATE safety_date SET safe_dates = ?, is_safe = ?, log = ?" +
-                            "WHERE year = ? AND month = ? AND day = ?"
+                            " INSERT INTO safety_date (year, month, day, safe_dates, is_safe, log) VALUES (?,?,?,?,?,?)" +
+                            " ELSE UPDATE safety_date SET safe_dates = ?, is_safe = ?, log = ?" +
+                            " WHERE year = ? AND month = ? AND day = ?"
                     , year, month, day, year, month, day, 1, 1, safetyDate.getLog(), 1, 1, safetyDate.getLog(), year, month, day);
         } else {
             safetyDate.setIs_safe(1);
             safetyDate.setSafe_dates(res.get(0).getSafe_dates() + 1);
             safetyDate.setLog("Today is running safe!");
             jdbc.update("IF NOT exists(SELECT * FROM safety_date WHERE year = ? AND month = ? AND day = ?)" +
-                            "INSERT INTO safety_date (year, month, day, safe_dates, is_safe, log) VALUES (?,?,?,?,?,?)" +
-                            "ELSE UPDATE safety_date SET safe_dates = ?, is_safe = ?, log = ? WHERE year = ? AND month = ? AND day = ?"
+                            " INSERT INTO safety_date (year, month, day, safe_dates, is_safe, log) VALUES (?,?,?,?,?,?)" +
+                            " ELSE UPDATE safety_date SET safe_dates = ?, is_safe = ?, log = ? WHERE year = ? AND month = ? AND day = ?"
                     , year, month, day, year, month, day, res.get(0).getSafe_dates() + 1, 1, safetyDate.getLog()
                     , res.get(0).getSafe_dates() + 1, 1, safetyDate.getLog(), year, month, day);
         }
@@ -108,11 +108,6 @@ public class SafetyDateRepo {
      * @param safetyDate
      */
     public SafetyDate updateSafetyDate(SafetyDate safetyDate) throws ParseException {
-        if (safetyDate.getSafe_dates() == 0) {
-            safetyDate.setIs_safe(0);
-        } else {
-            safetyDate.setIs_safe(1);
-        }
         if (safetyDate.getLog() == null || "".equals(safetyDate.getLog())) {
             safetyDate.setLog("Today is running safe!");
         }

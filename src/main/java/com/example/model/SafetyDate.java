@@ -10,7 +10,7 @@ public class SafetyDate {
     private String month;
     private String day;
     private Integer is_safe; // 0 means unsafe, 1 means safe
-    private String log;
+    private String log = "Today is running safe!";
 
     public SafetyDate() {
     }

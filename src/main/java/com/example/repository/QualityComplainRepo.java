@@ -52,7 +52,7 @@ public class QualityComplainRepo {
      * @return
      */
     public List<QualityComplain> findBySafeState() {
-        String sql = "SELECT * FROM quality_complain WHERE no_complain = 0";
+        String sql = "SELECT * FROM quality_complain WHERE no_complain <= 0";
         return jdbc.query(sql, new QualityComplainMapper());
     }
 
@@ -77,8 +77,8 @@ public class QualityComplainRepo {
             int noComplain = 1;
             qualityComplain.setNoComplain(noComplain);
             jdbc.update("IF NOT EXISTS(SELECT * FROM quality_complain WHERE add_date = ?)" +
-                            "INSERT INTO quality_complain (add_date, no_complain, count, log) VALUES (?, ?, ?, ?)" +
-                            "ELSE UPDATE quality_complain SET no_complain = ?, count = ?, log = ? WHERE add_date = ?"
+                            " INSERT INTO quality_complain (add_date, no_complain, count, log) VALUES (?, ?, ?, ?)" +
+                            " ELSE UPDATE quality_complain SET no_complain = ?, count = ?, log = ? WHERE add_date = ?"
                     , addDate, addDate, noComplain, count, log, noComplain, count, log, addDate);
         } else {
             int noComplain = 1;
@@ -86,8 +86,8 @@ public class QualityComplainRepo {
             int count = res.get(0).getCount() + 1;
             qualityComplain.setCount(count);
             jdbc.update("IF NOT EXISTS(SELECT * FROM quality_complain WHERE add_date = ?)" +
-                            "INSERT INTO quality_complain (add_date, no_complain, count, log) VALUES (?, ?, ?, ?)" +
-                            "ELSE UPDATE quality_complain SET no_complain = ?, count = ?, log = ? WHERE add_date = ?"
+                            " INSERT INTO quality_complain (add_date, no_complain, count, log) VALUES (?, ?, ?, ?)" +
+                            " ELSE UPDATE quality_complain SET no_complain = ?, count = ?, log = ? WHERE add_date = ?"
                     , addDate, addDate, noComplain, count, log, noComplain, count, log, addDate);
         }
         return qualityComplain;
@@ -100,13 +100,7 @@ public class QualityComplainRepo {
      * @param qualityComplain
      */
     public QualityComplain update(QualityComplain qualityComplain) throws ParseException {
-        int noComplain;
-        if (qualityComplain.getNoComplain() == 0) {
-            noComplain = 0;
-        } else {
-            noComplain = 1;
-        }
-        qualityComplain.setNoComplain(noComplain);
+        int noComplain = qualityComplain.getNoComplain();
         if (qualityComplain.getLog() == null || "".equals(qualityComplain.getLog())) {
             qualityComplain.setLog("There is no complain");
         }

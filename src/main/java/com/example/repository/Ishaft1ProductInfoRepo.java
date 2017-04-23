@@ -1,7 +1,8 @@
 package com.example.repository;
 
-import com.example.mapper.Ishaft1ProductMapper;
-import com.example.model.Ishaft1Product;
+import com.example.mapper.ProductInfoMapper;
+import com.example.model.ProductInfo;
+import com.example.util.DateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,31 +19,33 @@ import java.util.List;
  * Created by mrpan on 2017/3/12.
  */
 @Repository
-public class Ishaft1ProductRepo {
+public class Ishaft1ProductInfoRepo {
     private JdbcTemplate jdbc;
 
     @Autowired
-    public Ishaft1ProductRepo(@Qualifier("twoJdbcTemplate") JdbcTemplate jdbc) {
+    public Ishaft1ProductInfoRepo(@Qualifier("twoJdbcTemplate") JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
 
     /**
-     * 获得某时间段内生产产品的信息
+     * Get the ishaft1 product information based on start time, end time and station id
      *
      * @param startTime
      * @param endTime
      * @return
      */
-    public List<Ishaft1Product> getByPeriod(Date startTime, Date endTime) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public List<ProductInfo> getByPeriod(Date startTime, Date endTime) {
+        SimpleDateFormat sdf = DateFormat.timeFormat();
         String start = sdf.format(startTime);
         String end = sdf.format(endTime);
-        String sql = "SELECT Timestamp, Model FROM ._status WHERE ID IN (SELECT MIN(ID) FROM ._status WHERE Timestamp BETWEEN ? AND ? AND Status = '9999' AND StationName = 'LABELBENCH' GROUP BY Data000)";
-        return jdbc.query(sql, new Object[]{start, end}, new Ishaft1ProductMapper());
+        String sql = "SELECT Timestamp, Model FROM ._status WHERE ID IN (SELECT MIN(ID) FROM ._status " +
+                "WHERE Timestamp BETWEEN ? AND ? AND Status = '9999' AND StationName = 'LABELBENCH' GROUP BY Data000) " +
+                "ORDER BY Timestamp";
+        return jdbc.query(sql, new Object[]{start, end}, new ProductInfoMapper());
     }
 
     /**
-     * 获取从当前时刻开始的前topN条记录
+     * Get the topN records from start time to end time
      *
      * @param startDate
      * @param curDate
@@ -51,7 +54,9 @@ public class Ishaft1ProductRepo {
      */
     public List<Date> getCurBeats(Date startDate, Date curDate, int topN) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String sql = "SELECT TOP (?) Timestamp FROM ._status WHERE ID IN (SELECT MIN(ID) FROM ._status WHERE Timestamp BETWEEN ? AND ? AND Status = '9999' AND StationName = 'LABELBENCH' GROUP BY Serial) ORDER BY Timestamp DESC";
+        String sql = "SELECT TOP (?) Timestamp FROM ._status WHERE ID IN (SELECT MIN(ID) FROM ._status WHERE Timestamp" +
+                " BETWEEN ? AND ? AND Status = '9999' AND StationName = 'LABELBENCH' GROUP BY Serial)" +
+                " ORDER BY Timestamp DESC";
         return jdbc.query(sql, new Object[]{topN, sdf.format(startDate), sdf.format(curDate)}, new RowMapper<Date>() {
             @Override
             public Date mapRow(ResultSet resultSet, int i) throws SQLException {

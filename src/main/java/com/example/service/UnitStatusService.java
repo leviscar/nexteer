@@ -1,8 +1,9 @@
-package com.example.repository;
+package com.example.service;
 
 import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
 import com.example.model.*;
+import com.example.repository.*;
 import com.example.util.DateFormat;
 import com.example.util.Function;
 import com.example.util.ModelOutput;
@@ -11,7 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,33 +21,36 @@ import java.util.*;
 /**
  * Created by mrpan on 2017/3/10.
  */
-@Repository
-public class Ishaft1UnitStatusRepo {
-    private Ishaft1ProductRepo ishaft1ProductRepo;
+@Service
+public class UnitStatusService {
+    private Ishaft1ProductInfoRepo ishaft1ProductInfoRepo;
+    private CepsProductInfoRepo cepsProductInfoRepo;
     private WorkShiftRepo workShiftRepo;
     private RestEventRepo restEventRepo;
     private LossTimeRepo lossTimeRepo;
     private ProductModelRepo productModelRepo;
 
     @Autowired
-    public Ishaft1UnitStatusRepo(Ishaft1ProductRepo ishaft1ProductRepo, WorkShiftRepo workShiftRepo
-            , RestEventRepo restEventRepo, LossTimeRepo lossTimeRepo, ProductModelRepo productModelRepo) {
+    public UnitStatusService(Ishaft1ProductInfoRepo ishaft1ProductInfoRepo, CepsProductInfoRepo cepsProductInfoRepo
+            , WorkShiftRepo workShiftRepo, RestEventRepo restEventRepo, LossTimeRepo lossTimeRepo
+            , ProductModelRepo productModelRepo) {
+        this.cepsProductInfoRepo = cepsProductInfoRepo;
         this.lossTimeRepo = lossTimeRepo;
-        this.ishaft1ProductRepo = ishaft1ProductRepo;
+        this.ishaft1ProductInfoRepo = ishaft1ProductInfoRepo;
         this.workShiftRepo = workShiftRepo;
         this.restEventRepo = restEventRepo;
         this.productModelRepo = productModelRepo;
     }
 
-    public String getIshaftUnitStatusByCurTime(String date) throws ParseException {
-        Ishaft1UnitStatus unitStatus = new Ishaft1UnitStatus();
+    public String getUnitStatusByCurTime(String date, String cellName) throws ParseException {
+        UnitStatus unitStatus = new UnitStatus();
 
         // format the date with "HH:mm"
         SimpleDateFormat hourFormat = DateFormat.hourFormat();
         Date curTime = hourFormat.parse(date.substring(11, 16));
 
         // get the latest work shift based on cell name and current time
-        List<WorkShift> workShifts = workShiftRepo.getLatestByCurTime(Cell.ISHAFT1.toString(), date.substring(11, 16));
+        List<WorkShift> workShifts = workShiftRepo.getLatestByCurTime(cellName, date.substring(11, 16));
         JsonObject object = new JsonObject();
         if (workShifts.isEmpty()) {
             object.addProperty("system_status", false);
@@ -68,8 +72,60 @@ public class Ishaft1UnitStatusRepo {
         // add a day when the start time and current time do not in the same day
         curDate = Function.addOneDay(startDate, curDate);
 
-        // get the current product output
-        List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, curDate);
+        // get the current product output based on cell name
+        List<ProductInfo> products = new ArrayList<>();
+        // take the latest 30 products' beat to calculate the current beat
+        int topN = 30;
+        List<Date> topNProduct = new ArrayList<>();
+        // cell id to get the loss time
+        int cellId = 0;
+        String stationId;
+        switch (Cell.valueOf(cellName)) {
+            case ISHAFT1:
+                products= ishaft1ProductInfoRepo.getByPeriod(startDate, curDate);
+                topNProduct = ishaft1ProductInfoRepo.getCurBeats(startDate, curDate, topN);
+                cellId = 8;
+                break;
+            case ISHAFT2:
+                break;
+            case ISHAFT3:
+                break;
+            case ISHAFT4:
+                break;
+            case BEPS1:
+                break;
+            case BEPS2:
+                break;
+            case BEPS3:
+                break;
+            case BEPS4:
+                break;
+            case CEPS1:
+                stationId = "SD000094X02";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
+                topNProduct = cepsProductInfoRepo.getTopN(startDate, curDate, topN, stationId);
+                cellId = 11;
+                break;
+            case CEPS2:
+                stationId = "SD000102X01";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
+                topNProduct = cepsProductInfoRepo.getTopN(startDate, curDate, topN, stationId);
+                cellId = 12;
+                break;
+            case CEPS3:
+                stationId = "SD000107X01";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
+                topNProduct = cepsProductInfoRepo.getTopN(startDate, curDate, topN, stationId);
+                cellId = 13;
+                break;
+            case CEPS4:
+                stationId = "SD000122X01";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
+                topNProduct = cepsProductInfoRepo.getTopN(startDate, curDate, topN, stationId);
+                cellId = 14;
+                break;
+        }
+
         int curNum = products.size();
         unitStatus.setCurr_num(curNum);
 
@@ -79,9 +135,6 @@ public class Ishaft1UnitStatusRepo {
         int target = workShift.getTarget();
         unitStatus.setTarget(target);
 
-        // take the latest 30 products' beat to calculate the current beat
-        int topN = 30;
-        List<Date> topNProduct = ishaft1ProductRepo.getCurBeats(startDate, curDate, topN);
         int curBeats = OutputTool.calcCurBeats(topNProduct, topN);
         unitStatus.setCurr_beats(curBeats);
 
@@ -136,7 +189,7 @@ public class Ishaft1UnitStatusRepo {
         unitStatus.setHourly_target(targetMap);
 
         // get the loss time
-        unitStatus.setLoss_time(getLossTime(8, startDate, curDate));
+        unitStatus.setLoss_time(getLossTime(cellId, startDate, curDate));
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         return gson.toJson(unitStatus);
     }
@@ -242,7 +295,7 @@ public class Ishaft1UnitStatusRepo {
      * @param startDate
      * @return
      */
-    public Map<String, Integer> getHourlyOutput(List<Ishaft1Product> products, Date startDate) {
+    public Map<String, Integer> getHourlyOutput(List<ProductInfo> products, Date startDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         Map<String, Integer> map = new TreeMap<>();
 
@@ -251,7 +304,7 @@ public class Ishaft1UnitStatusRepo {
         calendar.add(Calendar.HOUR_OF_DAY, 1);
         Date endDate = calendar.getTime();
         int count = 0;
-        for (Ishaft1Product product : products) {
+        for (ProductInfo product : products) {
             if (product.getTime().getTime() >= startDate.getTime() && product.getTime().getTime() <= endDate.getTime()) {
                 count++;
             } else {

@@ -1,8 +1,6 @@
 package com.example.task;
 
 import com.example.enumtype.ShiftType;
-import com.example.model.ShiftUnitStatus;
-import com.example.repository.Ishaft1UnitStatusRepo;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -12,10 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by mrpan on 2017/4/13.
