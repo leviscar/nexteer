@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="css/mainboard.css" type="text/css">
     <link rel="stylesheet" href="css/height.css" type="text/css">
     <link rel="stylesheet" href="css/sheetTable.css" type="text/css">
+    <link rel="stylesheet" href="bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/dateForm.css" type="text/css">
     <style type="text/css">
         body {
             background-color: #F7F7F7;
@@ -65,12 +67,12 @@
                 <button type="button" class="btn btn-danger btn-xs" id="showYear">年视图</button>
 
             </form>
-            <!--<form class="navbar-form navbar-right">-->
-            <!--<input id="startScrapTime" type="date">-->
-            <!--<span>-</span>-->
-            <!--<input id="endScrapTime" type="date">-->
-            <!--<button type="button" class="btn btn-danger btn-xs " id="showPeriod">按日期显示</button>-->
-            <!--</form>-->
+            <form class="navbar-form navbar-right" id="selection">
+                <input type="text" class="form-control form_datetime_year" readonly id="selectYear" value="2017"/>
+                <button type="button" class="btn btn-danger btn-xs" id="selectYearSub">年份选择</button>
+                <input type="text" class="form-control form_datetime_month" readonly id="selectMonth" value="2017-02"/>
+                <button type="button" class="btn btn-danger btn-xs" id="selectMonthSub">月份选择</button>
+            </form>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
@@ -86,6 +88,8 @@
 <script src="bower_components/jquery-json/dist/jquery.json.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/echarts/dist/echarts.min.js"></script>
+<script type="application/javascript" src="bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/form_datetime.js"></script>
 <script src="js/defineGlobal.js"></script>
 <script src="js/showHCESec.js"></script>
 </body>

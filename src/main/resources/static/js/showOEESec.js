@@ -169,6 +169,9 @@ function showWeek() {
                     {
                         name: 'oee',
                         type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         barMaxWidth:40,
                         label: {
                             normal: {
@@ -181,6 +184,9 @@ function showWeek() {
                     {
                         name: 'target',
                         type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
                         barMaxWidth:40,
                         label: {
                             normal: {
@@ -332,6 +338,9 @@ $("#showWeek").bind("click",function () {
                         {
                             name: 'oee',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             barMaxWidth: 40,
                             label: {
                                 normal: {
@@ -344,6 +353,9 @@ $("#showWeek").bind("click",function () {
                         {
                             name: 'target',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             barMaxWidth: 40,
                             label: {
                                 normal: {
@@ -452,6 +464,7 @@ $("#showMonth").bind("click",function (){
     {
         var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
         // var curr_time="2017-03-13";
+        myMonthTitle.text = '可动率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
         var showOeeJson = new oeeInput(curr_time,"ISHAFT1");
         var IshaftOneOeeValueArr=[];
         var IshaftOneOeeTarArr = [];
@@ -540,6 +553,9 @@ $("#showMonth").bind("click",function (){
                         {
                             name: 'oee',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             barMaxWidth:40,
                             label: {
                                 normal: {
@@ -552,6 +568,9 @@ $("#showMonth").bind("click",function (){
                         {
                             name: 'target',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             barMaxWidth:40,
                             label: {
                                 normal: {
@@ -632,11 +651,203 @@ $("#showMonth").bind("click",function (){
         });
     }
 });
+$("#selectMonthSub").bind("click",function (){
+    {
+        var data = $("#selectMonth").val().split("-");
+        var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
+        // var curr_time="2017-04-04";
+        myMonthTitle.text = '可动率'+ data[0]+'-'+data[1]+ '月视图';
+        var showOeeJson = new oeeInput(curr_time,"ISHAFT1");
+        var IshaftOneOeeValueArr=[];
+        var IshaftOneOeeTarArr = [];
+        var IsTwoOeeValueArr=[];
+        var IsThrOeeValueArr=[];
+        var IsForOeeValueArr=[];
+        var BEPSOeeValueArr=[];
+        var CEPSOeeValueArr=[];
+        var OeeShowX=[];
+        var urlString = "http://localhost:8080/nexteer/oee/month/ISHAFT1?date="+curr_time;
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: 'GET',
+            url: urlString,
+            success: function (data) {
+                $.each(data, function (i, model) {
+                    oeeDate[i]=data[i].addDate;
+                    IshaftOneOeeValueArr[i]=model.oee;
+                    IshaftOneOeeTarArr[i]=model.targetOee;
+                    // IsTwoOeeValueArr[i]=model.ishaft2_value;
+                    // IsThrOeeValueArr[i]=model.ishaft3_value;
+                    // IsForOeeValueArr[i]=model.ishaft4_value;
+                    // BEPSOeeValueArr[i]=model.beps_value;
+                    // CEPSOeeValueArr[i]=model.ceps_value;
+                    // OeeShowX[i]=model.year+"."+model.month+"."+model.day;
+                });
+                console.log(JSON.stringify(data));
+                console.log(IshaftOneOeeValueArr);
+                // console.log(IsTwoOeeValueArr);
+                // console.log(IsThrOeeValueArr);
+                // console.log(IsForOeeValueArr);
+                // console.log(BEPSOeeValueArr);
+                // console.log(CEPSOeeValueArr);
+                // console.log(OeeShowX);
+                // 指定图表的配置项和数据
+                var firstOption = {
+                    title:myMonthTitle,
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {
+                                show: true
+                            }
 
+                        }
+                    },
+                    grid:myGrid,
+                    legend: myLengend,
+
+                    xAxis: {
+                        type: 'category',
+                        name:'Time',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        axisLabel:{
+                            textStyle:{
+
+                                fontSize:20
+                            }
+                        },
+                        data: oeeDate
+                    },
+                    yAxis:myYaxis,
+                    dataZoom: [
+                        {
+                            id: 'dataZoomX',
+                            type: 'slider',
+                            xAxisIndex: [0],
+                            filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
+                            start: 1,
+                            end: 100
+                        }],
+                    series: [
+
+                        {
+                            name: 'oee',
+                            type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
+                            barMaxWidth:40,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOneOeeValueArr
+                        },
+                        {
+                            name: 'target',
+                            type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
+                            barMaxWidth:40,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOneOeeTarArr
+                        }
+                        // ,
+                        // {
+                        //     name: 'Ishaft2',
+                        //     type: 'line',
+                        //     label: {
+                        //         normal: {
+                        //             show: true,
+                        //             position: 'top'
+                        //         }
+                        //     },
+                        //     data: IsTwoOeeValueArr
+                        // },
+                        // {
+                        //     name: 'Ishaft3',
+                        //     type: 'line',
+                        //     label: {
+                        //         normal: {
+                        //             show: true,
+                        //             position: 'top'
+                        //         }
+                        //     },
+                        //     data: IsThrOeeValueArr
+                        // },
+                        // {
+                        //     name: 'Ishaft4',
+                        //     type: 'line',
+                        //     label: {
+                        //         normal: {
+                        //             show: true,
+                        //             position: 'top'
+                        //         }
+                        //     },
+                        //     data: IsForOeeValueArr
+                        // },
+                        // {
+                        //     name: 'BEPS',
+                        //     type: 'line',
+                        //     label: {
+                        //         normal: {
+                        //             show: true,
+                        //             position: 'top'
+                        //         }
+                        //     },
+                        //     data: BEPSOeeValueArr
+                        // },
+                        // {
+                        //     name: 'CEPS',
+                        //     type: 'line',
+                        //     label: {
+                        //         normal: {
+                        //             show: true,
+                        //             position: 'top'
+                        //         }
+                        //     },
+                        //     data: CEPSOeeValueArr
+                        // }
+                    ]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                IsOneOeeChart.setOption(firstOption);
+
+            },
+            failure: function (errMsg) {
+                console.log(errMsg);
+                console.log('fail');
+            }
+
+        });
+    }
+});
 //按年显示
 $("#showYear").bind("click",function () {
     {
         var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
+        myYearTitle.text = '可动率'+ Uyear + '年视图';
         // var curr_time="2017-04-04";
         var showOeeJson = new oeeInput(curr_time,"ISHAFT1");
         var IshaftOneOeeValueArr=[];
@@ -648,6 +859,13 @@ $("#showYear").bind("click",function () {
         var CEPSOeeValueArr=[];
         var OeeShowX=[];
         var urlString = "http://localhost:8080/nexteer/oee/year/ISHAFT1?date="+curr_time;
+
+        // $("#selection").replaceWith("<form class=\"navbar-form navbar-right\" id=\"selection\"><select  id=\"selectYear\"></select><button type=\"button\" class=\"btn btn-danger btn-xs \" id=\"selectYearSub\">年份选择</button></form>");
+        // $("#selectYear").replaceWith("<select  id=\"selectYear\"><option>"+(Uyear-5)+"<option>"+(Uyear-4)+"</option>"+"<option>"+(Uyear-3)+"</option>"
+        //     +"<option>"+(Uyear-2)+"</option>"+"<option>"+(Uyear-1)+"</option>"+"<option>"+(Uyear)+"</option>"+"<option>"+(Uyear+1)+"</option>"
+        //     +"<option>"+(Uyear+2)+"</option>"+"<option>"+(Uyear+3)+"</option>"+"<option>"+(Uyear+4)+"</option>"+"<option>"+(Uyear+5)+"</option>"
+        //     +"<option>"+(Uyear+6)+"</option>"+"<option>"+(Uyear+7)+"</option>"+"<option>"+(Uyear+8)+"</option>"+"<option>"+(Uyear+9)+"</option>"
+        //     +"</option></select>");
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -725,6 +943,9 @@ $("#showYear").bind("click",function () {
                         {
                             name: 'oee',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             barMaxWidth:40,
                             label: {
                                 normal: {
@@ -737,6 +958,193 @@ $("#showYear").bind("click",function () {
                         {
                             name: 'target',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
+                            barMaxWidth:40,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOneOeeTarArr
+                        }
+                        // ,
+                        // {
+                        //     name: 'Ishaft2',
+                        //     type: 'line',
+                        //     label: {
+                        //         normal: {
+                        //             show: true,
+                        //             position: 'top'
+                        //         }
+                        //     },
+                        //     data: IsTwoOeeValueArr
+                        // },
+                        // {
+                        //     name: 'Ishaft3',
+                        //     type: 'line',
+                        //     label: {
+                        //         normal: {
+                        //             show: true,
+                        //             position: 'top'
+                        //         }
+                        //     },
+                        //     data: IsThrOeeValueArr
+                        // },
+                        // {
+                        //     name: 'Ishaft4',
+                        //     type: 'line',
+                        //     label: {
+                        //         normal: {
+                        //             show: true,
+                        //             position: 'top'
+                        //         }
+                        //     },
+                        //     data: IsForOeeValueArr
+                        // },
+                        // {
+                        //     name: 'BEPS',
+                        //     type: 'line',
+                        //     label: {
+                        //         normal: {
+                        //             show: true,
+                        //             position: 'top'
+                        //         }
+                        //     },
+                        //     data: BEPSOeeValueArr
+                        // },
+                        // {
+                        //     name: 'CEPS',
+                        //     type: 'line',
+                        //     label: {
+                        //         normal: {
+                        //             show: true,
+                        //             position: 'top'
+                        //         }
+                        //     },
+                        //     data: CEPSOeeValueArr
+                        // }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                IsOneOeeChart.setOption(firstOption);
+
+            },
+            failure: function (errMsg) {
+                console.log(errMsg);
+                console.log('fail');
+            }
+
+        });
+    }
+});
+$("#selectYearSub").bind("click",function () {
+    {
+        var curr_time=$("#selectYear").val()+"-12-31";
+        // var curr_time="2017-04-04";
+        myYearTitle.text = '可动率'+ $("#selectYear").val() + '年视图';
+        var showOeeJson = new oeeInput(curr_time,"ISHAFT1");
+        var IshaftOneOeeValueArr=[];
+        var IshaftOneOeeTarArr=[];
+        var urlString = "http://localhost:8080/nexteer/oee/year/ISHAFT1?date="+curr_time;
+        console.log("切换年份");
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: 'GET',
+            url: urlString,
+            success: function (data) {
+                $.each(data, function (i, model) {
+                    oeeDate[i]=data[i].addDate;
+                    IshaftOneOeeValueArr[i]=model.oee;
+                    IshaftOneOeeTarArr[i] = model.targetOee;
+                    // IsTwoOeeValueArr[i]=model.ishaft2_value;
+                    // IsThrOeeValueArr[i]=model.ishaft3_value;
+                    // IsForOeeValueArr[i]=model.ishaft4_value;
+                    // BEPSOeeValueArr[i]=model.beps_value;
+                    // CEPSOeeValueArr[i]=model.ceps_value;
+                    // OeeShowX[i]=model.year+"."+model.month+"."+model.day;
+                });
+                console.log(JSON.stringify(data));
+                console.log(IshaftOneOeeValueArr);
+                // console.log(IsTwoOeeValueArr);
+                // console.log(IsThrOeeValueArr);
+                // console.log(IsForOeeValueArr);
+                // console.log(BEPSOeeValueArr);
+                // console.log(CEPSOeeValueArr);
+                // console.log(OeeShowX);
+                // 指定图表的配置项和数据
+                var firstOption = {
+                    title: myYearTitle,
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {
+                                show: true
+                            }
+                        }
+                    },
+                    grid: myGrid,
+                    legend: myLengend,
+
+                    xAxis: {
+                        type: 'category',
+                        name:'Time',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        nameTextStyle:{
+                            fontStyle:'italic',
+                            fontWeight:'bold'
+                        },
+                        axisLabel:{
+                            textStyle:{
+
+                                fontSize:20
+                            }
+                        },
+                        data: oeeDate
+                    },
+                    yAxis:myYaxis,
+                    dataZoom: [
+                        {
+                            id: 'dataZoomX',
+                            type: 'slider',
+                            xAxisIndex: [0],
+                            filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
+                            start: 1,
+                            end: 100
+                        }],
+                    series: [
+
+                        {
+                            name: 'oee',
+                            type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
+                            barMaxWidth:40,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            data: IshaftOneOeeValueArr
+                        },
+                        {
+                            name: 'target',
+                            type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             barMaxWidth:40,
                             label: {
                                 normal: {
