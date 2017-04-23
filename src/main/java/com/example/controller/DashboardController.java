@@ -68,9 +68,21 @@ public class DashboardController {
                 break;
             case ISHAFT4:
                 break;
-            case BEPS:
+            case BEPS1:
                 break;
-            case CEPS:
+            case BEPS2:
+                break;
+            case BEPS3:
+                break;
+            case BEPS4:
+                break;
+            case CEPS1:
+                break;
+            case CEPS2:
+                break;
+            case CEPS3:
+                break;
+            case CEPS4:
                 break;
         }
         return res;
@@ -138,9 +150,21 @@ public class DashboardController {
                 break;
             case ISHAFT4:
                 break;
-            case BEPS:
+            case BEPS1:
                 break;
-            case CEPS:
+            case BEPS2:
+                break;
+            case BEPS3:
+                break;
+            case BEPS4:
+                break;
+            case CEPS1:
+                break;
+            case CEPS2:
+                break;
+            case CEPS3:
+                break;
+            case CEPS4:
                 break;
         }
         return object.toString();
@@ -225,9 +249,21 @@ public class DashboardController {
                 break;
             case ISHAFT4:
                 break;
-            case BEPS:
+            case BEPS1:
                 break;
-            case CEPS:
+            case BEPS2:
+                break;
+            case BEPS3:
+                break;
+            case BEPS4:
+                break;
+            case CEPS1:
+                break;
+            case CEPS2:
+                break;
+            case CEPS3:
+                break;
+            case CEPS4:
                 break;
         }
         object.addProperty("hce", hce);

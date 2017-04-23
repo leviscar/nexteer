@@ -2,7 +2,6 @@ package com.example.service;
 
 import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
-import com.example.enumtype.Unit;
 import com.example.model.*;
 import com.example.repository.*;
 import com.example.util.DateFormat;
@@ -43,7 +42,7 @@ public class UnitStatusService {
         this.productModelRepo = productModelRepo;
     }
 
-    public String getUnitStatusByCurTime(String date, String cellName, String unitName) throws ParseException {
+    public String getUnitStatusByCurTime(String date, String cellName) throws ParseException {
         UnitStatus unitStatus = new UnitStatus();
 
         // format the date with "HH:mm"
@@ -80,6 +79,7 @@ public class UnitStatusService {
         List<Date> topNProduct = new ArrayList<>();
         // cell id to get the loss time
         int cellId = 0;
+        String stationId;
         switch (Cell.valueOf(cellName)) {
             case ISHAFT1:
                 products= ishaft1ProductInfoRepo.getByPeriod(startDate, curDate);
@@ -92,31 +92,37 @@ public class UnitStatusService {
                 break;
             case ISHAFT4:
                 break;
-            case BEPS:
+            case BEPS1:
                 break;
-            case CEPS:
-                String stationId = null;
-                switch (Unit.valueOf(unitName)) {
-                    case Cell1:
-                        stationId = "SD000094X02";
-                        cellId = 11;
-                        break;
-                    case Cell2:
-                        stationId = "SD000102X01";
-                        cellId = 12;
-                        break;
-                    case Cell3:
-                        stationId = "SD000107X01";
-                        cellId = 13;
-                        break;
-                    case Cell4:
-                        stationId = "SD000122X01";
-                        cellId = 14;
-                        break;
-
-                }
+            case BEPS2:
+                break;
+            case BEPS3:
+                break;
+            case BEPS4:
+                break;
+            case CEPS1:
+                stationId = "SD000094X02";
                 products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
                 topNProduct = cepsProductInfoRepo.getTopN(startDate, curDate, topN, stationId);
+                cellId = 11;
+                break;
+            case CEPS2:
+                stationId = "SD000102X01";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
+                topNProduct = cepsProductInfoRepo.getTopN(startDate, curDate, topN, stationId);
+                cellId = 12;
+                break;
+            case CEPS3:
+                stationId = "SD000107X01";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
+                topNProduct = cepsProductInfoRepo.getTopN(startDate, curDate, topN, stationId);
+                cellId = 13;
+                break;
+            case CEPS4:
+                stationId = "SD000122X01";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
+                topNProduct = cepsProductInfoRepo.getTopN(startDate, curDate, topN, stationId);
+                cellId = 14;
                 break;
         }
 

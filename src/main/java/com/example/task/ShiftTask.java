@@ -43,7 +43,7 @@ public class ShiftTask {
             // set add date
             shiftUnitStatus.setAddDate(new java.sql.Date(date.getTime()));
             // get unit status
-            String unitStatus = unitStatusService.getUnitStatusByCurTime(sdf.format(date), Cell.ISHAFT1.toString(), "");
+            String unitStatus = unitStatusService.getUnitStatusByCurTime(sdf.format(date), Cell.ISHAFT1.toString());
             shiftUnitStatus.setUnitStatus(unitStatus);
             shiftUnitStatusRepo.add(shiftUnitStatus);
 
