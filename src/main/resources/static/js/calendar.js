@@ -5,6 +5,7 @@
 
 var circleDateTime=[];
 var safeCalendarTime=[];
+var logCalendarTime = [];
 var eventData = [];
 $.get("http://localhost:8080/nexteer/safety-date", function (data) {
     $.each(data, function (i, model) {
@@ -13,11 +14,30 @@ $.get("http://localhost:8080/nexteer/safety-date", function (data) {
 });
 
 $.get("http://localhost:8080/nexteer/safety-date/unsafe", function (data) {
+    var j =0,k=0;
     $.each(data, function (i, model) {
-        circleDateTime[i]=new Date(model.year,model.month-1,model.day).getTime();
-        eventData[i]={id:i,color:'red',name:model.log,startDate: new Date(model.year,model.month-1,model.day),endDate: new Date(model.year,model.month-1,model.day)};
+
+        if (model.is_safe == -1) {
+            circleDateTime[j] = new Date(model.year, model.month - 1, model.day).getTime();
+
+            j++;
+        }
+
+        if(model.is_safe == 0){
+            logCalendarTime[k] = new Date(model.year,model.month-1,model.day).getTime();
+            k++;
+        }
+        eventData[i] = {
+            id: i,
+            color: 'red',
+            name: model.log,
+            startDate: new Date(model.year, model.month - 1, model.day),
+            endDate: new Date(model.year, model.month - 1, model.day)
+        };
     });
     console.log(eventData);
+    console.log(logCalendarTime);
+    console.log(circleDateTime);
 });
 
 $(function() {
@@ -62,6 +82,14 @@ $(function() {
             for(var j in circleDateTime){
                 if(date.getTime()==circleDateTime[j]){
                     $(element).css('background-color', 'red');
+                    $(element).css('color', 'white');
+                    $(element).css('border-radius', '15px');
+                }
+
+            }
+            for(var k in logCalendarTime){
+                if(date.getTime()==logCalendarTime[k]){
+                    $(element).css('background-color', 'orange');
                     $(element).css('color', 'white');
                     $(element).css('border-radius', '15px');
                 }

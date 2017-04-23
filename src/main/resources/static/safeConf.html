@@ -86,8 +86,10 @@
                 </div>
                 <div class="panel-body">
                     <!--<button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#getDayModal">获得指定日期安全天数</button>-->
-                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#startDateModal">更新安全天数</button>
-                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#resetDateModal">重置安全天数为0</button>
+                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#startDateModal">指定安全运行天数</button>
+                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#desDateModal">配置损工事件</button>
+                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#logDateModal">配置可记录事故</button>
+                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#resetDateModal">重置安全运行天数</button>
                     <div class="modal fade" id="getDayModal" tabindex="-1" role="dialog" aria-labelledby="mygetDayModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -112,7 +114,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="mystartDateModalLabel">更新安全天数</h4>
+                                    <h4 class="modal-title" id="mystartDateModalLabel">指定安全运行天数</h4>
                                 </div>
                                 <div class="modal-body">
                                     <p><label for="startDateTime">更新时间</label>&nbsp;&nbsp;<input type="date" id="startDateTime"></p>
@@ -133,7 +135,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myresetDateModalLabel">重置安全天数</h4>
+                                    <h4 class="modal-title" id="myresetDateModalLabel">重置安全运行天数</h4>
                                 </div>
                                 <div class="modal-body">
                                     <p><label for="resetDateTime">重置时间</label>&nbsp;&nbsp;<input type="date" id="resetDateTime"></p>
@@ -149,6 +151,49 @@
                             </div>
                         </div>
                     </div>
+                    <div class="modal fade" id="logDateModal" tabindex="-1" role="dialog" aria-labelledby="mylogDateModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="mylogDateModalLabel">配置可记录事件</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="logDateTime">可记录事件时间</label>&nbsp;&nbsp;<input type="date" id="logDateTime"></p>
+                                    <hr class="active">
+                                    <p><label for="logDateValue">记录信息</label>&nbsp;&nbsp;<input type="text" id="logDateValue"></p>
+                                    <hr class="active">
+                                    <p id="logDateStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="logDate">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="desDateModal" tabindex="-1" role="dialog" aria-labelledby="mydesDateModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="mydesDateModalLabel">配置损工事件</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="desDateTime">损工事件时间</label>&nbsp;&nbsp;<input type="date" id="desDateTime"></p>
+                                    <hr class="active">
+                                    <p><label for="desDateValue">损工信息</label>&nbsp;&nbsp;<input type="text" id="desDateValue"></p>
+                                    <hr class="active">
+                                    <p id="desDateStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="desDate">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <p id="safeSearch"></p>
                 </div>
 
