@@ -1,8 +1,22 @@
 /**
  * Created by Administrator on 2017/3/18.
  */
-function OneShiftInput(setTime,morStart, morEnd,Beats,morWorkNum,morWorkOverNum,morTar , cellName) {
+
+function shiftInput(setTime,shiftType,morStart, morEnd,Beats,morWorkNum,morWorkOverNum,morTar , cellName,open) {
+    this.addDate = setTime;
+    this.shiftType = shiftType;
+    this.startTime  = morStart;
+    this.endTime = morEnd;
+    this.standardBeat= Beats;
+    this.normalWorkerNum = morWorkNum;
+    this.overtimeWorkerNum = morWorkOverNum;
+    this.target =morTar;
+    this.cell_name = cellName;
+    this.open = open;
+}
+function OneShiftInput(setTime,shiftType,morStart, morEnd,Beats,morWorkNum,morWorkOverNum,morTar , cellName,open) {
     this.setting_time = setTime;
+    this.shiftType = shiftType;
     this.morning_shift_start  = morStart;
     this.morning_shift_end = morEnd;
     this.morning_shift_standard_beats= Beats;
@@ -10,9 +24,11 @@ function OneShiftInput(setTime,morStart, morEnd,Beats,morWorkNum,morWorkOverNum,
     this.morning_overtime_worker_num = morWorkOverNum;
     this.morning_shift_target =morTar;
     this.cell_name = cellName;
+    this.open = open;
 }
-function TwoShiftInput(setTime,midStart, midEnd ,MBeats,MWorkNum,MWorkOverNum,midTar,cellName) {
+function TwoShiftInput(setTime,shiftType,midStart, midEnd ,MBeats,MWorkNum,MWorkOverNum,midTar,cellName,open) {
     this.setting_time = setTime;
+    this.shiftType=shiftType;
     this.middle_shift_start  = midStart;
     this.middle_shift_end = midEnd;
     this.middle_shift_standard_beats= MBeats;
@@ -20,10 +36,12 @@ function TwoShiftInput(setTime,midStart, midEnd ,MBeats,MWorkNum,MWorkOverNum,mi
     this.middle_overtime_worker_num=MWorkOverNum;
     this.middle_shift_target=midTar;
     this.cell_name = cellName;
+    this.open =open;
 }
 
-function ThreeShiftInput(setTime,nigStart,nigEnd,nigBeats,nigWorkNum,nigWorkOverNum,nigTar,cellName) {
+function ThreeShiftInput(setTime,shiftType,nigStart,nigEnd,nigBeats,nigWorkNum,nigWorkOverNum,nigTar,cellName,open) {
     this.setting_time=setTime;
+    this.shiftType = shiftType;
     this.night_shift_start=nigStart;
     this.night_shift_end=nigEnd;
     this.night_shift_standard_beats=nigBeats;
@@ -31,20 +49,22 @@ function ThreeShiftInput(setTime,nigStart,nigEnd,nigBeats,nigWorkNum,nigWorkOver
     this.night_overtime_worker_num = nigWorkOverNum;
     this.night_shift_target=nigTar;
     this.cell_name = cellName;
+    this.open = open;
 }
-function  eventInput(type,event,eventStart,eventEnd) {
-    this.shift_type=type;
+function  eventInput(type,cellName,event,eventStart,eventEnd) {
+    this.shiftType=type;
+    this.cellName = cellName;
     this.event=event;
-    this.event_start_time=eventStart;
-    this.event_end_time=eventEnd;
+    this.startTime=eventStart;
+    this.endTime=eventEnd;
 }
 function showEvent() {
-    $.get("http://localhost:8080/nexteer/rest-event/getAllEvent", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Ashift", function (data) {
         if(data.system_status ==true){
             console.log($.parseJSON(data));
             $.each($.parseJSON(data), function (i, model) {
 
-                $("#showEvent").append("<tbody><tr><td>"+model.shift_type+"</td><td>"+model.event+"</td><td>"+model.event_start_time+"</td><td>"+model.event_end_time+"</td></tr></tbody>");
+                $("#showEvent").append("<tbody><tr><td>"+model.shiftType+"</td><td>"+model.cellName+"</td><td>"+model.event+"</td><td>"+model.startTime+"</td><td>"+model.endTime+"</td></tr></tbody>");
             });
         }
 
@@ -56,44 +76,94 @@ $('#addThiEvent').editableSelect({
 });
 showEvent();
 function showBance() {
-    $.get("http://localhost:8080//nexteer/work-shift/ISHAFT1", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Ashift", function (data) {
         console.log(typeof (data));
-        console.log($.parseJSON(data));
+        console.log(data);
         // $("#productMessage").append("<tbody><tr><td>"+data.morning_shift_start+"</td><td>"+data.morning_shift_end+"</td><td>"+data.middle_shift_start+"</td><td>"+data.middle_shift_end+"</td><td>"+data.night_shift_start+"</td><td>"+data.night_shift_end+"</td><td>"+data.morning_shift_standard_beats+"</td><td>"
         //     +data.middle_shift_standard_beats+"</td><td>"+data.night_shift_standard_beats+"</td><td>"+data.morning_worker_num+"</td><td>"+data.middle_worker_num+"</td><td>"+data.night_worker_num+"</td><td>"+data.morning_overtime_worker_num+"</td><td>"+data.middle_overtime_worker_num+"</td><td>"+data.night_overtime_worker_num+"</td></tr></tbody>");
-        console.log($.parseJSON(data).id);
-        $("#ms").html($.parseJSON(data).morning_shift_start);
-        $("#me").html($.parseJSON(data).morning_shift_end);
-        $("#mis").html($.parseJSON(data).middle_shift_start);
-        $("#mie").html($.parseJSON(data).middle_shift_end);
-        $("#ns").html($.parseJSON(data).night_shift_start);
-        $("#ne").html($.parseJSON(data).night_shift_end);
-        $("#mb").html($.parseJSON(data).morning_shift_standard_beats);
-        $("#mib").html($.parseJSON(data).middle_shift_standard_beats);
-        $("#nb").html($.parseJSON(data).night_shift_standard_beats);
-        $("#mw").html($.parseJSON(data).morning_worker_num);
-        $("#miw").html($.parseJSON(data).middle_worker_num);
-        $("#nw").html($.parseJSON(data).night_worker_num);
-        $("#mow").html($.parseJSON(data).morning_overtime_worker_num);
-        $("#miow").html($.parseJSON(data).middle_overtime_worker_num);
-        $("#now").html($.parseJSON(data).night_overtime_worker_num);
-        $("#oneTar").html($.parseJSON(data).morning_shift_target);
-        $("#twoTar").html($.parseJSON(data).morning_shift_target);
-        $("#thiTar").html($.parseJSON(data).morning_shift_target);
-        $("#cellName").html($.parseJSON(data).cell_name);
+        console.log(data.id);
+        // $("#mShift").html($.parseJSON(data).shiftType);
+        // $("#ms").html($.parseJSON(data).startTime);
+        // $("#me").html($.parseJSON(data).endTime);
+        // $("#mb").html($.parseJSON(data).standardBeat);
+        // $("#mw").html($.parseJSON(data).normalWorkerNum);
+        // $("#mow").html($.parseJSON(data).overtimeWorkerNum);
+        // $("#mTar").html($.parseJSON(data).target);
+        // $("#cellAName").html($.parseJSON(data).cell_name);
+        // $("#Aopen").html($.parseJSON(data).open);
+        $("#mShift").html(data.shiftType);
+        $("#ms").html(data.startTime);
+        $("#me").html(data.endTime);
+        $("#mb").html(data.standardBeat);
+        $("#mw").html(data.normalWorkerNum);
+        $("#mow").html(data.overtimeWorkerNum);
+        $("#mTar").html(data.target);
+        $("#cellAName").html(data.cellName);
+        $("#Aopen").html(data.open);
 
+    });
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Bshift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        // $("#productMessage").append("<tbody><tr><td>"+data.morning_shift_start+"</td><td>"+data.morning_shift_end+"</td><td>"+data.middle_shift_start+"</td><td>"+data.middle_shift_end+"</td><td>"+data.night_shift_start+"</td><td>"+data.night_shift_end+"</td><td>"+data.morning_shift_standard_beats+"</td><td>"
+        //     +data.middle_shift_standard_beats+"</td><td>"+data.night_shift_standard_beats+"</td><td>"+data.morning_worker_num+"</td><td>"+data.middle_worker_num+"</td><td>"+data.night_worker_num+"</td><td>"+data.morning_overtime_worker_num+"</td><td>"+data.middle_overtime_worker_num+"</td><td>"+data.night_overtime_worker_num+"</td></tr></tbody>");
+        console.log(data.id);
+        // $("#miShift").html($.parseJSON(data).shiftType);
+        // $("#mis").html($.parseJSON(data).startTime);
+        // $("#mie").html($.parseJSON(data).endTime);
+        // $("#mib").html($.parseJSON(data).standardBeat);
+        // $("#miw").html($.parseJSON(data).normalWorkerNum);
+        // $("#miow").html($.parseJSON(data).overtimeWorkerNum);
+        // $("#miTar").html($.parseJSON(data).target);
+        // $("#cellBName").html($.parseJSON(data).cell_name);
+        // $("#Bopen").html($.parseJSON(data).open);
+        $("#miShift").html(data.shiftType);
+        $("#mis").html(data.startTime);
+        $("#mie").html(data.endTime);
+        $("#mib").html(data.standardBeat);
+        $("#miw").html(data.normalWorkerNum);
+        $("#miow").html(data.overtimeWorkerNum);
+        $("#miTar").html(data.target);
+        $("#cellBName").html(data.cellName);
+        $("#Bopen").html(data.open);
+
+    });
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Cshift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        // $("#productMessage").append("<tbody><tr><td>"+data.morning_shift_start+"</td><td>"+data.morning_shift_end+"</td><td>"+data.middle_shift_start+"</td><td>"+data.middle_shift_end+"</td><td>"+data.night_shift_start+"</td><td>"+data.night_shift_end+"</td><td>"+data.morning_shift_standard_beats+"</td><td>"
+        //     +data.middle_shift_standard_beats+"</td><td>"+data.night_shift_standard_beats+"</td><td>"+data.morning_worker_num+"</td><td>"+data.middle_worker_num+"</td><td>"+data.night_worker_num+"</td><td>"+data.morning_overtime_worker_num+"</td><td>"+data.middle_overtime_worker_num+"</td><td>"+data.night_overtime_worker_num+"</td></tr></tbody>");
+        console.log(data.id);
+        // $("#nShift").html($.parseJSON(data).shiftType);
+        // $("#ns").html($.parseJSON(data).startTime);
+        // $("#ne").html($.parseJSON(data).endTime);
+        // $("#nb").html($.parseJSON(data).standardBeat);
+        // $("#nw").html($.parseJSON(data).normalWorkerNum);
+        // $("#now").html($.parseJSON(data).overtimeWorkerNum);
+        // $("#nTar").html($.parseJSON(data).target);
+        // $("#cellCName").html($.parseJSON(data).cell_name);
+        // $("#Copen").html($.parseJSON(data).open);
+        $("#nShift").html(data.shiftType);
+        $("#ns").html(data.startTime);
+        $("#ne").html(data.endTime);
+        $("#nb").html(data.standardBeat);
+        $("#nw").html(data.normalWorkerNum);
+        $("#now").html(data.overtimeWorkerNum);
+        $("#nTar").html(data.target);
+        $("#cellCName").html(data.cellName);
+        $("#Copen").html(data.open);
     });
 }
 showBance();
 console.log("开始运行");
 $("#oneSub").bind("click", function () {
 
-    var OneshiftJson=new OneShiftInput( $("#oneTime").val(),$("#oneStart").val().toString(),$("#oneEnd").val().toString(),Number($("#oneStdBeats").val()),Number($("#oneWorkNum").val()),Number($("#oneWorkOverNum").val()),Number($("#oneTar").val()),$("#oneCellName").val());
+    var OneshiftJson=new shiftInput( $("#oneTime").val(),"Ashift",$("#oneStart").val().toString(),$("#oneEnd").val().toString(),Number($("#oneStdBeats").val()),Number($("#oneWorkNum").val()),Number($("#oneWorkOverNum").val()),Number($("#oneTar").val()),$("#oneCellName").val(),$("#oneOpen").val());
     console.log("start");
     console.log(JSON.stringify(OneshiftJson));
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/work-shift/ashift",
+        type: "PATCH",
+        url: "http://localhost:8080/nexteer/work-shift",
         data:JSON.stringify(OneshiftJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -118,13 +188,13 @@ $("#oneSub").bind("click", function () {
 });
 
 $("#twoSub").bind("click", function () {
-    var TwoshiftJson =new TwoShiftInput($("#twoTime").val(),$("#twoMStart").val().toString(),$("#twoMEnd").val().toString(),Number($("#twoMStdBeats").val()),Number($("#twoMWorkNum").val()),Number($("#twoMWorkOverNum").val()),Number($("#twoTar").val()),$("#twoCellName").val());
+    var TwoshiftJson =new shiftInput($("#twoTime").val(),"Bshift",$("#twoMStart").val().toString(),$("#twoMEnd").val().toString(),Number($("#twoMStdBeats").val()),Number($("#twoMWorkNum").val()),Number($("#twoMWorkOverNum").val()),Number($("#twoTar").val()),$("#twoCellName").val(),$("#twoOpen").val());
 
     console.log( JSON.stringify(TwoshiftJson));
 
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/work-shift/bshift",
+        type: "PATCH",
+        url: "http://localhost:8080/nexteer/work-shift",
         data: JSON.stringify(TwoshiftJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -150,7 +220,7 @@ $("#twoSub").bind("click", function () {
 $("#thiSub").bind("click", function () {
 
 
-    var ThishiftJson=new ThreeShiftInput($("#thiTime").val(),$("#thiNStart").val(),$("#thiNEnd").val(), Number($("#thiNBeats").val()), Number($("#thiNWorkNum").val()),Number($("#thiNWorkOverNum").val()),umber($("#thiTar").val()),$("#thiCellName").val());
+    var ThishiftJson=new shiftInput($("#thiTime").val(),"Cshift".$("#thiNStart").val(),$("#thiNEnd").val(), Number($("#thiNBeats").val()), Number($("#thiNWorkNum").val()),Number($("#thiNWorkOverNum").val()),umber($("#thiTar").val()),$("#thiCellName").val(),$("#thiOpen").val());
 
     // $("#thiMorStart").val(),$("#thiMorEnd").val(),$("#thiMidStart").val(),
     //     $("#thiMidEnd").val(),$("#thiNStart").val(),$("#thiNEnd").val(),parseInt($("#thiMorTar").val()),parseInt($("#thiMidTar").val()),parseInt($("#thiNTar").
@@ -158,8 +228,8 @@ $("#thiSub").bind("click", function () {
 
     console.log( JSON.stringify(ThishiftJson));
     $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/nexteer/work-shift/night-shift",
+        type: "PATCH",
+        url: "http://localhost:8080/nexteer/work-shift",
         data: JSON.stringify(ThishiftJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -241,7 +311,7 @@ $("#thiEventSub").bind("click",function () {
     var addEventJson= new eventInput($("#addThiType").val().toString(),$("#addThiEvent").val().toString(),$("#addThiStart").val().toString(),$("#addThiEnd").val().toString());
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/rest-event/addEvent",
+        url: "http://localhost:8080/nexteer/rest-event",
         data: JSON.stringify(addEventJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",

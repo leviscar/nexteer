@@ -2,9 +2,385 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="images/favicon.ico">
+    <title>Nexteer</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/jquery-editable-select/dist/jquery-editable-select.min.css">
+    <link rel="stylesheet" href="bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
+    <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <link rel="stylesheet" href="css/dateForm.css">
+    <style type="text/css">
+        .black-color{
+            color:black;
+        }
+        .red-color{
+            color:red;
+        }
+        #bs-example-navbar-collapse-1{
+            text-align: center;
+        }
+        p{
+            display: block;
+            font-size:1.4em;
+        }
+        span{
+            font-size: 1.5em;
+        }
+        select{
+            width: 30% !important;
+        }
+        .form-control{
+            width: 22%;
+            float: right;
+        }
+        .table-condensed{
+            width: 100%;
+        }
+
+        .datetimepicker{
+            width: 20%;
+        }
+    </style>
 </head>
 <body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost:8080/nexteer/index.html"><img src="images/icon.png" alt="Nexteer"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <p class="navbar-text center-block" >系统设置</p>
+                <li >
+                    <a href="http://localhost:8080/nexteer/safeConf.html" >安全运行天数设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/qualityConf.html" >质量无抱怨天数设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/scrapConf.html" >报废金额设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/modelConf.html" >型号信息设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/shiftConf.html" >班次信息设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/hceConf.html" >人员利用率设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/oeeConf.html" >可动率设置</a>
+                </li>
+
+            </ul>
+
+            <form class="navbar-form navbar-right">
+
+            </form>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="row">
+    <div class="col-md-12">
+        <form>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p>班次设置</p>
+                </div>
+                <div class="panel-body">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myMorFirModal">
+                        增加Ashift
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myMorFirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">增加Ashift班次设置</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="oneTime">添加日期</label>&nbsp;&nbsp;<input type="date" id="oneTime"></p><hr class="active">
+                                    <!--<p><label for="oneStart">Ashift开始时间</label><input type="text" class="form-control form_datetime_time" readonly id="oneStart"></p><hr class="active">-->
+                                    <p><label for="oneStart">Ashift开始时间</label><input type="text" class="form-control form_datetime_time" readonly id="oneStart"></p><hr class="active">
+                                    <p><label for="oneEnd">Ashift结束时间</label><input type="text" class="form-control form_datetime_time" readonly  id="oneEnd"></p><hr class="active">
+                                    <p><label for="oneStdBeats">Ashift标准节拍</label><input type="number" id="oneStdBeats"></p><hr class="active">
+                                    <p><label for="oneWorkNum">Ashift工作人数</label><input type="number" id="oneWorkNum"></p><hr class="active">
+                                    <p><label for="oneWorkOverNum">Ashift加班人数</label><input type="number" id="oneWorkOverNum"></p><hr class="active">
+                                    <p><label for="oneTar">Ashift目标值</label><input type="number" id="oneTar"></p><hr class="active">
+                                    <p><label for="oneOpen">是否开班</label>
+                                        <select  class="form-control" id="oneOpen">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </p>
+                                    <p><label for="oneCellName">产线</label>
+                                        <select  class="form-control" id="oneCellName">
+                                            <option>ISHAFT1</option>
+                                            <option>ISHAFT2</option>
+                                            <option>ISHAFT3</option>
+                                            <option>ISHAFT4</option>
+                                            <option>BEPS</option>
+                                            <option>CEPS</option>
+                                        </select>
+                                    </p><hr class="active">
+
+                                    <p id="oneStatus">未知</p><hr class="active">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="oneSub">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myMidFirModal">添加Bshift</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myMidFirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myMidModalLabel">添加Bshift</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="twoTime">添加日期</label>&nbsp;&nbsp;<input type="date" id="twoTime"></p><hr class="active">
+                                    <p><label for="twoMStart">Bshift开始时间</label><input type="text" class="form-control form_datetime_time" readonly id="twoMStart"></p><hr class="active">
+                                    <p><label for="twoMEnd">Bshift结束时间</label><input type="text" class="form-control form_datetime_time" readonly id="twoMEnd"></p><hr class="active">
+                                    <p><label for="twoMStdBeats">Bshift班标准节拍</label><input type="number" class="inputIns" id="twoMStdBeats"></p><hr class="active">
+                                    <p><label for="twoMWorkNum">Bshift班工作人数</label><input type="number" class="inputIns" id="twoMWorkNum"></p><hr class="active">
+                                    <p><label for="twoMWorkOverNum">Bshift班加班人数</label><input type="number" class="inputIns" id="twoMWorkOverNum"></p><hr class="active">
+                                    <p><label for="twoTar">Bshift目标值</label><input type="number" id="twoTar"></p><hr class="active">
+                                    <p><label for="twoOpen">是否开班</label>
+                                        <select  class="form-control" id="twoOpen">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </p>
+                                    <p><label for="twoCellName">产线</label>
+                                        <select  class="form-control" id="twoCellName">
+                                            <option>ISHAFT1</option>
+                                            <option>ISHAFT2</option>
+                                            <option>ISHAFT3</option>
+                                            <option>ISHAFT4</option>
+                                            <option>BEPS</option>
+                                            <option>CEPS</option>
+                                        </select>
+                                    </p><hr class="active">
+                                    <p id="twoStatus">未知</p><hr class="active">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="twoSub">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myNtFirModal">添加Cshift</button>
+                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myNtSecModal">
+                        增加事件
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myNtFirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myNtModalLabel">添加Cshift</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="thiTime">添加日期</label>&nbsp;&nbsp;<input type="date" id="thiTime"></p><hr class="active">
+                                    <p><label for="thiNStart">Cshift开始时间</label><input type="text" class="form-control form_datetime_time" readonly id="thiNStart"></p><hr class="active">
+                                    <p><label for="thiNEnd">Cshift结束时间</label><input type="text" class="form-control form_datetime_time" readonly id="thiNEnd"></p><hr class="active">
+                                    <p><label for="thiNBeats">Cshift标准节拍</label><input type="number" class="inputIns" id="thiNBeats"></p><hr class="active">
+                                    <p><label for="thiNWorkNum">Cshift工作人数（人）</label><input type="number" class="inputIns" id="thiNWorkNum"></p><hr class="active">
+                                    <p><label for="thiNWorkOverNum">Cshift加班人数（人）</label><input type="number" class="inputIns" id="thiNWorkOverNum"></p><hr class="active">
+                                    <p><label for="thiTar">Cshift目标值</label><input type="number" id="thiTar"></p><hr class="active">
+                                    <p><label for="thiOpen">是否开班</label>
+                                        <select  class="form-control" id="thiOpen">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </p>
+                                    <p><label for="thiCellName">产线</label>
+                                        <select  class="form-control" id="thiCellName">
+                                            <option>ISHAFT1</option>
+                                            <option>ISHAFT2</option>
+                                            <option>ISHAFT3</option>
+                                            <option>ISHAFT4</option>
+                                            <option>BEPS</option>
+                                            <option>CEPS</option>
+                                        </select>
+                                    </p><hr class="active">
+                                    <p id="thiStatus">未知</p><hr class="active">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="thiSub">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myNtSecModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myNtSecModalLabel">添加事件</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="addThiType">班次</label>
+                                        <select  class="form-control" id="addThiType">
+                                            <option>Ashift</option>
+                                            <option>Bshift</option>
+                                            <option>Cshift</option>
+                                        </select>
+                                    </p><hr class="active">
+                                    <p><label for="eventCellName">产线</label>
+                                        <select  class="form-control" id="eventCellName">
+                                            <option>ISHAFT1</option>
+                                            <option>ISHAFT2</option>
+                                            <option>ISHAFT3</option>
+                                            <option>ISHAFT4</option>
+                                            <option>BEPS</option>
+                                            <option>CEPS</option>
+                                        </select>
+                                    </p><hr class="active">
+                                    <!--<p><label for="addThiEvent">事件</label><input type="text" id="addThiEvent"></p><hr class="active">-->
+                                    <p><label for="addThiEvent">事件</label>
+                                        <select id="addThiEvent">
+                                            <option>吃饭</option>
+                                            <option>休息</option>
+                                        </select>
+                                    </p><hr class="active">
+                                    <p><label for="addThiStart">事件开始时间</label><input type="text" class="form-control form_datetime_time" readonly id="addThiStart"></p><hr class="active">
+                                    <p><label for="addThiEnd">事件结束时间</label><input type="text" class="form-control form_datetime_time" readonly id="addThiEnd"></p><hr class="active">
+                                    <p id="addThiStatus">未知</p><hr class="active">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="thiEventSub">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <hr class="active">
+        </form>
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p>当前班次信息显示: </p>
+                </div>
+                <div class="panel-body">
+                    <table id="showBanci" class="table  table-bordered black-color">
+                        <thead>
+                        <tr>
+                            <th>班次</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                            <th>标准节拍</th>
+                            <th>正常工作人数</th>
+                            <th>加班人数</th>
+                            <th>目标值</th>
+                            <th>产线</th>
+                            <th>开班状态</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td id="mShift"></td>
+                            <td id="ms"></td>
+                            <td id="me"></td>
+                            <td id="mb"></td>
+                            <td id="mw"></td>
+                            <td id="mow"></td>
+                            <td id="mTar"></td>
+                            <td id="cellAName"></td>
+                            <td id="Aopen"></td>
+                        </tr>
+                        <tr>
+                            <td id="miShift"></td>
+                            <td id="mis"></td>
+                            <td id="mie"></td>
+                            <td id="mib"></td>
+                            <td id="miw"></td>
+                            <td id="miow"></td>
+                            <td id="miTar"></td>
+                            <td id="cellBName"></td>
+                            <td id="Bopen"></td>
+                        </tr>
+                        <tr>
+                            <td id="nShift"></td>
+                            <td id="ns"></td>
+                            <td id="ne"></td>
+                            <td id="nb"></td>
+                            <td id="nw"></td>
+                            <td id="now"></td>
+                            <td id="nTar"></td>
+                            <td id="cellCName"></td>
+                            <td id="Copen"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p>当前休息事件显示: </p>
+                </div>
+                <div class="panel-body">
+                    <table id="showEvent" class="table  table-bordered black-color">
+                        <thead>
+                        <tr>
+                            <th>班次</th>
+                            <th>产线</th>
+                            <th>事件</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                        </tr>
+                        </thead>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <hr class="active">
+    </div>
+
+</div>
+
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/google-maps.js"></script>
+<script type="application/javascript" src="bower_components/jquery-editable-select/dist/jquery-editable-select.min.js"></script>
+<script type="application/javascript" src="bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/defineGlobal.js"></script>
+<script src="js/banciSet.js"></script>
+<script src="js/form_datetime.js"></script>
 
 </body>
 </html>

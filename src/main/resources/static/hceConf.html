@@ -74,6 +74,7 @@
                 <li >
                     <a href="http://localhost:8080/nexteer/oeeConf.html" >可动率设置</a>
                 </li>
+
             </ul>
 
             <form class="navbar-form navbar-right">
@@ -85,39 +86,37 @@
 <div class="row">
     <div class="col-md-12">
         <form>
-
             <div>
                 <div class="panel panel-default">
-                    <div class="panel-heading"><p>型号信息</p></div>
+                    <div class="panel-heading"><p>人员利用率</p></div>
                     <div class="panel-body">
-                        <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myShowProModal">
-                            增加型号信息
+                        <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myShowHceModal">
+                            添加人员利用率目标值
                         </button>
                         <!-- Modal -->
-                        <div class="modal fade" id="myShowProModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal fade" id="myShowHceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myAddProLabel">增加型号</h4>
+                                        <h4 class="modal-title" id="myAddHceLabel">添加人员利用率目标值</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <p><label for="addProID">型号ID</label><input type="number" id="addProID"></p>
-                                        <p><label for="addProName">型号名称</label><input type="text" id="addProName"></p>
-                                        <p><label for="addProCell">所属单元</label><select  class="form-control" id="addProCell">
-                                            <option>ishaft1</option>
-                                            <option>ishaft2</option>
-                                            <option>ishaft3</option>
-                                            <option>ishaft4</option>
+                                        <p><label for="addHceDate">录入时间</label><input type="date" id="addHceDate"></p>
+                                        <p><label for="addHceCell">所属单元</label><select  class="form-control" id="addHceCell">
+                                            <option>ISHAFT1</option>
+                                            <option>ISHAFT2</option>
+                                            <option>ISHAFT3</option>
+                                            <option>ISHAFT4</option>
                                             <option>CEPS</option>
                                             <option>BEPS</option>
                                         </select>
-                                        <p><label for="addProSTD">STD</label><input type="text" id="addProSTD"></p>
-                                        <p id="addProStatus">未知</p>
+                                        <p><label for="addHceTar">录入目标值</label><input type="text" id="addHceTar"></p>
+                                        <p id="addHceStatus">未知</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" id="addProSub">Save changes</button>
+                                        <button type="button" class="btn btn-primary" id="addHceSub">Save changes</button>
                                     </div>
                                 </div>
                             </div>
@@ -126,37 +125,8 @@
                     </div>
                 </div>
 
-                <!--<div class="panel panel-default">-->
-                <!--<div class="panel-heading">安全运行天数的查询值: </div>-->
-                <!--<div class="panel-body">-->
-                <!--<p id="safeSearch"></p>-->
-                <!--</div>-->
-                <!--</div>-->
             </div>
             <hr class="active">
-            <div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <p>型号信息显示值: </p>
-                    </div>
-                    <div class="panel-body">
-                        <table id="productMessage" class="table  table-bordered black-color">
-                            <thead>
-                            <tr>
-                                <th>行数</th>
-                                <th>型号ID</th>
-                                <th>型号名称</th>
-                                <th>所属单元</th>
-                                <th>STD</th>
-                            </tr>
-                            </thead>
-
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-
         </form>
 
     </div>
@@ -169,10 +139,8 @@
 <script type="application/javascript" src="bower_components/jquery-editable-select/dist/jquery-editable-select.min.js"></script>
 <script type="application/javascript" src="bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script src="js/defineGlobal.js"></script>
-<script src="js/proCountSet.js"></script>
-<script type="text/javascript">
-    $(".form_datetime").datetimepicker({format: 'yyyy-mm'});
-</script>
+<script src="js/hceSet.js"></script>
+<script src="js/form_datetime.js"></script>
 
 </body>
 </html>

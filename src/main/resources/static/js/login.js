@@ -17,7 +17,7 @@ $("#loginSub").bind("click",function () {
         success: function (data) {
             console.log(JSON.stringify(data));
             if(data.valid==true){
-                window.location.assign("http://localhost:8080/nexteer/Set.html");
+                window.location.assign("http://localhost:8080/nexteer/safeConf.html");
             }
             else {
                 $("#loginStu").html("用户名或者密码错误")

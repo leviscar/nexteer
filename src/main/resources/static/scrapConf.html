@@ -2,9 +2,399 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="images/favicon.ico">
+    <title>Nexteer</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/jquery-editable-select/dist/jquery-editable-select.min.css">
+    <link rel="stylesheet" href="bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
+    <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <style type="text/css">
+        .black-color{
+            color:black;
+        }
+        .red-color{
+            color:red;
+        }
+        #bs-example-navbar-collapse-1{
+            text-align: center;
+        }
+        p{
+            display: block;
+            font-size:1.4em;
+        }
+        span{
+            font-size: 1.5em;
+        }
+        select{
+            width: 30% !important;
+        }
+    </style>
 </head>
 <body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost:8080/nexteer/index.html"><img src="images/icon.png" alt="Nexteer"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <p class="navbar-text center-block" >系统设置</p>
+                <li >
+                    <a href="http://localhost:8080/nexteer/safeConf.html" >安全运行天数设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/qualityConf.html" >质量无抱怨天数设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/scrapConf.html" >报废金额设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/modelConf.html" >型号信息设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/shiftConf.html" >班次信息设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/hceConf.html" >人员利用率设置</a>
+                </li>
+                <li >
+                    <a href="http://localhost:8080/nexteer/oeeConf.html" >可动率设置</a>
+                </li>
+
+            </ul>
+
+            <form class="navbar-form navbar-right">
+
+            </form>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="row">
+    <div class="col-md-12">
+        <form>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p>报废金额设置</p>
+                </div>
+
+                <div class="panel-body">
+                    <button type="button" class="btn btn-sm " data-toggle="modal" data-target="#myAddIs1ScrapModal" >添加Ishaft1报废金额</button>
+                    <button type="button"  class="btn btn-sm " data-toggle="modal" data-target="#myResIs1ScrapModal" >更新Ishaft1报废金额</button>
+                    <div class="modal fade" id="myAddIs1ScrapModal" tabindex="-1" role="dialog" aria-labelledby="myAddIs1ScrapModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myAddIs1ScrapModalLabel">添加报废金额</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="Is1ScrapAddTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="Is1ScrapAddTime"></p>
+                                    <hr class="active">
+                                    <p><label for="Is1ScrapAddValue">Ishaft1报废金额值</label>&nbsp;&nbsp;<input type="number" id="Is1ScrapAddValue"></p>
+                                    <hr class="active">
+                                    <p><label for="Is1ScrapTarValue">Ishaft1报废金额目标值</label>&nbsp;&nbsp;<input type="number" id="Is1ScrapTarValue"></p>
+                                    <hr class="active">
+                                    <p id="addIs1ScrapStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="addIs1Scrap">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myResIs1ScrapModal" tabindex="-1" role="dialog" aria-labelledby="myResIs1ScrapModal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" >更新报废金额</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="Is1ScrapResTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="Is1ScrapResTime"></p>
+                                    <hr class="active">
+                                    <p><label for="Is1ScrapResValue">Ishaft1报废金额更新值</label>&nbsp;&nbsp;<input type="number" id="Is1ScrapResValue"></p>
+                                    <hr class="active">
+                                    <p><label for="Is1ScrapResTarValue">Ishaft1报废金额更新目标值</label>&nbsp;&nbsp;<input type="number" id="Is1ScrapResTarValue"></p>
+                                    <hr class="active">
+                                    <p id="resIs1ScrapStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="resetIs1Scrap">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm " data-toggle="modal" data-target="#myAddIs2ScrapModal" >添加Ishaft2报废金额</button>
+                    <button type="button"  class="btn btn-sm " data-toggle="modal" data-target="#myResIs2ScrapModal" >更新Ishaft2报废金额</button>
+                    &nbsp;&nbsp;
+                    <div class="modal fade" id="myAddIs2ScrapModal" tabindex="-1" role="dialog" aria-labelledby="myAddIs2ScrapModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myAddIs2ScrapModalLabel">添加报废金额</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="Is2ScrapAddTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="Is2ScrapAddTime"></p>
+                                    <hr class="active">
+                                    <p><label for="Is2ScrapAddValue">Ishaft2报废金额值</label>&nbsp;&nbsp;<input type="number" id="Is2ScrapAddValue"></p>
+                                    <p><label for="Is2ScrapTarValue">Ishaft2报废金额目标值</label>&nbsp;&nbsp;<input type="number" id="Is2ScrapTarValue"></p>
+                                    <hr class="active">
+                                    <p id="addIs2ScrapStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="addIs2Scrap">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myResIs2ScrapModal" tabindex="-1" role="dialog" aria-labelledby="myResIs2ScrapModal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" >更新报废金额</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="Is2ScrapResTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="Is2ScrapResTime"></p>
+                                    <hr class="active">
+                                    <p><label for="Is2ScrapResValue">Ishaft2报废金额更新值</label>&nbsp;&nbsp;<input type="number" id="Is2ScrapResValue"></p>
+                                    <p><label for="Is2ScrapResTarValue">Ishaft2报废金额更新目标值</label>&nbsp;&nbsp;<input type="number" id="Is2ScrapResTarValue"></p>
+                                    <hr class="active">
+                                    <p id="resIs2ScrapStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="resetIs2Scrap">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm " data-toggle="modal" data-target="#myAddIs3ScrapModal" >添加Ishaft3报废金额</button>
+                    <button type="button"  class="btn btn-sm " data-toggle="modal" data-target="#myResIs3ScrapModal" >更新Ishaft3报废金额</button>
+                    &nbsp;&nbsp;<br>
+                    <div class="modal fade" id="myAddIs3ScrapModal" tabindex="-1" role="dialog" aria-labelledby="myAddIs3ScrapModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myAddIs3ScrapModalLabel">添加报废金额</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="Is3ScrapAddTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="Is3ScrapAddTime"></p>
+                                    <hr class="active">
+                                    <p><label for="Is3ScrapAddValue">Ishaft3报废金额值</label>&nbsp;&nbsp;<input type="number" id="Is3ScrapAddValue"></p>
+                                    <p><label for="Is3ScrapTarValue">Ishaft3报废金额目标值</label>&nbsp;&nbsp;<input type="number" id="Is3ScrapTarValue"></p>
+                                    <hr class="active">
+                                    <p id="addIs3ScrapStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="addIs3Scrap">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myResIs3ScrapModal" tabindex="-1" role="dialog" aria-labelledby="myResIs3ScrapModal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" >更新报废金额</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="Is3ScrapResTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="Is3ScrapResTime"></p>
+                                    <hr class="active">
+                                    <p><label for="Is3ScrapResValue">Ishaft3报废金额更新值</label>&nbsp;&nbsp;<input type="number" id="Is3ScrapResValue"></p>
+                                    <p><label for="Is3ScrapResTarValue">Ishaft3报废金额更新目标值</label>&nbsp;&nbsp;<input type="number" id="Is3ScrapResTarValue"></p>
+                                    <hr class="active">
+                                    <p id="resIs3ScrapStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="resetIs3Scrap">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm " data-toggle="modal" data-target="#myAddIs4ScrapModal" >添加Ishaft4报废金额</button>
+                    <button type="button"  class="btn btn-sm " data-toggle="modal" data-target="#myResIs4ScrapModal" >更新Ishaft4报废金额</button>
+                    &nbsp;&nbsp;
+                    <div class="modal fade" id="myAddIs4ScrapModal" tabindex="-1" role="dialog" aria-labelledby="myAddIs4ScrapModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myAddIs4ScrapModalLabel">添加报废金额</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="Is4ScrapAddTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="Is4ScrapAddTime"></p>
+                                    <hr class="active">
+                                    <p><label for="Is4ScrapAddValue">Ishaft4报废金额值</label>&nbsp;&nbsp;<input type="number" id="Is4ScrapAddValue"></p>
+                                    <p><label for="Is4ScrapTarValue">Ishaft4报废金额目标值</label>&nbsp;&nbsp;<input type="number" id="Is4ScrapTarValue"></p>
+                                    <hr class="active">
+                                    <p id="addIs4ScrapStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="addIs4Scrap">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myResIs4ScrapModal" tabindex="-1" role="dialog" aria-labelledby="myResIs4ScrapModal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" >更新报废金额</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="Is4ScrapResTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="Is4ScrapResTime"></p>
+                                    <hr class="active">
+                                    <p><label for="Is4ScrapResValue">Ishaft4报废金额更新值</label>&nbsp;&nbsp;<input type="number" id="Is4ScrapResValue"></p>
+                                    <p><label for="Is4ScrapResTarValue">Ishaft4报废金额更新目标值</label>&nbsp;&nbsp;<input type="number" id="Is4ScrapResTarValue"></p>
+                                    <hr class="active">
+                                    <p id="resIs4ScrapStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="resetIs4Scrap">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm " data-toggle="modal" data-target="#myAddBEPSScrapModal" >添加BEPS报废金额</button>
+                    <button type="button"  class="btn btn-sm " data-toggle="modal" data-target="#myResBEPSScrapModal" >更新BEPS报废金额</button>
+                    &nbsp;&nbsp;
+                    <div class="modal fade" id="myAddBEPSScrapModal" tabindex="-1" role="dialog" aria-labelledby="myAddBEPSScrapModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myAddBEPSScrapModalLabel">添加报废金额</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="BEPSScrapAddTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="BEPSScrapAddTime"></p>
+                                    <hr class="active">
+                                    <p><label for="BEPSScrapAddValue">BEPS报废金额值</label>&nbsp;&nbsp;<input type="number" id="BEPSScrapAddValue"></p>
+                                    <hr class="active">
+                                    <p><label for="BEPSScrapTarValue">BEPS报废金额目标值</label>&nbsp;&nbsp;<input type="number" id="BEPSScrapTarValue"></p>
+                                    <hr class="active">
+                                    <p id="addBEPSScrapStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="addBEPSScrap">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myResBEPSScrapModal" tabindex="-1" role="dialog" aria-labelledby="myResBEPSScrapModal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" >更新报废金额</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="BEPSScrapResTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="BEPSScrapResTime"></p>
+                                    <hr class="active">
+                                    <p><label for="BEPSScrapResValue">BEPS报废金额更新值</label>&nbsp;&nbsp;<input type="number" id="BEPSScrapResValue"></p>
+                                    <hr class="active">
+                                    <p><label for="BEPSScrapResTarValue">BEPS报废金额更新目标值</label>&nbsp;&nbsp;<input type="number" id="BEPSScrapResTarValue"></p>
+                                    <hr class="active">
+                                    <p id="resBEPSScrapStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="resetBEPSScrap">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm " data-toggle="modal" data-target="#myAddCEPSScrapModal" >添加CEPS报废金额</button>
+                    <button type="button"  class="btn btn-sm " data-toggle="modal" data-target="#myResCEPSScrapModal" >更新CEPS报废金额</button>
+                    <div class="modal fade" id="myAddCEPSScrapModal" tabindex="-1" role="dialog" aria-labelledby="myAddCEPSScrapModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myAddCEPSScrapModalLabel">添加报废金额</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="CEPSScrapAddTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="CEPSScrapAddTime"></p>
+                                    <hr class="active">
+                                    <p><label for="CEPSScrapAddValue">CEPS报废金额值</label>&nbsp;&nbsp;<input type="number" id="CEPSScrapAddValue"></p>
+                                    <hr class="active">
+                                    <p><label for="CEPSScrapTarValue">CEPS报废金额目标值</label>&nbsp;&nbsp;<input type="number" id="CEPSScrapTarValue"></p>
+                                    <hr class="active">
+                                    <p id="addCEPSScrapStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="addCEPSScrap">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myResCEPSScrapModal" tabindex="-1" role="dialog" aria-labelledby="myResCEPSScrapModal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" >更新报废金额</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><label for="CEPSScrapResTime">报废时间</label>&nbsp;&nbsp;<input type="date" id="CEPSScrapResTime"></p>
+                                    <hr class="active">
+                                    <p><label for="CEPSScrapResValue">CEPS报废金额更新值</label>&nbsp;&nbsp;<input type="number" id="CEPSScrapResValue"></p>
+                                    <hr class="active">
+                                    <p><label for="CEPSScrapResTarValue">CEPS报废金额更新目标值</label>&nbsp;&nbsp;<input type="number" id="CEPSScrapResTarValue"></p>
+                                    <hr class="active">
+                                    <p id="resCEPSScrapStu">未知</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="resetCEPSScrap">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="active">
+        </form>
+
+    </div>
+
+</div>
+
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/google-maps.js"></script>
+<script type="application/javascript" src="bower_components/jquery-editable-select/dist/jquery-editable-select.min.js"></script>
+<script type="application/javascript" src="bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/defineGlobal.js"></script>
+<script src="js/scrapSet.js"></script>
+<script src="js/form_datetime.js"></script>
 
 </body>
 </html>

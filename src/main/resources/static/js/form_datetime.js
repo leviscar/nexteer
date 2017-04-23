@@ -19,3 +19,12 @@ $(".form_datetime_month").datetimepicker({
     minView:'year',
     maxView:'decade'
 });
+$(".form_datetime_time").datetimepicker({
+    language:  'zh-CN',
+    format: 'hh:ii',
+    autoclose: true,
+    todayBtn: true,
+    startView: 'day',
+    minView:'hour',
+    maxView:'day'
+});
