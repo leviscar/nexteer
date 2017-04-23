@@ -2,11 +2,11 @@ package com.example.controller;
 
 import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
-import com.example.model.Ishaft1Product;
+import com.example.model.ProductInfo;
 import com.example.model.ProductModel;
 import com.example.model.WorkShift;
-import com.example.repository.Ishaft1ProductRepo;
-import com.example.repository.Ishaft1UnitStatusRepo;
+import com.example.repository.Ishaft1ProductInfoRepo;
+import com.example.service.UnitStatusService;
 import com.example.repository.ProductModelRepo;
 import com.example.repository.WorkShiftRepo;
 import com.example.util.DateFormat;
@@ -32,17 +32,17 @@ import java.util.Map;
 @RequestMapping(value = "/dashboard")
 public class DashboardController {
     private WorkShiftRepo workShiftRepo;
-    private Ishaft1ProductRepo ishaft1ProductRepo;
+    private Ishaft1ProductInfoRepo ishaft1ProductInfoRepo;
     private ProductModelRepo productModelRepo;
-    private Ishaft1UnitStatusRepo ishaft1UnitStatusRepo;
+    private UnitStatusService unitStatusService;
 
     @Autowired
-    public DashboardController(WorkShiftRepo workShiftRepo, Ishaft1ProductRepo ishaft1ProductRepo
-            , ProductModelRepo productModelRepo, Ishaft1UnitStatusRepo ishaft1UnitStatusRepo) {
+    public DashboardController(WorkShiftRepo workShiftRepo, Ishaft1ProductInfoRepo ishaft1ProductInfoRepo
+            , ProductModelRepo productModelRepo, UnitStatusService unitStatusService) {
         this.workShiftRepo = workShiftRepo;
-        this.ishaft1ProductRepo = ishaft1ProductRepo;
+        this.ishaft1ProductInfoRepo = ishaft1ProductInfoRepo;
         this.productModelRepo = productModelRepo;
-        this.ishaft1UnitStatusRepo = ishaft1UnitStatusRepo;
+        this.unitStatusService = unitStatusService;
     }
 
     /**
@@ -114,9 +114,9 @@ public class DashboardController {
             case ISHAFT1:
                 int standardBeats = workShift.getStandardBeat();
                 long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
-                long restSeconds = ishaft1UnitStatusRepo.getRestSeconds(workShift.getId(), shiftType
+                long restSeconds = unitStatusService.getRestSeconds(workShift.getId(), shiftType
                         , hourFormat.parse(curTime));
-                List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, curDate);
+                List<ProductInfo> products = ishaft1ProductInfoRepo.getByPeriod(startDate, curDate);
                 int oee = (int) (standardBeats * products.size() * 100 / (totalSeconds - restSeconds));
                 object.addProperty("oee", oee);
                 int status;
@@ -188,7 +188,7 @@ public class DashboardController {
                 int overtimeWorkerNum = workShift.getOvertimeWorkerNum();
                 int standardMinutes = 8 * 60;
                 // get the current product output
-                List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, curDate);
+                List<ProductInfo> products = ishaft1ProductInfoRepo.getByPeriod(startDate, curDate);
                 // calculate all models' products * std
                 Map<String, Integer> modelOutputMap = ModelOutput.getEachModelOutput(products);
                 float stdMultiplyOutput = 0;
@@ -199,7 +199,7 @@ public class DashboardController {
                 }
                 // get the rest seconds from shift starting till now
                 long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
-                long restSeconds = ishaft1UnitStatusRepo.getRestSeconds(workShift.getId(), shiftType
+                long restSeconds = unitStatusService.getRestSeconds(workShift.getId(), shiftType
                         , hourFormat.parse(time.substring(11, 16)));
                 if (totalSeconds / 60 > standardMinutes) {
                     // get the overtime seconds till now
@@ -209,7 +209,7 @@ public class DashboardController {
                     calendar.add(Calendar.MINUTE, standardMinutes);
                     Date endTime = calendar.getTime();
                     // rest minutes during the normal work
-                    int normalRestMinute = (int) (ishaft1UnitStatusRepo.getHourlyRestSeconds(workShift.getId(),
+                    int normalRestMinute = (int) (unitStatusService.getHourlyRestSeconds(workShift.getId(),
                             shiftType, startDate, endTime) / 60);
                     // rest minutes during the overtime
                     int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
@@ -279,12 +279,12 @@ public class DashboardController {
         curDate = Function.addOneDay(startDate, curDate);
 
         // get the current product output
-        List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, curDate);
+        List<ProductInfo> products = ishaft1ProductInfoRepo.getByPeriod(startDate, curDate);
         int curNum = products.size();
         object.addProperty("curr_output", curNum);
 
         // get the hourly output
-        Map<String, Integer> map = ishaft1UnitStatusRepo.getHourlyOutput(products, startDate);
+        Map<String, Integer> map = unitStatusService.getHourlyOutput(products, startDate);
 
         // format the date with "HH:mm"
         SimpleDateFormat hourFormat = DateFormat.hourFormat();
@@ -292,7 +292,7 @@ public class DashboardController {
 
         // get the rest seconds from shift starting till now
         long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
-        long restSeconds = ishaft1UnitStatusRepo.getRestSeconds(workShift.getId(), shiftType, curTime);
+        long restSeconds = unitStatusService.getRestSeconds(workShift.getId(), shiftType, curTime);
         // get the current target based on current time
         int curTarget = (int) (workShift.getTarget() * (totalSeconds - restSeconds) /
                 ((endDate.getTime() - startDate.getTime()) / 1000 - restSeconds));

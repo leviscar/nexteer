@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Created by mrpan on 2017/3/10.
  */
-public class Ishaft1UnitStatus {
+public class UnitStatus {
     private int id;
     private String curr_time;
     private WorkShift curr_shift_info;
@@ -19,7 +19,7 @@ public class Ishaft1UnitStatus {
     private int target;
     private Map<String, Integer> hourly_output;
 
-    public Ishaft1UnitStatus() {
+    public UnitStatus() {
     }
 
     public String getCurr_time() {

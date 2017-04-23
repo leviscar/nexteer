@@ -37,6 +37,13 @@ public class BeanConfig {
         return DataSourceBuilder.create().build();
     }
 
+    @Bean(name = "cepsDataSource")
+    @Qualifier("cepsDataSource")
+    @ConfigurationProperties(prefix = "custom.datasource.ds3")
+    public DataSource cepsDataSource() {
+        return DataSourceBuilder.create().build();
+    }
+
     @Bean(name = "oneJdbcTemplate")
     public JdbcTemplate oneJdbcTemplate(@Qualifier("oneDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
@@ -49,6 +56,11 @@ public class BeanConfig {
 
     @Bean(name = "threeJdbcTemplate")
     public JdbcTemplate threeJdbcTemplate(@Qualifier("threeDataSource") DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
+    @Bean(name = "cepsJdbc")
+    public JdbcTemplate cepsJdbcTemplate(@Qualifier("cepsDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 }

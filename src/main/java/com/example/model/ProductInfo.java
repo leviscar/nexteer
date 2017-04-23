@@ -5,11 +5,11 @@ import java.util.Date;
 /**
  * Created by mrpan on 2017/3/12.
  */
-public class Ishaft1Product {
+public class ProductInfo {
     private String model;
     private Date time;
 
-    public Ishaft1Product() {
+    public ProductInfo() {
     }
 
     public String getModel() {

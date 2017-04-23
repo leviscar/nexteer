@@ -3,7 +3,7 @@ package com.example.task;
 import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
 import com.example.model.ShiftUnitStatus;
-import com.example.repository.Ishaft1UnitStatusRepo;
+import com.example.service.UnitStatusService;
 import com.example.repository.ShiftUnitStatusRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +21,12 @@ import java.util.Date;
 public class ShiftTask {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private Ishaft1UnitStatusRepo ishaft1UnitStatusRepo;
+    private UnitStatusService unitStatusService;
     private ShiftUnitStatusRepo shiftUnitStatusRepo;
 
     @Autowired
-    public ShiftTask(Ishaft1UnitStatusRepo ishaft1UnitStatusRepo, ShiftUnitStatusRepo shiftUnitStatusRepo) {
-        this.ishaft1UnitStatusRepo = ishaft1UnitStatusRepo;
+    public ShiftTask(UnitStatusService unitStatusService, ShiftUnitStatusRepo shiftUnitStatusRepo) {
+        this.unitStatusService = unitStatusService;
         this.shiftUnitStatusRepo = shiftUnitStatusRepo;
     }
 
@@ -43,7 +43,7 @@ public class ShiftTask {
             // set add date
             shiftUnitStatus.setAddDate(new java.sql.Date(date.getTime()));
             // get unit status
-            String unitStatus = ishaft1UnitStatusRepo.getIshaftUnitStatusByCurTime(sdf.format(date));
+            String unitStatus = unitStatusService.getUnitStatusByCurTime(sdf.format(date), Cell.ISHAFT1.toString(), "");
             shiftUnitStatus.setUnitStatus(unitStatus);
             shiftUnitStatusRepo.add(shiftUnitStatus);
 

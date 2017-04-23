@@ -1,6 +1,6 @@
 package com.example.util;
 
-import com.example.model.Ishaft1Product;
+import com.example.model.ProductInfo;
 
 import java.util.*;
 
@@ -14,10 +14,10 @@ public class ModelOutput {
      * @param products
      * @return map
      */
-    public static Map<String, Integer> getEachModelOutput(List<Ishaft1Product> products) {
-        Collections.sort(products, new Comparator<Ishaft1Product>() {
+    public static Map<String, Integer> getEachModelOutput(List<ProductInfo> products) {
+        Collections.sort(products, new Comparator<ProductInfo>() {
             @Override
-            public int compare(Ishaft1Product o1, Ishaft1Product o2) {
+            public int compare(ProductInfo o1, ProductInfo o2) {
                 if (Integer.valueOf(o1.getModel()) > Integer.valueOf(o2.getModel())) {
                     return -1;
                 }
@@ -30,7 +30,7 @@ public class ModelOutput {
         // get the all models' output
         Map<String, Integer> map = new HashMap<>();
         int count = 0;
-        for (Ishaft1Product product : products) {
+        for (ProductInfo product : products) {
             if (map.containsKey(product.getModel())) {
                 map.put(product.getModel(), ++count);
             } else {

@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.model.Ishaft1UnitStatus;
+import com.example.model.UnitStatus;
 import com.example.model.ShiftUnitStatus;
 import com.example.repository.ShiftUnitStatusRepo;
 import com.google.gson.Gson;
@@ -35,11 +35,11 @@ public class ShiftUnitStatusController {
      * @return
      */
     @RequestMapping(value = "/{cell_name}")
-    public Ishaft1UnitStatus getByCellDateAndShift(@PathVariable(value = "cell_name") String cellName
+    public UnitStatus getByCellDateAndShift(@PathVariable(value = "cell_name") String cellName
             , @RequestParam(value = "date") String date, @RequestParam(value = "shift_type") String shiftType) {
         List<ShiftUnitStatus> shiftUnitStatuses = shiftUnitStatusRepo.getByCellDateAndShift(cellName, date, shiftType);
         ShiftUnitStatus shiftUnitStatus = shiftUnitStatuses.get(0);
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-        return gson.fromJson(shiftUnitStatus.getUnitStatus(), Ishaft1UnitStatus.class);
+        return gson.fromJson(shiftUnitStatus.getUnitStatus(), UnitStatus.class);
     }
 }

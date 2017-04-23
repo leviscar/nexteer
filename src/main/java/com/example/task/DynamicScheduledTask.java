@@ -4,6 +4,7 @@ import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
 import com.example.model.*;
 import com.example.repository.*;
+import com.example.service.UnitStatusService;
 import com.example.util.DateFormat;
 import com.example.util.Function;
 import com.example.util.ModelOutput;
@@ -23,25 +24,25 @@ import java.util.*;
  */
 @Component
 public class DynamicScheduledTask {
-    private Ishaft1ProductRepo ishaft1ProductRepo;
+    private Ishaft1ProductInfoRepo ishaft1ProductInfoRepo;
     private ProductModelRepo productModelRepo;
     private WorkShiftRepo workShiftRepo;
     private OeeRepo oeeRepo;
     private HceRepo hceRepo;
-    private Ishaft1UnitStatusRepo ishaft1UnitStatusRepo;
+    private UnitStatusService unitStatusService;
     private Ishaft1OutputInfoRepo ishaft1OutputInfoRepo;
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    public DynamicScheduledTask(Ishaft1ProductRepo ishaft1ProductRepo, ProductModelRepo productModelRepo
-            , WorkShiftRepo workShiftRepo, OeeRepo oeeRepo, HceRepo hceRepo, Ishaft1UnitStatusRepo ishaft1UnitStatusRepo
+    public DynamicScheduledTask(Ishaft1ProductInfoRepo ishaft1ProductInfoRepo, ProductModelRepo productModelRepo
+            , WorkShiftRepo workShiftRepo, OeeRepo oeeRepo, HceRepo hceRepo, UnitStatusService unitStatusService
             , Ishaft1OutputInfoRepo ishaft1OutputInfoRepo) {
-        this.ishaft1ProductRepo = ishaft1ProductRepo;
+        this.ishaft1ProductInfoRepo = ishaft1ProductInfoRepo;
         this.productModelRepo = productModelRepo;
         this.workShiftRepo = workShiftRepo;
         this.oeeRepo = oeeRepo;
         this.hceRepo = hceRepo;
-        this.ishaft1UnitStatusRepo = ishaft1UnitStatusRepo;
+        this.unitStatusService = unitStatusService;
         this.ishaft1OutputInfoRepo = ishaft1OutputInfoRepo;
     }
 
@@ -65,7 +66,7 @@ public class DynamicScheduledTask {
         String addFormatDate = sdf.format(addDate);
         ishaft1OutputInfo.setAdd_date(addFormatDate);
         // get the products between current time and start time
-        List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(addDate, curDate);
+        List<ProductInfo> products = ishaft1ProductInfoRepo.getByPeriod(addDate, curDate);
         // get various model output
         Map<String, Integer> map = ModelOutput.getEachModelOutput(products);
         // insert into database based on different model
@@ -151,7 +152,7 @@ public class DynamicScheduledTask {
             Date endDate = dateList.get(1);
             endDate = Function.addOneDay(startDate, endDate);
             // get shift product output
-            List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, endDate);
+            List<ProductInfo> products = ishaft1ProductInfoRepo.getByPeriod(startDate, endDate);
             // get various model product output multiply its std
             float stdMultiplyOutput = 0;
             Map<String, Integer> modelOutputMap = ModelOutput.getEachModelOutput(products);
@@ -165,7 +166,7 @@ public class DynamicScheduledTask {
             // get overtime
             int standardMinutes = 8 * 60;
             SimpleDateFormat sdf = DateFormat.hourFormat();
-            long restSeconds = ishaft1UnitStatusRepo.getRestSeconds(ws.getId(), ShiftType.valueOf(ws.getShiftType())
+            long restSeconds = unitStatusService.getRestSeconds(ws.getId(), ShiftType.valueOf(ws.getShiftType())
                     , sdf.parse(sdf.format(endDate)));
             long totalSeconds = (endDate.getTime() - startDate.getTime()) / 1000;
             if (totalSeconds / 60 > standardMinutes) {
@@ -177,7 +178,7 @@ public class DynamicScheduledTask {
                 calendar.add(Calendar.MINUTE, standardMinutes);
                 Date overTimeStart = calendar.getTime();
                 // rest time during normal work
-                int normalRestMinute = (int) (ishaft1UnitStatusRepo.getHourlyRestSeconds(ws.getId()
+                int normalRestMinute = (int) (unitStatusService.getHourlyRestSeconds(ws.getId()
                         , ShiftType.valueOf(ws.getShiftType()), startDate, overTimeStart) / 60);
                 // rest time during overtime
                 int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
@@ -207,9 +208,9 @@ public class DynamicScheduledTask {
             Date endDate = dateList.get(1);
             endDate = Function.addOneDay(startDate, endDate);
             long totalSeconds = (endDate.getTime() - startDate.getTime()) / 1000;
-            long restSeconds = ishaft1UnitStatusRepo.getRestSeconds(ws.getId(), ShiftType.valueOf(ws.getShiftType())
+            long restSeconds = unitStatusService.getRestSeconds(ws.getId(), ShiftType.valueOf(ws.getShiftType())
                     , sdf.parse(sdf.format(endDate)));
-            List<Ishaft1Product> products = ishaft1ProductRepo.getByPeriod(startDate, endDate);
+            List<ProductInfo> products = ishaft1ProductInfoRepo.getByPeriod(startDate, endDate);
             map.put(totalSeconds - restSeconds, ws.getStandardBeat() * products.size());
         }
         return map;
