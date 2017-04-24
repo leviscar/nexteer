@@ -29,7 +29,7 @@ function getMainIshaft1Hce() {
             if($.parseJSON(data).open != false){
                 console.log(JSON.stringify(data));
 
-                $("#showMainIshaft1Hce").html($.parseJSON(data).hce+"%");
+                $("#showMainIshaft1Hce").html($.parseJSON(data).hce.toFixed(1)+"%");
                 console.log("获取hce操作成功");
                 switch ($.parseJSON(data).status)
                 {
