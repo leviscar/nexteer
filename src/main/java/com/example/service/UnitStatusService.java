@@ -304,15 +304,19 @@ public class UnitStatusService {
         calendar.add(Calendar.HOUR_OF_DAY, 1);
         Date endDate = calendar.getTime();
         int count = 0;
-        for (ProductInfo product : products) {
-            if (product.getTime().getTime() >= startDate.getTime() && product.getTime().getTime() <= endDate.getTime()) {
+        int idx = 0;
+        while (idx < products.size()){
+            ProductInfo productInfo = products.get(idx);
+            if (productInfo.getTime().getTime() >= startDate.getTime()
+                    && productInfo.getTime().getTime() <= endDate.getTime()) {
                 count++;
+                idx++;
             } else {
                 map.put(sdf.format(startDate), count);
                 calendar.add(Calendar.HOUR_OF_DAY, 1);
                 startDate = endDate;
                 endDate = calendar.getTime();
-                count = 1;
+                count = 0;
             }
         }
         map.put(sdf.format(startDate), count);
