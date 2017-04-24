@@ -65,30 +65,42 @@ function getNowStatus() {
     };
 // // 基于准备好的dom，初始化echarts实例
 // var myChart = echarts.init(document.getElementById('IshaftOneYieldDayChart'));
-    $.get("http://localhost:8080/nexteer/unit-status/ISHAFT1?curr_time="+curTime,function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/unit-status/ISHAFT1?curr_time="+curTime,function (data) {
         console.log($.parseJSON(data));
-        if(data.system_status == false){
+        if($.parseJSON(data).system_status == false){
             console.log("当前时间不在班次内");
         }else {
             {
                 console.log("操作正常");
-                console.log($.parseJSON(data).shift_type);
-                if($.parseJSON(data).shift_type=="Cshift"){
+                console.log($.parseJSON(data).shiftType);
+                if($.parseJSON(data).curr_shift_info.shiftType=="Cshift"){
                     $("#banci").html("C");
-                    $("#stdBeats").html($.parseJSON(data).curr_shift_info.night_shift_standard_beats);
+                    $("#stdBeats").html($.parseJSON(data).curr_shift_info.standardBeat);
                 }
-                if($.parseJSON(data).shift_type=="Ashift"){
+                if($.parseJSON(data).curr_shift_info.shiftType=="Ashift"){
                     $("#banci").html("A");
-                    $("#stdBeats").html($.parseJSON(data).curr_shift_info.morning_shift_standard_beats);
+                    $("#stdBeats").html($.parseJSON(data).curr_shift_info.standardBeat);
                 }
-                if($.parseJSON(data).shift_type=="Bshift"){
+                if($.parseJSON(data).curr_shift_info.shiftType=="Bshift"){
                     $("#banci").html("B");
-                    $("#stdBeats").html($.parseJSON(data).curr_shift_info.middle_shift_standard_beats);
+                    $("#stdBeats").html($.parseJSON(data).curr_shift_info.standardBeat);
                 }
 
                 $("#finish").html($.parseJSON(data).curr_num);
                 $("#defct").html($.parseJSON(data).defective_num);
-                $("#status").html($.parseJSON(data).status);
+                // $("#status").html($.parseJSON(data).status);
+                switch ($.parseJSON(data).status ){
+                    case 1:
+                        $("#status").replaceWith("<td id=\"status \"><img src=\"images/Sunny.png\" alt=\"NICE\"></td>");
+                        break;
+                    case 0:
+                        $("#status").replaceWith("<td id=\"status \"><img src=\"images/Cloudy.png\" alt=\"NICE\"></td>");
+                        break;
+                    case -1:
+                        $("#status").replaceWith("<td id=\"status \"><img src=\"images/Rainy.png\" alt=\"NICE\"></td>");
+                        break;
+
+                }
                 $("#personUse").html($.parseJSON(data).hce.toFixed(2));
                 $("#curBeats").html($.parseJSON(data).curr_beats);
                 $("#lossTime").html($.parseJSON(data).loss_time);
@@ -107,7 +119,6 @@ function getNowStatus() {
                     j++;
                 }
                 $("#target").html(hourlyTar[i-1]);
-
                 console.log(hourlyOut);
                 console.log(hourlyTime);
                 console.log(hourlyTar);
@@ -195,6 +206,9 @@ function getNowStatus() {
                         {
                             name: 'Hourly Target',
                             type: 'line',
+                            smooth: true,
+                            showAllSymbol: true,
+                            symbol: 'emptyCircle',
                             label: {
                                 normal: {
                                     show: true,
@@ -216,7 +230,7 @@ function getNowStatus() {
     });
     // $.ajax({
     //     type: "POST",
-    //     url: "http://localhost:8080/nexteer/ishaft1-unit-status/getByCurTime",
+    //     url: "http://10.1.0.40:8080/nexteer/ishaft1-unit-status/getByCurTime",
     //     data: JSON.stringify(curTimeJson),
     //     contentType: "application/json; charset=utf-8",
     //     dataType: "json",
