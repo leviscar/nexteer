@@ -24,12 +24,12 @@ function getMainIshaft1Hce() {
     var mainHceJson = new mainHceInput(currTime,cellName);
     console.log(mainHceJson);
     console.log("getMainHce开始");
-    $.get("http://localhost:8080/nexteer/dashboard/hce/ISHAFT1?time="+currTime,function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/dashboard/hce/ISHAFT1?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
                 console.log(JSON.stringify(data));
 
-                $("#showMainIshaft1Hce").html($.parseJSON(data).hce+"%");
+                $("#showMainIshaft1Hce").html($.parseJSON(data).hce.toFixed(1)+"%");
                 console.log("获取hce操作成功");
                 switch ($.parseJSON(data).status)
                 {

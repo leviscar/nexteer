@@ -121,7 +121,7 @@ function showWeek() {
     var scrapShowX=[];
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount/getByWeek",
+        url: "http://10.1.0.40:8080/nexteer/scrap-amount/getByWeek",
         data: JSON.stringify(showScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -301,7 +301,7 @@ $("#showWeek").bind("click",function () {
     var scrapShowX=[];
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount/getByWeek",
+        url: "http://10.1.0.40:8080/nexteer/scrap-amount/getByWeek",
         data: JSON.stringify(showScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -479,7 +479,7 @@ $("#showMonth").bind("click",function (){
         var scrapShowX=[];
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/nexteer/scrap-amount/getByMonth",
+            url: "http://10.1.0.40:8080/nexteer/scrap-amount/getByMonth",
             data: JSON.stringify(showScrapJson),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -697,7 +697,7 @@ $("#showYear").bind("click",function () {
         var scrapShowX=[];
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/nexteer/scrap-amount/getByYear",
+            url: "http://10.1.0.40:8080/nexteer/scrap-amount/getByYear",
             data: JSON.stringify(showScrapJson),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -914,7 +914,7 @@ $("#showPeriod").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount/getByPeriod",
+        url: "http://10.1.0.40:8080/nexteer/scrap-amount/getByPeriod",
         data: JSON.stringify(showPeriodJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",

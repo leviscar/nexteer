@@ -25,7 +25,7 @@ function getNowData() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/safety-date",
+        url: "http://10.1.0.40:8080/nexteer/safety-date",
         data: JSON.stringify(jsonString),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -43,14 +43,14 @@ function getNowData() {
 }
 function getSafeDay() {
 
-    $.get("http://localhost:8080/nexteer/safety-date/day?date="+curTime,function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/safety-date/day?date="+curTime,function (data) {
         if(data.system_status != false){
             console.log(JSON.stringify(data));
             $("#safeDay").html(data.safe_dates);
             console.log("获取安全日期操作成功");
         }
     });
-    $.get("http://localhost:8080/nexteer/safety-date/max",function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/safety-date/max",function (data) {
 
             console.log(JSON.stringify(data));
             $("#safeHigh").html(data);

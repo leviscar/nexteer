@@ -16,7 +16,7 @@ $("#addProSub").bind("click", function () {
     console.log(JSON.stringify(addProJson));
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/product-model",
+        url: "http://10.1.0.40:8080/nexteer/product-model",
         data:JSON.stringify(addProJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -35,7 +35,7 @@ $("#addProSub").bind("click", function () {
             console.log(errMsg);
         }
     });
-    // $.get("http://localhost:8080/nexteer/product-model", function (data) {
+    // $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
     //     $("#proLine").append("<td>"+"第"+(data.length)+"列"+"</td>");
     //     $("#proLineId").append("<td>"+data[data.length-1].modelId+"</td>");
     //     $("#proLineName").append("<td>"+data[data.length-1].modelName+"</td>");
@@ -46,7 +46,7 @@ $("#addProSub").bind("click", function () {
 
 //获取全部型号信息
 
-$.get("http://localhost:8080/nexteer/product-model", function (data) {
+$.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
     console.log(JSON.stringify(data));
     // $("#productMessage").replaceWith("<thead><tr><th>行数</th><th>型号ID</th><th>型号名称</th><th>所属单元</th><th>STD</th></tr></thead>");
     $.each(data, function (i, model) {
