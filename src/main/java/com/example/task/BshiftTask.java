@@ -24,8 +24,8 @@ public class BshiftTask implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        logger.info("TaskName: {}, TaskGroup:{}", jobExecutionContext.getJobDetail().getKey().getName()
-                , jobExecutionContext.getJobDetail().getKey().getGroup());
-        shiftTask.addIshaft1UnitStatus(ShiftType.Bshift);
+        String group = jobExecutionContext.getJobDetail().getKey().getGroup();
+        logger.info("TaskName: {}, TaskGroup:{}", jobExecutionContext.getJobDetail().getKey().getName(), group);
+        shiftTask.addUnitStatus(group, ShiftType.Bshift);
     }
 }

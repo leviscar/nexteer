@@ -44,6 +44,13 @@ public class BeanConfig {
         return DataSourceBuilder.create().build();
     }
 
+    @Bean(name = "cell5DataSource")
+    @Qualifier("cell5DataSource")
+    @ConfigurationProperties(prefix = "custom.datasource.ds4")
+    public DataSource cell5DataSource() {
+        return DataSourceBuilder.create().build();
+    }
+
     @Bean(name = "oneJdbcTemplate")
     public JdbcTemplate oneJdbcTemplate(@Qualifier("oneDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
@@ -61,6 +68,11 @@ public class BeanConfig {
 
     @Bean(name = "cepsJdbc")
     public JdbcTemplate cepsJdbcTemplate(@Qualifier("cepsDataSource") DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
+    @Bean(name = "cell5Jdbc")
+    public JdbcTemplate cell5JdbcTemplate(@Qualifier("cell5DataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 }
