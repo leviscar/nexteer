@@ -5,6 +5,7 @@ import com.example.enumtype.ShiftType;
 import com.example.model.ProductInfo;
 import com.example.model.ProductModel;
 import com.example.model.WorkShift;
+import com.example.repository.CepsProductInfoRepo;
 import com.example.repository.Ishaft1ProductInfoRepo;
 import com.example.service.UnitStatusService;
 import com.example.repository.ProductModelRepo;
@@ -20,10 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by mrpan on 2017/3/28.
@@ -35,14 +33,17 @@ public class DashboardController {
     private Ishaft1ProductInfoRepo ishaft1ProductInfoRepo;
     private ProductModelRepo productModelRepo;
     private UnitStatusService unitStatusService;
+    private CepsProductInfoRepo cepsProductInfoRepo;
 
     @Autowired
     public DashboardController(WorkShiftRepo workShiftRepo, Ishaft1ProductInfoRepo ishaft1ProductInfoRepo
-            , ProductModelRepo productModelRepo, UnitStatusService unitStatusService) {
+            , ProductModelRepo productModelRepo, UnitStatusService unitStatusService
+            , CepsProductInfoRepo cepsProductInfoRepo) {
         this.workShiftRepo = workShiftRepo;
         this.ishaft1ProductInfoRepo = ishaft1ProductInfoRepo;
         this.productModelRepo = productModelRepo;
         this.unitStatusService = unitStatusService;
+        this.cepsProductInfoRepo = cepsProductInfoRepo;
     }
 
     /**
@@ -57,35 +58,7 @@ public class DashboardController {
     public String getAllOutput(@PathVariable(value = "cell") String cellName
             , @RequestParam(value = "time") String time) throws ParseException {
         Cell cell = Cell.valueOf(cellName);
-        String res = null;
-        switch (cell) {
-            case ISHAFT1:
-                res = getIshaf1Output(time);
-                break;
-            case ISHAFT2:
-                break;
-            case ISHAFT3:
-                break;
-            case ISHAFT4:
-                break;
-            case BEPS1:
-                break;
-            case BEPS2:
-                break;
-            case BEPS3:
-                break;
-            case CEPS1:
-                break;
-            case CEPS2:
-                break;
-            case CEPS3:
-                break;
-            case CEPS4:
-                break;
-            case CEPS5:
-                break;
-        }
-        return res;
+        return getOutput(time, cell);
     }
 
     /**
@@ -98,76 +71,8 @@ public class DashboardController {
     @RequestMapping(value = "/oee/{cell}", method = RequestMethod.GET)
     public String getOee(@PathVariable(value = "cell") String cellName, @RequestParam(value = "time") String time)
             throws ParseException {
-        // format the date with "yyyy-MM-dd HH:mm:ss"
-        SimpleDateFormat timeFormat = DateFormat.timeFormat();
-        Date curDate = timeFormat.parse(time);
-
-        SimpleDateFormat hourFormat = DateFormat.hourFormat();
-        String curTime = hourFormat.format(curDate);
-
-        // get the latest work shift based on cell name and current time
-        List<WorkShift> workShifts = workShiftRepo.getLatestByCurTime(cellName, curTime);
-        JsonObject object = new JsonObject();
-        if (workShifts.isEmpty()) {
-            object.addProperty("system_status", false);
-            object.addProperty("log", "当前时刻不在任何班次中");
-            return object.toString();
-        }
-
-        WorkShift workShift = workShifts.get(0);
-        object.addProperty("open", workShift.isOpen());
-        ShiftType shiftType = ShiftType.valueOf(workShift.getShiftType());
-        object.addProperty("shift_type", shiftType.toString());
-        // set the year, month, day to work shift's start time and end time based on current date
-        List<Date> dateList = OutputTool.changeShiftDate(curDate, workShift);
-        Date startDate = dateList.get(0);
         Cell cell = Cell.valueOf(cellName);
-        switch (cell) {
-            case ISHAFT1:
-                int standardBeats = workShift.getStandardBeat();
-                long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
-                long restSeconds = unitStatusService.getRestSeconds(workShift.getId(), shiftType
-                        , hourFormat.parse(curTime));
-                List<ProductInfo> products = ishaft1ProductInfoRepo.getByPeriod(startDate, curDate);
-                int oee = (int) (standardBeats * products.size() * 100 / (totalSeconds - restSeconds));
-                object.addProperty("oee", oee);
-                int status;
-                if (oee >= 100) {
-                    // sunny
-                    status = 1;
-                } else if (oee >= 90) {
-                    // cloudy
-                    status = 0;
-                } else {
-                    // runny
-                    status = -1;
-                }
-                object.addProperty("status", status);
-                break;
-            case ISHAFT2:
-                break;
-            case ISHAFT3:
-                break;
-            case ISHAFT4:
-                break;
-            case BEPS1:
-                break;
-            case BEPS2:
-                break;
-            case BEPS3:
-                break;
-            case CEPS1:
-                break;
-            case CEPS2:
-                break;
-            case CEPS3:
-                break;
-            case CEPS4:
-                break;
-            case CEPS5:
-                break;
-        }
-        return object.toString();
+        return getOee(time, cell);
     }
 
     /**
@@ -181,6 +86,19 @@ public class DashboardController {
     @RequestMapping(value = "/hce/{cell}", method = RequestMethod.GET)
     public String getHce(@PathVariable(value = "cell") String cellName, @RequestParam(value = "time") String time)
             throws ParseException {
+        Cell cell = Cell.valueOf(cellName);
+        return getHce(time, cell);
+    }
+
+    /**
+     * Get Hce based on cell and time
+     *
+     * @param time
+     * @param cell
+     * @return
+     * @throws ParseException
+     */
+    private String getHce(String time, Cell cell) throws ParseException {
         // format the date with "yyyy-MM-dd HH:mm:ss"
         SimpleDateFormat timeFormat = DateFormat.timeFormat();
         Date curDate = timeFormat.parse(time);
@@ -189,7 +107,7 @@ public class DashboardController {
         String curTime = hourFormat.format(curDate);
 
         // get the latest work shift based on cell name and current time
-        List<WorkShift> workShifts = workShiftRepo.getLatestByCurTime(cellName, curTime);
+        List<WorkShift> workShifts = workShiftRepo.getLatestByCurTime(cell.toString(), curTime);
         JsonObject object = new JsonObject();
         if (workShifts.isEmpty()) {
             object.addProperty("system_status", false);
@@ -204,44 +122,12 @@ public class DashboardController {
         // set the year, month, day to work shift's start time and end time based on current date
         List<Date> dateList = OutputTool.changeShiftDate(curDate, workShift);
         Date startDate = dateList.get(0);
-        Cell cell = Cell.valueOf(cellName);
-        double hce = 0;
+
+        List<ProductInfo> products = new ArrayList<>();
+        String stationId;
         switch (cell) {
             case ISHAFT1:
-                int normalWorkerNum = workShift.getNormalWorkerNum();
-                int overtimeWorkerNum = workShift.getOvertimeWorkerNum();
-                int standardMinutes = 8 * 60;
-                // get the current product output
-                List<ProductInfo> products = ishaft1ProductInfoRepo.getByPeriod(startDate, curDate);
-                // calculate all models' products * std
-                Map<String, Integer> modelOutputMap = ModelOutput.getEachModelOutput(products);
-                float stdMultiplyOutput = 0;
-                for (Map.Entry<String, Integer> entry : modelOutputMap.entrySet()) {
-                    String modelId = entry.getKey();
-                    ProductModel model = productModelRepo.getStdByModelId(modelId);
-                    stdMultiplyOutput += model.getStd() * entry.getValue();
-                }
-                // get the rest seconds from shift starting till now
-                long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
-                long restSeconds = unitStatusService.getRestSeconds(workShift.getId(), shiftType
-                        , hourFormat.parse(time.substring(11, 16)));
-                if (totalSeconds / 60 > standardMinutes) {
-                    // get the overtime seconds till now
-                    int overMinutes = (int) (totalSeconds / 60 - standardMinutes);
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(startDate);
-                    calendar.add(Calendar.MINUTE, standardMinutes);
-                    Date endTime = calendar.getTime();
-                    // rest minutes during the normal work
-                    int normalRestMinute = (int) (unitStatusService.getHourlyRestSeconds(workShift.getId(),
-                            shiftType, startDate, endTime) / 60);
-                    // rest minutes during the overtime
-                    int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
-                    hce = 100 * stdMultiplyOutput * 60 / ((standardMinutes - normalRestMinute) * normalWorkerNum
-                            + (overMinutes - overRestMinutes) * overtimeWorkerNum);
-                } else {
-                    hce = 100 * stdMultiplyOutput * 60 * 60 / ((totalSeconds - restSeconds) * normalWorkerNum);
-                }
+                products = ishaft1ProductInfoRepo.getByPeriod(startDate, curDate);
                 break;
             case ISHAFT2:
                 break;
@@ -256,15 +142,60 @@ public class DashboardController {
             case BEPS3:
                 break;
             case CEPS1:
+                stationId = "SD000094X02";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
                 break;
             case CEPS2:
+                stationId = "SD000102X01";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
                 break;
             case CEPS3:
+                stationId = "SD000107X01";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
                 break;
             case CEPS4:
+                stationId = "SD000122X01";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
                 break;
             case CEPS5:
+                products = cepsProductInfoRepo.getCell5ByPeriod(startDate, curDate);
                 break;
+        }
+
+        int normalWorkerNum = workShift.getNormalWorkerNum();
+        int overtimeWorkerNum = workShift.getOvertimeWorkerNum();
+        int standardMinutes = 8 * 60;
+
+        // calculate all models' products * std
+        Map<String, Integer> modelOutputMap = ModelOutput.getEachModelOutput(products);
+        float stdMultiplyOutput = 0;
+        for (Map.Entry<String, Integer> entry : modelOutputMap.entrySet()) {
+            String modelId = entry.getKey();
+            ProductModel model = productModelRepo.getStdByModelId(modelId);
+            stdMultiplyOutput += model.getStd() * entry.getValue();
+        }
+        // get the rest seconds from shift starting till now
+        long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
+        long restSeconds = unitStatusService.getRestSeconds(workShift.getId(), shiftType
+                , hourFormat.parse(time.substring(11, 16)));
+        // calculate hce
+        double hce;
+        if (totalSeconds / 60 > standardMinutes) {
+            // get the overtime seconds till now
+            int overMinutes = (int) (totalSeconds / 60 - standardMinutes);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(startDate);
+            calendar.add(Calendar.MINUTE, standardMinutes);
+            Date endTime = calendar.getTime();
+            // rest minutes during the normal work
+            int normalRestMinute = (int) (unitStatusService.getHourlyRestSeconds(workShift.getId(),
+                    shiftType, startDate, endTime) / 60);
+            // rest minutes during the overtime
+            int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
+            hce = 100 * stdMultiplyOutput * 60 / ((standardMinutes - normalRestMinute) * normalWorkerNum
+                    + (overMinutes - overRestMinutes) * overtimeWorkerNum);
+        } else {
+            hce = 100 * stdMultiplyOutput * 60 * 60 / ((totalSeconds - restSeconds) * normalWorkerNum);
         }
         object.addProperty("hce", hce);
         int status;
@@ -279,26 +210,119 @@ public class DashboardController {
             status = -1;
         }
         object.addProperty("status", status);
-        return new Gson().toJson(object);
+        return object.toString();
     }
 
     /**
-     * Get product output of ishaft1
+     * Get oee based on cell and time on dashboard
      *
-     * @param date
+     * @param time
+     * @param cell
      * @return
      * @throws ParseException
      */
-    private String getIshaf1Output(String date) throws ParseException {
+    private String getOee(String time, Cell cell) throws ParseException {
+        // format the date with "yyyy-MM-dd HH:mm:ss"
+        SimpleDateFormat timeFormat = DateFormat.timeFormat();
+        Date curDate = timeFormat.parse(time);
+
+        SimpleDateFormat hourFormat = DateFormat.hourFormat();
+        String curTime = hourFormat.format(curDate);
+
         // get the latest work shift based on cell name and current time
-        List<WorkShift> workShifts = workShiftRepo.getLatestByCurTime(Cell.ISHAFT1.toString(), date.substring(11, 16));
+        List<WorkShift> workShifts = workShiftRepo.getLatestByCurTime(cell.toString(), curTime);
         JsonObject object = new JsonObject();
         if (workShifts.isEmpty()) {
             object.addProperty("system_status", false);
             object.addProperty("log", "当前时刻不在任何班次中");
             return object.toString();
         }
-        object.addProperty("cell_name", Cell.ISHAFT1.toString());
+
+        WorkShift workShift = workShifts.get(0);
+        object.addProperty("open", workShift.isOpen());
+        ShiftType shiftType = ShiftType.valueOf(workShift.getShiftType());
+        object.addProperty("shift_type", shiftType.toString());
+        // set the year, month, day to work shift's start time and end time based on current date
+        List<Date> dateList = OutputTool.changeShiftDate(curDate, workShift);
+        Date startDate = dateList.get(0);
+
+        List<ProductInfo> products = new ArrayList<>();
+        String stationId;
+        switch (cell) {
+            case ISHAFT1:
+                products = ishaft1ProductInfoRepo.getByPeriod(startDate, curDate);
+                break;
+            case ISHAFT2:
+                break;
+            case ISHAFT3:
+                break;
+            case ISHAFT4:
+                break;
+            case BEPS1:
+                break;
+            case BEPS2:
+                break;
+            case BEPS3:
+                break;
+            case CEPS1:
+                stationId = "SD000094X02";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
+                break;
+            case CEPS2:
+                stationId = "SD000102X01";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
+                break;
+            case CEPS3:
+                stationId = "SD000107X01";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
+                break;
+            case CEPS4:
+                stationId = "SD000122X01";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
+                break;
+            case CEPS5:
+                products = cepsProductInfoRepo.getCell5ByPeriod(startDate, curDate);
+                break;
+        }
+
+        int standardBeats = workShift.getStandardBeat();
+        long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
+        long restSeconds = unitStatusService.getRestSeconds(workShift.getId(), shiftType
+                , hourFormat.parse(curTime));
+        int oee = (int) (standardBeats * products.size() * 100 / (totalSeconds - restSeconds));
+        object.addProperty("oee", oee);
+        int status;
+        if (oee >= 100) {
+            // sunny
+            status = 1;
+        } else if (oee >= 90) {
+            // cloudy
+            status = 0;
+        } else {
+            // runny
+            status = -1;
+        }
+        object.addProperty("status", status);
+        return object.toString();
+    }
+
+    /**
+     * Get product output based on various cell
+     *
+     * @param date
+     * @return
+     * @throws ParseException
+     */
+    private String getOutput(String date, Cell cell) throws ParseException {
+        // get the latest work shift based on cell name and current time
+        List<WorkShift> workShifts = workShiftRepo.getLatestByCurTime(cell.toString(), date.substring(11, 16));
+        JsonObject object = new JsonObject();
+        if (workShifts.isEmpty()) {
+            object.addProperty("system_status", false);
+            object.addProperty("log", "当前时刻不在任何班次中");
+            return object.toString();
+        }
+        object.addProperty("cell_name", cell.toString());
         WorkShift workShift = workShifts.get(0);
         object.addProperty("open", workShift.isOpen());
         ShiftType shiftType = ShiftType.valueOf(workShift.getShiftType());
@@ -315,12 +339,46 @@ public class DashboardController {
         curDate = Function.addOneDay(startDate, curDate);
 
         // get the current product output
-        List<ProductInfo> products = ishaft1ProductInfoRepo.getByPeriod(startDate, curDate);
+        List<ProductInfo> products = new ArrayList<>();
+        String stationId;
+        switch (cell) {
+            case ISHAFT1:
+                products = ishaft1ProductInfoRepo.getByPeriod(startDate, curDate);
+                break;
+            case ISHAFT2:
+                break;
+            case ISHAFT3:
+                break;
+            case ISHAFT4:
+                break;
+            case BEPS1:
+                break;
+            case BEPS2:
+                break;
+            case BEPS3:
+                break;
+            case CEPS1:
+                stationId = "SD000094X02";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
+                break;
+            case CEPS2:
+                stationId = "SD000102X01";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
+                break;
+            case CEPS3:
+                stationId = "SD000107X01";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
+                break;
+            case CEPS4:
+                stationId = "SD000122X01";
+                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
+                break;
+            case CEPS5:
+                products = cepsProductInfoRepo.getCell5ByPeriod(startDate, curDate);
+                break;
+        }
         int curNum = products.size();
         object.addProperty("curr_output", curNum);
-
-        // get the hourly output
-        Map<String, Integer> map = unitStatusService.getHourlyOutput(products, startDate);
 
         // format the date with "HH:mm"
         SimpleDateFormat hourFormat = DateFormat.hourFormat();
