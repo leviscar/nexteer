@@ -1,9 +1,9 @@
 package com.example.task;
 
 import com.example.enumtype.ShiftType;
-import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.quartz.StatefulJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Configuration
 @EnableScheduling
 @Component
-public class AshiftTask implements Job {
+public class AshiftTask implements StatefulJob {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private ShiftTask shiftTask;
@@ -25,7 +25,7 @@ public class AshiftTask implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         String group = jobExecutionContext.getJobDetail().getKey().getGroup();
-        logger.info("TaskName: {}, TaskGroup:{}", jobExecutionContext.getJobDetail().getKey().getName(), group);
+        logger.info("TaskName: {}, TaskGroup:{}, description:{}", jobExecutionContext.getJobDetail().getKey().getName(), group);
         shiftTask.addUnitStatus(group, ShiftType.Ashift);
     }
 }

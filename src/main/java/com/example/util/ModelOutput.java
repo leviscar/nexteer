@@ -15,27 +15,13 @@ public class ModelOutput {
      * @return map
      */
     public static Map<String, Integer> getEachModelOutput(List<ProductInfo> products) {
-        Collections.sort(products, new Comparator<ProductInfo>() {
-            @Override
-            public int compare(ProductInfo o1, ProductInfo o2) {
-                if (Integer.valueOf(o1.getModel().trim()) > Integer.valueOf(o2.getModel().trim())) {
-                    return -1;
-                }
-                if (Integer.valueOf(o1.getModel().trim()) < Integer.valueOf(o2.getModel().trim())) {
-                    return 1;
-                }
-                return 0;
-            }
-        });
         // get the all models' output
         Map<String, Integer> map = new HashMap<>();
-        int count = 0;
         for (ProductInfo product : products) {
             if (map.containsKey(product.getModel())) {
-                map.put(product.getModel(), ++count);
+                map.put(product.getModel(), map.get(product.getModel()) + 1);
             } else {
-                count = 0;
-                map.put(product.getModel(), ++count);
+                map.put(product.getModel(), 1);
             }
         }
         return map;

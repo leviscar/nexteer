@@ -1,10 +1,9 @@
 package com.example.task;
 
-import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
 import com.example.model.ShiftUnitStatus;
-import com.example.service.UnitStatusService;
 import com.example.repository.ShiftUnitStatusRepo;
+import com.example.service.UnitStatusService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class ShiftTask {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             //test
-            date = sdf.parse("2017-04-07 15:50:00");
+            date = sdf.parse("2017-04-25 15:50:00");
             // set add date
             shiftUnitStatus.setAddDate(new java.sql.Date(date.getTime()));
             // get unit status

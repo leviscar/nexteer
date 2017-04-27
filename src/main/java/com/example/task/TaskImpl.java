@@ -7,16 +7,19 @@ import org.quartz.impl.matchers.GroupMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Created by mrpan on 2017/4/14.
  */
-@Component
+@Component("task")
+@Scope("prototype")
 public class TaskImpl {
     private Logger logger = LoggerFactory.getLogger(getClass());
     private Scheduler scheduler;
@@ -125,14 +128,17 @@ public class TaskImpl {
             JobKey jobKey = new JobKey(taskName, taskGroup);
 
             // set cron
-            CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(cron).withMisfireHandlingInstructionDoNothing();
+            CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(cron)
+                    .inTimeZone(TimeZone.getDefault()).withMisfireHandlingInstructionFireAndProceed();
             // set trigger
-            CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(triggerKey).withSchedule(cronScheduleBuilder).build();
+            CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(triggerKey)
+                    .withSchedule(cronScheduleBuilder).build();
             // get the task class based on the task name
             Class<? extends Job> clazz = (Class<? extends Job>) Class.forName(taskName);
             // create new job based on the job detail and trigger
             JobDetail jobDetail = JobBuilder.newJob(clazz).withIdentity(jobKey).build();
             scheduler.scheduleJob(jobDetail, cronTrigger);
+            scheduler.start();
 
             // get the status of trigger
             Trigger.TriggerState state = scheduler.getTriggerState(cronTrigger.getKey());
@@ -160,14 +166,16 @@ public class TaskImpl {
             }
             TriggerKey triggerKey = TriggerKey.triggerKey(taskName, taskGroup);
             JobKey jobKey = new JobKey(taskName, taskGroup);
-            CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(cron).withMisfireHandlingInstructionDoNothing();
-            CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(triggerKey).withSchedule(cronScheduleBuilder).build();
+            CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(cron)
+                    .inTimeZone(TimeZone.getDefault()).withMisfireHandlingInstructionFireAndProceed();
+            CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(triggerKey)
+                    .withSchedule(cronScheduleBuilder).build();
 
             JobDetail jobDetail = scheduler.getJobDetail(jobKey);
             HashSet<Trigger> triggerSet = new HashSet<>();
             triggerSet.add(cronTrigger);
-
             scheduler.scheduleJob(jobDetail, triggerSet, true);
+            scheduler.start();
             taskInfoRepo.updateCron(taskInfo);
             logger.info("update success, taskGroup:{}, taskName:{}, cron:{}", taskGroup, taskName, cron);
         } catch (SchedulerException e) {

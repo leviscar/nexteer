@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
 import com.example.enumtype.TaskType;
 import com.example.model.TaskInfo;
@@ -7,6 +8,7 @@ import com.example.model.WorkShift;
 import com.example.repository.WorkShiftRepo;
 import com.example.task.TaskImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -46,12 +48,14 @@ public class WorkShiftController {
         if (open) {
             String taskType = shiftType + taskSuffix;
             // set the cron based on the shift's end time
-            String cron = "0 " + endTime.substring(3, 5) + " " + endTime.substring(0, 2) + " * * ?";
+            int cronSecond = getCronSecond(Cell.valueOf(cellName), TaskType.valueOf(taskType));
+            String cron = cronSecond + " " + endTime.substring(3, 5) + " " + endTime.substring(0, 2) + " * * ?";
             // add saving the shift hourly output task
             addTask(cron, cellName, TaskType.valueOf(taskType));
             if (shiftType.equals(ShiftType.Ashift.toString())){
                 // add saving the last day's output information task
-                cron = "0 " + startTime.substring(3, 5) + " " + startTime.substring(0, 2) + " * * ?";
+                cronSecond = getCronSecond(Cell.valueOf(cellName), TaskType.DailyTask);
+                cron = cronSecond + " " + startTime.substring(3, 5) + " " + startTime.substring(0, 2) + " * * ?";
                 addTask(cron, cellName, TaskType.DailyTask);
             }
         }
@@ -75,13 +79,15 @@ public class WorkShiftController {
         boolean open = ws.isOpen();
         if (open) {
             // set the cron based on the shift's end time
-            String cron = "0 " + endTime.substring(3, 5) + " " + endTime.substring(0, 2) + " * * ?";
+            int cronSecond = getCronSecond(Cell.valueOf(cellName), TaskType.valueOf(taskType));
+            String cron = cronSecond + " " + endTime.substring(3, 5) + " " + endTime.substring(0, 2) + " * * ?";
             // add saving the shift hourly output task
             updateTask(cron, cellName, TaskType.valueOf(taskType));
             taskImpl.restart(taskPrefix + taskType, cellName);
             if (shiftType.equals(ShiftType.Ashift.toString())) {
                 // add saving the last day's output information task
-                cron = "0 " + startTime.substring(3, 5) + " " + startTime.substring(0, 2) + " * * ?";
+                cronSecond = getCronSecond(Cell.valueOf(cellName), TaskType.DailyTask);
+                cron = cronSecond + " " + startTime.substring(3, 5) + " " + startTime.substring(0, 2) + " * * ?";
                 updateTask(cron, cellName, TaskType.DailyTask);
                 taskImpl.restart(taskPrefix + TaskType.DailyTask.toString(), cellName);
             }
@@ -166,5 +172,58 @@ public class WorkShiftController {
         taskInfo.setTaskName(taskPrefix + taskType.toString());
         // update task
         taskImpl.update(taskInfo);
+    }
+
+    /**
+     * Set cron second based on cell and task type
+     * @param cell
+     * @param taskType
+     * @return
+     */
+    private int getCronSecond(Cell cell, TaskType taskType){
+        int second = 0;
+        switch (cell) {
+            case ISHAFT1:
+                second = 1;
+                break;
+            case ISHAFT2:
+                second = 2;
+                break;
+            case ISHAFT3:
+                second = 3;
+                break;
+            case ISHAFT4:
+                second = 4;
+                break;
+            case BEPS1:
+                second = 5;
+                break;
+            case BEPS2:
+                second = 6;
+                break;
+            case BEPS3:
+                second = 7;
+                break;
+            case CEPS1:
+                second = 8;
+                break;
+            case CEPS2:
+                second = 9;
+                break;
+            case CEPS3:
+                second = 10;
+                break;
+            case CEPS4:
+                second = 11;
+                break;
+            case CEPS5:
+                second = 12;
+                break;
+        }
+        if (taskType.equals(TaskType.DailyTask)){
+            return 2*second - 1;
+        } else {
+            return 2*second;
+        }
     }
 }
