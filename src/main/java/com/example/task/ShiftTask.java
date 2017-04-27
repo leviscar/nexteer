@@ -30,20 +30,20 @@ public class ShiftTask {
         this.shiftUnitStatusRepo = shiftUnitStatusRepo;
     }
 
-    public void addIshaft1UnitStatus(ShiftType shiftType) {
+    public void addUnitStatus(String cellName, ShiftType shiftType) {
         ShiftUnitStatus shiftUnitStatus = new ShiftUnitStatus();
-        shiftUnitStatus.setCellName(Cell.ISHAFT1.toString());
+        shiftUnitStatus.setCellName(cellName);
         shiftUnitStatus.setShiftType(shiftType.toString());
 
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             //test
-//            date = sdf.parse("2017-04-07 15:50:00");
+            date = sdf.parse("2017-04-07 15:50:00");
             // set add date
             shiftUnitStatus.setAddDate(new java.sql.Date(date.getTime()));
             // get unit status
-            String unitStatus = unitStatusService.getUnitStatusByCurTime(sdf.format(date), Cell.ISHAFT1.toString());
+            String unitStatus = unitStatusService.getUnitStatusByCurTime(sdf.format(date), cellName);
             shiftUnitStatus.setUnitStatus(unitStatus);
             shiftUnitStatusRepo.add(shiftUnitStatus);
 

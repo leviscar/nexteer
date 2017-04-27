@@ -18,10 +18,10 @@ public class ModelOutput {
         Collections.sort(products, new Comparator<ProductInfo>() {
             @Override
             public int compare(ProductInfo o1, ProductInfo o2) {
-                if (Integer.valueOf(o1.getModel()) > Integer.valueOf(o2.getModel())) {
+                if (Integer.valueOf(o1.getModel().trim()) > Integer.valueOf(o2.getModel().trim())) {
                     return -1;
                 }
-                if (Integer.valueOf(o1.getModel()) < Integer.valueOf(o2.getModel())) {
+                if (Integer.valueOf(o1.getModel().trim()) < Integer.valueOf(o2.getModel().trim())) {
                     return 1;
                 }
                 return 0;

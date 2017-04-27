@@ -80,6 +80,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>nexteer</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

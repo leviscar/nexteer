@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.enumtype.ShiftType;
 import com.example.enumtype.TaskType;
 import com.example.model.TaskInfo;
 import com.example.model.WorkShift;
@@ -48,9 +49,11 @@ public class WorkShiftController {
             String cron = "0 " + endTime.substring(3, 5) + " " + endTime.substring(0, 2) + " * * ?";
             // add saving the shift hourly output task
             addTask(cron, cellName, TaskType.valueOf(taskType));
-            // add saving the last day's output information task
-            cron = "0 " + startTime.substring(3, 5) + " " + startTime.substring(0, 2) + " * * ?";
-            addTask(cron, cellName, TaskType.DailyTask);
+            if (shiftType.equals(ShiftType.Ashift.toString())){
+                // add saving the last day's output information task
+                cron = "0 " + startTime.substring(3, 5) + " " + startTime.substring(0, 2) + " * * ?";
+                addTask(cron, cellName, TaskType.DailyTask);
+            }
         }
         repo.add(ws);
         return ws;
@@ -74,12 +77,14 @@ public class WorkShiftController {
             // set the cron based on the shift's end time
             String cron = "0 " + endTime.substring(3, 5) + " " + endTime.substring(0, 2) + " * * ?";
             // add saving the shift hourly output task
-            addTask(cron, cellName, TaskType.valueOf(taskType));
-            // add saving the last day's output information task
-            cron = "0 " + startTime.substring(3, 5) + " " + startTime.substring(0, 2) + " * * ?";
-            updateTask(cron, cellName, TaskType.DailyTask);
+            updateTask(cron, cellName, TaskType.valueOf(taskType));
             taskImpl.restart(taskPrefix + taskType, cellName);
-            taskImpl.restart(taskPrefix + TaskType.DailyTask.toString(), cellName);
+            if (shiftType.equals(ShiftType.Ashift.toString())) {
+                // add saving the last day's output information task
+                cron = "0 " + startTime.substring(3, 5) + " " + startTime.substring(0, 2) + " * * ?";
+                updateTask(cron, cellName, TaskType.DailyTask);
+                taskImpl.restart(taskPrefix + TaskType.DailyTask.toString(), cellName);
+            }
         } else {
             taskImpl.pause(taskPrefix + taskType, cellName);
             taskImpl.pause(taskPrefix + TaskType.DailyTask.toString(), cellName);

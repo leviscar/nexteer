@@ -98,8 +98,6 @@ public class UnitStatusService {
                 break;
             case BEPS3:
                 break;
-            case BEPS4:
-                break;
             case CEPS1:
                 stationId = "SD000094X02";
                 products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
@@ -124,10 +122,19 @@ public class UnitStatusService {
                 topNProduct = cepsProductInfoRepo.getTopN(startDate, curDate, topN, stationId);
                 cellId = 14;
                 break;
+            case CEPS5:
+                products = cepsProductInfoRepo.getCell5ByPeriod(startDate, curDate);
+                topNProduct = cepsProductInfoRepo.getCell5TopN(startDate, curDate, topN);
+                cellId = 15;
+                break;
         }
 
         int curNum = products.size();
         unitStatus.setCurr_num(curNum);
+
+        // get the hourly output
+        Map<String, Integer> map = getHourlyOutput(products, startDate);
+        unitStatus.setHourly_output(map);
 
         int standardBeats = workShift.getStandardBeat();
         int normalWorkerNum = workShift.getNormalWorkerNum();
@@ -173,10 +180,6 @@ public class UnitStatusService {
             hce = 100 * stdMultiplyOutput * 60 * 60 / ((totalSeconds - restSeconds) * normalWorkerNum);
         }
         unitStatus.setHce(hce);
-
-        // get the hourly output
-        Map<String, Integer> map = getHourlyOutput(products, startDate);
-        unitStatus.setHourly_output(map);
 
         // get the current target based on current time
         int curTarget = (int) (target * (totalSeconds - restSeconds) /
@@ -304,15 +307,19 @@ public class UnitStatusService {
         calendar.add(Calendar.HOUR_OF_DAY, 1);
         Date endDate = calendar.getTime();
         int count = 0;
-        for (ProductInfo product : products) {
-            if (product.getTime().getTime() >= startDate.getTime() && product.getTime().getTime() <= endDate.getTime()) {
+        int idx = 0;
+        while (idx < products.size()){
+            ProductInfo productInfo = products.get(idx);
+            if (productInfo.getTime().getTime() >= startDate.getTime()
+                    && productInfo.getTime().getTime() <= endDate.getTime()) {
                 count++;
+                idx++;
             } else {
                 map.put(sdf.format(startDate), count);
                 calendar.add(Calendar.HOUR_OF_DAY, 1);
                 startDate = endDate;
                 endDate = calendar.getTime();
-                count = 1;
+                count = 0;
             }
         }
         map.put(sdf.format(startDate), count);

@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import com.example.enumtype.Cell;
 import com.example.service.UnitStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
