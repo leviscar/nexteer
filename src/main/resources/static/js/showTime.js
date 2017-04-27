@@ -16,12 +16,12 @@ function myTimer(){
     var minutes = new Date().getMinutes();
     var seconds = new Date().getSeconds();
     $("#showMainTime").html(judgeTime(hours)+":"+judgeTime(minutes)+":"+judgeTime(seconds));
+    // console.log(judgeTime(hours)+":"+judgeTime(minutes)+":"+judgeTime(seconds));
 }
 function myDate() {
-    var year = new Date().getFullYear();
-    var month = new Date().getMonth()+1;
-    var day = new Date().getDate();
-    $("#showMainDate").html(judgeTime(year)+"年"+judgeTime(month )+"月"+judgeTime(day)+"日");
+    var yearNow = new Date().getFullYear();
+    var monthNow = new Date().getMonth()+1;
+    var dayNow = new Date().getDate();
+    $("#showMainDate").html(judgeTime(yearNow)+"年"+judgeTime(monthNow )+"月"+judgeTime(dayNow)+"日");
 }
-setInterval(function(){myTimer()},1000);
-setInterval(function () {myDate()},1000);
+setInterval(function(){myTimer();myDate()},1000);

@@ -10,9 +10,11 @@
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="bower_components/jquery-editable-select/dist/jquery-editable-select.min.css">
     <link rel="stylesheet" href="bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="uikit/dist/css/uikit.min.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
     <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <link rel="stylesheet" href="css/confContent.css">
     <style type="text/css">
         .black-color{
             color:black;
@@ -46,7 +48,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://10.1.0.40:8080/nexteer/index.html"><img src="images/icon.png" alt="Nexteer"></a>
+            <a class="navbar-brand" href="http://localhost:8080/nexteer/index.html"><img src="images/icon.png" alt="Nexteer"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -54,25 +56,25 @@
             <ul class="nav navbar-nav">
                 <p class="navbar-text center-block" >系统设置</p>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/safeConf.html" >安全运行天数设置</a>
+                    <a href="http://localhost:8080/nexteer/safeConf.html" >安全运行天数设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/qualityConf.html" >质量无抱怨天数设置</a>
+                    <a href="http://localhost:8080/nexteer/qualityConf.html" >质量无抱怨天数设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/scrapConf.html" >报废金额设置</a>
+                    <a href="http://localhost:8080/nexteer/scrapConf.html" >报废金额设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/modelConf.html" >型号信息设置</a>
+                    <a href="http://localhost:8080/nexteer/modelConf.html" >型号信息设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/shiftConf.html" >班次信息设置</a>
+                    <a href="http://localhost:8080/nexteer/shiftConf.html" >班次信息设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/hceConf.html" >人员利用率设置</a>
+                    <a href="http://localhost:8080/nexteer/hceConf.html" >人员利用率设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/oeeConf.html" >可动率设置</a>
+                    <a href="http://localhost:8080/nexteer/oeeConf.html" >可动率设置</a>
                 </li>
 
             </ul>
@@ -85,107 +87,151 @@
 </nav>
 <div class="row">
     <div class="col-md-12">
-        <form>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <p>用户质量无抱怨天数设置</p>
-                </div>
-                <div class="panel-body">
+        <div class="uk-article-title ">Quality Configuration</div>
+        <div class="conf-content ">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>配置选项</th>
+                    <th>配置时间</th>
+                    <th>配置信息</th>
+                    <th>返回状态</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>指定质量无抱怨天数</td>
+                    <td><input type="date" id="startNCOMDateTime"></td>
+                    <td><input type="number" id="startNCOMDateValue"></td>
+                    <td id="startNCOMDateStu"></td>
+                    <td><button type="button" class="btn btn-primary" id="startNCOMDate">提交</button></td>
+                </tr>
+                <tr>
+                    <td>配置非正式抱怨事件</td>
+                    <td><input type="date" id="logNCOMDateTime"></td>
+                    <td><input type="text" id="logNCOMDateValue"></td>
+                    <td id="logNCOMDateStu"></td>
+                    <td><button type="button" class="btn btn-primary" id="logNCOMDate">提交</button></td>
+                </tr>
+                <tr>
+                    <td>配置正式抱怨事件</td>
+                    <td><input type="date" id="desNCOMDateTime"></td>
+                    <td><input type="text" id="desNCOMDateValue"></td>
+                    <td id="desNCOMDateStu"></td>
+                    <td><button type="button" class="btn btn-primary" id="desNCOMDate">提交</button></td>
+                </tr>
+                <tr>
+                    <td>重置无抱怨天数</td>
+                    <td><input type="date" id="resetNCOMDateTime"></td>
+                    <td><input type="text" id="resetNCOMDateValue"></td>
+                    <td id="resetNCOMDateStu"></td>
+                    <td><button type="button" class="btn btn-primary" id="resetNCOMDate">提交</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--<form>-->
+            <!--<div class="panel panel-default">-->
+                <!--<div class="panel-heading">-->
+                    <!--<p>用户质量无抱怨天数设置</p>-->
+                <!--</div>-->
+                <!--<div class="panel-body">-->
 
-                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#startNCOMDateModal">指定质量无抱怨天数</button>
-                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#desNCOMDateModal">指定日期正式抱怨</button>
-                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#logNCOMDateModal">指定日期非正式抱怨</button>
-                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#resetNCOMDateModal">重置无客户抱怨天数</button>
+                    <!--<button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#startNCOMDateModal">指定质量无抱怨天数</button>-->
+                    <!--<button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#desNCOMDateModal">指定日期正式抱怨</button>-->
+                    <!--<button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#logNCOMDateModal">指定日期非正式抱怨</button>-->
+                    <!--<button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#resetNCOMDateModal">重置无客户抱怨天数</button>-->
 
-                    <div class="modal fade" id="startNCOMDateModal" tabindex="-1" role="dialog" aria-labelledby="mystartNCOMDateModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="mystartNCOMDateModalLabel">更新无抱怨天数</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p><label for="startNCOMDateTime">更新时间</label>&nbsp;&nbsp;<input type="date" id="startNCOMDateTime"></p>
-                                    <hr class="active">
-                                    <p><label for="startNCOMDateValue">更新无抱怨天数</label>&nbsp;&nbsp;<input type="number" id="startNCOMDateValue"></p>
-                                    <hr class="active">
-                                    <p id="startNCOMDateStu">未知</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="startNCOMDate">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="resetNCOMDateModal" tabindex="-1" role="dialog" aria-labelledby="myresetNCOMDateModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myresetNCOMDateModalLabel">重置无抱怨天数</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p><label for="resetNCOMDateTime">重置时间</label>&nbsp;&nbsp;<input type="date" id="resetNCOMDateTime"></p>
-                                    <hr class="active">
-                                    <p><label for="resetNCOMDateValue">输入错误信息</label>&nbsp;&nbsp;<input type="text" id="resetNCOMDateValue"></p>
-                                    <hr class="active">
-                                    <p id="resetNCOMDateStu">未知</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="resetNCOMDate">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="logNCOMDateModal" tabindex="-1" role="dialog" aria-labelledby="mylogNCOMDateModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="mylogNCOMDateModalLabel">配置非正式抱怨事件</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p><label for="logNCOMDateTime">非正式抱怨事件时间</label>&nbsp;&nbsp;<input type="date" id="logNCOMDateTime"></p>
-                                    <hr class="active">
-                                    <p><label for="logNCOMDateValue">非正式抱怨信息</label>&nbsp;&nbsp;<input type="text" id="logNCOMDateValue"></p>
-                                    <hr class="active">
-                                    <p id="logNCOMDateStu">未知</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="logNCOMDate">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="desNCOMDateModal" tabindex="-1" role="dialog" aria-labelledby="mydesNCOMDateModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="mydesNCOMDateModalLabel">配置正式抱怨事件</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p><label for="desNCOMDateTime">正式抱怨事件时间</label>&nbsp;&nbsp;<input type="date" id="desNCOMDateTime"></p>
-                                    <hr class="active">
-                                    <p><label for="desNCOMDateValue">正式抱怨信息</label>&nbsp;&nbsp;<input type="text" id="desNCOMDateValue"></p>
-                                    <hr class="active">
-                                    <p id="desNCOMDateStu">未知</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="desNCOMDate">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <p id="safeSearch"></p>
-                </div>
+                    <!--<div class="modal fade" id="startNCOMDateModal" tabindex="-1" role="dialog" aria-labelledby="mystartNCOMDateModalLabel">-->
+                        <!--<div class="modal-dialog" role="document">-->
+                            <!--<div class="modal-content">-->
+                                <!--<div class="modal-header">-->
+                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                                    <!--<h4 class="modal-title" id="mystartNCOMDateModalLabel">更新无抱怨天数</h4>-->
+                                <!--</div>-->
+                                <!--<div class="modal-body">-->
+                                    <!--<p><label for="startNCOMDateTime">更新时间</label>&nbsp;&nbsp;<input type="date" id="startNCOMDateTime"></p>-->
+                                    <!--<hr class="active">-->
+                                    <!--<p><label for="startNCOMDateValue">更新无抱怨天数</label>&nbsp;&nbsp;<input type="number" id="startNCOMDateValue"></p>-->
+                                    <!--<hr class="active">-->
+                                    <!--<p id="startNCOMDateStu">未知</p>-->
+                                <!--</div>-->
+                                <!--<div class="modal-footer">-->
+                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                    <!--<button type="button" class="btn btn-primary" id="startNCOMDate">Save changes</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="modal fade" id="resetNCOMDateModal" tabindex="-1" role="dialog" aria-labelledby="myresetNCOMDateModalLabel">-->
+                        <!--<div class="modal-dialog" role="document">-->
+                            <!--<div class="modal-content">-->
+                                <!--<div class="modal-header">-->
+                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                                    <!--<h4 class="modal-title" id="myresetNCOMDateModalLabel">重置无抱怨天数</h4>-->
+                                <!--</div>-->
+                                <!--<div class="modal-body">-->
+                                    <!--<p><label for="resetNCOMDateTime">重置时间</label>&nbsp;&nbsp;<input type="date" id="resetNCOMDateTime"></p>-->
+                                    <!--<hr class="active">-->
+                                    <!--<p><label for="resetNCOMDateValue">输入错误信息</label>&nbsp;&nbsp;<input type="text" id="resetNCOMDateValue"></p>-->
+                                    <!--<hr class="active">-->
+                                    <!--<p id="resetNCOMDateStu">未知</p>-->
+                                <!--</div>-->
+                                <!--<div class="modal-footer">-->
+                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                    <!--<button type="button" class="btn btn-primary" id="resetNCOMDate">Save changes</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="modal fade" id="logNCOMDateModal" tabindex="-1" role="dialog" aria-labelledby="mylogNCOMDateModalLabel">-->
+                        <!--<div class="modal-dialog" role="document">-->
+                            <!--<div class="modal-content">-->
+                                <!--<div class="modal-header">-->
+                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                                    <!--<h4 class="modal-title" id="mylogNCOMDateModalLabel">配置非正式抱怨事件</h4>-->
+                                <!--</div>-->
+                                <!--<div class="modal-body">-->
+                                    <!--<p><label for="logNCOMDateTime">非正式抱怨事件时间</label>&nbsp;&nbsp;<input type="date" id="logNCOMDateTime"></p>-->
+                                    <!--<hr class="active">-->
+                                    <!--<p><label for="logNCOMDateValue">非正式抱怨信息</label>&nbsp;&nbsp;<input type="text" id="logNCOMDateValue"></p>-->
+                                    <!--<hr class="active">-->
+                                    <!--<p id="logNCOMDateStu">未知</p>-->
+                                <!--</div>-->
+                                <!--<div class="modal-footer">-->
+                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                    <!--<button type="button" class="btn btn-primary" id="logNCOMDate">Save changes</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="modal fade" id="desNCOMDateModal" tabindex="-1" role="dialog" aria-labelledby="mydesNCOMDateModalLabel">-->
+                        <!--<div class="modal-dialog" role="document">-->
+                            <!--<div class="modal-content">-->
+                                <!--<div class="modal-header">-->
+                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                                    <!--<h4 class="modal-title" id="mydesNCOMDateModalLabel">配置正式抱怨事件</h4>-->
+                                <!--</div>-->
+                                <!--<div class="modal-body">-->
+                                    <!--<p><label for="desNCOMDateTime">正式抱怨事件时间</label>&nbsp;&nbsp;<input type="date" id="desNCOMDateTime"></p>-->
+                                    <!--<hr class="active">-->
+                                    <!--<p><label for="desNCOMDateValue">正式抱怨信息</label>&nbsp;&nbsp;<input type="text" id="desNCOMDateValue"></p>-->
+                                    <!--<hr class="active">-->
+                                    <!--<p id="desNCOMDateStu">未知</p>-->
+                                <!--</div>-->
+                                <!--<div class="modal-footer">-->
+                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                    <!--<button type="button" class="btn btn-primary" id="desNCOMDate">Save changes</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<p id="safeSearch"></p>-->
+                <!--</div>-->
 
-            </div>
-        </form>
+            <!--</div>-->
+        <!--</form>-->
 
     </div>
 
@@ -196,6 +242,7 @@
 <script type="text/javascript" src="js/google-maps.js"></script>
 <script type="application/javascript" src="bower_components/jquery-editable-select/dist/jquery-editable-select.min.js"></script>
 <script type="application/javascript" src="bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="application/javascript" src="uikit/dist/js/uikit.js"></script>
 <script src="js/defineGlobal.js"></script>
 <script src="js/NCOMSet.js"></script>
 <script src="js/form_datetime.js"></script>

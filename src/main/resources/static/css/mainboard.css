@@ -89,9 +89,15 @@ body{
     padding-top: 5%;
 }
 @font-face {
-    font-family: "My Font";
-    src: url("static/images/normalZAO.otf");
+    font-family: '造字工房朗倩（非商用）常规体';
+    src: url("static/images/normalZAO.otf") format('opentype');
 }
 /*body{*/
     /*font-size: 20px !important;*/
 /*}*/
+.border-line{
+    border: 1px solid #ffffff;
+}
+body{
+    overflow: hidden !important;
+}

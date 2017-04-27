@@ -15,12 +15,13 @@ $("#addOeeSub").bind("click", function () {
     console.log(JSON.stringify(addOeeJson));
     $.ajax({
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/oee/target",
+        url: "http://localhost:8080/nexteer/oee/target",
         data:JSON.stringify(addOeeJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            $("#addOeeStatus").html("添加"+data.addDate+"目标值为"+data.targetOee);
+            // $("#addOeeStatus").html("添加"+data.addDate+"目标值为"+data.targetOee);
+            $("#addOeeStatus").html("成功");
         },
         failure: function (errMsg) {
             console.log(errMsg);

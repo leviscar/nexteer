@@ -1,7 +1,6 @@
 /**
  * Created by Administrator on 2017/3/18.
  */
-
 function shiftInput(setTime,shiftType,morStart, morEnd,Beats,morWorkNum,morWorkOverNum,morTar , cellName,open) {
     this.addDate = setTime;
     this.shiftType = shiftType;
@@ -58,8 +57,8 @@ function  eventInput(type,cellName,event,eventStart,eventEnd) {
     this.startTime=eventStart;
     this.endTime=eventEnd;
 }
-function showEvent() {
-    $.get("http://10.1.0.40:8080/nexteer/rest-event?work_shift_id=1", function (data) {
+function showEvent(idInput) {
+    $.get("http://localhost:8080/nexteer/rest-event?work_shift_id="+idInput, function (data) {
         console.log(data);
             console.log(data);
             $.each(data, function (i, model) {
@@ -73,9 +72,9 @@ function showEvent() {
 $('#addThiEvent').editableSelect({
     effects: 'slide'
 });
-showEvent();
+
 function showBance() {
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT1?shift_type=Ashift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Ashift", function (data) {
         console.log(typeof (data));
         console.log(data);
         // $("#productMessage").append("<tbody><tr><td>"+data.morning_shift_start+"</td><td>"+data.morning_shift_end+"</td><td>"+data.middle_shift_start+"</td><td>"+data.middle_shift_end+"</td><td>"+data.night_shift_start+"</td><td>"+data.night_shift_end+"</td><td>"+data.morning_shift_standard_beats+"</td><td>"
@@ -99,9 +98,10 @@ function showBance() {
         $("#mTar").html(data.target);
         $("#cellAName").html(data.cellName);
         $("#Aopen").html(data.open);
+        showEvent(data.id);
 
     });
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT1?shift_type=Bshift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Bshift", function (data) {
         console.log(typeof (data));
         console.log(data);
         // $("#productMessage").append("<tbody><tr><td>"+data.morning_shift_start+"</td><td>"+data.morning_shift_end+"</td><td>"+data.middle_shift_start+"</td><td>"+data.middle_shift_end+"</td><td>"+data.night_shift_start+"</td><td>"+data.night_shift_end+"</td><td>"+data.morning_shift_standard_beats+"</td><td>"
@@ -125,9 +125,10 @@ function showBance() {
         $("#miTar").html(data.target);
         $("#cellBName").html(data.cellName);
         $("#Bopen").html(data.open);
+        showEvent(data.id);
 
     });
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT1?shift_type=Cshift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Cshift", function (data) {
         console.log(typeof (data));
         console.log(data);
         // $("#productMessage").append("<tbody><tr><td>"+data.morning_shift_start+"</td><td>"+data.morning_shift_end+"</td><td>"+data.middle_shift_start+"</td><td>"+data.middle_shift_end+"</td><td>"+data.night_shift_start+"</td><td>"+data.night_shift_end+"</td><td>"+data.morning_shift_standard_beats+"</td><td>"
@@ -151,9 +152,11 @@ function showBance() {
         $("#nTar").html(data.target);
         $("#cellCName").html(data.cellName);
         $("#Copen").html(data.open);
+        showEvent(data.id);
     });
 }
 showBance();
+
 console.log("开始运行");
 $("#oneSub").bind("click", function () {
 
@@ -161,17 +164,17 @@ $("#oneSub").bind("click", function () {
     console.log("start");
     console.log(JSON.stringify(OneshiftJson));
     $.ajax({
-        type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/work-shift",
+        type: "POST",
+        url: "http://localhost:8080/nexteer/work-shift",
         data:JSON.stringify(OneshiftJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
             if(data.system_status==true) {
-                $("#oneStatus").html("添加班次信息成功");
+                $("#oneStatus").html("成功");
             }
             else{
-                $("#oneStatus").html("添加班次信息失败");
+                $("#oneStatus").html("失败");
             }
             console.log(data.status);
             console.log("nice");
@@ -184,6 +187,7 @@ $("#oneSub").bind("click", function () {
         $("#oneStatus").html("");
     },1000*7);
     showBance();
+    window.location.reload();
 });
 
 $("#twoSub").bind("click", function () {
@@ -192,8 +196,8 @@ $("#twoSub").bind("click", function () {
     console.log( JSON.stringify(TwoshiftJson));
 
     $.ajax({
-        type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/work-shift",
+        type: "POST",
+        url: "http://localhost:8080/nexteer/work-shift",
         data: JSON.stringify(TwoshiftJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -218,7 +222,7 @@ $("#twoSub").bind("click", function () {
 $("#thiSub").bind("click", function () {
 
 
-    var ThishiftJson=new shiftInput($("#thiTime").val(),"Cshift".$("#thiNStart").val(),$("#thiNEnd").val(), Number($("#thiNBeats").val()), Number($("#thiNWorkNum").val()),Number($("#thiNWorkOverNum").val()),umber($("#thiTar").val()),$("#thiCellName").val(),$("#thiOpen").val());
+    var ThishiftJson=new shiftInput($("#thiTime").val(),"Cshift",$("#thiNStart").val(),$("#thiNEnd").val(), Number($("#thiNBeats").val()), Number($("#thiNWorkNum").val()),Number($("#thiNWorkOverNum").val()),Number($("#thiTar").val()),$("#thiCellName").val(),$("#thiOpen").val());
 
     // $("#thiMorStart").val(),$("#thiMorEnd").val(),$("#thiMidStart").val(),
     //     $("#thiMidEnd").val(),$("#thiNStart").val(),$("#thiNEnd").val(),parseInt($("#thiMorTar").val()),parseInt($("#thiMidTar").val()),parseInt($("#thiNTar").
@@ -226,17 +230,17 @@ $("#thiSub").bind("click", function () {
 
     console.log( JSON.stringify(ThishiftJson));
     $.ajax({
-        type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/work-shift",
+        type: "POST",
+        url: "http://localhost:8080/nexteer/work-shift",
         data: JSON.stringify(ThishiftJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
             if(data.system_status==true) {
-                $("#thiStatus").html("添加班次信息成功");
+                $("#thiStatus").html("成功");
             }
             else{
-                $("#thiStatus").html("添加班次信息失败");
+                $("#thiStatus").html("失败");
             }
             console.log(data.status);
         },
@@ -248,13 +252,14 @@ $("#thiSub").bind("click", function () {
         $("#thiStatus").html("");
     },1000*7);
     showBance();
+    window.location.reload();
 });
 
 $("#oneEventSub").bind("click",function () {
     var addEventJson=new eventInput("早班",$("#addEvent").val().toString(),$("#addStart").val().toString(),$("#addEnd").val().toString());
     $.ajax({
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/rest-event/addEvent",
+        url: "http://localhost:8080/nexteer/rest-event/addEvent",
         data: JSON.stringify(addEventJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -282,7 +287,7 @@ $("#twoEventSub").bind("click",function () {
     var addEventJson=new eventInput($("#addSecType").val().toString(),$("#addSecEvent").val().toString(),$("#addSecStart").val().toString(),$("#addSecEnd").val().toString());
     $.ajax({
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/rest-event/addEvent",
+        url: "http://localhost:8080/nexteer/rest-event/addEvent",
         data: JSON.stringify(addEventJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -314,15 +319,15 @@ $("#thiEventSub").bind("click",function () {
             'Content-Type': 'application/json'
         },
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/rest-event",
+        url: "http://localhost:8080/nexteer/rest-event",
         data: JSON.stringify(addEventJson),
         dataType: "json",
         success: function (data) {
             if(data.id != null) {
-                $("#addThiStatus").html("添加事件成功");
+                $("#addThiStatus").html("成功");
             }
             else{
-                $("#addThiStatus").html("添加事件失败");
+                $("#addThiStatus").html("失败");
             }
             console.log(data.event);
         },

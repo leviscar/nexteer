@@ -7,7 +7,7 @@
  */
 var IshaftTitle=["Ishaft1","Ishaft2","Ishaft3","Ishaft4"];
 IshaftOEEValue=["00","00","00","00"];
-IshaftOEEHref = ["http://10.1.0.40:8080/nexteer/OEESecView.html","http://10.1.0.40:8080/nexteer/OEEIshaftTwoWeekView.html","http://10.1.0.40:8080/nexteer/OEEIshaftThrWeekView.html","http://10.1.0.40:8080/nexteer/OEEIshaftFouWeekView.html"];
+IshaftOEEHref = ["http://localhost:8080/nexteer/OEESecView.html","http://localhost:8080/nexteer/OEEIshaftTwoWeekView.html","http://localhost:8080/nexteer/OEEIshaftThrWeekView.html","http://localhost:8080/nexteer/OEEIshaftFouWeekView.html"];
 
 function judgeTime(time) {
     var timeStr="";
@@ -32,7 +32,7 @@ function getMainOee() {
     console.log("getMainOee开始");
     // $.ajax({
     //     type: "POST",
-    //     url: "http://10.1.0.40:8080/nexteer/dashboard/oee",
+    //     url: "http://localhost:8080/nexteer/dashboard/oee",
     //     data: JSON.stringify(mainOeeJson),
     //     contentType: "application/json; charset=utf-8",
     //     dataType: "json",
@@ -51,7 +51,7 @@ function getMainOee() {
     //         console.log(errMsg);
     //     }
     // });
-    $.get("http://10.1.0.40:8080/nexteer/dashboard/oee/ISHAFT1?time="+currTime,function (data) {
+    $.get("http://localhost:8080/nexteer/dashboard/oee/ISHAFT1?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
                 console.log(JSON.stringify(data));
@@ -84,7 +84,7 @@ function getMainPro() {
     // var currTime = "2017-03-23 15:00:00";
     var cellName = "ISHAFT1";
     var mainOeeJson = new mainOeeInput(currTime,cellName);
-    var urlString = "http://10.1.0.40:8080/nexteer/dashboard/output/ISHAFT1?time="+currTime;
+    var urlString = "http://localhost:8080/nexteer/dashboard/output/ISHAFT1?time="+currTime;
     console.log(mainOeeJson);
     console.log("getMainPro开始");
     // $.ajax({
@@ -108,7 +108,7 @@ function getMainPro() {
     //         console.log(errMsg);
     //     }
     // });
-    $.get("http://10.1.0.40:8080/nexteer/dashboard/output/ISHAFT1?time="+currTime,function (data) {
+    $.get("http://localhost:8080/nexteer/dashboard/output/ISHAFT1?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
                 console.log(JSON.stringify(data));
@@ -121,16 +121,16 @@ function getMainPro() {
                 switch ($.parseJSON(data).status)
                 {
                     case -1:
-                        $("#status").replaceWith("<td class=\" noPadding\" id=\"status\"><a href=\"http://10.1.0.40:8080/nexteer/IshaftOneUnit.html\"><img  src=\"images/down.png\" alt=\"NICE\"></a></td>");
+                        $("#status").replaceWith("<td class=\" noPadding\" id=\"status\"><a href=\"http://localhost:8080/nexteer/IshaftOneUnit.html\"><img  src=\"images/down.png\" alt=\"NICE\"></a></td>");
                         break;
                     case 0:
-                        $("#status").replaceWith("<td class=\" noPadding\" id=\"status\"><a href=\"http://10.1.0.40:8080/nexteer/IshaftOneUnit.html\"><img class=\"slider\" src=\"images/slider.png\" alt=\"NICE\"></a></td>");
+                        $("#status").replaceWith("<td class=\" noPadding\" id=\"status\"><a href=\"http://localhost:8080/nexteer/IshaftOneUnit.html\"><img class=\"slider\" src=\"images/slider.png\" alt=\"NICE\"></a></td>");
                         break;
                     case 1:
-                        $("#status").replaceWith("<td class=\" noPadding\" id=\"status\"><a href=\"http://10.1.0.40:8080/nexteer/IshaftOneUnit.html\"><img  src=\"images/up.png\" alt=\"NICE\"></a></td>");
+                        $("#status").replaceWith("<td class=\" noPadding\" id=\"status\"><a href=\"http://localhost:8080/nexteer/IshaftOneUnit.html\"><img  src=\"images/up.png\" alt=\"NICE\"></a></td>");
                         break;
                     default:
-                        $("#status").replaceWith("<td class=\" noPadding\" id=\"status\"><a href=\"http://10.1.0.40:8080/nexteer/IshaftOneUnit.html\"></a></td>");
+                        $("#status").replaceWith("<td class=\" noPadding\" id=\"status\"><a href=\"http://localhost:8080/nexteer/IshaftOneUnit.html\"></a></td>");
                 }
             }
             else{

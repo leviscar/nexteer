@@ -20,37 +20,38 @@ var jsonString = new safeDateInput(judgeTime(Uyear),judgeTime(Umonth) , judgeTim
 var curTime = judgeTime(Uyear)+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
 console.log("safeShow开始");
 console.log(jsonString);
-//更新当前安全天数
-function getNowData() {
-
-    $.ajax({
-        type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/safety-date",
-        data: JSON.stringify(jsonString),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            console.log(JSON.stringify(data));
-            $("#safeDay").html(data.safe_dates);
-            console.log("获取安全日期操作成功");
-        },
-        failure: function (errMsg) {
-            console.log(errMsg);
-        }
-    });
-
-    console.log("公元"+Uyear+"年"+Umonth+"月"+Uday+"日");
-}
+//添加
+// 当前安全天数
+// function getNowData() {
+//
+//     $.ajax({
+//         type: "POST",
+//         url: "http://localhost:8080/nexteer/safety-date",
+//         data: JSON.stringify(jsonString),
+//         contentType: "application/json; charset=utf-8",
+//         dataType: "json",
+//         success: function (data) {
+//             console.log(JSON.stringify(data));
+//             $("#safeDay").html(data.safe_dates);
+//             console.log("获取安全日期操作成功");
+//         },
+//         failure: function (errMsg) {
+//             console.log(errMsg);
+//         }
+//     });
+//
+//     console.log("公元"+Uyear+"年"+Umonth+"月"+Uday+"日");
+// }
 function getSafeDay() {
 
-    $.get("http://10.1.0.40:8080/nexteer/safety-date/day?date="+curTime,function (data) {
+    $.get("http://localhost:8080/nexteer/safety-date/day?date="+curTime,function (data) {
         if(data.system_status != false){
             console.log(JSON.stringify(data));
             $("#safeDay").html(data.safe_dates);
             console.log("获取安全日期操作成功");
         }
     });
-    $.get("http://10.1.0.40:8080/nexteer/safety-date/max",function (data) {
+    $.get("http://localhost:8080/nexteer/safety-date/max",function (data) {
 
             console.log(JSON.stringify(data));
             $("#safeHigh").html(data);
@@ -58,6 +59,6 @@ function getSafeDay() {
     });
 
 }
-getNowData();
+// getNowData();
 setTimeout(getSafeDay(),1000);
-setInterval(getNowData(),1000*60*60);
+// setInterval(getNowData(),1000*60*60);
