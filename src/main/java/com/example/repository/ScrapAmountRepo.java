@@ -33,10 +33,90 @@ public class ScrapAmountRepo {
      * @param curDate
      * @return
      */
+    public List<ScrapAmount> getByDateAndCell(String curDate, String cellName) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = sdf.parse(curDate);
+        String sql = "SELECT * FROM scrap_amount WHERE add_date = ? and cell_name = ?";
+        return jdbc.query(sql, new Object[]{start, cellName}, new ScrapAmountMapper());
+    }
+
+    /**
+     * Query all the scrap amount records during the start date and end date
+     *
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    public List<ScrapAmount> getByPeriodAndCell(String startDate, String endDate, String cellName) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = sdf.parse(startDate);
+        Date end = sdf.parse(endDate);
+        if (start.getTime() - end.getTime() <= 0) {
+            String sql = "SELECT * FROM scrap_amount WHERE add_date BETWEEN ? AND ? and cell_name = ? ORDER BY add_date";
+            return jdbc.query(sql, new Object[]{start, end, cellName}, new ScrapAmountMapper());
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Get all the scrap amount records during the whole week based on current date
+     *
+     * @param curDate
+     * @return
+     */
+    public List<ScrapAmount> getByWeekAndCell(String curDate, String cellName) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar date = Calendar.getInstance();
+        date.setFirstDayOfWeek(Calendar.MONDAY);
+        date.setTime(sdf.parse(curDate));
+        date.set(Calendar.DAY_OF_WEEK, date.getFirstDayOfWeek());
+        String startDate = sdf.format(date.getTime());
+        return getByPeriodAndCell(startDate, curDate, cellName);
+    }
+
+    /**
+     * Get all the scrap amount records during the whole month based on current date
+     *
+     * @param curDate
+     * @return
+     * @throws ParseException
+     */
+    public List<ScrapAmount> getByMonthAndCell(String curDate, String cellName) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(sdf.parse(curDate));
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        String startDate = sdf.format(calendar.getTime());
+        return getByPeriodAndCell(startDate, curDate, cellName);
+    }
+
+    /**
+     * Get all the scrap amount records during the whole year based on current date
+     *
+     * @param curDate
+     * @return
+     * @throws ParseException
+     */
+    public List<ScrapAmount> getByYearAndCell(String curDate, String cellName) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(sdf.parse(curDate));
+        calendar.set(Calendar.MONTH, 0);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        String startDate = sdf.format(calendar.getTime());
+        return getByPeriodAndCell(startDate, curDate, cellName);
+    }
+    /**
+     * Get a scrap amount record on a specific date
+     *
+     * @param curDate
+     * @return
+     */
     public List<ScrapAmount> getByDate(String curDate) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date start = sdf.parse(curDate);
-        String sql = "SELECT * FROM scrap_amount WHERE year + month + day = ?";
+        String sql = "SELECT * FROM scrap_amount WHERE add_date = ?";
         return jdbc.query(sql, new Object[]{start}, new ScrapAmountMapper());
     }
 
@@ -52,7 +132,7 @@ public class ScrapAmountRepo {
         Date start = sdf.parse(startDate);
         Date end = sdf.parse(endDate);
         if (start.getTime() - end.getTime() <= 0) {
-            String sql = "SELECT * FROM scrap_amount WHERE year + month + day BETWEEN ? AND ?";
+            String sql = "SELECT * FROM scrap_amount WHERE add_date BETWEEN ? AND ? ORDER BY add_date";
             return jdbc.query(sql, new Object[]{start, end}, new ScrapAmountMapper());
         } else {
             return new ArrayList<>();
@@ -114,26 +194,17 @@ public class ScrapAmountRepo {
      * @param scrapAmount
      * @return
      */
-    public JsonObject addAmount(ScrapAmount scrapAmount) throws ParseException {
-        String curDate = scrapAmount.getYear() + "-" + scrapAmount.getMonth() + "-" + scrapAmount.getDay();
-        if (!getByDate(curDate).isEmpty()) {
+    public ScrapAmount addAmount(ScrapAmount scrapAmount) throws ParseException {
+        String curDate = scrapAmount.getAddDate();
+        String cellName = scrapAmount.getCellName();
+        if (!getByDateAndCell(curDate, cellName).isEmpty()) {
             updateAmount(scrapAmount);
         } else {
-            String sql = "INSERT INTO scrap_amount (year, month, day, ishaft1_value, ishaft2_value, ishaft3_value" +
-                    ", ishaft4_value, ceps_value, beps_value, ishaft1_target_value, ishaft2_target_value" +
-                    ", ishaft3_target_value, ishaft4_target_value, ceps_target_value, beps_target_value)" +
-                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            jdbc.update(sql, scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay()
-                    , scrapAmount.getIshaft1_value(), scrapAmount.getIshaft2_value(), scrapAmount.getIshaft3_value()
-                    , scrapAmount.getIshaft4_value(), scrapAmount.getCeps_value(), scrapAmount.getBeps_value()
-                    , scrapAmount.getIshaft1_target_value(), scrapAmount.getIshaft2_target_value()
-                    , scrapAmount.getIshaft3_target_value(), scrapAmount.getIshaft4_target_value()
-                    , scrapAmount.getCeps_target_value(), scrapAmount.getBeps_target_value());
+            String sql = "INSERT INTO scrap_amount (add_date, cell_name, value, target_value) VALUES (?, ?, ?, ?)";
+            jdbc.update(sql, scrapAmount.getAddDate(), scrapAmount.getCellName(), scrapAmount.getValue()
+                    , scrapAmount.getTargetValue());
         }
-        JsonObject object = new JsonObject();
-        object.addProperty("system_status", true);
-        object.addProperty("log", "add success");
-        return object;
+        return scrapAmount;
     }
 
     /**
@@ -142,27 +213,10 @@ public class ScrapAmountRepo {
      * @param scrapAmount
      * @return
      */
-    public JsonObject updateAmount(ScrapAmount scrapAmount) throws ParseException {
-        String curDate = scrapAmount.getYear() + "-" + scrapAmount.getMonth() + "-" + scrapAmount.getDay();
-        JsonObject jsonObject = new JsonObject();
-        if (!getByDate(curDate).isEmpty()) {
-            String sql = "UPDATE scrap_amount SET ishaft1_value = ?, ishaft2_value = ?, ishaft3_value = ?" +
-                    ", ishaft4_value = ?, ceps_value = ?, beps_value = ?, ishaft1_target_value = ?" +
-                    ", ishaft2_target_value = ?, ishaft3_target_value = ?, ishaft4_target_value = ?" +
-                    ", ceps_target_value = ?, beps_target_value = ? WHERE year = ? AND month = ? AND day = ?";
-            jdbc.update(sql, scrapAmount.getIshaft1_value(), scrapAmount.getIshaft2_value()
-                    , scrapAmount.getIshaft3_value(), scrapAmount.getIshaft4_value(), scrapAmount.getCeps_value()
-                    , scrapAmount.getBeps_value(), scrapAmount.getIshaft1_target_value(), scrapAmount.getIshaft2_target_value()
-                    , scrapAmount.getIshaft3_target_value(), scrapAmount.getIshaft4_target_value()
-                    , scrapAmount.getCeps_target_value(), scrapAmount.getBeps_target_value()
-                    , scrapAmount.getYear(), scrapAmount.getMonth(), scrapAmount.getDay());
-            jsonObject.addProperty("system_status", true);
-            jsonObject.addProperty("log", "update success");
-        } else {
-            jsonObject.addProperty("system_status", false);
-            jsonObject.addProperty("log", "数据库没有该日期的记录，请先添加记录");
-        }
-        return jsonObject;
+    public ScrapAmount updateAmount(ScrapAmount scrapAmount) throws ParseException {
+        String sql = "UPDATE scrap_amount SET value = ?, target_value = ? WHERE add_date = ? AND cell_name = ?";
+        jdbc.update(sql, scrapAmount.getValue(), scrapAmount.getTargetValue(), scrapAmount.getAddDate()
+                , scrapAmount.getCellName());
+        return scrapAmount;
     }
-
 }

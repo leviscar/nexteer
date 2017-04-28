@@ -7,23 +7,13 @@ CREATE TABLE safety_date (
   log        NVARCHAR(255) DEFAULT 'Today is running safe!',
   PRIMARY KEY (year, month, day)
 );
+DROP TABLE scrap_amount
 CREATE TABLE scrap_amount (
-  year                 NCHAR(4) NOT NULL,
-  month                NCHAR(2) NOT NULL,
-  day                  NCHAR(2) NOT NULL,
-  ishaft1_value        INT,
-  ishaft2_value        INT,
-  ishaft3_value        INT,
-  ishaft4_value        INT,
-  ceps_value           INT,
-  beps_value           INT,
-  ishaft1_target_value INT,
-  ishaft2_target_value INT,
-  ishaft3_target_value INT,
-  ishaft4_target_value INT,
-  ceps_target_value    INT,
-  beps_target_value    INT,
-  PRIMARY KEY (year, month, day)
+  add_date     DATE,
+  cell_name    VARCHAR(10),
+  value        INT,
+  target_value INT,
+  PRIMARY KEY (add_date, cell_name)
 );
 CREATE TABLE work_shift (
   id                  INT IDENTITY (1, 1) NOT NULL,
