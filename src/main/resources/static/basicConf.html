@@ -226,75 +226,103 @@
                     </tbody>
                 </table></li>
                 <li>
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                        <tr>
-                            <th>产线</th>
-                            <th>报废时间</th>
-                            <th>报废金额</th>
-                            <th>报废金额目标值</th>
-                            <th>添加状态</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>ISHAFT L1</td>
-                            <td><input type="date" id="Is1ScrapAddTime"></td>
-                            <td><input type="number" id="Is1ScrapAddValue"></td>
-                            <td><input type="number" id="Is1ScrapAddTarValue"></td>
-                            <td id="addIs1ScrapStu"></td>
-                            <td><button type="button" class="btn btn-primary" id="addIs1Scrap">添加</button></td>
-                            <td><button type="button" class="btn btn-primary" id="resetIs1Scrap">更新</button></td>
-                        </tr>
-                        <tr>
-                            <td>ISHAFT L2</td>
-                            <td><input type="date" id="Is2ScrapAddTime"></td>
-                            <td><input type="number" id="Is2ScrapAddValue"></td>
-                            <td><input type="number" id="Is2ScrapAddTarValue"></td>
-                            <td id="addIs2ScrapStu"></td>
-                            <td><button type="button" class="btn btn-primary" id="addIs2Scrap">添加</button></td>
-                            <td><button type="button" class="btn btn-primary" id="resetIs2Scrap">更新</button></td>
-                        </tr>
-                        <tr>
-                            <td>ISHAFT L3</td>
-                            <td><input type="date" id="Is3ScrapAddTime"></td>
-                            <td><input type="number" id="Is3ScrapAddValue"></td>
-                            <td><input type="number" id="Is3ScrapAddTarValue"></td>
-                            <td id="addIs3ScrapStu"></td>
-                            <td><button type="button" class="btn btn-primary" id="addIs3Scrap">添加</button></td>
-                            <td><button type="button" class="btn btn-primary" id="resetIs3Scrap">更新</button></td>
-                        </tr>
-                        <tr>
-                            <td>ISHAFT L4</td>
-                            <td><input type="date" id="Is4ScrapAddTime"></td>
-                            <td><input type="number" id="Is4ScrapAddValue"></td>
-                            <td><input type="number" id="Is4ScrapAddTarValue"></td>
-                            <td id="addIs4ScrapStu"></td>
-                            <td><button type="button" class="btn btn-primary" id="addIs4Scrap">添加</button></td>
-                            <td><button type="button" class="btn btn-primary" id="resetIs4Scrap">更新</button></td>
-                        </tr>
-                        <tr>
-                            <td>CEPS</td>
-                            <td><input type="date" id="CEPSScrapAddTime"></td>
-                            <td><input type="number" id="CEPSScrapAddValue"></td>
-                            <td><input type="number" id="CEPSScrapAddTarValue"></td>
-                            <td id="addCEPSScrapStu"></td>
-                            <td><button type="button" class="btn btn-primary" id="addCEPSScrap">添加</button></td>
-                            <td><button type="button" class="btn btn-primary" id="resetCEPSScrap">更新</button></td>
-                        </tr>
-                        <tr>
-                            <td>BEPS</td>
-                            <td><input type="date" id="BEPSScrapAddTime"></td>
-                            <td><input type="number" id="BEPSScrapAddValue"></td>
-                            <td><input type="number" id="BEPSScrapAddTarValue"></td>
-                            <td id="addBEPSScrapStu"></td>
-                            <td><button type="button" class="btn btn-primary" id="addBEPSScrap">添加</button></td>
-                            <td><button type="button" class="btn btn-primary" id="resetBEPSScrap">更新</button></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <ul class="uk-subnav uk-subnav-pill " uk-switcher>
+                        <li class="topLine"><a href="#">添加报废金额</a></li>
+                        <li class="topLine"><a href="#">报废金额显示</a></li>
+                    </ul>
+                    <ul class="uk-switcher uk-margin">
+                        <li>
+                            <table class="table table-striped table-bordered" id="scrapTable">
+                                <thead>
+                                <tr>
+                                    <th>产线</th>
+                                    <th>报废时间</th>
+                                    <th>报废金额</th>
+                                    <th>报废金额目标值</th>
+                                    <th>添加状态</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>ISHAFT L1</td>
+                                    <td><input type="date" id="Is1ScrapAddTime"></td>
+                                    <td><input type="number" id="Is1ScrapAddValue"></td>
+                                    <td><input type="number" id="Is1ScrapAddTarValue"></td>
+                                    <td id="addIs1ScrapStu"></td>
+                                    <td><button type="button" class="btn btn-primary addScrap" id="addIs1Scrap">添加</button></td>
+                                    <td><button type="button" class="btn btn-primary" id="resetIs1Scrap">更新</button></td>
+                                </tr>
+                                <tr>
+                                    <td>ISHAFT L2</td>
+                                    <td><input type="date" id="Is2ScrapAddTime"></td>
+                                    <td><input type="number" id="Is2ScrapAddValue"></td>
+                                    <td><input type="number" id="Is2ScrapAddTarValue"></td>
+                                    <td id="addIs2ScrapStu"></td>
+                                    <td><button type="button" class="btn btn-primary addScrap" id="addIs2Scrap">添加</button></td>
+                                    <td><button type="button" class="btn btn-primary" id="resetIs2Scrap">更新</button></td>
+                                </tr>
+                                <tr>
+                                    <td>ISHAFT L3</td>
+                                    <td><input type="date" id="Is3ScrapAddTime"></td>
+                                    <td><input type="number" id="Is3ScrapAddValue"></td>
+                                    <td><input type="number" id="Is3ScrapAddTarValue"></td>
+                                    <td id="addIs3ScrapStu"></td>
+                                    <td><button type="button" class="btn btn-primary addScrap" id="addIs3Scrap">添加</button></td>
+                                    <td><button type="button" class="btn btn-primary addScrap" id="resetIs3Scrap">更新</button></td>
+                                </tr>
+                                <tr>
+                                    <td>ISHAFT L4</td>
+                                    <td><input type="date" id="Is4ScrapAddTime"></td>
+                                    <td><input type="number" id="Is4ScrapAddValue"></td>
+                                    <td><input type="number" id="Is4ScrapAddTarValue"></td>
+                                    <td id="addIs4ScrapStu"></td>
+                                    <td><button type="button" class="btn btn-primary addScrap" id="addIs4Scrap">添加</button></td>
+                                    <td><button type="button" class="btn btn-primary" id="resetIs4Scrap">更新</button></td>
+                                </tr>
+                                <tr>
+                                    <td>CEPS</td>
+                                    <td><input type="date" id="CEPSScrapAddTime"></td>
+                                    <td><input type="number" id="CEPSScrapAddValue"></td>
+                                    <td><input type="number" id="CEPSScrapAddTarValue"></td>
+                                    <td id="addCEPSScrapStu"></td>
+                                    <td><button type="button" class="btn btn-primary addScrap" id="addCEPSScrap">添加</button></td>
+                                    <td><button type="button" class="btn btn-primary" id="resetCEPSScrap">更新</button></td>
+                                </tr>
+                                <tr>
+                                    <td>BEPS</td>
+                                    <td><input type="date" id="BEPSScrapAddTime"></td>
+                                    <td><input type="number" id="BEPSScrapAddValue"></td>
+                                    <td><input type="number" id="BEPSScrapAddTarValue"></td>
+                                    <td id="addBEPSScrapStu"></td>
+                                    <td><button type="button" class="btn btn-primary addScrap" id="addBEPSScrap">添加</button></td>
+                                    <td><button type="button" class="btn btn-primary" id="resetBEPSScrap">更新</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        <li>
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>Ishaft1</th>
+                                    <th>Ishaft2</th>
+                                    <th>Ishaft3</th>
+                                    <th>Ishaft4</th>
+                                    <th>CEPS</th>
+                                    <th>BEPS</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+
                 </li>
                 <li>
                     <ul class="uk-subnav uk-subnav-pill " uk-switcher>
@@ -352,6 +380,8 @@
                                             <th>型号名称</th>
                                             <th>所属单元</th>
                                             <th>STD</th>
+                                            <th></th>
+
                                         </tr>
                                         </thead>
 
@@ -1138,7 +1168,7 @@
 <script src="js/showTime.js"></script>
 <script>$(document).ready(function(){$(".vertical-nav").verticalnav({speed: 400,align: "left"});});</script>
 <script src="js/banciSet.js"></script>
-<script src="js/proCountSet.js"></script>
+<script src="js/modelSet.js"></script>
 <script src="js/safeset.js"></script>
 <script src="js/NCOMSet.js"></script>
 <script src="js/oeeSet.js"></script>

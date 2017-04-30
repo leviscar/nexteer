@@ -77,18 +77,7 @@ function showBance() {
     $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Ashift", function (data) {
         console.log(typeof (data));
         console.log(data);
-        // $("#productMessage").append("<tbody><tr><td>"+data.morning_shift_start+"</td><td>"+data.morning_shift_end+"</td><td>"+data.middle_shift_start+"</td><td>"+data.middle_shift_end+"</td><td>"+data.night_shift_start+"</td><td>"+data.night_shift_end+"</td><td>"+data.morning_shift_standard_beats+"</td><td>"
-        //     +data.middle_shift_standard_beats+"</td><td>"+data.night_shift_standard_beats+"</td><td>"+data.morning_worker_num+"</td><td>"+data.middle_worker_num+"</td><td>"+data.night_worker_num+"</td><td>"+data.morning_overtime_worker_num+"</td><td>"+data.middle_overtime_worker_num+"</td><td>"+data.night_overtime_worker_num+"</td></tr></tbody>");
         console.log(data.id);
-        // $("#mShift").html($.parseJSON(data).shiftType);
-        // $("#ms").html($.parseJSON(data).startTime);
-        // $("#me").html($.parseJSON(data).endTime);
-        // $("#mb").html($.parseJSON(data).standardBeat);
-        // $("#mw").html($.parseJSON(data).normalWorkerNum);
-        // $("#mow").html($.parseJSON(data).overtimeWorkerNum);
-        // $("#mTar").html($.parseJSON(data).target);
-        // $("#cellAName").html($.parseJSON(data).cell_name);
-        // $("#Aopen").html($.parseJSON(data).open);
         $("#mShift").html(data.shiftType);
         $("#ms").html(data.startTime);
         $("#me").html(data.endTime);
@@ -154,13 +143,255 @@ function showBance() {
         $("#Copen").html(data.open);
         showEvent(data.id);
     });
+
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT2?shift_type=Ashift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        console.log(data.id);
+        // $("#mShift").html(data.shiftType);
+        // $("#ms").html(data.startTime);
+        // $("#me").html(data.endTime);
+        // $("#mb").html(data.standardBeat);
+        // $("#mw").html(data.normalWorkerNum);
+        // $("#mow").html(data.overtimeWorkerNum);
+        // $("#mTar").html(data.target);
+        // $("#cellAName").html(data.cellName);
+        // $("#Aopen").html(data.open);
+        showEvent(data.id);
+
+    });
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT2?shift_type=Bshift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        console.log(data.id);
+        // $("#mShift").html(data.shiftType);
+        // $("#ms").html(data.startTime);
+        // $("#me").html(data.endTime);
+        // $("#mb").html(data.standardBeat);
+        // $("#mw").html(data.normalWorkerNum);
+        // $("#mow").html(data.overtimeWorkerNum);
+        // $("#mTar").html(data.target);
+        // $("#cellAName").html(data.cellName);
+        // $("#Aopen").html(data.open);
+        showEvent(data.id);
+
+    });
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT2?shift_type=Cshift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        console.log(data.id);
+        // $("#mShift").html(data.shiftType);
+        // $("#ms").html(data.startTime);
+        // $("#me").html(data.endTime);
+        // $("#mb").html(data.standardBeat);
+        // $("#mw").html(data.normalWorkerNum);
+        // $("#mow").html(data.overtimeWorkerNum);
+        // $("#mTar").html(data.target);
+        // $("#cellAName").html(data.cellName);
+        // $("#Aopen").html(data.open);
+        showEvent(data.id);
+
+    });
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT3?shift_type=Ashift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        console.log(data.id);
+        // $("#mShift").html(data.shiftType);
+        // $("#ms").html(data.startTime);
+        // $("#me").html(data.endTime);
+        // $("#mb").html(data.standardBeat);
+        // $("#mw").html(data.normalWorkerNum);
+        // $("#mow").html(data.overtimeWorkerNum);
+        // $("#mTar").html(data.target);
+        // $("#cellAName").html(data.cellName);
+        // $("#Aopen").html(data.open);
+        showEvent(data.id);
+
+    });
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT3?shift_type=Bshift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        console.log(data.id);
+        // $("#mShift").html(data.shiftType);
+        // $("#ms").html(data.startTime);
+        // $("#me").html(data.endTime);
+        // $("#mb").html(data.standardBeat);
+        // $("#mw").html(data.normalWorkerNum);
+        // $("#mow").html(data.overtimeWorkerNum);
+        // $("#mTar").html(data.target);
+        // $("#cellAName").html(data.cellName);
+        // $("#Aopen").html(data.open);
+        showEvent(data.id);
+
+    });
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT3?shift_type=Cshift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        console.log(data.id);
+        // $("#mShift").html(data.shiftType);
+        // $("#ms").html(data.startTime);
+        // $("#me").html(data.endTime);
+        // $("#mb").html(data.standardBeat);
+        // $("#mw").html(data.normalWorkerNum);
+        // $("#mow").html(data.overtimeWorkerNum);
+        // $("#mTar").html(data.target);
+        // $("#cellAName").html(data.cellName);
+        // $("#Aopen").html(data.open);
+        showEvent(data.id);
+
+    });
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT4?shift_type=Ashift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        console.log(data.id);
+        // $("#mShift").html(data.shiftType);
+        // $("#ms").html(data.startTime);
+        // $("#me").html(data.endTime);
+        // $("#mb").html(data.standardBeat);
+        // $("#mw").html(data.normalWorkerNum);
+        // $("#mow").html(data.overtimeWorkerNum);
+        // $("#mTar").html(data.target);
+        // $("#cellAName").html(data.cellName);
+        // $("#Aopen").html(data.open);
+        showEvent(data.id);
+
+    });
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT4?shift_type=Bshift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        console.log(data.id);
+        // $("#mShift").html(data.shiftType);
+        // $("#ms").html(data.startTime);
+        // $("#me").html(data.endTime);
+        // $("#mb").html(data.standardBeat);
+        // $("#mw").html(data.normalWorkerNum);
+        // $("#mow").html(data.overtimeWorkerNum);
+        // $("#mTar").html(data.target);
+        // $("#cellAName").html(data.cellName);
+        // $("#Aopen").html(data.open);
+        showEvent(data.id);
+
+    });
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT4?shift_type=Cshift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        console.log(data.id);
+        // $("#mShift").html(data.shiftType);
+        // $("#ms").html(data.startTime);
+        // $("#me").html(data.endTime);
+        // $("#mb").html(data.standardBeat);
+        // $("#mw").html(data.normalWorkerNum);
+        // $("#mow").html(data.overtimeWorkerNum);
+        // $("#mTar").html(data.target);
+        // $("#cellAName").html(data.cellName);
+        // $("#Aopen").html(data.open);
+        showEvent(data.id);
+
+    });
+
+    $.get("http://localhost:8080/nexteer/work-shift/CEPS?shift_type=Ashift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        console.log(data.id);
+        // $("#mShift").html(data.shiftType);
+        // $("#ms").html(data.startTime);
+        // $("#me").html(data.endTime);
+        // $("#mb").html(data.standardBeat);
+        // $("#mw").html(data.normalWorkerNum);
+        // $("#mow").html(data.overtimeWorkerNum);
+        // $("#mTar").html(data.target);
+        // $("#cellAName").html(data.cellName);
+        // $("#Aopen").html(data.open);
+        showEvent(data.id);
+
+    });
+    $.get("http://localhost:8080/nexteer/work-shift/CEPS?shift_type=Bshift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        console.log(data.id);
+        // $("#mShift").html(data.shiftType);
+        // $("#ms").html(data.startTime);
+        // $("#me").html(data.endTime);
+        // $("#mb").html(data.standardBeat);
+        // $("#mw").html(data.normalWorkerNum);
+        // $("#mow").html(data.overtimeWorkerNum);
+        // $("#mTar").html(data.target);
+        // $("#cellAName").html(data.cellName);
+        // $("#Aopen").html(data.open);
+        showEvent(data.id);
+
+    });
+    $.get("http://localhost:8080/nexteer/work-shift/CEPS?shift_type=Cshift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        console.log(data.id);
+        // $("#mShift").html(data.shiftType);
+        // $("#ms").html(data.startTime);
+        // $("#me").html(data.endTime);
+        // $("#mb").html(data.standardBeat);
+        // $("#mw").html(data.normalWorkerNum);
+        // $("#mow").html(data.overtimeWorkerNum);
+        // $("#mTar").html(data.target);
+        // $("#cellAName").html(data.cellName);
+        // $("#Aopen").html(data.open);
+        showEvent(data.id);
+
+    });
+    $.get("http://localhost:8080/nexteer/work-shift/BEPS?shift_type=Ashift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        console.log(data.id);
+        // $("#mShift").html(data.shiftType);
+        // $("#ms").html(data.startTime);
+        // $("#me").html(data.endTime);
+        // $("#mb").html(data.standardBeat);
+        // $("#mw").html(data.normalWorkerNum);
+        // $("#mow").html(data.overtimeWorkerNum);
+        // $("#mTar").html(data.target);
+        // $("#cellAName").html(data.cellName);
+        // $("#Aopen").html(data.open);
+        showEvent(data.id);
+
+    });
+    $.get("http://localhost:8080/nexteer/work-shift/BEPS?shift_type=Bshift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        console.log(data.id);
+        // $("#mShift").html(data.shiftType);
+        // $("#ms").html(data.startTime);
+        // $("#me").html(data.endTime);
+        // $("#mb").html(data.standardBeat);
+        // $("#mw").html(data.normalWorkerNum);
+        // $("#mow").html(data.overtimeWorkerNum);
+        // $("#mTar").html(data.target);
+        // $("#cellAName").html(data.cellName);
+        // $("#Aopen").html(data.open);
+        showEvent(data.id);
+
+    });
+    $.get("http://localhost:8080/nexteer/work-shift/BEPS?shift_type=Cshift", function (data) {
+        console.log(typeof (data));
+        console.log(data);
+        console.log(data.id);
+        // $("#mShift").html(data.shiftType);
+        // $("#ms").html(data.startTime);
+        // $("#me").html(data.endTime);
+        // $("#mb").html(data.standardBeat);
+        // $("#mw").html(data.normalWorkerNum);
+        // $("#mow").html(data.overtimeWorkerNum);
+        // $("#mTar").html(data.target);
+        // $("#cellAName").html(data.cellName);
+        // $("#Aopen").html(data.open);
+        showEvent(data.id);
+
+    });
 }
 showBance();
 
 console.log("开始运行");
 $("#oneSub").bind("click", function () {
 
-    var OneshiftJson=new shiftInput( $("#oneTime").val(),"Ashift",$("#oneStart").val().toString(),$("#oneEnd").val().toString(),Number($("#oneStdBeats").val()),Number($("#oneWorkNum").val()),Number($("#oneWorkOverNum").val()),Number($("#oneTar").val()),$("#oneCellName").val(),$("#oneOpen").val());
+    var OneshiftJson=new shiftInput( $("#oneTime").val(),"Ashift",$("#oneStart").val().toString(),$("#oneEnd").val().toString(),Number($("#oneStdBeats").val()),Number($("#oneWorkNum").val()),Number($("#oneWorkOverNum").val()),Number($("#oneTar").val()),"ISHAFT1",$("#oneOpen").val());
     console.log("start");
     console.log(JSON.stringify(OneshiftJson));
     $.ajax({
@@ -170,13 +401,13 @@ $("#oneSub").bind("click", function () {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            if(data.system_status==true) {
+            if(data.open != null) {
                 $("#oneStatus").html("成功");
             }
             else{
                 $("#oneStatus").html("失败");
             }
-            console.log(data.status);
+            console.log(data.open);
             console.log("nice");
         },
         failure: function (errMsg) {
@@ -187,11 +418,11 @@ $("#oneSub").bind("click", function () {
         $("#oneStatus").html("");
     },1000*7);
     showBance();
-    window.location.reload();
+    // window.location.reload();
 });
 
 $("#twoSub").bind("click", function () {
-    var TwoshiftJson =new shiftInput($("#twoTime").val(),"Bshift",$("#twoMStart").val().toString(),$("#twoMEnd").val().toString(),Number($("#twoMStdBeats").val()),Number($("#twoMWorkNum").val()),Number($("#twoMWorkOverNum").val()),Number($("#twoTar").val()),$("#twoCellName").val(),$("#twoOpen").val());
+    var TwoshiftJson =new shiftInput($("#twoTime").val(),"Bshift",$("#twoStart").val().toString(),$("#twoEnd").val().toString(),Number($("#twoStdBeats").val()),Number($("#twoWorkNum").val()),Number($("#twoWorkOverNum").val()),Number($("#twoTar").val()),"ISAHFT1",$("#twoOpen").val());
 
     console.log( JSON.stringify(TwoshiftJson));
 
@@ -202,11 +433,11 @@ $("#twoSub").bind("click", function () {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            if(data.id!=null) {
-                $("#twoStatus").html("添加班次信息成功");
+            if(data.open !=null) {
+                $("#twoStatus").html("成功");
             }
             else{
-                $("#twoStatus").html("添加班次信息失败");
+                $("#twoStatus").html("失败");
             }
         },
         failure: function (errMsg) {
@@ -222,7 +453,7 @@ $("#twoSub").bind("click", function () {
 $("#thiSub").bind("click", function () {
 
 
-    var ThishiftJson=new shiftInput($("#thiTime").val(),"Cshift",$("#thiNStart").val(),$("#thiNEnd").val(), Number($("#thiNBeats").val()), Number($("#thiNWorkNum").val()),Number($("#thiNWorkOverNum").val()),Number($("#thiTar").val()),$("#thiCellName").val(),$("#thiOpen").val());
+    var ThishiftJson=new shiftInput($("#thiTime").val(),"Cshift",$("#thiStart").val(),$("#thiEnd").val(), Number($("#thiStdBeats").val()), Number($("#thiWorkNum").val()),Number($("#thiWorkOverNum").val()),Number($("#thiTar").val()),"ISHAFT1",$("#thiOpen").val());
 
     // $("#thiMorStart").val(),$("#thiMorEnd").val(),$("#thiMidStart").val(),
     //     $("#thiMidEnd").val(),$("#thiNStart").val(),$("#thiNEnd").val(),parseInt($("#thiMorTar").val()),parseInt($("#thiMidTar").val()),parseInt($("#thiNTar").
@@ -252,7 +483,7 @@ $("#thiSub").bind("click", function () {
         $("#thiStatus").html("");
     },1000*7);
     showBance();
-    window.location.reload();
+    // window.location.reload();
 });
 
 $("#oneEventSub").bind("click",function () {
@@ -327,7 +558,7 @@ $("#thiEventSub").bind("click",function () {
                 $("#addThiStatus").html("成功");
             }
             else{
-                $("#addThiStatus").html("失败");
+                $("#addThiStatus").html("请先添加班次");
             }
             console.log(data.event);
         },
