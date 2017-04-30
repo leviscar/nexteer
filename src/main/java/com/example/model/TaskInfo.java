@@ -9,7 +9,7 @@ public class TaskInfo {
     private String cellName;
     private String taskName;
     private String taskStatus;
-
+    private String description;
     public TaskInfo() {
     }
 
@@ -51,5 +51,13 @@ public class TaskInfo {
 
     public void setTaskStatus(String taskStatus) {
         this.taskStatus = taskStatus;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

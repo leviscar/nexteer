@@ -7,7 +7,7 @@ import com.example.service.UnitStatusService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +16,7 @@ import java.util.Date;
 /**
  * Created by mrpan on 2017/4/16.
  */
-@Component
+@Service
 public class ShiftTask {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -38,7 +38,7 @@ public class ShiftTask {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             //test
-            date = sdf.parse("2017-04-25 15:50:00");
+//            date = sdf.parse("2017-04-25 15:50:00");
             // set add date
             shiftUnitStatus.setAddDate(new java.sql.Date(date.getTime()));
             // get unit status

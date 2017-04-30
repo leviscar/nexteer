@@ -1,14 +1,10 @@
 package com.example.task;
 
 import com.example.model.TaskInfo;
-import com.example.repository.TaskInfoRepo;
 import org.quartz.*;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,25 +14,15 @@ import java.util.TimeZone;
 /**
  * Created by mrpan on 2017/4/14.
  */
-@Component("task")
-@Scope("prototype")
 public class TaskImpl {
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private  Logger logger = LoggerFactory.getLogger(TaskImpl.class);
     private Scheduler scheduler;
-    private TaskInfoRepo taskInfoRepo;
-
-    @Autowired
-    public TaskImpl(Scheduler scheduler, TaskInfoRepo taskInfoRepo) {
-        this.scheduler = scheduler;
-        this.taskInfoRepo = taskInfoRepo;
-    }
-
     /**
      * get all tasks information
      *
      * @return
      */
-    public List<TaskInfo> getAllTasks() {
+    public  List<TaskInfo> getAllTasks() {
         List<TaskInfo> taskInfos = new ArrayList<>();
         try {
             // get all tasks groups
@@ -48,14 +34,16 @@ public class TaskImpl {
                     for (Trigger trigger : triggers) {
                         // get trigger state
                         Trigger.TriggerState state = scheduler.getTriggerState(trigger.getKey());
-                        String cron = "";
+                        String cron = "", description = "";
                         // get cron expression
                         if (trigger instanceof CronTrigger) {
                             CronTrigger cronTrigger = (CronTrigger) trigger;
+                            description = cronTrigger.getDescription();
                             cron = cronTrigger.getCronExpression();
                         }
                         TaskInfo taskInfo = new TaskInfo();
                         taskInfo.setCron(cron);
+                        taskInfo.setDescription(description);
                         taskInfo.setCellName(jobKey.getGroup());
                         taskInfo.setTaskName(jobKey.getName());
                         taskInfo.setTaskStatus(state.name());
@@ -76,7 +64,7 @@ public class TaskImpl {
      * @param taskGroup
      * @return
      */
-    public List<TaskInfo> getTasksByGroup(String taskGroup) {
+    public  List<TaskInfo> getTasksByGroup(String taskGroup) {
         List<TaskInfo> taskInfos = new ArrayList<>();
         try {
             // get all jobs in the group
@@ -86,14 +74,16 @@ public class TaskImpl {
                 for (Trigger trigger : triggers) {
                     // get trigger state
                     Trigger.TriggerState state = scheduler.getTriggerState(trigger.getKey());
-                    String cron = "";
+                    String cron = "", description = "";
                     // get cron expression
                     if (trigger instanceof CronTrigger) {
                         CronTrigger cronTrigger = (CronTrigger) trigger;
+                        description = cronTrigger.getDescription();
                         cron = cronTrigger.getCronExpression();
                     }
                     TaskInfo taskInfo = new TaskInfo();
                     taskInfo.setCron(cron);
+                    taskInfo.setDescription(description);
                     taskInfo.setCellName(jobKey.getGroup());
                     taskInfo.setTaskName(jobKey.getName());
                     taskInfo.setTaskStatus(state.name());
@@ -113,8 +103,9 @@ public class TaskImpl {
      * @param taskInfo
      */
     @SuppressWarnings("unchecked")
-    public void add(TaskInfo taskInfo) {
-        String taskName = taskInfo.getTaskName(), taskGroup = taskInfo.getCellName(), cron = taskInfo.getCron();
+    public  void add(TaskInfo taskInfo) {
+        String taskName = taskInfo.getTaskName(), taskGroup = taskInfo.getCellName()
+                , cron = taskInfo.getCron(), description = taskInfo.getDescription();
         try {
             // check the task existence
             if (checkExists(taskName, taskGroup)) {
@@ -131,21 +122,19 @@ public class TaskImpl {
             CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(cron)
                     .inTimeZone(TimeZone.getDefault()).withMisfireHandlingInstructionFireAndProceed();
             // set trigger
-            CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(triggerKey)
+            CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(triggerKey).withDescription(description)
                     .withSchedule(cronScheduleBuilder).build();
             // get the task class based on the task name
             Class<? extends Job> clazz = (Class<? extends Job>) Class.forName(taskName);
             // create new job based on the job detail and trigger
             JobDetail jobDetail = JobBuilder.newJob(clazz).withIdentity(jobKey).build();
             scheduler.scheduleJob(jobDetail, cronTrigger);
-            scheduler.start();
 
+            logger.info("Add task success, taskGroup:{}, taskName:{}, cron:{}", taskGroup, taskName, cron);
             // get the status of trigger
             Trigger.TriggerState state = scheduler.getTriggerState(cronTrigger.getKey());
             taskInfo.setTaskStatus(state.name());
 
-            // add task into database
-            taskInfoRepo.add(taskInfo);
         } catch (SchedulerException | ClassNotFoundException e) {
             logger.error("it happens when checking the task existence or finding the class based on the task name, e:{}" + e.toString());
             e.printStackTrace();
@@ -157,8 +146,9 @@ public class TaskImpl {
      *
      * @param taskInfo
      */
-    public void update(TaskInfo taskInfo) {
-        String taskName = taskInfo.getTaskName(), taskGroup = taskInfo.getCellName(), cron = taskInfo.getCron();
+    public  void update(TaskInfo taskInfo) {
+        String taskName = taskInfo.getTaskName(), taskGroup = taskInfo.getCellName()
+                , cron = taskInfo.getCron(), description = taskInfo.getDescription();
         try {
             if (!checkExists(taskName, taskGroup)) {
                 logger.info("taskGroup:{}, taskName:{} is not existed", taskGroup, taskName);
@@ -168,15 +158,13 @@ public class TaskImpl {
             JobKey jobKey = new JobKey(taskName, taskGroup);
             CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(cron)
                     .inTimeZone(TimeZone.getDefault()).withMisfireHandlingInstructionFireAndProceed();
-            CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(triggerKey)
+            CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(triggerKey).withDescription(description)
                     .withSchedule(cronScheduleBuilder).build();
 
             JobDetail jobDetail = scheduler.getJobDetail(jobKey);
             HashSet<Trigger> triggerSet = new HashSet<>();
             triggerSet.add(cronTrigger);
             scheduler.scheduleJob(jobDetail, triggerSet, true);
-            scheduler.start();
-            taskInfoRepo.updateCron(taskInfo);
             logger.info("update success, taskGroup:{}, taskName:{}, cron:{}", taskGroup, taskName, cron);
         } catch (SchedulerException e) {
             logger.error("it happens when checking the task existence, e:{}", e.toString());
@@ -190,13 +178,12 @@ public class TaskImpl {
      * @param taskName
      * @param taskGroup
      */
-    public void delete(String taskName, String taskGroup) {
+    public  void delete(String taskName, String taskGroup) {
         TriggerKey triggerKey = TriggerKey.triggerKey(taskName, taskGroup);
         try {
             if (checkExists(taskName, taskGroup)) {
                 scheduler.pauseTrigger(triggerKey);
                 scheduler.unscheduleJob(triggerKey);
-                taskInfoRepo.delete(taskGroup, taskName);
                 logger.info("delete triggerKey:{} success", triggerKey);
             }
         } catch (SchedulerException e) {
@@ -211,14 +198,13 @@ public class TaskImpl {
      * @param taskName
      * @param taskGroup
      */
-    public void pause(String taskName, String taskGroup) {
+    public  void pause(String taskName, String taskGroup) {
         TriggerKey triggerKey = TriggerKey.triggerKey(taskName, taskGroup);
         try {
             if (checkExists(taskName, taskGroup)) {
                 scheduler.pauseTrigger(triggerKey);
                 Trigger.TriggerState state = scheduler.getTriggerState(triggerKey);
                 String taskStatus = state.name();
-                taskInfoRepo.updateStatus(taskGroup, taskName, taskStatus);
                 logger.info("update task status:{} where taskGroup:{}, taskName:{}"
                         , taskStatus, taskGroup, taskName);
             }
@@ -234,14 +220,12 @@ public class TaskImpl {
      * @param taskName
      * @param taskGroup
      */
-    public void restart(String taskName, String taskGroup) {
+    public  void restart(String taskName, String taskGroup) {
         TriggerKey triggerKey = TriggerKey.triggerKey(taskName, taskGroup);
         try {
             if (checkExists(taskName, taskGroup)) {
                 scheduler.resumeTrigger(triggerKey);
-                Trigger.TriggerState state = scheduler.getTriggerState(triggerKey);
-                String taskStatus = state.name();
-                taskInfoRepo.updateStatus(taskGroup, taskName, taskStatus);
+//                Trigger.TriggerState state = scheduler.getTriggerState(triggerKey);
                 logger.info("restart success, triggerKey:{}", triggerKey);
             }
         } catch (SchedulerException e) {
@@ -258,8 +242,12 @@ public class TaskImpl {
      * @return
      * @throws SchedulerException
      */
-    public boolean checkExists(String taskName, String taskGroup) throws SchedulerException {
+    public  boolean checkExists(String taskName, String taskGroup) throws SchedulerException {
         TriggerKey triggerKey = TriggerKey.triggerKey(taskName, taskGroup);
         return scheduler.checkExists(triggerKey);
+    }
+
+    public void setScheduler(Scheduler scheduler) {
+        this.scheduler = scheduler;
     }
 }
