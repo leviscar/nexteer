@@ -3,7 +3,10 @@ package com.example.service;
 import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
 import com.example.model.*;
-import com.example.repository.*;
+import com.example.repository.LossTimeRepo;
+import com.example.repository.ProductModelRepo;
+import com.example.repository.RestEventRepo;
+import com.example.repository.WorkShiftRepo;
 import com.example.util.DateFormat;
 import com.example.util.Function;
 import com.example.util.ModelOutput;
@@ -23,23 +26,20 @@ import java.util.*;
  */
 @Service
 public class UnitStatusService {
-    private Ishaft1ProductInfoRepo ishaft1ProductInfoRepo;
-    private CepsProductInfoRepo cepsProductInfoRepo;
     private WorkShiftRepo workShiftRepo;
     private RestEventRepo restEventRepo;
     private LossTimeRepo lossTimeRepo;
     private ProductModelRepo productModelRepo;
+    private CellService cellService;
 
     @Autowired
-    public UnitStatusService(Ishaft1ProductInfoRepo ishaft1ProductInfoRepo, CepsProductInfoRepo cepsProductInfoRepo
-            , WorkShiftRepo workShiftRepo, RestEventRepo restEventRepo, LossTimeRepo lossTimeRepo
-            , ProductModelRepo productModelRepo) {
-        this.cepsProductInfoRepo = cepsProductInfoRepo;
+    public UnitStatusService(WorkShiftRepo workShiftRepo, RestEventRepo restEventRepo, LossTimeRepo lossTimeRepo
+            , ProductModelRepo productModelRepo, CellService cellService) {
         this.lossTimeRepo = lossTimeRepo;
-        this.ishaft1ProductInfoRepo = ishaft1ProductInfoRepo;
         this.workShiftRepo = workShiftRepo;
         this.restEventRepo = restEventRepo;
         this.productModelRepo = productModelRepo;
+        this.cellService = cellService;
     }
 
     public String getUnitStatusByCurTime(String date, String cellName) throws ParseException {
@@ -72,62 +72,16 @@ public class UnitStatusService {
         // add a day when the start time and current time do not in the same day
         curDate = Function.addOneDay(startDate, curDate);
 
+        Cell cell = Cell.valueOf(cellName);
+        // cell id to get the loss time
+        int cellId = cellService.getCellId(cell);
+
         // get the current product output based on cell name
-        List<ProductInfo> products = new ArrayList<>();
+        List<ProductInfo> products = cellService.getProducts(startDate, curDate, cell);
+
         // take the latest 30 products' beat to calculate the current beat
         int topN = 30;
-        List<Date> topNProduct = new ArrayList<>();
-        // cell id to get the loss time
-        int cellId = 0;
-        String stationId;
-        switch (Cell.valueOf(cellName)) {
-            case ISHAFT1:
-                products= ishaft1ProductInfoRepo.getByPeriod(startDate, curDate);
-                topNProduct = ishaft1ProductInfoRepo.getCurBeats(startDate, curDate, topN);
-                cellId = 8;
-                break;
-            case ISHAFT2:
-                break;
-            case ISHAFT3:
-                break;
-            case ISHAFT4:
-                break;
-            case BEPS1:
-                break;
-            case BEPS2:
-                break;
-            case BEPS3:
-                break;
-            case CEPS1:
-                stationId = "SD000094X02";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                topNProduct = cepsProductInfoRepo.getTopN(startDate, curDate, topN, stationId);
-                cellId = 11;
-                break;
-            case CEPS2:
-                stationId = "SD000102X01";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                topNProduct = cepsProductInfoRepo.getTopN(startDate, curDate, topN, stationId);
-                cellId = 12;
-                break;
-            case CEPS3:
-                stationId = "SD000107X01";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                topNProduct = cepsProductInfoRepo.getTopN(startDate, curDate, topN, stationId);
-                cellId = 13;
-                break;
-            case CEPS4:
-                stationId = "SD000122X01";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                topNProduct = cepsProductInfoRepo.getTopN(startDate, curDate, topN, stationId);
-                cellId = 14;
-                break;
-            case CEPS5:
-                products = cepsProductInfoRepo.getCell5ByPeriod(startDate, curDate);
-                topNProduct = cepsProductInfoRepo.getCell5TopN(startDate, curDate, topN);
-                cellId = 15;
-                break;
-        }
+        List<Date> topNProduct = cellService.getTopNProducts(startDate, curDate, topN, cell);
 
         int curNum = products.size();
         unitStatus.setCurr_num(curNum);
@@ -308,7 +262,7 @@ public class UnitStatusService {
         Date endDate = calendar.getTime();
         int count = 0;
         int idx = 0;
-        while (idx < products.size()){
+        while (idx < products.size()) {
             ProductInfo productInfo = products.get(idx);
             if (productInfo.getTime().getTime() >= startDate.getTime()
                     && productInfo.getTime().getTime() <= endDate.getTime()) {

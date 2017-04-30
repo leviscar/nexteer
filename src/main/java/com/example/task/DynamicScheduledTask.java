@@ -4,6 +4,7 @@ import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
 import com.example.model.*;
 import com.example.repository.*;
+import com.example.service.CellService;
 import com.example.service.UnitStatusService;
 import com.example.util.DateFormat;
 import com.example.util.Function;
@@ -14,9 +15,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 /**
  * Created by mrpan on 2017/3/18.
@@ -24,34 +27,35 @@ import java.util.*;
  */
 @Component
 public class DynamicScheduledTask {
-    private Ishaft1ProductInfoRepo ishaft1ProductInfoRepo;
     private ProductModelRepo productModelRepo;
     private WorkShiftRepo workShiftRepo;
     private OeeRepo oeeRepo;
     private HceRepo hceRepo;
     private UnitStatusService unitStatusService;
-    private Ishaft1OutputInfoRepo ishaft1OutputInfoRepo;
+    private OutputCountInfoRepo outputCountInfoRepo;
+    private CellService cellService;
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    public DynamicScheduledTask(Ishaft1ProductInfoRepo ishaft1ProductInfoRepo, ProductModelRepo productModelRepo
-            , WorkShiftRepo workShiftRepo, OeeRepo oeeRepo, HceRepo hceRepo, UnitStatusService unitStatusService
-            , Ishaft1OutputInfoRepo ishaft1OutputInfoRepo) {
-        this.ishaft1ProductInfoRepo = ishaft1ProductInfoRepo;
+    public DynamicScheduledTask(ProductModelRepo productModelRepo, WorkShiftRepo workShiftRepo, OeeRepo oeeRepo
+            , HceRepo hceRepo, UnitStatusService unitStatusService, OutputCountInfoRepo outputCountInfoRepo
+            , CellService cellService) {
         this.productModelRepo = productModelRepo;
         this.workShiftRepo = workShiftRepo;
         this.oeeRepo = oeeRepo;
         this.hceRepo = hceRepo;
         this.unitStatusService = unitStatusService;
-        this.ishaft1OutputInfoRepo = ishaft1OutputInfoRepo;
+        this.outputCountInfoRepo = outputCountInfoRepo;
+        this.cellService = cellService;
     }
 
     /**
-     * Insert the ishaft1 output information into database
+     * Insert output information into database
      */
-    public void insertIshaft1OutputIntoDatabase() throws ParseException {
-        Ishaft1OutputInfo ishaft1OutputInfo = new Ishaft1OutputInfo();
-        // get the last date
+    public void insertOutputIntoDatabase(String cellName) throws ParseException {
+        OutputCountInfo outputCountInfo = new OutputCountInfo();
+        outputCountInfo.setCellName(cellName);
+        Cell cell = Cell.valueOf(cellName);
         Date curDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //        // test
@@ -64,19 +68,21 @@ public class DynamicScheduledTask {
         Date addDate = calendar.getTime();
         // set the add date which is format
         String addFormatDate = sdf.format(addDate);
-        ishaft1OutputInfo.setAdd_date(addFormatDate);
+        outputCountInfo.setAddDate(addFormatDate);
+
         // get the products between current time and start time
-        List<ProductInfo> products = ishaft1ProductInfoRepo.getByPeriod(addDate, curDate);
+        List<ProductInfo> products = cellService.getProducts(addDate, curDate, cell);
+
         // get various model output
         Map<String, Integer> map = ModelOutput.getEachModelOutput(products);
         // insert into database based on different model
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             ProductModel model = productModelRepo.getStdByModelId(entry.getKey());
-            ishaft1OutputInfo.setModel_name(model.getModelName());
-            ishaft1OutputInfo.setModel(entry.getKey());
-            ishaft1OutputInfo.setOutput_count(entry.getValue());
-            ishaft1OutputInfoRepo.add(ishaft1OutputInfo);
-            logger.info("Add ishaft1OutputInfo:{} into database", ishaft1OutputInfo);
+            outputCountInfo.setModelName(model.getModelName());
+            outputCountInfo.setModelId(entry.getKey());
+            outputCountInfo.setCount(entry.getValue());
+            outputCountInfoRepo.add(outputCountInfo);
+            logger.info("Add ishaft1OutputInfo:{} into database", outputCountInfo);
         }
     }
 
@@ -85,13 +91,15 @@ public class DynamicScheduledTask {
      *
      * @throws ParseException
      */
-    public void insertIshaft1OeeAndHceIntoDatabase() throws ParseException {
+    public void insertOeeAndHceIntoDatabase(String cellName) throws ParseException {
         Oee oee = new Oee();
         Hce hce = new Hce();
         Date date = new Date();
+
+        Cell cell = Cell.valueOf(cellName);
 //        // test
-//        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        date = sdf2.parse("2017-04-07 15:50:00");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        date = sdf2.parse("2017-04-26 07:50:00");
 //        //end
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -102,20 +110,20 @@ public class DynamicScheduledTask {
 
         // get the latest A, B, C shifts information
         List<WorkShift> workShifts = new ArrayList<>();
-        List<WorkShift> shiftRes = workShiftRepo.getLatestByCurDate(Cell.ISHAFT1.toString(), ShiftType.Ashift.toString(), addDate);
+        List<WorkShift> shiftRes = workShiftRepo.getLatestByCurDate(cellName, ShiftType.Ashift.toString(), addDate);
         if (!shiftRes.isEmpty()) {
             workShifts.add(shiftRes.get(0));
         }
-        shiftRes = workShiftRepo.getLatestByCurDate(Cell.ISHAFT1.toString(), ShiftType.Bshift.toString(), addDate);
+        shiftRes = workShiftRepo.getLatestByCurDate(cellName, ShiftType.Bshift.toString(), addDate);
         if (!shiftRes.isEmpty()) {
             workShifts.add(shiftRes.get(0));
         }
-        shiftRes = workShiftRepo.getLatestByCurDate(Cell.ISHAFT1.toString(), ShiftType.Cshift.toString(), addDate);
+        shiftRes = workShiftRepo.getLatestByCurDate(cellName, ShiftType.Cshift.toString(), addDate);
         if (!shiftRes.isEmpty()) {
             workShifts.add(shiftRes.get(0));
         }
 
-        Map<Long, Integer> allShiftRes = getAllShiftsBeatsMultiOutput(workShifts, calendar.getTime());
+        Map<Long, Integer> allShiftRes = getAllShiftsBeatsMultiOutput(workShifts, calendar.getTime(), cell);
         long sumSeconds = 0;
         long sumMulti = 0;
         for (Map.Entry<Long, Integer> entry : allShiftRes.entrySet()) {
@@ -123,12 +131,12 @@ public class DynamicScheduledTask {
             sumMulti += entry.getValue();
         }
         oee.setOee((int) (sumMulti * 100 / sumSeconds));
-        oee.setCellName(Cell.ISHAFT1.toString());
+        oee.setCellName(cellName);
         oeeRepo.addActualOee(oee);
         logger.info("Add Oee:{} into database", oee);
 
-        hce.setHce(calcHce(workShifts, addDate));
-        hce.setCellName(Cell.ISHAFT1.toString());
+        hce.setHce(calcHce(workShifts, addDate, cell));
+        hce.setCellName(cellName);
         hceRepo.addActualHce(hce);
         logger.info("Add Hce:{} into database", hce);
     }
@@ -141,7 +149,7 @@ public class DynamicScheduledTask {
      * @return
      * @throws ParseException
      */
-    public int calcHce(List<WorkShift> workShifts, Date addDate) throws ParseException {
+    public int calcHce(List<WorkShift> workShifts, Date addDate, Cell cell) throws ParseException {
         // get result of std multiply product output
         float totalStdMultiplyOutput = 0;
         // get result of total times multiply worker numbers
@@ -152,7 +160,7 @@ public class DynamicScheduledTask {
             Date endDate = dateList.get(1);
             endDate = Function.addOneDay(startDate, endDate);
             // get shift product output
-            List<ProductInfo> products = ishaft1ProductInfoRepo.getByPeriod(startDate, endDate);
+            List<ProductInfo> products = cellService.getProducts(startDate, endDate, cell);
             // get various model product output multiply its std
             float stdMultiplyOutput = 0;
             Map<String, Integer> modelOutputMap = ModelOutput.getEachModelOutput(products);
@@ -191,7 +199,6 @@ public class DynamicScheduledTask {
         return (int) (totalStdMultiplyOutput * 60 * 100 / totalTimeMultiWorkerNum);
     }
 
-
     /**
      * Get the result of all shifts standard beats multiply product output
      *
@@ -199,7 +206,7 @@ public class DynamicScheduledTask {
      * @param addDate
      * @return
      */
-    private Map<Long, Integer> getAllShiftsBeatsMultiOutput(List<WorkShift> workShifts, Date addDate) throws ParseException {
+    private Map<Long, Integer> getAllShiftsBeatsMultiOutput(List<WorkShift> workShifts, Date addDate, Cell cell) throws ParseException {
         Map<Long, Integer> map = new HashMap<>();
         SimpleDateFormat sdf = DateFormat.hourFormat();
         for (WorkShift ws : workShifts) {
@@ -210,7 +217,8 @@ public class DynamicScheduledTask {
             long totalSeconds = (endDate.getTime() - startDate.getTime()) / 1000;
             long restSeconds = unitStatusService.getRestSeconds(ws.getId(), ShiftType.valueOf(ws.getShiftType())
                     , sdf.parse(sdf.format(endDate)));
-            List<ProductInfo> products = ishaft1ProductInfoRepo.getByPeriod(startDate, endDate);
+            // get the products between current time and start time
+            List<ProductInfo> products = cellService.getProducts(startDate, endDate, cell);
             map.put(totalSeconds - restSeconds, ws.getStandardBeat() * products.size());
         }
         return map;

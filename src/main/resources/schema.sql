@@ -7,26 +7,14 @@ CREATE TABLE safety_date (
   log        NVARCHAR(255) DEFAULT 'Today is running safe!',
   PRIMARY KEY (year, month, day)
 );
-DROP TABLE if EXISTS scrap_amount
+DROP TABLE scrap_amount
 CREATE TABLE scrap_amount (
-  year                 NCHAR(4) NOT NULL,
-  month                NCHAR(2) NOT NULL,
-  day                  NCHAR(2) NOT NULL,
-  ishaft1_value        INT,
-  ishaft2_value        INT,
-  ishaft3_value        INT,
-  ishaft4_value        INT,
-  ceps_value           INT,
-  beps_value           INT,
-  ishaft1_target_value INT,
-  ishaft2_target_value INT,
-  ishaft3_target_value INT,
-  ishaft4_target_value INT,
-  ceps_target_value    INT,
-  beps_target_value    INT,
-  PRIMARY KEY (year, month, day)
+  add_date     DATE,
+  cell_name    VARCHAR(10),
+  value        INT,
+  target_value INT,
+  PRIMARY KEY (add_date, cell_name)
 );
-DROP TABLE IF EXISTS work_shift;
 CREATE TABLE work_shift (
   id                  INT IDENTITY (1, 1) NOT NULL,
   add_date            DATE,
@@ -41,24 +29,25 @@ CREATE TABLE work_shift (
   is_open             BIT,
   PRIMARY KEY (id)
 );
-DROP TABLE if EXISTS rest_event;
 CREATE TABLE rest_event (
-  id               INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
-  work_shift_id    INT,
-  shift_type       VARCHAR(10),
-  cell_name        VARCHAR(10),
-  event            NVARCHAR(255),
-  start_time VARCHAR(5),
-  end_time   VARCHAR(5),
+  id            INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
+  work_shift_id INT,
+  shift_type    VARCHAR(10),
+  cell_name     VARCHAR(10),
+  event         NVARCHAR(255),
+  start_time    VARCHAR(5),
+  end_time      VARCHAR(5),
   CONSTRAINT fk_WorkShift FOREIGN KEY (work_shift_id)
   REFERENCES work_shift (id)
 );
-CREATE TABLE ishaft1_output_info (
-  id           INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
-  add_date     DATE,
-  model        VARCHAR(100), -- 型号
-  model_name   NVARCHAR(100), -- 型号名称
-  output_count INT -- 当天产量
+CREATE TABLE output_count_info (
+  id         INT IDENTITY (1, 1) NOT NULL,
+  cell_name  VARCHAR(10),
+  add_date   DATE,
+  model_id   VARCHAR(100), -- 型号
+  model_name NVARCHAR(100), -- 型号名称
+  count      INT, -- 当天产量
+  PRIMARY KEY (id, add_date, cell_name, model_id)
 );
 CREATE TABLE product_model (
   id         INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
