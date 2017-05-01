@@ -59,8 +59,8 @@ function  eventInput(type,cellName,event,eventStart,eventEnd) {
 }
 function showEvent(idInput) {
     $.get("http://localhost:8080/nexteer/rest-event?work_shift_id="+idInput, function (data) {
-        console.log(data);
-            console.log(data);
+        // console.log(data);
+        //     console.log(data);
             $.each(data, function (i, model) {
 
                 $("#showEvent").append("<tbody><tr><td>"+data[i].shiftType+"</td><td>"+data[i].cellName+"</td><td>"+data[i].event+"</td><td>"+data[i].startTime+"</td><td>"+data[i].endTime+"</td></tr></tbody>");
@@ -76,7 +76,7 @@ $('#addThiEvent').editableSelect({
 function showBance() {
     $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Ashift", function (data) {
         console.log(typeof (data));
-        console.log(data);
+        // console.log(data);
         console.log(data.id);
         $("#mShift").html(data.shiftType);
         $("#ms").html(data.startTime);
@@ -92,7 +92,7 @@ function showBance() {
     });
     $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Bshift", function (data) {
         console.log(typeof (data));
-        console.log(data);
+        // console.log(data);
         // $("#productMessage").append("<tbody><tr><td>"+data.morning_shift_start+"</td><td>"+data.morning_shift_end+"</td><td>"+data.middle_shift_start+"</td><td>"+data.middle_shift_end+"</td><td>"+data.night_shift_start+"</td><td>"+data.night_shift_end+"</td><td>"+data.morning_shift_standard_beats+"</td><td>"
         //     +data.middle_shift_standard_beats+"</td><td>"+data.night_shift_standard_beats+"</td><td>"+data.morning_worker_num+"</td><td>"+data.middle_worker_num+"</td><td>"+data.night_worker_num+"</td><td>"+data.morning_overtime_worker_num+"</td><td>"+data.middle_overtime_worker_num+"</td><td>"+data.night_overtime_worker_num+"</td></tr></tbody>");
         console.log(data.id);
