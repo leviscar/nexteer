@@ -13,19 +13,17 @@ import com.example.util.OutputTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.Date;
 
 /**
  * Created by mrpan on 2017/3/18.
  * Define some dynamic tasks whose execution time can be dynamically changed
  */
-@Component
+@Service
 public class DynamicScheduledTask {
     private ProductModelRepo productModelRepo;
     private WorkShiftRepo workShiftRepo;
@@ -60,7 +58,7 @@ public class DynamicScheduledTask {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //        // test
 //        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        curDate = sdf2.parse("2017-04-07 07:50:00");
+//        curDate = sdf2.parse("2017-04-26 07:50:00");
 //        //end
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(curDate);
@@ -82,8 +80,8 @@ public class DynamicScheduledTask {
             outputCountInfo.setModelId(entry.getKey());
             outputCountInfo.setCount(entry.getValue());
             outputCountInfoRepo.add(outputCountInfo);
-            logger.info("Add ishaft1OutputInfo:{} into database", outputCountInfo);
         }
+        logger.info("Add OutputInfo:{} into database", outputCountInfo);
     }
 
     /**
@@ -98,8 +96,8 @@ public class DynamicScheduledTask {
 
         Cell cell = Cell.valueOf(cellName);
 //        // test
-        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        date = sdf2.parse("2017-04-26 07:50:00");
+//        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        date = sdf2.parse("2017-04-26 07:50:00");
 //        //end
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -130,7 +128,11 @@ public class DynamicScheduledTask {
             sumSeconds += entry.getKey();
             sumMulti += entry.getValue();
         }
-        oee.setOee((int) (sumMulti * 100 / sumSeconds));
+        if (allShiftRes.isEmpty()){
+            oee.setOee(0);
+        } else {
+            oee.setOee((int) (sumMulti * 100 / sumSeconds));
+        }
         oee.setCellName(cellName);
         oeeRepo.addActualOee(oee);
         logger.info("Add Oee:{} into database", oee);

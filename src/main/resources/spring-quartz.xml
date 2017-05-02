@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="jobA" class="com.example.task.AshiftTask"/>
+    <bean id="jobB" class="com.example.task.BshiftTask"/>
+    <bean id="jobC" class="com.example.task.CshiftTask"/>
+    <bean id="jobD" class="com.example.task.DailyTask"/>
+    <bean id="jobFactory" class="com.example.config.AutoWiringSpringBeanJobFactory"/>
+
+    <!-- Quartz Job -->
+    <bean id="jobDetail1" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.example.task.AshiftTask"/>
+        <property name="group" value="ISHAFT1"/>
+        <property name="name" value="com.example.task.AshiftTask" />
+        <property name="description" value="添加ISHAFT1 A班单元状态"/>
+    </bean>
+    <bean id="jobDetail2" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.example.task.AshiftTask"/>
+        <property name="group" value="ISHAFT2"/>
+        <property name="name" value="com.example.task.AshiftTask" />
+        <property name="description" value="添加CEPS1 A班单元状态"/>
+    </bean>
+    <bean id="jobDetail3" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.example.task.AshiftTask"/>
+        <property name="group" value="ISHAFT3"/>
+        <property name="name" value="com.example.task.AshiftTask" />
+        <property name="description" value="添加CEPS5 A班单元状态"/>
+    </bean>
+    <!--<bean id="jobDetail2" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">-->
+    <!--<property name="jobClass" value="com.example.task.AshiftTask"/>-->
+    <!--<property name="group" value="ISHAFT2"/>-->
+    <!--<property name="description" value="添加ISHAFT2 A班单元状态"/>-->
+    <!--</bean>-->
+    <!--<bean id="jobDetail3" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">-->
+    <!--<property name="jobClass" value="com.example.task.AshiftTask"/>-->
+    <!--<property name="group" value="ISHAFT3"/>-->
+    <!--<property name="description" value="添加ISHAFT3 A班单元状态"/>-->
+    <!--</bean>-->
+    <!--<bean id="jobDetail4" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">-->
+    <!--<property name="jobClass" value="com.example.task.AshiftTask"/>-->
+    <!--<property name="group" value="ISHAFT4"/>-->
+    <!--<property name="description" value="添加ISHAFT4 A班单元状态"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="jobDetail5" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">-->
+    <!--<property name="jobClass" value="com.example.task.BshiftTask"/>-->
+    <!--<property name="group" value="ISHAFT1"/>-->
+    <!--<property name="description" value="添加ISHAFT1 B班单元状态"/>-->
+    <!--</bean>-->
+    <!--<bean id="jobDetail6" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">-->
+    <!--<property name="jobClass" value="com.example.task.BshiftTask"/>-->
+    <!--<property name="group" value="ISHAFT2"/>-->
+    <!--<property name="description" value="添加ISHAFT2 B班单元状态"/>-->
+    <!--</bean>-->
+    <!--<bean id="jobDetail7" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">-->
+    <!--<property name="jobClass" value="com.example.task.BshiftTask"/>-->
+    <!--<property name="group" value="ISHAFT3"/>-->
+    <!--<property name="description" value="添加ISHAFT3 B班单元状态"/>-->
+    <!--</bean>-->
+    <!--<bean id="jobDetail8" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">-->
+    <!--<property name="jobClass" value="com.example.task.BshiftTask"/>-->
+    <!--<property name="group" value="ISHAFT4"/>-->
+    <!--<property name="description" value="添加ISHAFT4 B班单元状态"/>-->
+    <!--</bean>-->
+    <bean id="jobDetail4" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.example.task.DailyTask"/>
+        <property name="group" value="ISHAFT1"/>
+        <property name="name" value="com.example.task.DailyTask"/>
+        <property name="description" value="添加ISHAFT1 日产量、OEE及HCE"/>
+    </bean>
+    <bean id="jobDetail5" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.example.task.DailyTask"/>
+        <property name="group" value="CEPS1"/>
+        <property name="name" value="com.example.task.DailyTask"/>
+        <property name="description" value="添加CEPS1 日产量、OEE及HCE"/>
+    </bean>
+    <bean id="jobDetail6" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.example.task.DailyTask"/>
+        <property name="group" value="CEPS5"/>
+        <property name="name" value="com.example.task.DailyTask"/>
+        <property name="description" value="添加CEPS5 日产量、OEE及HCE"/>
+    </bean>
+
+    <!-- Cron Trigger, run every 5 seconds -->
+    <bean id="cronTriggerJob1"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="jobDetail1"/>
+        <property name="group" value="ISHAFT1"/>
+        <property name="name" value="com.example.task.AshiftTask" />
+        <property name="cronExpression" value="0/10 * * * * ?"/>
+    </bean>
+    <bean id="cronTriggerJob2"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="jobDetail2"/>
+        <property name="cronExpression" value="0/10 * * * * ?"/>
+    </bean>
+    <bean id="cronTriggerJob3"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="jobDetail3"/>
+        <property name="cronExpression" value="0/10 * * * * ?"/>
+    </bean>
+    <bean id="cronTriggerJob4"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="jobDetail4"/>
+        <property name="group" value="ISHAFT1"/>
+        <property name="name" value="com.example.task.DailyTask"/>
+        <property name="cronExpression" value="0/10 * * * * ?"/>
+    </bean>
+
+    <bean id="cronTriggerJob5"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="jobDetail5"/>
+        <property name="name" value="com.example.task.DailyTask"/>
+        <property name="cronExpression" value="0/10 * * * * ?"/>
+    </bean>
+    <bean id="cronTriggerJob6"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="jobDetail6"/>
+        <property name="cronExpression" value="0/10 * * * * ?"/>
+    </bean>
+    <!--<bean id="cronTriggerJob7"-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="jobDetail7"/>-->
+    <!--<property name="cronExpression" value="0/5 * * * * ?"/>-->
+    <!--</bean>-->
+    <!--<bean id="cronTriggerJob8"-->
+    <!--class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="jobDetail8"/>-->
+    <!--<property name="cronExpression" value="0/5 * * * * ?"/>-->
+    <!--</bean>-->
+
+    <!-- Start the Triggers -->
+    <bean id="scheduleFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <!--<property name="applicationContextSchedulerContextKey" value="applicationContext"/>-->
+        <property name="jobFactory" ref="jobFactory"/>
+        <property name="triggers">
+            <list>
+                <!--<ref bean="cronTriggerJob1"/>-->
+                <!--<ref bean="cronTriggerJob2"/>-->
+                <!--<ref bean="cronTriggerJob3"/>-->
+                <!--<ref bean="cronTriggerJob4"/>-->
+                <!--<ref bean="cronTriggerJob5"/>-->
+                <!--<ref bean="cronTriggerJob6"/>-->
+                <!--<ref bean="cronTriggerJob7"/>-->
+                <!--<ref bean="cronTriggerJob8"/>-->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="taskImpl" class="com.example.task.TaskImpl">
+        <property name="scheduler" ref="scheduleFactory"/>
+    </bean>
+
+</beans>
