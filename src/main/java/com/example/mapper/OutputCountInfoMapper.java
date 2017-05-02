@@ -18,7 +18,7 @@ public class OutputCountInfoMapper implements RowMapper<OutputCountInfo> {
         outputInfo.setCellName(resultSet.getString("cell_name"));
         outputInfo.setCount(resultSet.getInt("count"));
         outputInfo.setModelId(resultSet.getString("model_id"));
-        outputInfo.setAddDate(resultSet.getString("addDate"));
+        outputInfo.setAddDate(resultSet.getString("add_date"));
         outputInfo.setModelName(resultSet.getString("model_name"));
         return outputInfo;
     }
