@@ -54,7 +54,18 @@
             padding: 0;
             /*color: #ffffff;*/
             color: #000000;
-            height: 100%;
+            height: 70%;
+        }
+        .timeItem{
+            width: 100%;
+            /*background-color: #727272;*/
+            padding: 0;
+            /*color: #ffffff;*/
+            color: #000000;
+            text-align: center;
+            font-size:4.5em;
+            font-weight:bold;
+            height: 30%;
         }
         .innerItemSec{
             width: 100%;
@@ -150,13 +161,32 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://10.1.0.40:8080/nexteer/index.html"><img src="images/icon.png" alt="Nexteer"></a>
+            <a class="navbar-brand" href="http://localhost:8080/nexteer/index.html"><img src="images/icon.png" alt="Nexteer"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <p class="navbar-text">I-shaft单元状态视图</p>
             <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BEPS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu"><a href="#">BEPS1</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="#">BEPS2</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu"><a href="#">CEPS1</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="#">CEPS2</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VSS-Ishaft <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -182,14 +212,7 @@
     <div class="row row1">
         <div class="col-md-12">
             <div class="unitHeader">
-                <p class="unitTitle">单元状态看板--</p>
-                <select class="form-control" style="font-size: 2em;height: 100%;width: 25%">
-                    <option>Ishaft1</option>
-                    <option>Ishaft2</option>
-                    <option>Ishaft3</option>
-                    <option>Ishaft4</option>
-                </select>
-                <p class="unitTitle">--总装</p>
+                <p class="unitTitle">ISHAFT1单元状态看板</p>
             </div>
 
         </div>
@@ -215,12 +238,11 @@
                         <td>单元状态</td>
                         <td id="status"><img src="images/Sunny.png" alt="NICE"></td>
                     </tr>
-                    <tr>
-                        <td>当前时间</td>
-                        <td id="showMainTime">0000</td>
-                    </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="timeItem " id="showMainTime">
+                    0000
             </div>
         </div>
         <div class="col-md-8 item " >

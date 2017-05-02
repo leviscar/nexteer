@@ -19,14 +19,14 @@ $("#startNCOMDate").bind("click",function () {
     console.log(getStartJson);
     $.ajax({
         type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/quality-complain",
+        url: "http://localhost:8080/nexteer/quality-complain",
         data: JSON.stringify(getStartJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
             console.log(JSON.stringify(data));
             console.log(data.count);
-            $("#startNCOMDateStu").html("重置"+data.addDate+"无抱怨天数为:"+ data.count);
+            $("#startNCOMDateStu").html("成功");
         },
         failure: function (errMsg) {
             console.log(errMsg);
@@ -51,14 +51,15 @@ $("#resetNCOMDate").bind("click",function () {
     var getResetJson=new resetNCOMDate($("#resetNCOMDateTime").val(),resetMessage,0,0);
     $.ajax({
         type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/quality-complain",
+        url: "http://localhost:8080/nexteer/quality-complain",
         data: JSON.stringify(getResetJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
             console.log(JSON.stringify(data));
             console.log(data.safe_dates);
-            $("#resetNCOMDateStu").html("重置"+data.addDate+"无抱怨天数为:"+ data.count+"<br>"+"事故信息为:"+data.log);
+            // $("#resetNCOMDateStu").html("重置"+data.addDate+"无抱怨天数为:"+ data.count+"<br>"+"事故信息为:"+data.log);
+            $("#resetNCOMDateStu").html("成功");
 
         },
         failure: function (errMsg) {
@@ -83,14 +84,15 @@ $("#desNCOMDate").bind("click",function () {
     var getdesJson=new desNCOMDate($("#desNCOMDateTime").val(),desMessage,-1,0);
     $.ajax({
         type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/quality-complain",
+        url: "http://localhost:8080/nexteer/quality-complain",
         data: JSON.stringify(getdesJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
             console.log(JSON.stringify(data));
             console.log(data.count);
-            $("#desNCOMDateStu").html("配置"+data.addDate+"正式抱怨天数为:"+ data.count+"<br>"+"抱怨信息为:"+data.log);
+            // $("#desNCOMDateStu").html("配置"+data.addDate+"正式抱怨天数为:"+ data.count+"<br>"+"抱怨信息为:"+data.log);
+            $("#desNCOMDateStu").html("成功")
 
         },
         failure: function (errMsg) {
@@ -115,15 +117,15 @@ $("#logNCOMDate").bind("click",function () {
     var getlogJson=new logNCOMDate($("#logNCOMDateTime").val(),logMessage,0,0);
     $.ajax({
         type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/quality-complain",
+        url: "http://localhost:8080/nexteer/quality-complain",
         data: JSON.stringify(getlogJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
             console.log(JSON.stringify(data));
             console.log(data.count);
-            $("#logNCOMDateStu").html("重置"+data.addDate+"无抱怨天数为:"+ data.count+"<br>"+"事故信息为:"+data.log);
-
+            // $("#logNCOMDateStu").html("重置"+data.addDate+"无抱怨天数为:"+ data.count+"<br>"+"事故信息为:"+data.log);
+            $("#logNCOMDateStu").html("成功");
         },
         failure: function (errMsg) {
             console.log(errMsg);

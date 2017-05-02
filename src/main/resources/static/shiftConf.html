@@ -10,10 +10,11 @@
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="bower_components/jquery-editable-select/dist/jquery-editable-select.min.css">
     <link rel="stylesheet" href="bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="uikit/dist/css/uikit.min.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
     <link rel="stylesheet" href="css/mainboard.css" type="text/css">
-    <link rel="stylesheet" href="css/dateForm.css">
+    <link rel="stylesheet" href="css/confContent.css">
     <style type="text/css">
         .black-color{
             color:black;
@@ -31,17 +32,19 @@
         span{
             font-size: 1.5em;
         }
+        input{
+            width: 100%;
+        }
         select{
-            width: 30% !important;
+            width: 80% !important;
         }
         .form-control{
-            width: 22%;
-            float: right;
+            width: 60%;
+            height: 50%;
         }
         .table-condensed{
             width: 100%;
         }
-
         .datetimepicker{
             width: 20%;
         }
@@ -58,7 +61,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://10.1.0.40:8080/nexteer/index.html"><img src="images/icon.png" alt="Nexteer"></a>
+            <a class="navbar-brand" href="http://localhost:8080/nexteer/index.html"><img src="images/icon.png" alt="Nexteer"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -66,25 +69,25 @@
             <ul class="nav navbar-nav">
                 <p class="navbar-text center-block" >系统设置</p>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/safeConf.html" >安全运行天数设置</a>
+                    <a href="http://localhost:8080/nexteer/safeConf.html" >安全运行天数设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/qualityConf.html" >质量无抱怨天数设置</a>
+                    <a href="http://localhost:8080/nexteer/qualityConf.html" >质量无抱怨天数设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/scrapConf.html" >报废金额设置</a>
+                    <a href="http://localhost:8080/nexteer/scrapConf.html" >报废金额设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/modelConf.html" >型号信息设置</a>
+                    <a href="http://localhost:8080/nexteer/modelConf.html" >型号信息设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/shiftConf.html" >班次信息设置</a>
+                    <a href="http://localhost:8080/nexteer/shiftConf.html" >班次信息设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/hceConf.html" >人员利用率设置</a>
+                    <a href="http://localhost:8080/nexteer/hceConf.html" >人员利用率设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/oeeConf.html" >可动率设置</a>
+                    <a href="http://localhost:8080/nexteer/oeeConf.html" >可动率设置</a>
                 </li>
 
             </ul>
@@ -97,261 +100,670 @@
 </nav>
 <div class="row">
     <div class="col-md-12">
-        <form>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <p>班次设置</p>
-                </div>
-                <div class="panel-body">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myMorFirModal">
-                        增加Ashift
-                    </button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="myMorFirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">增加Ashift班次设置</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p><label for="oneTime">添加日期</label>&nbsp;&nbsp;<input type="date" id="oneTime"></p><hr class="active">
-                                    <!--<p><label for="oneStart">Ashift开始时间</label><input type="text" class="form-control form_datetime_time" readonly id="oneStart"></p><hr class="active">-->
-                                    <p><label for="oneStart">Ashift开始时间</label><input type="text" class="form-control form_datetime_time" readonly id="oneStart"></p><hr class="active">
-                                    <p><label for="oneEnd">Ashift结束时间</label><input type="text" class="form-control form_datetime_time" readonly  id="oneEnd"></p><hr class="active">
-                                    <p><label for="oneStdBeats">Ashift标准节拍</label><input type="number" id="oneStdBeats"></p><hr class="active">
-                                    <p><label for="oneWorkNum">Ashift工作人数</label><input type="number" id="oneWorkNum"></p><hr class="active">
-                                    <p><label for="oneWorkOverNum">Ashift加班人数</label><input type="number" id="oneWorkOverNum"></p><hr class="active">
-                                    <p><label for="oneTar">Ashift目标值</label><input type="number" id="oneTar"></p><hr class="active">
-                                    <p><label for="oneOpen">是否开班</label>
-                                        <select  class="form-control" id="oneOpen">
+        <div class="conf-content ">
+            <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+                <li><a href="#">添加班次</a></li>
+                <li><a href="#">添加休息事件</a></li>
+            </ul>
+            <ul class="uk-switcher uk-margin">
+                <li>
+                    <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+                        <li><a href="#">ISHAFT L1</a></li>
+                        <li><a href="#">ISHAFT L2</a></li>
+                        <li><a href="#">ISHAFT L3</a></li>
+                        <li><a href="#">ISHAFT L4</a></li>
+                        <li><a href="#">CEPS</a></li>
+                        <li><a href="#">BEPS</a></li>
+                    </ul>
+                    <ul class="uk-switcher uk-margin">
+                        <li>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>产线</th>
+                                    <th>班次</th>
+                                    <th>添加日期</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th>标准节拍</th>
+                                    <th>工作人数</th>
+                                    <th>加班人数</th>
+                                    <th>目标值</th>
+                                    <th>开班状态</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td id="oneCellName">ISHAFT1</td>
+                                    <td>Ashift</td>
+                                    <td><input type="date" id="oneTime"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly id="oneStart"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly  id="oneEnd"></td>
+                                    <td><input type="number" id="oneStdBeats"></td>
+                                    <td><input type="number" id="oneWorkNum"></td>
+                                    <td><input type="number" id="oneWorkOverNum"></td>
+                                    <td><input type="number" id="oneTar"></td>
+                                    <td>
+                                        <select  id="oneOpen">
                                             <option>true</option>
                                             <option>false</option>
                                         </select>
-                                    </p>
-                                    <p><label for="oneCellName">产线</label>
-                                        <select  class="form-control" id="oneCellName">
-                                            <option>ISHAFT1</option>
-                                            <option>ISHAFT2</option>
-                                            <option>ISHAFT3</option>
-                                            <option>ISHAFT4</option>
-                                            <option>BEPS</option>
-                                            <option>CEPS</option>
-                                        </select>
-                                    </p><hr class="active">
-
-                                    <p id="oneStatus">未知</p><hr class="active">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="oneSub">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myMidFirModal">添加Bshift</button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="myMidFirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myMidModalLabel">添加Bshift</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p><label for="twoTime">添加日期</label>&nbsp;&nbsp;<input type="date" id="twoTime"></p><hr class="active">
-                                    <p><label for="twoMStart">Bshift开始时间</label><input type="text" class="form-control form_datetime_time" readonly id="twoMStart"></p><hr class="active">
-                                    <p><label for="twoMEnd">Bshift结束时间</label><input type="text" class="form-control form_datetime_time" readonly id="twoMEnd"></p><hr class="active">
-                                    <p><label for="twoMStdBeats">Bshift班标准节拍</label><input type="number" class="inputIns" id="twoMStdBeats"></p><hr class="active">
-                                    <p><label for="twoMWorkNum">Bshift班工作人数</label><input type="number" class="inputIns" id="twoMWorkNum"></p><hr class="active">
-                                    <p><label for="twoMWorkOverNum">Bshift班加班人数</label><input type="number" class="inputIns" id="twoMWorkOverNum"></p><hr class="active">
-                                    <p><label for="twoTar">Bshift目标值</label><input type="number" id="twoTar"></p><hr class="active">
-                                    <p><label for="twoOpen">是否开班</label>
-                                        <select  class="form-control" id="twoOpen">
+                                    </td>
+                                    <td id="oneStatus"></td>
+                                    <td><button type="button" class="btn btn-primary" id="oneSub">添加</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="twoCellName">ISHAFT1</td>
+                                    <td>Bshift</td>
+                                    <td><input type="date" id="twoTime"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly id="twoStart"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly  id="twoEnd"></td>
+                                    <td><input type="number" id="twoStdBeats"></td>
+                                    <td><input type="number" id="twoWorkNum"></td>
+                                    <td><input type="number" id="twoWorkOverNum"></td>
+                                    <td><input type="number" id="twoTar"></td>
+                                    <td>
+                                        <select   id="twoOpen">
                                             <option>true</option>
                                             <option>false</option>
                                         </select>
-                                    </p>
-                                    <p><label for="twoCellName">产线</label>
-                                        <select  class="form-control" id="twoCellName">
-                                            <option>ISHAFT1</option>
-                                            <option>ISHAFT2</option>
-                                            <option>ISHAFT3</option>
-                                            <option>ISHAFT4</option>
-                                            <option>BEPS</option>
-                                            <option>CEPS</option>
-                                        </select>
-                                    </p><hr class="active">
-                                    <p id="twoStatus">未知</p><hr class="active">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="twoSub">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myNtFirModal">添加Cshift</button>
-                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myNtSecModal">
-                        增加事件
-                    </button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="myNtFirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myNtModalLabel">添加Cshift</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p><label for="thiTime">添加日期</label>&nbsp;&nbsp;<input type="date" id="thiTime"></p><hr class="active">
-                                    <p><label for="thiNStart">Cshift开始时间</label><input type="text" class="form-control form_datetime_time" readonly id="thiNStart"></p><hr class="active">
-                                    <p><label for="thiNEnd">Cshift结束时间</label><input type="text" class="form-control form_datetime_time" readonly id="thiNEnd"></p><hr class="active">
-                                    <p><label for="thiNBeats">Cshift标准节拍</label><input type="number" class="inputIns" id="thiNBeats"></p><hr class="active">
-                                    <p><label for="thiNWorkNum">Cshift工作人数（人）</label><input type="number" class="inputIns" id="thiNWorkNum"></p><hr class="active">
-                                    <p><label for="thiNWorkOverNum">Cshift加班人数（人）</label><input type="number" class="inputIns" id="thiNWorkOverNum"></p><hr class="active">
-                                    <p><label for="thiTar">Cshift目标值</label><input type="number" id="thiTar"></p><hr class="active">
-                                    <p><label for="thiOpen">是否开班</label>
-                                        <select  class="form-control" id="thiOpen">
+                                    </td>
+                                    <td id="twoStatus"></td>
+                                    <td><button type="button" class="btn btn-primary" id="twoSub">添加</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="thiCellName">ISHAFT1</td>
+                                    <td>Cshift</td>
+                                    <td><input type="date" id="thiTime"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly id="thiStart"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly  id="thiEnd"></td>
+                                    <td><input type="number" id="thiStdBeats"></td>
+                                    <td><input type="number" id="thiWorkNum"></td>
+                                    <td><input type="number" id="thiWorkOverNum"></td>
+                                    <td><input type="number" id="thiTar"></td>
+                                    <td>
+                                        <select  id="thiOpen">
                                             <option>true</option>
                                             <option>false</option>
                                         </select>
-                                    </p>
-                                    <p><label for="thiCellName">产线</label>
-                                        <select  class="form-control" id="thiCellName">
-                                            <option>ISHAFT1</option>
-                                            <option>ISHAFT2</option>
-                                            <option>ISHAFT3</option>
-                                            <option>ISHAFT4</option>
-                                            <option>BEPS</option>
-                                            <option>CEPS</option>
+                                    </td>
+                                    <td id="thiStatus"></td>
+                                    <td><button type="button" class="btn btn-primary" id="thiSub">添加</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        <li>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>产线</th>
+                                    <th>班次</th>
+                                    <th>添加日期</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th>标准节拍</th>
+                                    <th>工作人数</th>
+                                    <th>加班人数</th>
+                                    <th>目标值</th>
+                                    <th>开班状态</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td id="oneIS2CellName">ISHAFT2</td>
+                                    <td>Ashift</td>
+                                    <td><input type="date" id="oneIS2Time"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly id="oneIS2Start"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly  id="oneIS2End"></td>
+                                    <td><input type="number" id="oneIS2StdBeats"></td>
+                                    <td><input type="number" id="oneIS2WorkNum"></td>
+                                    <td><input type="number" id="oneIS2WorkOverNum"></td>
+                                    <td><input type="number" id="oneIS2Tar"></td>
+                                    <td>
+                                        <select  id="oneIS2Open">
+                                            <option>true</option>
+                                            <option>false</option>
                                         </select>
-                                    </p><hr class="active">
-                                    <p id="thiStatus">未知</p><hr class="active">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="thiSub">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="myNtSecModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myNtSecModalLabel">添加事件</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p><label for="addThiType">班次</label>
-                                        <select  class="form-control" id="addThiType">
-                                            <option>Ashift</option>
-                                            <option>Bshift</option>
-                                            <option>Cshift</option>
+                                    </td>
+                                    <td id="oneIS2Status"></td>
+                                    <td><button type="button" class="btn btn-primary" id="oneIS2Sub">添加</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="twoIS2CellName">ISHAFT2</td>
+                                    <td>Bshift</td>
+                                    <td><input type="date" id="twoIS2Time"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly id="twoIS2Start"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly  id="twoIS2End"></td>
+                                    <td><input type="number" id="twoIS2StdBeats"></td>
+                                    <td><input type="number" id="twoIS2WorkNum"></td>
+                                    <td><input type="number" id="twoIS2WorkOverNum"></td>
+                                    <td><input type="number" id="twoIS2Tar"></td>
+                                    <td>
+                                        <select   id="twoIS2Open">
+                                            <option>true</option>
+                                            <option>false</option>
                                         </select>
-                                    </p><hr class="active">
-                                    <p><label for="eventCellName">产线</label>
-                                        <select  class="form-control" id="eventCellName">
-                                            <option>ISHAFT1</option>
-                                            <option>ISHAFT2</option>
-                                            <option>ISHAFT3</option>
-                                            <option>ISHAFT4</option>
-                                            <option>BEPS</option>
-                                            <option>CEPS</option>
+                                    </td>
+                                    <td id="twoIS2Status"></td>
+                                    <td><button type="button" class="btn btn-primary" id="twoIS2Sub">添加</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="thiIS2CellName">ISHAFT2</td>
+                                    <td>Cshift</td>
+                                    <td><input type="date" id="thiIS2Time"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly id="thiIS2Start"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly  id="thiIS2End"></td>
+                                    <td><input type="number" id="thiIS2StdBeats"></td>
+                                    <td><input type="number" id="thiIS2WorkNum"></td>
+                                    <td><input type="number" id="thiIS2WorkOverNum"></td>
+                                    <td><input type="number" id="thiIS2Tar"></td>
+                                    <td>
+                                        <select   id="thiIS2Open">
+                                            <option>true</option>
+                                            <option>false</option>
                                         </select>
-                                    </p><hr class="active">
-                                    <!--<p><label for="addThiEvent">事件</label><input type="text" id="addThiEvent"></p><hr class="active">-->
-                                    <p><label for="addThiEvent">事件</label>
-                                        <select id="addThiEvent">
-                                            <option>吃饭</option>
-                                            <option>休息</option>
+                                    </td>
+                                    <td id="thiIS2Status"></td>
+                                    <td><button type="button" class="btn btn-primary" id="thiIS2Sub">添加</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        <li>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>产线</th>
+                                    <th>班次</th>
+                                    <th>添加日期</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th>标准节拍</th>
+                                    <th>工作人数</th>
+                                    <th>加班人数</th>
+                                    <th>目标值</th>
+                                    <th>开班状态</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td id="oneIS3CellName">ISHAFT3</td>
+                                    <td>Ashift</td>
+                                    <td><input type="date" id="oneIS3Time"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly id="oneIS3Start"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly  id="oneIS3End"></td>
+                                    <td><input type="number" id="oneIS3StdBeats"></td>
+                                    <td><input type="number" id="oneIS3WorkNum"></td>
+                                    <td><input type="number" id="oneIS3WorkOverNum"></td>
+                                    <td><input type="number" id="oneIS3Tar"></td>
+                                    <td>
+                                        <select   id="oneIS3Open">
+                                            <option>true</option>
+                                            <option>false</option>
                                         </select>
-                                    </p><hr class="active">
-                                    <p><label for="addThiStart">事件开始时间</label><input type="text" class="form-control form_datetime_time" readonly id="addThiStart"></p><hr class="active">
-                                    <p><label for="addThiEnd">事件结束时间</label><input type="text" class="form-control form_datetime_time" readonly id="addThiEnd"></p><hr class="active">
-                                    <p id="addThiStatus">未知</p><hr class="active">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="thiEventSub">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                    </td>
+                                    <td id="oneIS3Status"></td>
+                                    <td><button type="button" class="btn btn-primary" id="oneIS3Sub">添加</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="twoIS3CellName">ISHAFT3</td>
+                                    <td>Bshift</td>
+                                    <td><input type="date" id="twoIS3Time"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly id="twoIS3Start"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly  id="twoIS3End"></td>
+                                    <td><input type="number" id="twoIS3StdBeats"></td>
+                                    <td><input type="number" id="twoIS3WorkNum"></td>
+                                    <td><input type="number" id="twoIS3WorkOverNum"></td>
+                                    <td><input type="number" id="twoIS3Tar"></td>
+                                    <td>
+                                        <select   id="twoIS3Open">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </td>
+                                    <td id="twoIS3Status"></td>
+                                    <td><button type="button" class="btn btn-primary" id="twoIS3Sub">添加</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="thiIS3CellName">ISHAFT3</td>
+                                    <td>Cshift</td>
+                                    <td><input type="date" id="thiIS3Time"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly id="thiIS3Start"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly  id="thiIS3End"></td>
+                                    <td><input type="number" id="thiIS3StdBeats"></td>
+                                    <td><input type="number" id="thiIS3WorkNum"></td>
+                                    <td><input type="number" id="thiIS3WorkOverNum"></td>
+                                    <td><input type="number" id="thiIS3Tar"></td>
+                                    <td>
+                                        <select   id="thiIS3Open">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </td>
+                                    <td id="thiIS3Status"></td>
+                                    <td><button type="button" class="btn btn-primary" id="thiIS3Sub">添加</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        <li>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>产线</th>
+                                    <th>班次</th>
+                                    <th>添加日期</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th>标准节拍</th>
+                                    <th>工作人数</th>
+                                    <th>加班人数</th>
+                                    <th>目标值</th>
+                                    <th>开班状态</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td id="oneIS4CellName">ISHAFT4</td>
+                                    <td>Ashift</td>
+                                    <td><input type="date" id="oneIS4Time"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly id="oneIS4Start"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly  id="oneIS4End"></td>
+                                    <td><input type="number" id="oneIS4StdBeats"></td>
+                                    <td><input type="number" id="oneIS4WorkNum"></td>
+                                    <td><input type="number" id="oneIS4WorkOverNum"></td>
+                                    <td><input type="number" id="oneIS4Tar"></td>
+                                    <td>
+                                        <select  id="oneIS4Open">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </td>
+                                    <td id="oneIS4Status"></td>
+                                    <td><button type="button" class="btn btn-primary" id="oneIS4Sub">添加</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="twoIS4CellName">ISHAFT4</td>
+                                    <td>Bshift</td>
+                                    <td><input type="date" id="twoIS4Time"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly id="twoIS4Start"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly  id="twoIS4End"></td>
+                                    <td><input type="number" id="twoIS4StdBeats"></td>
+                                    <td><input type="number" id="twoIS4WorkNum"></td>
+                                    <td><input type="number" id="twoIS4WorkOverNum"></td>
+                                    <td><input type="number" id="twoIS4Tar"></td>
+                                    <td>
+                                        <select   id="twoIS4Open">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </td>
+                                    <td id="twoIS4Status"></td>
+                                    <td><button type="button" class="btn btn-primary" id="twoIS4Sub">添加</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="thiIS4CellName">ISHAFT4</td>
+                                    <td>Cshift</td>
+                                    <td><input type="date" id="thiIS4Time"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly id="thiIS4Start"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly  id="thiIS4End"></td>
+                                    <td><input type="number" id="thiIS4StdBeats"></td>
+                                    <td><input type="number" id="thiIS4WorkNum"></td>
+                                    <td><input type="number" id="thiIS4WorkOverNum"></td>
+                                    <td><input type="number" id="thiIS4Tar"></td>
+                                    <td>
+                                        <select   id="thiIS4Open">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </td>
+                                    <td id="thiIS4Status"></td>
+                                    <td><button type="button" class="btn btn-primary" id="thiIS4Sub">添加</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        <li>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>产线</th>
+                                    <th>班次</th>
+                                    <th>添加日期</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th>标准节拍</th>
+                                    <th>工作人数</th>
+                                    <th>加班人数</th>
+                                    <th>目标值</th>
+                                    <th>开班状态</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td id="oneCEPSCellName">CEPS</td>
+                                    <td>Ashift</td>
+                                    <td><input type="date" id="oneCEPSTime"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly id="oneCEPSStart"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly  id="oneCEPSEnd"></td>
+                                    <td><input type="number" id="oneCEPSStdBeats"></td>
+                                    <td><input type="number" id="oneCEPSWorkNum"></td>
+                                    <td><input type="number" id="oneCEPSWorkOverNum"></td>
+                                    <td><input type="number" id="oneCEPSTar"></td>
+                                    <td>
+                                        <select  id="oneCEPSOpen">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </td>
+                                    <td id="oneCEPSStatus"></td>
+                                    <td><button type="button" class="btn btn-primary" id="oneCEPSSub">添加</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="twoCEPSCellName">CEPS</td>
+                                    <td>Bshift</td>
+                                    <td><input type="date" id="twoCEPSTime"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly id="twoCEPSStart"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly  id="twoCEPSEnd"></td>
+                                    <td><input type="number" id="twoCEPSStdBeats"></td>
+                                    <td><input type="number" id="twoCEPSWorkNum"></td>
+                                    <td><input type="number" id="twoCEPSWorkOverNum"></td>
+                                    <td><input type="number" id="twoCEPSTar"></td>
+                                    <td>
+                                        <select  id="twoCEPSOpen">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </td>
+                                    <td id="twoCEPSStatus"></td>
+                                    <td><button type="button" class="btn btn-primary" id="twoCEPSSub">添加</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="thiCEPSCellName">CEPS</td>
+                                    <td>Cshift</td>
+                                    <td><input type="date" id="thiCEPSTime"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly id="thiCEPSStart"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly  id="thiCEPSEnd"></td>
+                                    <td><input type="number" id="thiCEPSStdBeats"></td>
+                                    <td><input type="number" id="thiCEPSWorkNum"></td>
+                                    <td><input type="number" id="thiCEPSWorkOverNum"></td>
+                                    <td><input type="number" id="thiCEPSTar"></td>
+                                    <td>
+                                        <select   id="thiCEPSOpen">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </td>
+                                    <td id="thiCEPSStatus"></td>
+                                    <td><button type="button" class="btn btn-primary" id="thiCEPSSub">添加</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        <li>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>产线</th>
+                                    <th>班次</th>
+                                    <th>添加日期</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th>标准节拍</th>
+                                    <th>工作人数</th>
+                                    <th>加班人数</th>
+                                    <th>目标值</th>
+                                    <th>开班状态</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td id="oneBEPSCellName">BEPS</td>
+                                    <td>Ashift</td>
+                                    <td><input type="date" id="oneBEPSTime"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly id="oneBEPSStart"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly  id="oneBEPSEnd"></td>
+                                    <td><input type="number" id="oneBEPSStdBeats"></td>
+                                    <td><input type="number" id="oneBEPSWorkNum"></td>
+                                    <td><input type="number" id="oneBEPSWorkOverNum"></td>
+                                    <td><input type="number" id="oneBEPSTar"></td>
+                                    <td>
+                                        <select  id="oneBEPSOpen">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </td>
+                                    <td id="oneBEPSStatus"></td>
+                                    <td><button type="button" class="btn btn-primary" id="oneBEPSSub">添加</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="twoBEPSCellName">BEPS</td>
+                                    <td>Bshift</td>
+                                    <td><input type="date" id="twoBEPSTime"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly id="twoBEPSStart"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly  id="twoBEPSEnd"></td>
+                                    <td><input type="number" id="twoBEPSStdBeats"></td>
+                                    <td><input type="number" id="twoBEPSWorkNum"></td>
+                                    <td><input type="number" id="twoBEPSWorkOverNum"></td>
+                                    <td><input type="number" id="twoBEPSTar"></td>
+                                    <td>
+                                        <select  id="twoBEPSOpen">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </td>
+                                    <td id="twoBEPSStatus"></td>
+                                    <td><button type="button" class="btn btn-primary" id="twoBEPSSub">添加</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="thiBEPSCellName">BEPS</td>
+                                    <td>Cshift</td>
+                                    <td><input type="date" id="thiBEPSTime"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly id="thiBEPSStart"></td>
+                                    <td><input type="text" class="form_datetime_time" readonly  id="thiBEPSEnd"></td>
+                                    <td><input type="number" id="thiBEPSStdBeats"></td>
+                                    <td><input type="number" id="thiBEPSWorkNum"></td>
+                                    <td><input type="number" id="thiBEPSWorkOverNum"></td>
+                                    <td><input type="number" id="thiBEPSTar"></td>
+                                    <td>
+                                        <select  id="thiBEPSOpen">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </td>
+                                    <td id="thiBEPSStatus"></td>
+                                    <td><button type="button" class="btn btn-primary" id="thiBEPSSub">添加</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+                        <li><a href="#">ISHAFT L1</a></li>
+                        <li><a href="#">ISHAFT L2</a></li>
+                        <li><a href="#">ISHAFT L3</a></li>
+                        <li><a href="#">ISHAFT L4</a></li>
+                        <li><a href="#">CEPS</a></li>
+                        <li><a href="#">BEPS</a></li>
+                    </ul>
+                    <ul class="uk-switcher uk-margin">
+                        <li>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>产线</th>
+                                    <th>班次</th>
+                                    <th>添加日期</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th>标准节拍</th>
+                                    <th>工作人数</th>
+                                    <th>加班人数</th>
+                                    <th>目标值</th>
+                                    <th>开班状态</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td id="oneCellName">ISHAFT1</td>
+                                    <td>Ashift</td>
+                                    <td><input type="date" id="oneTime"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly id="oneStart"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly  id="oneEnd"></td>
+                                    <td><input type="number" id="oneStdBeats"></td>
+                                    <td><input type="number" id="oneWorkNum"></td>
+                                    <td><input type="number" id="oneWorkOverNum"></td>
+                                    <td><input type="number" id="oneTar"></td>
+                                    <td>
+                                        <select  id="oneOpen">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </td>
+                                    <td id="oneStatus"></td>
+                                    <td><button type="button" class="btn btn-primary" id="oneSub">添加</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="twoCellName">ISHAFT1</td>
+                                    <td>Bshift</td>
+                                    <td><input type="date" id="twoTime"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly id="twoStart"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly  id="twoEnd"></td>
+                                    <td><input type="number" id="twoStdBeats"></td>
+                                    <td><input type="number" id="twoWorkNum"></td>
+                                    <td><input type="number" id="twoWorkOverNum"></td>
+                                    <td><input type="number" id="twoTar"></td>
+                                    <td>
+                                        <select   id="twoOpen">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </td>
+                                    <td id="twoStatus"></td>
+                                    <td><button type="button" class="btn btn-primary" id="twoSub">添加</button></td>
+                                </tr>
+                                <tr>
+                                    <td id="thiCellName">ISHAFT1</td>
+                                    <td>Cshift</td>
+                                    <td><input type="date" id="thiTime"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly id="thiStart"></td>
+                                    <td><input type="text" class=" form_datetime_time" readonly  id="thiEnd"></td>
+                                    <td><input type="number" id="thiStdBeats"></td>
+                                    <td><input type="number" id="thiWorkNum"></td>
+                                    <td><input type="number" id="thiWorkOverNum"></td>
+                                    <td><input type="number" id="thiTar"></td>
+                                    <td>
+                                        <select  id="thiOpen">
+                                            <option>true</option>
+                                            <option>false</option>
+                                        </select>
+                                    </td>
+                                    <td id="thiStatus"></td>
+                                    <td><button type="button" class="btn btn-primary" id="thiSub">添加</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        <li>
 
-                </div>
+                        </li>
+                        <li>
 
-            </div>
-            <hr class="active">
-        </form>
-        <div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <p>当前班次信息显示: </p>
-                </div>
-                <div class="panel-body">
-                    <table id="showBanci" class="table  table-bordered black-color">
-                        <thead>
-                        <tr>
-                            <th>班次</th>
-                            <th>开始时间</th>
-                            <th>结束时间</th>
-                            <th>标准节拍</th>
-                            <th>正常工作人数</th>
-                            <th>加班人数</th>
-                            <th>目标值</th>
-                            <th>产线</th>
-                            <th>开班状态</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td id="mShift"></td>
-                            <td id="ms"></td>
-                            <td id="me"></td>
-                            <td id="mb"></td>
-                            <td id="mw"></td>
-                            <td id="mow"></td>
-                            <td id="mTar"></td>
-                            <td id="cellAName"></td>
-                            <td id="Aopen"></td>
-                        </tr>
-                        <tr>
-                            <td id="miShift"></td>
-                            <td id="mis"></td>
-                            <td id="mie"></td>
-                            <td id="mib"></td>
-                            <td id="miw"></td>
-                            <td id="miow"></td>
-                            <td id="miTar"></td>
-                            <td id="cellBName"></td>
-                            <td id="Bopen"></td>
-                        </tr>
-                        <tr>
-                            <td id="nShift"></td>
-                            <td id="ns"></td>
-                            <td id="ne"></td>
-                            <td id="nb"></td>
-                            <td id="nw"></td>
-                            <td id="now"></td>
-                            <td id="nTar"></td>
-                            <td id="cellCName"></td>
-                            <td id="Copen"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <p>当前休息事件显示: </p>
-                </div>
-                <div class="panel-body">
+                        </li>
+                        <li>
+
+                        </li>
+                        <li>
+
+                        </li>
+                        <li>
+
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+        <div class="conf-content ">
+            <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+                <li><a href="">当前班次信息</a></li>
+                <li><a href="">当前休息事件</a></li>
+            </ul>
+            <ul class="uk-switcher uk-margin">
+                <li>
+                    <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+                        <li><a href="#">ISHAFT L1</a></li>
+                        <li><a href="#">ISHAFT L2</a></li>
+                        <li><a href="#">ISHAFT L3</a></li>
+                        <li><a href="#">ISHAFT L4</a></li>
+                        <li><a href="#">CEPS</a></li>
+                        <li><a href="#">BEPS</a></li>
+                    </ul>
+                    <ul class="uk-switcher uk-margin">
+                        <table id="showBanci" class="table  table-bordered black-color">
+                            <thead>
+                            <tr>
+                                <th>班次</th>
+                                <th>开始时间</th>
+                                <th>结束时间</th>
+                                <th>标准节拍</th>
+                                <th>正常工作人数</th>
+                                <th>加班人数</th>
+                                <th>目标值</th>
+                                <th>产线</th>
+                                <th>开班状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td id="mShift"></td>
+                                <td id="ms"></td>
+                                <td id="me"></td>
+                                <td id="mb"></td>
+                                <td id="mw"></td>
+                                <td id="mow"></td>
+                                <td id="mTar"></td>
+                                <td id="cellAName"></td>
+                                <td id="Aopen"></td>
+                            </tr>
+                            <tr>
+                                <td id="miShift"></td>
+                                <td id="mis"></td>
+                                <td id="mie"></td>
+                                <td id="mib"></td>
+                                <td id="miw"></td>
+                                <td id="miow"></td>
+                                <td id="miTar"></td>
+                                <td id="cellBName"></td>
+                                <td id="Bopen"></td>
+                            </tr>
+                            <tr>
+                                <td id="nShift"></td>
+                                <td id="ns"></td>
+                                <td id="ne"></td>
+                                <td id="nb"></td>
+                                <td id="nw"></td>
+                                <td id="now"></td>
+                                <td id="nTar"></td>
+                                <td id="cellCName"></td>
+                                <td id="Copen"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </ul>
+
+                </li>
+                <li>
                     <table id="showEvent" class="table  table-bordered black-color">
                         <thead>
                         <tr>
@@ -364,11 +776,10 @@
                         </thead>
 
                     </table>
-                </div>
-            </div>
-
+                </li>
+            </ul>
         </div>
-        <hr class="active">
+
     </div>
 
 </div>
@@ -378,6 +789,7 @@
 <script type="text/javascript" src="js/google-maps.js"></script>
 <script type="application/javascript" src="bower_components/jquery-editable-select/dist/jquery-editable-select.min.js"></script>
 <script type="application/javascript" src="bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="application/javascript" src="uikit/dist/js/uikit.js"></script>
 <script src="js/defineGlobal.js"></script>
 <script src="js/banciSet.js"></script>
 <script src="js/form_datetime.js"></script>

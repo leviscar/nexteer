@@ -1,0 +1,2310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="images/favicon.ico">
+    <title>Nexteer</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/jquery-editable-select/dist/jquery-editable-select.min.css">
+    <link rel="stylesheet" href="bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
+    <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <link rel="stylesheet" href="uikit/dist/css/uikit.min.css">
+    <link rel="stylesheet" href="css/confContent.css">
+    <style type="text/css">
+        body{
+            padding-top: 1%;
+            overflow-y: scroll !important;
+        }
+
+        .black-color{
+            color:black;
+        }
+        .red-color{
+            color:red;
+        }
+        #bs-example-navbar-collapse-1{
+            text-align: center;
+        }
+        p{
+            display: block;
+            font-size:1.4em;
+        }
+        span{
+            font-size: 1.5em;
+        }
+        select{
+            width: 50% !important;
+        }
+        .border-line{
+            border: 1px solid #000000;
+        }
+        .topTitle{
+            width: 80%;
+            height: 20%;
+            margin-bottom: 1%;
+        }
+        .topInnerImage{
+            width: 20%;
+            height: 100%;
+        }
+        .topInnerImage img{
+            width: 61%;
+            height: 100%;
+        }
+        .topInnerTitle{
+            text-align: center;
+            font-size:2em;
+            font-weight:bold;
+            color: #d10429;
+        }
+
+
+        .uk-subnav-pill>.uk-active>a{
+            background-color: #d10429;
+        }
+        .btn-primary{
+            background-color: #d10429;
+            border-color:#d10429 ;
+        }
+        th{
+            text-align: center;
+            font-size: 1.5em;;
+            vertical-align: middle !important;
+        }
+        tr>td:nth-child(-1){
+            text-align: center;
+        }
+        td{
+            font-size: 1.2em;;
+            text-align: center;
+            vertical-align: middle !important;
+        }
+        .bigFont>li>a{
+            font-size:1.3em !important;
+            color: #0f0f0f;
+        }
+        .topLine{
+            border-top: 1px #D9D9D9 solid;
+            /*border-bottom: 1px #D9D9D9 solid;*/
+        }
+        .shift table input{
+            width: 70%;
+        }
+        .shift table input:nth-child(1){
+            width: 90%;
+        }
+
+        .shift table td{
+            width: 8.5%;
+            font-size: 1.5em;
+        }
+        .shift table th{
+            font-size: 1.2em;
+        }
+        .shift table select{
+            width: 90% !important;
+        }
+
+
+        input{
+            width: 50%;
+        }
+        .table-condensed{
+            width: 100%;
+        }
+        .datetimepicker{
+            width: 20%;
+        }
+
+        .form-control{
+            width: 50%;
+        }
+
+    </style>
+
+</head>
+<body >
+<div class="topTitle  row">
+    <div class="topInnerImage col-md-2">
+        <a href="http://localhost:8080/nexteer/index.html"><img src="images/icon.png" alt="nexteer"></a>
+    </div>
+    <div class="topInnerTitle col-md-9">
+        PIDS后台管理系统
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 ">
+        <div class="conf-content">
+            <ul class="uk-subnav uk-subnav-pill topLine bigFont" uk-switcher>
+                <li><a href="#">Safe Configuration</a></li>
+                <li><a href="#">Quality Configuration</a></li>
+                <li><a href="#">Scrap Configuration</a></li>
+                <li><a href="#">Model Configuration</a></li>
+                <li><a href="#">OEE Configuration</a></li>
+                <li><a href="#">HCE Configuration</a></li>
+                <li><a href="#">Shift Configuration</a></li>
+            </ul>
+            <ul class="uk-switcher uk-margin">
+                <li><table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>配置选项</th>
+                        <th>配置时间</th>
+                        <th>配置信息</th>
+                        <th>返回状态</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>指定安全运行天数</td>
+                        <td><input type="date" id="startDateTime"></td>
+                        <td><input type="number" id="startDateValue"></td>
+                        <td id="startDateStu"></td>
+                        <td><button type="button" class="btn btn-primary" id="startDate">提交</button></td>
+                    </tr>
+                    <tr>
+                        <td>配置损工事件</td>
+                        <td><input type="date" id="desDateTime"></td>
+                        <td><input type="text" id="desDateValue"></td>
+                        <td id="desDateStu"></td>
+                        <td><button type="button" class="btn btn-primary" id="desDate">提交</button></td>
+                    </tr>
+                    <tr>
+                        <td>配置可记录事件</td>
+                        <td><input type="date" id="logDateTime"></td>
+                        <td><input type="text" id="logDateValue"></td>
+                        <td id="logDateStu"></td>
+                        <td><button type="button" class="btn btn-primary" id="logDate">提交</button></td>
+                    </tr>
+                    <tr>
+                        <td>重置安全运行天数</td>
+                        <td><input type="date" id="resetDateTime"></td>
+                        <td><input type="text" id="resetDateValue"></td>
+                        <td id="resetDateStu"></td>
+                        <td><button type="button" class="btn btn-primary" id="resetDate">提交</button></td>
+                    </tr>
+                    </tbody>
+                </table></li>
+                <li><table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>配置选项</th>
+                        <th>配置时间</th>
+                        <th>配置信息</th>
+                        <th>返回状态</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>指定质量无抱怨天数</td>
+                        <td><input type="date" id="startNCOMDateTime"></td>
+                        <td><input type="number" id="startNCOMDateValue"></td>
+                        <td id="startNCOMDateStu"></td>
+                        <td><button type="button" class="btn btn-primary" id="startNCOMDate">提交</button></td>
+                    </tr>
+                    <tr>
+                        <td>配置非正式抱怨事件</td>
+                        <td><input type="date" id="logNCOMDateTime"></td>
+                        <td><input type="text" id="logNCOMDateValue"></td>
+                        <td id="logNCOMDateStu"></td>
+                        <td><button type="button" class="btn btn-primary" id="logNCOMDate">提交</button></td>
+                    </tr>
+                    <tr>
+                        <td>配置正式抱怨事件</td>
+                        <td><input type="date" id="desNCOMDateTime"></td>
+                        <td><input type="text" id="desNCOMDateValue"></td>
+                        <td id="desNCOMDateStu"></td>
+                        <td><button type="button" class="btn btn-primary" id="desNCOMDate">提交</button></td>
+                    </tr>
+                    <tr>
+                        <td>重置无抱怨天数</td>
+                        <td><input type="date" id="resetNCOMDateTime"></td>
+                        <td><input type="text" id="resetNCOMDateValue"></td>
+                        <td id="resetNCOMDateStu"></td>
+                        <td><button type="button" class="btn btn-primary" id="resetNCOMDate">提交</button></td>
+                    </tr>
+                    </tbody>
+                </table></li>
+                <li>
+                    <ul class="uk-subnav uk-subnav-pill " uk-switcher>
+                        <li class="topLine"><a href="#">添加报废金额</a></li>
+                        <li class="topLine"><a href="#">报废金额显示</a></li>
+                    </ul>
+                    <ul class="uk-switcher uk-margin">
+                        <li>
+                            <ul class="uk-subnav uk-subnav-pill " uk-switcher>
+                                <li class="topLine"><a href="#">ISHAFT</a></li>
+                                <li class="topLine"><a href="#">CEPS</a></li>
+                                <li class="topLine"><a href="#">BEPS</a></li>
+                            </ul>
+                            <ul class="uk-switcher uk-margin">
+                                <li>
+                                    <table class="table table-striped table-bordered" id="scrapTable">
+                                        <thead>
+                                        <tr>
+                                            <th>产线</th>
+                                            <th>报废时间</th>
+                                            <th>报废金额</th>
+                                            <th>报废金额目标值</th>
+                                            <th>添加状态</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>ISHAFT1</td>
+                                            <td><input type="date" ></td>
+                                            <td><input type="number" ></td>
+                                            <td><input type="number" ></td>
+                                            <td id="addIs1ScrapStu"></td>
+                                            <td><button type="button" class="btn btn-primary addScrap" >添加</button></td>
+                                            <td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>ISHAFT2</td>
+                                            <td><input type="date" ></td>
+                                            <td><input type="number" ></td>
+                                            <td><input type="number" ></td>
+                                            <td id="addIs2ScrapStu"></td>
+                                            <td><button type="button" class="btn btn-primary addScrap" >添加</button></td>
+                                            <td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>ISHAFT3</td>
+                                            <td><input type="date" ></td>
+                                            <td><input type="number" ></td>
+                                            <td><input type="number" ></td>
+                                            <td id="addIs3ScrapStu"></td>
+                                            <td><button type="button" class="btn btn-primary addScrap" >添加</button></td>
+                                            <td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>ISHAFT4</td>
+                                            <td><input type="date" ></td>
+                                            <td><input type="number" ></td>
+                                            <td><input type="number" ></td>
+                                            <td id="addIs4ScrapStu"></td>
+                                            <td><button type="button" class="btn btn-primary addScrap" >添加</button></td>
+                                            <td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>
+                                        </tr>
+                                        <!--<tr>-->
+                                            <!--<td>CEPS1</td>-->
+                                            <!--<td><input type="date" ></td>-->
+                                            <!--<td><input type="number" ></td>-->
+                                            <!--<td><input type="number" ></td>-->
+                                            <!--<td id="addCEPSScrapStu"></td>-->
+                                            <!--<td><button type="button" class="btn btn-primary addScrap" >添加</button></td>-->
+                                            <!--<td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>BEPS1</td>-->
+                                            <!--<td><input type="date" ></td>-->
+                                            <!--<td><input type="number" ></td>-->
+                                            <!--<td><input type="number" ></td>-->
+                                            <!--<td id="addBEPSScrapStu"></td>-->
+                                            <!--<td><button type="button" class="btn btn-primary addScrap" >添加</button></td>-->
+                                            <!--<td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>-->
+                                        <!--</tr>-->
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li>
+                                    <table class="table table-striped table-bordered" id="scrapCEPSTable">
+                                        <thead>
+                                        <tr>
+                                            <th>产线</th>
+                                            <th>报废时间</th>
+                                            <th>报废金额</th>
+                                            <th>报废金额目标值</th>
+                                            <th>添加状态</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>CEPS1</td>
+                                            <td><input type="date" ></td>
+                                            <td><input type="number" ></td>
+                                            <td><input type="number" ></td>
+                                            <td id="addCEPS1ScrapStu"></td>
+                                            <td><button type="button" class="btn btn-primary addScrap" >添加</button></td>
+                                            <td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>CEPS2</td>
+                                            <td><input type="date" ></td>
+                                            <td><input type="number" ></td>
+                                            <td><input type="number" ></td>
+                                            <td id="addCEPS2ScrapStu"></td>
+                                            <td><button type="button" class="btn btn-primary addScrap" >添加</button></td>
+                                            <td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>CEPS3</td>
+                                            <td><input type="date" ></td>
+                                            <td><input type="number" ></td>
+                                            <td><input type="number" ></td>
+                                            <td id="addCEPS3ScrapStu"></td>
+                                            <td><button type="button" class="btn btn-primary addScrap" >添加</button></td>
+                                            <td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>CEPS4</td>
+                                            <td><input type="date" ></td>
+                                            <td><input type="number" ></td>
+                                            <td><input type="number" ></td>
+                                            <td id="addCEPS4ScrapStu"></td>
+                                            <td><button type="button" class="btn btn-primary addScrap" >添加</button></td>
+                                            <td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>CEPS5</td>
+                                            <td><input type="date" ></td>
+                                            <td><input type="number" ></td>
+                                            <td><input type="number" ></td>
+                                            <td id="addCEPS5ScrapStu"></td>
+                                            <td><button type="button" class="btn btn-primary addScrap" >添加</button></td>
+                                            <td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>
+                                        </tr>
+                                        <!--<tr>-->
+                                        <!--<td>CEPS1</td>-->
+                                        <!--<td><input type="date" ></td>-->
+                                        <!--<td><input type="number" ></td>-->
+                                        <!--<td><input type="number" ></td>-->
+                                        <!--<td id="addCEPSScrapStu"></td>-->
+                                        <!--<td><button type="button" class="btn btn-primary addScrap" >添加</button></td>-->
+                                        <!--<td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                        <!--<td>BEPS1</td>-->
+                                        <!--<td><input type="date" ></td>-->
+                                        <!--<td><input type="number" ></td>-->
+                                        <!--<td><input type="number" ></td>-->
+                                        <!--<td id="addBEPSScrapStu"></td>-->
+                                        <!--<td><button type="button" class="btn btn-primary addScrap" >添加</button></td>-->
+                                        <!--<td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>-->
+                                        <!--</tr>-->
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li>
+                                    <table class="table table-striped table-bordered" id="scrapBEPSTable">
+                                        <thead>
+                                        <tr>
+                                            <th>产线</th>
+                                            <th>报废时间</th>
+                                            <th>报废金额</th>
+                                            <th>报废金额目标值</th>
+                                            <th>添加状态</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>BEPS1</td>
+                                            <td><input type="date" ></td>
+                                            <td><input type="number" ></td>
+                                            <td><input type="number" ></td>
+                                            <td id="addBEPS1ScrapStu"></td>
+                                            <td><button type="button" class="btn btn-primary addScrap" >添加</button></td>
+                                            <td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>BEPS2</td>
+                                            <td><input type="date" ></td>
+                                            <td><input type="number" ></td>
+                                            <td><input type="number" ></td>
+                                            <td id="addBEPS2ScrapStu"></td>
+                                            <td><button type="button" class="btn btn-primary addScrap" >添加</button></td>
+                                            <td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>BEPS3</td>
+                                            <td><input type="date" ></td>
+                                            <td><input type="number" ></td>
+                                            <td><input type="number" ></td>
+                                            <td id="addBEPS3ScrapStu"></td>
+                                            <td><button type="button" class="btn btn-primary addScrap" >添加</button></td>
+                                            <td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                            </ul>
+
+                        </li>
+                        <li>
+                            <ul class="uk-subnav uk-subnav-pill " uk-switcher>
+                                <li class="topLine"><a href="#">ISHAFT</a></li>
+                                <li class="topLine"><a href="#">CEPS</a></li>
+                                <li class="topLine"><a href="#">BEPS</a></li>
+                            </ul>
+                            <ul class="uk-switcher uk-margin">
+                                <li>
+                                    <table class="table table-striped table-bordered" id="scrapIshaftTable">
+                                        <thead>
+                                        <tr>
+                                            <th>时间</th>
+                                            <th>Ishaft1值</th>
+                                            <th>Ishaft1目标值</th>
+                                            <th>Ishaft2值</th>
+                                            <th>Ishaft2目标值</th>
+                                            <th>Ishaft3值</th>
+                                            <th>Ishaft3目标值</th>
+                                            <th>Ishaft4值</th>
+                                            <th>Ishaft4目标值</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li>
+                                    <table class="table table-striped table-bordered" id="scrapCEPS">
+                                        <thead>
+                                        <tr>
+                                            <th>时间</th>
+                                            <th>CEPS1值</th>
+                                            <th>CEPS1目标值</th>
+                                            <th>CEPS2值</th>
+                                            <th>CEPS2目标值</th>
+                                            <th>CEPS3值</th>
+                                            <th>CEPS3目标值</th>
+                                            <th>CEPS4值</th>
+                                            <th>CEPS4目标值</th>
+                                            <th>CEPS5值</th>
+                                            <th>CEPS5目标值</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li>
+                                    <table class="table table-striped table-bordered" id="scrapBEPS">
+                                        <thead>
+
+                                        <tr>
+                                            <th>时间</th>
+                                            <th>BEPS1值</th>
+                                            <th>BEPS1目标值</th>
+                                            <th>BEPS2值</th>
+                                            <th>BEPS2目标值</th>
+                                            <th>BEPS3值</th>
+                                            <th>BEPS3目标值</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </li>
+                <li>
+                    <ul class="uk-subnav uk-subnav-pill " uk-switcher>
+                        <li class="topLine"><a href="#">添加型号</a></li>
+                        <li class="topLine"><a href="#">型号信息显示</a></li>
+                    </ul>
+                    <ul class="uk-switcher uk-margin">
+                        <li><table class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>型号ID</th>
+                                <th>型号名称</th>
+                                <th>所属单元</th>
+                                <th>STD</th>
+                                <th>添加状态</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><input type="number" id="addProID"></td>
+                                <td><input type="text" id="addProName"></td>
+                                <td>
+                                    <select   id="addProCell">
+                                        <option>ishaft1</option>
+                                        <option>ishaft2</option>
+                                        <option>ishaft3</option>
+                                        <option>ishaft4</option>
+                                        <option>CEPS</option>
+                                        <option>BEPS</option>
+                                    </select>
+                                </td>
+                                <td><input type="text" id="addProSTD"></td>
+                                <td id="addProStatus"></td>
+                                <td><button type="button" class="btn btn-primary" id="addProSub">添加</button></td>
+                            </tr>
+                            </tbody>
+                        </table></li>
+                        <li>
+                            <ul class="uk-subnav uk-subnav-pill " uk-switcher>
+                                <li class="topLine"><a href="#">ISHAFT1型号</a></li>
+                                <li class="topLine"><a href="#">ISHAFT2型号</a></li>
+                                <li class="topLine"><a href="#">ISHAFT3型号</a></li>
+                                <li class="topLine"><a href="#">ISHAFT4型号</a></li>
+                                <li class="topLine"><a href="#">CEPS型号</a></li>
+                                <li class="topLine"><a href="#">BEPS型号</a></li>
+                            </ul>
+                            <ul class="uk-switcher uk-margin">
+                                <li>
+                                    <table id="productIs1Message" class="table  table-bordered black-color">
+                                        <thead>
+                                        <tr>
+                                            <th>行数</th>
+                                            <th>型号ID</th>
+                                            <th>型号名称</th>
+                                            <th>所属单元</th>
+                                            <th>STD</th>
+                                            <th></th>
+
+                                        </tr>
+                                        </thead>
+
+                                    </table>
+                                </li>
+                                <li>
+                                    <table id="productIs2Message" class="table  table-bordered black-color">
+                                        <thead>
+                                        <tr>
+                                            <th>行数</th>
+                                            <th>型号ID</th>
+                                            <th>型号名称</th>
+                                            <th>所属单元</th>
+                                            <th>STD</th>
+                                        </tr>
+                                        </thead>
+
+                                    </table>
+                                </li>
+                                <li>
+                                    <table id="productIs3Message" class="table  table-bordered black-color">
+                                        <thead>
+                                        <tr>
+                                            <th>行数</th>
+                                            <th>型号ID</th>
+                                            <th>型号名称</th>
+                                            <th>所属单元</th>
+                                            <th>STD</th>
+                                        </tr>
+                                        </thead>
+
+                                    </table>
+                                </li>
+                                <li>
+                                    <table id="productIs4Message" class="table  table-bordered black-color">
+                                        <thead>
+                                        <tr>
+                                            <th>行数</th>
+                                            <th>型号ID</th>
+                                            <th>型号名称</th>
+                                            <th>所属单元</th>
+                                            <th>STD</th>
+                                        </tr>
+                                        </thead>
+
+                                    </table>
+                                </li>
+                                <li>
+                                    <table id="productCEPSMessage" class="table  table-bordered black-color">
+                                        <thead>
+                                        <tr>
+                                            <th>行数</th>
+                                            <th>型号ID</th>
+                                            <th>型号名称</th>
+                                            <th>所属单元</th>
+                                            <th>STD</th>
+                                        </tr>
+                                        </thead>
+
+                                    </table>
+                                </li>
+                                <li>
+                                    <table id="productBEPSMessage" class="table  table-bordered black-color">
+                                        <thead>
+                                        <tr>
+                                            <th>行数</th>
+                                            <th>型号ID</th>
+                                            <th>型号名称</th>
+                                            <th>所属单元</th>
+                                            <th>STD</th>
+                                        </tr>
+                                        </thead>
+
+                                    </table>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </li>
+                <li>
+                    <ul class="uk-subnav uk-subnav-pill " uk-switcher>
+                        <li class="topLine"><a href="#">添加OEE目标值</a></li>
+                        <li class="topLine"><a href="#">OEE显示</a></li>
+                    </ul>
+                    <ul class="uk-switcher uk-margin">
+                        <li>
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>产线选择</th>
+                                    <th>录入时间</th>
+                                    <th>录入目标值</th>
+                                    <th>添加状态</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <select  class="form-control" id="addOeeCell">
+                                            <option>ISHAFT1</option>
+                                            <option>ISHAFT2</option>
+                                            <option>ISHAFT3</option>
+                                            <option>ISHAFT4</option>
+                                            <option>CEPS</option>
+                                            <option>BEPS</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="date" id="addOeeDate"></td>
+                                    <td><input type="text" id="addOeeTar"></td>
+                                    <td id="addOeeStatus"></td>
+                                    <td><button type="button" class="btn btn-primary" id="addOeeSub">添加</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        <li>
+                            <ul class="uk-subnav uk-subnav-pill " uk-switcher>
+                                <li class="topLine"><a href="#">ISHAFT</a></li>
+                                <li class="topLine"><a href="#">CEPS</a></li>
+                                <li class="topLine"><a href="#">BEPS</a></li>
+                            </ul>
+                            <ul class="uk-switcher uk-margin">
+                                <li>
+                                    <table class="table table-striped table-bordered" id="oeeIshaftTable">
+                                        <thead>
+                                        <tr>
+                                            <th>时间</th>
+                                            <th>Ishaft1值</th>
+                                            <th>Ishaft1目标值</th>
+                                            <th>Ishaft2值</th>
+                                            <th>Ishaft2目标值</th>
+                                            <th>Ishaft3值</th>
+                                            <th>Ishaft3目标值</th>
+                                            <th>Ishaft4值</th>
+                                            <th>Ishaft4目标值</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li>
+                                    <table class="table table-striped table-bordered" id="oeeCEPSTable">
+                                        <thead>
+                                        <tr>
+                                            <th>时间</th>
+                                            <th>CEPS1值</th>
+                                            <th>CEPS1目标值</th>
+                                            <th>CEPS2值</th>
+                                            <th>CEPS2目标值</th>
+                                            <th>CEPS3值</th>
+                                            <th>CEPS3目标值</th>
+                                            <th>CEPS4值</th>
+                                            <th>CEPS4目标值</th>
+                                            <th>CEPS5值</th>
+                                            <th>CEPS5目标值</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li>
+                                    <table class="table table-striped table-bordered" id="oeeBEPSTable">
+                                        <thead>
+                                        <tr>
+                                            <th>时间</th>
+                                            <th>BEPS1值</th>
+                                            <th>BEPS1目标值</th>
+                                            <th>BEPS2值</th>
+                                            <th>BEPS2目标值</th>
+                                            <th>BEPS3值</th>
+                                            <th>BEPS3目标值</th>
+                                            <th>BEPS4值</th>
+                                            <th>BEPS4目标值</th>
+                                            <th>BEPS5值</th>
+                                            <th>BEPS5目标值</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </li>
+                <li>
+                    <ul class="uk-subnav uk-subnav-pill " uk-switcher>
+                        <li class="topLine"><a href="#">添加HCE目标值</a></li>
+                        <li class="topLine"><a href="#">HCE显示</a></li>
+                    </ul>
+                    <ul class="uk-switcher uk-margin">
+                        <li>
+                            <table class="table table-striped table-bordered shiftTable">
+                                <thead>
+                                <tr>
+                                    <th>产线选择</th>
+                                    <th>录入时间</th>
+                                    <th>录入目标值</th>
+                                    <th>添加状态</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <select  class="form-control" id="addHceCell">
+                                            <option>ISHAFT1</option>
+                                            <option>ISHAFT2</option>
+                                            <option>ISHAFT3</option>
+                                            <option>ISHAFT4</option>
+                                            <option>CEPS</option>
+                                            <option>BEPS</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="date" id="addHceDate"></td>
+                                    <td><input type="text" id="addHceTar"></td>
+                                    <td id="addHceStatus"></td>
+                                    <td><button type="button" class="btn btn-primary" id="addHceSub">添加</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        <li>
+                            <ul class="uk-subnav uk-subnav-pill " uk-switcher>
+                                <li class="topLine"><a href="#">ISHAFT</a></li>
+                                <li class="topLine"><a href="#">CEPS</a></li>
+                                <li class="topLine"><a href="#">BEPS</a></li>
+                            </ul>
+                            <ul class="uk-switcher uk-margin">
+                                <li>
+                                    <table class="table table-striped table-bordered" id="hceIshaftTable">
+                                        <thead>
+                                        <tr>
+                                            <th>时间</th>
+                                            <th>Ishaft1值</th>
+                                            <th>Ishaft1目标值</th>
+                                            <th>Ishaft2值</th>
+                                            <th>Ishaft2目标值</th>
+                                            <th>Ishaft3值</th>
+                                            <th>Ishaft3目标值</th>
+                                            <th>Ishaft4值</th>
+                                            <th>Ishaft4目标值</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li>
+                                    <table class="table table-striped table-bordered" id="hceCEPSTable">
+                                        <thead>
+                                        <tr>
+                                            <th>时间</th>
+                                            <th>CEPS1值</th>
+                                            <th>CEPS1目标值</th>
+                                            <th>CEPS2值</th>
+                                            <th>CEPS2目标值</th>
+                                            <th>CEPS3值</th>
+                                            <th>CEPS3目标值</th>
+                                            <th>CEPS4值</th>
+                                            <th>CEPS4目标值</th>
+                                            <th>CEPS5值</th>
+                                            <th>CEPS5目标值</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li>
+                                    <table class="table table-striped table-bordered" id="hceBEPSTable">
+                                        <thead>
+                                        <tr>
+                                            <th>时间</th>
+                                            <th>BEPS1值</th>
+                                            <th>BEPS1目标值</th>
+                                            <th>BEPS2值</th>
+                                            <th>BEPS2目标值</th>
+                                            <th>BEPS3值</th>
+                                            <th>BEPS3目标值</th>
+                                            <th>BEPS4值</th>
+                                            <th>BEPS4目标值</th>
+                                            <th>BEPS5值</th>
+                                            <th>BEPS5目标值</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </li>
+                <li>
+                    <div class=" shift">
+                        <ul class="uk-subnav uk-subnav-pill " uk-switcher>
+                            <li class="topLine"><a href="#">添加班次</a></li>
+                            <li class="topLine"><a href="#">添加休息事件</a></li>
+                        </ul>
+                        <ul class="uk-switcher uk-margin">
+                            <li>
+                                <ul class="uk-subnav uk-subnav-pill " uk-switcher>
+                                    <li class="topLine"><a href="#">ISHAFT</a></li>
+                                    <li class="topLine"><a href="#">CEPS</a></li>
+                                    <li class="topLine"><a href="#">BEPS</a></li>
+                                </ul>
+                                <ul class="uk-switcher uk-margin">
+                                    <li>
+                                        <ul class="uk-subnav uk-subnav-pill " uk-switcher>
+                                            <li class="topLine"><a href="#">ISHAFT1</a></li>
+                                            <li class="topLine"><a href="#">ISHAFT2</a></li>
+                                            <li class="topLine"><a href="#">ISHAFT3</a></li>
+                                            <li class="topLine"><a href="#">ISHAFT4</a></li>
+                                        </ul>
+                                        <ul class="uk-switcher uk-margin">
+                                            <li>
+                                                <table class="table table-striped table-bordered" id="addISHAFT1Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>产线</th>
+                                                        <th>班次</th>
+                                                        <th>添加日期</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>开班状态</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td >ISHAFT1</td>
+                                                        <td>Ashift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >ISHAFT1</td>
+                                                        <td>Bshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >ISHAFT1</td>
+                                                        <td>Cshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table class="table table-striped table-bordered" id="addISHAFT2Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>产线</th>
+                                                        <th>班次</th>
+                                                        <th>添加日期</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>开班状态</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td >ISHAFT2</td>
+                                                        <td>Ashift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >ISHAFT2</td>
+                                                        <td>Bshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >ISHAFT2</td>
+                                                        <td>Cshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table class="table table-striped table-bordered" id="addISHAFT3Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>产线</th>
+                                                        <th>班次</th>
+                                                        <th>添加日期</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>开班状态</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td >ISHAFT3</td>
+                                                        <td>Ashift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >ISHAFT3</td>
+                                                        <td>Bshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >ISHAFT3</td>
+                                                        <td>Cshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table class="table table-striped table-bordered" id="addISHAFT4Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>产线</th>
+                                                        <th>班次</th>
+                                                        <th>添加日期</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>开班状态</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td >ISHAFT4</td>
+                                                        <td>Ashift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >ISHAFT4</td>
+                                                        <td>Bshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >ISHAFT4</td>
+                                                        <td>Cshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="uk-subnav uk-subnav-pill " uk-switcher>
+                                            <li class="topLine"><a href="#">CEPS1</a></li>
+                                            <li class="topLine"><a href="#">CEPS2</a></li>
+                                            <li class="topLine"><a href="#">CEPS3</a></li>
+                                            <li class="topLine"><a href="#">CEPS4</a></li>
+                                            <li class="topLine"><a href="#">CEPS5</a></li>
+                                        </ul>
+                                        <ul class="uk-switcher uk-margin">
+                                            <li>
+                                                <table class="table table-striped table-bordered" id="addCEPS1Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>产线</th>
+                                                        <th>班次</th>
+                                                        <th>添加日期</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>开班状态</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td >CEPS1</td>
+                                                        <td>Ashift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >CEPS1</td>
+                                                        <td>Bshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >CEPS1</td>
+                                                        <td>Cshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table class="table table-striped table-bordered" id="addCEPS2Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>产线</th>
+                                                        <th>班次</th>
+                                                        <th>添加日期</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>开班状态</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td >CEPS2</td>
+                                                        <td>Ashift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >CEPS2</td>
+                                                        <td>Bshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >CEPS2</td>
+                                                        <td>Cshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table class="table table-striped table-bordered" id="addCEPS3Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>产线</th>
+                                                        <th>班次</th>
+                                                        <th>添加日期</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>开班状态</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td >CEPS3</td>
+                                                        <td>Ashift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >CEPS3</td>
+                                                        <td>Bshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >CEPS3</td>
+                                                        <td>Cshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table class="table table-striped table-bordered" id="addCEPS4Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>产线</th>
+                                                        <th>班次</th>
+                                                        <th>添加日期</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>开班状态</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td >CEPS4</td>
+                                                        <td>Ashift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >CEPS4</td>
+                                                        <td>Bshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >CEPS4</td>
+                                                        <td>Cshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table class="table table-striped table-bordered" id="addCEPS5Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>产线</th>
+                                                        <th>班次</th>
+                                                        <th>添加日期</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>开班状态</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td >CEPS5</td>
+                                                        <td>Ashift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >CEPS5</td>
+                                                        <td>Bshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >CEPS5</td>
+                                                        <td>Cshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="uk-subnav uk-subnav-pill " uk-switcher>
+                                            <li class="topLine"><a href="#">BEPS1</a></li>
+                                            <li class="topLine"><a href="#">BEPS2</a></li>
+                                            <li class="topLine"><a href="#">BEPS3</a></li>
+                                        </ul>
+                                        <ul class="uk-switcher uk-margin">
+                                            <li>
+                                                <table class="table table-striped table-bordered" id="addBEPS1Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>产线</th>
+                                                        <th>班次</th>
+                                                        <th>添加日期</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>开班状态</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td >BEPS1</td>
+                                                        <td>Ashift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >BEPS1</td>
+                                                        <td>Bshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >BEPS1</td>
+                                                        <td>Cshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table class="table table-striped table-bordered" id="addBEPS2Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>产线</th>
+                                                        <th>班次</th>
+                                                        <th>添加日期</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>开班状态</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td >BEPS2</td>
+                                                        <td>Ashift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >BEPS2</td>
+                                                        <td>Bshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >BEPS2</td>
+                                                        <td>Cshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table class="table table-striped table-bordered" id="addBEPS3Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>产线</th>
+                                                        <th>班次</th>
+                                                        <th>添加日期</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>开班状态</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td >BEPS3</td>
+                                                        <td>Ashift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >BEPS3</td>
+                                                        <td>Bshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >BEPS3</td>
+                                                        <td>Cshift</td>
+                                                        <td><input type="date" ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly ></td>
+                                                        <td><input type="text" class=" form_datetime_time" readonly  ></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td><input type="number"></td>
+                                                        <td>
+                                                            <select>
+                                                                <option>true</option>
+                                                                <option>false</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td><button type="button" class="btn btn-primary addShift" >添加</button></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>产线</th>
+                                        <th>班次</th>
+                                        <th>事件</th>
+                                        <th>开始时间</th>
+                                        <th>结束时间</th>
+                                        <th>返回状态</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td >
+                                            <select   id="eventCellName">
+                                                <option>ISHAFT1</option>
+                                                <option>ISHAFT2</option>
+                                                <option>ISHAFT3</option>
+                                                <option>ISHAFT4</option>
+
+                                                <option>CEPS1</option>
+                                                <option>CEPS2</option>
+                                                <option>CEPS3</option>
+                                                <option>CEPS4</option>
+                                                <option>CEPS5</option>
+
+                                                <option>BEPS1</option>
+                                                <option>BEPS2</option>
+                                                <option>BEPS3</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select   id="addThiType">
+                                                <option>Ashift</option>
+                                                <option>Bshift</option>
+                                                <option>Cshift</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select id="addThiEvent">
+                                                <option>吃饭</option>
+                                                <option>休息</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="text" class=" form_datetime_time" readonly id="addThiStart">
+                                        </td>
+                                        <td>
+                                            <input type="text" class=" form_datetime_time" readonly id="addThiEnd">
+                                        </td>
+
+                                        <td id="addThiStatus"></td>
+                                        <td><button type="button" class="btn btn-primary" id="thiEventSub">添加</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class=" ">
+                        <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+                            <li><a href="">当前班次信息</a></li>
+                        </ul>
+                        <ul class="uk-switcher uk-margin">
+                            <li>
+                                <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+                                    <li><a href="">ISHAFT班次</a></li>
+                                    <li><a href="">CEPS班次</a></li>
+                                    <li><a href="">BEPS班次</a></li>
+                                </ul>
+                                <ul class="uk-switcher uk-margin">
+                                    <li>
+                                        <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+                                            <li><a href="">ISHAFT1</a></li>
+                                            <li><a href="">ISHAFT1休息事件</a></li>
+                                            <li><a href="">ISHAFT2</a></li>
+                                            <li><a href="">ISHAFT2休息事件</a></li>
+                                            <li><a href="">ISHAFT3</a></li>
+                                            <li><a href="">ISHAFT3休息事件</a></li>
+                                            <li><a href="">ISHAFT4</a></li>
+                                            <li><a href="">ISHAFT4休息事件</a></li>
+                                        </ul>
+                                        <ul class="uk-switcher uk-margin">
+                                            <li>
+                                                <table  class="table  table-bordered black-color table-bordered" id="showISHAFT1Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>正常工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>产线</th>
+                                                        <th>开班状态</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table id="showISHAFT1Event" class="table  table-bordered black-color table-bordered">
+                                                <thead>
+                                                <tr>
+                                                <th>班次</th>
+                                                <th>产线</th>
+                                                <th>事件</th>
+                                                <th>开始时间</th>
+                                                <th>结束时间</th>
+                                                </tr>
+                                                </thead>
+
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table  class="table  table-bordered black-color table-bordered" id="showISHAFT2Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>正常工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>产线</th>
+                                                        <th>开班状态</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table id="showISHAFT2Event" class="table  table-bordered black-color table-bordered">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>产线</th>
+                                                        <th>事件</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                    </tr>
+                                                    </thead>
+
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table  class="table  table-bordered black-color table-bordered" id="showISHAFT3Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>正常工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>产线</th>
+                                                        <th>开班状态</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table id="showISHAFT3Event" class="table  table-bordered black-color table-bordered">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>产线</th>
+                                                        <th>事件</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                    </tr>
+                                                    </thead>
+
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table  class="table  table-bordered black-color table-bordered" id="showISHAFT4Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>正常工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>产线</th>
+                                                        <th>开班状态</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table id="showISHAFT4Event" class="table  table-bordered black-color table-bordered">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>产线</th>
+                                                        <th>事件</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                    </tr>
+                                                    </thead>
+
+                                                </table>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+                                            <li><a href="">CEPS1</a></li>
+                                            <li><a href="">CEPS2</a></li>
+                                            <li><a href="">CEPS3</a></li>
+                                            <li><a href="">CEPS4</a></li>
+                                            <li><a href="">CEPS5</a></li>
+                                        </ul>
+                                        <ul class="uk-switcher uk-margin">
+                                            <li>
+                                                <table  class="table  table-bordered black-color table-bordered" id="showCEPS1Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>正常工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>产线</th>
+                                                        <th>开班状态</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table  class="table  table-bordered black-color table-bordered" id="showCEPS2Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>正常工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>产线</th>
+                                                        <th>开班状态</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table  class="table  table-bordered black-color table-bordered" id="showCEPS3Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>正常工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>产线</th>
+                                                        <th>开班状态</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table  class="table  table-bordered black-color table-bordered" id="showCEPS4Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>正常工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>产线</th>
+                                                        <th>开班状态</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table  class="table  table-bordered black-color table-bordered" id="showCEPS5Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>正常工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>产线</th>
+                                                        <th>开班状态</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+                                            <li><a href="">BEPS1</a></li>
+                                            <li><a href="">BEPS2</a></li>
+                                            <li><a href="">BEPS3</a></li>
+                                        </ul>
+                                        <ul class="uk-switcher uk-margin">
+                                            <li>
+                                                <table  class="table  table-bordered black-color table-bordered" id="showBEPS1Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>正常工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>产线</th>
+                                                        <th>开班状态</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table  class="table  table-bordered black-color table-bordered" id="showBEPS2Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>正常工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>产线</th>
+                                                        <th>开班状态</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                            <li>
+                                                <table  class="table  table-bordered black-color table-bordered" id="showBEPS3Table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                        <th>标准节拍</th>
+                                                        <th>正常工作人数</th>
+                                                        <th>加班人数</th>
+                                                        <th>目标值</th>
+                                                        <th>产线</th>
+                                                        <th>开班状态</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!--<li>-->
+                                <!--<table id="showEvent" class="table  table-bordered black-color table-bordered">-->
+                                    <!--<thead>-->
+                                    <!--<tr>-->
+                                        <!--<th>班次</th>-->
+                                        <!--<th>产线</th>-->
+                                        <!--<th>事件</th>-->
+                                        <!--<th>开始时间</th>-->
+                                        <!--<th>结束时间</th>-->
+                                    <!--</tr>-->
+                                    <!--</thead>-->
+
+                                <!--</table>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/google-maps.js"></script>
+<script src="uikit/dist/js/uikit.min.js"></script>
+<script type="application/javascript" src="bower_components/jquery-editable-select/dist/jquery-editable-select.min.js"></script>
+<script type="application/javascript" src="bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/defineGlobal.js"></script>
+<script src="js/scrapSetNew.js"></script>
+<script src="js/showTime.js"></script>
+<script>$(document).ready(function(){$(".vertical-nav").verticalnav({speed: 400,align: "left"});});</script>
+<!--<script src="js/banciSet.js"></script>-->
+<script src="js/banciSetNew.js"></script>
+<script src="js/modelSet.js"></script>
+<script src="js/safeset.js"></script>
+<script src="js/NCOMSet.js"></script>
+<script src="js/oeeSet.js"></script>
+<script src="js/hceSet.js"></script>
+<script src="js/form_datetime.js"></script>
+
+</body>
+</html>

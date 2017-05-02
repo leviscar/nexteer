@@ -1,0 +1,23 @@
+.uk-article-title{
+    font-weight:bold;
+    text-align: center;
+}
+.conf-content{
+    /*padding-top: 2%;*/
+
+    margin-left: 2%;
+    padding-right: 2%;
+    width: 100%;
+    height: 40%;
+}
+.firstTable th{
+    /*background-color: red;*/
+    /*color: white;*/
+    font-size: 2em;
+    height: 2.2em;
+    text-align: center;
+}
+.firstTable td{
+    font-size:1.5em;
+    text-align: center;
+}

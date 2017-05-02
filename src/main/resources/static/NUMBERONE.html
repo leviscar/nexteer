@@ -13,7 +13,7 @@
 <script src="js/defineGlobal.js"></script>
 <script>
 //    //生成后台线程
-//    var worker= new Worker("http://10.1.0.40:8080/nexteer/js/Ishaft1OutPutWork.js");
+//    var worker= new Worker("http://localhost:8080/nexteer/js/Ishaft1OutPutWork.js");
 //    console.log("nice");
 //    worker.postMessage("nice");
 //    worker.onmessage = function (event) {
@@ -43,7 +43,7 @@ console.log("getIs1Out开始");
 var returnArr=[];
 $.ajax({
     type: "POST",
-    url: "http://10.1.0.40:8080/nexteer/dashboard/output",
+    url: "http://localhost:8080/nexteer/dashboard/output",
     data: JSON.stringify(Is1OutJson),
     contentType: "application/json; charset=utf-8",
     dataType: "json",

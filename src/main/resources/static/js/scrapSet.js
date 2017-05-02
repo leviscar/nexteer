@@ -63,7 +63,7 @@ $("#addIs1Scrap").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(addIs1ScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -72,7 +72,7 @@ $("#addIs1Scrap").bind("click",function () {
             console.log(JSON.stringify(data));
             console.log('nice');
             if(data.system_status==true){
-                $("#addIs1ScrapStu").html("添加报废金额成功");
+                $("#addIs1ScrapStu").html("添加成功");
             }
 
 
@@ -80,7 +80,7 @@ $("#addIs1Scrap").bind("click",function () {
         failure: function (errMsg) {
             console.log(errMsg);
             console.log('fail');
-            $("#addIs1ScrapStu").html("添加报废金额失败");
+            $("#addIs1ScrapStu").html("添加失败");
         }
 
     });
@@ -97,13 +97,13 @@ $("#addIs2Scrap").bind("click",function () {
 
     var year=addScrapTime[0];
     var month=addScrapTime[1];
-    var startday=addScrapTime[2]
+    var startday=addScrapTime[2];
     var addIs2ScrapJson=new addIs2Scrap(addScrapTime[0].toString(),addScrapTime[1].toString(),addScrapTime[2].toString(),Number($("#Is2ScrapAddValue").val()),Number($("#Is2ScrapTarValue").val()));
-    console.log(year);
+
 
     $.ajax({
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(addIs2ScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -112,7 +112,7 @@ $("#addIs2Scrap").bind("click",function () {
             console.log(JSON.stringify(data));
             console.log('nice');
             if(data.system_status==true){
-                $("#addIs2ScrapStu").html("添加报废金额成功");
+                $("#addIs2ScrapStu").html("添加成功");
             }
 
 
@@ -120,7 +120,7 @@ $("#addIs2Scrap").bind("click",function () {
         failure: function (errMsg) {
             console.log(errMsg);
             console.log('fail');
-            $("#addIs2ScrapStu").html("添加报废金额失败");
+            $("#addIs2ScrapStu").html("添加失败");
         }
 
     });
@@ -143,7 +143,7 @@ $("#addIs3Scrap").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(addIs3ScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -152,7 +152,7 @@ $("#addIs3Scrap").bind("click",function () {
             console.log(JSON.stringify(data));
             console.log('nice');
             if(data.system_status==true){
-                $("#addIs3ScrapStu").html("添加报废金额成功");
+                $("#addIs3ScrapStu").html("添加成功");
             }
 
 
@@ -160,7 +160,7 @@ $("#addIs3Scrap").bind("click",function () {
         failure: function (errMsg) {
             console.log(errMsg);
             console.log('fail');
-            $("#addIs3ScrapStu").html("添加报废金额失败");
+            $("#addIs3ScrapStu").html("添加失败");
         }
 
     });
@@ -183,7 +183,7 @@ $("#addIs4Scrap").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(addIs4ScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -192,7 +192,7 @@ $("#addIs4Scrap").bind("click",function () {
             console.log(JSON.stringify(data));
             console.log('nice');
             if(data.system_status==true){
-                $("#addIs4ScrapStu").html("添加报废金额成功");
+                $("#addIs4ScrapStu").html("添加成功");
             }
 
 
@@ -200,7 +200,7 @@ $("#addIs4Scrap").bind("click",function () {
         failure: function (errMsg) {
             console.log(errMsg);
             console.log('fail');
-            $("#addIs4ScrapStu").html("添加报废金额失败");
+            $("#addIs4ScrapStu").html("添加失败");
         }
 
     });
@@ -223,7 +223,7 @@ $("#addBEPSScrap").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(addBEPSScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -232,7 +232,7 @@ $("#addBEPSScrap").bind("click",function () {
             console.log(JSON.stringify(data));
             console.log('nice');
             if(data.system_status==true){
-                $("#addBEPSScrapStu").html("添加报废金额成功");
+                $("#addBEPSScrapStu").html("添加成功");
             }
 
 
@@ -240,7 +240,7 @@ $("#addBEPSScrap").bind("click",function () {
         failure: function (errMsg) {
             console.log(errMsg);
             console.log('fail');
-            $("#addBEPSScrapStu").html("添加报废金额失败");
+            $("#addBEPSScrapStu").html("添加失败");
         }
 
     });
@@ -263,7 +263,7 @@ $("#addCEPSScrap").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(addCEPSScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -272,7 +272,7 @@ $("#addCEPSScrap").bind("click",function () {
             console.log(JSON.stringify(data));
             console.log('nice');
             if(data.system_status==true){
-                $("#addCEPSScrapStu").html("添加报废金额成功");
+                $("#addCEPSScrapStu").html("添加成功");
             }
 
 
@@ -280,7 +280,7 @@ $("#addCEPSScrap").bind("click",function () {
         failure: function (errMsg) {
             console.log(errMsg);
             console.log('fail');
-            $("#addCEPSScrapStu").html("添加报废金额失败");
+            $("#addCEPSScrapStu").html("添加失败");
         }
 
     });
@@ -306,7 +306,7 @@ $("#addCEPSScrap").bind("click",function () {
 //
 //     $.ajax({
 //         type: "POST",
-//         url: "http://10.1.0.40:8080/nexteer/scrap-amount/add",
+//         url: "http://localhost:8080/nexteer/scrap-amount/add",
 //         data: JSON.stringify(addScrapJson),
 //         contentType: "application/json; charset=utf-8",
 //         dataType: "json",
@@ -347,7 +347,7 @@ $("#resetIs1Scrap").bind("click",function () {
 
     $.ajax({
         type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -356,7 +356,7 @@ $("#resetIs1Scrap").bind("click",function () {
             console.log(JSON.stringify(data));
             console.log('nice');
             if(data.system_status==true){
-                $("#resIs1ScrapStu").html("更新报废金额成功");
+                $("#resIs1ScrapStu").html("更新成功");
             }
             if(data.system_status==false){
                 $("#resIs1ScrapStu").html(data.log);
@@ -367,7 +367,7 @@ $("#resetIs1Scrap").bind("click",function () {
         failure: function (errMsg) {
             console.log(errMsg);
             console.log('fail');
-            $("#resIs1ScrapStu").html("更新报废金额失败");
+            $("#resIs1ScrapStu").html("更新失败");
         }
 
     });
@@ -390,7 +390,7 @@ $("#resetIs2Scrap").bind("click",function () {
 
     $.ajax({
         type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -399,7 +399,7 @@ $("#resetIs2Scrap").bind("click",function () {
             console.log(JSON.stringify(data));
             console.log('nice');
             if(data.system_status==true){
-                $("#resIs2ScrapStu").html("更新报废金额成功");
+                $("#resIs2ScrapStu").html("更新成功");
             }
             if(data.system_status==false){
                 $("#resIs2ScrapStu").html(data.log);
@@ -410,7 +410,7 @@ $("#resetIs2Scrap").bind("click",function () {
         failure: function (errMsg) {
             console.log(errMsg);
             console.log('fail');
-            $("#resIs2ScrapStu").html("更新报废金额失败");
+            $("#resIs2ScrapStu").html("更新失败");
         }
 
     });
@@ -433,7 +433,7 @@ $("#resetIs3Scrap").bind("click",function () {
 
     $.ajax({
         type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -442,7 +442,7 @@ $("#resetIs3Scrap").bind("click",function () {
             console.log(JSON.stringify(data));
             console.log('nice');
             if(data.system_status==true){
-                $("#resIs3ScrapStu").html("更新报废金额成功");
+                $("#resIs3ScrapStu").html("更新成功");
             }
             if(data.system_status==false){
                 $("#resIs3ScrapStu").html(data.log);
@@ -453,7 +453,7 @@ $("#resetIs3Scrap").bind("click",function () {
         failure: function (errMsg) {
             console.log(errMsg);
             console.log('fail');
-            $("#resIs3ScrapStu").html("更新报废金额失败");
+            $("#resIs3ScrapStu").html("更新失败");
         }
 
     });
@@ -476,7 +476,7 @@ $("#resetIs4Scrap").bind("click",function () {
 
     $.ajax({
         type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -485,7 +485,7 @@ $("#resetIs4Scrap").bind("click",function () {
             console.log(JSON.stringify(data));
             console.log('nice');
             if(data.system_status==true){
-                $("#resIs4ScrapStu").html("更新报废金额成功");
+                $("#resIs4ScrapStu").html("更新成功");
             }
             if(data.system_status==false){
                 $("#resIs4ScrapStu").html(data.log);
@@ -496,7 +496,7 @@ $("#resetIs4Scrap").bind("click",function () {
         failure: function (errMsg) {
             console.log(errMsg);
             console.log('fail');
-            $("#resIs4ScrapStu").html("更新报废金额失败");
+            $("#resIs4ScrapStu").html("更新失败");
         }
 
     });
@@ -519,7 +519,7 @@ $("#resetBEPSScrap").bind("click",function () {
 
     $.ajax({
         type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -528,7 +528,7 @@ $("#resetBEPSScrap").bind("click",function () {
             console.log(JSON.stringify(data));
             console.log('nice');
             if(data.system_status==true){
-                $("#resBEPSScrapStu").html("更新报废金额成功");
+                $("#resBEPSScrapStu").html("更新成功");
             }
             if(data.system_status==false){
                 $("#resBEPSScrapStu").html(data.log);
@@ -539,7 +539,7 @@ $("#resetBEPSScrap").bind("click",function () {
         failure: function (errMsg) {
             console.log(errMsg);
             console.log('fail');
-            $("#resBEPSScrapStu").html("更新报废金额失败");
+            $("#resBEPSScrapStu").html("更新失败");
         }
 
     });
@@ -562,7 +562,7 @@ $("#resetCEPSScrap").bind("click",function () {
 
     $.ajax({
         type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+        url: "http://localhost:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -571,7 +571,7 @@ $("#resetCEPSScrap").bind("click",function () {
             console.log(JSON.stringify(data));
             console.log('nice');
             if(data.system_status==true){
-                $("#resCEPSScrapStu").html("更新报废金额成功");
+                $("#resCEPSScrapStu").html("更新成功");
             }
             if(data.system_status==false){
                 $("#resCEPSScrapStu").html(data.log);
@@ -582,7 +582,7 @@ $("#resetCEPSScrap").bind("click",function () {
         failure: function (errMsg) {
             console.log(errMsg);
             console.log('fail');
-            $("#resCEPSScrapStu").html("更新报废金额失败");
+            $("#resCEPSScrapStu").html("更新失败");
         }
 
     });
@@ -605,7 +605,7 @@ $("#resetCEPSScrap").bind("click",function () {
 //
 //     $.ajax({
 //         type: "POST",
-//         url: "http://10.1.0.40:8080/nexteer/scrap-amount/add",
+//         url: "http://localhost:8080/nexteer/scrap-amount/add",
 //         data: JSON.stringify(resScrapJson),
 //         contentType: "application/json; charset=utf-8",
 //         dataType: "json",

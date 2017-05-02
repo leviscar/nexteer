@@ -10,9 +10,11 @@
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="bower_components/jquery-editable-select/dist/jquery-editable-select.min.css">
     <link rel="stylesheet" href="bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="uikit/dist/css/uikit.min.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
     <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <link rel="stylesheet" href="css/confContent.css">
     <style type="text/css">
         .black-color{
             color:black;
@@ -31,7 +33,7 @@
             font-size: 1.5em;
         }
         select{
-            width: 30% !important;
+            width: 60% !important;
         }
     </style>
 </head>
@@ -46,7 +48,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://10.1.0.40:8080/nexteer/index.html"><img src="images/icon.png" alt="Nexteer"></a>
+            <a class="navbar-brand" href="http://localhost:8080/nexteer/index.html"><img src="images/icon.png" alt="Nexteer"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -54,25 +56,25 @@
             <ul class="nav navbar-nav">
                 <p class="navbar-text center-block" >系统设置</p>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/safeConf.html" >安全运行天数设置</a>
+                    <a href="http://localhost:8080/nexteer/safeConf.html" >安全运行天数设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/qualityConf.html" >质量无抱怨天数设置</a>
+                    <a href="http://localhost:8080/nexteer/qualityConf.html" >质量无抱怨天数设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/scrapConf.html" >报废金额设置</a>
+                    <a href="http://localhost:8080/nexteer/scrapConf.html" >报废金额设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/modelConf.html" >型号信息设置</a>
+                    <a href="http://localhost:8080/nexteer/modelConf.html" >型号信息设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/shiftConf.html" >班次信息设置</a>
+                    <a href="http://localhost:8080/nexteer/shiftConf.html" >班次信息设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/hceConf.html" >人员利用率设置</a>
+                    <a href="http://localhost:8080/nexteer/hceConf.html" >人员利用率设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/oeeConf.html" >可动率设置</a>
+                    <a href="http://localhost:8080/nexteer/oeeConf.html" >可动率设置</a>
                 </li>
 
             </ul>
@@ -85,48 +87,37 @@
 </nav>
 <div class="row">
     <div class="col-md-12">
-        <form>
-            <div>
-                <div class="panel panel-default">
-                    <div class="panel-heading"><p>可动率</p></div>
-                    <div class="panel-body">
-                        <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myShowOeeModal">
-                            添加可动率目标值
-                        </button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="myShowOeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myAddOeeLabel">添加可动率目标值</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p><label for="addOeeDate">录入时间</label><input type="date" id="addOeeDate"></p>
-                                        <p><label for="addOeeCell">所属单元</label><select  class="form-control" id="addOeeCell">
-                                            <option>ISHAFT1</option>
-                                            <option>ISHAFT2</option>
-                                            <option>ISHAFT3</option>
-                                            <option>ISHAFT4</option>
-                                            <option>CEPS</option>
-                                            <option>BEPS</option>
-                                        </select>
-                                        <p><label for="addOeeTar">录入目标值</label><input type="text" id="addOeeTar"></p>
-                                        <p id="addOeeStatus">未知</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" id="addOeeSub">Save changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <hr class="active">
-        </form>
+        <div class="uk-article-title ">OEE Configuration</div>
+        <div class="conf-content ">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>产线选择</th>
+                    <th>录入时间</th>
+                    <th>录入目标值</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <select  class="form-control" id="addOeeCell">
+                            <option>ISHAFT1</option>
+                            <option>ISHAFT2</option>
+                            <option>ISHAFT3</option>
+                            <option>ISHAFT4</option>
+                            <option>CEPS</option>
+                            <option>BEPS</option>
+                        </select>
+                    </td>
+                    <td><input type="date" id="addOeeDate"></td>
+                    <td><input type="text" id="addOeeTar"></td>
+                    <td id="addOeeStatus"></td>
+                    <td><button type="button" class="btn btn-primary" id="addOeeSub">添加</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
     </div>
 
@@ -137,6 +128,7 @@
 <script type="text/javascript" src="js/google-maps.js"></script>
 <script type="application/javascript" src="bower_components/jquery-editable-select/dist/jquery-editable-select.min.js"></script>
 <script type="application/javascript" src="bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="application/javascript" src="uikit/dist/js/uikit.js"></script>
 <script src="js/defineGlobal.js"></script>
 <script src="js/oeeSet.js"></script>
 <script src="js/form_datetime.js"></script>

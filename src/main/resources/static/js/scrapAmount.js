@@ -28,7 +28,7 @@ var curTime = judgeTime(Uyear)+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday-1);
 function showScrapData() {
     // $.ajax({
     //     type: "POST",
-    //     url: "http://10.1.0.40:8080/nexteer/scrap-amount/getByDate",
+    //     url: "http://localhost:8080/nexteer/scrap-amount/getByDate",
     //     data: JSON.stringify(nowScrapString),
     //     contentType: "application/json; charset=utf-8",
     //     dataType: "json",
@@ -43,7 +43,7 @@ function showScrapData() {
     //         console.log("载入报废金额失败。。");
     //     }
     // });
-    $.get("http://10.1.0.40:8080/nexteer/scrap-amount/day?date="+curTime,function (data) {
+    $.get("http://localhost:8080/nexteer/scrap-amount/day?date="+curTime,function (data) {
             $("#BEPSScrapAmount").html($.parseJSON(data).beps_value);
             $("#CEPSScrapAmount").html($.parseJSON(data).ceps_value);
             console.log($.parseJSON(data));

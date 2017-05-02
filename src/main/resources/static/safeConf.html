@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
     <link rel="stylesheet" href="css/mainboard.css" type="text/css">
+    <link rel="stylesheet" href="uikit/dist/css/uikit.min.css">
+    <link rel="stylesheet" href="css/confContent.css">
     <style type="text/css">
         .black-color{
             color:black;
@@ -33,9 +35,13 @@
         select{
             width: 30% !important;
         }
+        .border-line{
+            border: 1px solid #000000;
+        }
     </style>
+
 </head>
-<body>
+<body >
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -46,7 +52,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://10.1.0.40:8080/nexteer/index.html"><img src="images/icon.png" alt="Nexteer"></a>
+            <a class="navbar-brand" href="http://localhost:8080/nexteer/index.html"><img src="images/icon.png" alt="Nexteer"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -54,25 +60,25 @@
             <ul class="nav navbar-nav">
                 <p class="navbar-text center-block" >系统设置</p>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/safeConf.html" >安全运行天数设置</a>
+                    <a href="http://localhost:8080/nexteer/safeConf.html" >安全运行天数设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/qualityConf.html" >质量无抱怨天数设置</a>
+                    <a href="http://localhost:8080/nexteer/qualityConf.html" >质量无抱怨天数设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/scrapConf.html" >报废金额设置</a>
+                    <a href="http://localhost:8080/nexteer/scrapConf.html" >报废金额设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/modelConf.html" >型号信息设置</a>
+                    <a href="http://localhost:8080/nexteer/modelConf.html" >型号信息设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/shiftConf.html" >班次信息设置</a>
+                    <a href="http://localhost:8080/nexteer/shiftConf.html" >班次信息设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/hceConf.html" >人员利用率设置</a>
+                    <a href="http://localhost:8080/nexteer/hceConf.html" >人员利用率设置</a>
                 </li>
                 <li >
-                    <a href="http://10.1.0.40:8080/nexteer/oeeConf.html" >可动率设置</a>
+                    <a href="http://localhost:8080/nexteer/oeeConf.html" >可动率设置</a>
                 </li>
 
             </ul>
@@ -85,128 +91,93 @@
 </nav>
 <div class="row">
     <div class="col-md-12">
-        <form>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <p>安全运行天数设置</p>
-                </div>
-                <div class="panel-body">
-                    <!--<button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#getDayModal">获得指定日期安全天数</button>-->
-                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#startDateModal">指定安全运行天数</button>
-                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#desDateModal">配置损工事件</button>
-                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#logDateModal">配置可记录事故</button>
-                    <button type="button" value="txt" class="btn btn-sm " data-toggle="modal" data-target="#resetDateModal">重置安全运行天数</button>
-                    <div class="modal fade" id="getDayModal" tabindex="-1" role="dialog" aria-labelledby="mygetDayModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="mygetDayModalLabel">获取指定日期安全天数</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p><label for="getDayTime">选择指定日期</label>&nbsp;&nbsp;<input type="date" id="getDayTime"></p>
-                                    <hr class="active">
-                                    <p id="getDayStu">未知</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="getDay">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="startDateModal" tabindex="-1" role="dialog" aria-labelledby="mystartDateModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="mystartDateModalLabel">指定安全运行天数</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p><label for="startDateTime">更新时间</label>&nbsp;&nbsp;<input type="date" id="startDateTime"></p>
-                                    <hr class="active">
-                                    <p><label for="startDateValue">更新安全天数</label>&nbsp;&nbsp;<input type="number" id="startDateValue"></p>
-                                    <hr class="active">
-                                    <p id="startDateStu">未知</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="startDate">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="resetDateModal" tabindex="-1" role="dialog" aria-labelledby="myresetDateModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myresetDateModalLabel">重置安全运行天数</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p><label for="resetDateTime">重置时间</label>&nbsp;&nbsp;<input type="date" id="resetDateTime"></p>
-                                    <hr class="active">
-                                    <p><label for="resetDateValue">输入错误信息</label>&nbsp;&nbsp;<input type="text" id="resetDateValue"></p>
-                                    <hr class="active">
-                                    <p id="resetDateStu">未知</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="resetDate">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="logDateModal" tabindex="-1" role="dialog" aria-labelledby="mylogDateModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="mylogDateModalLabel">配置可记录事件</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p><label for="logDateTime">可记录事件时间</label>&nbsp;&nbsp;<input type="date" id="logDateTime"></p>
-                                    <hr class="active">
-                                    <p><label for="logDateValue">记录信息</label>&nbsp;&nbsp;<input type="text" id="logDateValue"></p>
-                                    <hr class="active">
-                                    <p id="logDateStu">未知</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="logDate">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="desDateModal" tabindex="-1" role="dialog" aria-labelledby="mydesDateModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="mydesDateModalLabel">配置损工事件</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p><label for="desDateTime">损工事件时间</label>&nbsp;&nbsp;<input type="date" id="desDateTime"></p>
-                                    <hr class="active">
-                                    <p><label for="desDateValue">损工信息</label>&nbsp;&nbsp;<input type="text" id="desDateValue"></p>
-                                    <hr class="active">
-                                    <p id="desDateStu">未知</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="desDate">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="uk-article-title ">Safe Configuration</div>
+        <div class="conf-content ">
+            <!--<form >-->
+            <!--<ul class="uk-subnav uk-subnav-pill" uk-switcher>-->
+            <!--<li><a href="#">指定安全运行天数</a></li>-->
+            <!--<li><a href="#">配置损工事件</a></li>-->
+            <!--<li><a href="#">配置可记录事件</a></li>-->
+            <!--<li><a href="#">重置安全运行天数</a></li>-->
+            <!--</ul>-->
 
-                    <p id="safeSearch"></p>
-                </div>
-
-            </div>
-            <hr class="active">
-        </form>
-
+            <!--<ul class="uk-switcher uk-margin">-->
+            <!--<li>-->
+            <!--<p><label for="startDateTime">更新时间</label>&nbsp;&nbsp;<input type="date" id="startDateTime"></p>-->
+            <!--<hr class="active">-->
+            <!--<p><label for="startDateValue">更新安全天数</label>&nbsp;&nbsp;<input type="number" id="startDateValue"></p>-->
+            <!--<hr class="active">-->
+            <!--<p id="startDateStu">未知</p>-->
+            <!--<button type="button" class="btn btn-primary" id="startDate">Save changes</button>-->
+            <!--</li>-->
+            <!--<li>-->
+            <!--<p><label for="desDateTime">损工事件时间</label>&nbsp;&nbsp;<input type="date" id="desDateTime"></p>-->
+            <!--<hr class="active">-->
+            <!--<p><label for="desDateValue">损工信息</label>&nbsp;&nbsp;<input type="text" id="desDateValue"></p>-->
+            <!--<hr class="active">-->
+            <!--<p id="desDateStu">未知</p>-->
+            <!--<button type="button" class="btn btn-primary" id="desDate">Save changes</button>-->
+            <!--</li>-->
+            <!--<li>-->
+            <!--<p><label for="logDateTime">可记录事件时间</label>&nbsp;&nbsp;<input type="date" id="logDateTime"></p>-->
+            <!--<hr class="active">-->
+            <!--<p><label for="logDateValue">记录信息</label>&nbsp;&nbsp;<input type="text" id="logDateValue"></p>-->
+            <!--<hr class="active">-->
+            <!--<p id="logDateStu">未知</p>-->
+            <!--<button type="button" class="btn btn-primary" id="logDate">Save changes</button>-->
+            <!--</li>-->
+            <!--<li>-->
+            <!--<p><label for="resetDateTime">重置时间</label>&nbsp;&nbsp;<input type="date" id="resetDateTime"></p>-->
+            <!--<hr class="active">-->
+            <!--<p><label for="resetDateValue">输入错误信息</label>&nbsp;&nbsp;<input type="text" id="resetDateValue"></p>-->
+            <!--<hr class="active">-->
+            <!--<p id="resetDateStu">未知</p>-->
+            <!--<button type="button" class="btn btn-primary" id="resetDate">Save changes</button>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</form>-->
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>配置选项</th>
+                    <th>配置时间</th>
+                    <th>配置信息</th>
+                    <th>返回状态</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>指定安全运行天数</td>
+                    <td><input type="date" id="startDateTime"></td>
+                    <td><input type="number" id="startDateValue"></td>
+                    <td id="startDateStu"></td>
+                    <td><button type="button" class="btn btn-primary" id="startDate">提交</button></td>
+                </tr>
+                <tr>
+                    <td>配置损工事件</td>
+                    <td><input type="date" id="desDateTime"></td>
+                    <td><input type="text" id="desDateValue"></td>
+                    <td id="desDateStu"></td>
+                    <td><button type="button" class="btn btn-primary" id="desDate">提交</button></td>
+                </tr>
+                <tr>
+                    <td>配置可记录事件</td>
+                    <td><input type="date" id="logDateTime"></td>
+                    <td><input type="text" id="logDateValue"></td>
+                    <td><p id="logDateStu"></p></td>
+                    <td><button type="button" class="btn btn-primary" id="logDate">提交</button></td>
+                </tr>
+                <tr>
+                    <td>重置安全运行天数</td>
+                    <td><input type="date" id="resetDateTime"></td>
+                    <td><input type="text" id="resetDateValue"></td>
+                    <td id="resetDateStu"></td>
+                    <td><button type="button" class="btn btn-primary" id="resetDate">提交</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div>
@@ -214,11 +185,31 @@
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/google-maps.js"></script>
+<script src="uikit/dist/js/uikit.min.js"></script>
 <script type="application/javascript" src="bower_components/jquery-editable-select/dist/jquery-editable-select.min.js"></script>
 <script type="application/javascript" src="bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script src="js/defineGlobal.js"></script>
 <script src="js/safeset.js"></script>
 <script src="js/form_datetime.js"></script>
+<script>
+   var yearLLL = 0;
+   var callback =function (nice) {
+     yearLLL=nice;
+     return yearLLL;
+   };
+    //获取全部不安全的日期信息
+   function getFunc(callback) {
+        $.get("http://localhost:8080/nexteer/safety-date/unsafe", function (data) {
+            var nice=JSON.stringify(data);
+            console.log(data);
+            good = callback(nice);
+            return good;
+        });
+    }
 
+    console.log(getFunc());
+    console.log(yearLLL);
+//    console.log(callback());
+</script>
 </body>
 </html>

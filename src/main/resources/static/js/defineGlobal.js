@@ -15,4 +15,4 @@ Udate=new Date();
 Uyear=Udate.getFullYear();
 Umonth=Udate.getMonth()+1;
 Uday=Udate.getDate();
-showSeconds= 6;
+showSeconds= 3;
