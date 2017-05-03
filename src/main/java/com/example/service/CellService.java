@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.enumtype.Cell;
 import com.example.model.ProductInfo;
+import com.example.repository.BepsProductInfoRepo;
 import com.example.repository.CepsProductInfoRepo;
 import com.example.repository.Ishaft1ProductInfoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,12 @@ import java.util.List;
 public class CellService {
     private Ishaft1ProductInfoRepo ishaft1ProductInfoRepo;
     private CepsProductInfoRepo cepsProductInfoRepo;
-
+    private BepsProductInfoRepo bepsProductInfoRepo;
     @Autowired
-    public CellService(Ishaft1ProductInfoRepo ishaft1ProductInfoRepo, CepsProductInfoRepo cepsProductInfoRepo) {
+    public CellService(Ishaft1ProductInfoRepo ishaft1ProductInfoRepo, CepsProductInfoRepo cepsProductInfoRepo, BepsProductInfoRepo bepsProductInfoRepo) {
         this.ishaft1ProductInfoRepo = ishaft1ProductInfoRepo;
         this.cepsProductInfoRepo = cepsProductInfoRepo;
+        this.bepsProductInfoRepo = bepsProductInfoRepo;
     }
 
     /**
@@ -38,7 +40,7 @@ public class CellService {
         String stationId;
         switch (cell) {
             case ISHAFT1:
-                ishaft1ProductInfoRepo.getByPeriod(start, end);
+                products = ishaft1ProductInfoRepo.getByPeriod(start, end);
                 break;
             case ISHAFT2:
                 break;
@@ -47,10 +49,15 @@ public class CellService {
             case ISHAFT4:
                 break;
             case BEPS1:
+                stationId = "SD001330X01";
+                products = bepsProductInfoRepo.getByPeriodAndStationId(start, end, stationId);
                 break;
             case BEPS2:
+                stationId = "SD001343X01";
+                products = bepsProductInfoRepo.getByPeriodAndStationId(start, end, stationId);
                 break;
             case BEPS3:
+                products = bepsProductInfoRepo.getCell5ByPeriod(start, end);
                 break;
             case CEPS1:
                 stationId = "SD000094X02";
@@ -85,11 +92,11 @@ public class CellService {
      * @return
      */
     public List<Date> getTopNProducts(Date start, Date end, int topN, Cell cell) {
-        List<Date> topNProduct = new ArrayList<>();
+        List<Date> topNProducts = new ArrayList<>();
         String stationId;
         switch (cell) {
             case ISHAFT1:
-                topNProduct = ishaft1ProductInfoRepo.getCurBeats(start, end, topN);
+                topNProducts = ishaft1ProductInfoRepo.getCurBeats(start, end, topN);
                 break;
             case ISHAFT2:
                 break;
@@ -98,32 +105,37 @@ public class CellService {
             case ISHAFT4:
                 break;
             case BEPS1:
+                stationId = "SD001330X01";
+                topNProducts = bepsProductInfoRepo.getTopN(start, end, topN, stationId);
                 break;
             case BEPS2:
+                stationId = "SD001343X01";
+                topNProducts = bepsProductInfoRepo.getTopN(start, end, topN, stationId);
                 break;
             case BEPS3:
+                topNProducts = bepsProductInfoRepo.getCell5TopN(start, end, topN);
                 break;
             case CEPS1:
                 stationId = "SD000094X02";
-                topNProduct = cepsProductInfoRepo.getTopN(start, end, topN, stationId);
+                topNProducts = cepsProductInfoRepo.getTopN(start, end, topN, stationId);
                 break;
             case CEPS2:
                 stationId = "SD000102X01";
-                topNProduct = cepsProductInfoRepo.getTopN(start, end, topN, stationId);
+                topNProducts = cepsProductInfoRepo.getTopN(start, end, topN, stationId);
                 break;
             case CEPS3:
                 stationId = "SD000107X01";
-                topNProduct = cepsProductInfoRepo.getTopN(start, end, topN, stationId);
+                topNProducts = cepsProductInfoRepo.getTopN(start, end, topN, stationId);
                 break;
             case CEPS4:
                 stationId = "SD000122X01";
-                topNProduct = cepsProductInfoRepo.getTopN(start, end, topN, stationId);
+                topNProducts = cepsProductInfoRepo.getTopN(start, end, topN, stationId);
                 break;
             case CEPS5:
-                topNProduct = cepsProductInfoRepo.getCell5TopN(start, end, topN);
+                topNProducts = cepsProductInfoRepo.getCell5TopN(start, end, topN);
                 break;
         }
-        return topNProduct;
+        return topNProducts;
     }
 
     /**
@@ -145,10 +157,13 @@ public class CellService {
             case ISHAFT4:
                 break;
             case BEPS1:
+                cellId = 4;
                 break;
             case BEPS2:
+                cellId = 5;
                 break;
             case BEPS3:
+                cellId = 7;
                 break;
             case CEPS1:
                 cellId = 11;

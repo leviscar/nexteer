@@ -5,23 +5,24 @@ import com.example.enumtype.ShiftType;
 import com.example.model.ProductInfo;
 import com.example.model.ProductModel;
 import com.example.model.WorkShift;
-import com.example.repository.CepsProductInfoRepo;
-import com.example.repository.Ishaft1ProductInfoRepo;
-import com.example.service.UnitStatusService;
 import com.example.repository.ProductModelRepo;
 import com.example.repository.WorkShiftRepo;
+import com.example.service.CellService;
+import com.example.service.UnitStatusService;
 import com.example.util.DateFormat;
 import com.example.util.Function;
 import com.example.util.ModelOutput;
 import com.example.util.OutputTool;
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by mrpan on 2017/3/28.
@@ -30,20 +31,17 @@ import java.util.*;
 @RequestMapping(value = "/dashboard")
 public class DashboardController {
     private WorkShiftRepo workShiftRepo;
-    private Ishaft1ProductInfoRepo ishaft1ProductInfoRepo;
     private ProductModelRepo productModelRepo;
     private UnitStatusService unitStatusService;
-    private CepsProductInfoRepo cepsProductInfoRepo;
+    private CellService cellService;
 
     @Autowired
-    public DashboardController(WorkShiftRepo workShiftRepo, Ishaft1ProductInfoRepo ishaft1ProductInfoRepo
-            , ProductModelRepo productModelRepo, UnitStatusService unitStatusService
-            , CepsProductInfoRepo cepsProductInfoRepo) {
+    public DashboardController(WorkShiftRepo workShiftRepo, ProductModelRepo productModelRepo
+            , UnitStatusService unitStatusService, CellService cellService) {
         this.workShiftRepo = workShiftRepo;
-        this.ishaft1ProductInfoRepo = ishaft1ProductInfoRepo;
         this.productModelRepo = productModelRepo;
         this.unitStatusService = unitStatusService;
-        this.cepsProductInfoRepo = cepsProductInfoRepo;
+        this.cellService = cellService;
     }
 
     /**
@@ -123,44 +121,7 @@ public class DashboardController {
         List<Date> dateList = OutputTool.changeShiftDate(curDate, workShift);
         Date startDate = dateList.get(0);
 
-        List<ProductInfo> products = new ArrayList<>();
-        String stationId;
-        switch (cell) {
-            case ISHAFT1:
-                products = ishaft1ProductInfoRepo.getByPeriod(startDate, curDate);
-                break;
-            case ISHAFT2:
-                break;
-            case ISHAFT3:
-                break;
-            case ISHAFT4:
-                break;
-            case BEPS1:
-                break;
-            case BEPS2:
-                break;
-            case BEPS3:
-                break;
-            case CEPS1:
-                stationId = "SD000094X02";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                break;
-            case CEPS2:
-                stationId = "SD000102X01";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                break;
-            case CEPS3:
-                stationId = "SD000107X01";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                break;
-            case CEPS4:
-                stationId = "SD000122X01";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                break;
-            case CEPS5:
-                products = cepsProductInfoRepo.getCell5ByPeriod(startDate, curDate);
-                break;
-        }
+        List<ProductInfo> products = cellService.getProducts(startDate, curDate, cell);
 
         int normalWorkerNum = workShift.getNormalWorkerNum();
         int overtimeWorkerNum = workShift.getOvertimeWorkerNum();
@@ -246,44 +207,7 @@ public class DashboardController {
         List<Date> dateList = OutputTool.changeShiftDate(curDate, workShift);
         Date startDate = dateList.get(0);
 
-        List<ProductInfo> products = new ArrayList<>();
-        String stationId;
-        switch (cell) {
-            case ISHAFT1:
-                products = ishaft1ProductInfoRepo.getByPeriod(startDate, curDate);
-                break;
-            case ISHAFT2:
-                break;
-            case ISHAFT3:
-                break;
-            case ISHAFT4:
-                break;
-            case BEPS1:
-                break;
-            case BEPS2:
-                break;
-            case BEPS3:
-                break;
-            case CEPS1:
-                stationId = "SD000094X02";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                break;
-            case CEPS2:
-                stationId = "SD000102X01";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                break;
-            case CEPS3:
-                stationId = "SD000107X01";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                break;
-            case CEPS4:
-                stationId = "SD000122X01";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                break;
-            case CEPS5:
-                products = cepsProductInfoRepo.getCell5ByPeriod(startDate, curDate);
-                break;
-        }
+        List<ProductInfo> products = cellService.getProducts(startDate, curDate, cell);
 
         int standardBeats = workShift.getStandardBeat();
         long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
@@ -339,44 +263,7 @@ public class DashboardController {
         curDate = Function.addOneDay(startDate, curDate);
 
         // get the current product output
-        List<ProductInfo> products = new ArrayList<>();
-        String stationId;
-        switch (cell) {
-            case ISHAFT1:
-                products = ishaft1ProductInfoRepo.getByPeriod(startDate, curDate);
-                break;
-            case ISHAFT2:
-                break;
-            case ISHAFT3:
-                break;
-            case ISHAFT4:
-                break;
-            case BEPS1:
-                break;
-            case BEPS2:
-                break;
-            case BEPS3:
-                break;
-            case CEPS1:
-                stationId = "SD000094X02";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                break;
-            case CEPS2:
-                stationId = "SD000102X01";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                break;
-            case CEPS3:
-                stationId = "SD000107X01";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                break;
-            case CEPS4:
-                stationId = "SD000122X01";
-                products = cepsProductInfoRepo.getByPeriodAndStationId(startDate, curDate, stationId);
-                break;
-            case CEPS5:
-                products = cepsProductInfoRepo.getCell5ByPeriod(startDate, curDate);
-                break;
-        }
+        List<ProductInfo> products = cellService.getProducts(startDate, curDate, cell);
         int curNum = products.size();
         object.addProperty("curr_output", curNum);
 
