@@ -97,7 +97,7 @@ function showWeek() {
     var BEPShceValueArr=[];
     var CEPShceValueArr=[];
     var hceShowX=[];
-    var urlString = "http://10.1.0.40:8080/nexteer/hce/week/ISHAFT1?date="+curr_time;
+    var urlString = "http://localhost:8080/nexteer/hce/week/ISHAFT1?date="+curr_time;
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -281,7 +281,7 @@ $("#showWeek").bind("click",function () {
     var BEPShceValueArr=[];
     var CEPShceValueArr=[];
     var hceShowX=[];
-    var urlString = "http://10.1.0.40:8080/nexteer/hce/week/ISHAFT1?date="+curr_time;
+    var urlString = "http://localhost:8080/nexteer/hce/week/ISHAFT1?date="+curr_time;
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -460,7 +460,7 @@ $("#showMonth").bind("click",function (){
         var BEPShceValueArr=[];
         var CEPShceValueArr=[];
         var hceShowX=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/hce/month/ISHAFT1?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/hce/month/ISHAFT1?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -652,7 +652,7 @@ $("#selectMonthSub").bind("click",function (){
         var BEPShceValueArr=[];
         var CEPShceValueArr=[];
         var hceShowX=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/hce/month/ISHAFT1?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/hce/month/ISHAFT1?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -843,7 +843,7 @@ $("#showYear").bind("click",function () {
         var BEPShceValueArr=[];
         var CEPShceValueArr=[];
         var hceShowX=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/hce/year/ISHAFT1?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/hce/year/ISHAFT1?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -1032,7 +1032,7 @@ $("#selectYearSub").bind("click",function () {
         var BEPShceValueArr=[];
         var CEPShceValueArr=[];
         var hceShowX=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/hce/year/ISHAFT1?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/hce/year/ISHAFT1?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -1241,7 +1241,7 @@ $("#showPeriod").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/hce-amount/getByPeriod",
+        url: "http://localhost:8080/nexteer/hce-amount/getByPeriod",
         data: JSON.stringify(showPeriodJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",

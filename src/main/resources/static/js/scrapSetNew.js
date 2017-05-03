@@ -56,7 +56,7 @@ function formOnload()
 function getScrapData() {
     var WeekDate=formOnload();
     console.log(WeekDate);
-    $.get("http://10.1.0.40:8080/nexteer/scrap-amount/week?date="+WeekDate[6], function (data) {
+    $.get("http://localhost:8080/nexteer/scrap-amount/week?date="+WeekDate[6], function (data) {
         console.log(data);
         var myData=[];
         var myCEPSData=[];
@@ -554,7 +554,7 @@ $(document).ready(function(){
                 'Content-Type': 'application/json'
             },
             type: "POST",
-            url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+            url: "http://localhost:8080/nexteer/scrap-amount",
             data: JSON.stringify(addInputJson),
             dataType: "json",
             success: function (data) {
@@ -596,7 +596,7 @@ $(document).ready(function(){
                 'Content-Type': 'application/json'
             },
             type: "POST",
-            url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+            url: "http://localhost:8080/nexteer/scrap-amount",
             data: JSON.stringify(addInputJson),
             dataType: "json",
             success: function (data) {
@@ -638,7 +638,7 @@ $(document).ready(function(){
                 'Content-Type': 'application/json'
             },
             type: "POST",
-            url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+            url: "http://localhost:8080/nexteer/scrap-amount",
             data: JSON.stringify(addInputJson),
             dataType: "json",
             success: function (data) {
@@ -683,7 +683,7 @@ $(document).ready(function(){
                 'Content-Type': 'application/json'
             },
             type: "PATCH",
-            url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+            url: "http://localhost:8080/nexteer/scrap-amount",
             data: JSON.stringify(addInputJson),
             dataType: "json",
             success: function (data) {
@@ -727,7 +727,7 @@ $(document).ready(function(){
                 'Content-Type': 'application/json'
             },
             type: "PATCH",
-            url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+            url: "http://localhost:8080/nexteer/scrap-amount",
             data: JSON.stringify(addInputJson),
             dataType: "json",
             success: function (data) {
@@ -771,7 +771,7 @@ $(document).ready(function(){
                 'Content-Type': 'application/json'
             },
             type: "PATCH",
-            url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+            url: "http://localhost:8080/nexteer/scrap-amount",
             data: JSON.stringify(addInputJson),
             dataType: "json",
             success: function (data) {

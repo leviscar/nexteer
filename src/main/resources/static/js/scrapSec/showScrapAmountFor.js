@@ -144,7 +144,7 @@ function showWeek() {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    $.get("http://10.1.0.40:8080/nexteer/scrap-amount/week?date="+WeekDate[6], function (data) {
+    $.get("http://localhost:8080/nexteer/scrap-amount/week?date="+WeekDate[6], function (data) {
             $.each($.parseJSON(data), function (i, model) {
                 switch (model.addDate){
                     case WeekDate[0]:
@@ -718,7 +718,7 @@ $("#showWeek").bind("click",function () {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    $.get("http://10.1.0.40:8080/nexteer/scrap-amount/week?date="+WeekDate[6], function (data) {
+    $.get("http://localhost:8080/nexteer/scrap-amount/week?date="+WeekDate[6], function (data) {
         $.each($.parseJSON(data), function (i, model) {
             switch (model.addDate){
                 case WeekDate[0]:
@@ -1305,7 +1305,7 @@ $("#showMonth").bind("click",function () {
 
     }
     console.log(MonthDate);
-    $.get("http://10.1.0.40:8080/nexteer/scrap-amount/week?date="+MonthDate[d.getDate()-1], function (data) {
+    $.get("http://localhost:8080/nexteer/scrap-amount/week?date="+MonthDate[d.getDate()-1], function (data) {
         $.each($.parseJSON(data), function (i, model) {
             for(var monIndex in MonthDate){
                 switch (model.cellName){
@@ -1581,7 +1581,7 @@ $("#showYear").bind("click",function () {
 
     }
     console.log(YearDate);
-    $.get("http://10.1.0.40:8080/nexteer/scrap-amount/week?date="+YearDate[YearDate.length-1], function (data) {
+    $.get("http://localhost:8080/nexteer/scrap-amount/week?date="+YearDate[YearDate.length-1], function (data) {
         $.each($.parseJSON(data), function (i, model) {
             for(var monIndex in YearDate){
                 switch (model.cellName){
@@ -1863,7 +1863,7 @@ $("#selectMonthSub").bind("click",function (){
         }
 
         console.log(MonthDate);
-        $.get("http://10.1.0.40:8080/nexteer/scrap-amount/week?date="+MonthDate[d.getDate()-1], function (data) {
+        $.get("http://localhost:8080/nexteer/scrap-amount/week?date="+MonthDate[d.getDate()-1], function (data) {
             $.each($.parseJSON(data), function (i, model) {
                 for(var monIndex in MonthDate){
                     switch (model.cellName){
@@ -2138,7 +2138,7 @@ $("#selectYearSub").bind("click",function () {
         }
 
         console.log(YearDate);
-        $.get("http://10.1.0.40:8080/nexteer/scrap-amount/week?date="+YearDate[YearDate.length-1], function (data) {
+        $.get("http://localhost:8080/nexteer/scrap-amount/week?date="+YearDate[YearDate.length-1], function (data) {
             $.each($.parseJSON(data), function (i, model) {
                 for(var monIndex in YearDate){
                     switch (model.cellName){

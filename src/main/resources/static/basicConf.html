@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/bs-docs.css" type="text/css">
     <link rel="stylesheet" href="css/mainboard.css" type="text/css">
-    <link rel="stylesheet" href="uikit/dist/css/uikit.min.css">
+    <link rel="stylesheet" href="uikit/css/uikit.min.css">
     <link rel="stylesheet" href="css/confContent.css">
     <style type="text/css">
         body{
@@ -103,6 +103,9 @@
             width: 8.5%;
             font-size: 1.5em;
         }
+        .showTable td{
+            font-size: 1.5em;
+        }
         .shift table th{
             font-size: 1.2em;
         }
@@ -131,7 +134,7 @@
 <body >
 <div class="topTitle  row">
     <div class="topInnerImage col-md-2">
-        <a href="http://10.1.0.40:8080/nexteer/index.html"><img src="images/icon.png" alt="nexteer"></a>
+        <a href="http://localhost:8080/nexteer/index.html"><img src="images/icon.png" alt="nexteer"></a>
     </div>
     <div class="topInnerTitle col-md-9">
         PIDS后台管理系统
@@ -237,7 +240,7 @@
                         <li class="topLine"><a href="#">添加报废金额</a></li>
                         <li class="topLine"><a href="#">报废金额显示</a></li>
                     </ul>
-                    <ul class="uk-switcher uk-margin">
+                    <ul class="uk-switcher uk-margin showTable">
                         <li>
                             <ul class="uk-subnav uk-subnav-pill " uk-switcher>
                                 <li class="topLine"><a href="#">ISHAFT</a></li>
@@ -1943,7 +1946,7 @@
                                             <li><a href="">ISHAFT4</a></li>
                                             <li><a href="">ISHAFT4休息事件</a></li>
                                         </ul>
-                                        <ul class="uk-switcher uk-margin">
+                                        <ul class="uk-switcher uk-margin showTable">
                                             <li>
                                                 <table  class="table  table-bordered black-color table-bordered" id="showISHAFT1Table">
                                                     <thead>
@@ -2290,7 +2293,7 @@
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/google-maps.js"></script>
-<script src="uikit/dist/js/uikit.min.js"></script>
+<script src="uikit/js/uikit.min.js"></script>
 <script type="application/javascript" src="bower_components/jquery-editable-select/dist/jquery-editable-select.min.js"></script>
 <script type="application/javascript" src="bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script src="js/defineGlobal.js"></script>

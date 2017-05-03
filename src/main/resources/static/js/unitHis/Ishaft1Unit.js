@@ -56,7 +56,7 @@ function getNowStatus(hisTime,shift) {
     };
 // // 基于准备好的dom，初始化echarts实例
 // var myChart = echarts.init(document.getElementById('IshaftOneYieldDayChart'));
-    $.get("http://10.1.0.40:8080/nexteer/unit-status/record/ISHAFT1?date="+hisTime+"&shift_type="+shift,function (data) {
+    $.get("http://localhost:8080/nexteer/unit-status/record/ISHAFT1?date="+hisTime+"&shift_type="+shift,function (data) {
         console.log($.parseJSON(data));
         if($.parseJSON(data).system_status == false){
             console.log("当前时间不在班次内");
@@ -221,7 +221,7 @@ function getNowStatus(hisTime,shift) {
     });
     // $.ajax({
     //     type: "POST",
-    //     url: "http://10.1.0.40:8080/nexteer/ishaft1-unit-status/getByCurTime",
+    //     url: "http://localhost:8080/nexteer/ishaft1-unit-status/getByCurTime",
     //     data: JSON.stringify(curTimeJson),
     //     contentType: "application/json; charset=utf-8",
     //     dataType: "json",
