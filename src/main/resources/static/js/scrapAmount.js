@@ -28,7 +28,7 @@ var curTime = judgeTime(Uyear)+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday-1);
 function showScrapData() {
     // $.ajax({
     //     type: "POST",
-    //     url: "http://localhost:8080/nexteer/scrap-amount/getByDate",
+    //     url: "http://10.1.0.40:8080/nexteer/scrap-amount/getByDate",
     //     data: JSON.stringify(nowScrapString),
     //     contentType: "application/json; charset=utf-8",
     //     dataType: "json",
@@ -43,12 +43,58 @@ function showScrapData() {
     //         console.log("载入报废金额失败。。");
     //     }
     // });
-    $.get("http://localhost:8080/nexteer/scrap-amount/day?date="+curTime,function (data) {
-            $("#BEPSScrapAmount").html($.parseJSON(data).beps_value);
-            $("#CEPSScrapAmount").html($.parseJSON(data).ceps_value);
-            console.log($.parseJSON(data));
-            var result= $.parseJSON(data).ishaft1_value + $.parseJSON(data).ishaft2_value + $.parseJSON(data).ishaft3_value + $.parseJSON(data).ishaft4_value;
-            $("#Ishaft1ScrapAmount").html(result);
+    $.get("http://10.1.0.40:8080/nexteer/scrap-amount/day?date="+curTime,function (data) {
+        var IshaftArray=0;
+        var CEPSArray = 0;
+        var BEPSArray =0;
+            // $("#BEPSScrapAmount").html($.parseJSON(data).beps_value);
+            // $("#CEPSScrapAmount").html($.parseJSON(data).ceps_value);
+            // console.log($.parseJSON(data));
+            // var result= $.parseJSON(data).ishaft1_value + $.parseJSON(data).ishaft2_value + $.parseJSON(data).ishaft3_value + $.parseJSON(data).ishaft4_value;
+            // $("#Ishaft1ScrapAmount").html(result);
+        $.each($.parseJSON(data), function (i, model) {
+            switch (model.cellName){
+                case "ISHAFT1":
+                    IshaftArray+=model.value;
+                    break;
+                case "ISHAFT2":
+                    IshaftArray+=model.value;
+                    break;
+                case "ISHAFT3":
+                    IshaftArray+=model.value;
+                    break;
+                case "ISHAFT4":
+                    IshaftArray+=model.value;
+                    break;
+                case "CEPS1":
+                    CEPSArray+=model.value;
+                    break;
+                case "CEPS2":
+                    CEPSArray+=model.value;
+                    break;
+                case "CEPS3":
+                    CEPSArray+=model.value;
+                    break;
+                case "CEPS4":
+                    CEPSArray+=model.value;
+                    break;
+                case "CEPS5":
+                    CEPSArray+=model.value;
+                    break;
+                case "BEPS1":
+                    BEPSArray+=model.value;
+                    break;
+                case "BEPS2":
+                    BEPSArray+=model.value;
+                    break;
+                case "BEPS3":
+                    BEPSArray+=model.value;
+                    break;
+            }
+        });
+        $("#BEPSScrapAmount").html(BEPSArray);
+        $("#CEPSScrapAmount").html(CEPSArray);
+        $("#Ishaft1ScrapAmount").html(IshaftArray);
             console.log("载入报废金额成功。。");
 
     });

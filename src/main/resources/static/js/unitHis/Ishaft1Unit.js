@@ -1,5 +1,5 @@
 /**
- * Created by Administrator on 2017/3/18.
+ * Created by Administrator on 2017/5/3.
  */
 function  curTimeInput(currTime) {
     this.curr_time=currTime;
@@ -15,19 +15,8 @@ function judgeTime(time) {
     return timeStr;
 }
 
+function getNowStatus(hisTime,shift) {
 
-// var curTimeJson=new curTimeInput("2016"+"-"+"08"+"-"+"14"+" "+judgeTime(Udate.getHours())+":"+judgeTime(Udate.getMinutes())+":"+judgeTime(Udate.getSeconds()));
-// var curTimeJson={
-//     "curr_time":"2016-08-14 21:00:00"
-// };
-function getNowStatus() {
-    var date=new Date();
-    var year=date.getFullYear();
-    var month=date.getMonth()+1;
-    var day=date.getDate();
-    // var curTime="2017-03-23 19:00:00";
-    var curTime= year+"-"+judgeTime(month)+"-"+judgeTime(day)+" "+judgeTime(date.getHours())+":"+judgeTime(date.getMinutes())+":"+judgeTime(date.getSeconds());
-    var curTimeJson= new curTimeInput(curTime);
     var timeRow=[];
     var hourlyTar=[];
     var hourlyOut=[];
@@ -67,7 +56,7 @@ function getNowStatus() {
     };
 // // 基于准备好的dom，初始化echarts实例
 // var myChart = echarts.init(document.getElementById('IshaftOneYieldDayChart'));
-    $.get("http://10.1.0.40:8080/nexteer/unit-status/ISHAFT1?curr_time="+curTime,function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/unit-status/record/ISHAFT1?date="+hisTime+"&shift_type="+shift,function (data) {
         console.log($.parseJSON(data));
         if($.parseJSON(data).system_status == false){
             console.log("当前时间不在班次内");
@@ -378,11 +367,3 @@ function getNowStatus() {
     //     }
     // });
 }
-
-$("#selectHistory").bind("click",function () {
-    window.location.assign("http://10.1.0.40:8080/nexteer/unitHis/Ishaft1His.html");
-});
-getNowStatus();
-setInterval(function () {
-    getNowStatus();
-},1000*60);

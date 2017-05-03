@@ -92,6 +92,15 @@ INSERT [dbo].[oee] ([id], [oee],[target_oee], [cell_name], [add_date]) VALUES (4
 INSERT [dbo].[oee] ([id], [oee],[target_oee], [cell_name], [add_date]) VALUES (45, 50,56, N'ISHAFT1', CAST(N'2017-04-10' AS Date))
 SET IDENTITY_INSERT [dbo].[oee] OFF
 
+SET IDENTITY_INSERT [dbo].[output_count_info] ON
+
+INSERT [dbo].[output_count_info] ([id], [cellName],[addDate], [modelId], [modelName],[count]) VALUES (1, N'ISHAFT1', CAST(N'2017-05-01' AS Date),38028798,N'R103转向下轴总成',320)
+INSERT [dbo].[output_count_info] ([id], [cellName],[addDate], [modelId], [modelName],[count]) VALUES (2, N'ISHAFT1', CAST(N'2017-03-01' AS Date),38028807,N'R103加长杆总成',300)
+INSERT [dbo].[output_count_info] ([id], [cellName],[addDate], [modelId], [modelName],[count]) VALUES (3, N'ISHAFT1', CAST(N'2017-05-02' AS Date),38028798,N'R103转向下轴总成',330)
+INSERT [dbo].[output_count_info] ([id], [cellName],[addDate], [modelId], [modelName],[count]) VALUES (4, N'ISHAFT1', CAST(N'2017-05-02' AS Date),38028807,N'R103加长杆总成',340)
+INSERT [dbo].[output_count_info] ([id], [cellName],[addDate], [modelId], [modelName],[count]) VALUES (5, N'ISHAFT1', CAST(N'2017-05-03' AS Date),38028798,N'R103转向下轴总成',360)
+SET IDENTITY_INSERT [dbo].[output_count_info] OFF
+
 SET IDENTITY_INSERT [dbo].[hce] ON
 
 INSERT [dbo].[hce] ([id], [hce],[target_hce], [cell_name], [add_date]) VALUES (5,80, 39, N'ISHAFT1', CAST(N'2017-03-01' AS Date))
@@ -136,7 +145,6 @@ INSERT [dbo].[hce] ([id], [hce],[target_hce], [cell_name], [add_date]) VALUES (4
 INSERT [dbo].[hce] ([id], [hce],[target_hce], [cell_name], [add_date]) VALUES (44, 80,49, N'ISHAFT1', CAST(N'2017-04-09' AS Date))
 INSERT [dbo].[hce] ([id], [hce],[target_hce], [cell_name], [add_date]) VALUES (45, 50,56, N'ISHAFT1', CAST(N'2017-04-10' AS Date))
 SET IDENTITY_INSERT [dbo].[hce] OFF
-
 -- DELETE FROM "safety_date";
 -- /*!40000 ALTER TABLE "safety_date" DISABLE KEYS */;
 -- INSERT INTO "safety_date" ("year", "month", "day", "safe_dates", "is_safe", "log") VALUES

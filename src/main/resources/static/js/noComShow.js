@@ -25,7 +25,7 @@ function getNCOMNowData() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/quality-complain",
+        url: "http://10.1.0.40:8080/nexteer/quality-complain",
         data: JSON.stringify(jsonString),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -43,7 +43,7 @@ function getNCOMNowData() {
 }
 function getnoComDay() {
 
-    $.get("http://localhost:8080/nexteer/quality-complain/day?date="+curTime,function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/quality-complain/day?date="+curTime,function (data) {
         if(data.system_status != false){
             console.log(JSON.stringify(data));
 
@@ -51,7 +51,7 @@ function getnoComDay() {
             console.log("获取无抱怨日期操作成功");
         }
     });
-    $.get("http://localhost:8080/nexteer/quality-complain/max",function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/quality-complain/max",function (data) {
 
         console.log(JSON.stringify(data));
         $("#noComHigh").html(data);

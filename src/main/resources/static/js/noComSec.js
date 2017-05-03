@@ -6,7 +6,7 @@ var circleNComDateTime=[];
 var NComCalendarTime=[];
 var logCalendarTime = [];
 var eventData =[];
-$.get("http://localhost:8080/nexteer/quality-complain", function (data) {
+$.get("http://10.1.0.40:8080/nexteer/quality-complain", function (data) {
     $.each(data, function (i, model) {
         var modelTime= model.addDate.split("-");
         NComCalendarTime[i]=new Date(Number(modelTime[0]),Number(modelTime[1]),Number(modelTime[2])).getTime();
@@ -14,7 +14,7 @@ $.get("http://localhost:8080/nexteer/quality-complain", function (data) {
     console.log(NComCalendarTime);
 });
 
-$.get("http://localhost:8080/nexteer/quality-complain/no-complain", function (data) {
+$.get("http://10.1.0.40:8080/nexteer/quality-complain/no-complain", function (data) {
     var j=0,k=0;
     $.each(data, function (i, model) {
         var modelTime= model.addDate.split("-");

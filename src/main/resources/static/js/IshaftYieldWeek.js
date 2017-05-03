@@ -54,7 +54,7 @@ var endtime= Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday);
 // 基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(document.getElementById('IshaftOneWeekChart'));
 //    var myDataOne= [];
-//    var worker = new Worker('http://localhost:8080/nexteer/IshaftYieldWeekFirstWork.js');
+//    var worker = new Worker('http://10.1.0.40:8080/nexteer/IshaftYieldWeekFirstWork.js');
 
 function getIshaftOneWeekData() {
     var proIDMsg=[];
@@ -69,7 +69,7 @@ function getIshaftOneWeekData() {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    $.get("http://localhost:8080/nexteer/product-model", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
         $.each(data, function (i, model) {
             if(model.cellName=="Ishaft1"){
 //                    ProMsg.push({"modelId":model.modelId,"modelName":model.modelName})
@@ -80,10 +80,11 @@ function getIshaftOneWeekData() {
     });
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/nexteer/output-info/ISHAFT1/week?date="+endtime,
+        url: "http://10.1.0.40:8080/nexteer/output-info/ISHAFT1/week?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             myAjaxData = JSON.stringify(data);
+            console.log(typeof (data));
             for(var j=0,len=proIDMsg.length;j<len;j++){
 //                    for(var myIndex = 0,myLen = myAjaxData.length;myIndex<myLen;myIndex++){
 //                        if(myAjaxData[myIndex].)

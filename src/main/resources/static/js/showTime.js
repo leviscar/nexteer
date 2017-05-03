@@ -16,6 +16,7 @@ function myTimer(){
     var minutes = new Date().getMinutes();
     var seconds = new Date().getSeconds();
     $("#showMainTime").html(judgeTime(hours)+":"+judgeTime(minutes)+":"+judgeTime(seconds));
+    $("#showTime").html(judgeTime(hours)+":"+judgeTime(minutes)+":"+judgeTime(seconds));
     // console.log(judgeTime(hours)+":"+judgeTime(minutes)+":"+judgeTime(seconds));
 }
 function myDate() {

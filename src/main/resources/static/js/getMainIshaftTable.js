@@ -6,8 +6,8 @@ var targetOut = [0,0,0,0];
 var nowOut = [0,0,0,0];
 var achevive = ["00%","00%","00%","00%"];
 var status = [0,1,0,1];
-var titleLink = ["http://localhost:8080/nexteer/IshaftYieldWeek.html ","http://localhost:8080/nexteer/IshaftYieldWeek.html ","http://localhost:8080/nexteer/IshaftYieldWeek.html ","http://localhost:8080/nexteer/IshaftYieldWeek.html ","http://localhost:8080/nexteer/IshaftYieldWeek.html "];
-var link = ["http://localhost:8080/nexteer/IshaftOneUnit.html","http://localhost:8080/nexteer/IshaftOneUnit.html","http://localhost:8080/nexteer/IshaftTwoUnit.html","http://localhost:8080/nexteer/IshaftTwoUnit.html"];
+var titleLink = ["http://10.1.0.40:8080/nexteer/IshaftYieldWeek.html ","http://10.1.0.40:8080/nexteer/IshaftYieldWeek.html ","http://10.1.0.40:8080/nexteer/IshaftYieldWeek.html ","http://10.1.0.40:8080/nexteer/IshaftYieldWeek.html ","http://10.1.0.40:8080/nexteer/IshaftYieldWeek.html "];
+var link = ["http://10.1.0.40:8080/nexteer/IshaftOneUnit.html","http://10.1.0.40:8080/nexteer/IshaftOneUnit.html","http://10.1.0.40:8080/nexteer/IshaftTwoUnit.html","http://10.1.0.40:8080/nexteer/IshaftTwoUnit.html"];
 
 function change(n){
     getMainOee();
