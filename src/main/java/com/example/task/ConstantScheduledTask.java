@@ -50,7 +50,7 @@ public class ConstantScheduledTask {
      *
      * @throws ParseException
      */
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "10 0 0 * * ?")
     public void addQualityComplain() throws ParseException {
         SimpleDateFormat sdf = DateFormat.dateFormat();
         QualityComplain qualityComplain = new QualityComplain();
