@@ -69,7 +69,7 @@ function getIshaftOneWeekData() {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    $.get("http://localhost:8080/nexteer/product-model", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
         $.each(data, function (i, model) {
             if(model.cellName=="BEPS"){
 //                    ProMsg.push({"modelId":model.modelId,"modelName":model.modelName})
@@ -80,7 +80,7 @@ function getIshaftOneWeekData() {
     });
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/nexteer/output-info/BEPS/week?date="+endtime,
+        url: "http://10.1.0.40:8080/nexteer/output-info/BEPS/week?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             myAjaxData = JSON.stringify(data);

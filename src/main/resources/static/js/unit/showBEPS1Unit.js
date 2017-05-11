@@ -66,7 +66,7 @@ function getNowStatus() {
         bottom:'2%'
     };
 // // 基于准备好的dom，初始化echarts实例
-    $.get("http://localhost:8080/nexteer/unit-status/BEPS1?curr_time="+curTime,function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/unit-status/BEPS1?curr_time="+curTime,function (data) {
         console.log($.parseJSON(data));
         if($.parseJSON(data).system_status == false){
             console.log("当前时间不在班次内");

@@ -58,7 +58,7 @@ function  eventInput(type,cellName,event,eventStart,eventEnd) {
     this.endTime=eventEnd;
 }
 function showEvent(idInput) {
-    $.get("http://localhost:8080/nexteer/rest-event?work_shift_id="+idInput, function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/rest-event?work_shift_id="+idInput, function (data) {
         // console.log(data);
         //     console.log(data);
             $.each(data, function (i, model) {
@@ -74,7 +74,7 @@ $('#addThiEvent').editableSelect({
 });
 
 function showBance() {
-    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Ashift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT1?shift_type=Ashift", function (data) {
         console.log(typeof (data));
         // console.log(data);
         console.log(data.id);
@@ -90,7 +90,7 @@ function showBance() {
         showEvent(data.id);
 
     });
-    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Bshift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT1?shift_type=Bshift", function (data) {
         console.log(typeof (data));
         // console.log(data);
         // $("#productMessage").append("<tbody><tr><td>"+data.morning_shift_start+"</td><td>"+data.morning_shift_end+"</td><td>"+data.middle_shift_start+"</td><td>"+data.middle_shift_end+"</td><td>"+data.night_shift_start+"</td><td>"+data.night_shift_end+"</td><td>"+data.morning_shift_standard_beats+"</td><td>"
@@ -117,7 +117,7 @@ function showBance() {
         showEvent(data.id);
 
     });
-    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Cshift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT1?shift_type=Cshift", function (data) {
         console.log(typeof (data));
         console.log(data);
         // $("#productMessage").append("<tbody><tr><td>"+data.morning_shift_start+"</td><td>"+data.morning_shift_end+"</td><td>"+data.middle_shift_start+"</td><td>"+data.middle_shift_end+"</td><td>"+data.night_shift_start+"</td><td>"+data.night_shift_end+"</td><td>"+data.morning_shift_standard_beats+"</td><td>"
@@ -144,7 +144,7 @@ function showBance() {
         showEvent(data.id);
     });
 
-    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT2?shift_type=Ashift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT2?shift_type=Ashift", function (data) {
         console.log(typeof (data));
         console.log(data);
         console.log(data.id);
@@ -160,7 +160,7 @@ function showBance() {
         showEvent(data.id);
 
     });
-    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT2?shift_type=Bshift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT2?shift_type=Bshift", function (data) {
         console.log(typeof (data));
         console.log(data);
         console.log(data.id);
@@ -176,7 +176,7 @@ function showBance() {
         showEvent(data.id);
 
     });
-    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT2?shift_type=Cshift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT2?shift_type=Cshift", function (data) {
         console.log(typeof (data));
         console.log(data);
         console.log(data.id);
@@ -192,7 +192,7 @@ function showBance() {
         showEvent(data.id);
 
     });
-    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT3?shift_type=Ashift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT3?shift_type=Ashift", function (data) {
         console.log(typeof (data));
         console.log(data);
         console.log(data.id);
@@ -208,7 +208,7 @@ function showBance() {
         showEvent(data.id);
 
     });
-    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT3?shift_type=Bshift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT3?shift_type=Bshift", function (data) {
         console.log(typeof (data));
         console.log(data);
         console.log(data.id);
@@ -224,7 +224,7 @@ function showBance() {
         showEvent(data.id);
 
     });
-    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT3?shift_type=Cshift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT3?shift_type=Cshift", function (data) {
         console.log(typeof (data));
         console.log(data);
         console.log(data.id);
@@ -240,7 +240,7 @@ function showBance() {
         showEvent(data.id);
 
     });
-    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT4?shift_type=Ashift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT4?shift_type=Ashift", function (data) {
         console.log(typeof (data));
         console.log(data);
         console.log(data.id);
@@ -256,7 +256,7 @@ function showBance() {
         showEvent(data.id);
 
     });
-    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT4?shift_type=Bshift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT4?shift_type=Bshift", function (data) {
         console.log(typeof (data));
         console.log(data);
         console.log(data.id);
@@ -272,7 +272,7 @@ function showBance() {
         showEvent(data.id);
 
     });
-    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT4?shift_type=Cshift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT4?shift_type=Cshift", function (data) {
         console.log(typeof (data));
         console.log(data);
         console.log(data.id);
@@ -289,7 +289,7 @@ function showBance() {
 
     });
 
-    $.get("http://localhost:8080/nexteer/work-shift/CEPS?shift_type=Ashift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/CEPS?shift_type=Ashift", function (data) {
         console.log(typeof (data));
         console.log(data);
         console.log(data.id);
@@ -305,7 +305,7 @@ function showBance() {
         showEvent(data.id);
 
     });
-    $.get("http://localhost:8080/nexteer/work-shift/CEPS?shift_type=Bshift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/CEPS?shift_type=Bshift", function (data) {
         console.log(typeof (data));
         console.log(data);
         console.log(data.id);
@@ -321,7 +321,7 @@ function showBance() {
         showEvent(data.id);
 
     });
-    $.get("http://localhost:8080/nexteer/work-shift/CEPS?shift_type=Cshift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/CEPS?shift_type=Cshift", function (data) {
         console.log(typeof (data));
         console.log(data);
         console.log(data.id);
@@ -337,7 +337,7 @@ function showBance() {
         showEvent(data.id);
 
     });
-    $.get("http://localhost:8080/nexteer/work-shift/BEPS?shift_type=Ashift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/BEPS?shift_type=Ashift", function (data) {
         console.log(typeof (data));
         console.log(data);
         console.log(data.id);
@@ -353,7 +353,7 @@ function showBance() {
         showEvent(data.id);
 
     });
-    $.get("http://localhost:8080/nexteer/work-shift/BEPS?shift_type=Bshift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/BEPS?shift_type=Bshift", function (data) {
         console.log(typeof (data));
         console.log(data);
         console.log(data.id);
@@ -369,7 +369,7 @@ function showBance() {
         showEvent(data.id);
 
     });
-    $.get("http://localhost:8080/nexteer/work-shift/BEPS?shift_type=Cshift", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/work-shift/BEPS?shift_type=Cshift", function (data) {
         console.log(typeof (data));
         console.log(data);
         console.log(data.id);
@@ -396,7 +396,7 @@ $("#oneSub").bind("click", function () {
     console.log(JSON.stringify(OneshiftJson));
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/work-shift",
+        url: "http://10.1.0.40:8080/nexteer/work-shift",
         data:JSON.stringify(OneshiftJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -428,7 +428,7 @@ $("#twoSub").bind("click", function () {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/work-shift",
+        url: "http://10.1.0.40:8080/nexteer/work-shift",
         data: JSON.stringify(TwoshiftJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -462,7 +462,7 @@ $("#thiSub").bind("click", function () {
     console.log( JSON.stringify(ThishiftJson));
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/work-shift",
+        url: "http://10.1.0.40:8080/nexteer/work-shift",
         data: JSON.stringify(ThishiftJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -490,7 +490,7 @@ $("#oneEventSub").bind("click",function () {
     var addEventJson=new eventInput("早班",$("#addEvent").val().toString(),$("#addStart").val().toString(),$("#addEnd").val().toString());
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/rest-event/addEvent",
+        url: "http://10.1.0.40:8080/nexteer/rest-event/addEvent",
         data: JSON.stringify(addEventJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -518,7 +518,7 @@ $("#twoEventSub").bind("click",function () {
     var addEventJson=new eventInput($("#addSecType").val().toString(),$("#addSecEvent").val().toString(),$("#addSecStart").val().toString(),$("#addSecEnd").val().toString());
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/rest-event/addEvent",
+        url: "http://10.1.0.40:8080/nexteer/rest-event/addEvent",
         data: JSON.stringify(addEventJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -550,7 +550,7 @@ $("#thiEventSub").bind("click",function () {
             'Content-Type': 'application/json'
         },
         type: "POST",
-        url: "http://localhost:8080/nexteer/rest-event",
+        url: "http://10.1.0.40:8080/nexteer/rest-event",
         data: JSON.stringify(addEventJson),
         dataType: "json",
         success: function (data) {

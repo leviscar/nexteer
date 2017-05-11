@@ -11,8 +11,8 @@ var targetOut = [1000,2000,3000,4000];
 var nowOut = [720,820,920,1020];
 var achevive = ["72%","82%","92%","102%"];
 var status = [0,1,0,1];
-var titleLink = ["http://localhost:8080/nexteer/Ishaft1YieldWeek.html ","http://localhost:8080/nexteer/Ishaft1YieldWeek.html ","http://localhost:8080/nexteer/Ishaft1YieldWeek.html ","http://localhost:8080/nexteer/Ishaft1YieldWeek.html ","http://localhost:8080/nexteer/Ishaft1YieldWeek.html "];
-var link = ["http://localhost:8080/nexteer/Ishaft1Unit.html","http://localhost:8080/nexteer/Ishaft1Unit.html","http://localhost:8080/nexteer/IshaftTwoUnit.html","http://localhost:8080/nexteer/IshaftTwoUnit.html"];
+var titleLink = ["http://10.1.0.40:8080/nexteer/Ishaft1YieldWeek.html ","http://10.1.0.40:8080/nexteer/Ishaft1YieldWeek.html ","http://10.1.0.40:8080/nexteer/Ishaft1YieldWeek.html ","http://10.1.0.40:8080/nexteer/Ishaft1YieldWeek.html ","http://10.1.0.40:8080/nexteer/Ishaft1YieldWeek.html "];
+var link = ["http://10.1.0.40:8080/nexteer/Ishaft1Unit.html","http://10.1.0.40:8080/nexteer/Ishaft1Unit.html","http://10.1.0.40:8080/nexteer/IshaftTwoUnit.html","http://10.1.0.40:8080/nexteer/IshaftTwoUnit.html"];
 function change(n){
     if(n>IshaftTitle.length-1) n=0;  //
     $("#showIshaft").replaceWith("<a href=\"\" id=\"showIshaft\">"+IshaftTitle[n]+"</a>");
@@ -25,7 +25,7 @@ function change(n){
 console.log("getMainPro开始运行");
 $.ajax({
     type:"POST",
-    url:"http://localhost:8080/nexteer/dashboard/output",
+    url:"http://10.1.0.40:8080/nexteer/dashboard/output",
     data:JSON.stringify(),
     contentType:"application/json;charset=utf-8",
     sync : false,
