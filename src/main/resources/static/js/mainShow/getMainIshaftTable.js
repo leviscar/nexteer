@@ -7,7 +7,7 @@ var nowOut = [0,0,0,0];
 var achevive = ["00%","00%","00%","00%"];
 var status = [0,1,0,1];
 var titleLink = ["http://localhost:8080/nexteer/html/Yield/Ishaft1YieldWeek.html ","http://localhost:8080/nexteer/html/Yield/Ishaft1YieldWeek.html ","http://localhost:8080/nexteer/html/Yield/Ishaft1YieldWeek.html ","http://localhost:8080/nexteer/html/Yield/Ishaft1YieldWeek.html ","http://localhost:8080/nexteer/html/Yield/Ishaft1YieldWeek.html "];
-var link = ["http://localhost:8080/nexteer/IshaftOneUnit.html","http://localhost:8080/nexteer/IshaftOneUnit.html","http://localhost:8080/nexteer/IshaftTwoUnit.html","http://localhost:8080/nexteer/IshaftTwoUnit.html"];
+var link = ["http://localhost:8080/nexteer/Ishaft1Unit.html","http://localhost:8080/nexteer/Ishaft1Unit.html","http://localhost:8080/nexteer/IshaftTwoUnit.html","http://localhost:8080/nexteer/IshaftTwoUnit.html"];
 
 function change(n){
     getMainOee();

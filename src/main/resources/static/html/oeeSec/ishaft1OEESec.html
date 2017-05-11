@@ -8,17 +8,15 @@
     <link rel="icon" href="../../images/favicon.ico">
     <title>Nexteer</title>
     <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="../../bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="../../css/bs-docs.css" type="text/css">
     <link rel="stylesheet" href="../../css/mainboard.css" type="text/css">
     <link rel="stylesheet" href="../../css/height.css" type="text/css">
-    <link rel="stylesheet" href="../../css/dateForm.css">
+    <link rel="stylesheet" href="../../css/sheetTable.css" type="text/css">
+    <link rel="stylesheet" href="../../bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="../../css/dateForm.css" type="text/css">
     <style type="text/css">
         body {
             background-color: #F7F7F7;
-        }
-        body {
-            font: normal 100% Helvetica, Arial, sans-serif;
         }
         .main{
             width: 98%;
@@ -63,12 +61,45 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form class="navbar-form navbar-left">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">全产线OEE<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/OEESec.html">全产线OEE</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VSS-Ishaft <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/ishaft1OEESec.html">Ishaft1</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/ishaft2OEESec.html">Ishaft2</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/ishaft3OEESec.html">Ishaft3</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/ishaft4OEESec.html">Ishaft4</a></li>
+                            <li role="separator" class="divider"></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BEPS <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/BEPS3OEESec.html">BEPS</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/CEPS5OEESec.html">CEPS</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </form>
+            <form class="navbar-form navbar-right" id="selection">
                 <button type="button" class="btn btn-danger btn-xs " id="showWeek" >周视图</button>
                 <button type="button" class="btn btn-danger btn-xs " id="showMonth">月视图</button>
                 <button type="button" class="btn btn-danger btn-xs" id="showYear">年视图</button>
-
-            </form>
-            <form class="navbar-form navbar-right" id="selection">
                 <input type="text" class="form-control form_datetime_year" readonly id="selectYear" value="2017"/>
                 <button type="button" class="btn btn-danger btn-xs" id="selectYearSub">年份选择</button>
                 <input type="text" class="form-control form_datetime_month" readonly id="selectMonth" value="2017-02"/>
@@ -90,8 +121,8 @@
 <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="../../bower_components/echarts/dist/echarts.min.js"></script>
 <script type="application/javascript" src="../../bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script src="../../js/global/defineGlobal.js"></script>
-<script src="../../js/oeeSec/showOEESec.js"></script>
 <script src="../../js/global/form_datetime.js"></script>
+<script src="../../js/global/defineGlobal.js"></script>
+<script src="../../js/oeeSec/showIshaft1OEESec.js"></script>
 </body>
 </html>

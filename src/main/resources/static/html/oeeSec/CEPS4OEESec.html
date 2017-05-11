@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="../../images/favicon.ico">
+    <title>Nexteer</title>
+    <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/bs-docs.css" type="text/css">
+    <link rel="stylesheet" href="../../css/mainboard.css" type="text/css">
+    <link rel="stylesheet" href="../../css/height.css" type="text/css">
+    <link rel="stylesheet" href="../../css/sheetTable.css" type="text/css">
+    <link rel="stylesheet" href="../../bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="../../css/dateForm.css" type="text/css">
+    <style type="text/css">
+        body {
+            background-color: #F7F7F7;
+        }
+        .main{
+            width: 98%;
+            margin:0 3% 0 3% ;
+            padding: 0 4% 0 2%;
+            box-sizing: border-box;
+        }
+
+        .main .item {
+            margin: 0 0 1% 0;
+            position: relative;
+            background-color: #FFF;
+            float: left;
+            box-shadow: 2px 2px 5px #CCC;
+            height: 100%;
+        }
+        .item2{
+            width: 93.75%;
+        }
+        .row{
+            height: 100%;
+        }
+        .border-line{
+            border: 1px solid #293c55;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost:8080/nexteer/index.html"><img src="../../images/icon.png" alt="Nexteer"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">全产线OEE<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/OEESec.html">全产线OEE</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VSS-Ishaft <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/ishaft1OEESec.html">Ishaft1</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/ishaft2OEESec.html">Ishaft2</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/ishaft3OEESec.html">Ishaft3</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/ishaft4OEESec.html">Ishaft4</a></li>
+                            <li role="separator" class="divider"></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BEPS <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/BEPS1OEESec.html">BEPS1</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/BEPS2OEESec.html">BEPS2</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/BEPS3OEESec.html">BEPS3</a></li>
+                            <li role="separator" class="divider"></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/CEPS1OEESec.html">CEPS1</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/CEPS2OEESec.html">CEPS2</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/CEPS3OEESec.html">CEPS3</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/CEPS4OEESec.html">CEPS4</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/oeeSec/CEPS5OEESec.html">CEPS5</a></li>
+                            <li role="separator" class="divider"></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </form>
+            <form class="navbar-form navbar-right" id="selection">
+                <button type="button" class="btn btn-danger btn-xs " id="showWeek" >周视图</button>
+                <button type="button" class="btn btn-danger btn-xs " id="showMonth">月视图</button>
+                <button type="button" class="btn btn-danger btn-xs" id="showYear">年视图</button>
+                <input type="text" class="form-control form_datetime_year" readonly id="selectYear" value="2017"/>
+                <button type="button" class="btn btn-danger btn-xs" id="selectYearSub">年份选择</button>
+                <input type="text" class="form-control form_datetime_month" readonly id="selectMonth" value="2017-02"/>
+                <button type="button" class="btn btn-danger btn-xs" id="selectMonthSub">月份选择</button>
+            </form>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="main">
+    <div class="row">
+        <div class=" scrapSheet item col-md-12" id="showIsOneWeekSheet" ></div>
+    </div>
+
+</div>
+
+
+<script src="../../bower_components/jquery/dist/jquery.min.js" ></script>
+<script src="../../bower_components/jquery-json/dist/jquery.json.min.js"></script>
+<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../bower_components/echarts/dist/echarts.min.js"></script>
+<script type="application/javascript" src="../../bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="../../js/global/form_datetime.js"></script>
+<script src="../../js/global/defineGlobal.js"></script>
+<script src="../../js/oeeSec/showCEPS4OEESec.js"></script>
+</body>
+</html>

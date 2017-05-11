@@ -44,7 +44,7 @@ function getNowStatus() {
     };
     var myyAxis=[{
         type: 'value',
-        name: '产品数（件）',
+        name: '产量（件）<br>Output',
         position: 'left',
         nameTextStyle:{
             fontStyle:'normal',
@@ -107,6 +107,7 @@ function getNowStatus() {
                 $("#curBeats").html($.parseJSON(data).curr_beats);
                 $("#lossTime").html($.parseJSON(data).loss_time);
                 $("#movRate").html($.parseJSON(data).movable_rate);
+                $("#offline").html($.parseJSON(data).lastOffLine);
                 var i=0;
                 for (key in $.parseJSON(data).hourly_output){
                     hourlyOut[i]=$.parseJSON(data).hourly_output[key];
@@ -381,6 +382,33 @@ function getNowStatus() {
 
 $("#selectHistory").bind("click",function () {
     window.location.assign("../../html/unitHistory/Ishaft1His.html");
+});
+
+$("#EN").bind("click",function () {
+    $(".unitTitle").replaceWith("<p class=\"unitTitle\">1st I-Shaft Cell Realtime Data Board</p>");
+    $(".firstTable>tbody>tr:nth-child(1)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>Current Shift</td>");
+    $(".firstTable>tbody>tr:nth-child(2)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>Target  Output</td>");
+    $(".firstTable>tbody>tr:nth-child(3)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>Current Output</td>");
+    $(".firstTable>tbody>tr:nth-child(4)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>Current  Status</td>");
+    $(".secTable>thead>tr:nth-child(1)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>Current Cycle(s)</td>");
+    $(".secTable>thead>tr:nth-child(1)>td:nth-child(2)").replaceWith("<td style='font-size:2.2em '>Cycle Time(s)</td>");
+    $(".secTable>thead>tr:nth-child(1)>td:nth-child(3)").replaceWith("<td style='font-size:2.2em '> Lose Time(s)</td>");
+    $(".secTable>thead>tr:nth-child(1)>td:nth-child(4)").replaceWith("<td style='font-size:2.2em '>OEE(%)</td>");
+    $(".secTable>thead>tr:nth-child(1)>td:nth-child(5)").replaceWith("<td style='font-size:2.2em '>HCE(%)</td>");
+    $(".secTable>thead>tr:nth-child(1)>td:nth-child(6)").replaceWith("<td style='font-size:2.2em '>Offline Time</td>");
+});
+$("#CN").bind("click",function () {
+    $(".unitTitle").replaceWith("<p class=\"unitTitle\">第一条中间轴单元实时数据看板 </p>");
+    $(".firstTable>tbody>tr:nth-child(1)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>当前班次</td>");
+    $(".firstTable>tbody>tr:nth-child(2)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>目标产量</td>");
+    $(".firstTable>tbody>tr:nth-child(3)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>当前产量</td>");
+    $(".firstTable>tbody>tr:nth-child(4)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>当前状态 </td>");
+    $(".secTable>thead>tr:nth-child(1)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>当前节拍/秒</td>");
+    $(".secTable>thead>tr:nth-child(1)>td:nth-child(2)").replaceWith("<td style='font-size:2.2em '>标准节拍/秒</td>");
+    $(".secTable>thead>tr:nth-child(1)>td:nth-child(3)").replaceWith("<td style='font-size:2.2em '>损失时间/秒</td>");
+    $(".secTable>thead>tr:nth-child(1)>td:nth-child(4)").replaceWith("<td style='font-size:2.2em '>可动率(%)</td>");
+    $(".secTable>thead>tr:nth-child(1)>td:nth-child(5)").replaceWith("<td style='font-size:2.2em '>人员利用率(%)</td>");
+    $(".secTable>thead>tr:nth-child(1)>td:nth-child(6)").replaceWith("<td style='font-size:2.2em '>上一件下线时间</td>");
 });
 getNowStatus();
 setInterval(function () {

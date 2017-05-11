@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="../../images/favicon.ico">
+    <title>Nexteer</title>
+    <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/bs-docs.css" type="text/css">
+    <link rel="stylesheet" href="../../css/mainboard.css" type="text/css">
+    <link rel="stylesheet" href="../../css/dropdown.css" type="text/css">
+    <link rel="stylesheet" href="../../css/height.css" type="text/css">
+    <style type="text/css">
+        body {
+            background-color: #F7F7F7;
+        }
+        .main{
+            width: 100%;
+            margin:0 0 0 3% ;
+            padding: 0 0 0 2%;
+            box-sizing: border-box;
+        }
+
+        .main .item {
+            margin: 0 2% 2% 0;
+            position: relative;
+            background-color:#F7F7F7;
+            float: left;
+            height: 100%;
+        }
+        .item2{
+            width: 93.75%;
+        }
+        .row{
+            height: 100%;
+        }
+        .border-line{
+            border: 1px solid #293c55;
+        }
+    </style>
+    <style type="text/css">
+        .table{
+            text-align: center;
+        }
+        .table>thead>tr>td{
+            color: white;
+            background-color: #6ab0b8;
+            font-size:1.8em;
+        }
+        .table>tbody>tr>td{
+            font-size:1.6em;
+        }
+        .table>tbody>tr:nth-child(2n+1)>td{
+            color: #000000;
+            background-color: #D2DEEF;
+        }
+        .table>tbody>tr:nth-child(2n)>td{
+            color: #000000;
+            background-color: #EAEFF7;
+        }
+        /*.table>tbody>tr:nth-child(3)>td{*/
+        /*color: #000000;*/
+        /*background-color: #D2DEEF;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost:8080/nexteer/index.html"><img src="../../images/icon.png" alt="Nexteer"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VSS-Ishaft <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu"><a href="#">I-shaft1</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="http://localhost:8080/nexteer/html/Yield/Ishaft1YieldWeek.html">周视图</a></li>
+                                <li><a href="http://localhost:8080/nexteer/html/Yield/Ishaft1YieldMonth.html">月视图</a></li>
+                                <li><a href="http://localhost:8080/nexteer/html/Yield/Ishaft1YieldYear.html">年视图</a></li>
+                            </ul>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="#">I-shaft2</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="http://localhost:8080/nexteer/html/Yield/Ishaft2YieldWeek.html">周视图</a></li>
+                                <li><a href="http://localhost:8080/nexteer/html/Yield/Ishaft2YieldMonth.html">月视图</a></li>
+                                <li><a href="http://localhost:8080/nexteer/html/Yield/Ishaft2YieldYear.html">年视图</a></li>
+                            </ul>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="#">I-shaft3</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="http://localhost:8080/nexteer/html/Yield/Ishaft3YieldWeek.html">周视图</a></li>
+                                <li><a href="http://localhost:8080/nexteer/html/Yield/Ishaft3YieldMonth.html">月视图</a></li>
+                                <li><a href="http://localhost:8080/nexteer/html/Yield/Ishaft3YieldYear.html">年视图</a></li>
+                            </ul>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="#">I-shaft4</a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="http://localhost:8080/nexteer/html/Yield/Ishaft4YieldWeek.html">周视图</a></li>
+                                <li><a href="http://localhost:8080/nexteer/html/Yield/Ishaft4YieldMonth.html">月视图</a></li>
+                                <li><a href="http://localhost:8080/nexteer/html/Yield/Ishaft4YieldYear.html">年视图</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BEPS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="http://localhost:8080/nexteer/html/Yield/BEPSYieldWeek.html">周视图</a></li>
+                        <li><a href="http://localhost:8080/nexteer/html/Yield/BEPSYieldMonth.html">月视图</a></li>
+                        <li><a href="http://localhost:8080/nexteer/html/Yield/BEPSYieldYear.html">年视图</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="http://localhost:8080/nexteer/html/Yield/CEPSYieldWeek.html">周视图</a></li>
+                        <li><a href="http://localhost:8080/nexteer/html/Yield/CEPSYieldMonth.html">月视图</a></li>
+                        <li><a href="http://localhost:8080/nexteer/html/Yield/CEPSYieldYear.html">年视图</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="main">
+    <div class="row">
+        <div class="col-md-12 item item2  " id="IshaftOneWeekChart"></div>
+    </div>
+</div>
+
+
+<script src="../../bower_components/jquery/dist/jquery.min.js" ></script>
+<script src="../../bower_components/jquery-json/dist/jquery.json.min.js"></script>
+<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../bower_components/echarts/dist/echarts.min.js"></script>
+<script src="../../js/global/defineGlobal.js"></script>
+<script src="../../js/Yield/BEPSYieldWeek.js"></script>
+</body>
+</html>

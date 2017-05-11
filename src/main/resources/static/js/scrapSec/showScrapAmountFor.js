@@ -49,8 +49,7 @@ function formOnload()
 
 
 console.log('start');
-// 基于准备好的dom，初始化echarts实例
-var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
+
 
 var myMonthTitle= {
     text: '报废金额月视图',
@@ -134,6 +133,8 @@ function showDataView(opt) {
     return table;
 }
 function showWeek() {
+    // 基于准备好的dom，初始化echarts实例
+    var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     var myData=[];
     console.log("开始传输数据");
     for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
@@ -427,7 +428,8 @@ function showWeek() {
     });
 }
 $("#showWeek").bind("click",function () {
-    window.location.assign("../../html/scrapSec/scrapAmountSec.html");
+    // 基于准备好的dom，初始化echarts实例
+    var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     var myData=[];
     console.log("开始传输数据");
     for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
@@ -722,7 +724,8 @@ $("#showWeek").bind("click",function () {
 });
 
 $("#showMonth").bind("click",function () {
-    window.location.assign("../../html/scrapSec/scrapAmountSec.html");
+    // 基于准备好的dom，初始化echarts实例
+    var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     var percent = 50;
     var myData=[];
     console.log("开始传输数据");
@@ -738,14 +741,14 @@ $("#showMonth").bind("click",function () {
         MonthDate.push(Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Mindex))
     }
     for(var perIndex in MonthDate){
-        var nowTime=Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday)
+        var nowTime=Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday);
         if(MonthDate[perIndex]==nowTime){
             percent=perIndex/31;
         }
 
     }
     console.log(MonthDate);
-    $.get("http://localhost:8080/nexteer/scrap-amount/week?date="+MonthDate[d.getDate()-1], function (data) {
+    $.get("http://localhost:8080/nexteer/scrap-amount/month?date="+MonthDate[d.getDate()-1], function (data) {
         $.each($.parseJSON(data), function (i, model) {
             for(var monIndex in MonthDate){
                 switch (model.cellName){
@@ -997,7 +1000,8 @@ $("#showMonth").bind("click",function () {
 });
 
 $("#showYear").bind("click",function () {
-    window.location.assign("../../html/scrapSec/scrapAmountSec.html");
+    // 基于准备好的dom，初始化echarts实例
+    var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     var percent=0;
     var myData=[];
     console.log("开始传输数据");
@@ -1254,7 +1258,8 @@ $("#showYear").bind("click",function () {
 });
 
 $("#selectMonthSub").bind("click",function (){
-    window.location.assign("../../html/scrapSec/scrapAmountSec.html");
+    // 基于准备好的dom，初始化echarts实例
+    var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     var data = $("#selectMonth").val().split("-");
     var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
     // var curr_time="2017-04-04";
@@ -1421,7 +1426,8 @@ $("#selectMonthSub").bind("click",function (){
 });
 
 $("#selectYearSub").bind("click",function () {
-    window.location.assign("../../html/scrapSec/scrapAmountSec.html");
+    // 基于准备好的dom，初始化echarts实例
+    var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     var curr_time = $("#selectYear").val() + "-12-31";
     // var curr_time="2017-04-04";
     myYearTitle.text = '可动率' + $("#selectYear").val() + '年视图';

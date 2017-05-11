@@ -16,7 +16,7 @@ function noComDateInput(addDate) {
     this.addDate = addDate;
 }
 
-var curTime = judgeTime(Uyear)+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
+
 var jsonString = new noComDateInput(curTime);
 console.log("noComShow开始");
 console.log(jsonString);
@@ -42,7 +42,11 @@ console.log(jsonString);
 //     console.log("公元"+Uyear+"年"+Umonth+"月"+Uday+"日");
 // }
 function getnoComDay() {
-
+    var date=new Date();
+    var year=date.getFullYear();
+    var month=date.getMonth()+1;
+    var day=date.getDate();
+    var curTime = judgeTime(year)+"-"+judgeTime(month)+"-"+judgeTime(day);
     $.get("http://localhost:8080/nexteer/quality-complain/day?date="+curTime,function (data) {
         if(data.system_status != false){
             console.log(JSON.stringify(data));

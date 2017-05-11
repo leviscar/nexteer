@@ -12,7 +12,7 @@ var nowOut = [720,820,920,1020];
 var achevive = ["72%","82%","92%","102%"];
 var status = [0,1,0,1];
 var titleLink = ["http://localhost:8080/nexteer/Ishaft1YieldWeek.html ","http://localhost:8080/nexteer/Ishaft1YieldWeek.html ","http://localhost:8080/nexteer/Ishaft1YieldWeek.html ","http://localhost:8080/nexteer/Ishaft1YieldWeek.html ","http://localhost:8080/nexteer/Ishaft1YieldWeek.html "];
-var link = ["http://localhost:8080/nexteer/IshaftOneUnit.html","http://localhost:8080/nexteer/IshaftOneUnit.html","http://localhost:8080/nexteer/IshaftTwoUnit.html","http://localhost:8080/nexteer/IshaftTwoUnit.html"];
+var link = ["http://localhost:8080/nexteer/Ishaft1Unit.html","http://localhost:8080/nexteer/Ishaft1Unit.html","http://localhost:8080/nexteer/IshaftTwoUnit.html","http://localhost:8080/nexteer/IshaftTwoUnit.html"];
 function change(n){
     if(n>IshaftTitle.length-1) n=0;  //
     $("#showIshaft").replaceWith("<a href=\"\" id=\"showIshaft\">"+IshaftTitle[n]+"</a>");

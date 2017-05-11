@@ -60,21 +60,21 @@ console.log('start');
 
 
 var myMonthTitle= {
-    text: 'CEPS5人员利用率月视图',
+    text: 'CEPS人员利用率月视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myWeekTitle= {
-    text: 'CEPS5人员利用率周视图',
+    text: 'CEPS人员利用率周视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myYearTitle={
-    text: 'CEPS5人员利用率年视图',
+    text: 'CEPS人员利用率年视图',
     left:'40%',
     textStyle:{
         fontSize:24
@@ -457,7 +457,7 @@ $("#showMonth").bind("click",function (){
         {
             var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
             // var curr_time="2017-03-13";
-            myMonthTitle.text = '人员利用率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
+            myMonthTitle.text = 'CEPS人员利用率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
             var IshaftOnehceValueArr=[];
             var IshaftOnehceTarArr=[];
             var urlString = "http://localhost:8080/nexteer/hce/month/CEPS5?date="+curr_time;
@@ -477,7 +477,7 @@ $("#showMonth").bind("click",function (){
                             if(MonthDate[monIndex]==model.addDate){
                                 myData[0][monIndex]=model.hce;
                                 myData[1][monIndex]=model.targetHce;
-                                percent=monIndex*100/31;
+                                percent=monIndex*100/30;
                             }
 
                         }
@@ -588,7 +588,7 @@ $("#selectMonthSub").bind("click",function (){
         var data = $("#selectMonth").val().split("-");
         var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
         // var curr_time="2017-04-04";
-        myMonthTitle.text = '人员利用率'+ data[0]+'-'+data[1]+ '月视图';
+        myMonthTitle.text = 'CEPS人员利用率'+ data[0]+'-'+data[1]+ '月视图';
 
         for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
             myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
@@ -622,13 +622,13 @@ $("#selectMonthSub").bind("click",function (){
                         if(MonthDate[monIndex]==model.addDate){
                             myData[0][monIndex]=model.hce;
                             myData[1][monIndex]=model.targetHce;
-                            percent=monIndex*100/31;
+                            percent=monIndex*100/30;
                         }
 
                     }
                 });
+                console.log(percent);
                 console.log(JSON.stringify(data));
-                console.log(IshaftOnehceValueArr);
                 // 指定图表的配置项和数据
                 var firstOption = {
                     title:myMonthTitle,
@@ -746,7 +746,7 @@ $("#showYear").bind("click",function () {
     console.log(YearDate);
     {
         var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-        myYearTitle.text = 'CEPS5人员利用率'+ Uyear + '年视图';
+        myYearTitle.text = 'CEPS人员利用率'+ Uyear + '年视图';
         var showhceJson = new hceInput(curr_time,"CEPS5");
         var IshaftOnehceValueArr=[];
         var IshaftOnehceTarArr=[];
@@ -869,7 +869,7 @@ $("#selectYearSub").bind("click",function () {
     {
         var curr_time=$("#selectYear").val()+"-12-31";
         // var curr_time="2017-04-04";
-        myYearTitle.text = 'CEPS5人员利用率'+ $("#selectYear").val() + '年视图';
+        myYearTitle.text = 'CEPS人员利用率'+ $("#selectYear").val() + '年视图';
         var showhceJson = new hceInput(curr_time,"CEPS5");
         var percent=99;
         var myData=[];

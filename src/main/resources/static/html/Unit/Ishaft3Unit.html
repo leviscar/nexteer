@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="../../images/favicon.ico">
+    <title>Nexteer</title>
+    <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/bs-docs.css" type="text/css">
+    <link rel="stylesheet" href="../../css/mainboard.css" type="text/css">
+    <link rel="stylesheet" href="../../css/dropdown.css">
+    <link rel="stylesheet" href="../../css/height.css" type="text/css">
+    <link rel="stylesheet" href="../../css/unit.css" type="text/css">
+</head>
+<body class="">
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost:8080/nexteer/index.html"><img src="../../images/icon.png" alt="Nexteer"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BEPS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/Unit/BEPS1Unit.html">BEPS1</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/Unit/BEPS2Unit.html">BEPS2</a>
+                        </li>
+                        <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/Unit/BEPS3Unit.html">BEPS3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/Unit/CEPS1Unit.html">CEPS1</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/Unit/CEPS2Unit.html">CEPS2</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/Unit/CEPS3Unit.html">CEPS3</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/Unit/CEPS4Unit.html">CEPS4</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/Unit/CEPS5Unit.html">CEPS5</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VSS-Ishaft <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/Unit/Ishaft1Unit.html">I-shaft1</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/Unit/Ishaft2Unit.html">I-shaft2</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/Unit/Ishaft3Unit.html">I-shaft3</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-submenu"><a href="http://localhost:8080/nexteer/html/Unit/Ishaft3Unit.html">I-shaft4</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+            <form class="navbar-form navbar-right" >
+                <button type="button" class="btn btn-danger btn-xs" id="CN">中文</button>
+                <button type="button" class="btn btn-danger btn-xs" id="EN">English</button>
+                <button type="button" class="btn btn-danger btn-xs" id="selectHistory">单元状态历史记录</button>
+            </form>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="main">
+    <div class="row row1">
+        <div class="col-md-12">
+            <div class="unitHeader">
+                <p class="unitTitle">第三条中间轴单元实时数据看板</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="row row2">
+        <div class="col-md-3 item  " id="firstItem">
+            <div class="innerItem ">
+                <table class="table table-hover firstTable">
+                    <tbody>
+                    <tr>
+                        <td>当前班次</td>
+                        <td id="banci">0000</td>
+                    </tr>
+                    <tr>
+                        <td>目标产量</td>
+                        <td id="target">0000</td>
+                    </tr>
+                    <tr>
+                        <td>当前产量</td>
+                        <td id="finish">0000</td>
+                    </tr>
+                    <tr>
+                        <td>当前状态</td>
+                        <td id="status"><img src="../../images/Sunny.png" alt="NICE"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="timeItem " id="showMainTime">
+                0000
+            </div>
+        </div>
+        <div class="col-md-8 item " >
+            <div class="innerItemSec" id="IshaftOneYieldDayChart"></div>
+            <div class="innerItemThi ">
+                <table class="table table-hover secTable">
+                    <thead>
+                    <tr>
+                        <td>当前节拍/秒</td>
+                        <td>标准节拍/秒</td>
+                        <td>损失时间/秒</td>
+                        <td>可动率/%</td>
+                        <td>人员利用率/%</td>
+                        <td>上一件下线时间</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td id="curBeats">0000</td>
+                        <td id="stdBeats">0000</td>
+                        <td id="lossTime">0000</td>
+                        <td id="movRate">0000</td>
+                        <td id="personUse">0000</td>
+                        <td id="offline">00:00:00</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="../../bower_components/jquery/dist/jquery.min.js" ></script>
+<script src="../../bower_components/jquery-json/dist/jquery.json.min.js"></script>
+<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../bower_components/echarts/dist/echarts.min.js"></script>
+<script src="../../js/global/defineGlobal.js"></script>
+<script src="../../js/global/showTime.js"></script>
+<script src="../../js/unit/showIshaft3Unit.js"></script>
+
+</body>
+</html>

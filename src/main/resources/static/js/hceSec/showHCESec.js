@@ -457,7 +457,7 @@ $("#showMonth").bind("click",function (){
         {
             var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
             // var curr_time="2017-03-13";
-            myMonthTitle.text = '人员利用率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
+            myMonthTitle.text = 'Ishaft1人员利用率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
             var IshaftOnehceValueArr=[];
             var IshaftOnehceTarArr=[];
             var urlString = "http://localhost:8080/nexteer/hce/month/ISHAFT1?date="+curr_time;
@@ -477,7 +477,7 @@ $("#showMonth").bind("click",function (){
                             if(MonthDate[monIndex]==model.addDate){
                                 myData[0][monIndex]=model.hce;
                                 myData[1][monIndex]=model.targetHce;
-                                percent=monIndex*100/31;
+                                percent=monIndex*100/30;
                             }
 
                         }
@@ -588,7 +588,7 @@ $("#selectMonthSub").bind("click",function (){
         var data = $("#selectMonth").val().split("-");
         var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
         // var curr_time="2017-04-04";
-        myMonthTitle.text = '人员利用率'+ data[0]+'-'+data[1]+ '月视图';
+        myMonthTitle.text = 'Ishaft1人员利用率'+ data[0]+'-'+data[1]+ '月视图';
 
         for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
             myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
@@ -622,7 +622,7 @@ $("#selectMonthSub").bind("click",function (){
                         if(MonthDate[monIndex]==model.addDate){
                             myData[0][monIndex]=model.hce;
                             myData[1][monIndex]=model.targetHce;
-                            percent=monIndex*100/31;
+                            percent=monIndex*100/30;
                         }
 
                     }

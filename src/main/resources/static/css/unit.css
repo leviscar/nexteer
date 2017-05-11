@@ -1,0 +1,133 @@
+
+body {
+    background-color: #F7F7F7;
+}
+/*body{background: url(images/backgroundNew.png) no-repeat center 0}*/
+.main{
+    width: 100%;
+    margin:0 0 0 3% ;
+    padding: 0 0 0 2%;
+    box-sizing: border-box;
+}
+
+.form-control{
+    width: 10%;
+    float: left;
+}
+p{
+    float: left;
+}
+.main .item {
+    margin: 0 2% 2% 0;
+    position: relative;
+    float: left;
+    /*box-shadow: 2px 2px 5px #CCC;*/
+    height: 100%;
+}
+.row1{
+    height:10%;
+}
+.row2{
+    height: 90%;
+}
+.border-line{
+    border: 1px solid #293c55;
+}
+.innerItem{
+    width: 100%;
+    margin: 0 0 10% 0;
+    /*background-color: #727272;*/
+    padding: 0;
+    /*color: #ffffff;*/
+    color: #000000;
+    height: 70%;
+}
+.timeItem{
+    width: 100%;
+    /*background-color: #727272;*/
+    padding: 0;
+    /*color: #ffffff;*/
+    color: #000000;
+    text-align: center;
+    font-size:4.5em;
+    font-weight:bold;
+    height: 30%;
+}
+.innerItemSec{
+    width: 100%;
+    color: #000000;
+    margin: 0 0 3% 0;
+    padding: 0;
+    height: 60%;
+}
+.innerItemThi{
+    width: 100%;
+    margin: 0 0 0 0;
+    color: #000000;
+    /*color: white;*/
+    /*background-color: #727272;*/
+    padding: 0;
+    height: 35%;
+}
+#firstItem{
+    box-shadow: none;
+}
+.unitTitle{
+    text-align: center;
+    font-size: 2.5em;
+    color: #0f0f0f;
+    /*color: #ffffff;*/
+}
+.unitHeader{
+    position: absolute;
+    left: 30%;
+    width: 60%;
+}
+.form-control{
+    /*color: #ffffff !important;*/
+    color: #000000;
+    background-color: inherit !important;
+}
+td img{
+    width: 40%;
+    height: 60%;
+}
+.innerItem>table>tbody>tr>td:nth-child(1),.innerItem>table>tbody>tr>td:nth-child(2){
+    padding: 0;
+}
+
+.table tr{
+    text-align: center;
+}
+.firstTable>tbody td{
+    font-size: 2.8em;
+    /*color: #aa314d;*/
+    /*color: #727272;*/
+    color: #D10429;
+}
+.table>tbody>tr>td,.table>thead>tr>td{
+    /*border-top: none;*/
+}
+.secTable>thead>tr>td{
+    font-size: 2.3em;
+    /*color: #727272;*/
+    color: #D10429;
+    /*color: #aa314d;*/
+    vertical-align: middle;
+    height: 3em;
+}
+.secTable>tbody>tr>td{
+    font-size: 3em;
+    vertical-align: middle;
+    height: 2em;
+}
+.firstTable>tbody>tr>td:nth-child(2){
+    color: #000000;
+}
+.table-hover > tbody > tr:hover {
+    background-color: gray;
+}
+.firstTable>tbody>tr>td{
+    vertical-align: middle;
+    height: 3em;
+}

@@ -24,5 +24,6 @@ function myDate() {
     var monthNow = new Date().getMonth()+1;
     var dayNow = new Date().getDate();
     $("#showMainDate").html(judgeTime(yearNow)+"年"+judgeTime(monthNow )+"月"+judgeTime(dayNow)+"日");
+    // $("#showDate").html(judgeTime(yearNow)+"-"+judgeTime(monthNow )+"-"+judgeTime(dayNow));
 }
 setInterval(function(){myTimer();myDate()},1000);

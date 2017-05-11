@@ -8,44 +8,13 @@
     <link rel="icon" href="../../images/favicon.ico">
     <title>Nexteer</title>
     <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="../../bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="../../css/bs-docs.css" type="text/css">
     <link rel="stylesheet" href="../../css/mainboard.css" type="text/css">
-    <link rel="stylesheet" href="../../css/dropdown.css" type="text/css">
-    <link rel="stylesheet" href="../../css/dateForm.css">
-    <style type="text/css">
-        body {
-            background-color: #F7F7F7;
-        }
-        .main{
-            width: 98%;
-            margin:0 3% 0 3% ;
-            padding: 0 4% 0 2%;
-            box-sizing: border-box;
-        }
-        .main{
-            height: 680px;
-        }
-        .main .item {
-            margin: 0 0 1% 0;
-            position: relative;
-            background-color: #FFF;
-            float: left;
-            box-shadow: 2px 2px 5px #CCC;
-            height: 100%;
-        }
-        .item2{
-            width: 93.75%;
-        }
-        .row{
-            height: 100%;
-        }
-        .border-line{
-            border: 1px solid #293c55;
-        }
-    </style>
+    <link rel="stylesheet" href="../../css/dropdown.css">
+    <link rel="stylesheet" href="../../css/height.css" type="text/css">
+    <link rel="stylesheet" href="../../css/unit.css" type="text/css">
 </head>
-<body>
+<body class="">
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -61,142 +30,84 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VSS-Ishaft <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-submenu"><a href="#">I-shaft1</a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="http://localhost:8080/nexteer/html/scrapSec/scrapWeekIshaft1.html">周视图</a></li>
-                                <li><a href="http://localhost:8080/nexteer/html/scrapSec/scrapMonthIshaft1.html">月视图</a></li>
-                                <li><a href="http://localhost:8080/nexteer/html/scrapSec/scrapYearIshaft1.html">年视图</a></li>
-                            </ul>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-submenu"><a href="#">I-shaft2</a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="#">周视图</a></li>
-                                <li><a href="#">月视图</a></li>
-                                <li><a href="#">年视图</a></li>
-                            </ul>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-submenu"><a href="#">I-shaft3</a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="#">周视图</a></li>
-                                <li><a href="#">月视图</a></li>
-                                <li><a href="#">年视图</a></li>
-                            </ul>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-submenu"><a href="#">I-shaft4</a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="#">周视图</a></li>
-                                <li><a href="#">月视图</a></li>
-                                <li><a href="#">年视图</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">BEPS <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-submenu"><a href="#">BEPS1</a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="#">周视图</a></li>
-                                <li><a href="#">月视图</a></li>
-                                <li><a href="#">年视图</a></li>
-                            </ul>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-submenu"><a href="#">BEPS2</a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="#">周视图</a></li>
-                                <li><a href="#">月视图</a></li>
-                                <li><a href="#">年视图</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu"><a href="#">BEPS3</a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="#">周视图</a></li>
-                                <li><a href="#">月视图</a></li>
-                                <li><a href="#">年视图</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CEPS <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-submenu"><a href="#">CEPS1</a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="#">周视图</a></li>
-                                <li><a href="#">月视图</a></li>
-                                <li><a href="#">年视图</a></li>
-                            </ul>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-submenu"><a href="#">CEPS2</a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="#">周视图</a></li>
-                                <li><a href="#">月视图</a></li>
-                                <li><a href="#">年视图</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu"><a href="#">CEPS1</a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="#">周视图</a></li>
-                                <li><a href="#">月视图</a></li>
-                                <li><a href="#">年视图</a></li>
-                            </ul>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-submenu"><a href="#">CEPS2</a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="#">周视图</a></li>
-                                <li><a href="#">月视图</a></li>
-                                <li><a href="#">年视图</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu"><a href="#">CEPS3</a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="#">周视图</a></li>
-                                <li><a href="#">月视图</a></li>
-                                <li><a href="#">年视图</a></li>
-                            </ul>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-submenu"><a href="#">CEPS4</a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="#">周视图</a></li>
-                                <li><a href="#">月视图</a></li>
-                                <li><a href="#">年视图</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu"><a href="#">CEPS5</a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="#">周视图</a></li>
-                                <li><a href="#">月视图</a></li>
-                                <li><a href="#">年视图</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-
-            </ul>
-            <form class="navbar-form navbar-right" id="selection">
-                <input type="date" class="form-control" readonly id="selectDate" />
-                <button type="button" class="btn btn-danger btn-xs" id="selectDateSub">选择查询时间</button>
+            <form class="navbar-form navbar-right" >
+                <input type="date" id="nowDate"/>
+                <select name="" id="nowShift">
+                    <option value="Ashift">A-Shift</option>
+                    <option value="Bshift">B-Shift</option>
+                    <option value="Cshift">C-Shift</option>
+                </select>
+                <button type="button" class="btn btn-danger btn-xs" id="selectShift">确定</button>
             </form>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
 <div class="main">
-    <div class="row">
-        <div class=" scrapSheet item col-md-12" id="showIs1UnitSheet" ></div>
-    </div>
+    <div class="row row1">
+        <div class="col-md-12">
+            <div class="unitHeader">
+                <p class="unitTitle">第一条中间轴单元历史数据看板</p>
+            </div>
 
+        </div>
+    </div>
+    <div class="row row2">
+        <div class="col-md-3 item  " id="firstItem">
+            <div class="innerItem ">
+                <table class="table table-hover firstTable">
+                    <tbody>
+                    <tr>
+                        <td>当前班次</td>
+                        <td id="banci">0000</td>
+                    </tr>
+                    <tr>
+                        <td>目标产量</td>
+                        <td id="target">0000</td>
+                    </tr>
+                    <tr>
+                        <td>当前产量</td>
+                        <td id="finish">0000</td>
+                    </tr>
+                    <tr>
+                        <td>当前状态</td>
+                        <td id="status"><img src="../../images/Sunny.png" alt="NICE"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="timeItem " id="showDate">
+                0000
+            </div>
+        </div>
+        <div class="col-md-8 item " >
+            <div class="innerItemSec" id="IshaftOneYieldDayChart"></div>
+            <div class="innerItemThi ">
+                <table class="table table-hover secTable">
+                    <thead>
+                    <tr>
+                        <td>当前节拍/秒</td>
+                        <td>标准节拍/秒</td>
+                        <td>损失时间/秒</td>
+                        <td>可动率/%</td>
+                        <td>人员利用率/%</td>
+                        <td>上一件下线时间</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td id="curBeats">0000</td>
+                        <td id="stdBeats">0000</td>
+                        <td id="lossTime">0000</td>
+                        <td id="movRate">0000</td>
+                        <td id="personUse">0000</td>
+                        <td id="offline">00:00:00</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 
@@ -204,9 +115,9 @@
 <script src="../../bower_components/jquery-json/dist/jquery.json.min.js"></script>
 <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="../../bower_components/echarts/dist/echarts.min.js"></script>
-<script type="application/javascript" src="../../bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script src="../../js/global/defineGlobal.js"></script>
-<script src="../../js/scrapSec/showScrapWeekIshaft1.js"></script>
-<script src="../../js/global/form_datetime.js"></script>
+<script src="../../js/global/showTime.js"></script>
+<script src="../../js/unitHis/Ishaft1UnitHis.js"></script>
+
 </body>
 </html>

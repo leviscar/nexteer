@@ -60,21 +60,21 @@ console.log('start');
 
 
 var myMonthTitle= {
-    text: 'BEPS3人员利用率月视图',
+    text: 'CEPS1人员利用率月视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myWeekTitle= {
-    text: 'BEPS3人员利用率周视图',
+    text: 'CEPS1人员利用率周视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myYearTitle={
-    text: 'BEPS3人员利用率年视图',
+    text: 'CEPS1人员利用率年视图',
     left:'40%',
     textStyle:{
         fontSize:24
@@ -121,7 +121,7 @@ function showWeek() {
     var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
     // var curr_time="2017-03-09";
-    var showhceJson = new hceInput(curr_time,"BEPS3");
+    var showhceJson = new hceInput(curr_time,"CEPS1");
     var IshaftOnehceValueArr=[];
     var IshaftOnehceTarArr=[];
     var myData=[];
@@ -134,7 +134,7 @@ function showWeek() {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    var urlString = "http://localhost:8080/nexteer/hce/week/BEPS3?date="+curr_time;
+    var urlString = "http://localhost:8080/nexteer/hce/week/CEPS1?date="+curr_time;
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -277,7 +277,7 @@ $("#showWeek").bind("click",function () {
     // window.location.reload();
     var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
     // var curr_time="2017-03-09";
-    var showhceJson = new hceInput(curr_time,"BEPS3");
+    var showhceJson = new hceInput(curr_time,"CEPS1");
     var IshaftOnehceValueArr=[];
     var IshaftOnehceTarArr=[];
     var myData=[];
@@ -290,7 +290,7 @@ $("#showWeek").bind("click",function () {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    var urlString = "http://localhost:8080/nexteer/hce/week/BEPS3?date="+curr_time;
+    var urlString = "http://localhost:8080/nexteer/hce/week/CEPS1?date="+curr_time;
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -457,10 +457,10 @@ $("#showMonth").bind("click",function (){
         {
             var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
             // var curr_time="2017-03-13";
-            myMonthTitle.text = '人员利用率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
+            myMonthTitle.text = 'CEPS1人员利用率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
             var IshaftOnehceValueArr=[];
             var IshaftOnehceTarArr=[];
-            var urlString = "http://localhost:8080/nexteer/hce/month/BEPS3?date="+curr_time;
+            var urlString = "http://localhost:8080/nexteer/hce/month/CEPS1?date="+curr_time;
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
@@ -477,7 +477,7 @@ $("#showMonth").bind("click",function (){
                             if(MonthDate[monIndex]==model.addDate){
                                 myData[0][monIndex]=model.hce;
                                 myData[1][monIndex]=model.targetHce;
-                                percent=monIndex*100/31;
+                                percent=monIndex*100/30;
                             }
 
                         }
@@ -580,7 +580,7 @@ $("#showMonth").bind("click",function (){
     })
 });
 $("#selectMonthSub").bind("click",function (){
-    // window.location.assign("../../html/hceSec/BEPS3HceSec.html");
+    // window.location.assign("../../html/hceSec/CEPS1HceSec.html");
     var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     var myData=[];
     var percent=50;
@@ -588,7 +588,7 @@ $("#selectMonthSub").bind("click",function (){
         var data = $("#selectMonth").val().split("-");
         var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
         // var curr_time="2017-04-04";
-        myMonthTitle.text = '人员利用率'+ data[0]+'-'+data[1]+ '月视图';
+        myMonthTitle.text = 'CPES1人员利用率'+ data[0]+'-'+data[1]+ '月视图';
 
         for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
             myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
@@ -605,7 +605,7 @@ $("#selectMonthSub").bind("click",function (){
         console.log(MonthDate);
         var IshaftOnehceValueArr=[];
         var IshaftOnehceTarArr=[];
-        var urlString = "http://localhost:8080/nexteer/hce/month/BEPS3?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/hce/month/CEPS1?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -622,11 +622,12 @@ $("#selectMonthSub").bind("click",function (){
                         if(MonthDate[monIndex]==model.addDate){
                             myData[0][monIndex]=model.hce;
                             myData[1][monIndex]=model.targetHce;
-                            percent=monIndex*100/31;
+                            percent=monIndex*100/30;
                         }
 
                     }
                 });
+                console.log(percent);
                 console.log(JSON.stringify(data));
                 console.log(IshaftOnehceValueArr);
                 // 指定图表的配置项和数据
@@ -724,7 +725,7 @@ $("#selectMonthSub").bind("click",function (){
 });
 //按年显示
 $("#showYear").bind("click",function () {
-    // window.location.assign("../../html/hceSec/BEPS3HceSec.html");
+    // window.location.assign("../../html/hceSec/CEPS1HceSec.html");
     var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     var percent=99;
     var myData=[];
@@ -746,11 +747,11 @@ $("#showYear").bind("click",function () {
     console.log(YearDate);
     {
         var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-        myYearTitle.text = 'BEPS3人员利用率'+ Uyear + '年视图';
-        var showhceJson = new hceInput(curr_time,"BEPS3");
+        myYearTitle.text = 'CEPS1人员利用率'+ Uyear + '年视图';
+        var showhceJson = new hceInput(curr_time,"CEPS1");
         var IshaftOnehceValueArr=[];
         var IshaftOnehceTarArr=[];
-        var urlString = "http://localhost:8080/nexteer/hce/year/BEPS3?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/hce/year/CEPS1?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -869,8 +870,8 @@ $("#selectYearSub").bind("click",function () {
     {
         var curr_time=$("#selectYear").val()+"-12-31";
         // var curr_time="2017-04-04";
-        myYearTitle.text = 'BEPS3人员利用率'+ $("#selectYear").val() + '年视图';
-        var showhceJson = new hceInput(curr_time,"BEPS3");
+        myYearTitle.text = 'CEPS1人员利用率'+ $("#selectYear").val() + '年视图';
+        var showhceJson = new hceInput(curr_time,"CEPS1");
         var percent=99;
         var myData=[];
         console.log("开始传输数据");
@@ -891,7 +892,7 @@ $("#selectYearSub").bind("click",function () {
         console.log(YearDate);
         var IshaftOnehceValueArr=[];
         var IshaftOnehceTarArr=[];
-        var urlString = "http://localhost:8080/nexteer/hce/year/BEPS3?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/hce/year/CEPS1?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -1048,7 +1049,7 @@ $("#showPeriod").bind("click",function () {
                 hceYearArr[i]=model.year;
                 hceMonthArr[i]=model.month;
                 hceDayArr[i]=model.day;
-                IshaftOnehceValueArr[i]=model.BEPS3_value;
+                IshaftOnehceValueArr[i]=model.CEPS1_value;
                 IsTwohceValueArr[i]=model.ishaft2_value;
                 IsThrhceValueArr[i]=model.ishaft3_value;
                 IsForhceValueArr[i]=model.ishaft4_value;
@@ -1098,7 +1099,7 @@ $("#showPeriod").bind("click",function () {
                 series: [
 
                     {
-                        name: 'BEPS3',
+                        name: 'CEPS1',
                         type: 'line',
                         label: {
                             normal: {

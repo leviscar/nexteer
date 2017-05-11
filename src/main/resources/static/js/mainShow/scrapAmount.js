@@ -22,10 +22,15 @@ function judgeTime(time) {
 }
 $("#time").html("公元"+Uyear+"年"+Umonth+"月"+Uday+"日");
 // var nowScrapString = new safety_date(Uyear.toString(),UscrapMonth.toString() , UscrapDay.toString());
-var curTime = judgeTime(Uyear)+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday-1);
+
 // console.log(nowScrapString);
 //显示前一天的报废金额
 function showScrapData() {
+    var date=new Date();
+    var year=date.getFullYear();
+    var month=date.getMonth()+1;
+    var day=date.getDate();
+    var curTime = judgeTime(year)+"-"+judgeTime(month)+"-"+judgeTime(day-1);
     // $.ajax({
     //     type: "POST",
     //     url: "http://localhost:8080/nexteer/scrap-amount/getByDate",
