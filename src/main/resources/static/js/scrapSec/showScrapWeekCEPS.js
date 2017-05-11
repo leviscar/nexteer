@@ -65,28 +65,28 @@ console.log('start');
 var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
 
 var myMonthTitle= {
-    text: 'ISHAFT1报废金额月视图',
+    text: 'CEPS报废金额月视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myWeekTitle= {
-    text: 'ISHAFT1报废金额周视图',
+    text: 'CEPS报废金额周视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myYearTitle={
-    text: 'ISHAFT1报废金额年视图',
+    text: 'CEPS报废金额年视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myPeriod={
-    text: 'ISHAFT1报废金额时间段视图',
+    text: 'CEPS报废金额时间段视图',
     left:'40%',
     textStyle:{
         fontSize:24
@@ -114,7 +114,7 @@ var myGrid= {
     bottom:'2%'
 };
 var myLengend = {
-    data:['Ishaft1','Ishaft1_target'],
+    data:['CEPS','CEPS_target'],
     align: 'right',
     right: '9%',
     top:'6%'
@@ -404,7 +404,7 @@ function showWeek() {
 
             series: [
                 {
-                    name: 'Ishaft1',
+                    name: 'CEPS',
                     type: 'line',
                     smooth: true,
                     showAllSymbol: true,
@@ -415,10 +415,10 @@ function showWeek() {
                             position: 'top'
                         }
                     },
-                    data: myData[0]
+                    data: myData[8]
                 },
                 {
-                    name: 'Ishaft1_target',
+                    name: 'CEPS_target',
                     type: 'line',
                     smooth: true,
                     showAllSymbol: true,
@@ -429,7 +429,7 @@ function showWeek() {
                             position: 'top'
                         }
                     },
-                    data: myData[1]
+                    data: myData[9]
                 }
             ]
         };

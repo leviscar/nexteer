@@ -5,9 +5,6 @@
  * Created by Administrator on 2017/5/6.
  */
 /**
- * Created by Administrator on 2017/5/6.
- */
-/**
  * Created by Administrator on 2017/5/3.
  */
 /**
@@ -65,28 +62,28 @@ console.log('start');
 var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
 
 var myMonthTitle= {
-    text: 'ISHAFT1报废金额月视图',
+    text: 'BEPS报废金额月视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myWeekTitle= {
-    text: 'ISHAFT1报废金额周视图',
+    text: 'BEPS报废金额周视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myYearTitle={
-    text: 'ISHAFT1报废金额年视图',
+    text: 'BEPS报废金额年视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myPeriod={
-    text: 'ISHAFT1报废金额时间段视图',
+    text: 'BEPS报废金额时间段视图',
     left:'40%',
     textStyle:{
         fontSize:24
@@ -114,7 +111,7 @@ var myGrid= {
     bottom:'2%'
 };
 var myLengend = {
-    data:['Ishaft1','Ishaft1_target'],
+    data:['BEPS','BEPS_target'],
     align: 'right',
     right: '9%',
     top:'6%'
@@ -404,7 +401,7 @@ function showWeek() {
 
             series: [
                 {
-                    name: 'Ishaft1',
+                    name: 'BEPS',
                     type: 'line',
                     smooth: true,
                     showAllSymbol: true,
@@ -415,10 +412,10 @@ function showWeek() {
                             position: 'top'
                         }
                     },
-                    data: myData[0]
+                    data: myData[10]
                 },
                 {
-                    name: 'Ishaft1_target',
+                    name: 'BEPS_target',
                     type: 'line',
                     smooth: true,
                     showAllSymbol: true,
@@ -429,7 +426,7 @@ function showWeek() {
                             position: 'top'
                         }
                     },
-                    data: myData[1]
+                    data: myData[11]
                 }
             ]
         };

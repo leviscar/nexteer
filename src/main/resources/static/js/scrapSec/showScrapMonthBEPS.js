@@ -1,4 +1,10 @@
 /**
+ * Created by Administrator on 2017/5/6.
+ */
+/**
+ * Created by Administrator on 2017/5/6.
+ */
+/**
  * Created by Administrator on 2017/5/3.
  */
 /**
@@ -56,21 +62,21 @@ console.log('start');
 var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
 
 var myMonthTitle= {
-    text: 'ISHAFT1报废金额月视图',
+    text: 'BEPS报废金额月视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myWeekTitle= {
-    text: 'ISHAFT1报废金额周视图',
+    text: 'BEPS报废金额周视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myYearTitle={
-    text: 'ISHAFT1报废金额年视图',
+    text: 'BEPS报废金额年视图',
     left:'40%',
     textStyle:{
         fontSize:24
@@ -105,7 +111,7 @@ var myGrid= {
     bottom:'2%'
 };
 var myLengend = {
-    data:['Ishaft1','Ishaft1_target'],
+    data:['BEPS','BEPS_target'],
     align: 'right',
     right: '9%',
     top:'6%'
@@ -280,7 +286,7 @@ function showMonth() {
             series: [
 
                 {
-                    name: 'Ishaft1',
+                    name: 'CEPS',
                     type: 'line',
                     smooth: true,
                     showAllSymbol: true,
@@ -291,10 +297,10 @@ function showMonth() {
                             position: 'top'
                         }
                     },
-                    data: myData[0]
+                    data: myData[10]
                 },
                 {
-                    name: 'Ishaft1_target',
+                    name: 'CEPS_target',
                     type: 'line',
                     smooth: true,
                     showAllSymbol: true,
@@ -305,7 +311,7 @@ function showMonth() {
                             position: 'top'
                         }
                     },
-                    data: myData[1]
+                    data: myData[11]
                 }
             ]
         };
@@ -321,7 +327,7 @@ $("#selectMonthSub").bind("click",function (){
     var data = $("#selectMonth").val().split("-");
     var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
     // var curr_time="2017-04-04";
-    myMonthTitle.text = 'ISHAFT1报废金额'+ data[0]+'-'+data[1]+ '月视图';
+    myMonthTitle.text = 'BEPS报废金额'+ data[0]+'-'+data[1]+ '月视图';
     {
         var percent = 50;
         var myData=[];
@@ -447,7 +453,7 @@ $("#selectMonthSub").bind("click",function (){
                 series: [
 
                     {
-                        name: 'Ishaft1',
+                        name: 'BEPS',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -458,10 +464,10 @@ $("#selectMonthSub").bind("click",function (){
                                 position: 'top'
                             }
                         },
-                        data: myData[0]
+                        data: myData[10]
                     },
                     {
-                        name: 'Ishaft1_target',
+                        name: 'BEPS_target',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -472,7 +478,7 @@ $("#selectMonthSub").bind("click",function (){
                                 position: 'top'
                             }
                         },
-                        data: myData[1]
+                        data: myData[11]
                     }
                 ]
             };

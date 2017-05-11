@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../images/favicon.ico">
+    <title>Nexteer</title>
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap-year-calendar/css/bootstrap-year-calendar.min.css">
+    <link rel="stylesheet" href="../css/bs-docs.css" type="text/css">
+    <link rel="stylesheet" href="../css/mainboard.css" type="text/css">
+
+    <style>
+        body {
+            background-color: #F7F7F7;
+        }
+        .main{
+            width:100%;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .calendar{
+            width:100%;
+            height:90% !important;
+            padding:20px;
+        }
+        .title{
+            text-align: center !important;
+            font-weight:bold;
+            font-size: 2em;
+            width: 100%;
+            height:10%;
+        }
+    </style>
+</head>
+<body class="MainBoard">
+<!--top navigation-->
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost:8080/nexteer/index.html"><img src="../images/icon.png" alt="Nexteer"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="main">
+    <div class="title ">用户质量无抱怨天数</div>
+    <div id="ncomCalendar" class="calendar"></div>
+</div>
+
+<script src="../bower_components/jquery/dist/jquery.min.js" ></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../bower_components/bootstrap-year-calendar/js/bootstrap-year-calendar.min.js"></script>
+<script src="../js/qualitySec/qualitySec.js"></script>
+</body>
+</html>

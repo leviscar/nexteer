@@ -1,4 +1,7 @@
 /**
+ * Created by Administrator on 2017/5/6.
+ */
+/**
  * Created by Administrator on 2017/5/3.
  */
 /**
@@ -56,21 +59,21 @@ console.log('start');
 var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
 
 var myMonthTitle= {
-    text: 'ISHAFT1报废金额月视图',
+    text: '报废金额月视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myWeekTitle= {
-    text: 'ISHAFT1报废金额周视图',
+    text: '报废金额周视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myYearTitle={
-    text: 'ISHAFT1报废金额年视图',
+    text: '报废金额年视图',
     left:'40%',
     textStyle:{
         fontSize:24
@@ -105,7 +108,7 @@ var myGrid= {
     bottom:'2%'
 };
 var myLengend = {
-    data:['Ishaft1','Ishaft1_target'],
+    data:['Ishaft1','Ishaft1_target','Ishaft2','Ishaft2_target','Ishaft3','Ishaft3_target','Ishaft4','Ishaft4_target','CEPS','CEPS_target','BEPS','BEPS_target'],
     align: 'right',
     right: '9%',
     top:'6%'
@@ -189,34 +192,11 @@ function showMonth() {
                             myData[8][monIndex]=model.value;
                             myData[9][monIndex]=model.targetValue;
                             break;
-                        case "CEPS2":
+                        case "BEPS1":
                             myData[10][monIndex]=model.value;
                             myData[11][monIndex]=model.targetValue;
                             break;
-                        case "CEPS3":
-                            myData[12][monIndex]=model.value;
-                            myData[13][monIndex]=model.targetValue;
-                            break;
-                        case "CEPS4":
-                            myData[14][monIndex]=model.value;
-                            myData[15][monIndex]=model.targetValue;
-                            break;
-                        case "CEPS5":
-                            myData[16][monIndex]=model.value;
-                            myData[17][monIndex]=model.targetValue;
-                            break;
-                        case "BEPS1":
-                            myData[18][monIndex]=model.value;
-                            myData[19][monIndex]=model.targetValue;
-                            break;
-                        case "BEPS2":
-                            myData[20][monIndex]=model.value;
-                            myData[21][monIndex]=model.targetValue;
-                            break;
-                        case "BEPS3":
-                            myData[22][monIndex]=model.value;
-                            myData[23][monIndex]=model.targetValue;
-                            break;
+
                     }
                 }
 
@@ -306,6 +286,146 @@ function showMonth() {
                         }
                     },
                     data: myData[1]
+                },
+                {
+                    name: 'Ishaft2',
+                    type: 'line',
+                    smooth: true,
+                    showAllSymbol: true,
+                    symbol: 'emptyCircle',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: myData[2]
+                },
+                {
+                    name: 'Ishaft2_target',
+                    type: 'line',
+                    smooth: true,
+                    showAllSymbol: true,
+                    symbol: 'emptyCircle',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: myData[3]
+                },
+                {
+                    name: 'Ishaft3',
+                    type: 'line',
+                    smooth: true,
+                    showAllSymbol: true,
+                    symbol: 'emptyCircle',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: myData[4]
+                },
+                {
+                    name: 'Ishaft3_target',
+                    type: 'line',
+                    smooth: true,
+                    showAllSymbol: true,
+                    symbol: 'emptyCircle',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: myData[5]
+                },
+                {
+                    name: 'Ishaft4',
+                    type: 'line',
+                    smooth: true,
+                    showAllSymbol: true,
+                    symbol: 'emptyCircle',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: myData[6]
+                },
+                {
+                    name: 'Ishaft4_target',
+                    type: 'line',
+                    smooth: true,
+                    showAllSymbol: true,
+                    symbol: 'emptyCircle',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: myData[7]
+                },
+                {
+                    name: 'CEPS',
+                    type: 'line',
+                    smooth: true,
+                    showAllSymbol: true,
+                    symbol: 'emptyCircle',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: myData[8]
+                },
+                {
+                    name: 'CEPS_target',
+                    type: 'line',
+                    smooth: true,
+                    showAllSymbol: true,
+                    symbol: 'emptyCircle',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: myData[9]
+                },
+                {
+                    name: 'BEPS',
+                    type: 'line',
+                    smooth: true,
+                    showAllSymbol: true,
+                    symbol: 'emptyCircle',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: myData[10]
+                },
+                {
+                    name: 'BEPS_target',
+                    type: 'line',
+                    smooth: true,
+                    showAllSymbol: true,
+                    symbol: 'emptyCircle',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    data: myData[11]
                 }
             ]
         };
@@ -321,7 +441,7 @@ $("#selectMonthSub").bind("click",function (){
     var data = $("#selectMonth").val().split("-");
     var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
     // var curr_time="2017-04-04";
-    myMonthTitle.text = 'ISHAFT1报废金额'+ data[0]+'-'+data[1]+ '月视图';
+    myMonthTitle.text = '报废金额'+ data[0]+'-'+data[1]+ '月视图';
     {
         var percent = 50;
         var myData=[];
@@ -365,34 +485,11 @@ $("#selectMonthSub").bind("click",function (){
                                 myData[8][monIndex]=model.value;
                                 myData[9][monIndex]=model.targetValue;
                                 break;
-                            case "CEPS2":
+                            case "BEPS1":
                                 myData[10][monIndex]=model.value;
                                 myData[11][monIndex]=model.targetValue;
                                 break;
-                            case "CEPS3":
-                                myData[12][monIndex]=model.value;
-                                myData[13][monIndex]=model.targetValue;
-                                break;
-                            case "CEPS4":
-                                myData[14][monIndex]=model.value;
-                                myData[15][monIndex]=model.targetValue;
-                                break;
-                            case "CEPS5":
-                                myData[16][monIndex]=model.value;
-                                myData[17][monIndex]=model.targetValue;
-                                break;
-                            case "BEPS1":
-                                myData[18][monIndex]=model.value;
-                                myData[19][monIndex]=model.targetValue;
-                                break;
-                            case "BEPS2":
-                                myData[20][monIndex]=model.value;
-                                myData[21][monIndex]=model.targetValue;
-                                break;
-                            case "BEPS3":
-                                myData[22][monIndex]=model.value;
-                                myData[23][monIndex]=model.targetValue;
-                                break;
+
                         }
                     }
 
@@ -473,6 +570,146 @@ $("#selectMonthSub").bind("click",function (){
                             }
                         },
                         data: myData[1]
+                    },
+                    {
+                        name: 'Ishaft2',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: myData[2]
+                    },
+                    {
+                        name: 'Ishaft2_target',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: myData[3]
+                    },
+                    {
+                        name: 'Ishaft3',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: myData[4]
+                    },
+                    {
+                        name: 'Ishaft3_target',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: myData[5]
+                    },
+                    {
+                        name: 'Ishaft4',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: myData[6]
+                    },
+                    {
+                        name: 'Ishaft4_target',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: myData[7]
+                    },
+                    {
+                        name: 'CEPS',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: myData[8]
+                    },
+                    {
+                        name: 'CEPS_target',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: myData[9]
+                    },
+                    {
+                        name: 'BEPS',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: myData[10]
+                    },
+                    {
+                        name: 'BEPS_target',
+                        type: 'line',
+                        smooth: true,
+                        showAllSymbol: true,
+                        symbol: 'emptyCircle',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top'
+                            }
+                        },
+                        data: myData[11]
                     }
                 ]
             };

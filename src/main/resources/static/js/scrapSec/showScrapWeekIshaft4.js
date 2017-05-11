@@ -1,12 +1,4 @@
-/**
- * Created by Administrator on 2017/5/6.
- */
-/**
- * Created by Administrator on 2017/5/6.
- */
-/**
- * Created by Administrator on 2017/5/6.
- */
+
 /**
  * Created by Administrator on 2017/5/3.
  */
@@ -65,28 +57,28 @@ console.log('start');
 var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
 
 var myMonthTitle= {
-    text: 'ISHAFT1报废金额月视图',
+    text: 'ISHAFT4报废金额月视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myWeekTitle= {
-    text: 'ISHAFT1报废金额周视图',
+    text: 'ISHAFT4报废金额周视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myYearTitle={
-    text: 'ISHAFT1报废金额年视图',
+    text: 'ISHAFT4报废金额年视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myPeriod={
-    text: 'ISHAFT1报废金额时间段视图',
+    text: 'ISHAFT4报废金额时间段视图',
     left:'40%',
     textStyle:{
         fontSize:24
@@ -114,7 +106,7 @@ var myGrid= {
     bottom:'2%'
 };
 var myLengend = {
-    data:['Ishaft1','Ishaft1_target'],
+    data:['Ishaft4','Ishaft4_target'],
     align: 'right',
     right: '9%',
     top:'6%'
@@ -404,7 +396,7 @@ function showWeek() {
 
             series: [
                 {
-                    name: 'Ishaft1',
+                    name: 'Ishaft4',
                     type: 'line',
                     smooth: true,
                     showAllSymbol: true,
@@ -415,10 +407,10 @@ function showWeek() {
                             position: 'top'
                         }
                     },
-                    data: myData[0]
+                    data: myData[6]
                 },
                 {
-                    name: 'Ishaft1_target',
+                    name: 'Ishaft4_target',
                     type: 'line',
                     smooth: true,
                     showAllSymbol: true,
@@ -429,7 +421,7 @@ function showWeek() {
                             position: 'top'
                         }
                     },
-                    data: myData[1]
+                    data: myData[7]
                 }
             ]
         };
@@ -440,3 +432,4 @@ function showWeek() {
 }
 
 showWeek();
+
