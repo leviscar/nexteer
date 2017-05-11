@@ -34,7 +34,7 @@ public class ConstantScheduledTask {
      *
      * @throws ParseException
      */
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "1 0 0 * * ?")
     public void addSafetyDate() throws ParseException {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
