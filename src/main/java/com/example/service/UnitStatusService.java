@@ -79,6 +79,12 @@ public class UnitStatusService {
         // get the current product output based on cell name
         List<ProductInfo> products = cellService.getProducts(startDate, curDate, cell);
 
+        // get the last product off line time
+        String lastOffLine = "";
+        if (products.size() > 0) {
+            lastOffLine = dateSdf.format(products.get(products.size() - 1).getTime());
+        }
+        unitStatus.setLastOffLine(lastOffLine);
         // take the latest 30 products' beat to calculate the current beat
         int topN = 30;
         List<Date> topNProduct = cellService.getTopNProducts(startDate, curDate, topN, cell);

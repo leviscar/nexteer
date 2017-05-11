@@ -18,6 +18,7 @@ public class UnitStatus {
     private double hce;
     private int target;
     private Map<String, Integer> hourly_output;
+    private String lastOffLine;
 
     public UnitStatus() {
     }
@@ -116,5 +117,13 @@ public class UnitStatus {
 
     public void setTarget(int target) {
         this.target = target;
+    }
+
+    public String getLastOffLine() {
+        return lastOffLine;
+    }
+
+    public void setLastOffLine(String lastOffLine) {
+        this.lastOffLine = lastOffLine;
     }
 }
