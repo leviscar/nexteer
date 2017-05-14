@@ -1,10 +1,10 @@
 {
   "name": "ng-spring-boot",
   "dependencies": {
-    "jquery": "latest",
-    "bootstrap": "latest",
+    "jquery": "^1.9.0",
+    "bootstrap": "^3.3.7",
     "bootstrap-year-calendar": "^1.1.0",
-    "jquery-json": "latest",
+    "jquery-json": "^2.6.0",
     "echarts": "^3.4.0",
     "font-awesome": "^4.7.0",
     "jquery-editable-select": "^2.2.4",
