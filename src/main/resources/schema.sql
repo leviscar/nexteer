@@ -63,14 +63,16 @@ CREATE TABLE oee (
   oee        INT,
   target_oee INT,
   cell_name  VARCHAR(10),
-  add_date   DATE
+  add_date   DATE,
+  PRIMARY KEY (id, add_date, cell_name)
 );
 CREATE TABLE hce (
   id         INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
   hce        INT,
   target_hce INT,
   cell_name  VARCHAR(10),
-  add_date   DATE
+  add_date   DATE,
+  PRIMARY KEY (id, add_date, cell_name)
 );
 CREATE TABLE task_info (
   id          INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
