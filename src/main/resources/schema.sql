@@ -1,3 +1,6 @@
+use nexteer;
+DELETE rest_event;
+DELETE work_shift;
 CREATE TABLE safety_date (
   year       NCHAR(4) NOT NULL,
   month      NCHAR(2) NOT NULL,
@@ -7,7 +10,6 @@ CREATE TABLE safety_date (
   log        NVARCHAR(255) DEFAULT 'Today is running safe!',
   PRIMARY KEY (year, month, day)
 );
-DROP TABLE scrap_amount
 CREATE TABLE scrap_amount (
   add_date     DATE,
   cell_name    VARCHAR(10),
