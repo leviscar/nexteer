@@ -8,6 +8,7 @@
     "echarts": "^3.4.0",
     "font-awesome": "^4.7.0",
     "jquery-editable-select": "^2.2.4",
-    "smalot-bootstrap-datetimepicker": "https://github.com/smalot/bootstrap-datetimepicker.git#^2.4.4"
+    "smalot-bootstrap-datetimepicker": "https://github.com/smalot/bootstrap-datetimepicker.git#^2.4.4",
+    "bootstrap-switch": "^3.3.4"
   }
 }
