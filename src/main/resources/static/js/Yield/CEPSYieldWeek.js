@@ -53,7 +53,7 @@ var endtime= Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday);
 //    var getIshaftOneWeekJson =new endTime("2017-04-06");
 
 //    var myDataOne= [];
-//    var worker = new Worker('http://localhost:8080/nexteer/IshaftYieldWeekFirstWork.js');
+//    var worker = new Worker('http://10.1.0.40:8080/nexteer/IshaftYieldWeekFirstWork.js');
 
 function getIshaftOneWeekData() {
     // 基于准备好的dom，初始化echarts实例

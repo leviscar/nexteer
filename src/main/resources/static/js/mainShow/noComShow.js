@@ -63,6 +63,6 @@ function getnoComDay() {
     });
 
 }
-getNCOMNowData();
+// getNCOMNowData();
 setTimeout(getnoComDay(),1000);
-setInterval(getNCOMNowData(),1000*60*60);
+// setInterval(getNCOMNowData(),1000*60*60);

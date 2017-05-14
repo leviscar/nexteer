@@ -24,7 +24,7 @@ var endtime= Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday);
 var myChart = echarts.init(document.getElementById('IshaftOneYieldYearBar'));
 var myPieChart = echarts.init(document.getElementById('IshaftOneYieldYearPie'));
 //    var myDataOne= [];
-//    var worker = new Worker('http://localhost:8080/nexteer/IshaftYieldWeekFirstWork.js');
+//    var worker = new Worker('http://10.1.0.40:8080/nexteer/IshaftYieldWeekFirstWork.js');
 var myTitle= {
     text: 'Ishaft3产量信息展示（年视图）',
     left:'40%',

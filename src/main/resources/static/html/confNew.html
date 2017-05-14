@@ -42,46 +42,59 @@
             <ul class="uk-switcher uk-margin">
                 <li>
                     <table class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th>配置选项</th>
-                        <th>配置时间</th>
-                        <th>配置信息</th>
-                        <th>返回状态</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>指定安全运行天数</td>
-                        <td><input type="date" id="startDateTime"></td>
-                        <td><input type="number" id="startDateValue"></td>
-                        <td id="startDateStu"></td>
-                        <td><button type="button" class="btn btn-primary" id="startDate">提交</button></td>
-                    </tr>
-                    <tr>
-                        <td>配置损工事件</td>
-                        <td><input type="date" id="desDateTime"></td>
-                        <td><input type="text" id="desDateValue"></td>
-                        <td id="desDateStu"></td>
-                        <td><button type="button" class="btn btn-primary" id="desDate">提交</button></td>
-                    </tr>
-                    <tr>
-                        <td>配置可记录事件</td>
-                        <td><input type="date" id="logDateTime"></td>
-                        <td><input type="text" id="logDateValue"></td>
-                        <td id="logDateStu"></td>
-                        <td><button type="button" class="btn btn-primary" id="logDate">提交</button></td>
-                    </tr>
-                    <tr>
-                        <td>重置安全运行天数</td>
-                        <td><input type="date" id="resetDateTime"></td>
-                        <td><input type="text" id="resetDateValue"></td>
-                        <td id="resetDateStu"></td>
-                        <td><button type="button" class="btn btn-primary" id="resetDate">提交</button></td>
-                    </tr>
-                    </tbody>
-                </table>
+                        <thead>
+                        <tr>
+                            <th>配置选项</th>
+                            <th>配置时间</th>
+                            <th>安全天数</th>
+                            <th>返回状态</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>指定安全运行天数</td>
+                            <td><input type="date" id="startDateTime"></td>
+                            <td><input type="number" id="startDateValue"></td>
+                            <td id="startDateStu"></td>
+                            <td><button type="button" class="btn btn-primary" id="startDate">提交</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>配置选项</th>
+                            <th>配置时间</th>
+                            <th>配置信息</th>
+                            <th>返回状态</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>配置损工事件</td>
+                            <td><input type="date" id="desDateTime"></td>
+                            <td><input type="text" id="desDateValue"></td>
+                            <td id="desDateStu"></td>
+                            <td><button type="button" class="btn btn-primary" id="desDate">提交</button></td>
+                        </tr>
+                        <tr>
+                            <td>配置可记录事件</td>
+                            <td><input type="date" id="logDateTime"></td>
+                            <td><input type="text" id="logDateValue"></td>
+                            <td id="logDateStu"></td>
+                            <td><button type="button" class="btn btn-primary" id="logDate">提交</button></td>
+                        </tr>
+                        <tr>
+                            <td>重置安全运行天数</td>
+                            <td><input type="date" id="resetDateTime"></td>
+                            <td><input type="text" id="resetDateValue"></td>
+                            <td id="resetDateStu"></td>
+                            <td><button type="button" class="btn btn-primary" id="resetDate">提交</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </li>
                 <li><table class="table table-striped table-bordered">
                     <thead>
@@ -199,36 +212,36 @@
                                         </thead>
                                         <tbody>
                                         <!--<tr>-->
-                                            <!--<td>CEPS1</td>-->
-                                            <!--<td><input type="date" ></td>-->
-                                            <!--<td><input type="number" ></td>-->
-                                            <!--<td><input type="number" ></td>-->
-                                            <!--<td><button type="button" class="btn btn-primary addScrap" >添加</button></td>-->
-                                            <!--<td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>-->
+                                        <!--<td>CEPS1</td>-->
+                                        <!--<td><input type="date" ></td>-->
+                                        <!--<td><input type="number" ></td>-->
+                                        <!--<td><input type="number" ></td>-->
+                                        <!--<td><button type="button" class="btn btn-primary addScrap" >添加</button></td>-->
+                                        <!--<td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>-->
                                         <!--</tr>-->
                                         <!--<tr>-->
-                                            <!--<td>CEPS2</td>-->
-                                            <!--<td><input type="date" ></td>-->
-                                            <!--<td><input type="number" ></td>-->
-                                            <!--<td><input type="number" ></td>-->
-                                            <!--<td><button type="button" class="btn btn-primary addScrap" >添加</button></td>-->
-                                            <!--<td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>-->
+                                        <!--<td>CEPS2</td>-->
+                                        <!--<td><input type="date" ></td>-->
+                                        <!--<td><input type="number" ></td>-->
+                                        <!--<td><input type="number" ></td>-->
+                                        <!--<td><button type="button" class="btn btn-primary addScrap" >添加</button></td>-->
+                                        <!--<td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>-->
                                         <!--</tr>-->
                                         <!--<tr>-->
-                                            <!--<td>CEPS3</td>-->
-                                            <!--<td><input type="date" ></td>-->
-                                            <!--<td><input type="number" ></td>-->
-                                            <!--<td><input type="number" ></td>-->
-                                            <!--<td><button type="button" class="btn btn-primary addScrap" >添加</button></td>-->
-                                            <!--<td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>-->
+                                        <!--<td>CEPS3</td>-->
+                                        <!--<td><input type="date" ></td>-->
+                                        <!--<td><input type="number" ></td>-->
+                                        <!--<td><input type="number" ></td>-->
+                                        <!--<td><button type="button" class="btn btn-primary addScrap" >添加</button></td>-->
+                                        <!--<td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>-->
                                         <!--</tr>-->
                                         <!--<tr>-->
-                                            <!--<td>CEPS4</td>-->
-                                            <!--<td><input type="date" ></td>-->
-                                            <!--<td><input type="number" ></td>-->
-                                            <!--<td><input type="number" ></td>-->
-                                            <!--<td><button type="button" class="btn btn-primary addScrap" >添加</button></td>-->
-                                            <!--<td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>-->
+                                        <!--<td>CEPS4</td>-->
+                                        <!--<td><input type="date" ></td>-->
+                                        <!--<td><input type="number" ></td>-->
+                                        <!--<td><input type="number" ></td>-->
+                                        <!--<td><button type="button" class="btn btn-primary addScrap" >添加</button></td>-->
+                                        <!--<td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>-->
                                         <!--</tr>-->
                                         <tr>
                                             <td>CEPS5</td>
@@ -279,15 +292,15 @@
                                             <!--<td><input type="number" ></td>-->
                                             <!--<td><button type="button" class="btn btn-primary addScrap" >添加</button></td>-->
                                             <!--<td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>-->
-                                        <!--</tr>-->
-                                        <!--<tr>-->
+                                            <!--</tr>-->
+                                            <!--<tr>-->
                                             <!--<td>BEPS2</td>-->
                                             <!--<td><input type="date" ></td>-->
                                             <!--<td><input type="number" ></td>-->
                                             <!--<td><input type="number" ></td>-->
                                             <!--<td><button type="button" class="btn btn-primary addScrap" >添加</button></td>-->
                                             <!--<td><button type="button" class="btn btn-primary resetScrap" >更新</button></td>-->
-                                        <!--</tr>-->
+                                            <!--</tr>-->
                                         <tr>
                                             <td>BEPS3</td>
                                             <td><input type="date" ></td>
@@ -1825,15 +1838,15 @@
                                             </li>
                                             <li>
                                                 <table id="showISHAFT1Event" class="table  table-bordered black-color table-bordered">
-                                                <thead>
-                                                <tr>
-                                                <th>班次</th>
-                                                <th>产线</th>
-                                                <th>事件</th>
-                                                <th>开始时间</th>
-                                                <th>结束时间</th>
-                                                </tr>
-                                                </thead>
+                                                    <thead>
+                                                    <tr>
+                                                        <th>班次</th>
+                                                        <th>产线</th>
+                                                        <th>事件</th>
+                                                        <th>开始时间</th>
+                                                        <th>结束时间</th>
+                                                    </tr>
+                                                    </thead>
 
                                                 </table>
                                             </li>
@@ -2060,46 +2073,6 @@
                                         </ul>
                                         <ul class="uk-switcher uk-margin">
                                             <li>
-                                                <table  class="table  table-bordered black-color table-bordered" id="showBEPS1Table">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>班次</th>
-                                                        <th>开始时间</th>
-                                                        <th>结束时间</th>
-                                                        <th>标准节拍</th>
-                                                        <th>正常工作人数</th>
-                                                        <th>加班人数</th>
-                                                        <th>目标值</th>
-                                                        <th>产线</th>
-                                                        <th>开班状态</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                </table>
-                                            </li>
-                                            <li>
-                                                <table  class="table  table-bordered black-color table-bordered" id="showBEPS2Table">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>班次</th>
-                                                        <th>开始时间</th>
-                                                        <th>结束时间</th>
-                                                        <th>标准节拍</th>
-                                                        <th>正常工作人数</th>
-                                                        <th>加班人数</th>
-                                                        <th>目标值</th>
-                                                        <th>产线</th>
-                                                        <th>开班状态</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                </table>
-                                            </li>
-                                            <li>
                                                 <table  class="table  table-bordered black-color table-bordered" id="showBEPS3Table">
                                                     <thead>
                                                     <tr>
@@ -2123,20 +2096,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            <!--<li>-->
-                                <!--<table id="showEvent" class="table  table-bordered black-color table-bordered">-->
-                                    <!--<thead>-->
-                                    <!--<tr>-->
-                                        <!--<th>班次</th>-->
-                                        <!--<th>产线</th>-->
-                                        <!--<th>事件</th>-->
-                                        <!--<th>开始时间</th>-->
-                                        <!--<th>结束时间</th>-->
-                                    <!--</tr>-->
-                                    <!--</thead>-->
-
-                                <!--</table>-->
-                            <!--</li>-->
                         </ul>
                     </div>
                 </li>

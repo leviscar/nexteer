@@ -44,7 +44,7 @@ function getNowStatus() {
     };
     var myyAxis=[{
         type: 'value',
-        name: '产量（件）<br>Output',
+        name: '产量/Output（件）',
         position: 'left',
         nameTextStyle:{
             fontStyle:'normal',
@@ -93,13 +93,13 @@ function getNowStatus() {
                 // $("#status").html($.parseJSON(data).status);
                 switch ($.parseJSON(data).status ){
                     case 1:
-                        $("#status").replaceWith("<td id=\"status \"><img src=\"images/Sunny.png\" alt=\"NICE\"></td>");
+                        $("#status").replaceWith("<td id=\"status \"><img src=\"../../images/Sunny.png\" alt=\"NICE\"></td>");
                         break;
                     case 0:
-                        $("#status").replaceWith("<td id=\"status \"><img src=\"images/Cloudy.png\" alt=\"NICE\"></td>");
+                        $("#status").replaceWith("<td id=\"status \"><img src=\"../../images/Cloudy.png\" alt=\"NICE\"></td>");
                         break;
                     case -1:
-                        $("#status").replaceWith("<td id=\"status \"><img src=\"images/Rainy.png\" alt=\"NICE\"></td>");
+                        $("#status").replaceWith("<td id=\"status \"><img src=\"../../images/Rainy.png\" alt=\"NICE\"></td>");
                         break;
 
                 }
@@ -107,7 +107,7 @@ function getNowStatus() {
                 $("#curBeats").html($.parseJSON(data).curr_beats);
                 $("#lossTime").html($.parseJSON(data).loss_time);
                 $("#movRate").html($.parseJSON(data).movable_rate);
-                $("#offline").html($.parseJSON(data).lastOffLine);
+                var line=[];line=$.parseJSON(data).lastOffLine.split(" ");$("#offline").html(line[1]);
                 var i=0;
                 for (key in $.parseJSON(data).hourly_output){
                     hourlyOut[i]=$.parseJSON(data).hourly_output[key];
@@ -174,7 +174,7 @@ function getNowStatus() {
                         axisLabel:{
                             textStyle:{
                                 fontWeight:'bold',
-                                fontSize:20
+                                fontSize:14
                                 // color:"#ffffff"
                             }
                         },

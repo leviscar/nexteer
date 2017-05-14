@@ -23,10 +23,9 @@ function getMainIshaft1Hce() {
     var month=date.getMonth()+1;
     var day=date.getDate();
     var currTime = judgeTime(year)+"-"+judgeTime(month)+"-"+judgeTime(day)+" "+judgeTime(date.getHours())+":"+judgeTime(date.getMinutes())+":"+judgeTime(date.getSeconds());
-
     var cellName = "ISHAFT1";
     var mainHceJson = new mainHceInput(currTime,cellName);
-    console.log(mainHceJson);
+    console.log(currTime);
     console.log("getMainHce开始");
     $.get("http://10.1.0.40:8080/nexteer/dashboard/hce/ISHAFT1?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
@@ -56,7 +55,7 @@ function getMainIshaft1Hce() {
 
         }
     });
-    $.get("http://10.1.0.40:8080/nexteer/dashboard/hce/BEPS?time="+currTime,function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/dashboard/hce/BEPS3?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
                 console.log(JSON.stringify(data));
@@ -84,7 +83,7 @@ function getMainIshaft1Hce() {
 
         }
     });
-    $.get("http://10.1.0.40:8080/nexteer/dashboard/hce/CEPS?time="+currTime,function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/dashboard/hce/CEPS5?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
                 console.log(JSON.stringify(data));

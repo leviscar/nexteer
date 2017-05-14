@@ -54,21 +54,21 @@ console.log('start');
 var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
 
 var myMonthTitle= {
-    text: 'Ishaft1报废金额月视图',
+    text: 'Ishaft4报废金额月视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myWeekTitle= {
-    text: 'Ishaft1报废金额周视图',
+    text: 'Ishaft4报废金额周视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myYearTitle={
-    text: 'Ishaft1报废金额年视图',
+    text: 'Ishaft4报废金额年视图',
     left:'40%',
     textStyle:{
         fontSize:24
@@ -103,7 +103,7 @@ var myGrid= {
     bottom:'2%'
 };
 var myLengend = {
-    data:['Ishaft1','Ishaft1_target'],
+    data:['Ishaft4','Ishaft4_target'],
     align: 'right',
     right: '9%',
     top:'6%'
@@ -161,12 +161,12 @@ function showYear() {
 
     }
     console.log(YearDate);
-    $.get("http://10.1.0.40:8080/nexteer/scrap-amount/ISHAFT1/year?date="+YearDate[YearDate.length-1], function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/scrap-amount/ISHAFT4/year?date="+YearDate[YearDate.length-1], function (data) {
         $.each($.parseJSON(data), function (i, model) {
             for(var monIndex=0;monIndex<YearDate.length;monIndex++) {
                 if (YearDate[monIndex] == model.addDate) {
-                            myData[0][monIndex] = model.value;
-                            myData[1][monIndex] = model.targetValue;
+                    myData[0][monIndex] = model.value;
+                    myData[1][monIndex] = model.targetValue;
                 }
             }
         });
@@ -224,7 +224,7 @@ function showYear() {
             series: [
 
                 {
-                    name: 'Ishaft1',
+                    name: 'Ishaft4',
                     type: 'line',
                     smooth: true,
                     showAllSymbol: true,
@@ -238,7 +238,7 @@ function showYear() {
                     data: myData[0]
                 },
                 {
-                    name: 'Ishaft1_target',
+                    name: 'Ishaft4_target',
                     type: 'line',
                     smooth: true,
                     showAllSymbol: true,
@@ -263,7 +263,7 @@ showYear();
 $("#selectYearSub").bind("click",function () {
     var curr_time = $("#selectYear").val() + "-12-31";
     // var curr_time="2017-04-04";
-    myYearTitle.text = 'Ishaft1报废金额' + $("#selectYear").val() + '年视图';
+    myYearTitle.text = 'Ishaft4报废金额' + $("#selectYear").val() + '年视图';
     {
         var percent=99;
         var myData=[];
@@ -283,7 +283,7 @@ $("#selectYearSub").bind("click",function () {
         }
 
         console.log(YearDate);
-        $.get("http://10.1.0.40:8080/nexteer/scrap-amount/ISHAFT1/year?date="+YearDate[YearDate.length-1], function (data) {
+        $.get("http://10.1.0.40:8080/nexteer/scrap-amount/ISHAFT4/year?date="+YearDate[YearDate.length-1], function (data) {
             $.each($.parseJSON(data), function (i, model) {
                 for(var monIndex=0;monIndex<YearDate.length;monIndex++) {
                     if (YearDate[monIndex] == model.addDate) {
@@ -346,7 +346,7 @@ $("#selectYearSub").bind("click",function () {
                 series: [
 
                     {
-                        name: 'Ishaft1',
+                        name: 'Ishaft4',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -360,7 +360,7 @@ $("#selectYearSub").bind("click",function () {
                         data: myData[0]
                     },
                     {
-                        name: 'Ishaft1_target',
+                        name: 'Ishaft4_target',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,

@@ -1,0 +1,116 @@
+
+body{
+    padding-top: 1%;
+    overflow-y: scroll !important;
+}
+
+.black-color{
+    color:black;
+}
+.red-color{
+    color:red;
+}
+#bs-example-navbar-collapse-1{
+    text-align: center;
+}
+p{
+    display: block;
+    font-size:1.4em;
+}
+span{
+    font-size: 1.5em;
+}
+select{
+    width: 70% !important;
+}
+.border-line{
+    border: 1px solid #000000;
+}
+.topTitle{
+    width: 80%;
+    height: 20%;
+    margin-bottom: 1%;
+}
+.topInnerImage{
+    width: 20%;
+    height: 100%;
+}
+.topInnerImage img{
+    width: 61%;
+    height: 100%;
+}
+.topInnerTitle{
+    text-align: center;
+    font-size:2em;
+    font-weight:bold;
+    color: #d10429;
+}
+
+
+.uk-subnav-pill>.uk-active>a{
+    background-color: #d10429;
+}
+.btn-primary{
+    background-color: #d10429;
+    border-color:#d10429 ;
+}
+th{
+    text-align: center;
+    font-size: 1.5em;;
+    vertical-align: middle !important;
+}
+tr>td:nth-child(-1){
+    text-align: center;
+}
+td{
+    font-size: 1.2em;;
+    text-align: center;
+    vertical-align: middle !important;
+}
+.bigFont>li>a{
+    font-size:1.3em !important;
+    color: #0f0f0f;
+}
+.topLine{
+    border-top: 1px #D9D9D9 solid;
+    /*border-bottom: 1px #D9D9D9 solid;*/
+}
+.shift table input{
+    width: 70%;
+}
+.shift table input:nth-child(1){
+    width: 90%;
+}
+
+.shift table td{
+    width: 8.5%;
+    font-size: 1.5em;
+}
+.showTable td{
+    font-size: 1.5em;
+}
+td{
+    font-size: 1.5em;
+}
+.shift table th{
+    font-size: 1.2em;
+}
+.shift table select{
+    width: 90% !important;
+}
+
+
+input{
+    width: 80%;
+}
+.table-condensed{
+    width: 100%;
+}
+.datetimepicker{
+    width: 20%;
+}
+
+.form-control{
+    width: 50%;
+}
+

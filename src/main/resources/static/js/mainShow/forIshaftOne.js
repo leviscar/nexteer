@@ -82,7 +82,7 @@ function getMainOee() {
 
         }
     });
-    $.get("http://10.1.0.40:8080/nexteer/dashboard/oee/BEPS?time="+currTime,function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/dashboard/oee/BEPS3?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
                 console.log(JSON.stringify(data));
@@ -110,7 +110,7 @@ function getMainOee() {
 
         }
     });
-    $.get("http://10.1.0.40:8080/nexteer/dashboard/oee/CEPS?time="+currTime,function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/dashboard/oee/CEPS5?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
                 console.log(JSON.stringify(data));
@@ -287,7 +287,7 @@ function getMainPro() {
 
         }
     });
-    $.get("http://10.1.0.40:8080/nexteer/dashboard/output/BEPS?time="+currTime,function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/dashboard/output/BEPS3?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
                 $(".secTable>tbody>tr:nth-child(1)>td:nth-child(2)").html($.parseJSON(data).shift_type);
@@ -315,7 +315,7 @@ function getMainPro() {
 
         }
     });
-    $.get("http://10.1.0.40:8080/nexteer/dashboard/output/CEPS?time="+currTime,function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/dashboard/output/CEPS5?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
                 $(".secTable>tbody>tr:nth-child(2)>td:nth-child(2)").html($.parseJSON(data).shift_type);

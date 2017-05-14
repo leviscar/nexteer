@@ -107,7 +107,7 @@ function getNowStatus() {
                     $("#curBeats").html(data.curr_beats);
                     $("#lossTime").html(data.loss_time);
                     $("#movRate").html(data.movable_rate);
-                    $("#offline").html(data.lastOffLine);
+                    var line=[];line=data.lastOffLine.split(" ");$("#offline").html(line[1]);
                     $("#target").html(data.target);
                     var i=0;
                     for (key in data.hourly_output){
