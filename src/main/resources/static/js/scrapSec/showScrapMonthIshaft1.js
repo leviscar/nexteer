@@ -56,21 +56,21 @@ console.log('start');
 var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
 
 var myMonthTitle= {
-    text: 'ISHAFT1报废金额月视图',
+    text: '第一条中间轴报废金额月视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myWeekTitle= {
-    text: 'ISHAFT1报废金额周视图',
+    text: '第一条中间轴报废金额周视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myYearTitle={
-    text: 'ISHAFT1报废金额年视图',
+    text: '第一条中间轴报废金额年视图',
     left:'40%',
     textStyle:{
         fontSize:24
@@ -321,7 +321,7 @@ $("#selectMonthSub").bind("click",function (){
     var data = $("#selectMonth").val().split("-");
     var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
     // var curr_time="2017-04-04";
-    myMonthTitle.text = 'ISHAFT1报废金额'+ data[0]+'-'+data[1]+ '月视图';
+    myMonthTitle.text = '第一条中间轴报废金额'+ data[0]+'-'+data[1]+ '月视图';
     {
         var percent = 50;
         var myData=[];

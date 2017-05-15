@@ -83,7 +83,11 @@ td{
 }
 
 .shift table td{
-    width: 8.5%;
+    width: 8%;
+    font-size: 1.5em;
+}
+.shift table>tbody>tr>td:nth-child(1){
+    width: 12%;
     font-size: 1.5em;
 }
 .showTable td{
@@ -113,4 +117,6 @@ input{
 .form-control{
     width: 50%;
 }
-
+#scrapIshaftTable>tbody>tr:nth-child(1)>td{
+    color: red !important;
+}

@@ -1283,7 +1283,7 @@ $("#showMonth").bind("click",function (){
         {
             var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
             // var curr_time="2017-03-13";
-            myMonthTitle.text = 'Ishaft1人员利用率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
+            myMonthTitle.text = '第一条中间轴人员利用率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
             var IshaftOnehceValueArr=[];
             var IshaftOnehceTarArr=[];
             var urlString = "http://10.1.0.40:8080/nexteer/hce/month?date="+curr_time;
@@ -1968,7 +1968,7 @@ $("#showYear").bind("click",function () {
     console.log(YearDate);
     {
         var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-        myYearTitle.text = 'Ishaft1人员利用率'+ Uyear + '年视图';
+        myYearTitle.text = '第一条中间轴人员利用率'+ Uyear + '年视图';
         var showhceJson = new hceInput(curr_time,"ISHAFT1");
         var IshaftOnehceValueArr=[];
         var IshaftOnehceTarArr=[];

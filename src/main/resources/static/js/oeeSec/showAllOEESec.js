@@ -2110,7 +2110,7 @@ $("#showYear").bind("click",function () {
     console.log(YearDate);
     {
         var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-        myYearTitle.text = 'Ishaft1可动率'+ Uyear + '年视图';
+        myYearTitle.text = '第一条中间轴可动率'+ Uyear + '年视图';
         var showoeeJson = new oeeInput(curr_time,"ISHAFT1");
         var IshaftOneoeeValueArr=[];
         var IshaftOneoeeTarArr=[];

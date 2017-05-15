@@ -57,28 +57,28 @@ console.log('start');
 var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
 
 var myMonthTitle= {
-    text: 'ISHAFT3报废金额月视图',
+    text: '第三条中间轴报废金额月视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myWeekTitle= {
-    text: 'ISHAFT3报废金额周视图',
+    text: '第三条中间轴报废金额周视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myYearTitle={
-    text: 'ISHAFT3报废金额年视图',
+    text: '第三条中间轴报废金额年视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myPeriod={
-    text: 'ISHAFT3报废金额时间段视图',
+    text: '第三条中间轴报废金额时间段视图',
     left:'40%',
     textStyle:{
         fontSize:24

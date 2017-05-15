@@ -33,7 +33,7 @@ function getNowStatus() {
     console.log("start");
 
     var myLegend={
-        data:['Output per Hour','Hourly Target'],
+        data:['小时产量','小时目标值'],
         textStyle:{
             // color:"#ffffff"
             fontSize:22
@@ -41,7 +41,7 @@ function getNowStatus() {
     };
     var myyAxis=[{
         type: 'value',
-        name: '产品数（件）',
+        name: '产量（件）',
         position: 'left',
         nameTextStyle:{
             fontStyle:'normal',
@@ -49,7 +49,7 @@ function getNowStatus() {
             // color:"#ffffff",
             fontSize:22
         },
-        axisLabel:{
+        axisLabel:{interval:0,
             textStyle:{
                 fontSize:22,
                 fontWeight:'bold'
@@ -172,10 +172,10 @@ function getNowStatus() {
                             axisTick: {
                                 alignWithLabel: true
                             },
-                            axisLabel:{
+                            axisLabel:{interval:0,
                                 textStyle:{
                                     // fontWeight:'bold',
-                                    fontSize:14
+                                    fontSize:16
                                     // color:"#ffffff"
                                 }
                             },
@@ -184,11 +184,11 @@ function getNowStatus() {
                         }],
                         yAxis: myyAxis,
                         series: [{
-                            name: 'Output per Hour',
+                            name: '小时产量',
                             type: 'bar',
                             barMaxWidth:40,
                             itemStyle: {
-                                normal: {
+                                normal: {textStyle:{fontSize:22},
                                     barBorderRadius: 5
                                     // color: new echarts.graphic.LinearGradient(
                                     //     0, 0, 0, 1,
@@ -200,7 +200,7 @@ function getNowStatus() {
                                 }
                             },
                             label: {
-                                normal: {
+                                normal: {textStyle:{fontSize:22},
                                     show: true,
                                     position: 'top'
                                 }
@@ -208,13 +208,13 @@ function getNowStatus() {
                             data: hourlyOut
                         },
                             {
-                                name: 'Hourly Target',
-                                type: 'line',
+                                name: '小时目标值',
+                                type: 'line',lineStyle:{normal:{width:6}},
                                 smooth: true,
                                 showAllSymbol: true,
                                 symbol: 'emptyCircle',
                                 label: {
-                                    normal: {
+                                    normal: {textStyle:{fontSize:22},
                                         show: true,
                                         position: 'top'
                                     }

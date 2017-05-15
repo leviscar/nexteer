@@ -82,7 +82,7 @@ function showWeek() {
                 // 指定图表的配置项和数据
                 var firstOption = {
                     title: {
-                        text: 'Ishaft1报废金额周视图'
+                        text: '第一条中间轴报废金额周视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -150,7 +150,7 @@ function showWeek() {
                 };
                 var SecOption= {
                     title: {
-                        text: 'Ishaft2报废金额周视图'
+                        text: '第二条中间轴报废金额周视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -217,7 +217,7 @@ function showWeek() {
                 };
                 var ThrOption= {
                     title: {
-                        text: 'Ishaft3报废金额周视图'
+                        text: '第三条中间轴报废金额周视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -284,7 +284,7 @@ function showWeek() {
                 };
                 var ForOption= {
                     title: {
-                        text: 'Ishaft3报废金额周视图'
+                        text: '第三条中间轴报废金额周视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -351,7 +351,7 @@ function showWeek() {
                 };
                 var BEPSOption={
                     title: {
-                        text: 'BEPS报废金额周视图'
+                        text: '有刷产线报废金额周视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -418,7 +418,7 @@ function showWeek() {
                 };
                 var CEPSOption={
                     title: {
-                        text: 'CEPS报废金额周视图'
+                        text: '无刷产线报废金额周视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -541,7 +541,7 @@ function showMonth() {
                 // 指定图表的配置项和数据
                 var firstOption = {
                     title: {
-                        text: 'Ishaft1报废金额月视图'
+                        text: '第一条中间轴报废金额月视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -608,7 +608,7 @@ function showMonth() {
                 };
                 var SecOption= {
                     title: {
-                        text: 'Ishaft2报废金额月视图'
+                        text: '第二条中间轴报废金额月视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -675,7 +675,7 @@ function showMonth() {
                 };
                 var ThrOption= {
                     title: {
-                        text: 'Ishaft3报废金额月视图'
+                        text: '第三条中间轴报废金额月视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -742,7 +742,7 @@ function showMonth() {
                 };
                 var ForOption= {
                     title: {
-                        text: 'Ishaft3报废金额月视图'
+                        text: '第三条中间轴报废金额月视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -809,7 +809,7 @@ function showMonth() {
                 };
                 var BEPSOption={
                     title: {
-                        text: 'BEPS报废金额月视图'
+                        text: '有刷产线报废金额月视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -876,7 +876,7 @@ function showMonth() {
                 };
                 var CEPSOption={
                     title: {
-                        text: 'CEPS报废金额月视图'
+                        text: '无刷产线报废金额月视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -999,7 +999,7 @@ function showYear() {
                 // 指定图表的配置项和数据
                 var firstOption = {
                     title: {
-                        text: 'Ishaft1报废金额年视图'
+                        text: '第一条中间轴报废金额年视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -1067,7 +1067,7 @@ function showYear() {
                 };
                 var SecOption= {
                     title: {
-                        text: 'Ishaft2报废金额年视图'
+                        text: '第二条中间轴报废金额年视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -1134,7 +1134,7 @@ function showYear() {
                 };
                 var ThrOption= {
                     title: {
-                        text: 'Ishaft3报废金额年视图'
+                        text: '第三条中间轴报废金额年视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -1201,7 +1201,7 @@ function showYear() {
                 };
                 var ForOption= {
                     title: {
-                        text: 'Ishaft3报废金额年视图'
+                        text: '第三条中间轴报废金额年视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -1268,7 +1268,7 @@ function showYear() {
                 };
                 var BEPSOption={
                     title: {
-                        text: 'BEPS报废金额年视图'
+                        text: '有刷产线报废金额年视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -1335,7 +1335,7 @@ function showYear() {
                 };
                 var CEPSOption={
                     title: {
-                        text: 'CEPS报废金额年视图'
+                        text: '无刷产线报废金额年视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -1479,7 +1479,7 @@ function showPeriod() {
             // 指定图表的配置项和数据
             var firstOption = {
                 title: {
-                    text: 'Ishaft1报废金额时间段视图'
+                    text: '第一条中间轴报废金额时间段视图'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -1547,7 +1547,7 @@ function showPeriod() {
             };
             var SecOption= {
                 title: {
-                    text: 'Ishaft2报废金额时间段视图'
+                    text: '第二条中间轴报废金额时间段视图'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -1614,7 +1614,7 @@ function showPeriod() {
             };
             var ThrOption= {
                 title: {
-                    text: 'Ishaft3报废金额时间段视图'
+                    text: '第三条中间轴报废金额时间段视图'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -1681,7 +1681,7 @@ function showPeriod() {
             };
             var ForOption= {
                 title: {
-                    text: 'Ishaft3报废金额时间段视图'
+                    text: '第三条中间轴报废金额时间段视图'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -1748,7 +1748,7 @@ function showPeriod() {
             };
             var BEPSOption={
                 title: {
-                    text: 'BEPS报废金额时间段视图'
+                    text: '有刷产线报废金额时间段视图'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -1815,7 +1815,7 @@ function showPeriod() {
             };
             var CEPSOption={
                 title: {
-                    text: 'CEPS报废金额时间段视图'
+                    text: '无刷产线报废金额时间段视图'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -1939,7 +1939,7 @@ $("#showWeek").bind("click",function () {
                 // 指定图表的配置项和数据
                 var firstOption = {
                     title: {
-                        text: 'Ishaft1报废金额周视图'
+                        text: '第一条中间轴报废金额周视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -2007,7 +2007,7 @@ $("#showWeek").bind("click",function () {
                 };
                 var SecOption= {
                     title: {
-                        text: 'Ishaft2报废金额周视图'
+                        text: '第二条中间轴报废金额周视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -2074,7 +2074,7 @@ $("#showWeek").bind("click",function () {
                 };
                 var ThrOption= {
                     title: {
-                        text: 'Ishaft3报废金额周视图'
+                        text: '第三条中间轴报废金额周视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -2141,7 +2141,7 @@ $("#showWeek").bind("click",function () {
                 };
                 var ForOption= {
                     title: {
-                        text: 'Ishaft3报废金额周视图'
+                        text: '第三条中间轴报废金额周视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -2208,7 +2208,7 @@ $("#showWeek").bind("click",function () {
                 };
                 var BEPSOption={
                     title: {
-                        text: 'BEPS报废金额周视图'
+                        text: '有刷产线报废金额周视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -2275,7 +2275,7 @@ $("#showWeek").bind("click",function () {
                 };
                 var CEPSOption={
                     title: {
-                        text: 'CEPS报废金额周视图'
+                        text: '无刷产线报废金额周视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -2399,7 +2399,7 @@ $("#showMonth").bind("click",function (){
                 // 指定图表的配置项和数据
                 var firstOption = {
                     title: {
-                        text: 'Ishaft1报废金额月视图'
+                        text: '第一条中间轴报废金额月视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -2466,7 +2466,7 @@ $("#showMonth").bind("click",function (){
                 };
                 var SecOption= {
                     title: {
-                        text: 'Ishaft2报废金额月视图'
+                        text: '第二条中间轴报废金额月视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -2533,7 +2533,7 @@ $("#showMonth").bind("click",function (){
                 };
                 var ThrOption= {
                     title: {
-                        text: 'Ishaft3报废金额月视图'
+                        text: '第三条中间轴报废金额月视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -2600,7 +2600,7 @@ $("#showMonth").bind("click",function (){
                 };
                 var ForOption= {
                     title: {
-                        text: 'Ishaft3报废金额月视图'
+                        text: '第三条中间轴报废金额月视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -2667,7 +2667,7 @@ $("#showMonth").bind("click",function (){
                 };
                 var BEPSOption={
                     title: {
-                        text: 'BEPS报废金额月视图'
+                        text: '有刷产线报废金额月视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -2734,7 +2734,7 @@ $("#showMonth").bind("click",function (){
                 };
                 var CEPSOption={
                     title: {
-                        text: 'CEPS报废金额月视图'
+                        text: '无刷产线报废金额月视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -2859,7 +2859,7 @@ $("#showYear").bind("click",function () {
                 // 指定图表的配置项和数据
                 var firstOption = {
                     title: {
-                        text: 'Ishaft1报废金额年视图'
+                        text: '第一条中间轴报废金额年视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -2927,7 +2927,7 @@ $("#showYear").bind("click",function () {
                 };
                 var SecOption= {
                     title: {
-                        text: 'Ishaft2报废金额年视图'
+                        text: '第二条中间轴报废金额年视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -2994,7 +2994,7 @@ $("#showYear").bind("click",function () {
                 };
                 var ThrOption= {
                     title: {
-                        text: 'Ishaft3报废金额年视图'
+                        text: '第三条中间轴报废金额年视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -3061,7 +3061,7 @@ $("#showYear").bind("click",function () {
                 };
                 var ForOption= {
                     title: {
-                        text: 'Ishaft3报废金额年视图'
+                        text: '第三条中间轴报废金额年视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -3128,7 +3128,7 @@ $("#showYear").bind("click",function () {
                 };
                 var BEPSOption={
                     title: {
-                        text: 'BEPS报废金额年视图'
+                        text: '有刷产线报废金额年视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -3195,7 +3195,7 @@ $("#showYear").bind("click",function () {
                 };
                 var CEPSOption={
                     title: {
-                        text: 'CEPS报废金额年视图'
+                        text: '无刷产线报废金额年视图'
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -3341,7 +3341,7 @@ $("#showPeriod").bind("click",function () {
             // 指定图表的配置项和数据
             var firstOption = {
                 title: {
-                    text: 'Ishaft1报废金额时间段视图'
+                    text: '第一条中间轴报废金额时间段视图'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -3409,7 +3409,7 @@ $("#showPeriod").bind("click",function () {
             };
             var SecOption= {
                 title: {
-                    text: 'Ishaft2报废金额时间段视图'
+                    text: '第二条中间轴报废金额时间段视图'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -3476,7 +3476,7 @@ $("#showPeriod").bind("click",function () {
             };
             var ThrOption= {
                 title: {
-                    text: 'Ishaft3报废金额时间段视图'
+                    text: '第三条中间轴报废金额时间段视图'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -3543,7 +3543,7 @@ $("#showPeriod").bind("click",function () {
             };
             var ForOption= {
                 title: {
-                    text: 'Ishaft3报废金额时间段视图'
+                    text: '第三条中间轴报废金额时间段视图'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -3610,7 +3610,7 @@ $("#showPeriod").bind("click",function () {
             };
             var BEPSOption={
                 title: {
-                    text: 'BEPS报废金额时间段视图'
+                    text: '有刷产线报废金额时间段视图'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -3677,7 +3677,7 @@ $("#showPeriod").bind("click",function () {
             };
             var CEPSOption={
                 title: {
-                    text: 'CEPS报废金额时间段视图'
+                    text: '无刷产线报废金额时间段视图'
                 },
                 tooltip: {
                     trigger: 'axis',

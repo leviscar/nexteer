@@ -54,21 +54,21 @@ console.log('start');
 var IsOnescrapChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
 
 var myMonthTitle= {
-    text: 'BEPS3报废金额月视图',
+    text: '有刷产线报废金额月视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myWeekTitle= {
-    text: 'BEPS3报废金额周视图',
+    text: '有刷产线报废金额周视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myYearTitle={
-    text: 'BEPS3报废金额年视图',
+    text: '有刷产线报废金额年视图',
     left:'40%',
     textStyle:{
         fontSize:24
@@ -263,7 +263,7 @@ showYear();
 $("#selectYearSub").bind("click",function () {
     var curr_time = $("#selectYear").val() + "-12-31";
     // var curr_time="2017-04-04";
-    myYearTitle.text = 'BEPS3报废金额' + $("#selectYear").val() + '年视图';
+    myYearTitle.text = '有刷产线报废金额' + $("#selectYear").val() + '年视图';
     {
         var percent=99;
         var myData=[];
