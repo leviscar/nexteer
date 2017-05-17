@@ -3,7 +3,6 @@ package com.example.service;
 import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
 import com.example.model.*;
-import com.example.repository.LossTimeRepo;
 import com.example.repository.ProductModelRepo;
 import com.example.repository.RestEventRepo;
 import com.example.repository.WorkShiftRepo;
@@ -28,14 +27,12 @@ import java.util.*;
 public class UnitStatusService {
     private WorkShiftRepo workShiftRepo;
     private RestEventRepo restEventRepo;
-    private LossTimeRepo lossTimeRepo;
     private ProductModelRepo productModelRepo;
     private CellService cellService;
 
     @Autowired
-    public UnitStatusService(WorkShiftRepo workShiftRepo, RestEventRepo restEventRepo, LossTimeRepo lossTimeRepo
-            , ProductModelRepo productModelRepo, CellService cellService) {
-        this.lossTimeRepo = lossTimeRepo;
+    public UnitStatusService(WorkShiftRepo workShiftRepo, RestEventRepo restEventRepo,
+                             ProductModelRepo productModelRepo, CellService cellService) {
         this.workShiftRepo = workShiftRepo;
         this.restEventRepo = restEventRepo;
         this.productModelRepo = productModelRepo;
@@ -73,8 +70,6 @@ public class UnitStatusService {
         curDate = Function.addOneDay(startDate, curDate);
 
         Cell cell = Cell.valueOf(cellName);
-        // cell id to get the loss time
-        int cellId = cellService.getCellId(cell);
 
         // get the current product output based on cell name
         List<ProductInfo> products = cellService.getProducts(startDate, curDate, cell);
@@ -151,27 +146,12 @@ public class UnitStatusService {
         Map<String, Integer> targetMap = getHourlyTargetValue(standardBeats, shiftType, workShift);
         unitStatus.setHourly_target(targetMap);
 
-        // get the loss time
-        unitStatus.setLoss_time(getLossTime(cellId, startDate, curDate));
+        // calculate the loss time(currTime-startTime-restTime-standardBeats*currOutput)
+        int lossTime = (int) (totalSeconds - restSeconds - standardBeats * curNum);
+        unitStatus.setLoss_time(lossTime);
+
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         return gson.toJson(unitStatus);
-    }
-
-    /**
-     * Calculate the loss time based on start time and end time
-     *
-     * @param cellId
-     * @param startTime
-     * @param endTime
-     * @return
-     */
-    public int getLossTime(int cellId, Date startTime, Date endTime) {
-        List<LossTime> lossTimeList = lossTimeRepo.getLossTimeByCellId(cellId, startTime, endTime);
-        int totalTime = 0;
-        for (LossTime lossTime : lossTimeList) {
-            totalTime += lossTime.getEndTime().getTime() - lossTime.getStartTime().getTime();
-        }
-        return totalTime / 1000;
     }
 
     /**
