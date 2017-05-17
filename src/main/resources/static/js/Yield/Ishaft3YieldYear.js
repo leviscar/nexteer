@@ -75,7 +75,7 @@ function getIshaftOneMonthData() {
         myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
         sum[i]=0;
         for(var myJ=0;myJ<366;myJ++){
-            myData[i][myJ]=0;
+            myData[i][myJ]=null;
         }
     }
 //        var myXDate=[];
@@ -292,7 +292,7 @@ $("#selectYearSub").bind("click",function () {
             myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
             sum[i]=0;
             for(var myJ=0;myJ<366;myJ++){
-                myData[i][myJ]=0;
+                myData[i][myJ]=null;
             }
         }
 //        var myXDate=[];

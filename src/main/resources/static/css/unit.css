@@ -92,7 +92,7 @@ p{
     background-color: inherit !important;
 }
 td img{
-    width: 40%;
+    width: 60%;
     height: 60%;
 }
 .innerItem>table>tbody>tr>td:nth-child(1),.innerItem>table>tbody>tr>td:nth-child(2){
@@ -132,6 +132,6 @@ td img{
 }
 .firstTable>tbody>tr>td{
     vertical-align: middle;
-    height: 3em;
+    height: 3.3em;
 }
 

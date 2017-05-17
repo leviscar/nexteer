@@ -36,7 +36,7 @@ function getNowStatus() {
     console.log("start");
 
     var myLegend={
-        data:['小时产量','小时目标值'],
+        right: '9%',data:['小时产量','小时目标值'],
         textStyle:{
             // color:"#ffffff"
             fontSize:22
@@ -184,7 +184,7 @@ function getNowStatus() {
                     series: [{
                         name: '小时产量',
                         type: 'bar',
-                        barMaxWidth:80,
+                        barMaxWidth:60,
                         itemStyle: {
                             normal: {textStyle:{fontSize:22},
                                 barBorderRadius: 5
@@ -266,7 +266,7 @@ $("#EN").bind("click",function () {
     console.log("start");
 
     var myLegend={
-        data:['Output per Hour','Hourly Target'],
+        right: '9%',data:['Output per Hour','Hourly Target'],
         textStyle:{
             // color:"#ffffff"
             fontSize:22
@@ -415,7 +415,7 @@ $("#EN").bind("click",function () {
                     series: [{
                         name: 'Output per Hour',
                         type: 'bar',
-                        barMaxWidth:80,
+                        barMaxWidth:60,
                         itemStyle: {
                             normal: {textStyle:{fontSize:22},
                                 barBorderRadius: 5
@@ -490,7 +490,7 @@ function getENStatus(){
         console.log("start");
 
         var myLegend={
-            data:['Output per Hour','Hourly Target'],
+            right: '9%',data:['Output per Hour','Hourly Target'],
             textStyle:{
                 // color:"#ffffff"
                 fontSize:22
@@ -639,7 +639,7 @@ function getENStatus(){
                         series: [{
                             name: 'Output per Hour',
                             type: 'bar',
-                            barMaxWidth:80,
+                            barMaxWidth:60,
                             itemStyle: {
                                 normal: {textStyle:{fontSize:22},
                                     barBorderRadius: 5

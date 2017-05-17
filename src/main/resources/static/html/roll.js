@@ -4,12 +4,21 @@
 
 var url = [];
 
-url.push ( 'http://10.1.0.40:8080/nexteer/html/Yield/Ishaft1YieldWeek.html');
-url.push ( 'http://10.1.0.40:8080/nexteer/html/hceSec/ishaft1HceSec.html');
-url.push ( 'http://10.1.0.40:8080/nexteer/html/oeeSec/ishaft1OEESec.html');
-url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/Ishaft1Unit.html');
-url.push ( 'http://10.1.0.40:8080/nexteer/html/scrapSec/scrapWeek.html');
+
 url.push ( 'http://10.1.0.40:8080/nexteer/index.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/BEPS1Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/BEPS2Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/BEPS3Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/CEPS1Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/CEPS2Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/CEPS3Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/CEPS4Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/CEPS5Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/Ishaft1Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/Ishaft2Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/Ishaft3Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/Ishaft4Unit.html');
+
 
 var count = 0;
 
@@ -18,5 +27,8 @@ function changeSrc () {
     $("#iframe1").replaceWith("<iframe id=\"iframe1\" src="+url[count]+"></iframe>");
     count ++;
 }
+$("#exitRoll").bind("click",function () {
+    window.location.assign("http://10.1.0.40:8080/nexteer/index.html");
 
-setInterval( "changeSrc() ",20*1000);
+});
+setInterval( "changeSrc() ",8*1000);

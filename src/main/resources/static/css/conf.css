@@ -67,8 +67,13 @@ td{
     text-align: center;
     vertical-align: middle !important;
 }
+.bigFont>li{
+    display: block;
+    width: 15%!important;
+}
 .bigFont>li>a{
-    font-size:1.3em !important;
+    font-size:1.5em !important;
+    font-weight:bold !important;
     color: #0f0f0f;
 }
 .topLine{

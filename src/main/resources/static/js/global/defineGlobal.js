@@ -9,7 +9,11 @@ function safety_date(year, month, day, is_safe, safety_date, log) {
     this.safety_date = safety_date;
     this.log = log;
 }
-
+Array.prototype.remove = function(from, to) {
+    var rest = this.slice((to || from) + 1 || this.length);
+    this.length = from < 0 ? this.length + from : from;
+    return this.push.apply(this, rest);
+};
 
 Udate=new Date();
 Uyear=Udate.getFullYear();

@@ -60,7 +60,7 @@ function getMainOee() {
             if($.parseJSON(data).open != false){
                 console.log(JSON.stringify(data));
                 console.log("获取Oee成功");
-                $("#showIshaft1OeeValue").html($.parseJSON(data).oee+"%");
+                $("#showIshaft1OeeValue").html($.parseJSON(data).oee.toFixed(1)+"%");
                 switch ($.parseJSON(data).status)
                 {
                     case -1:
@@ -87,8 +87,8 @@ function getMainOee() {
             if($.parseJSON(data).open != false){
                 console.log(JSON.stringify(data));
 
-                $("#showMainBEPSoee").html($.parseJSON(data).oee.toFixed(1)+"%");
-                console.log("获取oee操作成功");
+                $("#showBEPSOeeValue").html($.parseJSON(data).oee.toFixed(1)+"%");
+                console.log("获取oee BEPS3操作成功");
                 switch ($.parseJSON(data).status)
                 {
                     case -1:
@@ -115,8 +115,8 @@ function getMainOee() {
             if($.parseJSON(data).open != false){
                 console.log(JSON.stringify(data));
 
-                $("#showMainCEPSoee").html($.parseJSON(data).oee.toFixed(1)+"%");
-                console.log("获取oee操作成功");
+                $("#showCEPSOeeValue").html($.parseJSON(data).oee.toFixed(1)+"%");
+                console.log("获取oee CEPS5操作成功");
                 switch ($.parseJSON(data).status)
                 {
                     case -1:
@@ -178,7 +178,6 @@ function getMainPro() {
                 console.log(JSON.stringify(data));
                 console.log("获取Oee成功");
                 console.log(JSON.stringify(data));
-                console.log("获取"+cellName+"OutPut成功");
                 $("#tarOut").html($.parseJSON(data).target);
                 $("#curOut").html($.parseJSON(data).curr_output);
                 $("#reachRate").html($.parseJSON(data).reach_rate+"%");

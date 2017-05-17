@@ -140,7 +140,7 @@ function showWeek() {
     for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
         myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
         for(var myJ=0;myJ<7;myJ++){
-            myData[i][myJ]=0;
+            myData[i][myJ]=null;
         }
     }
     var WeekDate=formOnload();
@@ -435,7 +435,7 @@ $("#showWeek").bind("click",function () {
     for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
         myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
         for(var myJ=0;myJ<7;myJ++){
-            myData[i][myJ]=0;
+            myData[i][myJ]=null;
         }
     }
     var WeekDate=formOnload();
@@ -732,7 +732,7 @@ $("#showMonth").bind("click",function () {
     for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
         myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
         for(var myJ=0;myJ<31;myJ++){
-            myData[i][myJ]=0;
+            myData[i][myJ]=null;
         }
     }
     var MonthDate=[];
@@ -1008,7 +1008,7 @@ $("#showYear").bind("click",function () {
     for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
         myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
         for(var myJ=0;myJ<366;myJ++){
-            myData[i][myJ]=0;
+            myData[i][myJ]=null;
         }
     }
     var YearDate=[];
@@ -1271,7 +1271,7 @@ $("#selectMonthSub").bind("click",function (){
         for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
             myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
             for(var myJ=0;myJ<31;myJ++){
-                myData[i][myJ]=0;
+                myData[i][myJ]=null;
             }
         }
         var MonthDate=[];
@@ -1438,7 +1438,7 @@ $("#selectYearSub").bind("click",function () {
         for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
             myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
             for(var myJ=0;myJ<366;myJ++){
-                myData[i][myJ]=0;
+                myData[i][myJ]=null;
             }
         }
         var YearDate=[];

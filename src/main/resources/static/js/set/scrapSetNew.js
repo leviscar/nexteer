@@ -67,7 +67,7 @@ function getScrapData() {
             myCEPSData[i]=[];
             myBEPSData[i]=[];
             for(var myJ=0;myJ<10;myJ++){
-                myData[i][myJ]=0;
+                myData[i][myJ]=null;
                 myCEPSData[i][myJ]=0;
                 myBEPSData[i][myJ]=0;
             }

@@ -59,7 +59,7 @@ var myYaxis= [{
     name:'可动率（%）',
     position:'left',
     min:0,
-    max:100,
+
     nameTextStyle:{
         fontStyle:'normal',
         fontWeight:'bold',
