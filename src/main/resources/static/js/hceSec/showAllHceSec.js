@@ -128,7 +128,7 @@ function showWeek() {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    var urlString = "http://10.1.0.40:8080/nexteer/hce/week/ISHAFT1?date="+curr_time;
+    var urlString = "http://localhost:8080/nexteer/hce/week/ISHAFT1?date="+curr_time;
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -949,7 +949,7 @@ $("#showWeek").bind("click",function () {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    var urlString = "http://10.1.0.40:8080/nexteer/hce/week?date="+curr_time;
+    var urlString = "http://localhost:8080/nexteer/hce/week?date="+curr_time;
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -1286,7 +1286,7 @@ $("#showMonth").bind("click",function (){
             myMonthTitle.text = '第一条中间轴人员利用率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
             var IshaftOnehceValueArr=[];
             var IshaftOnehceTarArr=[];
-            var urlString = "http://10.1.0.40:8080/nexteer/hce/month?date="+curr_time;
+            var urlString = "http://localhost:8080/nexteer/hce/month?date="+curr_time;
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
@@ -1629,7 +1629,7 @@ $("#selectMonthSub").bind("click",function (){
         console.log(MonthDate);
         var IshaftOnehceValueArr=[];
         var IshaftOnehceTarArr=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/hce/month?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/hce/month?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -1972,7 +1972,7 @@ $("#showYear").bind("click",function () {
         var showhceJson = new hceInput(curr_time,"ISHAFT1");
         var IshaftOnehceValueArr=[];
         var IshaftOnehceTarArr=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/hce/year?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/hce/year?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -2311,7 +2311,7 @@ $("#selectYearSub").bind("click",function () {
         console.log(YearDate);
         var IshaftOnehceValueArr=[];
         var IshaftOnehceTarArr=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/hce/year?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/hce/year?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',

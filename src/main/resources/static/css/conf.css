@@ -69,10 +69,10 @@ td{
 }
 .bigFont>li{
     display: block;
-    width: 15%!important;
+    width: 14%!important;
 }
 .bigFont>li>a{
-    font-size:1.5em !important;
+    font-size:1.3em !important;
     font-weight:bold !important;
     color: #0f0f0f;
 }
@@ -124,4 +124,26 @@ input{
 }
 #scrapIshaftTable>tbody>tr:nth-child(1)>td{
     color: red !important;
+}
+.banci table td{
+    width: 7.5% ;
+}
+.banci table td:nth-child(6),.banci table td:nth-child(1){
+    width: 12% ;
+}
+.banci table td:nth-child(10){
+    width: 24% ;
+}
+.banci table td:nth-child(3) input,.banci table td:nth-child(4) input{
+    border-width: 0;
+}
+li{
+    text-align: center;
+}
+.bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary {
+    color: #fff;
+    background: #d10429 !important;
+}
+.banci div div{
+    text-align: center;
 }
