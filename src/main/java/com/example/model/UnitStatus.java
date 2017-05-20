@@ -19,6 +19,7 @@ public class UnitStatus {
     private int target;
     private Map<String, Integer> hourly_output;
     private String lastOffLine;
+    private int calculatedTarget;
 
     public UnitStatus() {
     }
@@ -125,5 +126,13 @@ public class UnitStatus {
 
     public void setLastOffLine(String lastOffLine) {
         this.lastOffLine = lastOffLine;
+    }
+
+    public int getCalculatedTarget() {
+        return calculatedTarget;
+    }
+
+    public void setCalculatedTarget(int calculatedTarget) {
+        this.calculatedTarget = calculatedTarget;
     }
 }

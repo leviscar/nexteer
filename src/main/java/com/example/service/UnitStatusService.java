@@ -146,6 +146,13 @@ public class UnitStatusService {
         Map<String, Integer> targetMap = getHourlyTargetValue(standardBeats, shiftType, workShift);
         unitStatus.setHourly_target(targetMap);
 
+        // set calculated target
+        int calculatedTarget = 0;
+        for (int i: targetMap.values()) {
+            calculatedTarget += i;
+        }
+        unitStatus.setCalculatedTarget(calculatedTarget);
+
         // calculate the loss time(currTime-startTime-restTime-standardBeats*currOutput)
         int lossTime = (int) (totalSeconds - restSeconds - standardBeats * curNum);
         unitStatus.setLoss_time(lossTime);
