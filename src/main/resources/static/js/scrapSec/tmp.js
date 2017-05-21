@@ -1,6 +1,9 @@
 /**
  * Created by Administrator on 2017/5/20.
  */
+/**
+ * Created by Administrator on 2017/4/4.
+ */
 
 
 function judgeTime(time) {
@@ -34,12 +37,13 @@ function up(x, y) {
 
 }
 console.log('start');
-var obj={cell:"ISHAFT4"};
+var obj={cell:"ISHAFT1"};
 
 
-function showMonth(cell){
+function showMonth(event){
+    var obj=event.data;
     var cellName;
-    switch(cell) {
+    switch(event.data.cell) {
         case "ISHAFT1":
             cellName="第一条中间轴";
             break;
@@ -116,7 +120,7 @@ function showMonth(cell){
         {
             var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
             myMonthTitle.text = cellName+'报废金额'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
-            var urlString = "http://10.1.0.40:8080/nexteer/scrap-amount/"+cell+"/year/?date="+curr_time;
+            var urlString = "http://10.1.0.40:8080/nexteer/scrap-amount/month/"+obj.cell+"?date="+curr_time;
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
@@ -139,7 +143,7 @@ function showMonth(cell){
 
                     // 指定图表的配置项和数据
                     var firstOption = {
-                        title:myYearTitle,
+                        title:myMonthTitle,
                         tooltip: {
                             trigger: 'axis',
                             axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
@@ -315,7 +319,7 @@ function showSelectMonth(event){
             var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
             // var curr_time="2017-04-04";
             myMonthTitle.text = cellName+'报废金额'+ data[0]+'-'+data[1]+ '月视图';
-            var urlString = "http://10.1.0.40:8080/nexteer/scrap-amount/"+event.data.cell+"/year/?date="+curr_time;
+            var urlString = "http://10.1.0.40:8080/nexteer/scrap-amount/month/"+obj.cell+"?date="+curr_time;
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
@@ -338,7 +342,7 @@ function showSelectMonth(event){
 
                     // 指定图表的配置项和数据
                     var firstOption = {
-                        title:myYearTitle,
+                        title:myMonthTitle,
                         tooltip: {
                             trigger: 'axis',
                             axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
@@ -434,8 +438,7 @@ function showSelectMonth(event){
 
 
 //按月显示
-showMonth("ISHAFT4");
-
+$("#showMonth").bind("click",obj,showMonth);
 
 $("#selectMonthSub").bind("click",obj,showSelectMonth);
 

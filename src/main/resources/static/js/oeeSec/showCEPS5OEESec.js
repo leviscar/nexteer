@@ -1,5 +1,5 @@
 /**
- * Created by Administrator on 2017/5/11.
+ * Created by Administrator on 2017/5/20.
  */
 /**
  * Created by Administrator on 2017/4/4.
@@ -58,73 +58,87 @@ function formOnload()
     return [Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday];
 }
 
+//降序排序
+function down(x, y) {
+    var xTime=new Date(x.addDate);
+    var yTime=new Date(y.addDate);
+    return (xTime.getTime() < yTime.getTime()) ? 1 : -1
+
+}
+
+//升序排序
+function up(x, y) {
+    var xTime=new Date(x.addDate);
+    var yTime=new Date(y.addDate);
+    return (xTime.getTime() > yTime.getTime()) ? 1 : -1
+
+}
 console.log('start');
+var obj={cell:"CEPS5"};
 // 基于准备好的dom，初始化echarts实例
-
-
-var myMonthTitle= {
-    text: '无刷产线可动率月视图',
-    left:'40%',
-    textStyle:{
-        fontSize:24
-    }
-};
-var myWeekTitle= {
-    text: '无刷产线可动率周视图',
-    left:'40%',
-    textStyle:{
-        fontSize:24
-    }
-};
-var myYearTitle={
-    text: '无刷产线可动率年视图',
-    left:'40%',
-    textStyle:{
-        fontSize:24
-    }
-};
-var myPeriod={
-    text: '可动率时间段视图',
-    left:'40%',
-    textStyle:{
-        fontSize:24
-    }
-};
-var myYaxis= [{
-    type:'value',
-    name:'可动率（%）',
-    position:'left',
-    min:0,
-
-    nameTextStyle:{
-        fontStyle:'normal',
-        fontWeight:'bold',
-        fontSize:'20'
-    },
-    axisLabel:{
-        textStyle:{
-            fontSize:20
-        }
-    }
-}];
-var myGrid= {
-    containLabel: true,
-    left:'4%',
-    right:'5%',
-    bottom:'2%'
-};
-var myLengend = {
-    data:['oee','target'],
-    align: 'right',
-    right: '9%',
-    top:'6%'
-};
-
-function showWeek() {
+function showWeek(event) {
     var IsOneoeeChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-    // var curr_time="2017-03-09";
-    var showoeeJson = new oeeInput(curr_time,"ISHAFT1");
+    var cellName;
+    switch(event.data.cell) {
+        case "ISHAFT1":
+            cellName="第一条中间轴";
+            break;
+        case "ISHAFT2":
+            cellName="第二条中间轴";
+            break;
+        case "ISHAFT3":
+            cellName="第三条中间轴";
+            break;
+        case "ISHAFT4":
+            cellName="第四条中间轴";
+            break;
+        case "CEPS5":
+            cellName="无刷产线";
+            break;
+        case "BEPS3":
+            cellName="有刷产线";
+            break;
+
+    }
+    var myWeekTitle= {
+
+        text: cellName+'可动率周视图',
+        left:'40%',
+        textStyle:{
+            fontSize:24
+        }
+    };
+    var myYaxis= [{
+        type:'value',
+        name:'可动率（%）',
+        position:'left',
+        min:0,
+
+        nameTextStyle:{
+            fontStyle:'normal',
+            fontWeight:'bold',
+            fontSize:'20'
+        },
+        axisLabel:{
+            textStyle:{
+                fontSize:20
+            }
+        }
+    }];
+    var myGrid= {
+        containLabel: true,
+        left:'4%',
+        right:'5%',
+        bottom:'2%'
+    };
+    var myLengend = {
+        data:['oee','target'],
+        align: 'right',
+        right: '9%',
+        top:'6%'
+    };
+    var showoeeJson = new oeeInput(curr_time,event.data.cell);
     var IshaftOneoeeValueArr=[];
     var IshaftOneoeeTarArr=[];
     var myData=[];
@@ -137,7 +151,7 @@ function showWeek() {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    var urlString = "http://localhost:8080/nexteer/oee/week/CEPS5?date="+curr_time;
+    var urlString = "http://10.1.0.40:8080/nexteer/oee/week/"+event.data.cell+"?date="+curr_time;
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -271,16 +285,69 @@ function showWeek() {
 
     });
 }
-
-showWeek();
-
-//按周显示
-$("#showWeek").bind("click",function () {
+function showWeekMain(cell) {
     var IsOneoeeChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
-    // window.location.reload();
     var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-    // var curr_time="2017-03-09";
-    var showoeeJson = new oeeInput(curr_time,"ISHAFT1");
+    var cellName;
+    switch(cell) {
+        case "ISHAFT1":
+            cellName="第一条中间轴";
+            break;
+        case "ISHAFT2":
+            cellName="第二条中间轴";
+            break;
+        case "ISHAFT3":
+            cellName="第三条中间轴";
+            break;
+        case "ISHAFT4":
+            cellName="第四条中间轴";
+            break;
+        case "CEPS5":
+            cellName="无刷产线";
+            break;
+        case "BEPS3":
+            cellName="有刷产线";
+            break;
+
+    }
+    var myWeekTitle= {
+
+        text: cellName+'可动率周视图',
+        left:'40%',
+        textStyle:{
+            fontSize:24
+        }
+    };
+    var myYaxis= [{
+        type:'value',
+        name:'可动率（%）',
+        position:'left',
+        min:0,
+
+        nameTextStyle:{
+            fontStyle:'normal',
+            fontWeight:'bold',
+            fontSize:'20'
+        },
+        axisLabel:{
+            textStyle:{
+                fontSize:20
+            }
+        }
+    }];
+    var myGrid= {
+        containLabel: true,
+        left:'4%',
+        right:'5%',
+        bottom:'2%'
+    };
+    var myLengend = {
+        data:['oee','target'],
+        align: 'right',
+        right: '9%',
+        top:'6%'
+    };
+    var showoeeJson = new oeeInput(curr_time,cell);
     var IshaftOneoeeValueArr=[];
     var IshaftOneoeeTarArr=[];
     var myData=[];
@@ -293,7 +360,7 @@ $("#showWeek").bind("click",function () {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    var urlString = "http://localhost:8080/nexteer/oee/week/CEPS5?date="+curr_time;
+    var urlString = "http://10.1.0.40:8080/nexteer/oee/week/"+cell+"?date="+curr_time;
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -426,44 +493,92 @@ $("#showWeek").bind("click",function () {
         }
 
     });
-});
-//按月显示
-$("#showMonth").bind("click",function (){
-    // window.location.reload();
-    // $("#showIsOneWeekSheet").empty();
+}
+showWeekMain("CEPS5");
+$("#showWeek").bind("click",obj,showWeek);
+
+
+function showMonth(event){
+    var obj=event.data;
+    var cellName;
+    switch(event.data.cell) {
+        case "ISHAFT1":
+            cellName="第一条中间轴";
+            break;
+        case "ISHAFT2":
+            cellName="第二条中间轴";
+            break;
+        case "ISHAFT3":
+            cellName="第三条中间轴";
+            break;
+        case "ISHAFT4":
+            cellName="第四条中间轴";
+            break;
+        case "CEPS5":
+            cellName="无刷产线";
+            break;
+        case "BEPS3":
+            cellName="有刷产线";
+            break;
+
+    }
+    var myMonthTitle= {
+        text: cellName+'可动率月视图',
+        left:'40%',
+        textStyle:{
+            fontSize:24
+        }
+    };
+    var myWeekTitle= {
+
+        text: obj.cellName+'可动率周视图',
+        left:'40%',
+        textStyle:{
+            fontSize:24
+        }
+    };
+    var myYearTitle={
+        text: cellName+'可动率年视图',
+        left:'40%',
+        textStyle:{
+            fontSize:24
+        }
+    };
+    var myYaxis= [{
+        type:'value',
+        name:'可动率（%）',
+        position:'left',
+        min:0,
+
+        nameTextStyle:{
+            fontStyle:'normal',
+            fontWeight:'bold',
+            fontSize:'20'
+        },
+        axisLabel:{
+            textStyle:{
+                fontSize:20
+            }
+        }
+    }];
+    var myGrid= {
+        containLabel: true,
+        left:'4%',
+        right:'5%',
+        bottom:'2%'
+    };
+    var myLengend = {
+        data:['oee','target'],
+        align: 'right',
+        right: '9%',
+        top:'6%'
+    };
     var IsOneoeeChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     $(document).ready(function () {
-        var percent = 50;
-        var myData=[];
-        console.log("开始传输数据");
-        for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
-            myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
-            for(var myJ=0;myJ<31;myJ++){
-                myData[i][myJ]=null;
-            }
-        }
-        var MonthDate=[];
-        var d=new Date(Uyear,Umonth,0);
-        for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
-            MonthDate.push(Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Mindex))
-        }
-        for(var perIndex in MonthDate){
-            var nowTime=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-            if(MonthDate[perIndex]==nowTime){
-                percent=parseInt(perIndex*100/31)+1;
-                console.log(percent);
-            }
-
-        }
-        console.log(MonthDate);
-        console.log(MonthDate[d.getDate()-1]);
         {
             var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-            // var curr_time="2017-03-13";
-            myMonthTitle.text = '无刷产线可动率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
-            var IshaftOneoeeValueArr=[];
-            var IshaftOneoeeTarArr=[];
-            var urlString = "http://localhost:8080/nexteer/oee/month/CEPS5?date="+curr_time;
+            myMonthTitle.text = cellName+'可动率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
+            var urlString = "http://10.1.0.40:8080/nexteer/oee/month/"+obj.cell+"?date="+curr_time;
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
@@ -472,21 +587,18 @@ $("#showMonth").bind("click",function (){
                 type: 'GET',
                 url: urlString,
                 success: function (data) {
-                    $.each(data, function (i, model) {
-                        oeeDate[i]=data[i].addDate;
-                        IshaftOneoeeValueArr[i]=model.oee;
-                        IshaftOneoeeTarArr[i]=model.targetOee;
-                        for(var monIndex=0;monIndex<MonthDate.length;monIndex++){
-                            if(MonthDate[monIndex]==model.addDate){
-                                myData[0][monIndex]=model.oee;
-                                myData[1][monIndex]=model.targetOee;
-                                percent=monIndex*100/30;
-                            }
-
-                        }
-                    });
+                    var OeeArr=[];
+                    var OeeTarArr=[];
+                    var NowDate=[];
                     console.log(JSON.stringify(data));
-                    console.log(IshaftOneoeeValueArr);
+                    data.sort(up);
+                    $.each(data, function (i, model) {
+                        OeeArr.push(model.oee);
+                        OeeTarArr.push(model.targetOee);
+                        NowDate.push(model.addDate);
+                    });
+
+
                     // 指定图表的配置项和数据
                     var firstOption = {
                         title:myMonthTitle,
@@ -521,7 +633,7 @@ $("#showMonth").bind("click",function (){
                                     fontSize:20
                                 }
                             },
-                            data: MonthDate
+                            data: NowDate
                         },
                         yAxis:myYaxis,
                         dataZoom: [
@@ -531,7 +643,7 @@ $("#showMonth").bind("click",function (){
                                 xAxisIndex: [0],
                                 filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
                                 start: 1,
-                                end: percent
+                                end: 100
                             }],
                         series: [
 
@@ -548,7 +660,7 @@ $("#showMonth").bind("click",function (){
                                         position: 'top'
                                     }
                                 },
-                                data: myData[0]
+                                data: OeeArr
                             },
                             {
                                 name: 'target',
@@ -563,7 +675,7 @@ $("#showMonth").bind("click",function (){
                                         position: 'top'
                                     }
                                 },
-                                data: myData[1]
+                                data: OeeTarArr
                             }
                         ]
                     };
@@ -581,431 +693,578 @@ $("#showMonth").bind("click",function (){
         }
 
     })
-});
-$("#selectMonthSub").bind("click",function (){
-    // window.location.assign("../../html/oeeSec/ishaft1oeeSec.html");
+}
+
+function showSelectMonth(event){
+    var obj=event.data;
+    var cellName;
+    switch(event.data.cell) {
+        case "ISHAFT1":
+            cellName="第一条中间轴";
+            break;
+        case "ISHAFT2":
+            cellName="第二条中间轴";
+            break;
+        case "ISHAFT3":
+            cellName="第三条中间轴";
+            break;
+        case "ISHAFT4":
+            cellName="第四条中间轴";
+            break;
+        case "CEPS5":
+            cellName="无刷产线";
+            break;
+        case "BEPS3":
+            cellName="有刷产线";
+            break;
+
+    }
+    var myMonthTitle= {
+        text: cellName+'可动率月视图',
+        left:'40%',
+        textStyle:{
+            fontSize:24
+        }
+    };
+    var myWeekTitle= {
+
+        text: obj.cellName+'可动率周视图',
+        left:'40%',
+        textStyle:{
+            fontSize:24
+        }
+    };
+    var myYearTitle={
+        text: cellName+'可动率年视图',
+        left:'40%',
+        textStyle:{
+            fontSize:24
+        }
+    };
+    var myYaxis= [{
+        type:'value',
+        name:'可动率（%）',
+        position:'left',
+        min:0,
+
+        nameTextStyle:{
+            fontStyle:'normal',
+            fontWeight:'bold',
+            fontSize:'20'
+        },
+        axisLabel:{
+            textStyle:{
+                fontSize:20
+            }
+        }
+    }];
+    var myGrid= {
+        containLabel: true,
+        left:'4%',
+        right:'5%',
+        bottom:'2%'
+    };
+    var myLengend = {
+        data:['oee','target'],
+        align: 'right',
+        right: '9%',
+        top:'6%'
+    };
     var IsOneoeeChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
-    var myData=[];
-    var percent=50;
-    {
-        var data = $("#selectMonth").val().split("-");
-        var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
-        // var curr_time="2017-04-04";
-        myMonthTitle.text = '无刷产线可动率'+ data[0]+'-'+data[1]+ '月视图';
+    $(document).ready(function () {
+        {
+            var data = $("#selectMonth").val().split("-");
+            var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
+            // var curr_time="2017-04-04";
+            myMonthTitle.text = cellName+'可动率'+ data[0]+'-'+data[1]+ '月视图';
+            var urlString = "http://10.1.0.40:8080/nexteer/oee/month/"+obj.cell+"?date="+curr_time;
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: 'GET',
+                url: urlString,
+                success: function (data) {
+                    var OeeArr=[];
+                    var OeeTarArr=[];
+                    var NowDate=[];
+                    console.log(JSON.stringify(data));
+                    data.sort(up);
+                    $.each(data, function (i, model) {
+                        OeeArr.push(model.oee);
+                        OeeTarArr.push(model.targetOee);
+                        NowDate.push(model.addDate);
+                    });
 
-        for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
-            myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
-            for(var myJ=0;myJ<31;myJ++){
-                myData[i][myJ]=null;
-            }
-        }
-        var MonthDate=[];
-        var d=new Date(data[0],data[1],0);
-        for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
-            MonthDate.push(data[0]+"-"+data[1]+"-"+judgeTime(Mindex));
-        }
 
-        console.log(MonthDate);
-        var IshaftOneoeeValueArr=[];
-        var IshaftOneoeeTarArr=[];
-        var urlString = "http://localhost:8080/nexteer/oee/month/CEPS5?date="+curr_time;
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            type: 'GET',
-            url: urlString,
-            success: function (data) {
-                $.each(data, function (i, model) {
-                    oeeDate[i]=data[i].addDate;
-                    IshaftOneoeeValueArr[i]=model.oee;
-                    IshaftOneoeeTarArr[i]=model.targetOee;
-                    for(var monIndex=0;monIndex<MonthDate.length;monIndex++){
-                        if(MonthDate[monIndex]==model.addDate){
-                            myData[0][monIndex]=model.oee;
-                            myData[1][monIndex]=model.targetOee;
-                            percent=monIndex*100/30;
-                        }
-
-                    }
-                });
-                console.log(JSON.stringify(data));
-                console.log(IshaftOneoeeValueArr);
-                // 指定图表的配置项和数据
-                var firstOption = {
-                    title:myMonthTitle,
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                    },
-                    toolbox: {
-                        feature: {
-                            saveAsImage: {
-                                show: true
-                            }
-
-                        }
-                    },
-                    grid:myGrid,
-                    legend: myLengend,
-
-                    xAxis: {
-                        type: 'category',
-                        name:'Time',
-                        axisTick: {
-                            alignWithLabel: true
+                    // 指定图表的配置项和数据
+                    var firstOption = {
+                        title:myMonthTitle,
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                         },
-                        nameTextStyle:{
-                            fontStyle:'italic',
-                            fontWeight:'bold'
-                        },
-                        axisLabel:{
-                            textStyle:{
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {
+                                    show: true
+                                }
 
-                                fontSize:20
                             }
                         },
-                        data: MonthDate
-                    },
-                    yAxis:myYaxis,
-                    dataZoom: [
-                        {
-                            id: 'dataZoomX',
-                            type: 'slider',
-                            xAxisIndex: [0],
-                            filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
-                            start: 1,
-                            end: percent
-                        }],
-                    series: [
+                        grid:myGrid,
+                        legend: myLengend,
 
-                        {
-                            name: 'oee',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
+                        xAxis: {
+                            type: 'category',
+                            name:'Time',
+                            axisTick: {
+                                alignWithLabel: true
+                            },
+                            nameTextStyle:{
+                                fontStyle:'italic',
+                                fontWeight:'bold'
+                            },
+                            axisLabel:{
+                                textStyle:{
+
+                                    fontSize:20
                                 }
                             },
-                            data: myData[0]
+                            data: NowDate
                         },
-                        {
-                            name: 'target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
+                        yAxis:myYaxis,
+                        dataZoom: [
+                            {
+                                id: 'dataZoomX',
+                                type: 'slider',
+                                xAxisIndex: [0],
+                                filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
+                                start: 1,
+                                end: 100
+                            }],
+                        series: [
+
+                            {
+                                name: 'oee',
+                                type: 'line',
+                                smooth: true,
+                                showAllSymbol: true,
+                                symbol: 'emptyCircle',
+                                barMaxWidth:40,
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'top'
+                                    }
+                                },
+                                data: OeeArr
                             },
-                            data: myData[1]
-                        }
-                    ]
-                };
+                            {
+                                name: 'target',
+                                type: 'line',
+                                smooth: true,
+                                showAllSymbol: true,
+                                symbol: 'emptyCircle',
+                                barMaxWidth:40,
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'top'
+                                    }
+                                },
+                                data: OeeTarArr
+                            }
+                        ]
+                    };
 
-                // 使用刚指定的配置项和数据显示图表。
-                IsOneoeeChart.setOption(firstOption);
+                    // 使用刚指定的配置项和数据显示图表。
+                    IsOneoeeChart.setOption(firstOption);
 
-            },
-            failure: function (errMsg) {
-                console.log(errMsg);
-                console.log('fail');
-            }
+                },
+                failure: function (errMsg) {
+                    console.log(errMsg);
+                    console.log('fail');
+                }
 
-        });
+            });
+        }
+
+    })
+}
+
+function showYear(event){
+    var obj=event.data;
+    var cellName;
+    switch(event.data.cell) {
+        case "ISHAFT1":
+            cellName="第一条中间轴";
+            break;
+        case "ISHAFT2":
+            cellName="第二条中间轴";
+            break;
+        case "ISHAFT3":
+            cellName="第三条中间轴";
+            break;
+        case "ISHAFT4":
+            cellName="第四条中间轴";
+            break;
+        case "CEPS5":
+            cellName="无刷产线";
+            break;
+        case "BEPS3":
+            cellName="有刷产线";
+            break;
+
     }
-});
-//按年显示
-$("#showYear").bind("click",function () {
-    // window.location.assign("../../html/oeeSec/ishaft1oeeSec.html");
+    var myYearTitle={
+        text: cellName+'可动率年视图',
+        left:'40%',
+        textStyle:{
+            fontSize:24
+        }
+    };
+    var myYaxis= [{
+        type:'value',
+        name:'可动率（%）',
+        position:'left',
+        min:0,
+
+        nameTextStyle:{
+            fontStyle:'normal',
+            fontWeight:'bold',
+            fontSize:'20'
+        },
+        axisLabel:{
+            textStyle:{
+                fontSize:20
+            }
+        }
+    }];
+    var myGrid= {
+        containLabel: true,
+        left:'4%',
+        right:'5%',
+        bottom:'2%'
+    };
+    var myLengend = {
+        data:['oee','target'],
+        align: 'right',
+        right: '9%',
+        top:'6%'
+    };
     var IsOneoeeChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
-    var percent=99;
-    var myData=[];
-    console.log("开始传输数据");
-    for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
-        myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
-        for(var myJ=0;myJ<366;myJ++){
-            myData[i][myJ]=null;
-        }
-    }
-    var YearDate=[];
-    for(var yIndex=1;yIndex<13;yIndex++){
-        var d=new Date($("#selectYear").val(),yIndex,0);
-        for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
-            YearDate.push($("#selectYear").val()+"-"+judgeTime(yIndex)+"-"+judgeTime(Mindex))
-        }
-    }
+    $(document).ready(function () {
+        {
+            var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
+            myYearTitle.text = cellName+'可动率'+ Uyear+ '年视图';
+            var urlString = "http://10.1.0.40:8080/nexteer/oee/year/"+obj.cell+"?date="+curr_time;
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: 'GET',
+                url: urlString,
+                success: function (data) {
+                    var OeeArr=[];
+                    var OeeTarArr=[];
+                    var NowDate=[];
+                    console.log(JSON.stringify(data));
+                    data.sort(up);
+                    $.each(data, function (i, model) {
+                        OeeArr.push(model.oee);
+                        OeeTarArr.push(model.targetOee);
+                        NowDate.push(model.addDate);
+                    });
 
-    console.log(YearDate);
-    {
-        var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-        myYearTitle.text = '无刷产线可动率'+ Uyear + '年视图';
-        var showoeeJson = new oeeInput(curr_time,"ISHAFT1");
-        var IshaftOneoeeValueArr=[];
-        var IshaftOneoeeTarArr=[];
-        var urlString = "http://localhost:8080/nexteer/oee/year/CEPS5?date="+curr_time;
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            type: 'GET',
-            url: urlString,
-            success: function (data) {
-                $.each(data, function (i, model) {
-                    oeeDate[i]=data[i].addDate;
-                    IshaftOneoeeValueArr[i]=model.oee;
-                    IshaftOneoeeTarArr[i]=model.targetOee;
-                    for(var monIndex=0;monIndex<YearDate.length;monIndex++) {
-                        if (YearDate[monIndex] == model.addDate) {
-                            myData[0][monIndex] = model.oee;
-                            myData[1][monIndex] = model.targetOee;
-                            percent=monIndex*100/365;
-                        }
-                    }
-                });
-                console.log(JSON.stringify(data));
-                console.log(IshaftOneoeeValueArr);
-                // 指定图表的配置项和数据
-                var firstOption = {
-                    title: myYearTitle,
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                    },
-                    toolbox: {
-                        feature: {
-                            saveAsImage: {
-                                show: true
-                            }
-                        }
-                    },
-                    grid: myGrid,
-                    legend: myLengend,
 
-                    xAxis: {
-                        type: 'category',
-                        name:'Time',
-                        axisTick: {
-                            alignWithLabel: true
+                    // 指定图表的配置项和数据
+                    var firstOption = {
+                        title:myYearTitle,
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                         },
-                        nameTextStyle:{
-                            fontStyle:'italic',
-                            fontWeight:'bold'
-                        },
-                        axisLabel:{
-                            textStyle:{
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {
+                                    show: true
+                                }
 
-                                fontSize:20
                             }
                         },
-                        data: YearDate
-                    },
-                    yAxis:myYaxis,
-                    dataZoom: [
-                        {
-                            id: 'dataZoomX',
-                            type: 'slider',
-                            xAxisIndex: [0],
-                            filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
-                            start: 1,
-                            end: percent
-                        }],
-                    series: [
+                        grid:myGrid,
+                        legend: myLengend,
 
-                        {
-                            name: 'oee',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
+                        xAxis: {
+                            type: 'category',
+                            name:'Time',
+                            axisTick: {
+                                alignWithLabel: true
+                            },
+                            nameTextStyle:{
+                                fontStyle:'italic',
+                                fontWeight:'bold'
+                            },
+                            axisLabel:{
+                                textStyle:{
+
+                                    fontSize:20
                                 }
                             },
-                            data: myData[0]
+                            data: NowDate
                         },
-                        {
-                            name: 'target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[1]
-                        }
-                    ]
-                };
-                // 使用刚指定的配置项和数据显示图表。
-                IsOneoeeChart.setOption(firstOption);
+                        yAxis:myYaxis,
+                        dataZoom: [
+                            {
+                                id: 'dataZoomX',
+                                type: 'slider',
+                                xAxisIndex: [0],
+                                filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
+                                start: 1,
+                                end: 100
+                            }],
+                        series: [
 
-            },
-            failure: function (errMsg) {
-                console.log(errMsg);
-                console.log('fail');
+                            {
+                                name: 'oee',
+                                type: 'line',
+                                smooth: true,
+                                showAllSymbol: true,
+                                symbol: 'emptyCircle',
+                                barMaxWidth:40,
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'top'
+                                    }
+                                },
+                                data: OeeArr
+                            },
+                            {
+                                name: 'target',
+                                type: 'line',
+                                smooth: true,
+                                showAllSymbol: true,
+                                symbol: 'emptyCircle',
+                                barMaxWidth:40,
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'top'
+                                    }
+                                },
+                                data: OeeTarArr
+                            }
+                        ]
+                    };
+
+                    // 使用刚指定的配置项和数据显示图表。
+                    IsOneoeeChart.setOption(firstOption);
+
+                },
+                failure: function (errMsg) {
+                    console.log(errMsg);
+                    console.log('fail');
+                }
+
+            });
+        }
+
+    })
+}
+
+function showSelectYear(event){
+    var obj=event.data;
+    var cellName;
+    switch(event.data.cell) {
+        case "ISHAFT1":
+            cellName="第一条中间轴";
+            break;
+        case "ISHAFT2":
+            cellName="第二条中间轴";
+            break;
+        case "ISHAFT3":
+            cellName="第三条中间轴";
+            break;
+        case "ISHAFT4":
+            cellName="第四条中间轴";
+            break;
+        case "CEPS5":
+            cellName="无刷产线";
+            break;
+        case "BEPS3":
+            cellName="有刷产线";
+            break;
+
+    }
+    var myYearTitle={
+        text: cellName+'可动率年视图',
+        left:'40%',
+        textStyle:{
+            fontSize:24
+        }
+    };
+    var myYaxis= [{
+        type:'value',
+        name:'可动率（%）',
+        position:'left',
+        min:0,
+
+        nameTextStyle:{
+            fontStyle:'normal',
+            fontWeight:'bold',
+            fontSize:'20'
+        },
+        axisLabel:{
+            textStyle:{
+                fontSize:20
             }
-
-        });
-    }
-});
-$("#selectYearSub").bind("click",function () {
+        }
+    }];
+    var myGrid= {
+        containLabel: true,
+        left:'4%',
+        right:'5%',
+        bottom:'2%'
+    };
+    var myLengend = {
+        data:['oee','target'],
+        align: 'right',
+        right: '9%',
+        top:'6%'
+    };
     var IsOneoeeChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
-    {
-        var curr_time=$("#selectYear").val()+"-12-31";
-        // var curr_time="2017-04-04";
-        myYearTitle.text = '无刷产线可动率'+ $("#selectYear").val() + '年视图';
-        var showoeeJson = new oeeInput(curr_time,"ISHAFT1");
-        var percent=99;
-        var myData=[];
-        console.log("开始传输数据");
-        for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
-            myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
-            for(var myJ=0;myJ<366;myJ++){
-                myData[i][myJ]=null;
-            }
-        }
-        var YearDate=[];
-        for(var yIndex=1;yIndex<13;yIndex++){
-            var d=new Date($("#selectYear").val(),yIndex,0);
-            for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
-                YearDate.push($("#selectYear").val()+"-"+judgeTime(yIndex)+"-"+judgeTime(Mindex))
-            }
-        }
+    $(document).ready(function () {
+        {
+            var curr_time=$("#selectYear").val()+"-12-31";
+            // var curr_time="2017-04-04";
+            myYearTitle.text = cellName+'可动率'+ $("#selectYear").val() + '年视图';
+            var urlString = "http://10.1.0.40:8080/nexteer/oee/year/"+obj.cell+"?date="+curr_time;
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: 'GET',
+                url: urlString,
+                success: function (data) {
+                    var OeeArr=[];
+                    var OeeTarArr=[];
+                    var NowDate=[];
+                    console.log(JSON.stringify(data));
+                    data.sort(up);
+                    $.each(data, function (i, model) {
+                        OeeArr.push(model.oee);
+                        OeeTarArr.push(model.targetOee);
+                        NowDate.push(model.addDate);
+                    });
 
-        console.log(YearDate);
-        var IshaftOneoeeValueArr=[];
-        var IshaftOneoeeTarArr=[];
-        var urlString = "http://localhost:8080/nexteer/oee/year/CEPS5?date="+curr_time;
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            type: 'GET',
-            url: urlString,
-            success: function (data) {
-                $.each(data, function (i, model) {
-                    oeeDate[i]=data[i].addDate;
-                    IshaftOneoeeValueArr[i]=model.oee;
-                    IshaftOneoeeTarArr[i]=model.targetOee;
-                    for(var monIndex=0;monIndex<YearDate.length;monIndex++) {
-                        if (YearDate[monIndex] == model.addDate) {
-                            myData[0][monIndex] = model.oee;
-                            myData[1][monIndex] = model.targetOee;
-                            percent=monIndex*100/365;
-                        }
-                    }
-                });
-                console.log(JSON.stringify(data));
-                console.log(IshaftOneoeeValueArr);
-                // 指定图表的配置项和数据
-                var firstOption = {
-                    title: myYearTitle,
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                    },
-                    toolbox: {
-                        feature: {
-                            saveAsImage: {
-                                show: true
-                            }
-                        }
-                    },
-                    grid: myGrid,
-                    legend: myLengend,
 
-                    xAxis: {
-                        type: 'category',
-                        name:'Time',
-                        axisTick: {
-                            alignWithLabel: true
+                    // 指定图表的配置项和数据
+                    var firstOption = {
+                        title:myYearTitle,
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
                         },
-                        nameTextStyle:{
-                            fontStyle:'italic',
-                            fontWeight:'bold'
-                        },
-                        axisLabel:{
-                            textStyle:{
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {
+                                    show: true
+                                }
 
-                                fontSize:20
                             }
                         },
-                        data: YearDate
-                    },
-                    yAxis:myYaxis,
-                    dataZoom: [
-                        {
-                            id: 'dataZoomX',
-                            type: 'slider',
-                            xAxisIndex: [0],
-                            filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
-                            start: 1,
-                            end: percent
-                        }],
-                    series: [
+                        grid:myGrid,
+                        legend: myLengend,
 
-                        {
-                            name: 'oee',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
+                        xAxis: {
+                            type: 'category',
+                            name:'Time',
+                            axisTick: {
+                                alignWithLabel: true
+                            },
+                            nameTextStyle:{
+                                fontStyle:'italic',
+                                fontWeight:'bold'
+                            },
+                            axisLabel:{
+                                textStyle:{
+
+                                    fontSize:20
                                 }
                             },
-                            data: myData[0]
+                            data: NowDate
                         },
-                        {
-                            name: 'target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
+                        yAxis:myYaxis,
+                        dataZoom: [
+                            {
+                                id: 'dataZoomX',
+                                type: 'slider',
+                                xAxisIndex: [0],
+                                filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
+                                start: 1,
+                                end: 100
+                            }],
+                        series: [
+
+                            {
+                                name: 'oee',
+                                type: 'line',
+                                smooth: true,
+                                showAllSymbol: true,
+                                symbol: 'emptyCircle',
+                                barMaxWidth:40,
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'top'
+                                    }
+                                },
+                                data: OeeArr
                             },
-                            data: myData[1]
-                        }
-                    ]
-                };
-                // 使用刚指定的配置项和数据显示图表。
-                IsOneoeeChart.setOption(firstOption);
+                            {
+                                name: 'target',
+                                type: 'line',
+                                smooth: true,
+                                showAllSymbol: true,
+                                symbol: 'emptyCircle',
+                                barMaxWidth:40,
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'top'
+                                    }
+                                },
+                                data: OeeTarArr
+                            }
+                        ]
+                    };
 
-            },
-            failure: function (errMsg) {
-                console.log(errMsg);
-                console.log('fail');
-            }
+                    // 使用刚指定的配置项和数据显示图表。
+                    IsOneoeeChart.setOption(firstOption);
 
-        });
-    }
-});
+                },
+                failure: function (errMsg) {
+                    console.log(errMsg);
+                    console.log('fail');
+                }
+
+            });
+        }
+
+    })
+}
+//按月显示
+$("#showMonth").bind("click",obj,showMonth);
+
+$("#selectMonthSub").bind("click",obj,showSelectMonth);
+
+$("#showYear").bind("click",obj,showYear);
+
+$("#selectYearSub").bind("click",obj,showSelectYear);
+
 

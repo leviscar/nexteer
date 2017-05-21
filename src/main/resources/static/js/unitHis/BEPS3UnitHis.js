@@ -24,7 +24,7 @@ function getNowStatus() {
     var shift=$("#nowShift").val();
     var nowTime = $("#nowDate").val();
     $("#showDate").html(nowTime);
-    var getString="http://localhost:8080/nexteer/unit-status/record/BEPS3?date="+nowTime+"&shift_type="+shift;
+    var getString="http://10.1.0.40:8080/nexteer/unit-status/record/BEPS3?date="+nowTime+"&shift_type="+shift;
     console.log(getString);
     var timeRow=[];
     var hourlyTar=[];

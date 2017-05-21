@@ -12,17 +12,29 @@ function judgeMyTime(time) {
     }
     return timeStr;
 }
-// function endTime(endTime) {
-//     this.end_time = endTime;
-// }
-// var getIshaftOneMonthJson= new endTime(Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday));
-// //    var getIshaftOneMonthJson =new endTime("2017-04-08");
+//降序排序
+function down(x, y) {
+    var xTime=new Date(x.addDate);
+    var yTime=new Date(y.addDate);
+    return (xTime.getTime() < yTime.getTime()) ? 1 : -1
+
+}
+
+//升序排序
+function up(x, y) {
+    var xTime=new Date(x.addDate);
+    var yTime=new Date(y.addDate);
+    return (xTime.getTime() > yTime.getTime()) ? 1 : -1
+
+}
+
+
 var endtime= Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday);
 // 基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(document.getElementById('IshaftOneYieldMonthBar'));
 var myPieChart = echarts.init(document.getElementById('IshaftOneYieldMonthPie'));
 //    var myDataOne= [];
-//    var worker = new Worker('http://localhost:8080/nexteer/IshaftYieldWeekFirstWork.js');
+//    var worker = new Worker('http://10.1.0.40:8080/nexteer/IshaftYieldWeekFirstWork.js');
 var myTitle= {
     text: 'Ishaft2产量信息展示（月视图）',
     left:'40%',
@@ -86,10 +98,9 @@ function getIshaftOneMonthData() {
 
 
 
-    $.get("http://localhost:8080/nexteer/product-model", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
         $.each(data, function (i, model) {
             if(model.cellName=="Ishaft2"){
-//                    ProMsg.push({"modelId":model.modelId,"modelName":model.modelName})
                 proIDMsg.push(model.modelId);
                 proNameMsg.push(model.modelName);
             }
@@ -97,15 +108,11 @@ function getIshaftOneMonthData() {
     });
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/nexteer/output-info/ISHAFT2/month?date="+endtime,
+        url: "http://10.1.0.40:8080/nexteer/output-info/ISHAFT2/month?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             myAjaxData = JSON.stringify(data);
             for(var j=0,len=proIDMsg.length;j<len;j++){
-//                    for(var myIndex = 0,myLen = myAjaxData.length;myIndex<myLen;myIndex++){
-//                        if(myAjaxData[myIndex].)
-//                        myData[j].push({"addDate":myAjaxData[myIndex].addDate,"count":myAjaxData[myIndex].count});
-//                    }
                 $.each(data,function (index,model) {
                     if(data[index].modelId==proIDMsg[j]){
                         for(var MDIndex=0;MDIndex<31;MDIndex++){
@@ -304,7 +311,7 @@ $("#selectMonthSub").bind("click",function (){
 
 
 
-    $.get("http://localhost:8080/nexteer/product-model", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
         $.each(data, function (i, model) {
             if(model.cellName=="Ishaft2"){
 //                    ProMsg.push({"modelId":model.modelId,"modelName":model.modelName})
@@ -315,7 +322,7 @@ $("#selectMonthSub").bind("click",function (){
     });
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/nexteer/output-info/ISHAFT2/month?date="+endtime,
+        url: "http://10.1.0.40:8080/nexteer/output-info/ISHAFT2/month?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             myAjaxData = JSON.stringify(data);

@@ -12,17 +12,28 @@
         }
         return timeStr;
     }
-// function endTime(endTime) {
-//     this.end_time = endTime;
-// }
-// var getIshaftOneMonthJson= new endTime(Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday));
-// //    var getIshaftOneMonthJson =new endTime("2017-04-08");
+//降序排序
+function down(x, y) {
+    var xTime=new Date(x.addDate);
+    var yTime=new Date(y.addDate);
+    return (xTime.getTime() < yTime.getTime()) ? 1 : -1
+
+}
+
+//升序排序
+function up(x, y) {
+    var xTime=new Date(x.addDate);
+    var yTime=new Date(y.addDate);
+    return (xTime.getTime() > yTime.getTime()) ? 1 : -1
+
+}
+
+
 var endtime= Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday);
 // 基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(document.getElementById('IshaftOneYieldMonthBar'));
 var myPieChart = echarts.init(document.getElementById('IshaftOneYieldMonthPie'));
-//    var myDataOne= [];
-//    var worker = new Worker('http://localhost:8080/nexteer/IshaftYieldWeekFirstWork.js');
+
 var myTitle= {
     text: 'Ishaft1产量信息展示（月视图）',
     left:'40%',
@@ -58,35 +69,42 @@ var myLengend = {
     top:'6%'
 };
 
-function getIshaftOneMonthData() {
+function getIshaftOneMonthData(cell) {
+    var cellName;
+    switch(cell) {
+        case "ISHAFT1":
+            cellName="第一条中间轴";
+            break;
+        case "ISHAFT2":
+            cellName="第二条中间轴";
+            break;
+        case "ISHAFT3":
+            cellName="第三条中间轴";
+            break;
+        case "ISHAFT4":
+            cellName="第四条中间轴";
+            break;
+        case "CEPS5":
+            cellName="无刷产线";
+            break;
+        case "BEPS3":
+            cellName="有刷产线";
+            break;
+
+    }
+    myTitle.text=cellName+"产量信息展示";
     var proIDMsg=[];
     var proNameMsg=[];
     var myData=[];
     var myAjaxData=[];
     var sum=[];
     var myPieData=[];
-    var perCent=50;
-    for(var i=0;i<30;i++){    //一维长度为i,i为变量，可以根据实际情况改变
-        myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
-        sum[i]=0;
-        for(var myJ=0;myJ<31;myJ++){
-            myData[i][myJ]=null;
-        }
-    }
-    var myXDate=[];
-    for(var jX=0;jX<30;jX++){    //一维长度为i,i为变量，可以根据实际情况改变
-        myXDate[jX]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
-    }
-    var MonthDate=[];
-    var d=new Date(Uyear,Umonth,0);
-    for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
-        MonthDate.push(Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Mindex))
-    }
-    console.log("当前月份天数"+MonthDate);
+    var perCent=100;
 
 
 
-    $.get("http://localhost:8080/nexteer/product-model", function (data) {
+
+    $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
         $.each(data, function (i, model) {
             if(model.cellName=="Ishaft1"){
 //                    ProMsg.push({"modelId":model.modelId,"modelName":model.modelName})
@@ -97,7 +115,7 @@ function getIshaftOneMonthData() {
     });
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/nexteer/output-info/ISHAFT1/month?date="+endtime,
+        url: "http://10.1.0.40:8080/nexteer/output-info/ISHAFT1/month?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             myAjaxData = JSON.stringify(data);
@@ -304,7 +322,7 @@ $("#selectMonthSub").bind("click",function (){
 
 
 
-    $.get("http://localhost:8080/nexteer/product-model", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
         $.each(data, function (i, model) {
             if(model.cellName=="Ishaft1"){
 //                    ProMsg.push({"modelId":model.modelId,"modelName":model.modelName})
@@ -315,7 +333,7 @@ $("#selectMonthSub").bind("click",function (){
     });
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/nexteer/output-info/ISHAFT1/month?date="+endtime,
+        url: "http://10.1.0.40:8080/nexteer/output-info/ISHAFT1/month?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             myAjaxData = JSON.stringify(data);
