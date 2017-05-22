@@ -109,7 +109,7 @@ function getIshaftOneWeekData() {
 //                }
 
             var myTitle= {
-                text: 'Ishaft4产量信息展示（周视图）',
+                text: '第四条中间轴产量信息展示（周视图）',
                 left:'40%',
                 textStyle:{
                     fontSize:24

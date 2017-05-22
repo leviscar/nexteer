@@ -26,7 +26,7 @@ var myPieChart = echarts.init(document.getElementById('IshaftOneYieldYearPie'));
 //    var myDataOne= [];
 //    var worker = new Worker('http://10.1.0.40:8080/nexteer/IshaftYieldWeekFirstWork.js');
 var myTitle= {
-    text: 'CEPS产量信息展示（年视图）',
+    text: '无刷产量信息展示（年视图）',
     left:'40%',
     textStyle:{
         fontSize:24

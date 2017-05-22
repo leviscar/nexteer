@@ -103,7 +103,7 @@ td img{
     text-align: center;
 }
 .firstTable>tbody td{
-    font-size: 2.7em;
+    font-size: 2.5em;
     /*color: #aa314d;*/
     /*color: #727272;*/
     color: #D10429;
@@ -132,6 +132,6 @@ td img{
 }
 .firstTable>tbody>tr>td{
     vertical-align: middle;
-    height: 3.3em;
+    height: 3em;
 }
 

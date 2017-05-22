@@ -55,6 +55,34 @@ function formOnload()
     return [Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday];
 }
 
+//降序排序
+function down(x, y) {
+    var xTime=new Date(x.addDate);
+    var yTime=new Date(y.addDate);
+    return (xTime.getTime() < yTime.getTime()) ? 1 : -1
+
+}
+
+//升序排序
+function up(x, y) {
+    var xTime=new Date(x.addDate);
+    var yTime=new Date(y.addDate);
+    return (xTime.getTime() > yTime.getTime()) ? 1 : -1
+
+}
+//数组去重
+Array.prototype.unique1 = function()
+{
+    var n = []; //一个新的临时数组
+    for(var i = 0; i < this.length; i++) //遍历当前数组
+    {
+        //如果当前数组的第i已经保存进了临时数组，那么跳过，
+        //否则把当前项push到临时数组里面
+        if (n.indexOf(this[i]) == -1) n.push(this[i]);
+    }
+    return n;
+}
+
 console.log('start');
 // 基于准备好的dom，初始化echarts实例
 
@@ -676,7 +704,7 @@ function showWeek() {
                         data: myData[7]
                     },
                     {
-                        name: 'BEPS',
+                        name: 'BEPS3',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -691,7 +719,7 @@ function showWeek() {
                         data: myData[12]
                     },
                     {
-                        name: 'BEPS_target',
+                        name: 'BEPS3_target',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -706,7 +734,7 @@ function showWeek() {
                         data: myData[13]
                     },
                     {
-                        name: 'CEPS',
+                        name: 'CEPS5',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -721,7 +749,7 @@ function showWeek() {
                         data: myData[22]
                     },
                     {
-                        name: 'CEPS_target',
+                        name: 'CEPS5_target',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -998,7 +1026,7 @@ $("#showWeek").bind("click",function () {
                         data: myData[7]
                     },
                     {
-                        name: 'BEPS',
+                        name: 'BEPS3',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -1013,7 +1041,7 @@ $("#showWeek").bind("click",function () {
                         data: myData[12]
                     },
                     {
-                        name: 'BEPS_target',
+                        name: 'BEPS3_target',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -1028,7 +1056,7 @@ $("#showWeek").bind("click",function () {
                         data: myData[13]
                     },
                     {
-                        name: 'CEPS',
+                        name: 'CEPS5',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -1043,7 +1071,7 @@ $("#showWeek").bind("click",function () {
                         data: myData[22]
                     },
                     {
-                        name: 'CEPS_target',
+                        name: 'CEPS5_target',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -1074,40 +1102,30 @@ $("#showWeek").bind("click",function () {
 
 //按月显示
 $("#showMonth").bind("click",function (){
-    // window.location.reload();
-    // $("#showIsOneWeekSheet").empty();
     var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     $(document).ready(function () {
-        var percent = 50;
-        var myData=[];
-        console.log("开始传输数据");
-        for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
-            myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
-            for(var myJ=0;myJ<31;myJ++){
-                myData[i][myJ]=null;
-            }
-        }
-        var MonthDate=[];
-        var d=new Date(Uyear,Umonth,0);
-        for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
-            MonthDate.push(Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Mindex))
-        }
-        for(var perIndex in MonthDate){
-            var nowTime=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-            if(MonthDate[perIndex]==nowTime){
-                percent=parseInt(perIndex*100/31)+1;
-                console.log(percent);
-            }
-
-        }
-        console.log(MonthDate);
-        console.log(MonthDate[d.getDate()-1]);
         {
             var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-            // var curr_time="2017-03-13";
             myMonthTitle.text = '全产线人员利用率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
-            var IshaftOnehceValueArr=[];
-            var IshaftOnehceTarArr=[];
+            var myIshaft1=[];
+            var myIshaft1Value=[];
+            var myIshaft1Tar=[];
+            var myIshaft2=[];
+            var myIshaft2Value=[];
+            var myIshaft2Tar=[];
+            var myIshaft3=[];
+            var myIshaft3Value=[];
+            var myIshaft3Tar=[];
+            var myIshaft4=[];
+            var myIshaft4Value=[];
+            var myIshaft4Tar=[];
+            var myCEPS=[];
+            var myCEPSValue=[];
+            var myCEPSTar=[];
+            var myBEPS=[];
+            var myBEPSValue=[];
+            var myBEPSTar=[];
+            var Mdate=[];
             var urlString = "http://10.1.0.40:8080/nexteer/hce/month?date="+curr_time;
             $.ajax({
                 headers: {
@@ -1118,89 +1136,62 @@ $("#showMonth").bind("click",function (){
                 url: urlString,
                 success: function (data) {
                     $.each(data, function (i, model) {
-                        hceDate[i]=data[i].addDate;
-                        IshaftOnehceValueArr[i]=model.hce;
-                        IshaftOnehceTarArr[i]=model.targetHce;
-                        for(var monIndex=0;monIndex<MonthDate.length;monIndex++){
-                            if(MonthDate[monIndex]==model.addDate){
-                                switch (model.cellName){
-                                    case "ISHAFT1":
-                                        myData[0][monIndex]=model.hce;
-                                        myData[1][monIndex]=model.targetHce;
-                                        break;
-                                    case "ISHAFT2":
-                                        myData[2][monIndex]=model.hce;
-                                        myData[3][monIndex]=model.targetHce;
-                                        break;
-                                    case "ISHAFT3":
-                                        myData[4][monIndex]=model.hce;
-                                        myData[5][monIndex]=model.targetHce;
-                                        break;
-                                    case "ISHAFT4":
-                                        myData[6][monIndex]=model.hce;
-                                        myData[7][monIndex]=model.targetHce;
-                                        break;
-                                    case "BEPS1":
-                                        myData[8][monIndex]=model.hce;
-                                        myData[9][monIndex]=model.targetHce;
-                                        break;
-                                    case "BEPS2":
-                                        myData[10][monIndex]=model.hce;
-                                        myData[11][monIndex]=model.targetHce;
-                                        break;
-                                    case "BEPS3":
-                                        myData[12][monIndex]=model.hce;
-                                        myData[13][monIndex]=model.targetHce;
-                                        break;
-                                    case "CEPS1":
-                                        myData[14][monIndex]=model.hce;
-                                        myData[15][monIndex]=model.targetHce;
-                                        break;
-                                    case "CEPS2":
-                                        myData[16][monIndex]=model.hce;
-                                        myData[17][monIndex]=model.targetHce;
-                                        break;
-                                    case "CEPS3":
-                                        myData[18][monIndex]=model.hce;
-                                        myData[19][monIndex]=model.targetHce;
-                                        break;
-                                    case "CEPS4":
-                                        myData[20][monIndex]=model.hce;
-                                        myData[21][monIndex]=model.targetHce;
-                                        break;
-                                    case "CEPS5":
-                                        myData[22][monIndex]=model.hce;
-                                        myData[23][monIndex]=model.targetHce;
-                                        break;
-                                }
-                                percent=monIndex*100/30;
-                            }
-
+                        switch (model.cellName){
+                            case "ISHAFT1":
+                                myIshaft1.push(data[i]);
+                                break;
+                            case "ISHAFT2":
+                                myIshaft2.push(data[i]);
+                                break;
+                            case "ISHAFT3":
+                                myIshaft3.push(data[i]);
+                                break;
+                            case "ISHAFT4":
+                                myIshaft4.push(data[i]);
+                                break;
+                            case "BEPS3":
+                                myBEPS.push(data[i]);
+                                break;
+                            case "CEPS5":
+                                myCEPS.push(data[i]);
+                                break;
                         }
+                        Mdate.push(model.addDate);
+                    });
+                    Mdate.unique1();
+                    console.log(Mdate);
+                    myIshaft1.sort(up);
+                    myIshaft2.sort(up);
+                    myIshaft3.sort(up);
+                    myIshaft4.sort(up);
+                    myBEPS.sort(up);
+                    myCEPS.sort(up);
+                    $.each(myIshaft1,function (i,model) {
+                        myIshaft1Value.push(model.hce);
+                        myIshaft1Tar.push(model.targetHce);
+                    });
+                    $.each(myIshaft2,function (i,model) {
+                        myIshaft2Value.push(model.hce);
+                        myIshaft2Tar.push(model.targetHce);
+
+                    });
+                    $.each(myIshaft3,function (i,model) {
+                        myIshaft3Value.push(model.hce);
+                        myIshaft3Tar.push(model.targetHce);
+                    });
+                    $.each(myIshaft4,function (i,model) {
+                        myIshaft4Value.push(model.hce);
+                        myIshaft4Tar.push(model.targetHce);
+                    });
+                    $.each(myBEPS,function (i,model) {
+                        myBEPSValue.push(model.hce);
+                        myBEPSTar.push(model.targetHce);
+                    });
+                    $.each(myCEPS,function (i,model) {
+                        myCEPSValue.push(model.hce);
+                        myCEPSTar.push(model.targetHce);
                     });
 
-                    for(var sIndex;sIndex<MonthDate.length;sIndex++){
-                        if((myData[0][sIndex]==null&&myData[1][sIndex]==null&&myData[2][sIndex]==null&&myData[3][sIndex]==null&&myData[4][sIndex]==null&&myData[5][sIndex]==null&&
-                            myData[6][sIndex]==null&&myData[7][sIndex]==null&&myData[12][sIndex]==null&&myData[13][sIndex]==null&&myData[22][sIndex]==null&&myData[23][sIndex])==null){
-                            var insertIndex=sIndex-1;
-                            myData[0].splice(insertIndex,1);
-                            myData[1].splice(insertIndex,1);
-                            myData[2].splice(insertIndex,1);
-                            myData[3].splice(insertIndex,1);
-                            myData[4].splice(insertIndex,1);
-                            myData[5].splice(insertIndex,1);
-                            myData[6].splice(insertIndex,1);
-                            myData[7].splice(insertIndex,1);
-                            myData[12].splice(insertIndex,1);
-                            myData[13].splice(insertIndex,1);
-                            myData[14].splice(insertIndex,1);
-                            myData[15].splice(insertIndex,1);
-                            MonthDate.splice(insertIndex,1);
-                            console.log("delete"+insertIndex);
-                        }
-                    }
-                    console.log(JSON.stringify(data));
-                    console.log(IshaftOnehceValueArr);
                     // 指定图表的配置项和数据
                     var firstOption = {
                         title:myMonthTitle,
@@ -1235,7 +1226,7 @@ $("#showMonth").bind("click",function (){
                                     fontSize:20
                                 }
                             },
-                            data: MonthDate
+                            data: Mdate
                         },
                         yAxis:myYaxis,
                         dataZoom: [
@@ -1245,7 +1236,7 @@ $("#showMonth").bind("click",function (){
                                 xAxisIndex: [0],
                                 filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
                                 start: 1,
-                                end: percent
+                                end: 100
                             }],
                         series: [
 
@@ -1262,7 +1253,7 @@ $("#showMonth").bind("click",function (){
                                         position: 'top'
                                     }
                                 },
-                                data: myData[0]
+                                data: myIshaft1Value
                             },
                             {
                                 name: 'Ishaft1_target',
@@ -1277,7 +1268,7 @@ $("#showMonth").bind("click",function (){
                                         position: 'top'
                                     }
                                 },
-                                data: myData[1]
+                                data: myIshaft1Tar
                             },
                             {
                                 name: 'Ishaft2',
@@ -1292,7 +1283,7 @@ $("#showMonth").bind("click",function (){
                                         position: 'top'
                                     }
                                 },
-                                data: myData[2]
+                                data: myIshaft2Value
                             },
                             {
                                 name: 'Ishaft2_target',
@@ -1307,7 +1298,7 @@ $("#showMonth").bind("click",function (){
                                         position: 'top'
                                     }
                                 },
-                                data: myData[3]
+                                data: myIshaft2Tar
                             },
                             {
                                 name: 'Ishaft3',
@@ -1322,7 +1313,7 @@ $("#showMonth").bind("click",function (){
                                         position: 'top'
                                     }
                                 },
-                                data: myData[4]
+                                data: myIshaft3Value
                             },
                             {
                                 name: 'Ishaft3_target',
@@ -1337,7 +1328,7 @@ $("#showMonth").bind("click",function (){
                                         position: 'top'
                                     }
                                 },
-                                data: myData[5]
+                                data: myIshaft3Tar
                             },
                             {
                                 name: 'Ishaft4',
@@ -1352,7 +1343,7 @@ $("#showMonth").bind("click",function (){
                                         position: 'top'
                                     }
                                 },
-                                data: myData[6]
+                                data: myIshaft4Value
                             },
                             {
                                 name: 'Ishaft4_target',
@@ -1367,10 +1358,10 @@ $("#showMonth").bind("click",function (){
                                         position: 'top'
                                     }
                                 },
-                                data: myData[7]
+                                data: myIshaft4Tar
                             },
                             {
-                                name: 'BEPS',
+                                name: 'BEPS3',
                                 type: 'line',
                                 smooth: true,
                                 showAllSymbol: true,
@@ -1382,10 +1373,10 @@ $("#showMonth").bind("click",function (){
                                         position: 'top'
                                     }
                                 },
-                                data: myData[12]
+                                data: myBEPSValue
                             },
                             {
-                                name: 'BEPS_target',
+                                name: 'BEPS3_target',
                                 type: 'line',
                                 smooth: true,
                                 showAllSymbol: true,
@@ -1397,10 +1388,10 @@ $("#showMonth").bind("click",function (){
                                         position: 'top'
                                     }
                                 },
-                                data: myData[13]
+                                data: myBEPSTar
                             },
                             {
-                                name: 'CEPS',
+                                name: 'CEPS5',
                                 type: 'line',
                                 smooth: true,
                                 showAllSymbol: true,
@@ -1412,10 +1403,10 @@ $("#showMonth").bind("click",function (){
                                         position: 'top'
                                     }
                                 },
-                                data: myData[22]
+                                data: myCEPSValue
                             },
                             {
-                                name: 'CEPS_target',
+                                name: 'CEPS5_target',
                                 type: 'line',
                                 smooth: true,
                                 showAllSymbol: true,
@@ -1427,7 +1418,7 @@ $("#showMonth").bind("click",function (){
                                         position: 'top'
                                     }
                                 },
-                                data: myData[23]
+                                data: myCEPSTar
                             }
                         ]
                     };
@@ -1446,1023 +1437,1024 @@ $("#showMonth").bind("click",function (){
 
     })
 });
-$("#selectMonthSub").bind("click",function (){
-    // window.location.assign("../../html/hceSec/ishaft1HceSec.html");
-    var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
-    var myData=[];
-    var percent=50;
-    {
-        var data = $("#selectMonth").val().split("-");
-        var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
-        // var curr_time="2017-04-04";
-        myMonthTitle.text = '全产线人员利用率'+ data[0]+'-'+data[1]+ '月视图';
+// $("#selectMonthSub").bind("click",function (){
+//     // window.location.assign("../../html/hceSec/ishaft1HceSec.html");
+//     var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
+//     var myData=[];
+//     var percent=50;
+//     {
+//         var data = $("#selectMonth").val().split("-");
+//         var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
+//         // var curr_time="2017-04-04";
+//         myMonthTitle.text = '全产线人员利用率'+ data[0]+'-'+data[1]+ '月视图';
+//
+//         for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
+//             myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
+//             for(var myJ=0;myJ<31;myJ++){
+//                 myData[i][myJ]=null;
+//             }
+//         }
+//         var MonthDate=[];
+//         var d=new Date(data[0],data[1],0);
+//         for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
+//             MonthDate.push(data[0]+"-"+data[1]+"-"+judgeTime(Mindex));
+//         }
+//
+//         console.log(MonthDate);
+//         var IshaftOnehceValueArr=[];
+//         var IshaftOnehceTarArr=[];
+//         var urlString = "http://10.1.0.40:8080/nexteer/hce/month?date="+curr_time;
+//         $.ajax({
+//             headers: {
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/json'
+//             },
+//             type: 'GET',
+//             url: urlString,
+//             success: function (data) {
+//                 $.each(data, function (i, model) {
+//                     hceDate[i]=data[i].addDate;
+//                     IshaftOnehceValueArr[i]=model.hce;
+//                     IshaftOnehceTarArr[i]=model.targetHce;
+//                     for(var monIndex=0;monIndex<MonthDate.length;monIndex++){
+//                         if(MonthDate[monIndex]==model.addDate){
+//                             switch (model.cellName){
+//                                 case "ISHAFT1":
+//                                     myData[0][monIndex]=model.hce;
+//                                     myData[1][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "ISHAFT2":
+//                                     myData[2][monIndex]=model.hce;
+//                                     myData[3][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "ISHAFT3":
+//                                     myData[4][monIndex]=model.hce;
+//                                     myData[5][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "ISHAFT4":
+//                                     myData[6][monIndex]=model.hce;
+//                                     myData[7][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "BEPS1":
+//                                     myData[8][monIndex]=model.hce;
+//                                     myData[9][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "BEPS2":
+//                                     myData[10][monIndex]=model.hce;
+//                                     myData[11][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "BEPS3":
+//                                     myData[12][monIndex]=model.hce;
+//                                     myData[13][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "CEPS1":
+//                                     myData[14][monIndex]=model.hce;
+//                                     myData[15][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "CEPS2":
+//                                     myData[16][monIndex]=model.hce;
+//                                     myData[17][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "CEPS3":
+//                                     myData[18][monIndex]=model.hce;
+//                                     myData[19][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "CEPS4":
+//                                     myData[20][monIndex]=model.hce;
+//                                     myData[21][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "CEPS5":
+//                                     myData[22][monIndex]=model.hce;
+//                                     myData[23][monIndex]=model.targetHce;
+//                                     break;
+//                             }
+//                             percent=monIndex*100/30;
+//                         }
+//
+//                     }
+//                 });
+//                 console.log(JSON.stringify(data));
+//                 console.log(IshaftOnehceValueArr);
+//                 // 指定图表的配置项和数据
+//                 var firstOption = {
+//                     title:myMonthTitle,
+//                     tooltip: {
+//                         trigger: 'axis',
+//                         axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+//                     },
+//                     toolbox: {
+//                         feature: {
+//                             saveAsImage: {
+//                                 show: true
+//                             }
+//
+//                         }
+//                     },
+//                     grid:myGrid,
+//                     legend: myLengend,
+//
+//                     xAxis: {
+//                         type: 'category',
+//                         name:'Time',
+//                         axisTick: {
+//                             alignWithLabel: true
+//                         },
+//                         nameTextStyle:{
+//                             fontStyle:'italic',
+//                             fontWeight:'bold'
+//                         },
+//                         axisLabel:{
+//                             textStyle:{
+//
+//                                 fontSize:20
+//                             }
+//                         },
+//                         data: MonthDate
+//                     },
+//                     yAxis:myYaxis,
+//                     dataZoom: [
+//                         {
+//                             id: 'dataZoomX',
+//                             type: 'slider',
+//                             xAxisIndex: [0],
+//                             filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
+//                             start: 1,
+//                             end: percent
+//                         }],
+//                     series: [
+//
+//                         {
+//                             name: 'Ishaft1',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[0]
+//                         },
+//                         {
+//                             name: 'Ishaft1_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[1]
+//                         },
+//                         {
+//                             name: 'Ishaft2',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[2]
+//                         },
+//                         {
+//                             name: 'Ishaft2_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[3]
+//                         },
+//                         {
+//                             name: 'Ishaft3',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[4]
+//                         },
+//                         {
+//                             name: 'Ishaft3_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[5]
+//                         },
+//                         {
+//                             name: 'Ishaft4',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[6]
+//                         },
+//                         {
+//                             name: 'Ishaft4_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[7]
+//                         },
+//                         {
+//                             name: 'BEPS3',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[12]
+//                         },
+//                         {
+//                             name: 'BEPS3_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[13]
+//                         },
+//                         {
+//                             name: 'CEPS5',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[22]
+//                         },
+//                         {
+//                             name: 'CEPS5_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[23]
+//                         }
+//                     ]
+//                 };
+//
+//                 // 使用刚指定的配置项和数据显示图表。
+//                 IsOnehceChart.setOption(firstOption);
+//
+//             },
+//             failure: function (errMsg) {
+//                 console.log(errMsg);
+//                 console.log('fail');
+//             }
+//
+//         });
+//     }
+// });
+// //按年显示
+// $("#showYear").bind("click",function () {
+//     // window.location.assign("../../html/hceSec/ishaft1HceSec.html");
+//     var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
+//     var percent=99;
+//     var myData=[];
+//     console.log("开始传输数据");
+//     for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
+//         myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
+//         for(var myJ=0;myJ<366;myJ++){
+//             myData[i][myJ]=null;
+//         }
+//     }
+//     var YearDate=[];
+//     for(var yIndex=1;yIndex<13;yIndex++){
+//         var d=new Date($("#selectYear").val(),yIndex,0);
+//         for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
+//             YearDate.push($("#selectYear").val()+"-"+judgeTime(yIndex)+"-"+judgeTime(Mindex))
+//         }
+//     }
+//
+//     console.log(YearDate);
+//     {
+//         var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
+//         myYearTitle.text = '第一条中间轴人员利用率'+ Uyear + '年视图';
+//         var showhceJson = new hceInput(curr_time,"ISHAFT1");
+//         var IshaftOnehceValueArr=[];
+//         var IshaftOnehceTarArr=[];
+//         var urlString = "http://10.1.0.40:8080/nexteer/hce/year?date="+curr_time;
+//         $.ajax({
+//             headers: {
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/json'
+//             },
+//             type: 'GET',
+//             url: urlString,
+//             success: function (data) {
+//                 $.each(data, function (i, model) {
+//                     hceDate[i]=data[i].addDate;
+//                     IshaftOnehceValueArr[i]=model.hce;
+//                     IshaftOnehceTarArr[i]=model.targetHce;
+//                     for(var monIndex=0;monIndex<YearDate.length;monIndex++) {
+//                         if (YearDate[monIndex] == model.addDate) {
+//                             switch (model.cellName){
+//                                 case "ISHAFT1":
+//                                     myData[0][monIndex]=model.hce;
+//                                     myData[1][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "ISHAFT2":
+//                                     myData[2][monIndex]=model.hce;
+//                                     myData[3][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "ISHAFT3":
+//                                     myData[4][monIndex]=model.hce;
+//                                     myData[5][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "ISHAFT4":
+//                                     myData[6][monIndex]=model.hce;
+//                                     myData[7][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "BEPS1":
+//                                     myData[8][monIndex]=model.hce;
+//                                     myData[9][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "BEPS2":
+//                                     myData[10][monIndex]=model.hce;
+//                                     myData[11][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "BEPS3":
+//                                     myData[12][monIndex]=model.hce;
+//                                     myData[13][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "CEPS1":
+//                                     myData[14][monIndex]=model.hce;
+//                                     myData[15][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "CEPS2":
+//                                     myData[16][monIndex]=model.hce;
+//                                     myData[17][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "CEPS3":
+//                                     myData[18][monIndex]=model.hce;
+//                                     myData[19][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "CEPS4":
+//                                     myData[20][monIndex]=model.hce;
+//                                     myData[21][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "CEPS5":
+//                                     myData[22][monIndex]=model.hce;
+//                                     myData[23][monIndex]=model.targetHce;
+//                                     break;
+//                             }
+//                             percent=monIndex*100/365;
+//                         }
+//                     }
+//                 });
+//                 console.log(JSON.stringify(data));
+//                 console.log(IshaftOnehceValueArr);
+//                 // 指定图表的配置项和数据
+//                 var firstOption = {
+//                     title: myYearTitle,
+//                     tooltip: {
+//                         trigger: 'axis',
+//                         axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+//                     },
+//                     toolbox: {
+//                         feature: {
+//                             saveAsImage: {
+//                                 show: true
+//                             }
+//                         }
+//                     },
+//                     grid: myGrid,
+//                     legend: myLengend,
+//
+//                     xAxis: {
+//                         type: 'category',
+//                         name:'Time',
+//                         axisTick: {
+//                             alignWithLabel: true
+//                         },
+//                         nameTextStyle:{
+//                             fontStyle:'italic',
+//                             fontWeight:'bold'
+//                         },
+//                         axisLabel:{
+//                             textStyle:{
+//
+//                                 fontSize:20
+//                             }
+//                         },
+//                         data: YearDate
+//                     },
+//                     yAxis:myYaxis,
+//                     dataZoom: [
+//                         {
+//                             id: 'dataZoomX',
+//                             type: 'slider',
+//                             xAxisIndex: [0],
+//                             filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
+//                             start: 1,
+//                             end: percent
+//                         }],
+//                     series: [
+//
+//                         {
+//                             name: 'Ishaft1',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[0]
+//                         },
+//                         {
+//                             name: 'Ishaft1_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[1]
+//                         },
+//                         {
+//                             name: 'Ishaft2',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[2]
+//                         },
+//                         {
+//                             name: 'Ishaft2_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[3]
+//                         },
+//                         {
+//                             name: 'Ishaft3',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[4]
+//                         },
+//                         {
+//                             name: 'Ishaft3_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[5]
+//                         },
+//                         {
+//                             name: 'Ishaft4',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[6]
+//                         },
+//                         {
+//                             name: 'Ishaft4_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[7]
+//                         },
+//                         {
+//                             name: 'BEPS3',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[12]
+//                         },
+//                         {
+//                             name: 'BEPS3_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[13]
+//                         },
+//                         {
+//                             name: 'CEPS5',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[22]
+//                         },
+//                         {
+//                             name: 'CEPS5_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[23]
+//                         }
+//                     ]
+//                 };
+//                 // 使用刚指定的配置项和数据显示图表。
+//                 IsOnehceChart.setOption(firstOption);
+//
+//             },
+//             failure: function (errMsg) {
+//                 console.log(errMsg);
+//                 console.log('fail');
+//             }
+//
+//         });
+//     }
+// });
+// $("#selectYearSub").bind("click",function () {
+//     var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
+//     {
+//         var curr_time=$("#selectYear").val()+"-12-31";
+//         // var curr_time="2017-04-04";
+//         myYearTitle.text = '全产线人员利用率'+ $("#selectYear").val() + '年视图';
+//         var showhceJson = new hceInput(curr_time,"ISHAFT1");
+//         var percent=99;
+//         var myData=[];
+//         console.log("开始传输数据");
+//         for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
+//             myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
+//             for(var myJ=0;myJ<366;myJ++){
+//                 myData[i][myJ]=null;
+//             }
+//         }
+//         var YearDate=[];
+//         for(var yIndex=1;yIndex<13;yIndex++){
+//             var d=new Date($("#selectYear").val(),yIndex,0);
+//             for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
+//                 YearDate.push($("#selectYear").val()+"-"+judgeTime(yIndex)+"-"+judgeTime(Mindex))
+//             }
+//         }
+//
+//         console.log(YearDate);
+//         var IshaftOnehceValueArr=[];
+//         var IshaftOnehceTarArr=[];
+//         var urlString = "http://10.1.0.40:8080/nexteer/hce/year?date="+curr_time;
+//         $.ajax({
+//             headers: {
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/json'
+//             },
+//             type: 'GET',
+//             url: urlString,
+//             success: function (data) {
+//                 $.each(data, function (i, model) {
+//                     hceDate[i]=data[i].addDate;
+//                     IshaftOnehceValueArr[i]=model.hce;
+//                     IshaftOnehceTarArr[i]=model.targetHce;
+//                     for(var monIndex=0;monIndex<YearDate.length;monIndex++) {
+//                         if (YearDate[monIndex] == model.addDate) {
+//                             switch (model.cellName){
+//                                 case "ISHAFT1":
+//                                     myData[0][monIndex]=model.hce;
+//                                     myData[1][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "ISHAFT2":
+//                                     myData[2][monIndex]=model.hce;
+//                                     myData[3][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "ISHAFT3":
+//                                     myData[4][monIndex]=model.hce;
+//                                     myData[5][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "ISHAFT4":
+//                                     myData[6][monIndex]=model.hce;
+//                                     myData[7][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "BEPS1":
+//                                     myData[8][monIndex]=model.hce;
+//                                     myData[9][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "BEPS2":
+//                                     myData[10][monIndex]=model.hce;
+//                                     myData[11][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "BEPS3":
+//                                     myData[12][monIndex]=model.hce;
+//                                     myData[13][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "CEPS1":
+//                                     myData[14][monIndex]=model.hce;
+//                                     myData[15][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "CEPS2":
+//                                     myData[16][monIndex]=model.hce;
+//                                     myData[17][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "CEPS3":
+//                                     myData[18][monIndex]=model.hce;
+//                                     myData[19][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "CEPS4":
+//                                     myData[20][monIndex]=model.hce;
+//                                     myData[21][monIndex]=model.targetHce;
+//                                     break;
+//                                 case "CEPS5":
+//                                     myData[22][monIndex]=model.hce;
+//                                     myData[23][monIndex]=model.targetHce;
+//                                     break;
+//                             }
+//                             percent=monIndex*100/365;
+//                         }
+//                     }
+//                 });
+//                 console.log(JSON.stringify(data));
+//                 console.log(IshaftOnehceValueArr);
+//                 // 指定图表的配置项和数据
+//                 var firstOption = {
+//                     title: myYearTitle,
+//                     tooltip: {
+//                         trigger: 'axis',
+//                         axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+//                     },
+//                     toolbox: {
+//                         feature: {
+//                             saveAsImage: {
+//                                 show: true
+//                             }
+//                         }
+//                     },
+//                     grid: myGrid,
+//                     legend: myLengend,
+//
+//                     xAxis: {
+//                         type: 'category',
+//                         name:'Time',
+//                         axisTick: {
+//                             alignWithLabel: true
+//                         },
+//                         nameTextStyle:{
+//                             fontStyle:'italic',
+//                             fontWeight:'bold'
+//                         },
+//                         axisLabel:{
+//                             textStyle:{
+//
+//                                 fontSize:20
+//                             }
+//                         },
+//                         data: YearDate
+//                     },
+//                     yAxis:myYaxis,
+//                     dataZoom: [
+//                         {
+//                             id: 'dataZoomX',
+//                             type: 'slider',
+//                             xAxisIndex: [0],
+//                             filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
+//                             start: 1,
+//                             end: percent
+//                         }],
+//                     series: [
+//
+//                         {
+//                             name: 'Ishaft1',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[0]
+//                         },
+//                         {
+//                             name: 'Ishaft1_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[1]
+//                         },
+//                         {
+//                             name: 'Ishaft2',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[2]
+//                         },
+//                         {
+//                             name: 'Ishaft2_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[3]
+//                         },
+//                         {
+//                             name: 'Ishaft3',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[4]
+//                         },
+//                         {
+//                             name: 'Ishaft3_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[5]
+//                         },
+//                         {
+//                             name: 'Ishaft4',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[6]
+//                         },
+//                         {
+//                             name: 'Ishaft4_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[7]
+//                         },
+//                         {
+//                             name: 'BEPS3',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[12]
+//                         },
+//                         {
+//                             name: 'BEPS3_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[13]
+//                         },
+//                         {
+//                             name: 'CEPS5',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[22]
+//                         },
+//                         {
+//                             name: 'CEPS5_target',
+//                             type: 'line',
+//                             smooth: true,
+//                             showAllSymbol: true,
+//                             symbol: 'emptyCircle',
+//                             barMaxWidth:40,
+//                             label: {
+//                                 normal: {
+//                                     show: true,
+//                                     position: 'top'
+//                                 }
+//                             },
+//                             data: myData[23]
+//                         }
+//                     ]
+//                 };
+//                 // 使用刚指定的配置项和数据显示图表。
+//                 IsOnehceChart.setOption(firstOption);
+//
+//             },
+//             failure: function (errMsg) {
+//                 console.log(errMsg);
+//                 console.log('fail');
+//             }
+//
+//         });
+//     }
+// });
 
-        for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
-            myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
-            for(var myJ=0;myJ<31;myJ++){
-                myData[i][myJ]=null;
-            }
-        }
-        var MonthDate=[];
-        var d=new Date(data[0],data[1],0);
-        for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
-            MonthDate.push(data[0]+"-"+data[1]+"-"+judgeTime(Mindex));
-        }
-
-        console.log(MonthDate);
-        var IshaftOnehceValueArr=[];
-        var IshaftOnehceTarArr=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/hce/month?date="+curr_time;
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            type: 'GET',
-            url: urlString,
-            success: function (data) {
-                $.each(data, function (i, model) {
-                    hceDate[i]=data[i].addDate;
-                    IshaftOnehceValueArr[i]=model.hce;
-                    IshaftOnehceTarArr[i]=model.targetHce;
-                    for(var monIndex=0;monIndex<MonthDate.length;monIndex++){
-                        if(MonthDate[monIndex]==model.addDate){
-                            switch (model.cellName){
-                                case "ISHAFT1":
-                                    myData[0][monIndex]=model.hce;
-                                    myData[1][monIndex]=model.targetHce;
-                                    break;
-                                case "ISHAFT2":
-                                    myData[2][monIndex]=model.hce;
-                                    myData[3][monIndex]=model.targetHce;
-                                    break;
-                                case "ISHAFT3":
-                                    myData[4][monIndex]=model.hce;
-                                    myData[5][monIndex]=model.targetHce;
-                                    break;
-                                case "ISHAFT4":
-                                    myData[6][monIndex]=model.hce;
-                                    myData[7][monIndex]=model.targetHce;
-                                    break;
-                                case "BEPS1":
-                                    myData[8][monIndex]=model.hce;
-                                    myData[9][monIndex]=model.targetHce;
-                                    break;
-                                case "BEPS2":
-                                    myData[10][monIndex]=model.hce;
-                                    myData[11][monIndex]=model.targetHce;
-                                    break;
-                                case "BEPS3":
-                                    myData[12][monIndex]=model.hce;
-                                    myData[13][monIndex]=model.targetHce;
-                                    break;
-                                case "CEPS1":
-                                    myData[14][monIndex]=model.hce;
-                                    myData[15][monIndex]=model.targetHce;
-                                    break;
-                                case "CEPS2":
-                                    myData[16][monIndex]=model.hce;
-                                    myData[17][monIndex]=model.targetHce;
-                                    break;
-                                case "CEPS3":
-                                    myData[18][monIndex]=model.hce;
-                                    myData[19][monIndex]=model.targetHce;
-                                    break;
-                                case "CEPS4":
-                                    myData[20][monIndex]=model.hce;
-                                    myData[21][monIndex]=model.targetHce;
-                                    break;
-                                case "CEPS5":
-                                    myData[22][monIndex]=model.hce;
-                                    myData[23][monIndex]=model.targetHce;
-                                    break;
-                            }
-                            percent=monIndex*100/30;
-                        }
-
-                    }
-                });
-                console.log(JSON.stringify(data));
-                console.log(IshaftOnehceValueArr);
-                // 指定图表的配置项和数据
-                var firstOption = {
-                    title:myMonthTitle,
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                    },
-                    toolbox: {
-                        feature: {
-                            saveAsImage: {
-                                show: true
-                            }
-
-                        }
-                    },
-                    grid:myGrid,
-                    legend: myLengend,
-
-                    xAxis: {
-                        type: 'category',
-                        name:'Time',
-                        axisTick: {
-                            alignWithLabel: true
-                        },
-                        nameTextStyle:{
-                            fontStyle:'italic',
-                            fontWeight:'bold'
-                        },
-                        axisLabel:{
-                            textStyle:{
-
-                                fontSize:20
-                            }
-                        },
-                        data: MonthDate
-                    },
-                    yAxis:myYaxis,
-                    dataZoom: [
-                        {
-                            id: 'dataZoomX',
-                            type: 'slider',
-                            xAxisIndex: [0],
-                            filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
-                            start: 1,
-                            end: percent
-                        }],
-                    series: [
-
-                        {
-                            name: 'Ishaft1',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[0]
-                        },
-                        {
-                            name: 'Ishaft1_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[1]
-                        },
-                        {
-                            name: 'Ishaft2',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[2]
-                        },
-                        {
-                            name: 'Ishaft2_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[3]
-                        },
-                        {
-                            name: 'Ishaft3',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[4]
-                        },
-                        {
-                            name: 'Ishaft3_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[5]
-                        },
-                        {
-                            name: 'Ishaft4',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[6]
-                        },
-                        {
-                            name: 'Ishaft4_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[7]
-                        },
-                        {
-                            name: 'BEPS',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[12]
-                        },
-                        {
-                            name: 'BEPS_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[13]
-                        },
-                        {
-                            name: 'CEPS',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[22]
-                        },
-                        {
-                            name: 'CEPS_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[23]
-                        }
-                    ]
-                };
-
-                // 使用刚指定的配置项和数据显示图表。
-                IsOnehceChart.setOption(firstOption);
-
-            },
-            failure: function (errMsg) {
-                console.log(errMsg);
-                console.log('fail');
-            }
-
-        });
-    }
-});
-//按年显示
-$("#showYear").bind("click",function () {
-    // window.location.assign("../../html/hceSec/ishaft1HceSec.html");
-    var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
-    var percent=99;
-    var myData=[];
-    console.log("开始传输数据");
-    for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
-        myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
-        for(var myJ=0;myJ<366;myJ++){
-            myData[i][myJ]=null;
-        }
-    }
-    var YearDate=[];
-    for(var yIndex=1;yIndex<13;yIndex++){
-        var d=new Date($("#selectYear").val(),yIndex,0);
-        for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
-            YearDate.push($("#selectYear").val()+"-"+judgeTime(yIndex)+"-"+judgeTime(Mindex))
-        }
-    }
-
-    console.log(YearDate);
-    {
-        var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-        myYearTitle.text = '第一条中间轴人员利用率'+ Uyear + '年视图';
-        var showhceJson = new hceInput(curr_time,"ISHAFT1");
-        var IshaftOnehceValueArr=[];
-        var IshaftOnehceTarArr=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/hce/year?date="+curr_time;
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            type: 'GET',
-            url: urlString,
-            success: function (data) {
-                $.each(data, function (i, model) {
-                    hceDate[i]=data[i].addDate;
-                    IshaftOnehceValueArr[i]=model.hce;
-                    IshaftOnehceTarArr[i]=model.targetHce;
-                    for(var monIndex=0;monIndex<YearDate.length;monIndex++) {
-                        if (YearDate[monIndex] == model.addDate) {
-                            switch (model.cellName){
-                                case "ISHAFT1":
-                                    myData[0][monIndex]=model.hce;
-                                    myData[1][monIndex]=model.targetHce;
-                                    break;
-                                case "ISHAFT2":
-                                    myData[2][monIndex]=model.hce;
-                                    myData[3][monIndex]=model.targetHce;
-                                    break;
-                                case "ISHAFT3":
-                                    myData[4][monIndex]=model.hce;
-                                    myData[5][monIndex]=model.targetHce;
-                                    break;
-                                case "ISHAFT4":
-                                    myData[6][monIndex]=model.hce;
-                                    myData[7][monIndex]=model.targetHce;
-                                    break;
-                                case "BEPS1":
-                                    myData[8][monIndex]=model.hce;
-                                    myData[9][monIndex]=model.targetHce;
-                                    break;
-                                case "BEPS2":
-                                    myData[10][monIndex]=model.hce;
-                                    myData[11][monIndex]=model.targetHce;
-                                    break;
-                                case "BEPS3":
-                                    myData[12][monIndex]=model.hce;
-                                    myData[13][monIndex]=model.targetHce;
-                                    break;
-                                case "CEPS1":
-                                    myData[14][monIndex]=model.hce;
-                                    myData[15][monIndex]=model.targetHce;
-                                    break;
-                                case "CEPS2":
-                                    myData[16][monIndex]=model.hce;
-                                    myData[17][monIndex]=model.targetHce;
-                                    break;
-                                case "CEPS3":
-                                    myData[18][monIndex]=model.hce;
-                                    myData[19][monIndex]=model.targetHce;
-                                    break;
-                                case "CEPS4":
-                                    myData[20][monIndex]=model.hce;
-                                    myData[21][monIndex]=model.targetHce;
-                                    break;
-                                case "CEPS5":
-                                    myData[22][monIndex]=model.hce;
-                                    myData[23][monIndex]=model.targetHce;
-                                    break;
-                            }
-                            percent=monIndex*100/365;
-                        }
-                    }
-                });
-                console.log(JSON.stringify(data));
-                console.log(IshaftOnehceValueArr);
-                // 指定图表的配置项和数据
-                var firstOption = {
-                    title: myYearTitle,
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                    },
-                    toolbox: {
-                        feature: {
-                            saveAsImage: {
-                                show: true
-                            }
-                        }
-                    },
-                    grid: myGrid,
-                    legend: myLengend,
-
-                    xAxis: {
-                        type: 'category',
-                        name:'Time',
-                        axisTick: {
-                            alignWithLabel: true
-                        },
-                        nameTextStyle:{
-                            fontStyle:'italic',
-                            fontWeight:'bold'
-                        },
-                        axisLabel:{
-                            textStyle:{
-
-                                fontSize:20
-                            }
-                        },
-                        data: YearDate
-                    },
-                    yAxis:myYaxis,
-                    dataZoom: [
-                        {
-                            id: 'dataZoomX',
-                            type: 'slider',
-                            xAxisIndex: [0],
-                            filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
-                            start: 1,
-                            end: percent
-                        }],
-                    series: [
-
-                        {
-                            name: 'Ishaft1',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[0]
-                        },
-                        {
-                            name: 'Ishaft1_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[1]
-                        },
-                        {
-                            name: 'Ishaft2',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[2]
-                        },
-                        {
-                            name: 'Ishaft2_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[3]
-                        },
-                        {
-                            name: 'Ishaft3',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[4]
-                        },
-                        {
-                            name: 'Ishaft3_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[5]
-                        },
-                        {
-                            name: 'Ishaft4',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[6]
-                        },
-                        {
-                            name: 'Ishaft4_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[7]
-                        },
-                        {
-                            name: 'BEPS',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[12]
-                        },
-                        {
-                            name: 'BEPS_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[13]
-                        },
-                        {
-                            name: 'CEPS',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[22]
-                        },
-                        {
-                            name: 'CEPS_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[23]
-                        }
-                    ]
-                };
-                // 使用刚指定的配置项和数据显示图表。
-                IsOnehceChart.setOption(firstOption);
-
-            },
-            failure: function (errMsg) {
-                console.log(errMsg);
-                console.log('fail');
-            }
-
-        });
-    }
-});
-$("#selectYearSub").bind("click",function () {
-    var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
-    {
-        var curr_time=$("#selectYear").val()+"-12-31";
-        // var curr_time="2017-04-04";
-        myYearTitle.text = '全产线人员利用率'+ $("#selectYear").val() + '年视图';
-        var showhceJson = new hceInput(curr_time,"ISHAFT1");
-        var percent=99;
-        var myData=[];
-        console.log("开始传输数据");
-        for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
-            myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
-            for(var myJ=0;myJ<366;myJ++){
-                myData[i][myJ]=null;
-            }
-        }
-        var YearDate=[];
-        for(var yIndex=1;yIndex<13;yIndex++){
-            var d=new Date($("#selectYear").val(),yIndex,0);
-            for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
-                YearDate.push($("#selectYear").val()+"-"+judgeTime(yIndex)+"-"+judgeTime(Mindex))
-            }
-        }
-
-        console.log(YearDate);
-        var IshaftOnehceValueArr=[];
-        var IshaftOnehceTarArr=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/hce/year?date="+curr_time;
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            type: 'GET',
-            url: urlString,
-            success: function (data) {
-                $.each(data, function (i, model) {
-                    hceDate[i]=data[i].addDate;
-                    IshaftOnehceValueArr[i]=model.hce;
-                    IshaftOnehceTarArr[i]=model.targetHce;
-                    for(var monIndex=0;monIndex<YearDate.length;monIndex++) {
-                        if (YearDate[monIndex] == model.addDate) {
-                            switch (model.cellName){
-                                case "ISHAFT1":
-                                    myData[0][monIndex]=model.hce;
-                                    myData[1][monIndex]=model.targetHce;
-                                    break;
-                                case "ISHAFT2":
-                                    myData[2][monIndex]=model.hce;
-                                    myData[3][monIndex]=model.targetHce;
-                                    break;
-                                case "ISHAFT3":
-                                    myData[4][monIndex]=model.hce;
-                                    myData[5][monIndex]=model.targetHce;
-                                    break;
-                                case "ISHAFT4":
-                                    myData[6][monIndex]=model.hce;
-                                    myData[7][monIndex]=model.targetHce;
-                                    break;
-                                case "BEPS1":
-                                    myData[8][monIndex]=model.hce;
-                                    myData[9][monIndex]=model.targetHce;
-                                    break;
-                                case "BEPS2":
-                                    myData[10][monIndex]=model.hce;
-                                    myData[11][monIndex]=model.targetHce;
-                                    break;
-                                case "BEPS3":
-                                    myData[12][monIndex]=model.hce;
-                                    myData[13][monIndex]=model.targetHce;
-                                    break;
-                                case "CEPS1":
-                                    myData[14][monIndex]=model.hce;
-                                    myData[15][monIndex]=model.targetHce;
-                                    break;
-                                case "CEPS2":
-                                    myData[16][monIndex]=model.hce;
-                                    myData[17][monIndex]=model.targetHce;
-                                    break;
-                                case "CEPS3":
-                                    myData[18][monIndex]=model.hce;
-                                    myData[19][monIndex]=model.targetHce;
-                                    break;
-                                case "CEPS4":
-                                    myData[20][monIndex]=model.hce;
-                                    myData[21][monIndex]=model.targetHce;
-                                    break;
-                                case "CEPS5":
-                                    myData[22][monIndex]=model.hce;
-                                    myData[23][monIndex]=model.targetHce;
-                                    break;
-                            }
-                            percent=monIndex*100/365;
-                        }
-                    }
-                });
-                console.log(JSON.stringify(data));
-                console.log(IshaftOnehceValueArr);
-                // 指定图表的配置项和数据
-                var firstOption = {
-                    title: myYearTitle,
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: { }// 坐标轴指示器，坐标轴触发有效// type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                    },
-                    toolbox: {
-                        feature: {
-                            saveAsImage: {
-                                show: true
-                            }
-                        }
-                    },
-                    grid: myGrid,
-                    legend: myLengend,
-
-                    xAxis: {
-                        type: 'category',
-                        name:'Time',
-                        axisTick: {
-                            alignWithLabel: true
-                        },
-                        nameTextStyle:{
-                            fontStyle:'italic',
-                            fontWeight:'bold'
-                        },
-                        axisLabel:{
-                            textStyle:{
-
-                                fontSize:20
-                            }
-                        },
-                        data: YearDate
-                    },
-                    yAxis:myYaxis,
-                    dataZoom: [
-                        {
-                            id: 'dataZoomX',
-                            type: 'slider',
-                            xAxisIndex: [0],
-                            filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
-                            start: 1,
-                            end: percent
-                        }],
-                    series: [
-
-                        {
-                            name: 'Ishaft1',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[0]
-                        },
-                        {
-                            name: 'Ishaft1_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[1]
-                        },
-                        {
-                            name: 'Ishaft2',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[2]
-                        },
-                        {
-                            name: 'Ishaft2_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[3]
-                        },
-                        {
-                            name: 'Ishaft3',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[4]
-                        },
-                        {
-                            name: 'Ishaft3_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[5]
-                        },
-                        {
-                            name: 'Ishaft4',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[6]
-                        },
-                        {
-                            name: 'Ishaft4_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[7]
-                        },
-                        {
-                            name: 'BEPS',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[12]
-                        },
-                        {
-                            name: 'BEPS_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[13]
-                        },
-                        {
-                            name: 'CEPS',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[22]
-                        },
-                        {
-                            name: 'CEPS_target',
-                            type: 'line',
-                            smooth: true,
-                            showAllSymbol: true,
-                            symbol: 'emptyCircle',
-                            barMaxWidth:40,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'top'
-                                }
-                            },
-                            data: myData[23]
-                        }
-                    ]
-                };
-                // 使用刚指定的配置项和数据显示图表。
-                IsOnehceChart.setOption(firstOption);
-
-            },
-            failure: function (errMsg) {
-                console.log(errMsg);
-                console.log('fail');
-            }
-
-        });
-    }
-});

@@ -109,7 +109,7 @@ function getIshaftOneWeekData() {
 //                }
 
             var myTitle= {
-                text: 'BEPS产量信息展示（周视图）',
+                text: '有刷产量信息展示（周视图）',
                 left:'40%',
                 textStyle:{
                     fontSize:24

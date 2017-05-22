@@ -35,7 +35,7 @@ var myChart = echarts.init(document.getElementById('IshaftOneYieldMonthBar'));
 var myPieChart = echarts.init(document.getElementById('IshaftOneYieldMonthPie'));
 
 var myTitle= {
-    text: 'Ishaft1产量信息展示（月视图）',
+    text: '第一条中间轴产量信息展示（月视图）',
     left:'40%',
     textStyle:{
         fontSize:24
@@ -69,30 +69,30 @@ var myLengend = {
     top:'6%'
 };
 
-function getIshaftOneMonthData(cell) {
-    var cellName;
-    switch(cell) {
-        case "ISHAFT1":
-            cellName="第一条中间轴";
-            break;
-        case "ISHAFT2":
-            cellName="第二条中间轴";
-            break;
-        case "ISHAFT3":
-            cellName="第三条中间轴";
-            break;
-        case "ISHAFT4":
-            cellName="第四条中间轴";
-            break;
-        case "CEPS5":
-            cellName="无刷产线";
-            break;
-        case "BEPS3":
-            cellName="有刷产线";
-            break;
+function getIshaftOneMonthData() {
 
-    }
-    myTitle.text=cellName+"产量信息展示";
+    // switch(cell) {
+    //     case "ISHAFT1":
+    //         cellName="第一条中间轴";
+    //         break;
+    //     case "ISHAFT2":
+    //         cellName="第二条中间轴";
+    //         break;
+    //     case "ISHAFT3":
+    //         cellName="第三条中间轴";
+    //         break;
+    //     case "ISHAFT4":
+    //         cellName="第四条中间轴";
+    //         break;
+    //     case "CEPS5":
+    //         cellName="无刷产线";
+    //         break;
+    //     case "BEPS3":
+    //         cellName="有刷产线";
+    //         break;
+    //
+    // }
+    myTitle.text="第一条中间轴产量信息展示";
     var proIDMsg=[];
     var proNameMsg=[];
     var myData=[];
@@ -100,7 +100,23 @@ function getIshaftOneMonthData(cell) {
     var sum=[];
     var myPieData=[];
     var perCent=100;
-
+    for(var i=0;i<30;i++){    //一维长度为i,i为变量，可以根据实际情况改变
+        myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
+        sum[i]=0;
+        for(var myJ=0;myJ<31;myJ++){
+            myData[i][myJ]=null;
+        }
+    }
+    var myXDate=[];
+    for(var jX=0;jX<30;jX++){    //一维长度为i,i为变量，可以根据实际情况改变
+        myXDate[jX]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
+    }
+    var MonthDate=[];
+    var d=new Date(Uyear,Umonth,0);
+    for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
+        MonthDate.push(Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Mindex))
+    }
+    console.log("当前月份天数"+MonthDate);
 
 
 

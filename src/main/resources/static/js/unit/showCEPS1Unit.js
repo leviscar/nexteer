@@ -120,7 +120,7 @@ function getNowStatus() {
                     timeRow[j]=key+"-"+judgeTime(Number(keyRow[0])+1)+":"+keyRow[1];
                     j++;
                 }
-                $("#target").html($.parseJSON(data).target);
+                $("#target").html($.parseJSON(data).calculatedTarget);$("#cTarget").html($.parseJSON(data).target);
                 console.log(hourlyOut);
                 console.log(hourlyTime);
                 console.log(hourlyTar);
@@ -351,7 +351,7 @@ $("#EN").bind("click",function () {
                     timeRow[j]=key+"-"+judgeTime(Number(keyRow[0])+1)+":"+keyRow[1];
                     j++;
                 }
-                $("#target").html($.parseJSON(data).target);
+                $("#target").html($.parseJSON(data).calculatedTarget);$("#cTarget").html($.parseJSON(data).target);
                 console.log(hourlyOut);
                 console.log(hourlyTime);
                 console.log(hourlyTar);
@@ -575,7 +575,7 @@ function getENStatus(){
                         timeRow[j]=key+"-"+judgeTime(Number(keyRow[0])+1)+":"+keyRow[1];
                         j++;
                     }
-                    $("#target").html($.parseJSON(data).target);
+                    $("#target").html($.parseJSON(data).calculatedTarget);$("#cTarget").html($.parseJSON(data).target);
                     console.log(hourlyOut);
                     console.log(hourlyTime);
                     console.log(hourlyTar);
