@@ -12,6 +12,22 @@ function judgeMyTime(time) {
     }
     return timeStr;
 }
+//升序排序
+function up(x, y) {
+    var xTime=new Date(x);
+    var yTime=new Date(y);
+    return (xTime.getTime() > yTime.getTime()) ? 1 : -1
+
+}
+function unique1(arr){
+    var newArr = [];//新建一个数组
+    for(var i=0,len=arr.length;i<len;i++){
+        if(newArr.indexOf(arr[i]) == -1){//若新数组中未包含该项则将其存入新数组
+            newArr.push(arr[i]);
+        }
+    }
+    return newArr;
+}
 // //构造传输时间对象
 // function endTime(endTime) {
 //     this.end_time = endTime;
@@ -82,15 +98,7 @@ function getIshaftOneMonthData() {
 //        for(var jX=0;jX<30;jX++){    //一维长度为i,i为变量，可以根据实际情况改变
 //            myXDate[jX]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
 //        }
-    var YearDate=[];
-    for(var yIndex=1;yIndex<13;yIndex++){
-        var d=new Date(Uyear,yIndex,0);
-        for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
-            YearDate.push(Uyear+"-"+judgeMyTime(yIndex)+"-"+judgeMyTime(Mindex))
-        }
-    }
 
-    console.log("当前年份天数"+YearDate);
 
     $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
         $.each(data, function (i, model) {
@@ -106,6 +114,13 @@ function getIshaftOneMonthData() {
         url: "http://10.1.0.40:8080/nexteer/output-info/ISHAFT3/year?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
+            var YearDate = [];
+            $.each(data,function (i,model) {
+                YearDate.push(model.addDate);
+            });
+            YearDate= unique1(YearDate);
+            YearDate.sort(up);
+            console.log(YearDate);
             myAjaxData = JSON.stringify(data);
             for(var j=0,len=proIDMsg.length;j<len;j++){
 //                    for(var myIndex = 0,myLen = myAjaxData.length;myIndex<myLen;myIndex++){
@@ -299,15 +314,7 @@ $("#selectYearSub").bind("click",function () {
 //        for(var jX=0;jX<30;jX++){    //一维长度为i,i为变量，可以根据实际情况改变
 //            myXDate[jX]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
 //        }
-        var YearDate=[];
-        for(var yIndex=1;yIndex<13;yIndex++){
-            var d=new Date($("#selectYear").val(),yIndex,0);
-            for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
-                YearDate.push($("#selectYear").val()+"-"+judgeMyTime(yIndex)+"-"+judgeMyTime(Mindex))
-            }
-        }
 
-        console.log("当前年份天数"+YearDate);
 
         $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
             $.each(data, function (i, model) {
@@ -323,6 +330,13 @@ $("#selectYearSub").bind("click",function () {
             url: "http://10.1.0.40:8080/nexteer/output-info/ISHAFT3/year?date="+endtime,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
+                var YearDate = [];
+                $.each(data,function (i,model) {
+                    YearDate.push(model.addDate);
+                });
+                YearDate= unique1(YearDate);
+                YearDate.sort(up);
+                console.log(YearDate);
                 myAjaxData = JSON.stringify(data);
                 for(var j=0,len=proIDMsg.length;j<len;j++){
 //                    for(var myIndex = 0,myLen = myAjaxData.length;myIndex<myLen;myIndex++){

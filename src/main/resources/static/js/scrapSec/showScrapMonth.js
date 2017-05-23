@@ -1,14 +1,23 @@
 /**
  * Created by Administrator on 2017/5/6.
  */
-/**
- * Created by Administrator on 2017/5/3.
- */
-/**
- * Created by Administrator on 2017/5/2.
- */
+//升序排序
+function up(x, y) {
+    var xTime=new Date(x);
+    var yTime=new Date(y);
+    return (xTime.getTime() > yTime.getTime()) ? 1 : -1
 
+}
 
+function unique1(arr){
+    var newArr = [];//新建一个数组
+    for(var i=0,len=arr.length;i<len;i++){
+        if(newArr.indexOf(arr[i]) == -1){//若新数组中未包含该项则将其存入新数组
+            newArr.push(arr[i]);
+        }
+    }
+    return newArr;
+}
 function judgeMyTime(time) {
     var timeStr="";
     if (time<10){
@@ -156,18 +165,17 @@ function showMonth() {
     for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
         MonthDate.push(Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Mindex))
     }
-    for(var perIndex in MonthDate){
-        var nowTime=Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday);
-        if(MonthDate[perIndex]==nowTime){
-            percent=parseInt(perIndex*100/31)+1;
-            console.log(percent);
-        }
+    console.log("当前月份天数"+MonthDate);
 
-    }
-    console.log(MonthDate);
-    console.log(MonthDate[d.getDate()-1]);
     $.get("http://10.1.0.40:8080/nexteer/scrap-amount/month?date="+MonthDate[d.getDate()-1], function (data) {
         console.log(data);
+        var MonthDate = [];
+        $.each($.parseJSON(data),function (i,model) {
+            MonthDate.push(model.addDate);
+        });
+        MonthDate= unique1(MonthDate);
+        MonthDate.sort(up);
+        console.log(MonthDate);
         $.each($.parseJSON(data), function (i, model) {
             for(var monIndex=0;monIndex<MonthDate.length;monIndex++){
                 if(MonthDate[monIndex]==model.addDate){

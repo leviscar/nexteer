@@ -13,19 +13,21 @@
         return timeStr;
     }
 //降序排序
-function down(x, y) {
-    var xTime=new Date(x.addDate);
-    var yTime=new Date(y.addDate);
-    return (xTime.getTime() < yTime.getTime()) ? 1 : -1
-
-}
-
 //升序排序
 function up(x, y) {
-    var xTime=new Date(x.addDate);
-    var yTime=new Date(y.addDate);
+    var xTime=new Date(x);
+    var yTime=new Date(y);
     return (xTime.getTime() > yTime.getTime()) ? 1 : -1
 
+}
+function unique1(arr){
+    var newArr = [];//新建一个数组
+    for(var i=0,len=arr.length;i<len;i++){
+        if(newArr.indexOf(arr[i]) == -1){//若新数组中未包含该项则将其存入新数组
+            newArr.push(arr[i]);
+        }
+    }
+    return newArr;
 }
 
 
@@ -111,12 +113,7 @@ function getIshaftOneMonthData() {
     for(var jX=0;jX<30;jX++){    //一维长度为i,i为变量，可以根据实际情况改变
         myXDate[jX]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
     }
-    var MonthDate=[];
-    var d=new Date(Uyear,Umonth,0);
-    for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
-        MonthDate.push(Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Mindex))
-    }
-    console.log("当前月份天数"+MonthDate);
+
 
 
 
@@ -134,6 +131,13 @@ function getIshaftOneMonthData() {
         url: "http://10.1.0.40:8080/nexteer/output-info/ISHAFT1/month?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
+            var MonthDate = [];
+            $.each(data,function (i,model) {
+                MonthDate.push(model.addDate);
+            });
+            MonthDate= unique1(MonthDate);
+            MonthDate.sort(up);
+            console.log(MonthDate);
             myAjaxData = JSON.stringify(data);
             for(var j=0,len=proIDMsg.length;j<len;j++){
 //                    for(var myIndex = 0,myLen = myAjaxData.length;myIndex<myLen;myIndex++){

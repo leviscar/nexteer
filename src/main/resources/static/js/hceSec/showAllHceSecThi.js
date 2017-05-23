@@ -1,14 +1,14 @@
 /**
- * Created by Administrator on 2017/5/12.
+ * Created by Administrator on 2017/5/24.
  */
 /**
  * Created by Administrator on 2017/4/4.
  */
 
-var oeeYearArr=[];
-var oeeMonthArr=[];
-var oeeDayArr=[];
-var oeeDate =[];
+var hceYearArr=[];
+var hceMonthArr=[];
+var hceDayArr=[];
+var hceDate =[];
 
 function judgeTime(time) {
     var timeStr="";
@@ -20,7 +20,7 @@ function judgeTime(time) {
     }
     return timeStr;
 }
-function oeeInput(curr_time,cell_name) {
+function hceInput(curr_time,cell_name) {
     this.curr_time=curr_time;
     this.cell_name=cell_name;
 }
@@ -57,6 +57,8 @@ function formOnload()
     var Sunday = transferDate(new Date(thisTime +  (step_s+6) * 24 * 3600* 1000));
     return [Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday];
 }
+
+
 //升序排序
 function up(x, y) {
     var xTime=new Date(x);
@@ -64,7 +66,6 @@ function up(x, y) {
     return (xTime.getTime() > yTime.getTime()) ? 1 : -1
 
 }
-
 function unique1(arr){
     var newArr = [];//新建一个数组
     for(var i=0,len=arr.length;i<len;i++){
@@ -74,26 +75,27 @@ function unique1(arr){
     }
     return newArr;
 }
+
 console.log('start');
 // 基于准备好的dom，初始化echarts实例
 
 
 var myMonthTitle= {
-    text: '全产线可动率月视图',
+    text: '全产线人员利用率月视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myWeekTitle= {
-    text: '全产线可动率周视图',
+    text: '全产线人员利用率周视图',
     left:'40%',
     textStyle:{
         fontSize:24
     }
 };
 var myYearTitle={
-    text: '全产线可动率年视图',
+    text: '全产线人员利用率年视图',
     left:'40%',
     textStyle:{
         fontSize:24
@@ -101,7 +103,7 @@ var myYearTitle={
 };
 var myYaxis= [{
     type:'value',
-    name:'可动率（%）',
+    name:'人员利用率（%）',
     position:'left',
     min:0,
 
@@ -131,12 +133,12 @@ var myLengend = {
 };
 
 function showWeek() {
-    var IsOneoeeChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
+    var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
     // var curr_time="2017-03-09";
-    var showoeeJson = new oeeInput(curr_time,"ISHAFT1");
-    var IshaftOneoeeValueArr=[];
-    var IshaftOneoeeTarArr=[];
+    var showhceJson = new hceInput(curr_time,"ISHAFT1");
+    var IshaftOnehceValueArr=[];
+    var IshaftOnehceTarArr=[];
     var myData=[];
     console.log("开始传输数据");
     for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
@@ -147,7 +149,7 @@ function showWeek() {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    var urlString = "http://10.1.0.40:8080/nexteer/oee/week/ISHAFT1?date="+curr_time;
+    var urlString = "http://10.1.0.40:8080/nexteer/hce/week/ISHAFT1?date="+curr_time;
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -158,372 +160,372 @@ function showWeek() {
         success: function (data) {
             console.log(data);
             $.each(data, function (i, model) {
-                oeeDate[i]=data[i].addDate;
-                IshaftOneoeeValueArr[i]=model.oee;
-                IshaftOneoeeTarArr[i]=model.targetOee;
+                hceDate[i]=data[i].addDate;
+                IshaftOnehceValueArr[i]=model.hce;
+                IshaftOnehceTarArr[i]=model.targetHce;
                 switch (model.addDate){
                     case WeekDate[0]:
                         console.log("ncie");
                         switch (model.cellName){
                             case "ISHAFT1":
-                                myData[0][0]=model.oee;
-                                myData[1][0]=model.targetOee;
+                                myData[0][0]=model.hce;
+                                myData[1][0]=model.targetHce;
                                 break;
                             case "ISHAFT2":
-                                myData[2][0]=model.oee;
-                                myData[3][0]=model.targetOee;
+                                myData[2][0]=model.hce;
+                                myData[3][0]=model.targetHce;
                                 break;
                             case "ISHAFT3":
-                                myData[4][0]=model.oee;
-                                myData[5][0]=model.targetOee;
+                                myData[4][0]=model.hce;
+                                myData[5][0]=model.targetHce;
                                 break;
                             case "ISHAFT4":
-                                myData[6][0]=model.oee;
-                                myData[7][0]=model.targetOee;
+                                myData[6][0]=model.hce;
+                                myData[7][0]=model.targetHce;
                                 break;
                             case "BEPS1":
-                                myData[8][0]=model.oee;
-                                myData[9][0]=model.targetOee;
+                                myData[8][0]=model.hce;
+                                myData[9][0]=model.targetHce;
                                 break;
                             case "BEPS2":
-                                myData[10][0]=model.oee;
-                                myData[11][0]=model.targetOee;
+                                myData[10][0]=model.hce;
+                                myData[11][0]=model.targetHce;
                                 break;
                             case "BEPS3":
-                                myData[12][0]=model.oee;
-                                myData[13][0]=model.targetOee;
+                                myData[12][0]=model.hce;
+                                myData[13][0]=model.targetHce;
                                 break;
                             case "CEPS1":
-                                myData[14][0]=model.oee;
-                                myData[15][0]=model.targetOee;
+                                myData[14][0]=model.hce;
+                                myData[15][0]=model.targetHce;
                                 break;
                             case "CEPS2":
-                                myData[16][0]=model.oee;
-                                myData[17][0]=model.targetOee;
+                                myData[16][0]=model.hce;
+                                myData[17][0]=model.targetHce;
                                 break;
                             case "CEPS3":
-                                myData[18][0]=model.oee;
-                                myData[19][0]=model.targetOee;
+                                myData[18][0]=model.hce;
+                                myData[19][0]=model.targetHce;
                                 break;
                             case "CEPS4":
-                                myData[20][0]=model.oee;
-                                myData[21][0]=model.targetOee;
+                                myData[20][0]=model.hce;
+                                myData[21][0]=model.targetHce;
                                 break;
                             case "CEPS5":
-                                myData[22][0]=model.oee;
-                                myData[23][0]=model.targetOee;
+                                myData[22][0]=model.hce;
+                                myData[23][0]=model.targetHce;
                                 break;
                         }
                         break;
                     case WeekDate[1]:
                         switch (model.cellName){
                             case "ISHAFT1":
-                                myData[0][0]=model.oee;
-                                myData[1][0]=model.targetOee;
+                                myData[0][0]=model.hce;
+                                myData[1][0]=model.targetHce;
                                 break;
                             case "ISHAFT2":
-                                myData[2][0]=model.oee;
-                                myData[3][0]=model.targetOee;
+                                myData[2][0]=model.hce;
+                                myData[3][0]=model.targetHce;
                                 break;
                             case "ISHAFT3":
-                                myData[4][0]=model.oee;
-                                myData[5][0]=model.targetOee;
+                                myData[4][0]=model.hce;
+                                myData[5][0]=model.targetHce;
                                 break;
                             case "ISHAFT4":
-                                myData[6][0]=model.oee;
-                                myData[7][0]=model.targetOee;
+                                myData[6][0]=model.hce;
+                                myData[7][0]=model.targetHce;
                                 break;
                             case "BEPS1":
-                                myData[8][0]=model.oee;
-                                myData[9][0]=model.targetOee;
+                                myData[8][0]=model.hce;
+                                myData[9][0]=model.targetHce;
                                 break;
                             case "BEPS2":
-                                myData[10][0]=model.oee;
-                                myData[11][0]=model.targetOee;
+                                myData[10][0]=model.hce;
+                                myData[11][0]=model.targetHce;
                                 break;
                             case "BEPS3":
-                                myData[12][0]=model.oee;
-                                myData[13][0]=model.targetOee;
+                                myData[12][0]=model.hce;
+                                myData[13][0]=model.targetHce;
                                 break;
                             case "CEPS1":
-                                myData[14][0]=model.oee;
-                                myData[15][0]=model.targetOee;
+                                myData[14][0]=model.hce;
+                                myData[15][0]=model.targetHce;
                                 break;
                             case "CEPS2":
-                                myData[16][0]=model.oee;
-                                myData[17][0]=model.targetOee;
+                                myData[16][0]=model.hce;
+                                myData[17][0]=model.targetHce;
                                 break;
                             case "CEPS3":
-                                myData[18][0]=model.oee;
-                                myData[19][0]=model.targetOee;
+                                myData[18][0]=model.hce;
+                                myData[19][0]=model.targetHce;
                                 break;
                             case "CEPS4":
-                                myData[20][0]=model.oee;
-                                myData[21][0]=model.targetOee;
+                                myData[20][0]=model.hce;
+                                myData[21][0]=model.targetHce;
                                 break;
                             case "CEPS5":
-                                myData[22][0]=model.oee;
-                                myData[23][0]=model.targetOee;
+                                myData[22][0]=model.hce;
+                                myData[23][0]=model.targetHce;
                                 break;
                         }
                         break;
                     case WeekDate[2]:
                         switch (model.cellName){
                             case "ISHAFT1":
-                                myData[0][0]=model.oee;
-                                myData[1][0]=model.targetOee;
+                                myData[0][0]=model.hce;
+                                myData[1][0]=model.targetHce;
                                 break;
                             case "ISHAFT2":
-                                myData[2][0]=model.oee;
-                                myData[3][0]=model.targetOee;
+                                myData[2][0]=model.hce;
+                                myData[3][0]=model.targetHce;
                                 break;
                             case "ISHAFT3":
-                                myData[4][0]=model.oee;
-                                myData[5][0]=model.targetOee;
+                                myData[4][0]=model.hce;
+                                myData[5][0]=model.targetHce;
                                 break;
                             case "ISHAFT4":
-                                myData[6][0]=model.oee;
-                                myData[7][0]=model.targetOee;
+                                myData[6][0]=model.hce;
+                                myData[7][0]=model.targetHce;
                                 break;
                             case "BEPS1":
-                                myData[8][0]=model.oee;
-                                myData[9][0]=model.targetOee;
+                                myData[8][0]=model.hce;
+                                myData[9][0]=model.targetHce;
                                 break;
                             case "BEPS2":
-                                myData[10][0]=model.oee;
-                                myData[11][0]=model.targetOee;
+                                myData[10][0]=model.hce;
+                                myData[11][0]=model.targetHce;
                                 break;
                             case "BEPS3":
-                                myData[12][0]=model.oee;
-                                myData[13][0]=model.targetOee;
+                                myData[12][0]=model.hce;
+                                myData[13][0]=model.targetHce;
                                 break;
                             case "CEPS1":
-                                myData[14][0]=model.oee;
-                                myData[15][0]=model.targetOee;
+                                myData[14][0]=model.hce;
+                                myData[15][0]=model.targetHce;
                                 break;
                             case "CEPS2":
-                                myData[16][0]=model.oee;
-                                myData[17][0]=model.targetOee;
+                                myData[16][0]=model.hce;
+                                myData[17][0]=model.targetHce;
                                 break;
                             case "CEPS3":
-                                myData[18][0]=model.oee;
-                                myData[19][0]=model.targetOee;
+                                myData[18][0]=model.hce;
+                                myData[19][0]=model.targetHce;
                                 break;
                             case "CEPS4":
-                                myData[20][0]=model.oee;
-                                myData[21][0]=model.targetOee;
+                                myData[20][0]=model.hce;
+                                myData[21][0]=model.targetHce;
                                 break;
                             case "CEPS5":
-                                myData[22][0]=model.oee;
-                                myData[23][0]=model.targetOee;
+                                myData[22][0]=model.hce;
+                                myData[23][0]=model.targetHce;
                                 break;
                         }
                         break;
                     case WeekDate[3]:
                         switch (model.cellName){
                             case "ISHAFT1":
-                                myData[0][0]=model.oee;
-                                myData[1][0]=model.targetOee;
+                                myData[0][0]=model.hce;
+                                myData[1][0]=model.targetHce;
                                 break;
                             case "ISHAFT2":
-                                myData[2][0]=model.oee;
-                                myData[3][0]=model.targetOee;
+                                myData[2][0]=model.hce;
+                                myData[3][0]=model.targetHce;
                                 break;
                             case "ISHAFT3":
-                                myData[4][0]=model.oee;
-                                myData[5][0]=model.targetOee;
+                                myData[4][0]=model.hce;
+                                myData[5][0]=model.targetHce;
                                 break;
                             case "ISHAFT4":
-                                myData[6][0]=model.oee;
-                                myData[7][0]=model.targetOee;
+                                myData[6][0]=model.hce;
+                                myData[7][0]=model.targetHce;
                                 break;
                             case "BEPS1":
-                                myData[8][0]=model.oee;
-                                myData[9][0]=model.targetOee;
+                                myData[8][0]=model.hce;
+                                myData[9][0]=model.targetHce;
                                 break;
                             case "BEPS2":
-                                myData[10][0]=model.oee;
-                                myData[11][0]=model.targetOee;
+                                myData[10][0]=model.hce;
+                                myData[11][0]=model.targetHce;
                                 break;
                             case "BEPS3":
-                                myData[12][0]=model.oee;
-                                myData[13][0]=model.targetOee;
+                                myData[12][0]=model.hce;
+                                myData[13][0]=model.targetHce;
                                 break;
                             case "CEPS1":
-                                myData[14][0]=model.oee;
-                                myData[15][0]=model.targetOee;
+                                myData[14][0]=model.hce;
+                                myData[15][0]=model.targetHce;
                                 break;
                             case "CEPS2":
-                                myData[16][0]=model.oee;
-                                myData[17][0]=model.targetOee;
+                                myData[16][0]=model.hce;
+                                myData[17][0]=model.targetHce;
                                 break;
                             case "CEPS3":
-                                myData[18][0]=model.oee;
-                                myData[19][0]=model.targetOee;
+                                myData[18][0]=model.hce;
+                                myData[19][0]=model.targetHce;
                                 break;
                             case "CEPS4":
-                                myData[20][0]=model.oee;
-                                myData[21][0]=model.targetOee;
+                                myData[20][0]=model.hce;
+                                myData[21][0]=model.targetHce;
                                 break;
                             case "CEPS5":
-                                myData[22][0]=model.oee;
-                                myData[23][0]=model.targetOee;
+                                myData[22][0]=model.hce;
+                                myData[23][0]=model.targetHce;
                                 break;
                         }
                         break;
                     case WeekDate[4]:
                         switch (model.cellName){
                             case "ISHAFT1":
-                                myData[0][0]=model.oee;
-                                myData[1][0]=model.targetOee;
+                                myData[0][0]=model.hce;
+                                myData[1][0]=model.targetHce;
                                 break;
                             case "ISHAFT2":
-                                myData[2][0]=model.oee;
-                                myData[3][0]=model.targetOee;
+                                myData[2][0]=model.hce;
+                                myData[3][0]=model.targetHce;
                                 break;
                             case "ISHAFT3":
-                                myData[4][0]=model.oee;
-                                myData[5][0]=model.targetOee;
+                                myData[4][0]=model.hce;
+                                myData[5][0]=model.targetHce;
                                 break;
                             case "ISHAFT4":
-                                myData[6][0]=model.oee;
-                                myData[7][0]=model.targetOee;
+                                myData[6][0]=model.hce;
+                                myData[7][0]=model.targetHce;
                                 break;
                             case "BEPS1":
-                                myData[8][0]=model.oee;
-                                myData[9][0]=model.targetOee;
+                                myData[8][0]=model.hce;
+                                myData[9][0]=model.targetHce;
                                 break;
                             case "BEPS2":
-                                myData[10][0]=model.oee;
-                                myData[11][0]=model.targetOee;
+                                myData[10][0]=model.hce;
+                                myData[11][0]=model.targetHce;
                                 break;
                             case "BEPS3":
-                                myData[12][0]=model.oee;
-                                myData[13][0]=model.targetOee;
+                                myData[12][0]=model.hce;
+                                myData[13][0]=model.targetHce;
                                 break;
                             case "CEPS1":
-                                myData[14][0]=model.oee;
-                                myData[15][0]=model.targetOee;
+                                myData[14][0]=model.hce;
+                                myData[15][0]=model.targetHce;
                                 break;
                             case "CEPS2":
-                                myData[16][0]=model.oee;
-                                myData[17][0]=model.targetOee;
+                                myData[16][0]=model.hce;
+                                myData[17][0]=model.targetHce;
                                 break;
                             case "CEPS3":
-                                myData[18][0]=model.oee;
-                                myData[19][0]=model.targetOee;
+                                myData[18][0]=model.hce;
+                                myData[19][0]=model.targetHce;
                                 break;
                             case "CEPS4":
-                                myData[20][0]=model.oee;
-                                myData[21][0]=model.targetOee;
+                                myData[20][0]=model.hce;
+                                myData[21][0]=model.targetHce;
                                 break;
                             case "CEPS5":
-                                myData[22][0]=model.oee;
-                                myData[23][0]=model.targetOee;
+                                myData[22][0]=model.hce;
+                                myData[23][0]=model.targetHce;
                                 break;
                         }
                         break;
                     case WeekDate[5]:
                         switch (model.cellName){
                             case "ISHAFT1":
-                                myData[0][0]=model.oee;
-                                myData[1][0]=model.targetOee;
+                                myData[0][0]=model.hce;
+                                myData[1][0]=model.targetHce;
                                 break;
                             case "ISHAFT2":
-                                myData[2][0]=model.oee;
-                                myData[3][0]=model.targetOee;
+                                myData[2][0]=model.hce;
+                                myData[3][0]=model.targetHce;
                                 break;
                             case "ISHAFT3":
-                                myData[4][0]=model.oee;
-                                myData[5][0]=model.targetOee;
+                                myData[4][0]=model.hce;
+                                myData[5][0]=model.targetHce;
                                 break;
                             case "ISHAFT4":
-                                myData[6][0]=model.oee;
-                                myData[7][0]=model.targetOee;
+                                myData[6][0]=model.hce;
+                                myData[7][0]=model.targetHce;
                                 break;
                             case "BEPS1":
-                                myData[8][0]=model.oee;
-                                myData[9][0]=model.targetOee;
+                                myData[8][0]=model.hce;
+                                myData[9][0]=model.targetHce;
                                 break;
                             case "BEPS2":
-                                myData[10][0]=model.oee;
-                                myData[11][0]=model.targetOee;
+                                myData[10][0]=model.hce;
+                                myData[11][0]=model.targetHce;
                                 break;
                             case "BEPS3":
-                                myData[12][0]=model.oee;
-                                myData[13][0]=model.targetOee;
+                                myData[12][0]=model.hce;
+                                myData[13][0]=model.targetHce;
                                 break;
                             case "CEPS1":
-                                myData[14][0]=model.oee;
-                                myData[15][0]=model.targetOee;
+                                myData[14][0]=model.hce;
+                                myData[15][0]=model.targetHce;
                                 break;
                             case "CEPS2":
-                                myData[16][0]=model.oee;
-                                myData[17][0]=model.targetOee;
+                                myData[16][0]=model.hce;
+                                myData[17][0]=model.targetHce;
                                 break;
                             case "CEPS3":
-                                myData[18][0]=model.oee;
-                                myData[19][0]=model.targetOee;
+                                myData[18][0]=model.hce;
+                                myData[19][0]=model.targetHce;
                                 break;
                             case "CEPS4":
-                                myData[20][0]=model.oee;
-                                myData[21][0]=model.targetOee;
+                                myData[20][0]=model.hce;
+                                myData[21][0]=model.targetHce;
                                 break;
                             case "CEPS5":
-                                myData[22][0]=model.oee;
-                                myData[23][0]=model.targetOee;
+                                myData[22][0]=model.hce;
+                                myData[23][0]=model.targetHce;
                                 break;
                         }
                         break;
                     case WeekDate[6]:
                         switch (model.cellName){
                             case "ISHAFT1":
-                                myData[0][0]=model.oee;
-                                myData[1][0]=model.targetOee;
+                                myData[0][0]=model.hce;
+                                myData[1][0]=model.targetHce;
                                 break;
                             case "ISHAFT2":
-                                myData[2][0]=model.oee;
-                                myData[3][0]=model.targetOee;
+                                myData[2][0]=model.hce;
+                                myData[3][0]=model.targetHce;
                                 break;
                             case "ISHAFT3":
-                                myData[4][0]=model.oee;
-                                myData[5][0]=model.targetOee;
+                                myData[4][0]=model.hce;
+                                myData[5][0]=model.targetHce;
                                 break;
                             case "ISHAFT4":
-                                myData[6][0]=model.oee;
-                                myData[7][0]=model.targetOee;
+                                myData[6][0]=model.hce;
+                                myData[7][0]=model.targetHce;
                                 break;
                             case "BEPS1":
-                                myData[8][0]=model.oee;
-                                myData[9][0]=model.targetOee;
+                                myData[8][0]=model.hce;
+                                myData[9][0]=model.targetHce;
                                 break;
                             case "BEPS2":
-                                myData[10][0]=model.oee;
-                                myData[11][0]=model.targetOee;
+                                myData[10][0]=model.hce;
+                                myData[11][0]=model.targetHce;
                                 break;
                             case "BEPS3":
-                                myData[12][0]=model.oee;
-                                myData[13][0]=model.targetOee;
+                                myData[12][0]=model.hce;
+                                myData[13][0]=model.targetHce;
                                 break;
                             case "CEPS1":
-                                myData[14][0]=model.oee;
-                                myData[15][0]=model.targetOee;
+                                myData[14][0]=model.hce;
+                                myData[15][0]=model.targetHce;
                                 break;
                             case "CEPS2":
-                                myData[16][0]=model.oee;
-                                myData[17][0]=model.targetOee;
+                                myData[16][0]=model.hce;
+                                myData[17][0]=model.targetHce;
                                 break;
                             case "CEPS3":
-                                myData[18][0]=model.oee;
-                                myData[19][0]=model.targetOee;
+                                myData[18][0]=model.hce;
+                                myData[19][0]=model.targetHce;
                                 break;
                             case "CEPS4":
-                                myData[20][0]=model.oee;
-                                myData[21][0]=model.targetOee;
+                                myData[20][0]=model.hce;
+                                myData[21][0]=model.targetHce;
                                 break;
                             case "CEPS5":
-                                myData[22][0]=model.oee;
-                                myData[23][0]=model.targetOee;
+                                myData[22][0]=model.hce;
+                                myData[23][0]=model.targetHce;
                                 break;
                         }
                         break;
@@ -695,7 +697,7 @@ function showWeek() {
                         data: myData[7]
                     },
                     {
-                        name: 'BEPS3',
+                        name: 'BEPS',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -710,7 +712,7 @@ function showWeek() {
                         data: myData[12]
                     },
                     {
-                        name: 'BEPS3_target',
+                        name: 'BEPS_target',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -725,7 +727,7 @@ function showWeek() {
                         data: myData[13]
                     },
                     {
-                        name: 'CEPS5',
+                        name: 'CEPS',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -740,7 +742,7 @@ function showWeek() {
                         data: myData[22]
                     },
                     {
-                        name: 'CEPS5_target',
+                        name: 'CEPS_target',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -757,7 +759,7 @@ function showWeek() {
                 ]
             };
             // 使用刚指定的配置项和数据显示图表。
-            IsOneoeeChart.setOption(firstOption);
+            IsOnehceChart.setOption(firstOption);
 
         },
         failure: function (errMsg) {
@@ -772,12 +774,12 @@ showWeek();
 
 //按周显示
 $("#showWeek").bind("click",function () {
-    var IsOneoeeChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
+    var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
     // var curr_time="2017-03-09";
-    var showoeeJson = new oeeInput(curr_time,"ISHAFT1");
-    var IshaftOneoeeValueArr=[];
-    var IshaftOneoeeTarArr=[];
+    var showhceJson = new hceInput(curr_time,"ISHAFT1");
+    var IshaftOnehceValueArr=[];
+    var IshaftOnehceTarArr=[];
     var myData=[];
     console.log("开始传输数据");
     for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
@@ -788,7 +790,7 @@ $("#showWeek").bind("click",function () {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    var urlString = "http://10.1.0.40:8080/nexteer/oee/week?date="+curr_time;
+    var urlString = "http://10.1.0.40:8080/nexteer/hce/week?date="+curr_time;
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -799,377 +801,58 @@ $("#showWeek").bind("click",function () {
         success: function (data) {
             console.log(data);
             $.each(data, function (i, model) {
-                oeeDate[i]=data[i].addDate;
-                IshaftOneoeeValueArr[i]=model.oee;
-                IshaftOneoeeTarArr[i]=model.targetOee;
-                switch (model.addDate){
-                    case WeekDate[0]:
-                        console.log("ncie");
-                        switch (model.cellName){
-                            case "ISHAFT1":
-                                myData[0][0]=model.oee;
-                                myData[1][0]=model.targetOee;
-                                break;
-                            case "ISHAFT2":
-                                myData[2][0]=model.oee;
-                                myData[3][0]=model.targetOee;
-                                break;
-                            case "ISHAFT3":
-                                myData[4][0]=model.oee;
-                                myData[5][0]=model.targetOee;
-                                break;
-                            case "ISHAFT4":
-                                myData[6][0]=model.oee;
-                                myData[7][0]=model.targetOee;
-                                break;
-                            case "BEPS1":
-                                myData[8][0]=model.oee;
-                                myData[9][0]=model.targetOee;
-                                break;
-                            case "BEPS2":
-                                myData[10][0]=model.oee;
-                                myData[11][0]=model.targetOee;
-                                break;
-                            case "BEPS3":
-                                myData[12][0]=model.oee;
-                                myData[13][0]=model.targetOee;
-                                break;
-                            case "CEPS1":
-                                myData[14][0]=model.oee;
-                                myData[15][0]=model.targetOee;
-                                break;
-                            case "CEPS2":
-                                myData[16][0]=model.oee;
-                                myData[17][0]=model.targetOee;
-                                break;
-                            case "CEPS3":
-                                myData[18][0]=model.oee;
-                                myData[19][0]=model.targetOee;
-                                break;
-                            case "CEPS4":
-                                myData[20][0]=model.oee;
-                                myData[21][0]=model.targetOee;
-                                break;
-                            case "CEPS5":
-                                myData[22][0]=model.oee;
-                                myData[23][0]=model.targetOee;
-                                break;
-                        }
+                hceDate[i]=data[i].addDate;
+                IshaftOnehceValueArr[i]=model.hce;
+                IshaftOnehceTarArr[i]=model.targetHce;
+                switch (model.cellName){
+                    case "ISHAFT1":
+                        myData[0][monIndex]=model.hce;
+                        myData[1][monIndex]=model.targetHce;
                         break;
-                    case WeekDate[1]:
-                        switch (model.cellName){
-                            case "ISHAFT1":
-                                myData[0][0]=model.oee;
-                                myData[1][0]=model.targetOee;
-                                break;
-                            case "ISHAFT2":
-                                myData[2][0]=model.oee;
-                                myData[3][0]=model.targetOee;
-                                break;
-                            case "ISHAFT3":
-                                myData[4][0]=model.oee;
-                                myData[5][0]=model.targetOee;
-                                break;
-                            case "ISHAFT4":
-                                myData[6][0]=model.oee;
-                                myData[7][0]=model.targetOee;
-                                break;
-                            case "BEPS1":
-                                myData[8][0]=model.oee;
-                                myData[9][0]=model.targetOee;
-                                break;
-                            case "BEPS2":
-                                myData[10][0]=model.oee;
-                                myData[11][0]=model.targetOee;
-                                break;
-                            case "BEPS3":
-                                myData[12][0]=model.oee;
-                                myData[13][0]=model.targetOee;
-                                break;
-                            case "CEPS1":
-                                myData[14][0]=model.oee;
-                                myData[15][0]=model.targetOee;
-                                break;
-                            case "CEPS2":
-                                myData[16][0]=model.oee;
-                                myData[17][0]=model.targetOee;
-                                break;
-                            case "CEPS3":
-                                myData[18][0]=model.oee;
-                                myData[19][0]=model.targetOee;
-                                break;
-                            case "CEPS4":
-                                myData[20][0]=model.oee;
-                                myData[21][0]=model.targetOee;
-                                break;
-                            case "CEPS5":
-                                myData[22][0]=model.oee;
-                                myData[23][0]=model.targetOee;
-                                break;
-                        }
+                    case "ISHAFT2":
+                        myData[2][monIndex]=model.hce;
+                        myData[3][monIndex]=model.targetHce;
                         break;
-                    case WeekDate[2]:
-                        switch (model.cellName){
-                            case "ISHAFT1":
-                                myData[0][0]=model.oee;
-                                myData[1][0]=model.targetOee;
-                                break;
-                            case "ISHAFT2":
-                                myData[2][0]=model.oee;
-                                myData[3][0]=model.targetOee;
-                                break;
-                            case "ISHAFT3":
-                                myData[4][0]=model.oee;
-                                myData[5][0]=model.targetOee;
-                                break;
-                            case "ISHAFT4":
-                                myData[6][0]=model.oee;
-                                myData[7][0]=model.targetOee;
-                                break;
-                            case "BEPS1":
-                                myData[8][0]=model.oee;
-                                myData[9][0]=model.targetOee;
-                                break;
-                            case "BEPS2":
-                                myData[10][0]=model.oee;
-                                myData[11][0]=model.targetOee;
-                                break;
-                            case "BEPS3":
-                                myData[12][0]=model.oee;
-                                myData[13][0]=model.targetOee;
-                                break;
-                            case "CEPS1":
-                                myData[14][0]=model.oee;
-                                myData[15][0]=model.targetOee;
-                                break;
-                            case "CEPS2":
-                                myData[16][0]=model.oee;
-                                myData[17][0]=model.targetOee;
-                                break;
-                            case "CEPS3":
-                                myData[18][0]=model.oee;
-                                myData[19][0]=model.targetOee;
-                                break;
-                            case "CEPS4":
-                                myData[20][0]=model.oee;
-                                myData[21][0]=model.targetOee;
-                                break;
-                            case "CEPS5":
-                                myData[22][0]=model.oee;
-                                myData[23][0]=model.targetOee;
-                                break;
-                        }
+                    case "ISHAFT3":
+                        myData[4][monIndex]=model.hce;
+                        myData[5][monIndex]=model.targetHce;
                         break;
-                    case WeekDate[3]:
-                        switch (model.cellName){
-                            case "ISHAFT1":
-                                myData[0][0]=model.oee;
-                                myData[1][0]=model.targetOee;
-                                break;
-                            case "ISHAFT2":
-                                myData[2][0]=model.oee;
-                                myData[3][0]=model.targetOee;
-                                break;
-                            case "ISHAFT3":
-                                myData[4][0]=model.oee;
-                                myData[5][0]=model.targetOee;
-                                break;
-                            case "ISHAFT4":
-                                myData[6][0]=model.oee;
-                                myData[7][0]=model.targetOee;
-                                break;
-                            case "BEPS1":
-                                myData[8][0]=model.oee;
-                                myData[9][0]=model.targetOee;
-                                break;
-                            case "BEPS2":
-                                myData[10][0]=model.oee;
-                                myData[11][0]=model.targetOee;
-                                break;
-                            case "BEPS3":
-                                myData[12][0]=model.oee;
-                                myData[13][0]=model.targetOee;
-                                break;
-                            case "CEPS1":
-                                myData[14][0]=model.oee;
-                                myData[15][0]=model.targetOee;
-                                break;
-                            case "CEPS2":
-                                myData[16][0]=model.oee;
-                                myData[17][0]=model.targetOee;
-                                break;
-                            case "CEPS3":
-                                myData[18][0]=model.oee;
-                                myData[19][0]=model.targetOee;
-                                break;
-                            case "CEPS4":
-                                myData[20][0]=model.oee;
-                                myData[21][0]=model.targetOee;
-                                break;
-                            case "CEPS5":
-                                myData[22][0]=model.oee;
-                                myData[23][0]=model.targetOee;
-                                break;
-                        }
+                    case "ISHAFT4":
+                        myData[6][monIndex]=model.hce;
+                        myData[7][monIndex]=model.targetHce;
                         break;
-                    case WeekDate[4]:
-                        switch (model.cellName){
-                            case "ISHAFT1":
-                                myData[0][0]=model.oee;
-                                myData[1][0]=model.targetOee;
-                                break;
-                            case "ISHAFT2":
-                                myData[2][0]=model.oee;
-                                myData[3][0]=model.targetOee;
-                                break;
-                            case "ISHAFT3":
-                                myData[4][0]=model.oee;
-                                myData[5][0]=model.targetOee;
-                                break;
-                            case "ISHAFT4":
-                                myData[6][0]=model.oee;
-                                myData[7][0]=model.targetOee;
-                                break;
-                            case "BEPS1":
-                                myData[8][0]=model.oee;
-                                myData[9][0]=model.targetOee;
-                                break;
-                            case "BEPS2":
-                                myData[10][0]=model.oee;
-                                myData[11][0]=model.targetOee;
-                                break;
-                            case "BEPS3":
-                                myData[12][0]=model.oee;
-                                myData[13][0]=model.targetOee;
-                                break;
-                            case "CEPS1":
-                                myData[14][0]=model.oee;
-                                myData[15][0]=model.targetOee;
-                                break;
-                            case "CEPS2":
-                                myData[16][0]=model.oee;
-                                myData[17][0]=model.targetOee;
-                                break;
-                            case "CEPS3":
-                                myData[18][0]=model.oee;
-                                myData[19][0]=model.targetOee;
-                                break;
-                            case "CEPS4":
-                                myData[20][0]=model.oee;
-                                myData[21][0]=model.targetOee;
-                                break;
-                            case "CEPS5":
-                                myData[22][0]=model.oee;
-                                myData[23][0]=model.targetOee;
-                                break;
-                        }
+                    case "BEPS1":
+                        myData[8][monIndex]=model.hce;
+                        myData[9][monIndex]=model.targetHce;
                         break;
-                    case WeekDate[5]:
-                        switch (model.cellName){
-                            case "ISHAFT1":
-                                myData[0][0]=model.oee;
-                                myData[1][0]=model.targetOee;
-                                break;
-                            case "ISHAFT2":
-                                myData[2][0]=model.oee;
-                                myData[3][0]=model.targetOee;
-                                break;
-                            case "ISHAFT3":
-                                myData[4][0]=model.oee;
-                                myData[5][0]=model.targetOee;
-                                break;
-                            case "ISHAFT4":
-                                myData[6][0]=model.oee;
-                                myData[7][0]=model.targetOee;
-                                break;
-                            case "BEPS1":
-                                myData[8][0]=model.oee;
-                                myData[9][0]=model.targetOee;
-                                break;
-                            case "BEPS2":
-                                myData[10][0]=model.oee;
-                                myData[11][0]=model.targetOee;
-                                break;
-                            case "BEPS3":
-                                myData[12][0]=model.oee;
-                                myData[13][0]=model.targetOee;
-                                break;
-                            case "CEPS1":
-                                myData[14][0]=model.oee;
-                                myData[15][0]=model.targetOee;
-                                break;
-                            case "CEPS2":
-                                myData[16][0]=model.oee;
-                                myData[17][0]=model.targetOee;
-                                break;
-                            case "CEPS3":
-                                myData[18][0]=model.oee;
-                                myData[19][0]=model.targetOee;
-                                break;
-                            case "CEPS4":
-                                myData[20][0]=model.oee;
-                                myData[21][0]=model.targetOee;
-                                break;
-                            case "CEPS5":
-                                myData[22][0]=model.oee;
-                                myData[23][0]=model.targetOee;
-                                break;
-                        }
+                    case "BEPS2":
+                        myData[10][monIndex]=model.hce;
+                        myData[11][monIndex]=model.targetHce;
                         break;
-                    case WeekDate[6]:
-                        switch (model.cellName){
-                            case "ISHAFT1":
-                                myData[0][0]=model.oee;
-                                myData[1][0]=model.targetOee;
-                                break;
-                            case "ISHAFT2":
-                                myData[2][0]=model.oee;
-                                myData[3][0]=model.targetOee;
-                                break;
-                            case "ISHAFT3":
-                                myData[4][0]=model.oee;
-                                myData[5][0]=model.targetOee;
-                                break;
-                            case "ISHAFT4":
-                                myData[6][0]=model.oee;
-                                myData[7][0]=model.targetOee;
-                                break;
-                            case "BEPS1":
-                                myData[8][0]=model.oee;
-                                myData[9][0]=model.targetOee;
-                                break;
-                            case "BEPS2":
-                                myData[10][0]=model.oee;
-                                myData[11][0]=model.targetOee;
-                                break;
-                            case "BEPS3":
-                                myData[12][0]=model.oee;
-                                myData[13][0]=model.targetOee;
-                                break;
-                            case "CEPS1":
-                                myData[14][0]=model.oee;
-                                myData[15][0]=model.targetOee;
-                                break;
-                            case "CEPS2":
-                                myData[16][0]=model.oee;
-                                myData[17][0]=model.targetOee;
-                                break;
-                            case "CEPS3":
-                                myData[18][0]=model.oee;
-                                myData[19][0]=model.targetOee;
-                                break;
-                            case "CEPS4":
-                                myData[20][0]=model.oee;
-                                myData[21][0]=model.targetOee;
-                                break;
-                            case "CEPS5":
-                                myData[22][0]=model.oee;
-                                myData[23][0]=model.targetOee;
-                                break;
-                        }
+                    case "BEPS3":
+                        myData[12][monIndex]=model.hce;
+                        myData[13][monIndex]=model.targetHce;
                         break;
-
-
+                    case "CEPS1":
+                        myData[14][monIndex]=model.hce;
+                        myData[15][monIndex]=model.targetHce;
+                        break;
+                    case "CEPS2":
+                        myData[16][monIndex]=model.hce;
+                        myData[17][monIndex]=model.targetHce;
+                        break;
+                    case "CEPS3":
+                        myData[18][monIndex]=model.hce;
+                        myData[19][monIndex]=model.targetHce;
+                        break;
+                    case "CEPS4":
+                        myData[20][monIndex]=model.hce;
+                        myData[21][monIndex]=model.targetHce;
+                        break;
+                    case "CEPS5":
+                        myData[22][monIndex]=model.hce;
+                        myData[23][monIndex]=model.targetHce;
+                        break;
                 }
             });
             console.log(JSON.stringify(data));
@@ -1336,7 +1019,7 @@ $("#showWeek").bind("click",function () {
                         data: myData[7]
                     },
                     {
-                        name: 'BEPS3',
+                        name: 'BEPS',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -1351,7 +1034,7 @@ $("#showWeek").bind("click",function () {
                         data: myData[12]
                     },
                     {
-                        name: 'BEPS3_target',
+                        name: 'BEPS_target',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -1366,7 +1049,7 @@ $("#showWeek").bind("click",function () {
                         data: myData[13]
                     },
                     {
-                        name: 'CEPS5',
+                        name: 'CEPS',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -1381,7 +1064,7 @@ $("#showWeek").bind("click",function () {
                         data: myData[22]
                     },
                     {
-                        name: 'CEPS5_target',
+                        name: 'CEPS_target',
                         type: 'line',
                         smooth: true,
                         showAllSymbol: true,
@@ -1398,7 +1081,7 @@ $("#showWeek").bind("click",function () {
                 ]
             };
             // 使用刚指定的配置项和数据显示图表。
-            IsOneoeeChart.setOption(firstOption);
+            IsOnehceChart.setOption(firstOption);
 
         },
         failure: function (errMsg) {
@@ -1408,11 +1091,13 @@ $("#showWeek").bind("click",function () {
 
     });
 });
+
+
 //按月显示
 $("#showMonth").bind("click",function (){
     // window.location.reload();
     // $("#showIsOneWeekSheet").empty();
-    var IsOneoeeChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
+    var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     $(document).ready(function () {
         var percent = 50;
         var myData=[];
@@ -1424,13 +1109,15 @@ $("#showMonth").bind("click",function (){
             }
         }
 
+
+
         {
             var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
             // var curr_time="2017-03-13";
-            myMonthTitle.text = '全产线可动率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
-            var IshaftOneoeeValueArr=[];
-            var IshaftOneoeeTarArr=[];
-            var urlString = "http://10.1.0.40:8080/nexteer/oee/month?date="+curr_time;
+            myMonthTitle.text = '全产线人员利用率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
+            var IshaftOnehceValueArr=[];
+            var IshaftOnehceTarArr=[];
+            var urlString = "http://10.1.0.40:8080/nexteer/hce/month?date="+curr_time;
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
@@ -1446,70 +1133,93 @@ $("#showMonth").bind("click",function (){
                     MonthDate= unique1(MonthDate);
                     MonthDate.sort(up);
                     console.log(MonthDate);
-                    $.each(data, function (i, model) {
 
-                        oeeDate[i]=data[i].addDate;
-                        IshaftOneoeeValueArr[i]=model.oee;
-                        IshaftOneoeeTarArr[i]=model.targetOee;
+                    $.each(data, function (i, model) {
+                        hceDate[i]=data[i].addDate;
+                        IshaftOnehceValueArr[i]=model.hce;
+                        IshaftOnehceTarArr[i]=model.targetHce;
                         for(var monIndex=0;monIndex<MonthDate.length;monIndex++){
                             if(MonthDate[monIndex]==model.addDate){
-                                switch (model.cellName){
-                                    case "ISHAFT1":
-                                        myData[0][monIndex]=model.oee;
-                                        myData[1][monIndex]=model.targetOee;
-                                        break;
-                                    case "ISHAFT2":
-                                        myData[2][monIndex]=model.oee;
-                                        myData[3][monIndex]=model.targetOee;
-                                        break;
-                                    case "ISHAFT3":
-                                        myData[4][monIndex]=model.oee;
-                                        myData[5][monIndex]=model.targetOee;
-                                        break;
-                                    case "ISHAFT4":
-                                        myData[6][monIndex]=model.oee;
-                                        myData[7][monIndex]=model.targetOee;
-                                        break;
-                                    case "BEPS1":
-                                        myData[8][monIndex]=model.oee;
-                                        myData[9][monIndex]=model.targetOee;
-                                        break;
-                                    case "BEPS2":
-                                        myData[10][monIndex]=model.oee;
-                                        myData[11][monIndex]=model.targetOee;
-                                        break;
-                                    case "BEPS3":
-                                        myData[12][monIndex]=model.oee;
-                                        myData[13][monIndex]=model.targetOee;
-                                        break;
-                                    case "CEPS1":
-                                        myData[14][monIndex]=model.oee;
-                                        myData[15][monIndex]=model.targetOee;
-                                        break;
-                                    case "CEPS2":
-                                        myData[16][monIndex]=model.oee;
-                                        myData[17][monIndex]=model.targetOee;
-                                        break;
-                                    case "CEPS3":
-                                        myData[18][monIndex]=model.oee;
-                                        myData[19][monIndex]=model.targetOee;
-                                        break;
-                                    case "CEPS4":
-                                        myData[20][monIndex]=model.oee;
-                                        myData[21][monIndex]=model.targetOee;
-                                        break;
-                                    case "CEPS5":
-                                        myData[22][monIndex]=model.oee;
-                                        myData[23][monIndex]=model.targetOee;
-                                        break;
+                                if(model.hce!=0){
+                                    switch (model.cellName){
+                                        case "ISHAFT1":
+                                            myData[0][monIndex]=model.hce;
+                                            myData[1][monIndex]=model.targetHce;
+                                            break;
+                                        case "ISHAFT2":
+                                            myData[2][monIndex]=model.hce;
+                                            myData[3][monIndex]=model.targetHce;
+                                            break;
+                                        case "ISHAFT3":
+                                            myData[4][monIndex]=model.hce;
+                                            myData[5][monIndex]=model.targetHce;
+                                            break;
+                                        case "ISHAFT4":
+                                            myData[6][monIndex]=model.hce;
+                                            myData[7][monIndex]=model.targetHce;
+                                            break;
+                                        case "BEPS1":
+                                            myData[8][monIndex]=model.hce;
+                                            myData[9][monIndex]=model.targetHce;
+                                            break;
+                                        case "BEPS2":
+                                            myData[10][monIndex]=model.hce;
+                                            myData[11][monIndex]=model.targetHce;
+                                            break;
+                                        case "BEPS3":
+                                            myData[12][monIndex]=model.hce;
+                                            myData[13][monIndex]=model.targetHce;
+                                            break;
+                                        case "CEPS1":
+                                            myData[14][monIndex]=model.hce;
+                                            myData[15][monIndex]=model.targetHce;
+                                            break;
+                                        case "CEPS2":
+                                            myData[16][monIndex]=model.hce;
+                                            myData[17][monIndex]=model.targetHce;
+                                            break;
+                                        case "CEPS3":
+                                            myData[18][monIndex]=model.hce;
+                                            myData[19][monIndex]=model.targetHce;
+                                            break;
+                                        case "CEPS4":
+                                            myData[20][monIndex]=model.hce;
+                                            myData[21][monIndex]=model.targetHce;
+                                            break;
+                                        case "CEPS5":
+                                            myData[22][monIndex]=model.hce;
+                                            myData[23][monIndex]=model.targetHce;
+                                            break;
+                                    }
+                                    percent=monIndex*100/30;
                                 }
-                                percent=monIndex*100/30;
                             }
 
                         }
                     });
+
+                    for(var sIndex;sIndex<MonthDate.length;sIndex++){
+                        if((myData[0][sIndex]==null&&myData[1][sIndex]==null&&myData[2][sIndex]==null&&myData[3][sIndex]==null&&myData[4][sIndex]==null&&myData[5][sIndex]==null&&
+                            myData[6][sIndex]==null&&myData[7][sIndex]==null&&myData[12][sIndex]==null&&myData[13][sIndex]==null&&myData[22][sIndex]==null&&myData[23][sIndex])==null){
+                            var insertIndex=sIndex-1;
+                            myData[0].splice(insertIndex,1);
+                            myData[1].splice(insertIndex,1);
+                            myData[2].splice(insertIndex,1);
+                            myData[3].splice(insertIndex,1);
+                            myData[4].splice(insertIndex,1);
+                            myData[5].splice(insertIndex,1);
+                            myData[6].splice(insertIndex,1);
+                            myData[7].splice(insertIndex,1);
+                            myData[12].splice(insertIndex,1);
+                            myData[13].splice(insertIndex,1);
+                            myData[14].splice(insertIndex,1);
+                            myData[15].splice(insertIndex,1);
+                            MonthDate.splice(insertIndex,1);
+                            console.log("delete"+insertIndex);
+                        }
+                    }
                     console.log(JSON.stringify(data));
-                    console.log(IshaftOneoeeValueArr);
+                    console.log(IshaftOnehceValueArr);
                     // 指定图表的配置项和数据
                     var firstOption = {
                         title:myMonthTitle,
@@ -1679,7 +1389,7 @@ $("#showMonth").bind("click",function (){
                                 data: myData[7]
                             },
                             {
-                                name: 'BEPS3',
+                                name: 'BEPS',
                                 type: 'line',
                                 smooth: true,
                                 showAllSymbol: true,
@@ -1694,7 +1404,7 @@ $("#showMonth").bind("click",function (){
                                 data: myData[12]
                             },
                             {
-                                name: 'BEPS3_target',
+                                name: 'BEPS_target',
                                 type: 'line',
                                 smooth: true,
                                 showAllSymbol: true,
@@ -1709,7 +1419,7 @@ $("#showMonth").bind("click",function (){
                                 data: myData[13]
                             },
                             {
-                                name: 'CEPS5',
+                                name: 'CEPS',
                                 type: 'line',
                                 smooth: true,
                                 showAllSymbol: true,
@@ -1724,7 +1434,7 @@ $("#showMonth").bind("click",function (){
                                 data: myData[22]
                             },
                             {
-                                name: 'CEPS5_target',
+                                name: 'CEPS_target',
                                 type: 'line',
                                 smooth: true,
                                 showAllSymbol: true,
@@ -1742,7 +1452,7 @@ $("#showMonth").bind("click",function (){
                     };
 
                     // 使用刚指定的配置项和数据显示图表。
-                    IsOneoeeChart.setOption(firstOption);
+                    IsOnehceChart.setOption(firstOption);
 
                 },
                 failure: function (errMsg) {
@@ -1756,15 +1466,15 @@ $("#showMonth").bind("click",function (){
     })
 });
 $("#selectMonthSub").bind("click",function (){
-    // window.location.assign("../../html/oeeSec/ishaft1oeeSec.html");
-    var IsOneoeeChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
+    // window.location.assign("../../html/hceSec/ishaft1HceSec.html");
+    var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     var myData=[];
     var percent=50;
     {
         var data = $("#selectMonth").val().split("-");
         var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
         // var curr_time="2017-04-04";
-        myMonthTitle.text = '全产线可动率'+ data[0]+'-'+data[1]+ '月视图';
+        myMonthTitle.text = '全产线人员利用率'+ data[0]+'-'+data[1]+ '月视图';
 
         for(var i=0;i<24;i++){    //一维长度为i,i为变量，可以根据实际情况改变
             myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
@@ -1772,10 +1482,9 @@ $("#selectMonthSub").bind("click",function (){
                 myData[i][myJ]=null;
             }
         }
-
-        var IshaftOneoeeValueArr=[];
-        var IshaftOneoeeTarArr=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/oee/month?date="+curr_time;
+        var IshaftOnehceValueArr=[];
+        var IshaftOnehceTarArr=[];
+        var urlString = "http://10.1.0.40:8080/nexteer/hce/month?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -1791,69 +1500,72 @@ $("#selectMonthSub").bind("click",function (){
                 MonthDate= unique1(MonthDate);
                 MonthDate.sort(up);
                 console.log(MonthDate);
+
                 $.each(data, function (i, model) {
-                    oeeDate[i]=data[i].addDate;
-                    IshaftOneoeeValueArr[i]=model.oee;
-                    IshaftOneoeeTarArr[i]=model.targetOee;
+                    hceDate[i]=data[i].addDate;
+                    IshaftOnehceValueArr[i]=model.hce;
+                    IshaftOnehceTarArr[i]=model.targetHce;
                     for(var monIndex=0;monIndex<MonthDate.length;monIndex++){
                         if(MonthDate[monIndex]==model.addDate){
-                            switch (model.cellName){
-                                case "ISHAFT1":
-                                    myData[0][monIndex]=model.oee;
-                                    myData[1][monIndex]=model.targetOee;
-                                    break;
-                                case "ISHAFT2":
-                                    myData[2][monIndex]=model.oee;
-                                    myData[3][monIndex]=model.targetOee;
-                                    break;
-                                case "ISHAFT3":
-                                    myData[4][monIndex]=model.oee;
-                                    myData[5][monIndex]=model.targetOee;
-                                    break;
-                                case "ISHAFT4":
-                                    myData[6][monIndex]=model.oee;
-                                    myData[7][monIndex]=model.targetOee;
-                                    break;
-                                case "BEPS1":
-                                    myData[8][monIndex]=model.oee;
-                                    myData[9][monIndex]=model.targetOee;
-                                    break;
-                                case "BEPS2":
-                                    myData[10][monIndex]=model.oee;
-                                    myData[11][monIndex]=model.targetOee;
-                                    break;
-                                case "BEPS3":
-                                    myData[12][monIndex]=model.oee;
-                                    myData[13][monIndex]=model.targetOee;
-                                    break;
-                                case "CEPS1":
-                                    myData[14][monIndex]=model.oee;
-                                    myData[15][monIndex]=model.targetOee;
-                                    break;
-                                case "CEPS2":
-                                    myData[16][monIndex]=model.oee;
-                                    myData[17][monIndex]=model.targetOee;
-                                    break;
-                                case "CEPS3":
-                                    myData[18][monIndex]=model.oee;
-                                    myData[19][monIndex]=model.targetOee;
-                                    break;
-                                case "CEPS4":
-                                    myData[20][monIndex]=model.oee;
-                                    myData[21][monIndex]=model.targetOee;
-                                    break;
-                                case "CEPS5":
-                                    myData[22][monIndex]=model.oee;
-                                    myData[23][monIndex]=model.targetOee;
-                                    break;
+                            if(model.hce!=0){
+                                switch (model.cellName){
+                                    case "ISHAFT1":
+                                        myData[0][monIndex]=model.hce;
+                                        myData[1][monIndex]=model.targetHce;
+                                        break;
+                                    case "ISHAFT2":
+                                        myData[2][monIndex]=model.hce;
+                                        myData[3][monIndex]=model.targetHce;
+                                        break;
+                                    case "ISHAFT3":
+                                        myData[4][monIndex]=model.hce;
+                                        myData[5][monIndex]=model.targetHce;
+                                        break;
+                                    case "ISHAFT4":
+                                        myData[6][monIndex]=model.hce;
+                                        myData[7][monIndex]=model.targetHce;
+                                        break;
+                                    case "BEPS1":
+                                        myData[8][monIndex]=model.hce;
+                                        myData[9][monIndex]=model.targetHce;
+                                        break;
+                                    case "BEPS2":
+                                        myData[10][monIndex]=model.hce;
+                                        myData[11][monIndex]=model.targetHce;
+                                        break;
+                                    case "BEPS3":
+                                        myData[12][monIndex]=model.hce;
+                                        myData[13][monIndex]=model.targetHce;
+                                        break;
+                                    case "CEPS1":
+                                        myData[14][monIndex]=model.hce;
+                                        myData[15][monIndex]=model.targetHce;
+                                        break;
+                                    case "CEPS2":
+                                        myData[16][monIndex]=model.hce;
+                                        myData[17][monIndex]=model.targetHce;
+                                        break;
+                                    case "CEPS3":
+                                        myData[18][monIndex]=model.hce;
+                                        myData[19][monIndex]=model.targetHce;
+                                        break;
+                                    case "CEPS4":
+                                        myData[20][monIndex]=model.hce;
+                                        myData[21][monIndex]=model.targetHce;
+                                        break;
+                                    case "CEPS5":
+                                        myData[22][monIndex]=model.hce;
+                                        myData[23][monIndex]=model.targetHce;
+                                        break;
+                                }
+                                percent=monIndex*100/30;
                             }
-                            percent=monIndex*100/30;
                         }
 
                     }
                 });
                 console.log(JSON.stringify(data));
-                console.log(IshaftOneoeeValueArr);
+                console.log(IshaftOnehceValueArr);
                 // 指定图表的配置项和数据
                 var firstOption = {
                     title:myMonthTitle,
@@ -2023,7 +1735,7 @@ $("#selectMonthSub").bind("click",function (){
                             data: myData[7]
                         },
                         {
-                            name: 'BEPS3',
+                            name: 'BEPS',
                             type: 'line',
                             smooth: true,
                             showAllSymbol: true,
@@ -2038,7 +1750,7 @@ $("#selectMonthSub").bind("click",function (){
                             data: myData[12]
                         },
                         {
-                            name: 'BEPS3_target',
+                            name: 'BEPS_target',
                             type: 'line',
                             smooth: true,
                             showAllSymbol: true,
@@ -2053,7 +1765,7 @@ $("#selectMonthSub").bind("click",function (){
                             data: myData[13]
                         },
                         {
-                            name: 'CEPS5',
+                            name: 'CEPS',
                             type: 'line',
                             smooth: true,
                             showAllSymbol: true,
@@ -2068,7 +1780,7 @@ $("#selectMonthSub").bind("click",function (){
                             data: myData[22]
                         },
                         {
-                            name: 'CEPS5_target',
+                            name: 'CEPS_target',
                             type: 'line',
                             smooth: true,
                             showAllSymbol: true,
@@ -2086,7 +1798,7 @@ $("#selectMonthSub").bind("click",function (){
                 };
 
                 // 使用刚指定的配置项和数据显示图表。
-                IsOneoeeChart.setOption(firstOption);
+                IsOnehceChart.setOption(firstOption);
 
             },
             failure: function (errMsg) {
@@ -2099,8 +1811,8 @@ $("#selectMonthSub").bind("click",function (){
 });
 //按年显示
 $("#showYear").bind("click",function () {
-    // window.location.assign("../../html/oeeSec/ishaft1oeeSec.html");
-    var IsOneoeeChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
+    // window.location.assign("../../html/hceSec/ishaft1HceSec.html");
+    var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     var percent=99;
     var myData=[];
     console.log("开始传输数据");
@@ -2113,11 +1825,11 @@ $("#showYear").bind("click",function () {
 
     {
         var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
-        myYearTitle.text = '第一条中间轴可动率'+ Uyear + '年视图';
-        var showoeeJson = new oeeInput(curr_time,"ISHAFT1");
-        var IshaftOneoeeValueArr=[];
-        var IshaftOneoeeTarArr=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/oee/year?date="+curr_time;
+        myYearTitle.text = '全产线中间轴人员利用率'+ Uyear + '年视图';
+        var showhceJson = new hceInput(curr_time,"ISHAFT1");
+        var IshaftOnehceValueArr=[];
+        var IshaftOnehceTarArr=[];
+        var urlString = "http://10.1.0.40:8080/nexteer/hce/year?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -2134,70 +1846,70 @@ $("#showYear").bind("click",function () {
                 YearDate.sort(up);
                 console.log(YearDate);
                 $.each(data, function (i, model) {
-
-                    oeeDate[i]=data[i].addDate;
-                    IshaftOneoeeValueArr[i]=model.oee;
-                    IshaftOneoeeTarArr[i]=model.targetOee;
+                    hceDate[i]=data[i].addDate;
+                    IshaftOnehceValueArr[i]=model.hce;
+                    IshaftOnehceTarArr[i]=model.targetHce;
                     for(var monIndex=0;monIndex<YearDate.length;monIndex++) {
-                        if (YearDate[monIndex] == model.addDate) {
-                            if(model.oee!=0){
+                        if(YearDate[monIndex]==model.addDate){
+                            if(model.hce!=0){
                                 switch (model.cellName){
                                     case "ISHAFT1":
-                                        myData[0][monIndex]=model.oee;
-                                        myData[1][monIndex]=model.targetOee;
+                                        myData[0][monIndex]=model.hce;
+                                        myData[1][monIndex]=model.targetHce;
                                         break;
                                     case "ISHAFT2":
-                                        myData[2][monIndex]=model.oee;
-                                        myData[3][monIndex]=model.targetOee;
+                                        myData[2][monIndex]=model.hce;
+                                        myData[3][monIndex]=model.targetHce;
                                         break;
                                     case "ISHAFT3":
-                                        myData[4][monIndex]=model.oee;
-                                        myData[5][monIndex]=model.targetOee;
+                                        myData[4][monIndex]=model.hce;
+                                        myData[5][monIndex]=model.targetHce;
                                         break;
                                     case "ISHAFT4":
-                                        myData[6][monIndex]=model.oee;
-                                        myData[7][monIndex]=model.targetOee;
+                                        myData[6][monIndex]=model.hce;
+                                        myData[7][monIndex]=model.targetHce;
                                         break;
                                     case "BEPS1":
-                                        myData[8][monIndex]=model.oee;
-                                        myData[9][monIndex]=model.targetOee;
+                                        myData[8][monIndex]=model.hce;
+                                        myData[9][monIndex]=model.targetHce;
                                         break;
                                     case "BEPS2":
-                                        myData[10][monIndex]=model.oee;
-                                        myData[11][monIndex]=model.targetOee;
+                                        myData[10][monIndex]=model.hce;
+                                        myData[11][monIndex]=model.targetHce;
                                         break;
                                     case "BEPS3":
-                                        myData[12][monIndex]=model.oee;
-                                        myData[13][monIndex]=model.targetOee;
+                                        myData[12][monIndex]=model.hce;
+                                        myData[13][monIndex]=model.targetHce;
                                         break;
                                     case "CEPS1":
-                                        myData[14][monIndex]=model.oee;
-                                        myData[15][monIndex]=model.targetOee;
+                                        myData[14][monIndex]=model.hce;
+                                        myData[15][monIndex]=model.targetHce;
                                         break;
                                     case "CEPS2":
-                                        myData[16][monIndex]=model.oee;
-                                        myData[17][monIndex]=model.targetOee;
+                                        myData[16][monIndex]=model.hce;
+                                        myData[17][monIndex]=model.targetHce;
                                         break;
                                     case "CEPS3":
-                                        myData[18][monIndex]=model.oee;
-                                        myData[19][monIndex]=model.targetOee;
+                                        myData[18][monIndex]=model.hce;
+                                        myData[19][monIndex]=model.targetHce;
                                         break;
                                     case "CEPS4":
-                                        myData[20][monIndex]=model.oee;
-                                        myData[21][monIndex]=model.targetOee;
+                                        myData[20][monIndex]=model.hce;
+                                        myData[21][monIndex]=model.targetHce;
                                         break;
                                     case "CEPS5":
-                                        myData[22][monIndex]=model.oee;
-                                        myData[23][monIndex]=model.targetOee;
+                                        myData[22][monIndex]=model.hce;
+                                        myData[23][monIndex]=model.targetHce;
                                         break;
                                 }
                                 percent=monIndex*100/365;
                             }
+
                         }
                     }
                 });
                 console.log(JSON.stringify(data));
-                console.log(IshaftOneoeeValueArr);
+                console.log(IshaftOnehceValueArr);
                 // 指定图表的配置项和数据
                 var firstOption = {
                     title: myYearTitle,
@@ -2366,7 +2078,7 @@ $("#showYear").bind("click",function () {
                             data: myData[7]
                         },
                         {
-                            name: 'BEPS3',
+                            name: 'BEPS',
                             type: 'line',
                             smooth: true,
                             showAllSymbol: true,
@@ -2381,7 +2093,7 @@ $("#showYear").bind("click",function () {
                             data: myData[12]
                         },
                         {
-                            name: 'BEPS3_target',
+                            name: 'BEPS_target',
                             type: 'line',
                             smooth: true,
                             showAllSymbol: true,
@@ -2396,7 +2108,7 @@ $("#showYear").bind("click",function () {
                             data: myData[13]
                         },
                         {
-                            name: 'CEPS5',
+                            name: 'CEPS',
                             type: 'line',
                             smooth: true,
                             showAllSymbol: true,
@@ -2411,7 +2123,7 @@ $("#showYear").bind("click",function () {
                             data: myData[22]
                         },
                         {
-                            name: 'CEPS5_target',
+                            name: 'CEPS_target',
                             type: 'line',
                             smooth: true,
                             showAllSymbol: true,
@@ -2428,7 +2140,7 @@ $("#showYear").bind("click",function () {
                     ]
                 };
                 // 使用刚指定的配置项和数据显示图表。
-                IsOneoeeChart.setOption(firstOption);
+                IsOnehceChart.setOption(firstOption);
 
             },
             failure: function (errMsg) {
@@ -2440,12 +2152,12 @@ $("#showYear").bind("click",function () {
     }
 });
 $("#selectYearSub").bind("click",function () {
-    var IsOneoeeChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
+    var IsOnehceChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
     {
         var curr_time=$("#selectYear").val()+"-12-31";
         // var curr_time="2017-04-04";
-        myYearTitle.text = '全产线可动率'+ $("#selectYear").val() + '年视图';
-        var showoeeJson = new oeeInput(curr_time,"ISHAFT1");
+        myYearTitle.text = '全产线人员利用率'+ $("#selectYear").val() + '年视图';
+        var showhceJson = new hceInput(curr_time,"ISHAFT1");
         var percent=99;
         var myData=[];
         console.log("开始传输数据");
@@ -2456,9 +2168,9 @@ $("#selectYearSub").bind("click",function () {
             }
         }
 
-        var IshaftOneoeeValueArr=[];
-        var IshaftOneoeeTarArr=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/oee/year?date="+curr_time;
+        var IshaftOnehceValueArr=[];
+        var IshaftOnehceTarArr=[];
+        var urlString = "http://10.1.0.40:8080/nexteer/hce/year?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -2474,61 +2186,62 @@ $("#selectYearSub").bind("click",function () {
                 YearDate= unique1(YearDate);
                 YearDate.sort(up);
                 console.log(YearDate);
+
                 $.each(data, function (i, model) {
-                    oeeDate[i]=data[i].addDate;
-                    IshaftOneoeeValueArr[i]=model.oee;
-                    IshaftOneoeeTarArr[i]=model.targetOee;
+                    hceDate[i]=data[i].addDate;
+                    IshaftOnehceValueArr[i]=model.hce;
+                    IshaftOnehceTarArr[i]=model.targetHce;
                     for(var monIndex=0;monIndex<YearDate.length;monIndex++) {
                         if (YearDate[monIndex] == model.addDate) {
-                            if(model.oee!=0){
+                            if(model.hce!=0){
                                 switch (model.cellName){
                                     case "ISHAFT1":
-                                        myData[0][monIndex]=model.oee;
-                                        myData[1][monIndex]=model.targetOee;
+                                        myData[0][monIndex]=model.hce;
+                                        myData[1][monIndex]=model.targetHce;
                                         break;
                                     case "ISHAFT2":
-                                        myData[2][monIndex]=model.oee;
-                                        myData[3][monIndex]=model.targetOee;
+                                        myData[2][monIndex]=model.hce;
+                                        myData[3][monIndex]=model.targetHce;
                                         break;
                                     case "ISHAFT3":
-                                        myData[4][monIndex]=model.oee;
-                                        myData[5][monIndex]=model.targetOee;
+                                        myData[4][monIndex]=model.hce;
+                                        myData[5][monIndex]=model.targetHce;
                                         break;
                                     case "ISHAFT4":
-                                        myData[6][monIndex]=model.oee;
-                                        myData[7][monIndex]=model.targetOee;
+                                        myData[6][monIndex]=model.hce;
+                                        myData[7][monIndex]=model.targetHce;
                                         break;
                                     case "BEPS1":
-                                        myData[8][monIndex]=model.oee;
-                                        myData[9][monIndex]=model.targetOee;
+                                        myData[8][monIndex]=model.hce;
+                                        myData[9][monIndex]=model.targetHce;
                                         break;
                                     case "BEPS2":
-                                        myData[10][monIndex]=model.oee;
-                                        myData[11][monIndex]=model.targetOee;
+                                        myData[10][monIndex]=model.hce;
+                                        myData[11][monIndex]=model.targetHce;
                                         break;
                                     case "BEPS3":
-                                        myData[12][monIndex]=model.oee;
-                                        myData[13][monIndex]=model.targetOee;
+                                        myData[12][monIndex]=model.hce;
+                                        myData[13][monIndex]=model.targetHce;
                                         break;
                                     case "CEPS1":
-                                        myData[14][monIndex]=model.oee;
-                                        myData[15][monIndex]=model.targetOee;
+                                        myData[14][monIndex]=model.hce;
+                                        myData[15][monIndex]=model.targetHce;
                                         break;
                                     case "CEPS2":
-                                        myData[16][monIndex]=model.oee;
-                                        myData[17][monIndex]=model.targetOee;
+                                        myData[16][monIndex]=model.hce;
+                                        myData[17][monIndex]=model.targetHce;
                                         break;
                                     case "CEPS3":
-                                        myData[18][monIndex]=model.oee;
-                                        myData[19][monIndex]=model.targetOee;
+                                        myData[18][monIndex]=model.hce;
+                                        myData[19][monIndex]=model.targetHce;
                                         break;
                                     case "CEPS4":
-                                        myData[20][monIndex]=model.oee;
-                                        myData[21][monIndex]=model.targetOee;
+                                        myData[20][monIndex]=model.hce;
+                                        myData[21][monIndex]=model.targetHce;
                                         break;
                                     case "CEPS5":
-                                        myData[22][monIndex]=model.oee;
-                                        myData[23][monIndex]=model.targetOee;
+                                        myData[22][monIndex]=model.hce;
+                                        myData[23][monIndex]=model.targetHce;
                                         break;
                                 }
                                 percent=monIndex*100/365;
@@ -2537,7 +2250,7 @@ $("#selectYearSub").bind("click",function () {
                     }
                 });
                 console.log(JSON.stringify(data));
-                console.log(IshaftOneoeeValueArr);
+                console.log(IshaftOnehceValueArr);
                 // 指定图表的配置项和数据
                 var firstOption = {
                     title: myYearTitle,
@@ -2706,7 +2419,7 @@ $("#selectYearSub").bind("click",function () {
                             data: myData[7]
                         },
                         {
-                            name: 'BEPS3',
+                            name: 'BEPS',
                             type: 'line',
                             smooth: true,
                             showAllSymbol: true,
@@ -2721,7 +2434,7 @@ $("#selectYearSub").bind("click",function () {
                             data: myData[12]
                         },
                         {
-                            name: 'BEPS3_target',
+                            name: 'BEPS_target',
                             type: 'line',
                             smooth: true,
                             showAllSymbol: true,
@@ -2736,7 +2449,7 @@ $("#selectYearSub").bind("click",function () {
                             data: myData[13]
                         },
                         {
-                            name: 'CEPS5',
+                            name: 'CEPS',
                             type: 'line',
                             smooth: true,
                             showAllSymbol: true,
@@ -2751,7 +2464,7 @@ $("#selectYearSub").bind("click",function () {
                             data: myData[22]
                         },
                         {
-                            name: 'CEPS5_target',
+                            name: 'CEPS_target',
                             type: 'line',
                             smooth: true,
                             showAllSymbol: true,
@@ -2768,7 +2481,7 @@ $("#selectYearSub").bind("click",function () {
                     ]
                 };
                 // 使用刚指定的配置项和数据显示图表。
-                IsOneoeeChart.setOption(firstOption);
+                IsOnehceChart.setOption(firstOption);
 
             },
             failure: function (errMsg) {

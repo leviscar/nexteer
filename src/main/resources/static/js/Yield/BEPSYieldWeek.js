@@ -45,6 +45,7 @@ function formOnload()
     var Sunday = transferDate(new Date(thisTime +  step_m * 24 * 3600* 1000));
     return [Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday];
 }
+
 // function endTime(endTime) {
 //     this.end_time = endTime;
 // }

@@ -47,7 +47,23 @@ function formOnload()
     return [Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday];
 }
 
+//升序排序
+function up(x, y) {
+    var xTime=new Date(x);
+    var yTime=new Date(y);
+    return (xTime.getTime() > yTime.getTime()) ? 1 : -1
 
+}
+
+function unique1(arr){
+    var newArr = [];//新建一个数组
+    for(var i=0,len=arr.length;i<len;i++){
+        if(newArr.indexOf(arr[i]) == -1){//若新数组中未包含该项则将其存入新数组
+            newArr.push(arr[i]);
+        }
+    }
+    return newArr;
+}
 console.log('start');
 
 
@@ -152,16 +168,18 @@ function showYear() {
                 YearDate.push(Uyear+"-"+judgeMyTime(yIndex)+"-"+judgeMyTime(Mindex))
             }
         }
-        for(var perIndex in YearDate){
-            var nowTime =Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday);
-            if(YearDate[perIndex]==nowTime){
-                percent=parseInt(perIndex*100/365)+1;
-                console.log(percent);
-            }
 
-        }
-        console.log(YearDate);
+        console.log("当前年份天数"+YearDate);
+
         $.get("http://10.1.0.40:8080/nexteer/scrap-amount/year?date="+YearDate[YearDate.length-1], function (data) {
+            var YearDate = [];
+            $.each($.parseJSON(data),function (i,model) {
+                YearDate.push(model.addDate);
+            });
+            YearDate= unique1(YearDate);
+            YearDate.sort(up);
+            console.log(YearDate);
+
             $.each($.parseJSON(data), function (i, model) {
                 for(var monIndex=0;monIndex<YearDate.length;monIndex++) {
                     if (YearDate[monIndex] == model.addDate) {

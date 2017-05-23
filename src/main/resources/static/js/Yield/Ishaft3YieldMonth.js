@@ -12,6 +12,22 @@ function judgeMyTime(time) {
     }
     return timeStr;
 }
+//升序排序
+function up(x, y) {
+    var xTime=new Date(x);
+    var yTime=new Date(y);
+    return (xTime.getTime() > yTime.getTime()) ? 1 : -1
+
+}
+function unique1(arr){
+    var newArr = [];//新建一个数组
+    for(var i=0,len=arr.length;i<len;i++){
+        if(newArr.indexOf(arr[i]) == -1){//若新数组中未包含该项则将其存入新数组
+            newArr.push(arr[i]);
+        }
+    }
+    return newArr;
+}
 // function endTime(endTime) {
 //     this.end_time = endTime;
 // }
@@ -100,6 +116,13 @@ function getIshaftOneMonthData() {
         url: "http://10.1.0.40:8080/nexteer/output-info/ISHAFT3/month?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
+            var MonthDate = [];
+            $.each(data,function (i,model) {
+                MonthDate.push(model.addDate);
+            });
+            MonthDate= unique1(MonthDate);
+            MonthDate.sort(up);
+            console.log(MonthDate);
             myAjaxData = JSON.stringify(data);
             for(var j=0,len=proIDMsg.length;j<len;j++){
 //                    for(var myIndex = 0,myLen = myAjaxData.length;myIndex<myLen;myIndex++){
