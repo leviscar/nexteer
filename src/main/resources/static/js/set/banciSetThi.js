@@ -734,7 +734,7 @@ $('#showShiftLi').on('click','.eventSub',function(){
 
 $("#addEventSub").bind("click",function () {
     {
-        var addEventJson= new eventInput($("#eventShift").text().toString(),$("#eventCell").attr("class").toString(),$("#eventStart").val().toString(),$("#eventEnd").val().toString(),$("#eventIn").val().toString());
+        var addEventJson= new eventInput($("#eventShift").text().toString(),$("#eventCell").attr("class").toString(),$("#eventIn").val().toString(),$("#eventStart").val().toString(),$("#eventEnd").val().toString());
         console.log(addEventJson);
         switch ($("#eventCell").attr("class").toString()){
             case "CEPS5":
