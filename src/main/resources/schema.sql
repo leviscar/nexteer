@@ -95,4 +95,11 @@ CREATE TABLE quality_complain (
   count       INT,
   log         NVARCHAR(255)
 );
+CREATE TABLE std_info (
+  cell_name VARCHAR(10),
+  standard_beat INT,
+  unit_id INT,
+  unit_num INT,
+  PRIMARY KEY (cell_name, standard_beat, unit_id)
+);
 
