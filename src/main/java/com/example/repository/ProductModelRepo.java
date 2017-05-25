@@ -44,7 +44,7 @@ public class ProductModelRepo {
      * @param modelId
      * @return
      */
-    public ProductModel getStdByModelId(String modelId) {
+    public ProductModel getByModelId(String modelId) {
         String sql = "SELECT * FROM product_model WHERE model_id = ?";
         return jdbc.queryForObject(sql, new Object[]{modelId}, new ProductModelMapper());
     }

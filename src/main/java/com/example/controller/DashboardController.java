@@ -3,15 +3,14 @@ package com.example.controller;
 import com.example.enumtype.Cell;
 import com.example.enumtype.ShiftType;
 import com.example.model.ProductInfo;
-import com.example.model.ProductModel;
 import com.example.model.WorkShift;
 import com.example.repository.ProductModelRepo;
+import com.example.repository.StdInfoRepo;
 import com.example.repository.WorkShiftRepo;
 import com.example.service.CellService;
 import com.example.service.UnitStatusService;
 import com.example.util.DateFormat;
 import com.example.util.Function;
-import com.example.util.ModelOutput;
 import com.example.util.OutputTool;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by mrpan on 2017/3/28.
@@ -34,14 +32,15 @@ public class DashboardController {
     private ProductModelRepo productModelRepo;
     private UnitStatusService unitStatusService;
     private CellService cellService;
-
+    private StdInfoRepo stdInfoRepo;
     @Autowired
     public DashboardController(WorkShiftRepo workShiftRepo, ProductModelRepo productModelRepo
-            , UnitStatusService unitStatusService, CellService cellService) {
+            , UnitStatusService unitStatusService, CellService cellService, StdInfoRepo stdInfoRepo) {
         this.workShiftRepo = workShiftRepo;
         this.productModelRepo = productModelRepo;
         this.unitStatusService = unitStatusService;
         this.cellService = cellService;
+        this.stdInfoRepo = stdInfoRepo;
     }
 
     /**
@@ -120,25 +119,27 @@ public class DashboardController {
         // set the year, month, day to work shift's start time and end time based on current date
         List<Date> dateList = OutputTool.changeShiftDate(curDate, workShift);
         Date startDate = dateList.get(0);
+        Date endDate = dateList.get(1);
 
         List<ProductInfo> products = cellService.getProducts(startDate, curDate, cell);
 
         int normalWorkerNum = workShift.getNormalWorkerNum();
         int overtimeWorkerNum = workShift.getOvertimeWorkerNum();
         int standardMinutes = 8 * 60;
-
+        int standardBeats = workShift.getStandardBeat();
         // calculate all models' products * std
-        Map<String, Integer> modelOutputMap = ModelOutput.getEachModelOutput(products);
-        float stdMultiplyOutput = 0;
-        for (Map.Entry<String, Integer> entry : modelOutputMap.entrySet()) {
-            String modelId = entry.getKey();
-            ProductModel model = productModelRepo.getStdByModelId(modelId);
-            stdMultiplyOutput += model.getStd() * entry.getValue();
-        }
         // get the rest seconds from shift starting till now
         long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
         long restSeconds = unitStatusService.getRestSeconds(workShift.getId(), shiftType
                 , hourFormat.parse(time.substring(11, 16)));
+        int unitId = cellService.getUnitId(cell);
+        String cellBelong = cellService.getCellName(cell);
+        int unitWorkerNum = stdInfoRepo.getWorkNumByUnit(cellBelong, standardBeats, unitId);
+        int workHours = (int) ((endDate.getTime() - startDate.getTime()) / (1000 * 3600));
+        int calculatedTarget = (int) ((totalSeconds - restSeconds) / standardBeats);
+        float std = (float) unitWorkerNum * (float) workHours / (float) calculatedTarget;
+        float stdMultiplyOutput = std * products.size();
+
         // calculate hce
         double hce;
         if (totalSeconds / 60 > standardMinutes) {
@@ -153,10 +154,10 @@ public class DashboardController {
                     shiftType, startDate, endTime) / 60);
             // rest minutes during the overtime
             int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
-            hce = 100 * stdMultiplyOutput * 60 / ((standardMinutes - normalRestMinute) * normalWorkerNum
-                    + (overMinutes - overRestMinutes) * overtimeWorkerNum);
+            hce = 100 * stdMultiplyOutput * 60 / ((standardMinutes - normalRestMinute) * unitWorkerNum
+                    + (overMinutes - overRestMinutes) * unitWorkerNum);
         } else {
-            hce = 100 * stdMultiplyOutput * 60 * 60 / ((totalSeconds - restSeconds) * normalWorkerNum);
+            hce = 100 * stdMultiplyOutput * 60 * 60 / ((totalSeconds - restSeconds) * unitWorkerNum);
         }
         object.addProperty("hce", hce);
         int status;

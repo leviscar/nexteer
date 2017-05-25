@@ -20,6 +20,7 @@ public class CellService {
     private Ishaft1ProductInfoRepo ishaft1ProductInfoRepo;
     private CepsProductInfoRepo cepsProductInfoRepo;
     private BepsProductInfoRepo bepsProductInfoRepo;
+
     @Autowired
     public CellService(Ishaft1ProductInfoRepo ishaft1ProductInfoRepo, CepsProductInfoRepo cepsProductInfoRepo, BepsProductInfoRepo bepsProductInfoRepo) {
         this.ishaft1ProductInfoRepo = ishaft1ProductInfoRepo;
@@ -137,4 +138,103 @@ public class CellService {
         }
         return topNProducts;
     }
+
+    /**
+     * Get unit id
+     *
+     * @param cell
+     * @return
+     */
+    public int getUnitId(Cell cell) {
+        int unitId = 0;
+        switch (cell) {
+            case ISHAFT1:
+                unitId = 1;
+                break;
+            case ISHAFT2:
+                unitId = 1;
+                break;
+            case ISHAFT3:
+                unitId = 1;
+                break;
+            case ISHAFT4:
+                unitId = 1;
+                break;
+            case BEPS1:
+                unitId = 4;
+                break;
+            case BEPS2:
+                unitId = 5;
+                break;
+            case BEPS3:
+                unitId = 7;
+                break;
+            case CEPS1:
+                unitId = 3;
+                break;
+            case CEPS2:
+                unitId = 4;
+                break;
+            case CEPS3:
+                unitId = 5;
+                break;
+            case CEPS4:
+                unitId = 6;
+                break;
+            case CEPS5:
+                unitId = 7;
+                break;
+        }
+        return unitId;
+    }
+
+    /**
+     * Get cell name
+     *
+     * @param cell
+     * @return
+     */
+    public String getCellName(Cell cell) {
+        String cellName = "";
+        switch (cell) {
+            case ISHAFT1:
+                cellName = "ISHAFT1";
+                break;
+            case ISHAFT2:
+                cellName = "ISHAFT2";
+                break;
+            case ISHAFT3:
+                cellName = "ISHAFT3";
+                break;
+            case ISHAFT4:
+                cellName = "ISHAFT4";
+                break;
+            case BEPS1:
+                cellName = "BEPS";
+                break;
+            case BEPS2:
+                cellName = "BEPS";
+                break;
+            case BEPS3:
+                cellName = "BEPS";
+                break;
+            case CEPS1:
+                cellName = "CEPS";
+                break;
+            case CEPS2:
+                cellName = "CEPS";
+                break;
+            case CEPS3:
+                cellName = "CEPS";
+                break;
+            case CEPS4:
+                cellName = "CEPS";
+                break;
+            case CEPS5:
+                cellName = "CEPS";
+                break;
+        }
+        return cellName;
+    }
+
 }

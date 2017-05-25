@@ -5,6 +5,7 @@ import com.example.enumtype.ShiftType;
 import com.example.model.*;
 import com.example.repository.ProductModelRepo;
 import com.example.repository.RestEventRepo;
+import com.example.repository.StdInfoRepo;
 import com.example.repository.WorkShiftRepo;
 import com.example.util.DateFormat;
 import com.example.util.Function;
@@ -29,14 +30,16 @@ public class UnitStatusService {
     private RestEventRepo restEventRepo;
     private ProductModelRepo productModelRepo;
     private CellService cellService;
+    private StdInfoRepo stdInfoRepo;
 
     @Autowired
     public UnitStatusService(WorkShiftRepo workShiftRepo, RestEventRepo restEventRepo,
-                             ProductModelRepo productModelRepo, CellService cellService) {
+                             ProductModelRepo productModelRepo, CellService cellService, StdInfoRepo stdInfoRepo) {
         this.workShiftRepo = workShiftRepo;
         this.restEventRepo = restEventRepo;
         this.productModelRepo = productModelRepo;
         this.cellService = cellService;
+        this.stdInfoRepo = stdInfoRepo;
     }
 
     public String getUnitStatusByCurTime(String date, String cellName) throws ParseException {
@@ -107,17 +110,28 @@ public class UnitStatusService {
         int oee = (int) (standardBeats * curNum * 100 / (totalSeconds - restSeconds));
         unitStatus.setMovable_rate(oee);
 
+        // get the hourly target output
+        Map<String, Integer> targetMap = getHourlyTargetValue(standardBeats, shiftType, workShift);
+        unitStatus.setHourly_target(targetMap);
+
+        // set calculated target
+        int calculatedTarget = 0;
+        for (int i : targetMap.values()) {
+            calculatedTarget += i;
+        }
+        unitStatus.setCalculatedTarget(calculatedTarget);
+
         // calculate hce
         int standardMinutes = 8 * 60;
         double hce;
         // calculate all models' products * std
-        Map<String, Integer> modelOutputMap = ModelOutput.getEachModelOutput(products);
-        float stdMultiplyOutput = 0;
-        for (Map.Entry<String, Integer> entry : modelOutputMap.entrySet()) {
-            String modelId = entry.getKey();
-            ProductModel model = productModelRepo.getStdByModelId(modelId);
-            stdMultiplyOutput += model.getStd() * entry.getValue();
-        }
+        int unitId = cellService.getUnitId(cell);
+        String cellBelong = cellService.getCellName(cell);
+        int unitWorkerNum = stdInfoRepo.getWorkNumByUnit(cellBelong, standardBeats, unitId);
+        int workHours = (int) ((endDate.getTime() - startDate.getTime()) / (1000 * 3600));
+        float std = (float) unitWorkerNum * (float) workHours / (float) calculatedTarget;
+        float stdMultiplyOutput = std * curNum;
+
         if (totalSeconds / 60 > standardMinutes) {
             // get the overtime seconds till now
             int overMinutes = (int) (totalSeconds / 60 - standardMinutes);
@@ -129,10 +143,10 @@ public class UnitStatusService {
             int normalRestMinute = (int) (getHourlyRestSeconds(workShift.getId(), shiftType, startDate, endTime) / 60);
             // rest minutes during the overtime
             int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
-            hce = 100 * stdMultiplyOutput * 60 / ((standardMinutes - normalRestMinute) * normalWorkerNum +
-                    (overMinutes - overRestMinutes) * overtimeWorkerNum);
+            hce = 100 * stdMultiplyOutput * 60 / ((standardMinutes - normalRestMinute) * unitWorkerNum +
+                    (overMinutes - overRestMinutes) * unitWorkerNum);
         } else {
-            hce = 100 * stdMultiplyOutput * 60 * 60 / ((totalSeconds - restSeconds) * normalWorkerNum);
+            hce = 100 * stdMultiplyOutput * 60 * 60 / ((totalSeconds - restSeconds) * unitWorkerNum);
         }
         unitStatus.setHce(hce);
 
@@ -141,17 +155,6 @@ public class UnitStatusService {
                 ((endDate.getTime() - startDate.getTime()) / 1000 - restSeconds));
         // get status
         unitStatus.setStatus(OutputTool.getStatus(curTarget, curNum));
-
-        // get the hourly target output
-        Map<String, Integer> targetMap = getHourlyTargetValue(standardBeats, shiftType, workShift);
-        unitStatus.setHourly_target(targetMap);
-
-        // set calculated target
-        int calculatedTarget = 0;
-        for (int i: targetMap.values()) {
-            calculatedTarget += i;
-        }
-        unitStatus.setCalculatedTarget(calculatedTarget);
 
         // calculate the loss time(currTime-startTime-restTime-standardBeats*currOutput)
         int lossTime = (int) (totalSeconds - restSeconds - standardBeats * curNum);
