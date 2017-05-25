@@ -58,4 +58,15 @@ public class RestEventRepo {
         String sql = "SELECT * FROM rest_event WHERE work_shift_id = ?";
         return jdbc.query(sql, new Object[]{wsId}, new RestEventMapper());
     }
+
+    /**
+     * Delete specific rest event
+     *
+     * @param event
+     */
+    public void delete(RestEvent event) {
+        jdbc.update("DELETE FROM rest_event WHERE cell_name = ? AND shift_type = ? AND rest_event.start_time = ? " +
+                        "AND rest_event.end_time = ? AND rest_event.event = ?", event.getCellName(), event.getShiftType()
+                , event.getStartTime(), event.getEndTime(), event.getEvent());
+    }
 }
