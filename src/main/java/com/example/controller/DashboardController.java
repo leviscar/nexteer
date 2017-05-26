@@ -29,15 +29,13 @@ import java.util.List;
 @RequestMapping(value = "/dashboard")
 public class DashboardController {
     private WorkShiftRepo workShiftRepo;
-    private ProductModelRepo productModelRepo;
     private UnitStatusService unitStatusService;
     private CellService cellService;
     private StdInfoRepo stdInfoRepo;
     @Autowired
-    public DashboardController(WorkShiftRepo workShiftRepo, ProductModelRepo productModelRepo
-            , UnitStatusService unitStatusService, CellService cellService, StdInfoRepo stdInfoRepo) {
+    public DashboardController(WorkShiftRepo workShiftRepo, UnitStatusService unitStatusService
+            , CellService cellService, StdInfoRepo stdInfoRepo) {
         this.workShiftRepo = workShiftRepo;
-        this.productModelRepo = productModelRepo;
         this.unitStatusService = unitStatusService;
         this.cellService = cellService;
         this.stdInfoRepo = stdInfoRepo;
@@ -132,11 +130,13 @@ public class DashboardController {
         long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
         long restSeconds = unitStatusService.getRestSeconds(workShift.getId(), shiftType
                 , hourFormat.parse(time.substring(11, 16)));
+        long totalRestSeconds = unitStatusService.getRestSeconds(workShift.getId(), shiftType
+                ,  hourFormat.parse(workShift.getEndTime()));
         int unitId = cellService.getUnitId(cell);
         String cellBelong = cellService.getCellName(cell);
         int unitWorkerNum = stdInfoRepo.getWorkNumByUnit(cellBelong, standardBeats, unitId);
         int workHours = (int) ((endDate.getTime() - startDate.getTime()) / (1000 * 3600));
-        int calculatedTarget = (int) ((totalSeconds - restSeconds) / standardBeats);
+        int calculatedTarget = (int) ((workHours * 3600 - totalRestSeconds) / standardBeats);
         float std = (float) unitWorkerNum * (float) workHours / (float) calculatedTarget;
         float stdMultiplyOutput = std * products.size();
 

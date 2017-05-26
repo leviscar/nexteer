@@ -28,16 +28,14 @@ import java.util.*;
 public class UnitStatusService {
     private WorkShiftRepo workShiftRepo;
     private RestEventRepo restEventRepo;
-    private ProductModelRepo productModelRepo;
     private CellService cellService;
     private StdInfoRepo stdInfoRepo;
 
     @Autowired
     public UnitStatusService(WorkShiftRepo workShiftRepo, RestEventRepo restEventRepo,
-                             ProductModelRepo productModelRepo, CellService cellService, StdInfoRepo stdInfoRepo) {
+                             CellService cellService, StdInfoRepo stdInfoRepo) {
         this.workShiftRepo = workShiftRepo;
         this.restEventRepo = restEventRepo;
-        this.productModelRepo = productModelRepo;
         this.cellService = cellService;
         this.stdInfoRepo = stdInfoRepo;
     }
@@ -106,6 +104,8 @@ public class UnitStatusService {
         // get the rest seconds from shift starting till now
         long totalSeconds = (curDate.getTime() - startDate.getTime()) / 1000;
         long restSeconds = getRestSeconds(workShift.getId(), shiftType, curTime);
+        long totalRestSeconds = getRestSeconds(workShift.getId(), shiftType
+                ,  hourFormat.parse(workShift.getEndTime()));
         // OEE = current beat * (products output) / （total seconds - rest seconds）%
         int oee = (int) (standardBeats * curNum * 100 / (totalSeconds - restSeconds));
         unitStatus.setMovable_rate(oee);
@@ -113,13 +113,6 @@ public class UnitStatusService {
         // get the hourly target output
         Map<String, Integer> targetMap = getHourlyTargetValue(standardBeats, shiftType, workShift);
         unitStatus.setHourly_target(targetMap);
-
-        // set calculated target
-        int calculatedTarget = 0;
-        for (int i : targetMap.values()) {
-            calculatedTarget += i;
-        }
-        unitStatus.setCalculatedTarget(calculatedTarget);
 
         // calculate hce
         int standardMinutes = 8 * 60;
@@ -129,6 +122,8 @@ public class UnitStatusService {
         String cellBelong = cellService.getCellName(cell);
         int unitWorkerNum = stdInfoRepo.getWorkNumByUnit(cellBelong, standardBeats, unitId);
         int workHours = (int) ((endDate.getTime() - startDate.getTime()) / (1000 * 3600));
+        int calculatedTarget = (int) ((workHours * 3600 - totalRestSeconds) / standardBeats);
+        unitStatus.setCalculatedTarget(calculatedTarget);
         float std = (float) unitWorkerNum * (float) workHours / (float) calculatedTarget;
         float stdMultiplyOutput = std * curNum;
 
