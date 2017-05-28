@@ -1,6 +1,7 @@
 package com.example.repository;
 
 import com.example.mapper.StdInfoMapper;
+import com.example.model.StdInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -61,5 +62,44 @@ public class StdInfoRepo {
     public int getWorkNumByUnit(String cellName, int standardBeat, int unitId) {
         return jdbc.queryForObject("SELECT unit_num FROM std_info WHERE cell_name = ? AND standard_beat = ?" +
                 " AND unit_id = ?", new Object[]{cellName, standardBeat, unitId}, Integer.class);
+    }
+
+    /**
+     * Add std information into database
+     *
+     * @param stdInfo
+     * @return
+     */
+    public StdInfo add(StdInfo stdInfo) {
+        String cellName = stdInfo.getCellName();
+        int standardBeat = stdInfo.getStandardBeats();
+        int unitId = stdInfo.getUnitId();
+        int unitNum = stdInfo.getUnitNum();
+        jdbc.update("IF exists(SELECT * FROM std_info WHERE cell_name = ? AND standard_beat = ? AND unit_id = ?) " +
+                        "UPDATE std_info SET unit_num = ? WHERE cell_name = ? AND standard_beat = ? AND unit_id = ? ELSE " +
+                        "INSERT INTO std_info (cell_name, standard_beat, unit_id, unit_num) VALUES (?,?,?,?)"
+                , cellName, standardBeat, unitId, unitNum, cellName, standardBeat, unitId, cellName, standardBeat, unitId, unitNum);
+        return stdInfo;
+    }
+
+    /**
+     * Delete record based on cell name and standard beat
+     *
+     * @param cellName
+     * @param standardBeat
+     */
+    public void delete(String cellName, int standardBeat) {
+        jdbc.update("DELETE FROM std_info WHERE cell_name = ? AND standard_beat = ?", cellName, standardBeat);
+    }
+
+    /**
+     * Get all records based on cell name
+     *
+     * @param cellName
+     * @return
+     */
+    public List<StdInfo> getByCell(String cellName) {
+        return jdbc.query("SELECT * FROM std_info WHERE cell_name = ? ORDER BY standard_beat, unit_id"
+                , new Object[]{cellName}, new StdInfoMapper());
     }
 }
