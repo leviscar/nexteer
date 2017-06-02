@@ -1,6 +1,7 @@
 package com.example.repository;
 
 import com.example.mapper.HceMapper;
+import com.example.mapper.OeeMapper;
 import com.example.model.Hce;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,17 @@ public class HceRepo {
                 , hce.getAddDate(), hce.getCellName(), hce.getTargetHce(), hce.getAddDate(), hce.getCellName()
                 , hce.getTargetHce(), hce.getAddDate(), hce.getCellName());
         return hce;
+    }
+
+    /**
+     * Get specific cell's target hce
+     *
+     * @param date
+     * @return
+     */
+    public List<Hce> getTargetHceByCellAndDate(String cellName, Date date) {
+        return jdbc.query("SELECT * FROM hce WHERE add_date = ? AND cell_name = ?"
+                , new Object[]{date, cellName}, new HceMapper());
     }
 
     /**
