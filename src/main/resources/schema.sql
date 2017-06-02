@@ -55,8 +55,7 @@ CREATE TABLE product_model (
   id         INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
   model_id   VARCHAR(100), -- 型号id
   model_name NVARCHAR(100), -- 型号名
-  cell_name  NVARCHAR(100), -- 所属单元名
-  std        REAL -- 标准std 用于计算hce
+  cell_name  NVARCHAR(100) -- 所属单元名
 );
 CREATE TABLE oee (
   id         INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,

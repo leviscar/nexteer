@@ -16,7 +16,6 @@ public class ProductModelMapper implements RowMapper<ProductModel> {
         model.setId(resultSet.getInt("id"));
         model.setModelId(resultSet.getString("model_id"));
         model.setModelName(resultSet.getString("model_name"));
-        model.setStd(resultSet.getFloat("std"));
         model.setCellName(resultSet.getString("cell_name"));
         return model;
     }

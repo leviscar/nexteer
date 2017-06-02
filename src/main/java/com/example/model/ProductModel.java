@@ -8,7 +8,6 @@ public class ProductModel {
     private int id;
     private String modelId; // model id
     private String modelName; // model name
-    private float std; // std
     private String cellName; // cell name
 
     public ProductModel() {
@@ -20,14 +19,6 @@ public class ProductModel {
 
     public void setCellName(String cellName) {
         this.cellName = cellName;
-    }
-
-    public float getStd() {
-        return std;
-    }
-
-    public void setStd(float std) {
-        this.std = std;
     }
 
     public int getId() {
