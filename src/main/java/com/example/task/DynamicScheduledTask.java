@@ -32,12 +32,13 @@ public class DynamicScheduledTask {
     private UnitStatusService unitStatusService;
     private OutputCountInfoRepo outputCountInfoRepo;
     private CellService cellService;
+    private StdInfoRepo stdInfoRepo;
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     public DynamicScheduledTask(ProductModelRepo productModelRepo, WorkShiftRepo workShiftRepo, OeeRepo oeeRepo
             , HceRepo hceRepo, UnitStatusService unitStatusService, OutputCountInfoRepo outputCountInfoRepo
-            , CellService cellService) {
+            , CellService cellService, StdInfoRepo stdInfoRepo) {
         this.productModelRepo = productModelRepo;
         this.workShiftRepo = workShiftRepo;
         this.oeeRepo = oeeRepo;
@@ -45,6 +46,7 @@ public class DynamicScheduledTask {
         this.unitStatusService = unitStatusService;
         this.outputCountInfoRepo = outputCountInfoRepo;
         this.cellService = cellService;
+        this.stdInfoRepo = stdInfoRepo;
     }
 
     /**
@@ -75,7 +77,7 @@ public class DynamicScheduledTask {
         Map<String, Integer> map = ModelOutput.getEachModelOutput(products);
         // insert into database based on different model
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            ProductModel model = productModelRepo.getStdByModelId(entry.getKey());
+            ProductModel model = productModelRepo.getByModelId(entry.getKey());
             outputCountInfo.setModelName(model.getModelName());
             outputCountInfo.setModelId(entry.getKey());
             outputCountInfo.setCount(entry.getValue());
@@ -97,7 +99,7 @@ public class DynamicScheduledTask {
         Cell cell = Cell.valueOf(cellName);
 //        // test
 //        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        date = sdf2.parse("2017-04-26 07:50:00");
+//        date = sdf2.parse("2017-05-26 07:50:00");
 //        //end
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -128,7 +130,7 @@ public class DynamicScheduledTask {
             sumSeconds += entry.getKey();
             sumMulti += entry.getValue();
         }
-        if (allShiftRes.isEmpty()){
+        if (allShiftRes.isEmpty()) {
             oee.setOee(0);
         } else {
             oee.setOee((int) (sumMulti * 100 / sumSeconds));
@@ -163,22 +165,24 @@ public class DynamicScheduledTask {
             endDate = Function.addOneDay(startDate, endDate);
             // get shift product output
             List<ProductInfo> products = cellService.getProducts(startDate, endDate, cell);
-            // get various model product output multiply its std
-            float stdMultiplyOutput = 0;
-            Map<String, Integer> modelOutputMap = ModelOutput.getEachModelOutput(products);
-            for (Map.Entry<String, Integer> entry : modelOutputMap.entrySet()) {
-                String modelId = entry.getKey();
-                ProductModel model = productModelRepo.getStdByModelId(modelId);
-                stdMultiplyOutput += model.getStd() * entry.getValue();
-            }
-            totalStdMultiplyOutput += stdMultiplyOutput;
-
-            // get overtime
+            // calculate hce
             int standardMinutes = 8 * 60;
+            // get overtime
             SimpleDateFormat sdf = DateFormat.hourFormat();
             long restSeconds = unitStatusService.getRestSeconds(ws.getId(), ShiftType.valueOf(ws.getShiftType())
                     , sdf.parse(sdf.format(endDate)));
             long totalSeconds = (endDate.getTime() - startDate.getTime()) / 1000;
+
+            // calculate all models' products * std
+            int standardBeat = ws.getStandardBeat();
+            int unitId = cellService.getUnitId(cell);
+            String cellBelong = cellService.getCellName(cell);
+            int unitWorkerNum = stdInfoRepo.getWorkNumByUnit(cellBelong, standardBeat, unitId);
+            int workHours = (int) totalSeconds / 3600;
+            int calculatedTarget = (int) ((totalSeconds - restSeconds) / standardBeat);
+            float std = (float) unitWorkerNum * (float) workHours / (float) calculatedTarget;
+            totalStdMultiplyOutput += std * products.size();
+
             if (totalSeconds / 60 > standardMinutes) {
                 // overtime minutes
                 int overMinutes = (int) (totalSeconds / 60 - standardMinutes);
@@ -192,10 +196,10 @@ public class DynamicScheduledTask {
                         , ShiftType.valueOf(ws.getShiftType()), startDate, overTimeStart) / 60);
                 // rest time during overtime
                 int overRestMinutes = (int) (restSeconds / 60 - normalRestMinute);
-                totalTimeMultiWorkerNum += (standardMinutes - normalRestMinute) * ws.getNormalWorkerNum()
-                        + (overMinutes - overRestMinutes) * ws.getOvertimeWorkerNum();
+                totalTimeMultiWorkerNum += (standardMinutes - normalRestMinute) * unitWorkerNum
+                        + (overMinutes - overRestMinutes) * unitWorkerNum;
             } else {
-                totalTimeMultiWorkerNum += (totalSeconds - restSeconds) * ws.getNormalWorkerNum() / 60;
+                totalTimeMultiWorkerNum += (totalSeconds - restSeconds) * unitWorkerNum / 60;
             }
         }
         return (int) (totalStdMultiplyOutput * 60 * 100 / totalTimeMultiWorkerNum);

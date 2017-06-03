@@ -54,6 +54,17 @@ public class OeeRepo {
     }
 
     /**
+     * Get specific cell's target oee
+     *
+     * @param date
+     * @return
+     */
+    public List<Oee> getTargetOeeByCellAndDate(String cellName, Date date) {
+        return jdbc.query("SELECT * FROM oee WHERE add_date = ? and cell_name = ?"
+                , new Object[]{date, cellName}, new OeeMapper());
+    }
+
+    /**
      * Get all oee records of specific cell during a period based on start date and end date
      *
      * @param cellName

@@ -107,6 +107,7 @@ public class ScrapAmountRepo {
         String startDate = sdf.format(calendar.getTime());
         return getByPeriodAndCell(startDate, curDate, cellName);
     }
+
     /**
      * Get a scrap amount record on a specific date
      *
@@ -218,5 +219,17 @@ public class ScrapAmountRepo {
         jdbc.update(sql, scrapAmount.getValue(), scrapAmount.getTargetValue(), scrapAmount.getAddDate()
                 , scrapAmount.getCellName());
         return scrapAmount;
+    }
+
+    /**
+     * Get specific cell's target scrap amount
+     *
+     * @param cellName
+     * @param date
+     * @return
+     * @throws ParseException
+     */
+    public List<ScrapAmount> getTargetScrapAmountByCellAndDate(String cellName, String date) throws ParseException {
+        return getByPeriodAndCell(date, date, cellName);
     }
 }

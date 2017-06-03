@@ -1,4 +1,4 @@
-use nexteer;
+USE nexteer;
 DELETE rest_event;
 DELETE work_shift;
 CREATE TABLE safety_date (
@@ -55,8 +55,7 @@ CREATE TABLE product_model (
   id         INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
   model_id   VARCHAR(100), -- 型号id
   model_name NVARCHAR(100), -- 型号名
-  cell_name  NVARCHAR(100), -- 所属单元名
-  std        REAL -- 标准std 用于计算hce
+  cell_name  NVARCHAR(100) -- 所属单元名
 );
 CREATE TABLE oee (
   id         INT IDENTITY (1, 1) PRIMARY KEY NOT NULL,
@@ -95,4 +94,16 @@ CREATE TABLE quality_complain (
   count       INT,
   log         NVARCHAR(255)
 );
-
+CREATE TABLE std_info (
+  cell_name     VARCHAR(10),
+  standard_beat INT,
+  unit_id       INT,
+  unit_num      INT,
+  PRIMARY KEY (cell_name, standard_beat, unit_id)
+);
+CREATE TABLE polling_page (
+  cell_name  VARCHAR(10),
+  is_polling BIT,
+  interval   INT,
+  PRIMARY KEY (cell_name)
+);

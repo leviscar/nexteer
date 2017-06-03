@@ -42,4 +42,14 @@ public class RestEventController {
     public List<RestEvent> getByWorkShiftId(@RequestParam(value = "work_shift_id") int wsId) {
         return reRepo.getByWorkShiftId(wsId);
     }
+
+    /**
+     * Delete specific rest event
+     *
+     * @param re
+     */
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void delete(@RequestBody RestEvent re) {
+        reRepo.delete(re);
+    }
 }
