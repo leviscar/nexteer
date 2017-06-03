@@ -34,7 +34,7 @@ var endtime= Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday);
 var myChart = echarts.init(document.getElementById('IshaftOneYieldMonthBar'));
 var myPieChart = echarts.init(document.getElementById('IshaftOneYieldMonthPie'));
 //    var myDataOne= [];
-//    var worker = new Worker('http://10.1.0.40:8080/nexteer/IshaftYieldWeekFirstWork.js');
+//    var worker = new Worker('http://localhost:8080/nexteer/IshaftYieldWeekFirstWork.js');
 var myTitle= {
     text: '第二条中间轴产量信息展示（月视图）',
     left:'40%',
@@ -93,7 +93,7 @@ function getIshaftOneMonthData() {
 
 
 
-    $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
+    $.get("http://localhost:8080/nexteer/product-model", function (data) {
         $.each(data, function (i, model) {
             if(model.cellName=="Ishaft2"){
                 proIDMsg.push(model.modelId);
@@ -103,7 +103,7 @@ function getIshaftOneMonthData() {
     });
     $.ajax({
         type: "GET",
-        url: "http://10.1.0.40:8080/nexteer/output-info/ISHAFT2/month?date="+endtime,
+        url: "http://localhost:8080/nexteer/output-info/ISHAFT2/month?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
 
@@ -117,7 +117,7 @@ function getIshaftOneMonthData() {
             myAjaxData = JSON.stringify(data);
             for(var j=0,len=proIDMsg.length;j<len;j++){
                 $.each(data,function (index,model) {
-                    if(data[index].modelId==proIDMsg[j]){
+                    if(Number(data[index].modelId)==Number(proIDMsg[j])){
                         for(var MDIndex=0;MDIndex<31;MDIndex++){
                             if (data[index].addDate==MonthDate[MDIndex]){
                                 myData[j][MDIndex]=data[index].count;
@@ -314,7 +314,7 @@ $("#selectMonthSub").bind("click",function (){
 
 
 
-    $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
+    $.get("http://localhost:8080/nexteer/product-model", function (data) {
         $.each(data, function (i, model) {
             if(model.cellName=="Ishaft2"){
 //                    ProMsg.push({"modelId":model.modelId,"modelName":model.modelName})
@@ -325,7 +325,7 @@ $("#selectMonthSub").bind("click",function (){
     });
     $.ajax({
         type: "GET",
-        url: "http://10.1.0.40:8080/nexteer/output-info/ISHAFT2/month?date="+endtime,
+        url: "http://localhost:8080/nexteer/output-info/ISHAFT2/month?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             myAjaxData = JSON.stringify(data);
@@ -335,7 +335,7 @@ $("#selectMonthSub").bind("click",function (){
 //                        myData[j].push({"addDate":myAjaxData[myIndex].addDate,"count":myAjaxData[myIndex].count});
 //                    }
                 $.each(data,function (index,model) {
-                    if(data[index].modelId==proIDMsg[j]){
+                    if(Number(data[index].modelId)==Number(proIDMsg[j])){
                         for(var MDIndex=0;MDIndex<31;MDIndex++){
                             if (data[index].addDate==MonthDate[MDIndex]){
                                 myData[j][MDIndex]=data[index].count;

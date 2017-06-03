@@ -72,7 +72,7 @@ $(document).ready(function(){
                 'Content-Type': 'application/json'
             },
             type: "POST",
-            url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+            url: "http://localhost:8080/nexteer/scrap-amount",
             data: JSON.stringify(addInputJson),
             dataType: "json",
             success: function (data) {
@@ -132,7 +132,7 @@ $(document).ready(function(){
                 'Content-Type': 'application/json'
             },
             type: "PATCH",
-            url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+            url: "http://localhost:8080/nexteer/scrap-amount",
             data: JSON.stringify(addInputJson),
             dataType: "json",
             success: function (data) {

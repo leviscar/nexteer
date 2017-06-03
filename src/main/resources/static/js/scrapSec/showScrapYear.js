@@ -171,7 +171,7 @@ function showYear() {
 
         console.log("当前年份天数"+YearDate);
 
-        $.get("http://10.1.0.40:8080/nexteer/scrap-amount/year?date="+YearDate[YearDate.length-1], function (data) {
+        $.get("http://localhost:8080/nexteer/scrap-amount/year?date="+YearDate[YearDate.length-1], function (data) {
             var YearDate = [];
             $.each($.parseJSON(data),function (i,model) {
                 YearDate.push(model.addDate);
@@ -284,7 +284,7 @@ function showYear() {
                         xAxisIndex: [0],
                         filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
                         start: 1,
-                        end: percent
+                        end: 100
                     }],
 
                 series: [
@@ -492,7 +492,7 @@ $("#selectYearSub").bind("click",function () {
         }
 
         console.log(YearDate);
-        $.get("http://10.1.0.40:8080/nexteer/scrap-amount/year?date="+YearDate[YearDate.length-1], function (data) {
+        $.get("http://localhost:8080/nexteer/scrap-amount/year?date="+YearDate[YearDate.length-1], function (data) {
             $.each($.parseJSON(data), function (i, model) {
                 for(var monIndex=0;monIndex<YearDate.length;monIndex++) {
                     if (YearDate[monIndex] == model.addDate) {
@@ -597,7 +597,7 @@ $("#selectYearSub").bind("click",function () {
                         xAxisIndex: [0],
                         filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
                         start: 1,
-                        end: percent
+                        end: 100
                     }],
 
                 series: [

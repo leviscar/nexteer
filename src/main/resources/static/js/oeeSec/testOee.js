@@ -74,7 +74,7 @@ function up(x, y) {
 
 }
 console.log('start');
-var obj={cell:"ISHAFT1"};
+var obj={cell:"BEPS3"};
 // 基于准备好的dom，初始化echarts实例
 function showWeek(event) {
     var IsOneoeeChart=echarts.init(document.getElementById('showIsOneWeekSheet'));
@@ -494,7 +494,7 @@ function showWeekMain(cell) {
 
     });
 }
-showWeekMain("ISHAFT1");
+showWeekMain("BEPS3");
 $("#showWeek").bind("click",obj,showWeek);
 
 
@@ -593,9 +593,11 @@ function showMonth(event){
                     console.log(JSON.stringify(data));
                     data.sort(up);
                     $.each(data, function (i, model) {
-                        OeeArr.push(model.oee);
-                        OeeTarArr.push(model.targetOee);
-                        NowDate.push(model.addDate);
+                        if(Number(model.oee!=0)){
+                            OeeArr.push(model.oee);
+                            OeeTarArr.push(model.targetOee);
+                            NowDate.push(model.addDate);
+                        }
                     });
 
 
@@ -792,9 +794,11 @@ function showSelectMonth(event){
                     console.log(JSON.stringify(data));
                     data.sort(up);
                     $.each(data, function (i, model) {
-                        OeeArr.push(model.oee);
-                        OeeTarArr.push(model.targetOee);
-                        NowDate.push(model.addDate);
+                        if(Number(model.oee!=0)){
+                            OeeArr.push(model.oee);
+                            OeeTarArr.push(model.targetOee);
+                            NowDate.push(model.addDate);
+                        }
                     });
 
 
@@ -974,9 +978,12 @@ function showYear(event){
                     console.log(JSON.stringify(data));
                     data.sort(up);
                     $.each(data, function (i, model) {
-                        OeeArr.push(model.oee);
-                        OeeTarArr.push(model.targetOee);
-                        NowDate.push(model.addDate);
+                        if(Number(model.oee!=0)){
+                            OeeArr.push(model.oee);
+                            OeeTarArr.push(model.targetOee);
+                            NowDate.push(model.addDate);
+                        }
+
                     });
 
 
@@ -1157,9 +1164,11 @@ function showSelectYear(event){
                     console.log(JSON.stringify(data));
                     data.sort(up);
                     $.each(data, function (i, model) {
-                        OeeArr.push(model.oee);
-                        OeeTarArr.push(model.targetOee);
-                        NowDate.push(model.addDate);
+                        if(Number(model.oee!=0)){
+                            OeeArr.push(model.oee);
+                            OeeTarArr.push(model.targetOee);
+                            NowDate.push(model.addDate);
+                        }
                     });
 
 
@@ -1266,5 +1275,6 @@ $("#selectMonthSub").bind("click",obj,showSelectMonth);
 $("#showYear").bind("click",obj,showYear);
 
 $("#selectYearSub").bind("click",obj,showSelectYear);
+
 
 

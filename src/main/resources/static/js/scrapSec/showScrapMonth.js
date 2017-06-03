@@ -167,7 +167,7 @@ function showMonth() {
     }
     console.log("当前月份天数"+MonthDate);
 
-    $.get("http://10.1.0.40:8080/nexteer/scrap-amount/month?date="+MonthDate[d.getDate()-1], function (data) {
+    $.get("http://localhost:8080/nexteer/scrap-amount/month?date="+MonthDate[d.getDate()-1], function (data) {
         console.log(data);
         var MonthDate = [];
         $.each($.parseJSON(data),function (i,model) {
@@ -241,7 +241,7 @@ function showMonth() {
                     xAxisIndex: [0],
                     filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
                     start: 1,
-                    end: percent
+                    end: 100
                 }],
             grid: myGrid,
             legend: myLengend,
@@ -467,7 +467,7 @@ $("#selectMonthSub").bind("click",function (){
         }
 
         console.log(MonthDate);
-        $.get("http://10.1.0.40:8080/nexteer/scrap-amount/month?date="+MonthDate[d.getDate()-1], function (data) {
+        $.get("http://localhost:8080/nexteer/scrap-amount/month?date="+MonthDate[d.getDate()-1], function (data) {
             console.log(data);
             $.each($.parseJSON(data), function (i, model) {
                 for(var monIndex=0;monIndex<MonthDate.length;monIndex++){

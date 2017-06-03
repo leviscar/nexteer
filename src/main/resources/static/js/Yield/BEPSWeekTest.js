@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2017/5/3.
  */
-//获取Ishaft3的周数据ajax请求函数
+//获取BEPS的周数据ajax请求函数
 function judgeMyTime(time) {
     var timeStr="";
     if (time<10){
@@ -45,23 +45,17 @@ function formOnload()
     var Sunday = transferDate(new Date(thisTime +  step_m * 24 * 3600* 1000));
     return [Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday];
 }
-// function endTime(endTime) {
-//     this.end_time = endTime;
-// }
-// var getIshaftOneWeekJson= new endTime(Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday));
+
+
 var endtime= Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday);
-//    var getIshaftOneWeekJson =new endTime("2017-04-06");
 // 基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(document.getElementById('IshaftOneWeekChart'));
-//    var myDataOne= [];
-//    var worker = new Worker('http://localhost:8080/nexteer/IshaftYieldWeekFirstWork.js');
-
 function getIshaftOneWeekData() {
     var proIDMsg=[];
     var proNameMsg=[];
     var myData=[];
     var myAjaxData=[];
-    for(var i=0;i<30;i++){    //一维长度为i,i为变量，可以根据实际情况改变
+    for(var i=0;i<15;i++){    //一维长度为i,i为变量，可以根据实际情况改变
         myData[i]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
         for(var myJ=0;myJ<7;myJ++){
             myData[i][myJ]=null;
@@ -71,8 +65,7 @@ function getIshaftOneWeekData() {
     console.log(WeekDate);
     $.get("http://localhost:8080/nexteer/product-model", function (data) {
         $.each(data, function (i, model) {
-            if(model.cellName=="Ishaft3"){
-//                    ProMsg.push({"modelId":model.modelId,"modelName":model.modelName})
+            if(model.cellName=="BEPS"){
                 proIDMsg.push(model.modelId);
                 proNameMsg.push(model.modelName);
             }
@@ -80,20 +73,17 @@ function getIshaftOneWeekData() {
     });
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/nexteer/output-info/ISHAFT3/week?date="+endtime,
+        url: "http://localhost:8080/nexteer/output-info/BEPS3/week?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             myAjaxData = JSON.stringify(data);
             console.log(typeof (data));
+            console.log(myAjaxData);
             for(var j=0,len=proIDMsg.length;j<len;j++){
-//                    for(var myIndex = 0,myLen = myAjaxData.length;myIndex<myLen;myIndex++){
-//                        if(myAjaxData[myIndex].)
-//                        myData[j].push({"addDate":myAjaxData[myIndex].addDate,"count":myAjaxData[myIndex].count});
-//                    }
                 $.each(data,function (index,model) {
                     if(Number(data[index].modelId)==Number(proIDMsg[j])){
-//                            myData[j].push(data[index].count);
                         for(var MDIndex=0;MDIndex<7;MDIndex++){
+                            console.log(data[index].addDate);
                             if (data[index].addDate==WeekDate[MDIndex]){
                                 myData[j][MDIndex]=data[index].count;
                             }
@@ -102,14 +92,11 @@ function getIshaftOneWeekData() {
 
                 })
             }
-//                for(var jD=0,jLen = myData[iD].length;jD<jLen;jD++){
-//                }
-//                for(var iD=0;iD<30;iD++){
-//
-//                }
+
+            console.log(myData);
 
             var myTitle= {
-                text: '第三条中间轴产量信息展示（周视图）',
+                text: '有刷产量信息展示（周视图）',
                 left:'40%',
                 textStyle:{
                     fontSize:24
@@ -152,19 +139,6 @@ function getIshaftOneWeekData() {
                     symbol: 'emptyCircle',data:myData[pI]};
             }
             console.log(sData);
-//                var mySeriesData =  [{
-//                    name: 'F102',
-//                    type: 'bar',
-//                    data: [20, 12, 31, 34, 31]
-//                }, {
-//                    name: 'R103',
-//                    type: 'bar',
-//                    data: [10, 20, 5, 9, 3]
-//                }, {
-//                    name: 'H50',
-//                    type: 'bar',
-//                    data: [1, 1, 2, 3, 1]
-//                }];
 
             option = {
                 title: myTitle,
@@ -231,8 +205,7 @@ function getIshaftOneWeekData() {
 
             console.log(proNameMsg);
             console.log(proIDMsg);
-            console.log(myData);
-            console.log(myAjaxData);
+            console.log(sData);
         },
         failure: function (errMsg) {
             console.log(errMsg);

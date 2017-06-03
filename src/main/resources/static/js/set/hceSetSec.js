@@ -25,7 +25,7 @@ $("#addHceSub").bind("click", function () {
     console.log(JSON.stringify(addHceJson));
     $.ajax({
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/hce/target",
+        url: "http://localhost:8080/nexteer/hce/target",
         data:JSON.stringify(addHceJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",

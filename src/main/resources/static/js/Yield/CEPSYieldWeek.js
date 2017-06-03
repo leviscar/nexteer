@@ -53,7 +53,7 @@ var endtime= Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday);
 //    var getIshaftOneWeekJson =new endTime("2017-04-06");
 
 //    var myDataOne= [];
-//    var worker = new Worker('http://10.1.0.40:8080/nexteer/IshaftYieldWeekFirstWork.js');
+//    var worker = new Worker('http://localhost:8080/nexteer/IshaftYieldWeekFirstWork.js');
 
 function getIshaftOneWeekData() {
     // 基于准备好的dom，初始化echarts实例
@@ -70,7 +70,7 @@ function getIshaftOneWeekData() {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
+    $.get("http://localhost:8080/nexteer/product-model", function (data) {
         $.each(data, function (i, model) {
             if(model.cellName=="CEPS"){
 //                    ProMsg.push({"modelId":model.modelId,"modelName":model.modelName})
@@ -81,7 +81,7 @@ function getIshaftOneWeekData() {
     });
     $.ajax({
         type: "GET",
-        url: "http://10.1.0.40:8080/nexteer/output-info/CEPS/week?date="+endtime,
+        url: "http://localhost:8080/nexteer/output-info/CEPS5/week?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             myAjaxData = JSON.stringify(data);
@@ -92,7 +92,7 @@ function getIshaftOneWeekData() {
 //                        myData[j].push({"addDate":myAjaxData[myIndex].addDate,"count":myAjaxData[myIndex].count});
 //                    }
                 $.each(data,function (index,model) {
-                    if(data[index].modelId==proIDMsg[j]){
+                    if(Number(data[index].modelId)==Number(proIDMsg[j])){
 //                            myData[j].push(data[index].count);
                         for(var MDIndex=0;MDIndex<7;MDIndex++){
                             if (data[index].addDate==WeekDate[MDIndex]){

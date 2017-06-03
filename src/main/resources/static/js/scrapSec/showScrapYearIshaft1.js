@@ -116,7 +116,7 @@ function showMonth(cell){
         {
             var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
             myMonthTitle.text = cellName+'报废金额'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
-            var urlString = "http://10.1.0.40:8080/nexteer/scrap-amount/"+cell+"/year/?date="+curr_time;
+            var urlString = "http://localhost:8080/nexteer/scrap-amount/"+cell+"/year/?date="+curr_time;
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
@@ -131,9 +131,11 @@ function showMonth(cell){
                     console.log(JSON.stringify(data));
                     data.sort(up);
                     $.each(data, function (i, model) {
-                        OeeArr.push(model.value);
-                        OeeTarArr.push(model.targetValue);
-                        NowDate.push(model.addDate);
+                        if(Number(model.value)!=0){
+                            OeeArr.push(model.value);
+                            OeeTarArr.push(model.targetValue);
+                            NowDate.push(model.addDate);
+                        }
                     });
 
 
@@ -315,7 +317,7 @@ function showSelectMonth(event){
             var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
             // var curr_time="2017-04-04";
             myMonthTitle.text = cellName+'报废金额'+ data[0]+'-'+data[1]+ '月视图';
-            var urlString = "http://10.1.0.40:8080/nexteer/scrap-amount/"+event.data.cell+"/year/?date="+curr_time;
+            var urlString = "http://localhost:8080/nexteer/scrap-amount/"+event.data.cell+"/year/?date="+curr_time;
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
@@ -330,9 +332,11 @@ function showSelectMonth(event){
                     console.log(JSON.stringify(data));
                     data.sort(up);
                     $.each(data, function (i, model) {
-                        OeeArr.push(model.value);
-                        OeeTarArr.push(model.targetValue);
-                        NowDate.push(model.addDate);
+                        if(Number(model.value)!=0){
+                            OeeArr.push(model.value);
+                            OeeTarArr.push(model.targetValue);
+                            NowDate.push(model.addDate);
+                        }
                     });
 
 
