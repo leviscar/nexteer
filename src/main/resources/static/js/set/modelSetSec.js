@@ -11,7 +11,6 @@ function addProInput(modelID, modelName, cellName,std) {
     this.modelId  = modelID;
     this.modelName = modelName;
     this.cellName = cellName;
-    this.std= std;
 }
 
 console.log("开始运行");
@@ -40,13 +39,13 @@ function getProduct(cell,id) {
                 case "CEPS": line="无刷产线";
                     break;
             }
-            $(id).append("<tbody><tr><td>"+(i+1)+"</td><td>"+model.modelId+"</td><td>"+model.modelName+"</td><td>"+line+"</td><td>"+model.std+"</td><td><button class=\"modelSub btn btn-primary\">删除</button></td></tr></tbody>");
+            $(id).append("<tbody><tr><td>"+(i+1)+"</td><td>"+model.modelId+"</td><td>"+model.modelName+"</td><td>"+line+"</td><td><button class=\"modelSub btn btn-primary\">删除</button></td></tr></tbody>");
         });
     });
 }
 $("#addProSub").bind("click", function () {
 
-    var addProJson=new addProInput($("#addProID").val().toString(),$("#addProName").val().toString(),$("#addProCell").val(),Number($("#addProSTD").val()));
+    var addProJson=new addProInput($("#addProID").val().toString(),$("#addProName").val().toString(),$("#addProCell").val());
     console.log("start");
     console.log(JSON.stringify(addProJson));
     $.ajax({
