@@ -11,9 +11,8 @@ $(document).ready(function(){
 
     var stdNode=$(".banci tr td:nth-child(5)");
     stdNode.click(newClick);
-    var stdSelect=$(".banci tr td:nth-child(5) select");
-    stdSelect.change(newSelect);
-
+    // var stdSelect=$(".banci tbody tr select");
+    // stdSelect.change(newSelect);
 
 
 });
@@ -65,6 +64,14 @@ function stdClick() {
     //将td的文本内容保存
     var td = $(this);
     var cell=$(this).parent().find("td").eq(0).attr("class");
+    console.log(cell);
+    if(cell=="BEPS3"){
+        cell="BEPS"
+    }
+    if(cell=="CEPS5"){
+        cell="CEPS"
+    }
+
     //将td的内容清空
     td.empty();
     //新建一个输入框
@@ -109,33 +116,57 @@ function stdClick() {
 }
 
 function newClick() {
-    var input = $("<select class='form-control changeSelect'>");
-
+    var td = $(this);
+    var tdText = td.text();
     var cell=$(this).parent().find("td").eq(0).attr("class");
+    console.log(cell);
+    if(cell=="BEPS3"){
+        cell="BEPS"
+    }
+    if(cell=="CEPS5"){
+        cell="CEPS"
+    }
+    var input = $("<td><select class='form-control changeSelect' onchange='newSelect(this)'></td>");
+
+
     $.get("http://localhost:8080/nexteer/std-info/standard-beat/"+cell, function (data) {
         $(this).empty();
         //新建一个输入框
         $.each(data,function (i,model) {
             if(data[i]!=0&&data[i]!=null){
-                input.append("<option>"+data[i]+"</option>");
+                if(data[i]==Number(tdText)){
+                    input.find("select").append("<option selected>"+data[i]+"</option>");
+                }else{
+                    input.find("select").append("<option>"+data[i]+"</option>");
+                }
+
 
             }
 
         });
-    });
 
+    });
     //将输入框添加到td中
     $(this).replaceWith(input);
 
+    $(this).bind("click",newClick);
+
+
 }
 
-function newSelect() {
-    var cell=$(this).parent().find("td").eq(0).attr("class");
-    var num=$(this).find("select").val();
+function newSelect(self) {
+    // var cell=$(this).parent().text();
+    var cell=$(self).parent().parent().find('td').eq(0).attr("class");
+    var num=$(self).val();
+    if(cell=="BEPS3"){
+        cell="BEPS"
+    }
+    if(cell=="CEPS5"){
+        cell="CEPS"
+    }
     console.log("td开始工作");
     $.get("http://localhost:8080/nexteer/std-info/worker-num/"+cell+"?standard-beat="+num, function (data) {
-        console.log(num);
-        $(this).parent().find("td").eq(5).html(data);
+        $(self).parent().parent().find("td").eq(5).html(data);
     });
 
 }

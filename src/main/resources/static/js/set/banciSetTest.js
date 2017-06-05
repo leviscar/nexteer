@@ -26,6 +26,10 @@ var shift=["CEPS5","BEPS3","ISHAFT1","ISHAFT2","ISHAFT3","ISHAFT4"];
 var shiftType = ["Ashift","Bshift","Cshift"];
 var shiftTable=["#showCEPSTable","#showBEPSTable","#showIshaft1Table","#showIshaft2Table","#showIshaft3Table","#showIshaft4Table"];
 
+function newBind() {
+    var tdNods = $(".banci li table:nth-child(1) tbody tr td:nth-child(5)");
+    tdNods.click(tdClick);
+}
 //显示班次按钮
 function showShift() {
     $("#showISHAFT1Event").find("tbody").remove();
@@ -42,6 +46,7 @@ function showShift() {
         $("#showIshaft1Table").find("tbody").find("tr").eq(0).find("td").eq(2).find("input").val(data.startTime);
         $("#showIshaft1Table").find("tbody").find("tr").eq(0).find("td").eq(3).find("input").val(data.endTime);
         $("#showIshaft1Table").find("tbody").find("tr").eq(0).find("td").eq(4).text(data.standardBeat==0?"":data.standardBeat);
+
         $("#showIshaft1Table").find("tbody").find("tr").eq(0).find("td").eq(5).text(data.normalWorkerNum==0?"":data.normalWorkerNum);
         $("#showIshaft1Table").find("tbody").find("tr").eq(0).find("td").eq(6).text(data.overtimeWorkerNum==0?"":data.overtimeWorkerNum);
         $("#showIshaft1Table").find("tbody").find("tr").eq(0).find("td").eq(7).text(data.target==0?"":data.target);
@@ -448,7 +453,7 @@ $(document).ready(function(){
         var shiftType = $(this).parent().parent().find("td").eq(1).text();
         var startTime = $(this).parent().parent().find("td").eq(2).find("input").val();
         var endTime = $(this).parent().parent().find("td").eq(3).find("input").val();
-        var standardBeat= $(this).parent().parent().find("td").eq(4).text();
+        var standardBeat= $(this).parent().parent().find("select").val();
         var normalWorkerNum= $(this).parent().parent().find("td").eq(5).text();
         var overtimeWorkerNum= $(this).parent().parent().find("td").eq(6).text();
         var target= $(this).parent().parent().find("td").eq(7).text();

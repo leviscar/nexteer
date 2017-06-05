@@ -27,3 +27,8 @@
 /*#myCEPSModal input{*/
     /*width: 80%;*/
 /*}*/
+.changeSelect{
+    width: 100% !important;
+    height: 100%;
+    font-size: 1em;
+}

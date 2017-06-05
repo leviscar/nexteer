@@ -103,7 +103,7 @@ function getIshaftOneMonthData() {
     });
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/nexteer/output-info/BEPS/year?date="+endtime,
+        url: "http://localhost:8080/nexteer/output-info/BEPS3/year?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             myAjaxData = JSON.stringify(data);
@@ -320,7 +320,7 @@ $("#selectYearSub").bind("click",function () {
         });
         $.ajax({
             type: "GET",
-            url: "http://localhost:8080/nexteer/output-info/BEPS/year?date="+endtime,
+            url: "http://localhost:8080/nexteer/output-info/BEPS3/year?date="+endtime,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 myAjaxData = JSON.stringify(data);

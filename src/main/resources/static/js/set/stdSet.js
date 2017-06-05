@@ -183,16 +183,12 @@ getIshaftData();
 $(document).ready(function(){
     $('#CEPSStdSet').on('click','.deleteStd',function(){
         console.log("delStd start");
-        var modelId = $(this).parent().parent().parent().find("tr").eq(0).find("td").text();
-        console.log(modelId);
-        var addJson=new stdDelInput("CEPS",Number(modelId));
-        var urlString = "http://localhost:8080/nexteer/std-info";
+        var modelId = Number($(this).parent().parent().parent().find("tr").eq(0).find("td").text());
+        var urlString = "http://localhost:8080/nexteer/std-info/CEPS?standard-beat="+modelId;
         console.log(urlString);
         $.ajax({
             url: urlString,
             type: 'DELETE',
-            data: JSON.stringify(addJson),
-            dataType: "json",
             success: function(result) {
                 console.log("删除成功");
                 getCEPSSTDData();
@@ -201,39 +197,33 @@ $(document).ready(function(){
     });
     $('#BEPSStdSet').on('click','.deleteStd',function(){
         console.log("delStd start");
-        var modelId = $(this).parent().parent().parent().find("tr").eq(0).find("td").text();
-        console.log(modelId);
-        var addJson=new stdDelInput("BEPS",Number(modelId));
-        console.log(JSON.stringify(addJson));
-        var urlString = "http://localhost:8080/nexteer/std-info";
+        var modelId = Number($(this).parent().parent().parent().find("tr").eq(0).find("td").text());
+        var urlString = "http://localhost:8080/nexteer/std-info/BEPS?standard-beat="+modelId;
         console.log(urlString);
         $.ajax({
             url: urlString,
             type: 'DELETE',
-            data:JSON.stringify(addJson),
-            dataType: "json",
             success: function(result) {
                 console.log("删除成功");
-                // getBEPSSTDData();
+                getBEPSSTDData();
             }
         });
     });
     $('#IShaftStdSet').on('click','.deleteIShaftStd',function(){
         console.log("delStd start");
-        var addJson=new stdDelInput($(this).parent().parent().find("td").eq(0).attr("class"),Number($(this).parent().parent().find("td").eq(1).text()));
-        console.log(JSON.stringify(addJson));
-        var urlString = "http://localhost:8080/nexteer/std-info";
+        var cell=$(this).parent().parent().find("td").eq(0).attr("class");
+        var sd=Number($(this).parent().parent().find("td").eq(1).text());
+        var urlString = "http://localhost:8080/nexteer/std-info/"+cell+"?standard-beat="+sd;
         console.log(urlString);
         $.ajax({
             url: urlString,
-            type: 'POST',
-            data:{cellName:"ISHAFT1",standardBeats:28,_method: "DELETE"},
-            dataType: "json",
+            type: 'DELETE',
             success: function(result) {
                 console.log("删除成功");
                 getIshaftData();
             }
         });
+
     });
 });
 

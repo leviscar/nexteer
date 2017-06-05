@@ -98,7 +98,13 @@ function getIshaftOneMonthData() {
 //        for(var jX=0;jX<30;jX++){    //一维长度为i,i为变量，可以根据实际情况改变
 //            myXDate[jX]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
 //        }
-
+    var YearDate=[];
+    for(var yIndex=1;yIndex<13;yIndex++){
+        var d=new Date(Uyear,yIndex,0);
+        for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
+            YearDate.push(Uyear+"-"+judgeMyTime(yIndex)+"-"+judgeMyTime(Mindex))
+        }
+    }
 
     console.log("当前年份天数"+YearDate);
 
@@ -113,7 +119,7 @@ function getIshaftOneMonthData() {
     });
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/nexteer/output-info/CEPS/year?date="+endtime,
+        url: "http://localhost:8080/nexteer/output-info/CEPS5/year?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             var YearDate = [];
@@ -135,7 +141,7 @@ function getIshaftOneMonthData() {
                             if (data[index].addDate==YearDate[MDIndex]){
                                 myData[j][MDIndex]=data[index].count;
                                 sum[j]+=data[index].count;
-                                percent=100*MDIndex/366;
+                                percent=100*MDIndex/366+2;
                             }
 
                         }
@@ -316,7 +322,15 @@ $("#selectYearSub").bind("click",function () {
 //        for(var jX=0;jX<30;jX++){    //一维长度为i,i为变量，可以根据实际情况改变
 //            myXDate[jX]=[];  //声明二维，每一个一维数组里面的一个元素都是一个数组；
 //        }
+        var YearDate=[];
+        for(var yIndex=1;yIndex<13;yIndex++){
+            var d=new Date(Uyear,yIndex,0);
+            for(var Mindex=1;Mindex<d.getDate()+1;Mindex++){
+                YearDate.push(Uyear+"-"+judgeMyTime(yIndex)+"-"+judgeMyTime(Mindex))
+            }
+        }
 
+        console.log("当前年份天数"+YearDate);
 
         $.get("http://localhost:8080/nexteer/product-model", function (data) {
             $.each(data, function (i, model) {
@@ -329,7 +343,7 @@ $("#selectYearSub").bind("click",function () {
         });
         $.ajax({
             type: "GET",
-            url: "http://localhost:8080/nexteer/output-info/CEPS/year?date="+endtime,
+            url: "http://localhost:8080/nexteer/output-info/CEPS5/year?date="+endtime,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 var YearDate = [];
@@ -351,7 +365,7 @@ $("#selectYearSub").bind("click",function () {
                                 if (data[index].addDate==YearDate[MDIndex]){
                                     myData[j][MDIndex]=data[index].count;
                                     sum[j]+=data[index].count;
-                                    percent=100*MDIndex/366;
+                                    percent=100*MDIndex/366+2;
                                 }
 
                             }

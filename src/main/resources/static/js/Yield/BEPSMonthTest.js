@@ -29,8 +29,8 @@ function unique1(arr){
     return newArr;
 }
 
-// var endtime= Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday);
-var endtime="2017-05-31";
+var endtime= Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday);
+// var endtime="2017-05-31";
 // 基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(document.getElementById('IshaftOneYieldMonthBar'));
 var myPieChart = echarts.init(document.getElementById('IshaftOneYieldMonthPie'));
