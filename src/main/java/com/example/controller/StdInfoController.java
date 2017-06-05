@@ -48,11 +48,12 @@ public class StdInfoController {
     /**
      * Delete record based on standard beat
      *
-     * @param stdInfo
+     * @param standardBeat
+     * @param cellName
      */
-    @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteByStandardBeat(@RequestBody StdInfo stdInfo) {
-        stdInfoRepo.delete(stdInfo.getCellName(), stdInfo.getStandardBeats());
+    @RequestMapping(value = "/{cell}", method = RequestMethod.DELETE)
+    public void deleteByStandardBeat(@PathVariable(value = "cell") String cellName, @RequestParam(value = "standard-beat") int standardBeat) {
+        stdInfoRepo.delete(cellName, standardBeat);
     }
 
     /**
@@ -64,7 +65,7 @@ public class StdInfoController {
     @RequestMapping(method = RequestMethod.POST)
     public List<StdInfo> add(@RequestBody List<StdInfo> stdInfos) {
         List<StdInfo> res = new ArrayList<>();
-        for (StdInfo stdInfo: stdInfos) {
+        for (StdInfo stdInfo : stdInfos) {
             res.add(stdInfoRepo.add(stdInfo));
         }
         return res;
