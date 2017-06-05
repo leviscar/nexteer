@@ -26,7 +26,7 @@ console.log("safeShow开始");
 //
 //     $.ajax({
 //         type: "POST",
-//         url: "http://localhost:8080/nexteer/safety-date",
+//         url: "http://10.1.0.40:8080/nexteer/safety-date",
 //         data: JSON.stringify(jsonString),
 //         contentType: "application/json; charset=utf-8",
 //         dataType: "json",
@@ -48,8 +48,8 @@ function getSafeDay() {
     var nowDay = new Date().getDate();
     var nowTime=judgeTime(nowYear)+"-"+judgeTime(nowMonth)+"-"+judgeTime(nowDay);
     console.log(nowTime);
-    // var urlString = "http://localhost:8080/nexteer/safety-date/day?date="+nowTime;
-    $.get("http://localhost:8080/nexteer/safety-date/day?date="+nowTime,function (data) {
+    // var urlString = "http://10.1.0.40:8080/nexteer/safety-date/day?date="+nowTime;
+    $.get("http://10.1.0.40:8080/nexteer/safety-date/day?date="+nowTime,function (data) {
         if($.parseJSON(data).system_status != false){
             console.log(JSON.stringify(data));
             $("#safeDay").html($.parseJSON(data).safe_dates);
@@ -77,7 +77,7 @@ function getSafeDay() {
     //     }
     //
     // });
-    $.get("http://localhost:8080/nexteer/safety-date/max",function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/safety-date/max",function (data) {
 
             console.log(JSON.stringify(data));
             $("#safeHigh").html(data);

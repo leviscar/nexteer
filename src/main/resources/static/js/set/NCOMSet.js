@@ -19,7 +19,7 @@ $("#startNCOMDate").bind("click",function () {
     console.log(getStartJson);
     $.ajax({
         type: "PATCH",
-        url: "http://localhost:8080/nexteer/quality-complain",
+        url: "http://10.1.0.40:8080/nexteer/quality-complain",
         data: JSON.stringify(getStartJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -51,7 +51,7 @@ $("#resetNCOMDate").bind("click",function () {
     var getResetJson=new resetNCOMDate($("#resetNCOMDateTime").val(),resetMessage,0,0);
     $.ajax({
         type: "PATCH",
-        url: "http://localhost:8080/nexteer/quality-complain",
+        url: "http://10.1.0.40:8080/nexteer/quality-complain",
         data: JSON.stringify(getResetJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -84,7 +84,7 @@ $("#desNCOMDate").bind("click",function () {
     var getdesJson=new desNCOMDate($("#desNCOMDateTime").val(),desMessage,-1,0);
     $.ajax({
         type: "PATCH",
-        url: "http://localhost:8080/nexteer/quality-complain",
+        url: "http://10.1.0.40:8080/nexteer/quality-complain",
         data: JSON.stringify(getdesJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -117,7 +117,7 @@ $("#logNCOMDate").bind("click",function () {
     var getlogJson=new logNCOMDate($("#logNCOMDateTime").val(),logMessage,0,0);
     $.ajax({
         type: "PATCH",
-        url: "http://localhost:8080/nexteer/quality-complain",
+        url: "http://10.1.0.40:8080/nexteer/quality-complain",
         data: JSON.stringify(getlogJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",

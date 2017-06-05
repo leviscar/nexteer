@@ -90,7 +90,7 @@ body{
 }
 @font-face {
     font-family: '造字工房朗倩（非商用）常规体';
-    src: url("static/images/normalZAO.otf") format('opentype');
+    src: url("../images/normalZAO.otf") format('opentype');
 }
 /*body{*/
     /*font-size: 20px !important;*/
