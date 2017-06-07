@@ -33,7 +33,7 @@ function showScrapData() {
     var curTime = judgeTime(year)+"-"+judgeTime(month)+"-"+judgeTime(day-1);
     // $.ajax({
     //     type: "POST",
-    //     url: "http://localhost:8080/nexteer/scrap-amount/getByDate",
+    //     url: "http://10.1.0.40:8080/nexteer/scrap-amount/getByDate",
     //     data: JSON.stringify(nowScrapString),
     //     contentType: "application/json; charset=utf-8",
     //     dataType: "json",
@@ -48,7 +48,7 @@ function showScrapData() {
     //         console.log("载入报废金额失败。。");
     //     }
     // });
-    $.get("http://localhost:8080/nexteer/scrap-amount/day?date="+curTime,function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/scrap-amount/day?date="+curTime,function (data) {
         var IshaftArray=0;
         var CEPSArray = 0;
         var BEPSArray =0;

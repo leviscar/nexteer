@@ -65,7 +65,7 @@ function getRunStatus(cell) {
     }
     // var curTime="2017-03-23 19:00:00";
     var curTime= year+"-"+judgeTime(month)+"-"+judgeTime(day)+" "+judgeTime(date.getHours())+":"+judgeTime(date.getMinutes())+":"+judgeTime(date.getSeconds());
-    var urlString = "http://localhost:8080/nexteer/unit-status/"+cell+"?curr_time="+curTime;
+    var urlString = "http://10.1.0.40:8080/nexteer/unit-status/"+cell+"?curr_time="+curTime;
     console.log(urlString);
     $.get(urlString,function (data) {
         if(data.curr_shift_info.id!=null){

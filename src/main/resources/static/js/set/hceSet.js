@@ -55,7 +55,7 @@ function formOnload()
 function getHceData() {
     var WeekDate=formOnload();
     console.log(WeekDate);
-    $.get("http://localhost:8080/nexteer/hce/week?date="+WeekDate[6], function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/hce/week?date="+WeekDate[6], function (data) {
         console.log(data);
         var myData=[];
         var myCEPSData=[];
@@ -596,7 +596,7 @@ $("#addHceSub").bind("click", function () {
     console.log(JSON.stringify(addHceJson));
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/hce/target",
+        url: "http://10.1.0.40:8080/nexteer/hce/target",
         data:JSON.stringify(addHceJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
