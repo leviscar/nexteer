@@ -1,7 +1,8 @@
 
 body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 {
-    font-family: '造字工房朗倩（非商用）常规体',Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+    /*font-family: '造字工房朗倩（非商用）常规体',Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;*/
     /*font-family: '造字工房朗倩（非商用）常规体' !important;*/
+    font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
 }
 
 body {
@@ -15,7 +16,7 @@ body {
 
 /*body{background: url(images/background.png) no-repeat center 0}*/
 .bg{
-    background-image: url(images/backgroundNew.png);//此为图片地址
+    background-image: url(../images/backgroundNew.png);//此为图片地址
 background-size: 100% 100%;
     -moz-background-size: 100% 100%;
     -webkit-background-size: 100% 100%;

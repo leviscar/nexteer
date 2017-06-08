@@ -2,7 +2,7 @@
 body {
     background-color: #F7F7F7;
 }
-/*body{background: url(images/backgroundNew.png) no-repeat center 0}*/
+/*body{background: url(../images/backgroundNew.png) no-repeat center 0}*/
 .main{
     width: 100%;
     margin:0;

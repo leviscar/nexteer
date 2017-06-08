@@ -52,12 +52,12 @@ function showShift() {
         $("#showIshaft1Table").find("tbody").find("tr").eq(0).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("ISHAFT1",data.id);
         if (data.open ==true){
-            $("#showIshaft1Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showIshaft1Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showIshaft1Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showIshaft1Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -74,12 +74,12 @@ function showShift() {
         $("#showIshaft1Table").find("tbody").find("tr").eq(1).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("ISHAFT1",data.id);
         if (data.open ==true){
-            $("#showIshaft1Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showIshaft1Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showIshaft1Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showIshaft1Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -96,12 +96,12 @@ function showShift() {
         $("#showIshaft1Table").find("tbody").find("tr").eq(2).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("ISHAFT1",data.id);
         if (data.open ==true){
-            $("#showIshaft1Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showIshaft1Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showIshaft1Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showIshaft1Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -119,12 +119,12 @@ function showShift() {
         $("#showIshaft2Table").find("tbody").find("tr").eq(0).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("ISHAFT2",data.id);
         if (data.open ==true){
-            $("#showIshaft2Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showIshaft2Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showIshaft2Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showIshaft2Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -141,12 +141,12 @@ function showShift() {
         $("#showIshaft2Table").find("tbody").find("tr").eq(1).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("ISHAFT2",data.id);
         if (data.open ==true){
-            $("#showIshaft2Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showIshaft2Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showIshaft2Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showIshaft2Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -163,12 +163,12 @@ function showShift() {
         $("#showIshaft2Table").find("tbody").find("tr").eq(2).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("ISHAFT2",data.id);
         if (data.open ==true){
-            $("#showIshaft2Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showIshaft2Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showIshaft2Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showIshaft2Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -186,12 +186,12 @@ function showShift() {
         $("#showIshaft3Table").find("tbody").find("tr").eq(0).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("ISHAFT3",data.id);
         if (data.open ==true){
-            $("#showIshaft3Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showIshaft3Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showIshaft3Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showIshaft3Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -208,12 +208,12 @@ function showShift() {
         $("#showIshaft3Table").find("tbody").find("tr").eq(1).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("ISHAFT3",data.id);
         if (data.open ==true){
-            $("#showIshaft3Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showIshaft3Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showIshaft3Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showIshaft3Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -230,12 +230,12 @@ function showShift() {
         $("#showIshaft3Table").find("tbody").find("tr").eq(2).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("ISHAFT3",data.id);
         if (data.open ==true){
-            $("#showIshaft3Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showIshaft3Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showIshaft3Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showIshaft3Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -253,12 +253,12 @@ function showShift() {
         $("#showIshaft4Table").find("tbody").find("tr").eq(0).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("ISHAFT4",data.id);
         if (data.open ==true){
-            $("#showIshaft4Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showIshaft4Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showIshaft4Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showIshaft4Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -275,12 +275,12 @@ function showShift() {
         $("#showIshaft4Table").find("tbody").find("tr").eq(1).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("ISHAFT4",data.id);
         if (data.open ==true){
-            $("#showIshaft4Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showIshaft4Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showIshaft4Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showIshaft4Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -297,12 +297,12 @@ function showShift() {
         $("#showIshaft4Table").find("tbody").find("tr").eq(2).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("ISHAFT4",data.id);
         if (data.open ==true){
-            $("#showIshaft4Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showIshaft4Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showIshaft4Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showIshaft4Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -320,12 +320,12 @@ function showShift() {
         $("#showBEPS3Table").find("tbody").find("tr").eq(0).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("BEPS3",data.id);
         if (data.open ==true){
-            $("#showBEPS3Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showBEPS3Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showBEPS3Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showBEPS3Table").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -342,12 +342,12 @@ function showShift() {
         $("#showBEPS3Table").find("tbody").find("tr").eq(1).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("BEPS3",data.id);
         if (data.open ==true){
-            $("#showBEPS3Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showBEPS3Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showBEPS3Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showBEPS3Table").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -364,12 +364,12 @@ function showShift() {
         $("#showBEPS3Table").find("tbody").find("tr").eq(2).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("BEPS3",data.id);
         if (data.open ==true){
-            $("#showBEPS3Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showBEPS3Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showBEPS3Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showBEPS3Table").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -387,12 +387,12 @@ function showShift() {
         $("#showCEPSTable").find("tbody").find("tr").eq(0).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("CEPS5",data.id);
         if (data.open ==true){
-            $("#showCEPSTable").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showCEPSTable").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showCEPSTable").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showCEPSTable").find("tbody").find("tr").eq(0).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -409,12 +409,12 @@ function showShift() {
         $("#showCEPSTable").find("tbody").find("tr").eq(1).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("CEPS5",data.id);
         if (data.open ==true){
-            $("#showCEPSTable").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showCEPSTable").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showCEPSTable").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showCEPSTable").find("tbody").find("tr").eq(1).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
@@ -431,12 +431,12 @@ function showShift() {
         $("#showCEPSTable").find("tbody").find("tr").eq(2).find("td").eq(7).text(data.target==0?"":data.target);
         showEvent("CEPS5",data.id);
         if (data.open ==true){
-            $("#showCEPSTable").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
+            $("#showCEPSTable").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\"  checked/> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
 
         }
         else{
-            $("#showCEPSTable").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primrya\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
+            $("#showCEPSTable").find("tbody").find("tr").eq(2).find("td").eq(8).replaceWith("<td class=\"switch switch-large\" data-on=\"danger\" data-off=\"primary\" > <input type=\"checkbox\" name=\"my-checkbox\" /> </td>");
             $("[name='my-checkbox']").bootstrapSwitch();
         }
 
