@@ -107,8 +107,3 @@ CREATE TABLE polling_page (
   interval   INT,
   PRIMARY KEY (cell_name)
 );
-CREATE TABLE welcome_image (
-  name  VARCHAR(255),
-  image TEXT,
-  PRIMARY KEY (name)
-);
