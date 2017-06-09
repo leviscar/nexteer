@@ -21,7 +21,7 @@ function pollInput(cell,is,interval) {
     this.interval=interval;
 }
 function getPollStatus() {
-    $.get("http://localhost:8080/nexteer/polling-page/",function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/polling-page/",function (data) {
         console.log(data[0]);
         if(data[0]==undefined){
             $(".rollTbody").find("tr").eq(0).find("td").eq(1).replaceWith(" <td  class='switch switch-large' data-on='danger' data-off='primary' > <input id='mySwitch'type='checkbox' name='my-checkbox' /></td>");
@@ -37,46 +37,60 @@ function getPollStatus() {
 
 }
 getPollStatus();
-
+function addWelcomeInput(name,image) {
+    this.name=name;
+    this.image=image;
+}
 
 function checkButton() {
     console.log($(".rollTbody").find("tr").eq(0).find("input").is(':checked'));
     var pollAdd=new pollInput("welcome",true,10);
 
-        if( $(".rollTbody").find("tr").eq(0).find("input").is(':checked')==true){
-            $.ajax({
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                type: "POST",
-                url: "http://localhost:8080/nexteer/polling-page/",
-                data: JSON.stringify(pollAdd),
-                dataType: "json",
-                success: function (data) {
-                    console.log(data);
+    // var curTime="2017-03-23 19:00:00";
+    var curTime= year+"-"+judgeTime(month)+"-"+judgeTime(day)+" "+judgeTime(date.getHours())+":"+judgeTime(date.getMinutes())+":"+judgeTime(date.getSeconds());
+    var urlString = "http://10.1.0.40:8080/nexteer/unit-status/"+cell+"?curr_time="+curTime;
+    console.log(urlString);
+    $.get(urlString,function (data) {
+        if (data.curr_shift_info.id != null) {
+            if (data.curr_shift_info.open == true) {
+                $(".rollTbody").find("tr").eq(index).find("td").eq(1).replaceWith("<td class='switch switch-large' data-on='danger' data-off='primrya' > <input type='checkbox' name='my-checkbox'  /></td>");
 
-                },
-                failure: function (errMsg) {
-                    console.log(errMsg);
-                }
-            });
-        }else{
-            $.ajax({
-                type: "DELETE",
-                url: "http://localhost:8080/nexteer/polling-page/WELCOME",
-                success: function (data) {
-                    console.log("删除成功");
+                if ($(".rollTbody").find("tr").eq(0).find("input").is(':checked') == true) {
+                    $.ajax({
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        type: "POST",
+                        url: "http://10.1.0.40:8080/nexteer/polling-page/",
+                        data: JSON.stringify(pollAdd),
+                        dataType: "json",
+                        success: function (data) {
+                            console.log(data);
 
-                },
-                failure: function (errMsg) {
-                    console.log(errMsg);
+                        },
+                        failure: function (errMsg) {
+                            console.log(errMsg);
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        type: "DELETE",
+                        url: "http://10.1.0.40:8080/nexteer/polling-page/WELCOME",
+                        success: function (data) {
+                            console.log("删除成功");
+
+                        },
+                        failure: function (errMsg) {
+                            console.log(errMsg);
+                        }
+                    });
                 }
-            });
+
+            }
         }
-
+    });
 }
-
 function checkNew(status) {
     console.log("checkNew-Status:"+status);
     if(status==true){
@@ -86,7 +100,7 @@ function checkNew(status) {
                 'Content-Type': 'application/json'
             },
             type: "POST",
-            url: "http://localhost:8080/nexteer/polling-page/",
+            url: "http://10.1.0.40:8080/nexteer/polling-page/",
             data: JSON.stringify(pollAdd),
             dataType: "json",
             success: function (data) {
@@ -100,7 +114,7 @@ function checkNew(status) {
     }else{
         $.ajax({
             type: "DELETE",
-            url: "http://localhost:8080/nexteer/polling-page/WELCOME",
+            url: "http://10.1.0.40:8080/nexteer/polling-page/WELCOME",
             success: function (data) {
                 console.log("删除成功");
 
@@ -124,7 +138,7 @@ $("#addPollSub").bind("click",function () {
             'Content-Type': 'application/json'
         },
         type: "POST",
-        url: "http://localhost:8080/nexteer/polling-page/",
+        url: "http://10.1.0.40:8080/nexteer/polling-page/",
         data: JSON.stringify(pollAdd),
         dataType: "json",
         success: function (data) {
@@ -142,7 +156,7 @@ $("#delPollSub").bind("click",function () {
     console.log("添加Poll");
     $.ajax({
         type: "DELETE",
-        url: "http://localhost:8080/nexteer/polling-page/WELCOME",
+        url: "http://10.1.0.40:8080/nexteer/polling-page/WELCOME",
         success: function (data) {
             console.log("删除成功");
             getPollStatus();
@@ -153,3 +167,41 @@ $("#delPollSub").bind("click",function () {
         }
     });
 });
+
+        function ProcessFile( e ) {
+           var file = document.getElementById('file').files[0];
+           if ( file ) {
+
+               var reader = new FileReader();
+               reader.onload = function ( event ) {
+                   var txt = event.target.result;
+                   var img = document.createElement("img");
+                   img.src = txt;
+                   $("#result").empty();
+                   document.getElementById("result").appendChild( img );
+                   var welcome = new addWelcomeInput("welcome.png",txt);
+                   console.log(welcome);
+                   $.ajax({
+                       headers: {
+                           'Content-Type': 'application/json'
+                       },
+                       type: "POST",
+                       url: "http://10.1.0.40:8080/nexteer/welcome",
+                       data: JSON.stringify(welcome),
+                       dataType: "json",
+                       success: function (data) {
+                           console.log(data);
+                       },
+                       failure: function (errMsg) {
+                           console.log(errMsg);
+                       }
+                   });
+               };
+           }
+           reader.readAsDataURL( file );
+       }
+       function contentLoaded() {
+           document.getElementById('file').addEventListener( 'change' ,
+               ProcessFile , false );
+       }
+       window.addEventListener( "DOMContentLoaded" , contentLoaded , false );

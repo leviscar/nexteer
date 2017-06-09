@@ -27,69 +27,70 @@ Array.prototype.remove = function(val) {
         this.splice(index, 1);
     }
 };
-// url.push ( 'http://localhost:8080/nexteer/index.html');
-// url.push ( 'http://localhost:8080/nexteer/html/Unit/BEPS1Unit.html');
-// url.push ( 'http://localhost:8080/nexteer/html/Unit/BEPS2Unit.html');
-// url.push ( 'http://localhost:8080/nexteer/html/Unit/BEPS3Unit.html');
-// url.push ( 'http://localhost:8080/nexteer/html/Unit/CEPS1Unit.html');
-// url.push ( 'http://localhost:8080/nexteer/html/Unit/CEPS2Unit.html');
-// url.push ( 'http://localhost:8080/nexteer/html/Unit/CEPS3Unit.html');
-// url.push ( 'http://localhost:8080/nexteer/html/Unit/CEPS4Unit.html');
-// url.push ( 'http://localhost:8080/nexteer/html/Unit/CEPS5Unit.html');
-// url.push ( 'http://localhost:8080/nexteer/html/Unit/Ishaft1Unit.html');
-// url.push ( 'http://localhost:8080/nexteer/html/Unit/Ishaft2Unit.html');
-// url.push ( 'http://localhost:8080/nexteer/html/Unit/Ishaft3Unit.html');
-// url.push ( 'http://localhost:8080/nexteer/html/Unit/Ishaft4Unit.html');
+
 var url = ['index','BEPS1','BEPS2','BEPS3','CEPS1','CEPS2','CEPS3','CEPS4','CEPS5','ISHAFT1','ISHAFT2','ISHAFT3','ISHAFT4','welcome'];
-var urlStr = [{'index':"http://localhost:8080/nexteer/index.html"},
-    {'BEPS1':"http://localhost:8080/nexteer/html/Unit/BEPS1Unit.html"},
-    {'BEPS2':"http://localhost:8080/nexteer/html/Unit/BEPS2Unit.html"},
-    {'BEPS3':"http://localhost:8080/nexteer/html/Unit/BEPS3Unit.html"},
-    {'CEPS1':"http://localhost:8080/nexteer/html/Unit/CEPS1Unit.html"},
-    {'CEPS2':"http://localhost:8080/nexteer/html/Unit/CEPS1Unit.html"},
-    {'CEPS3':"http://localhost:8080/nexteer/html/Unit/CEPS1Unit.html"},
-    {'CEPS4':"http://localhost:8080/nexteer/html/Unit/CEPS1Unit.html"},
-    {'CEPS5':"http://localhost:8080/nexteer/html/Unit/CEPS1Unit.html"},
-    {'ISHAFT1':"http://localhost:8080/nexteer/html/Unit/Ishaft1Unit.html"},
-    {'ISHAFT2':"http://localhost:8080/nexteer/html/Unit/Ishaft2Unit.html"},
-    {'ISHAFT3':"http://localhost:8080/nexteer/html/Unit/Ishaft3Unit.html"},
-    {'ISHAFT4':"http://localhost:8080/nexteer/html/Unit/Ishaft4Unit.html"},
-    {'welcome':"http://localhost:8080/nexteer/html/welcome.html"}];
+var urlStr = [{'index':"http://10.1.0.40:8080/nexteer/index.html"},
+    {'BEPS1':"http://10.1.0.40:8080/nexteer/html/Unit/BEPS1Unit.html"},
+    {'BEPS2':"http://10.1.0.40:8080/nexteer/html/Unit/BEPS2Unit.html"},
+    {'BEPS3':"http://10.1.0.40:8080/nexteer/html/Unit/BEPS3Unit.html"},
+    {'CEPS1':"http://10.1.0.40:8080/nexteer/html/Unit/CEPS1Unit.html"},
+    {'CEPS2':"http://10.1.0.40:8080/nexteer/html/Unit/CEPS1Unit.html"},
+    {'CEPS3':"http://10.1.0.40:8080/nexteer/html/Unit/CEPS1Unit.html"},
+    {'CEPS4':"http://10.1.0.40:8080/nexteer/html/Unit/CEPS1Unit.html"},
+    {'CEPS5':"http://10.1.0.40:8080/nexteer/html/Unit/CEPS1Unit.html"},
+    {'ISHAFT1':"http://10.1.0.40:8080/nexteer/html/Unit/Ishaft1Unit.html"},
+    {'ISHAFT2':"http://10.1.0.40:8080/nexteer/html/Unit/Ishaft2Unit.html"},
+    {'ISHAFT3':"http://10.1.0.40:8080/nexteer/html/Unit/Ishaft3Unit.html"},
+    {'ISHAFT4':"http://10.1.0.40:8080/nexteer/html/Unit/Ishaft4Unit.html"},
+    {'welcome':"http://10.1.0.40:8080/nexteer/html/welcome.html"}];
 
 function urlObj() {
-    this.index="http://localhost:8080/nexteer/index.html";
-    this.BEPS1="http://localhost:8080/nexteer/html/Unit/BEPS1Unit.html";
-    this.BEPS2="http://localhost:8080/nexteer/html/Unit/BEPS2Unit.html";
-    this.BEPS3="http://localhost:8080/nexteer/html/Unit/BEPS3Unit.html";
-    this.CEPS1="http://localhost:8080/nexteer/html/Unit/CEPS1Unit.html";
-    this.CEPS2="http://localhost:8080/nexteer/html/Unit/CEPS1Unit.html";
-    this.CEPS3="http://localhost:8080/nexteer/html/Unit/CEPS1Unit.html";
-    this.CEPS4="http://localhost:8080/nexteer/html/Unit/CEPS1Unit.html";
-    this.CEPS5="http://localhost:8080/nexteer/html/Unit/CEPS1Unit.html";
-    this.ISHAFT1="http://localhost:8080/nexteer/html/Unit/Ishaft1Unit.html";
-    this.ISHAFT2="http://localhost:8080/nexteer/html/Unit/Ishaft2Unit.html";
-    this.ISHAFT3="http://localhost:8080/nexteer/html/Unit/Ishaft3Unit.html";
-    this.ISHAFT4="http://localhost:8080/nexteer/html/Unit/Ishaft4Unit.html";
-    this.welcome="http://localhost:8080/nexteer/html/welcome.html";
+    this.index="http://10.1.0.40:8080/nexteer/index.html";
+    this.BEPS1="http://10.1.0.40:8080/nexteer/html/Unit/BEPS1Unit.html";
+    this.BEPS2="http://10.1.0.40:8080/nexteer/html/Unit/BEPS2Unit.html";
+    this.BEPS3="http://10.1.0.40:8080/nexteer/html/Unit/BEPS3Unit.html";
+    this.CEPS1="http://10.1.0.40:8080/nexteer/html/Unit/CEPS1Unit.html";
+    this.CEPS2="http://10.1.0.40:8080/nexteer/html/Unit/CEPS1Unit.html";
+    this.CEPS3="http://10.1.0.40:8080/nexteer/html/Unit/CEPS1Unit.html";
+    this.CEPS4="http://10.1.0.40:8080/nexteer/html/Unit/CEPS1Unit.html";
+    this.CEPS5="http://10.1.0.40:8080/nexteer/html/Unit/CEPS1Unit.html";
+    this.ISHAFT1="http://10.1.0.40:8080/nexteer/html/Unit/Ishaft1Unit.html";
+    this.ISHAFT2="http://10.1.0.40:8080/nexteer/html/Unit/Ishaft2Unit.html";
+    this.ISHAFT3="http://10.1.0.40:8080/nexteer/html/Unit/Ishaft3Unit.html";
+    this.ISHAFT4="http://10.1.0.40:8080/nexteer/html/Unit/Ishaft4Unit.html";
+    this.welcome="http://10.1.0.40:8080/nexteer/html/welcome.html";
 }
 
 
-localStorage.index="http://localhost:8080/nexteer/index.html";
-localStorage.BEPS1="http://localhost:8080/nexteer/html/Unit/BEPS1Unit.html";
-localStorage.BEPS2="http://localhost:8080/nexteer/html/Unit/BEPS2Unit.html";
-localStorage.BEPS3="http://localhost:8080/nexteer/html/Unit/BEPS3Unit.html";
+localStorage.index="http://10.1.0.40:8080/nexteer/index.html";
+localStorage.BEPS1="http://10.1.0.40:8080/nexteer/html/Unit/BEPS1Unit.html";
+localStorage.BEPS2="http://10.1.0.40:8080/nexteer/html/Unit/BEPS2Unit.html";
+localStorage.BEPS3="http://10.1.0.40:8080/nexteer/html/Unit/BEPS3Unit.html";
 
-localStorage.CEPS1="http://localhost:8080/nexteer/html/Unit/CEPS1Unit.html";
-localStorage.CEPS2="http://localhost:8080/nexteer/html/Unit/CEPS2Unit.html";
-localStorage.CEPS3="http://localhost:8080/nexteer/html/Unit/CEPS3Unit.html";
-localStorage.CEPS4="http://localhost:8080/nexteer/html/Unit/CEPS4Unit.html";
-localStorage.CEPS5="http://localhost:8080/nexteer/html/Unit/CEPS5Unit.html";
+localStorage.CEPS1="http://10.1.0.40:8080/nexteer/html/Unit/CEPS1Unit.html";
+localStorage.CEPS2="http://10.1.0.40:8080/nexteer/html/Unit/CEPS2Unit.html";
+localStorage.CEPS3="http://10.1.0.40:8080/nexteer/html/Unit/CEPS3Unit.html";
+localStorage.CEPS4="http://10.1.0.40:8080/nexteer/html/Unit/CEPS4Unit.html";
+localStorage.CEPS5="http://10.1.0.40:8080/nexteer/html/Unit/CEPS5Unit.html";
+url.push ( 'http://10.1.0.40:8080/nexteer/index.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/BEPS1Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/BEPS2Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/BEPS3Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/CEPS1Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/CEPS2Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/CEPS3Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/CEPS4Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/CEPS5Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/Ishaft1Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/Ishaft2Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/Ishaft3Unit.html');
+url.push ( 'http://10.1.0.40:8080/nexteer/html/Unit/Ishaft4Unit.html');
 
-localStorage.ISHAFT1="http://localhost:8080/nexteer/html/Unit/Ishaft1Unit.html";
-localStorage.ISHAFT2="http://localhost:8080/nexteer/html/Unit/Ishaft2Unit.html";
-localStorage.ISHAFT3="http://localhost:8080/nexteer/html/Unit/Ishaft3Unit.html";
-localStorage.ISHAFT4="http://localhost:8080/nexteer/html/Unit/Ishaft4Unit.html";
-localStorage.welcome="http://localhost:8080/nexteer/html/welcome.html";
+localStorage.ISHAFT1="http://10.1.0.40:8080/nexteer/html/Unit/Ishaft1Unit.html";
+localStorage.ISHAFT2="http://10.1.0.40:8080/nexteer/html/Unit/Ishaft2Unit.html";
+localStorage.ISHAFT3="http://10.1.0.40:8080/nexteer/html/Unit/Ishaft3Unit.html";
+localStorage.ISHAFT4="http://10.1.0.40:8080/nexteer/html/Unit/Ishaft4Unit.html";
+localStorage.welcome="http://10.1.0.40:8080/nexteer/html/welcome.html";
 
 var count = 0;
 
@@ -156,7 +157,7 @@ function getRunStatus(cell) {
 
     }
     var curTime= year+"-"+judgeTime(month)+"-"+judgeTime(day)+" "+judgeTime(date.getHours())+":"+judgeTime(date.getMinutes())+":"+judgeTime(date.getSeconds());
-    var urlString = "http://localhost:8080/nexteer/unit-status/"+cell+"?curr_time="+curTime;
+    var urlString = "http://10.1.0.40:8080/nexteer/unit-status/"+cell+"?curr_time="+curTime;
     console.log(urlString);
     console.log(url);
     $.get(urlString,function (data) {
@@ -184,7 +185,7 @@ function getRunStatus(cell) {
 }
 
 function getPollStatus() {
-    $.get("http://localhost:8080/nexteer/polling-page/",function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/polling-page/",function (data) {
         url.remove('welcome');
         console.log(data[0]);
         if(data[0]==undefined){
@@ -224,7 +225,7 @@ function changeSrc () {
     count ++;
 }
 $("#exitRoll").bind("click",function () {
-    window.location.assign("http://localhost:8080/nexteer/index.html");
+    window.location.assign("http://10.1.0.40:8080/nexteer/index.html");
 
 });
 setInterval( "changeSrc() ",10*1000);

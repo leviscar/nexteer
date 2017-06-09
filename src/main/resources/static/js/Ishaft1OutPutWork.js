@@ -27,7 +27,7 @@ onmessage = function (event) {
     console.log("getIs1Out开始");
     $.ajax({
             type: "POST",
-            url: "http://localhost:8080/nexteer/dashboard/output",
+            url: "http://10.1.0.40:8080/nexteer/dashboard/output",
             data: JSON.stringify(Is1OutJson),
             contentType: "application/json; charset=utf-8",
             async : false,
