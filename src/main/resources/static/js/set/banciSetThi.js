@@ -373,7 +373,7 @@ function showShift() {
     $.get("http://10.1.0.40:8080/nexteer/work-shift/CEPS5?shift_type=Ashift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
-        console.log(data);
+        console.log("无刷产线："+data);
         $("#showCEPSTable").find("tbody").find("tr").eq(0).find("td").eq(2).find("input").val(data.startTime);
         $("#showCEPSTable").find("tbody").find("tr").eq(0).find("td").eq(3).find("input").val(data.endTime);
         $("#showCEPSTable").find("tbody").find("tr").eq(0).find("td").eq(4).text(data.standardBeat==0?"":data.standardBeat);
