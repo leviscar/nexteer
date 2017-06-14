@@ -1,9 +1,8 @@
 package com.example.util;
 
 import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.InitialDirContext;
 import java.util.Hashtable;
 
 /**
@@ -19,20 +18,23 @@ public class CheckMail {
      * @return
      */
     public static boolean checkMail(String userName, String password) {
+        if (userName.equals("") || password.equals("")) {
+            return false;
+        }
         String host = "10.1.0.6";
         String port = "389";
         String domain = "CQ-Nexteer.com";
         String url = "ldap://" + host + ":" + port;
         String user = userName + "@" + domain;
         Hashtable env = new Hashtable();
-        DirContext ctx;
+        InitialContext ctx;
         env.put(Context.SECURITY_AUTHENTICATION, "simple");
         env.put(Context.SECURITY_PRINCIPAL, user);
         env.put(Context.SECURITY_CREDENTIALS, password);
         env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
         env.put(Context.PROVIDER_URL, url);
         try {
-            ctx = new InitialDirContext(env);
+            ctx = new InitialContext(env);
             ctx.close();
             return true; //验证成功返回true
         } catch (NamingException err) {
