@@ -70,7 +70,8 @@ function getOeeData() {
     var month=date.getMonth()+1;
     var day=date.getDate();
     var time=year+"-"+judgeMyTime(month)+"-"+judgeMyTime(day);
-    var url="http://10.1.0.40:8080/nexteer/oee/year?date="+time;
+    var yesTime=year+"-"+judgeMyTime(month)+"-"+judgeMyTime(day-1);
+    var url="http://10.1.0.40:8080/nexteer/oee/period?start="+yesTime+"&end="+time;
     $.get(url,function (data) {
         console.log(data);
         console.log(typeof data);

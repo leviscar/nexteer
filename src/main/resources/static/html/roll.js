@@ -212,7 +212,7 @@ function changeSrc () {
     count ++;
 }
 $("#exitRoll").bind("click",function () {
-    window.location.assign("../../index.html");
+    window.location.assign("../index.html");
 
 });
 setInterval( "changeSrc() ",20*1000);

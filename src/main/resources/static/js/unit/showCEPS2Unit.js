@@ -238,17 +238,7 @@ $("#selectHistory").bind("click",function () {
 
 
 $("#CN").bind("click",function () {
-    $(".unitTitle").replaceWith("<p class=\"unitTitle\">无刷助力器组装线实时数据看板</p>");
-    $(".firstTable>tbody>tr:nth-child(1)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>当前班次</td>");
-    $(".firstTable>tbody>tr:nth-child(2)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>目标产量</td>");
-    $(".firstTable>tbody>tr:nth-child(3)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>当前产量</td>");
-    $(".firstTable>tbody>tr:nth-child(4)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>当前状态 </td>");
-    $(".secTable>thead>tr:nth-child(1)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>当前节拍/秒</td>");
-    $(".secTable>thead>tr:nth-child(1)>td:nth-child(2)").replaceWith("<td style='font-size:2.2em '>标准节拍/秒</td>");
-    $(".secTable>thead>tr:nth-child(1)>td:nth-child(3)").replaceWith("<td style='font-size:2.2em '>损失时间/秒</td>");
-    $(".secTable>thead>tr:nth-child(1)>td:nth-child(4)").replaceWith("<td style='font-size:2.2em '>可动率(%)</td>");
-    $(".secTable>thead>tr:nth-child(1)>td:nth-child(5)").replaceWith("<td style='font-size:2.2em '>人员利用率(%)</td>");
-    $(".secTable>thead>tr:nth-child(1)>td:nth-child(6)").replaceWith("<td style='font-size:2.2em '>上一件下线时间</td>");
+    window.location.reload();
 });
 $("#EN").bind("click",function () {
     status=1;
@@ -465,8 +455,9 @@ $("#EN").bind("click",function () {
     $(".unitTitle").replaceWith("<p class=\"unitTitle\">CEPS Assist Mech Cell Realtime Data Board</p>");
     $(".firstTable>tbody>tr:nth-child(1)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>Current Shift</td>");
     $(".firstTable>tbody>tr:nth-child(2)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>Target  Output</td>");
-    $(".firstTable>tbody>tr:nth-child(3)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>Current Output</td>");
-    $(".firstTable>tbody>tr:nth-child(4)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>Current  Status</td>");
+    $(".firstTable>tbody>tr:nth-child(3)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>Planned Output</td>");
+    $(".firstTable>tbody>tr:nth-child(4)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>Current Output</td>");
+    $(".firstTable>tbody>tr:nth-child(5)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>Current  Status</td>");
     $(".secTable>thead>tr:nth-child(1)>td:nth-child(1)").replaceWith("<td style='font-size:2.2em '>Current Cycle(s)</td>");
     $(".secTable>thead>tr:nth-child(1)>td:nth-child(2)").replaceWith("<td style='font-size:2.2em '>Cycle Time(s)</td>");
     $(".secTable>thead>tr:nth-child(1)>td:nth-child(3)").replaceWith("<td style='font-size:2.2em '> Lose Time(s)</td>");
