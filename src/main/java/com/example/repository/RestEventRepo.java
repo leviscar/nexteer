@@ -62,9 +62,11 @@ public class RestEventRepo {
     /**
      * Delete specific rest event
      *
-     * @param id
+     * @param event
      */
-    public void delete(int id) {
-        jdbc.update("DELETE FROM rest_event WHERE id = ?", id);
+    public void delete(RestEvent event) {
+        jdbc.update("DELETE FROM rest_event WHERE cell_name = ? AND shift_type = ? AND rest_event.start_time = ? " +
+                        "AND rest_event.end_time = ? AND rest_event.event = ?", event.getCellName(), event.getShiftType()
+                , event.getStartTime(), event.getEndTime(), event.getEvent());
     }
 }
