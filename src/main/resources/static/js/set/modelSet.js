@@ -19,7 +19,7 @@ $("#addProSub").bind("click", function () {
     console.log(JSON.stringify(addProJson));
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/product-model",
+        url: "http://10.1.0.40:8080/nexteer/product-model",
         data:JSON.stringify(addProJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -45,7 +45,7 @@ $("#addProSub").bind("click", function () {
 
 //获取Ishaft1型号信息
 function getIshaft1() {
-    $.get("http://localhost:8080/nexteer/product-model/Ishaft1", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/product-model/Ishaft1", function (data) {
         console.log(JSON.stringify(data));
         // $("#productMessage").replaceWith("<thead><tr><th>行数</th><th>型号ID</th><th>型号名称</th><th>所属单元</th><th>STD</th></tr></thead>");
         $.each(data, function (i, model) {
@@ -56,7 +56,7 @@ function getIshaft1() {
 
 function getCEPS() {
     //获取CEPS型号信息
-    $.get("http://localhost:8080/nexteer/product-model/CEPS", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/product-model/CEPS", function (data) {
         console.log(JSON.stringify(data));
         // $("#productMessage").replaceWith("<thead><tr><th>行数</th><th>型号ID</th><th>型号名称</th><th>所属单元</th><th>STD</th></tr></thead>");
         $("#productCEPSMessage").find("tbody").remove();
@@ -69,7 +69,7 @@ function getCEPS() {
 
 //获取Ishaft2型号信息
 function getIshaft2() {
-    $.get("http://localhost:8080/nexteer/product-model/Ishaft2", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/product-model/Ishaft2", function (data) {
         console.log(JSON.stringify(data));
         // $("#productMessage").replaceWith("<thead><tr><th>行数</th><th>型号ID</th><th>型号名称</th><th>所属单元</th><th>STD</th></tr></thead>");
         $("#productMessage").find("tbody").remove();
@@ -83,7 +83,7 @@ function getIshaft2() {
 
 //获取Ishaft3型号信息
 function getIshaft3() {
-    $.get("http://localhost:8080/nexteer/product-model/Ishaft3", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/product-model/Ishaft3", function (data) {
         console.log(JSON.stringify(data));
         // $("#productMessage").replaceWith("<thead><tr><th>行数</th><th>型号ID</th><th>型号名称</th><th>所属单元</th><th>STD</th></tr></thead>");
         $.each(data, function (i, model) {
@@ -95,7 +95,7 @@ function getIshaft3() {
 
 //获取Ishaft4型号信息
 function getIshaft4() {
-    $.get("http://localhost:8080/nexteer/product-model/Ishaft4", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/product-model/Ishaft4", function (data) {
         console.log(JSON.stringify(data));
         // $("#productMessage").replaceWith("<thead><tr><th>行数</th><th>型号ID</th><th>型号名称</th><th>所属单元</th><th>STD</th></tr></thead>");
         $.each(data, function (i, model) {
@@ -106,7 +106,7 @@ function getIshaft4() {
 
 //获取BEPS型号信息
 function getBEPS() {
-    $.get("http://localhost:8080/nexteer/product-model/BEPS", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/product-model/BEPS", function (data) {
         console.log(JSON.stringify(data));
         // $("#productMessage").replaceWith("<thead><tr><th>行数</th><th>型号ID</th><th>型号名称</th><th>所属单元</th><th>STD</th></tr></thead>");
         $.each(data, function (i, model) {
@@ -131,7 +131,7 @@ $(document).ready(function(){
         // var modelId = $(this).parent().parent().find("td").eq(1).val();
         var modelId = $(this).parent().parent().find("td").eq(1).text();
         console.log(modelId);
-        var urlString = "http://localhost:8080/nexteer/product-model?modelId=" + modelId;
+        var urlString = "http://10.1.0.40:8080/nexteer/product-model?modelId=" + modelId;
         console.log(urlString);
         $.ajax({
             url: urlString,

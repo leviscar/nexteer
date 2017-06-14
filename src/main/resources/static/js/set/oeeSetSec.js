@@ -26,7 +26,7 @@ $("#addOeeSub").bind("click", function () {
     console.log(JSON.stringify(addOeeJson));
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/oee/target",
+        url: "http://10.1.0.40:8080/nexteer/oee/target",
         data:JSON.stringify(addOeeJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -70,7 +70,7 @@ function getOeeData() {
     var month=date.getMonth()+1;
     var day=date.getDate();
     var time=year+"-"+judgeMyTime(month)+"-"+judgeMyTime(day);
-    var url="http://localhost:8080/nexteer/oee/year?date="+time;
+    var url="http://10.1.0.40:8080/nexteer/oee/year?date="+time;
     $.get(url,function (data) {
         console.log(data);
         console.log(typeof data);

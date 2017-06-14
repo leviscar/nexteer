@@ -43,7 +43,7 @@ function stdAddInput(cellName,sd,ui,un) {
 }
 
 function getCEPSSTDData() {
-    $.get("http://localhost:8080/nexteer/std-info/CEPS", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/std-info/CEPS", function (data) {
         var stdBeats=[];
 
         $.each(data, function (i, model) {
@@ -73,7 +73,7 @@ function getCEPSSTDData() {
 
 }
 function getBEPSSTDData() {
-    $.get("http://localhost:8080/nexteer/std-info/BEPS", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/std-info/BEPS", function (data) {
         var stdBeats=[];
 
         $.each(data, function (i, model) {
@@ -100,7 +100,7 @@ function getBEPSSTDData() {
 }
 function getIshaftData() {
     $("#BEPSStd").find("li").eq(2).find("table").find("tbody").empty();
-    $.get("http://localhost:8080/nexteer/std-info/ISHAFT1", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/std-info/ISHAFT1", function (data) {
         var stdBeats=[];
 
         $.each(data, function (i, model) {
@@ -117,7 +117,7 @@ function getIshaftData() {
         });
 
     });
-    $.get("http://localhost:8080/nexteer/std-info/ISHAFT2", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/std-info/ISHAFT2", function (data) {
         var stdBeats=[];
 
         $.each(data, function (i, model) {
@@ -136,7 +136,7 @@ function getIshaftData() {
         });
 
     });
-    $.get("http://localhost:8080/nexteer/std-info/ISHAFT3", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/std-info/ISHAFT3", function (data) {
         var stdBeats=[];
 
         $.each(data, function (i, model) {
@@ -155,7 +155,7 @@ function getIshaftData() {
         });
 
     });
-    $.get("http://localhost:8080/nexteer/std-info/ISHAFT4", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/std-info/ISHAFT4", function (data) {
         var stdBeats=[];
 
         $.each(data, function (i, model) {
@@ -184,7 +184,7 @@ $(document).ready(function(){
     $('#CEPSStdSet').on('click','.deleteStd',function(){
         console.log("delStd start");
         var modelId = Number($(this).parent().parent().parent().find("tr").eq(0).find("td").text());
-        var urlString = "http://localhost:8080/nexteer/std-info/CEPS?standard-beat="+modelId;
+        var urlString = "http://10.1.0.40:8080/nexteer/std-info/CEPS?standard-beat="+modelId;
         console.log(urlString);
         $.ajax({
             url: urlString,
@@ -198,7 +198,7 @@ $(document).ready(function(){
     $('#BEPSStdSet').on('click','.deleteStd',function(){
         console.log("delStd start");
         var modelId = Number($(this).parent().parent().parent().find("tr").eq(0).find("td").text());
-        var urlString = "http://localhost:8080/nexteer/std-info/BEPS?standard-beat="+modelId;
+        var urlString = "http://10.1.0.40:8080/nexteer/std-info/BEPS?standard-beat="+modelId;
         console.log(urlString);
         $.ajax({
             url: urlString,
@@ -213,7 +213,7 @@ $(document).ready(function(){
         console.log("delStd start");
         var cell=$(this).parent().parent().find("td").eq(0).attr("class");
         var sd=Number($(this).parent().parent().find("td").eq(1).text());
-        var urlString = "http://localhost:8080/nexteer/std-info/"+cell+"?standard-beat="+sd;
+        var urlString = "http://10.1.0.40:8080/nexteer/std-info/"+cell+"?standard-beat="+sd;
         console.log(urlString);
         $.ajax({
             url: urlString,
@@ -244,7 +244,7 @@ $("#addCEPSSTDSub").bind("click",function () {
             'Content-Type': 'application/json'
         },
         type: "POST",
-        url: "http://localhost:8080/nexteer/std-info",
+        url: "http://10.1.0.40:8080/nexteer/std-info",
         data: all,
         dataType: "json",
         success: function (data) {
@@ -280,7 +280,7 @@ $("#addBEPSSTDSub").bind("click",function () {
             'Content-Type': 'application/json'
         },
         type: "POST",
-        url: "http://localhost:8080/nexteer/std-info",
+        url: "http://10.1.0.40:8080/nexteer/std-info",
         data: all,
         dataType: "json",
         success: function (data) {
@@ -310,7 +310,7 @@ $("#addIshaftSTDSub").bind("click",function () {
             'Content-Type': 'application/json'
         },
         type: "POST",
-        url: "http://localhost:8080/nexteer/std-info",
+        url: "http://10.1.0.40:8080/nexteer/std-info",
         data: all,
         dataType: "json",
         success: function (data) {
