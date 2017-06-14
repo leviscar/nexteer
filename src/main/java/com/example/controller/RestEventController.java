@@ -46,10 +46,10 @@ public class RestEventController {
     /**
      * Delete specific rest event
      *
-     * @param re
+     * @param id
      */
-    @RequestMapping(method = RequestMethod.DELETE)
-    public void delete(@RequestBody RestEvent re) {
-        reRepo.delete(re);
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable(value = "id") int id) {
+        reRepo.delete(id);
     }
 }
