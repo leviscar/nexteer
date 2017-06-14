@@ -51,7 +51,47 @@ function formOnload()
     var Sunday = transferDate(new Date(thisTime +  step_m * 24 * 3600* 1000));
     return [Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday];
 }
+function getScrapData() {
+    console.log("报废金额");
+    var date=new Date();
+    var year=date.getFullYear();
+    var month=date.getMonth()+1;
+    var day=date.getDate();
+    var time=year+"-"+judgeMyTime(month)+"-"+judgeMyTime(day);
+    var url="http://10.1.0.40:8080/nexteer/scrap-amount/period?start=2017-01-01&end="+time;
+    $.get(url,function (data) {
+        console.log(data);
+        console.log(typeof data);
+        var scrapData=$.parseJSON(data);
+        console.log(scrapData[scrapData.length-1]);
+        var i;
+        ((scrapData.length<=19)?(i=0):(i=scrapData.length-19));
 
+        for (i;i<scrapData.length;i++){
+            var line;
+            switch (scrapData[i].cellName){
+                case "ISHAFT1": line="第一条中间轴";
+                    break;
+                case "ISHAFT2": line="第二条中间轴";
+                    break;
+                case "ISHAFT3": line="第三条中间轴";
+                    break;
+                case "ISHAFT4": line="第四条中间轴";
+                    break;
+                case "BEPS3": line="有刷产线";
+                    break;
+                case "CEPS5": line="无刷产线";
+                    break;
+            }
+            $("#scrapIshaftTable").prepend("<tbody><tr><td>"+scrapData[i].addDate+"</td><td>"+line+"</td><td>"+scrapData[i].value+"</td><td>"+scrapData[i].targetValue
+                +"</td></tr></tbody>");
+
+        }
+        // $("#scrapIshaftTable").prepend("<tbody><tr><td>"+data.addDate+"</td><td>"+line+"</td><td>"+data.value+"</td><td>"+data.targetValue
+        //     +"</td></tr></tbody>");
+    })
+}
+getScrapData();
 //添加按钮
 $(document).ready(function(){
     $('#scrapTable').on('click','.addScrap',function(){
@@ -80,23 +120,24 @@ $(document).ready(function(){
                 console.log(JSON.stringify(data));
                 console.log('nice');
                 $(this).parent().parent().find("td").eq(4).html("添加成功");
-                var line;
-                switch (data.cellName){
-                    case "ISHAFT1": line="第一条中间轴";
-                    break;
-                    case "ISHAFT2": line="第二条中间轴";
-                        break;
-                    case "ISHAFT3": line="第三条中间轴";
-                        break;
-                    case "ISHAFT4": line="第四条中间轴";
-                        break;
-                    case "BEPS3": line="有刷产线";
-                        break;
-                    case "CEPS5": line="无刷产线";
-                        break;
-                }
-                $("#scrapIshaftTable").prepend("<tbody><tr><td>"+data.addDate+"</td><td>"+line+"</td><td>"+data.value+"</td><td>"+data.targetValue
-                    +"</td></tr></tbody>");
+                // var line;
+                // switch (data.cellName){
+                //     case "ISHAFT1": line="第一条中间轴";
+                //     break;
+                //     case "ISHAFT2": line="第二条中间轴";
+                //         break;
+                //     case "ISHAFT3": line="第三条中间轴";
+                //         break;
+                //     case "ISHAFT4": line="第四条中间轴";
+                //         break;
+                //     case "BEPS3": line="有刷产线";
+                //         break;
+                //     case "CEPS5": line="无刷产线";
+                //         break;
+                // }
+                // $("#scrapIshaftTable").prepend("<tbody><tr><td>"+data.addDate+"</td><td>"+line+"</td><td>"+data.value+"</td><td>"+data.targetValue
+                //     +"</td></tr></tbody>");
+                getScrapData();
 
             },
             failure: function (errMsg) {
@@ -142,23 +183,23 @@ $(document).ready(function(){
                 if(data.cellName != null){
                     $(this).parent().parent().find("td").eq(4).html("更新成功");
                 }
-                switch (data.cellName){
-                    case "ISHAFT1": line="第一条中间轴";
-                        break;
-                    case "ISHAFT2": line="第二条中间轴";
-                        break;
-                    case "ISHAFT3": line="第三条中间轴";
-                        break;
-                    case "ISHAFT4": line="第四条中间轴";
-                        break;
-                    case "BEPS3": line="有刷产线";
-                        break;
-                    case "CEPS5": line="无刷产线";
-                        break;
-                }
-                $("#scrapIshaftTable").prepend("<tbody><tr><td>"+data.addDate+"</td><td>"+line+"</td><td>"+data.value+"</td><td>"+data.targetValue
-                    +"</td></tr></tbody>");
-
+                // switch (data.cellName){
+                //     case "ISHAFT1": line="第一条中间轴";
+                //         break;
+                //     case "ISHAFT2": line="第二条中间轴";
+                //         break;
+                //     case "ISHAFT3": line="第三条中间轴";
+                //         break;
+                //     case "ISHAFT4": line="第四条中间轴";
+                //         break;
+                //     case "BEPS3": line="有刷产线";
+                //         break;
+                //     case "CEPS5": line="无刷产线";
+                //         break;
+                // }
+                // $("#scrapIshaftTable").prepend("<tbody><tr><td>"+data.addDate+"</td><td>"+line+"</td><td>"+data.value+"</td><td>"+data.targetValue
+                //     +"</td></tr></tbody>");
+                getScrapData();
 
             },
             failure: function (errMsg) {
