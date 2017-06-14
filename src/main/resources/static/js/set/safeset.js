@@ -26,7 +26,7 @@ console.log("开始运行safeSet");
 //     var getDayJson = new safety_date(String(getDayYear), String(getDayMonth), String(getDayDay));
 //     $.ajax({
 //         type: "POST",
-//         url: "http://10.1.0.40:8080/nexteer/safetyDate/getDates",
+//         url: "http://localhost:8080/nexteer/safetyDate/getDates",
 //         data: JSON.stringify(getDayJson),
 //         contentType: "application/json; charset=utf-8",
 //         dataType: "json",
@@ -43,13 +43,18 @@ console.log("开始运行safeSet");
 //         $("#getDayStu").html("");
 //     },1000*showSeconds)
 // });
+function safeDateInput(year,month,day) {
+    this.year=year;
+    this.month=month;
+    this.day=day;
+}
 //更新当前安全天数
 function getNowData() {
     var jsonString = new safeDateInput(judgeTime(Uyear),judgeTime(Umonth) , judgeTime(Uday));
     var curTime = judgeTime(Uyear)+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
     $.ajax({
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/safety-date",
+        url: "http://localhost:8080/nexteer/safety-date",
         data: JSON.stringify(jsonString),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -67,14 +72,14 @@ function getNowData() {
 }
 function getSafeDay() {
 
-    $.get("http://10.1.0.40:8080/nexteer/safety-date/day?date="+curTime,function (data) {
+    $.get("http://localhost:8080/nexteer/safety-date/day?date="+curTime,function (data) {
         if(data.system_status != false){
             console.log(JSON.stringify(data));
             $("#safeDay").html(data.safe_dates);
             console.log("获取安全日期操作成功");
         }
     });
-    $.get("http://10.1.0.40:8080/nexteer/safety-date/max",function (data) {
+    $.get("http://localhost:8080/nexteer/safety-date/max",function (data) {
 
         console.log(JSON.stringify(data));
         $("#safeHigh").html(data);
@@ -98,10 +103,14 @@ $("#startDate").bind("click",function () {
     var startCount=Number($("#startDateValue").val());
     var startLog="";
     console.log(startDateYear+"年"+startDateMonth+"月"+startDateDay+"日");
+    if(startDateYear==Uyear&&startDateMonth==judgeMyTime(Umonth)&&startDateDay==judgeMyTime(Uday)){
+        getNowData();
+    }
+
     var getStartJson=new startDay(startDateYear.toString(),startDateMonth.toString(),startDateDay.toString(),startCount,startLog.toString());
     $.ajax({
         type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/safety-date",
+        url: "http://localhost:8080/nexteer/safety-date",
         data: JSON.stringify(getStartJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -139,7 +148,7 @@ $("#resetDate").bind("click",function () {
     var getResetJson=new resetDate(resetYear,resetMonth,resetDay,0,resetMessage);
     $.ajax({
         type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/safety-date",
+        url: "http://localhost:8080/nexteer/safety-date",
         data: JSON.stringify(getResetJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -178,7 +187,7 @@ $("#desDate").bind("click",function () {
     var getdesJson=new desDate(desYear,desMonth,desDay,-1,0,desMessage);
     $.ajax({
         type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/safety-date",
+        url: "http://localhost:8080/nexteer/safety-date",
         data: JSON.stringify(getdesJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -218,7 +227,7 @@ $("#logDate").bind("click",function () {
     console.log(getlogJson);
     $.ajax({
         type: "PATCH",
-        url: "http://10.1.0.40:8080/nexteer/safety-date",
+        url: "http://localhost:8080/nexteer/safety-date",
         data: JSON.stringify(getlogJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -240,7 +249,7 @@ $("#logDate").bind("click",function () {
 
 //获取全部的日期信息
 $("#getAllSafeDate").bind("click",function () {
-    $.get("http://10.1.0.40:8080/nexteer/safetyDate/getAllDates", function (data) {
+    $.get("http://localhost:8080/nexteer/safetyDate/getAllDates", function (data) {
         $.each(data, function (i, model) {
             $("#logSafeMessage").append(
                 "<tr><th>"+"第"+(i+1)+"行"+"</th>"+"<td>" + model.year+"年" + "</td>" +
@@ -255,7 +264,7 @@ $("#getAllSafeDate").bind("click",function () {
 
 //获取全部不安全的日期信息
 $("#getAllUnsafeDate").bind("click",function () {
-    $.get("http://10.1.0.40:8080/nexteer/safetyDate/getUnsafeDates", function (data) {
+    $.get("http://localhost:8080/nexteer/safetyDate/getUnsafeDates", function (data) {
         $.each(data, function (i, model) {
             $("#logUnSafeMessage").append(
                 "<tr><th>"+"第"+(i+1)+"行"+"</th>"+"<td>" + model.year+"年" + "</td>" +

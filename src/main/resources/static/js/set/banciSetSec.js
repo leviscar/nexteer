@@ -37,7 +37,7 @@ $("#thiEventSub").bind("click",function () {
                     'Content-Type': 'application/json'
                 },
                 type: "POST",
-                url: "http://10.1.0.40:8080/nexteer/rest-event",
+                url: "http://localhost:8080/nexteer/rest-event",
                 data: JSON.stringify(addEventJson),
                 dataType: "json",
                 success: function (data) {
@@ -60,7 +60,7 @@ $("#thiEventSub").bind("click",function () {
                     'Content-Type': 'application/json'
                 },
                 type: "POST",
-                url: "http://10.1.0.40:8080/nexteer/rest-event",
+                url: "http://localhost:8080/nexteer/rest-event",
                 data: JSON.stringify(addEventJson),
                 dataType: "json",
                 success: function (data) {
@@ -83,7 +83,7 @@ $("#thiEventSub").bind("click",function () {
                     'Content-Type': 'application/json'
                 },
                 type: "POST",
-                url: "http://10.1.0.40:8080/nexteer/rest-event",
+                url: "http://localhost:8080/nexteer/rest-event",
                 data: JSON.stringify(addEventJson),
                 dataType: "json",
                 success: function (data) {
@@ -106,7 +106,7 @@ $("#thiEventSub").bind("click",function () {
                     'Content-Type': 'application/json'
                 },
                 type: "POST",
-                url: "http://10.1.0.40:8080/nexteer/rest-event",
+                url: "http://localhost:8080/nexteer/rest-event",
                 data: JSON.stringify(addEventJson),
                 dataType: "json",
                 success: function (data) {
@@ -129,7 +129,7 @@ $("#thiEventSub").bind("click",function () {
                     'Content-Type': 'application/json'
                 },
                 type: "POST",
-                url: "http://10.1.0.40:8080/nexteer/rest-event",
+                url: "http://localhost:8080/nexteer/rest-event",
                 data: JSON.stringify(addEventJson),
                 dataType: "json",
                 success: function (data) {
@@ -170,7 +170,7 @@ $("#thiEventSub").bind("click",function () {
                     'Content-Type': 'application/json'
                 },
                 type: "POST",
-                url: "http://10.1.0.40:8080/nexteer/rest-event",
+                url: "http://localhost:8080/nexteer/rest-event",
                 data: JSON.stringify(addEventJson),
                 dataType: "json",
                 success: function (data) {
@@ -193,7 +193,7 @@ $("#thiEventSub").bind("click",function () {
                     'Content-Type': 'application/json'
                 },
                 type: "POST",
-                url: "http://10.1.0.40:8080/nexteer/rest-event",
+                url: "http://localhost:8080/nexteer/rest-event",
                 data: JSON.stringify(addEventJson),
                 dataType: "json",
                 success: function (data) {
@@ -216,7 +216,7 @@ $("#thiEventSub").bind("click",function () {
                     'Content-Type': 'application/json'
                 },
                 type: "POST",
-                url: "http://10.1.0.40:8080/nexteer/rest-event",
+                url: "http://localhost:8080/nexteer/rest-event",
                 data: JSON.stringify(addEventJson),
                 dataType: "json",
                 success: function (data) {
@@ -256,7 +256,7 @@ $("#thiEventSub").bind("click",function () {
                     'Content-Type': 'application/json'
                 },
                 type: "POST",
-                url: "http://10.1.0.40:8080/nexteer/rest-event",
+                url: "http://localhost:8080/nexteer/rest-event",
                 data: JSON.stringify(addEventJson),
                 dataType: "json",
                 success: function (data) {
@@ -327,7 +327,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -352,7 +352,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -377,7 +377,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -402,7 +402,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -427,7 +427,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -471,7 +471,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -496,7 +496,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -521,7 +521,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -564,7 +564,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {

@@ -19,7 +19,7 @@ console.log("开始运行");
 
 //获取型号信息
 function getProduct(cell,id) {
-    $.get("http://10.1.0.40:8080/nexteer/product-model/"+cell, function (data) {
+    $.get("http://localhost:8080/nexteer/product-model/"+cell, function (data) {
         console.log(JSON.stringify(data));
         $(id).find("tbody").empty();
         var line;
@@ -50,7 +50,7 @@ $("#addProSub").bind("click", function () {
     console.log(JSON.stringify(addProJson));
     $.ajax({
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/product-model",
+        url: "http://localhost:8080/nexteer/product-model",
         data:JSON.stringify(addProJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -97,7 +97,7 @@ $(document).ready(function(){
         // var modelId = $(this).parent().parent().find("td").eq(1).val();
         var modelId = $(this).parent().parent().find("td").eq(1).text();
         console.log(modelId);
-        var urlString = "http://10.1.0.40:8080/nexteer/product-model?modelId=" + modelId;
+        var urlString = "http://localhost:8080/nexteer/product-model?modelId=" + modelId;
         console.log(urlString);
         $.ajax({
             url: urlString,
@@ -118,7 +118,7 @@ $(document).ready(function(){
         // var modelId = $(this).parent().parent().find("td").eq(1).val();
         var modelId = $(this).parent().parent().find("td").eq(1).text();
         console.log(modelId);
-        var urlString = "http://10.1.0.40:8080/nexteer/product-model?modelId=" + modelId;
+        var urlString = "http://localhost:8080/nexteer/product-model?modelId=" + modelId;
         console.log(urlString);
         $.ajax({
             url: urlString,
@@ -139,7 +139,7 @@ $(document).ready(function(){
         // var modelId = $(this).parent().parent().find("td").eq(1).val();
         var modelId = $(this).parent().parent().find("td").eq(1).text();
         console.log(modelId);
-        var urlString = "http://10.1.0.40:8080/nexteer/product-model?modelId=" + modelId;
+        var urlString = "http://localhost:8080/nexteer/product-model?modelId=" + modelId;
         console.log(urlString);
         $.ajax({
             url: urlString,
@@ -160,7 +160,7 @@ $(document).ready(function(){
         // var modelId = $(this).parent().parent().find("td").eq(1).val();
         var modelId = $(this).parent().parent().find("td").eq(1).text();
         console.log(modelId);
-        var urlString = "http://10.1.0.40:8080/nexteer/product-model?modelId=" + modelId;
+        var urlString = "http://localhost:8080/nexteer/product-model?modelId=" + modelId;
         console.log(urlString);
         $.ajax({
             url: urlString,
@@ -181,7 +181,7 @@ $(document).ready(function(){
         // var modelId = $(this).parent().parent().find("td").eq(1).val();
         var modelId = $(this).parent().parent().find("td").eq(1).text();
         console.log(modelId);
-        var urlString = "http://10.1.0.40:8080/nexteer/product-model?modelId=" + modelId;
+        var urlString = "http://localhost:8080/nexteer/product-model?modelId=" + modelId;
         console.log(urlString);
         $.ajax({
             url: urlString,
@@ -202,7 +202,7 @@ $(document).ready(function(){
         // var modelId = $(this).parent().parent().find("td").eq(1).val();
         var modelId = $(this).parent().parent().find("td").eq(1).text();
         console.log(modelId);
-        var urlString = "http://10.1.0.40:8080/nexteer/product-model?modelId=" + modelId;
+        var urlString = "http://localhost:8080/nexteer/product-model?modelId=" + modelId;
         console.log(urlString);
         $.ajax({
             url: urlString,

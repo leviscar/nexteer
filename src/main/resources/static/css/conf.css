@@ -122,9 +122,9 @@ input{
 .form-control{
     width: 50%;
 }
-#scrapIshaftTable>tbody>tr:nth-child(1)>td{
-    color: red !important;
-}
+/*#scrapIshaftTable>tbody>tr:nth-child(1)>td{*/
+    /*color: red !important;*/
+/*}*/
 .banci table td{
     width: 7.5% ;
 }
@@ -151,4 +151,8 @@ li{
 #myStdAddTitle>th{
     width: 25%;
     font-size: 1.5em;
+}
+#result>img{
+    width: 100%;
+    height: 100%;
 }

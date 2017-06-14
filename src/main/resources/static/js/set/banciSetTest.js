@@ -39,7 +39,7 @@ function showShift() {
     $("#showCEPS5Event").find("tbody").remove();
     $("#showBEPS3Event").find("tbody").remove();
 
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT1?shift_type=Ashift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Ashift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -62,7 +62,7 @@ function showShift() {
         }
 
     });
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT1?shift_type=Bshift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Bshift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -84,7 +84,7 @@ function showShift() {
         }
 
     });
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT1?shift_type=Cshift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT1?shift_type=Cshift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -107,7 +107,7 @@ function showShift() {
 
     });
 
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT2?shift_type=Ashift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT2?shift_type=Ashift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -129,7 +129,7 @@ function showShift() {
         }
 
     });
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT2?shift_type=Bshift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT2?shift_type=Bshift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -151,7 +151,7 @@ function showShift() {
         }
 
     });
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT2?shift_type=Cshift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT2?shift_type=Cshift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -174,7 +174,7 @@ function showShift() {
 
     });
 
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT3?shift_type=Ashift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT3?shift_type=Ashift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -196,7 +196,7 @@ function showShift() {
         }
 
     });
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT3?shift_type=Bshift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT3?shift_type=Bshift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -218,7 +218,7 @@ function showShift() {
         }
 
     });
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT3?shift_type=Cshift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT3?shift_type=Cshift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -241,7 +241,7 @@ function showShift() {
 
     });
 
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT4?shift_type=Ashift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT4?shift_type=Ashift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -263,7 +263,7 @@ function showShift() {
         }
 
     });
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT4?shift_type=Bshift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT4?shift_type=Bshift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -285,7 +285,7 @@ function showShift() {
         }
 
     });
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/ISHAFT4?shift_type=Cshift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/ISHAFT4?shift_type=Cshift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -308,7 +308,7 @@ function showShift() {
 
     });
 
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/BEPS3?shift_type=Ashift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/BEPS3?shift_type=Ashift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -330,7 +330,7 @@ function showShift() {
         }
 
     });
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/BEPS3?shift_type=Bshift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/BEPS3?shift_type=Bshift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -352,7 +352,7 @@ function showShift() {
         }
 
     });
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/BEPS3?shift_type=Cshift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/BEPS3?shift_type=Cshift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -375,7 +375,7 @@ function showShift() {
 
     });
 
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/CEPS5?shift_type=Ashift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/CEPS5?shift_type=Ashift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -397,7 +397,7 @@ function showShift() {
         }
 
     });
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/CEPS5?shift_type=Bshift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/CEPS5?shift_type=Bshift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -419,7 +419,7 @@ function showShift() {
         }
 
     });
-    $.get("http://10.1.0.40:8080/nexteer/work-shift/CEPS5?shift_type=Cshift", function (data) {
+    $.get("http://localhost:8080/nexteer/work-shift/CEPS5?shift_type=Cshift", function (data) {
         console.log(typeof (data));
         console.log(data.id);
         console.log(data);
@@ -471,7 +471,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -496,7 +496,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -521,7 +521,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -546,7 +546,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -571,7 +571,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -598,7 +598,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -624,7 +624,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -648,7 +648,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -674,7 +674,7 @@ $(document).ready(function(){
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/work-shift",
+                    url: "http://localhost:8080/nexteer/work-shift",
                     data: JSON.stringify(addInputJson),
                     dataType: "json",
                     success: function (data) {
@@ -703,7 +703,7 @@ $(document).ready(function(){
 });
 
 function showEvent(cell,idInput) {
-    $.get("http://10.1.0.40:8080/nexteer/rest-event?work_shift_id="+idInput, function (data) {
+    $.get("http://localhost:8080/nexteer/rest-event?work_shift_id="+idInput, function (data) {
         console.log(data);
         var title= "#show"+cell+"Event";
         $.each(data, function (i, model) {
@@ -723,7 +723,9 @@ function showEvent(cell,idInput) {
                 case "CEPS5": line="无刷产线";
                     break;
             }
-            $(title).prepend("<tbody><tr><td>"+line+"</td><td>"+data[i].shiftType+"</td><td>"+data[i].event+"</td><td>"+data[i].startTime+"</td><td>"+data[i].endTime+"</td></tr></tbody>");
+            // $(title).prepend("<tbody><tr><td>"+line+"</td><td>"+data[i].shiftType+"</td><td>"+data[i].event+"</td><td>"+data[i].startTime+"</td><td>"+data[i].endTime+"</td></tr></tbody>");
+            $(title).prepend("<tbody><tr><td>"+line+"</td><td>"+data[i].shiftType+"</td><td>"+data[i].event+"</td><td>"+data[i].startTime+"</td><td>"+data[i].endTime+"</td><td><button class=\"eventDel btn btn-primary\">删除</button></td></tr></tbody>");
+
         });
 
     });
@@ -750,7 +752,7 @@ $("#addEventSub").bind("click",function () {
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/rest-event",
+                    url: "http://localhost:8080/nexteer/rest-event",
                     data: JSON.stringify(addEventJson),
                     dataType: "json",
                     success: function (data) {
@@ -773,7 +775,7 @@ $("#addEventSub").bind("click",function () {
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/rest-event",
+                    url: "http://localhost:8080/nexteer/rest-event",
                     data: JSON.stringify(addEventJson),
                     dataType: "json",
                     success: function (data) {
@@ -796,7 +798,7 @@ $("#addEventSub").bind("click",function () {
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/rest-event",
+                    url: "http://localhost:8080/nexteer/rest-event",
                     data: JSON.stringify(addEventJson),
                     dataType: "json",
                     success: function (data) {
@@ -819,7 +821,7 @@ $("#addEventSub").bind("click",function () {
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/rest-event",
+                    url: "http://localhost:8080/nexteer/rest-event",
                     data: JSON.stringify(addEventJson),
                     dataType: "json",
                     success: function (data) {
@@ -842,7 +844,7 @@ $("#addEventSub").bind("click",function () {
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/rest-event",
+                    url: "http://localhost:8080/nexteer/rest-event",
                     data: JSON.stringify(addEventJson),
                     dataType: "json",
                     success: function (data) {
@@ -867,7 +869,7 @@ $("#addEventSub").bind("click",function () {
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/rest-event",
+                    url: "http://localhost:8080/nexteer/rest-event",
                     data: JSON.stringify(addEventJson),
                     dataType: "json",
                     success: function (data) {
@@ -890,7 +892,7 @@ $("#addEventSub").bind("click",function () {
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/rest-event",
+                    url: "http://localhost:8080/nexteer/rest-event",
                     data: JSON.stringify(addEventJson),
                     dataType: "json",
                     success: function (data) {
@@ -913,7 +915,7 @@ $("#addEventSub").bind("click",function () {
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/rest-event",
+                    url: "http://localhost:8080/nexteer/rest-event",
                     data: JSON.stringify(addEventJson),
                     dataType: "json",
                     success: function (data) {
@@ -937,7 +939,7 @@ $("#addEventSub").bind("click",function () {
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://10.1.0.40:8080/nexteer/rest-event",
+                    url: "http://localhost:8080/nexteer/rest-event",
                     data: JSON.stringify(addEventJson),
                     dataType: "json",
                     success: function (data) {
@@ -962,7 +964,185 @@ $("#addEventSub").bind("click",function () {
     }
 
 });
+$(document).ready(function(){
+    $('#showShiftLi').on('click','.eventDel',function(){
+        console.log("del start");
 
+        // var modelId = $(this).parent().parent().find("td").eq(1).val();
+        var type = $(this).parent().parent().find("td").eq(1).text();
+        var cell=$(this).parent().parent().find("td").eq(0).text();
+        var event=$(this).parent().parent().find("td").eq(2).text();
+        var start=$(this).parent().parent().find("td").eq(3).text();
+        var end=$(this).parent().parent().find("td").eq(4).text();
+        var Input=new eventInput(type,cell,event,start,end);
+        console.log(Input);
+        var urlString = "http://localhost:8080/nexteer/rest-event";
+        console.log(urlString);
+        switch (cell){
+            case "有刷产线":
+                Input.cellName="BEPS1";
+                $.ajax({
+                    url: urlString,
+                    type: 'DELETE',
+                    data:JSON.stringify(Input),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(result) {
+                        console.log("删除成功");
+
+                    }
+                });
+                Input.cellName="BEPS2";
+                $.ajax({
+                    url: urlString,
+                    type: 'DELETE',
+                    data:JSON.stringify(Input),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(result) {
+                        console.log("删除成功");
+
+                    }
+                });
+                Input.cellName="BEPS3";
+                $.ajax({
+                    url: urlString,
+                    type: 'DELETE',
+                    data:JSON.stringify(Input),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(result) {
+                        console.log("删除成功");
+
+                    }
+                });
+                break;
+            case "无刷产线":
+                Input.cellName="CEPS1";
+                $.ajax({
+                    url: urlString,
+                    type: 'DELETE',
+                    data:JSON.stringify(Input),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(result) {
+                        console.log("删除成功");
+
+                    }
+                });
+                Input.cellName="CEPS2";
+                $.ajax({
+                    url: urlString,
+                    type: 'DELETE',
+                    data:JSON.stringify(Input),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(result) {
+                        console.log("删除成功");
+
+                    }
+                });
+                Input.cellName="CEPS3";
+                $.ajax({
+                    url: urlString,
+                    type: 'DELETE',
+                    data:JSON.stringify(Input),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(result) {
+                        console.log("删除成功");
+
+                    }
+                });
+                Input.cellName="CEPS4";
+                $.ajax({
+                    url: urlString,
+                    type: 'DELETE',
+                    data:JSON.stringify(Input),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(result) {
+                        console.log("删除成功");
+
+                    }
+                });
+                Input.cellName="CEPS5";
+                $.ajax({
+                    url: urlString,
+                    type: 'DELETE',
+                    data:JSON.stringify(Input),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(result) {
+                        console.log("删除成功");
+
+                    }
+                });
+                break;
+            case "第一条中间轴":
+                Input.cellName="ISHAFT1";
+                $.ajax({
+                    url: urlString,
+                    type: 'DELETE',
+                    data:JSON.stringify(Input),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(result) {
+                        console.log("删除成功");
+
+                    }
+                });
+                break;
+            case "第二条中间轴":
+                Input.cellName="ISHAFT2";
+                $.ajax({
+                    url: urlString,
+                    type: 'DELETE',
+                    data:JSON.stringify(Input),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(result) {
+                        console.log("删除成功");
+
+                    }
+                });
+                break;
+            case "第三条中间轴":
+                Input.cellName="ISHAFT3";
+                $.ajax({
+                    url: urlString,
+                    type: 'DELETE',
+                    data:JSON.stringify(Input),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(result) {
+                        console.log("删除成功");
+
+                    }
+                });
+                break;
+            case "第四条中间轴":
+                Input.cellName="ISHAFT4";
+                $.ajax({
+                    url: urlString,
+                    type: 'DELETE',
+                    data:JSON.stringify(Input),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(result) {
+                        console.log("删除成功");
+
+                    }
+                });
+                break;
+        }
+
+
+        showShift();
+    });
+
+
+});
 $('#eventIn').editableSelect({
     effects: 'slide'
 });
