@@ -10,7 +10,7 @@ var eventData =[];
 $.get("http://10.1.0.40:8080/nexteer/quality-complain", function (data) {
     $.each(data, function (i, model) {
         var modelTime= model.addDate.split("-");
-        NComCalendarTime[i]=new Date(Number(modelTime[0]),Number(modelTime[1]),Number(modelTime[2])).getTime();
+        NComCalendarTime[i]=new Date(Number(modelTime[0]),Number(modelTime[1])-1,Number(modelTime[2])).getTime();
     });
     console.log(NComCalendarTime);
 });
@@ -20,14 +20,14 @@ $.get("http://10.1.0.40:8080/nexteer/quality-complain/no-complain", function (da
     $.each(data, function (i, model) {
         var modelTime= model.addDate.split("-");
         if(model.noComplain == -1){
-            circleNComDateTime[j]=new Date(Number(modelTime[0]),Number(modelTime[1]),Number(modelTime[2])).getTime();
+            circleNComDateTime[j]=new Date(Number(modelTime[0]),Number(modelTime[1])-1,Number(modelTime[2])).getTime();
             j++;
         }
         if(model.noComplain == 0){
-            logCalendarTime[k]=new Date(Number(modelTime[0]),Number(modelTime[1]),Number(modelTime[2])).getTime();
+            logCalendarTime[k]=new Date(Number(modelTime[0]),Number(modelTime[1])-1,Number(modelTime[2])).getTime();
             k++;
         }
-        eventData[i]={id:i,color:'red',name:model.log,startDate: new Date(Number(modelTime[0]),Number(modelTime[1]),Number(modelTime[2])),endDate: new Date(Number(modelTime[0]),Number(modelTime[1]),Number(modelTime[2]))};
+        eventData[i]={id:i,color:'red',name:model.log,startDate: new Date(Number(modelTime[0]),Number(modelTime[1])-1,Number(modelTime[2])),endDate: new Date(Number(modelTime[0]),Number(modelTime[1])-1,Number(modelTime[2]))};
     });
     console.log(circleNComDateTime);
 });

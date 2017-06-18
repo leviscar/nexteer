@@ -72,14 +72,14 @@ function render() {
                 if(date.getTime()==safeCalendarTime[i]){
                     $(element).css('background-color', 'green');
                     $(element).css('color', 'white');
-                    $(element).css('border-radius', '1px');
+                    $(element).css('border-radius', '15px');
                 }
             }
             for(var j in circleDateTime){
                 if(date.getTime()==circleDateTime[j]){
                     $(element).css('background-color', 'red');
                     $(element).css('color', 'white');
-                    $(element).css('border-radius', '1px');
+                    $(element).css('border-radius', '15px');
                 }
 
             }
@@ -87,7 +87,7 @@ function render() {
                 if(date.getTime()==logCalendarTime[k]){
                     $(element).css('background-color', 'orange');
                     $(element).css('color', 'white');
-                    $(element).css('border-radius', '1px');
+                    $(element).css('border-radius', '15px');
                 }
 
             }
