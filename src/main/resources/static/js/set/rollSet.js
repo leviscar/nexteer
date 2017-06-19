@@ -215,6 +215,7 @@ $("#delPollSub").bind("click",function () {
                 var basic=txtData[1];
                 var txt="data:image/png;base64,"+basic;
                 img.src=txt;
+                img.alt="请插入图片";
                 document.getElementById("result").appendChild(img);
             });
             var total = document.documentElement.clientHeight;
