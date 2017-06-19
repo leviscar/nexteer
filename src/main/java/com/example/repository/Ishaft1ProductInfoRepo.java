@@ -34,14 +34,13 @@ public class Ishaft1ProductInfoRepo {
      * @param endTime
      * @return
      */
-    public List<ProductInfo> getByPeriod(Date startTime, Date endTime) {
+    public List<ProductInfo> getByPeriod(Date startTime, Date endTime, String stationId) {
         SimpleDateFormat sdf = DateFormat.timeFormat();
         String start = sdf.format(startTime);
         String end = sdf.format(endTime);
-        String sql = "SELECT Timestamp, Model FROM ._status WHERE ID IN (SELECT MIN(ID) FROM ._status " +
-                "WHERE Timestamp BETWEEN ? AND ? AND Status = '9999' AND StationName = 'LABELBENCH' GROUP BY Data000) " +
-                "ORDER BY Timestamp";
-        return jdbc.query(sql, new Object[]{start, end}, new ProductInfoMapper());
+        return jdbc.query("SELECT Timestamp, Model FROM ._status WHERE ID IN (SELECT MIN(ID) FROM ._status " +
+                        "WHERE Timestamp BETWEEN ? AND ? AND Status = '9999' AND StationID = ? GROUP BY Serial) ORDER BY Timestamp"
+                , new Object[]{start, end, stationId}, new ProductInfoMapper());
     }
 
     /**
@@ -52,12 +51,12 @@ public class Ishaft1ProductInfoRepo {
      * @param topN
      * @return
      */
-    public List<Date> getCurBeats(Date startDate, Date curDate, int topN) {
+    public List<Date> getCurBeats(Date startDate, Date curDate, String stationId, int topN) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sql = "SELECT TOP (?) Timestamp FROM ._status WHERE ID IN (SELECT MIN(ID) FROM ._status WHERE Timestamp" +
-                " BETWEEN ? AND ? AND Status = '9999' AND StationName = 'LABELBENCH' GROUP BY Serial)" +
+                " BETWEEN ? AND ? AND Status = '9999' AND StationID = ? GROUP BY Serial)" +
                 " ORDER BY Timestamp DESC";
-        return jdbc.query(sql, new Object[]{topN, sdf.format(startDate), sdf.format(curDate)}, new RowMapper<Date>() {
+        return jdbc.query(sql, new Object[]{topN, sdf.format(startDate), sdf.format(curDate), stationId}, new RowMapper<Date>() {
             @Override
             public Date mapRow(ResultSet resultSet, int i) throws SQLException {
                 return resultSet.getTimestamp("Timestamp");
