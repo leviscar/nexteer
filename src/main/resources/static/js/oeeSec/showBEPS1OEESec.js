@@ -138,7 +138,7 @@ function showWeek() {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    var urlString = "http://10.1.0.40:8080/nexteer/oee/week/BEPS1?date="+curr_time;
+    var urlString = "http://localhost:8080/nexteer/oee/week/BEPS1?date="+curr_time;
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -294,7 +294,7 @@ $("#showWeek").bind("click",function () {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    var urlString = "http://10.1.0.40:8080/nexteer/oee/week/BEPS1?date="+curr_time;
+    var urlString = "http://localhost:8080/nexteer/oee/week/BEPS1?date="+curr_time;
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -464,7 +464,7 @@ $("#showMonth").bind("click",function (){
             myMonthTitle.text = 'BEPS1可动率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
             var IshaftOneoeeValueArr=[];
             var IshaftOneoeeTarArr=[];
-            var urlString = "http://10.1.0.40:8080/nexteer/oee/month/BEPS1?date="+curr_time;
+            var urlString = "http://localhost:8080/nexteer/oee/month/BEPS1?date="+curr_time;
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
@@ -609,7 +609,7 @@ $("#selectMonthSub").bind("click",function (){
         console.log(MonthDate);
         var IshaftOneoeeValueArr=[];
         var IshaftOneoeeTarArr=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/oee/month/BEPS1?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/oee/month/BEPS1?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -754,7 +754,7 @@ $("#showYear").bind("click",function () {
         var showoeeJson = new oeeInput(curr_time,"ISHAFT1");
         var IshaftOneoeeValueArr=[];
         var IshaftOneoeeTarArr=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/oee/year/BEPS1?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/oee/year/BEPS1?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -895,7 +895,7 @@ $("#selectYearSub").bind("click",function () {
         console.log(YearDate);
         var IshaftOneoeeValueArr=[];
         var IshaftOneoeeTarArr=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/oee/year/BEPS1?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/oee/year/BEPS1?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
