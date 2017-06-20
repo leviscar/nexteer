@@ -41,9 +41,12 @@ public class CellService {
         String stationId;
         switch (cell) {
             case ISHAFT1:
-                products = ishaft1ProductInfoRepo.getByPeriod(start, end);
+                stationId = "SD000129X01";
+                products = ishaft1ProductInfoRepo.getByPeriod(start, end, stationId);
                 break;
             case ISHAFT2:
+                stationId = "SD000179X01";
+                products = ishaft1ProductInfoRepo.getByPeriod(start, end, stationId);
                 break;
             case ISHAFT3:
                 break;
@@ -97,9 +100,12 @@ public class CellService {
         String stationId;
         switch (cell) {
             case ISHAFT1:
-                topNProducts = ishaft1ProductInfoRepo.getCurBeats(start, end, topN);
+                stationId = "SD000129X01";
+                topNProducts = ishaft1ProductInfoRepo.getCurBeats(start, end, stationId, topN);
                 break;
             case ISHAFT2:
+                stationId = "SD000179X01";
+                topNProducts = ishaft1ProductInfoRepo.getCurBeats(start, end, stationId, topN);
                 break;
             case ISHAFT3:
                 break;
