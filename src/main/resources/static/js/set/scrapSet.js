@@ -63,7 +63,7 @@ $("#addIs1Scrap").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount",
+        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
         data: JSON.stringify(addIs1ScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -103,7 +103,7 @@ $("#addIs2Scrap").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount",
+        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
         data: JSON.stringify(addIs2ScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -143,7 +143,7 @@ $("#addIs3Scrap").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount",
+        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
         data: JSON.stringify(addIs3ScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -183,7 +183,7 @@ $("#addIs4Scrap").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount",
+        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
         data: JSON.stringify(addIs4ScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -223,7 +223,7 @@ $("#addBEPSScrap").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount",
+        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
         data: JSON.stringify(addBEPSScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -263,7 +263,7 @@ $("#addCEPSScrap").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/nexteer/scrap-amount",
+        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
         data: JSON.stringify(addCEPSScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -306,7 +306,7 @@ $("#addCEPSScrap").bind("click",function () {
 //
 //     $.ajax({
 //         type: "POST",
-//         url: "http://localhost:8080/nexteer/scrap-amount/add",
+//         url: "http://10.1.0.40:8080/nexteer/scrap-amount/add",
 //         data: JSON.stringify(addScrapJson),
 //         contentType: "application/json; charset=utf-8",
 //         dataType: "json",
@@ -347,7 +347,7 @@ $("#resetIs1Scrap").bind("click",function () {
 
     $.ajax({
         type: "PATCH",
-        url: "http://localhost:8080/nexteer/scrap-amount",
+        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -390,7 +390,7 @@ $("#resetIs2Scrap").bind("click",function () {
 
     $.ajax({
         type: "PATCH",
-        url: "http://localhost:8080/nexteer/scrap-amount",
+        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -433,7 +433,7 @@ $("#resetIs3Scrap").bind("click",function () {
 
     $.ajax({
         type: "PATCH",
-        url: "http://localhost:8080/nexteer/scrap-amount",
+        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -476,7 +476,7 @@ $("#resetIs4Scrap").bind("click",function () {
 
     $.ajax({
         type: "PATCH",
-        url: "http://localhost:8080/nexteer/scrap-amount",
+        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -519,7 +519,7 @@ $("#resetBEPSScrap").bind("click",function () {
 
     $.ajax({
         type: "PATCH",
-        url: "http://localhost:8080/nexteer/scrap-amount",
+        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -562,7 +562,7 @@ $("#resetCEPSScrap").bind("click",function () {
 
     $.ajax({
         type: "PATCH",
-        url: "http://localhost:8080/nexteer/scrap-amount",
+        url: "http://10.1.0.40:8080/nexteer/scrap-amount",
         data: JSON.stringify(resScrapJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -605,7 +605,7 @@ $("#resetCEPSScrap").bind("click",function () {
 //
 //     $.ajax({
 //         type: "POST",
-//         url: "http://localhost:8080/nexteer/scrap-amount/add",
+//         url: "http://10.1.0.40:8080/nexteer/scrap-amount/add",
 //         data: JSON.stringify(resScrapJson),
 //         contentType: "application/json; charset=utf-8",
 //         dataType: "json",

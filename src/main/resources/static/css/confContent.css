@@ -32,3 +32,9 @@
     height: 100%;
     font-size: 1em;
 }
+
+/*更改安全信息配置的前三个表格宽度*/
+.safe table tr th:nth-child(1),.safe table tr th:nth-child(2),.safe table tr th:nth-child(3),
+.quality table tr th:nth-child(1),.quality table tr th:nth-child(2),.quality table tr th:nth-child(3){
+    width: 25%;
+}

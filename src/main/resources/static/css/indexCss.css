@@ -379,3 +379,25 @@ td img{
 #roll{
     color: white;
 }
+
+#myLoginModal h4{
+    margin: 0 auto;
+    color: #e51937;
+    text-align: center;
+    font-size: 2.3em;
+    font-weight: bold;
+
+}
+#myLoginModal label{
+    float: left;
+    position: relative;
+    left: 11%;
+    font-size: 1.5em;
+}
+#myLoginModal p{
+    position: relative;
+}
+#myLoginModal input{
+    position: absolute;
+    right:32%;
+}

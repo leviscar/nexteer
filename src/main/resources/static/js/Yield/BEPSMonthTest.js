@@ -35,7 +35,7 @@ var endtime= Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday);
 var myChart = echarts.init(document.getElementById('IshaftOneYieldMonthBar'));
 var myPieChart = echarts.init(document.getElementById('IshaftOneYieldMonthPie'));
 //    var myDataOne= [];
-//    var worker = new Worker('http://localhost:8080/nexteer/IshaftYieldWeekFirstWork.js');
+//    var worker = new Worker('http://10.1.0.40:8080/nexteer/IshaftYieldWeekFirstWork.js');
 var myTitle= {
     text: '有刷产量信息展示（月视图）',
     left:'40%',
@@ -94,7 +94,7 @@ function getIshaftOneMonthData() {
 
 
 
-    $.get("http://localhost:8080/nexteer/product-model", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
         $.each(data, function (i, model) {
             if(model.cellName=="BEPS"){
 //                    ProMsg.push({"modelId":model.modelId,"modelName":model.modelName})
@@ -105,7 +105,7 @@ function getIshaftOneMonthData() {
     });
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/nexteer/output-info/BEPS3/month?date="+endtime,
+        url: "http://10.1.0.40:8080/nexteer/output-info/BEPS3/month?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             var MonthDate = [];
@@ -320,7 +320,7 @@ $("#selectMonthSub").bind("click",function (){
 
 
 
-    $.get("http://localhost:8080/nexteer/product-model", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
         $.each(data, function (i, model) {
             if(model.cellName=="BEPS"){
 //                    ProMsg.push({"modelId":model.modelId,"modelName":model.modelName})
@@ -331,7 +331,7 @@ $("#selectMonthSub").bind("click",function (){
     });
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/nexteer/output-info/BEPS3/month?date="+endtime,
+        url: "http://10.1.0.40:8080/nexteer/output-info/BEPS3/month?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             myAjaxData = JSON.stringify(data);

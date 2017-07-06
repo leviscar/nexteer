@@ -21,7 +21,7 @@ function pollInput(cell,is,interval) {
     this.interval=interval;
 }
 function getPollStatus() {
-    $.get("http://localhost:8080/nexteer/polling-page/",function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/polling-page/",function (data) {
         console.log(data[0]);
         if(data[0]==undefined){
             $(".rollTbody").find("tr").eq(0).find("td").eq(1).replaceWith(" <td  class='switch switch-large' data-on='danger' data-off='primary' > <input id='mySwitch'type='checkbox' name='my-checkbox' /></td>");
@@ -48,7 +48,7 @@ function checkButton() {
 
     // var curTime="2017-03-23 19:00:00";
     var curTime= year+"-"+judgeTime(month)+"-"+judgeTime(day)+" "+judgeTime(date.getHours())+":"+judgeTime(date.getMinutes())+":"+judgeTime(date.getSeconds());
-    var urlString = "http://localhost:8080/nexteer/unit-status/"+cell+"?curr_time="+curTime;
+    var urlString = "http://10.1.0.40:8080/nexteer/unit-status/"+cell+"?curr_time="+curTime;
     console.log(urlString);
     $.get(urlString,function (data) {
         if (data.curr_shift_info.id != null) {
@@ -62,7 +62,7 @@ function checkButton() {
                             'Content-Type': 'application/json'
                         },
                         type: "POST",
-                        url: "http://localhost:8080/nexteer/polling-page/",
+                        url: "http://10.1.0.40:8080/nexteer/polling-page/",
                         data: JSON.stringify(pollAdd),
                         dataType: "json",
                         success: function (data) {
@@ -76,7 +76,7 @@ function checkButton() {
                 } else {
                     $.ajax({
                         type: "DELETE",
-                        url: "http://localhost:8080/nexteer/polling-page/WELCOME",
+                        url: "http://10.1.0.40:8080/nexteer/polling-page/WELCOME",
                         success: function (data) {
                             console.log("删除成功");
 
@@ -100,7 +100,7 @@ function checkNew(status) {
                 'Content-Type': 'application/json'
             },
             type: "POST",
-            url: "http://localhost:8080/nexteer/polling-page/",
+            url: "http://10.1.0.40:8080/nexteer/polling-page/",
             data: JSON.stringify(pollAdd),
             dataType: "json",
             success: function (data) {
@@ -114,7 +114,7 @@ function checkNew(status) {
     }else{
         $.ajax({
             type: "DELETE",
-            url: "http://localhost:8080/nexteer/polling-page/WELCOME",
+            url: "http://10.1.0.40:8080/nexteer/polling-page/WELCOME",
             success: function (data) {
                 console.log("删除成功");
 
@@ -138,7 +138,7 @@ $("#addPollSub").bind("click",function () {
             'Content-Type': 'application/json'
         },
         type: "POST",
-        url: "http://localhost:8080/nexteer/polling-page/",
+        url: "http://10.1.0.40:8080/nexteer/polling-page/",
         data: JSON.stringify(pollAdd),
         dataType: "json",
         success: function (data) {
@@ -156,7 +156,7 @@ $("#delPollSub").bind("click",function () {
     console.log("添加Poll");
     $.ajax({
         type: "DELETE",
-        url: "http://localhost:8080/nexteer/polling-page/WELCOME",
+        url: "http://10.1.0.40:8080/nexteer/polling-page/WELCOME",
         success: function (data) {
             console.log("删除成功");
             getPollStatus();
@@ -187,7 +187,7 @@ $("#delPollSub").bind("click",function () {
                            'Content-Type': 'application/json'
                        },
                        type: "POST",
-                       url: "http://localhost:8080/nexteer/welcome",
+                       url: "http://10.1.0.40:8080/nexteer/welcome",
                        data: JSON.stringify(welcome),
                        dataType: "json",
                        success: function (data) {
@@ -208,7 +208,7 @@ $("#delPollSub").bind("click",function () {
        }
        window.addEventListener( "DOMContentLoaded" , contentLoaded , false );
         function getImage() {
-            $.get("http://localhost:8080/nexteer/welcome?name=welcome.png",function (data) {
+            $.get("http://10.1.0.40:8080/nexteer/welcome?name=welcome.png",function (data) {
                 var img=document.createElement("img");
                 var txt=data.toString();
                 var txtData=txt.split("base64/");
