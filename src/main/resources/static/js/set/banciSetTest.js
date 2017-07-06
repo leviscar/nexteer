@@ -694,9 +694,60 @@ $(document).ready(function(){
                 });
         }
         showShift();
+
+
+        //在页面加载时候，就使td节点具有click点击能力
+        var stdNode=$(".banci tr td:nth-child(5)");
+        stdNode.click(newClick);
+        function newClick() {
+            var td = $(this);
+            var tdText = td.text();
+            var cell=$(this).parent().find("td").eq(0).attr("class");
+            console.log(cell);
+            if(cell=="BEPS3"){
+                cell="BEPS"
+            }
+            if(cell=="CEPS5"){
+                cell="CEPS"
+            }
+            var input = $("<td><select class='form-control changeSelect' onchange='newSelect(this)'></td>");
+
+
+            $.get("http://localhost:8080/nexteer/std-info/standard-beat/"+cell, function (data) {
+                $(this).empty();
+                //新建一个输入框
+                console.log("start");
+                $.each(data,function (i,model) {
+                    if(data[i]!=0&&data[i]!=null){
+                        if(data[i]==Number(tdText)){
+                            input.find("select").append("<option selected>"+data[i]+"</option>");
+                        }else{
+                            input.find("select").append("<option>"+data[i]+"</option>");
+                        }
+
+
+                    }
+
+                });
+
+            });
+            //将输入框添加到td中
+            $(this).replaceWith(input);
+            var out=$(this);
+            var tdNew=out.parent("td");
+            // tdNew.bind("click",newClick);
+            console.log(tdNew);
+            tdNew.unbind("click");
+            // var tdLast=$(".banci tr td:nth-child(5)");
+            // tdLast.click(newClick);
+
+
+
+        }
         setInterval(function () {
             $(".showStatus").html("");
-        },1000*3)
+        },1000*3);
+
 
     });
 
