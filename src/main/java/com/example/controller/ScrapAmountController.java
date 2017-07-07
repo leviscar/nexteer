@@ -153,7 +153,7 @@ public class ScrapAmountController {
      * @return
      */
     @RequestMapping(value = "/period", method = RequestMethod.GET)
-    public String getByPeriod( @RequestParam(value = "start") String startDate
+    public String getByPeriod(@RequestParam(value = "start") String startDate
             , @RequestParam(value = "end") String endDate) throws ParseException {
         Gson gson = new Gson();
         List<ScrapAmount> res = repo.getByPeriod(startDate, endDate);
@@ -226,6 +226,7 @@ public class ScrapAmountController {
             return jsonObject.toString();
         }
     }
+
     /**
      * Add a scrap amount record into database
      *
@@ -246,5 +247,21 @@ public class ScrapAmountController {
     @RequestMapping(method = RequestMethod.PATCH)
     public ScrapAmount update(@RequestBody ScrapAmount scrapAmount) throws ParseException {
         return repo.updateAmount(scrapAmount);
+    }
+
+    /**
+     * Get latest scrap amount record
+     *
+     * @param cellName
+     * @return
+     */
+    @RequestMapping(value = "/{cell}/latest")
+    public ScrapAmount getLastst(@PathVariable(value = "cell") String cellName) {
+        List<ScrapAmount> res = repo.getLatest(cellName);
+        if (res.size() == 0) {
+            return new ScrapAmount();
+        } else {
+            return repo.getLatest(cellName).get(0);
+        }
     }
 }

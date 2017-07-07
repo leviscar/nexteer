@@ -36,7 +36,7 @@ public class ScrapAmountRepo {
     public List<ScrapAmount> getByDateAndCell(String curDate, String cellName) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date start = sdf.parse(curDate);
-        String sql = "SELECT * FROM scrap_amount WHERE add_date = ? and cell_name = ?";
+        String sql = "SELECT * FROM scrap_amount WHERE add_date = ? AND cell_name = ?";
         return jdbc.query(sql, new Object[]{start, cellName}, new ScrapAmountMapper());
     }
 
@@ -52,7 +52,7 @@ public class ScrapAmountRepo {
         Date start = sdf.parse(startDate);
         Date end = sdf.parse(endDate);
         if (start.getTime() - end.getTime() <= 0) {
-            String sql = "SELECT * FROM scrap_amount WHERE add_date BETWEEN ? AND ? and cell_name = ? ORDER BY add_date";
+            String sql = "SELECT * FROM scrap_amount WHERE add_date BETWEEN ? AND ? AND cell_name = ? ORDER BY add_date, cell_name";
             return jdbc.query(sql, new Object[]{start, end, cellName}, new ScrapAmountMapper());
         } else {
             return new ArrayList<>();
@@ -133,7 +133,7 @@ public class ScrapAmountRepo {
         Date start = sdf.parse(startDate);
         Date end = sdf.parse(endDate);
         if (start.getTime() - end.getTime() <= 0) {
-            String sql = "SELECT * FROM scrap_amount WHERE add_date BETWEEN ? AND ? ORDER BY add_date";
+            String sql = "SELECT * FROM scrap_amount WHERE add_date BETWEEN ? AND ? ORDER BY add_date, cell_name";
             return jdbc.query(sql, new Object[]{start, end}, new ScrapAmountMapper());
         } else {
             return new ArrayList<>();
@@ -231,5 +231,16 @@ public class ScrapAmountRepo {
      */
     public List<ScrapAmount> getTargetScrapAmountByCellAndDate(String cellName, String date) throws ParseException {
         return getByPeriodAndCell(date, date, cellName);
+    }
+
+    /**
+     * Get latest cell's target scrap amount
+     *
+     * @param cellName
+     * @return
+     */
+    public List<ScrapAmount> getLatest(String cellName) {
+        return jdbc.query("SELECT TOP 1 * FROM scrap_amount WHERE cell_name = ? ORDER BY add_date DESC"
+                , new Object[]{cellName}, new ScrapAmountMapper());
     }
 }
