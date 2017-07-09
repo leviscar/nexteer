@@ -7,6 +7,8 @@ import com.example.model.WorkShift;
 import com.example.repository.WorkShiftRepo;
 import com.example.task.TaskImpl;
 import com.example.util.DateFormat;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +39,8 @@ public class WorkShiftController {
      * @return
      * @throws ParseException
      */
+    @ApiOperation(value = "增加班次")
+    @ApiImplicitParam(name = "ws", value = "班次实体信息", required = true, dataType = "WorkShift")
     @RequestMapping(method = RequestMethod.POST)
     public WorkShift add(@RequestBody WorkShift ws) throws ParseException {
         String startTime = ws.getStartTime();

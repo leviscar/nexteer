@@ -13,6 +13,9 @@ import com.example.util.DateFormat;
 import com.example.util.Function;
 import com.example.util.OutputTool;
 import com.google.gson.JsonObject;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,6 +52,8 @@ public class DashboardController {
      * @return
      * @throws ParseException
      */
+    @ApiOperation(value = "主面板获得所有产线的产量信息", notes = "")
+    @ApiImplicitParam(name = "cell", value = "指定的产线，如BEPS1", required = true, dataType = "String")
     @RequestMapping(value = "/output/{cell}", method = RequestMethod.GET)
     public String getAllOutput(@PathVariable(value = "cell") String cellName
             , @RequestParam(value = "time") String time) throws ParseException {
@@ -63,6 +68,10 @@ public class DashboardController {
      * @param time
      * @return
      */
+    @ApiOperation(value = "主面板获取oee")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "cell", value = "指定产线，如BEPS1",required = true, dataType = "String"),
+            @ApiImplicitParam(name = "time", value = "制定事件")})
     @RequestMapping(value = "/oee/{cell}", method = RequestMethod.GET)
     public String getOee(@PathVariable(value = "cell") String cellName, @RequestParam(value = "time") String time)
             throws ParseException {
