@@ -64,7 +64,7 @@ public class ConstantScheduledTask {
         qualityComplainRepo.add(qualityComplain);
     }
 
-    @Scheduled(cron = "0 54 10 * * ?")
+    @Scheduled(cron = "20 0 0 * * ?")
     public void addTarget() throws ParseException {
         addTargetHce();
         addTargetOee();
