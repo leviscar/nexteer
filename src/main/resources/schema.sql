@@ -1,6 +1,6 @@
 USE nexteer;
--- DELETE rest_event;
--- DELETE work_shift;
+DELETE rest_event;
+DELETE work_shift;
 CREATE TABLE safety_date (
   year       NCHAR(4) NOT NULL,
   month      NCHAR(2) NOT NULL,
