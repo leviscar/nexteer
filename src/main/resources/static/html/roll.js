@@ -144,7 +144,7 @@ function getRunStatus(cell) {
 
     }
     var curTime= year+"-"+judgeTime(month)+"-"+judgeTime(day)+" "+judgeTime(date.getHours())+":"+judgeTime(date.getMinutes())+":"+judgeTime(date.getSeconds());
-    var urlString = "http://localhost:8080/nexteer/unit-status/"+cell+"?curr_time="+curTime;
+    var urlString = "http://10.1.0.40:8080/nexteer/unit-status/"+cell+"?curr_time="+curTime;
     console.log(urlString);
     console.log(url);
     $.get(urlString,function (data) {
@@ -172,7 +172,7 @@ function getRunStatus(cell) {
 }
 
 function getPollStatus() {
-    $.get("http://localhost:8080/nexteer/polling-page/",function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/polling-page/",function (data) {
         url.remove('welcome');
         console.log(data[0]);
         if(data[0]==undefined){

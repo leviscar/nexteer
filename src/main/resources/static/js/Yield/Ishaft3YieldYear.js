@@ -40,7 +40,7 @@ var endtime= Uyear+"-"+judgeMyTime(Umonth)+"-"+judgeMyTime(Uday);
 var myChart = echarts.init(document.getElementById('IshaftOneYieldYearBar'));
 var myPieChart = echarts.init(document.getElementById('IshaftOneYieldYearPie'));
 //    var myDataOne= [];
-//    var worker = new Worker('http://localhost:8080/nexteer/IshaftYieldWeekFirstWork.js');
+//    var worker = new Worker('http://10.1.0.40:8080/nexteer/IshaftYieldWeekFirstWork.js');
 var myTitle= {
     text: '第三条中间轴产量信息展示（年视图）',
     left:'40%',
@@ -100,7 +100,7 @@ function getIshaftOneMonthData() {
 //        }
 
 
-    $.get("http://localhost:8080/nexteer/product-model", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
         $.each(data, function (i, model) {
             if(model.cellName=="Ishaft3"){
 //                    ProMsg.push({"modelId":model.modelId,"modelName":model.modelName})
@@ -111,7 +111,7 @@ function getIshaftOneMonthData() {
     });
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/nexteer/output-info/ISHAFT3/year?date="+endtime,
+        url: "http://10.1.0.40:8080/nexteer/output-info/ISHAFT3/year?date="+endtime,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             var YearDate = [];
@@ -316,7 +316,7 @@ $("#selectYearSub").bind("click",function () {
 //        }
 
 
-        $.get("http://localhost:8080/nexteer/product-model", function (data) {
+        $.get("http://10.1.0.40:8080/nexteer/product-model", function (data) {
             $.each(data, function (i, model) {
                 if(model.cellName=="Ishaft3"){
 //                    ProMsg.push({"modelId":model.modelId,"modelName":model.modelName})
@@ -327,7 +327,7 @@ $("#selectYearSub").bind("click",function () {
         });
         $.ajax({
             type: "GET",
-            url: "http://localhost:8080/nexteer/output-info/ISHAFT3/year?date="+endtime,
+            url: "http://10.1.0.40:8080/nexteer/output-info/ISHAFT3/year?date="+endtime,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 var YearDate = [];
