@@ -47,11 +47,10 @@ function getSafeDay() {
     var nowMonth = new Date().getMonth()+1;
     var nowDay = new Date().getDate();
     var nowTime=judgeTime(nowYear)+"-"+judgeTime(nowMonth)+"-"+judgeTime(nowDay);
-    console.log(nowTime);
     // var urlString = "http://10.1.0.40:8080/nexteer/safety-date/day?date="+nowTime;
     $.get("http://10.1.0.40:8080/nexteer/safety-date/day?date="+nowTime,function (data) {
         if($.parseJSON(data).system_status != false){
-            console.log(JSON.stringify(data));
+            // console.log(JSON.stringify(data));
             $("#safeDay").html($.parseJSON(data).safe_dates);
             console.log("获取安全日期操作成功");
         }
@@ -79,7 +78,7 @@ function getSafeDay() {
     // });
     $.get("http://10.1.0.40:8080/nexteer/safety-date/max",function (data) {
 
-            console.log(JSON.stringify(data));
+            // console.log(JSON.stringify(data));
             $("#safeHigh").html(data);
             console.log("获取安全日期最大值操作成功");
     });

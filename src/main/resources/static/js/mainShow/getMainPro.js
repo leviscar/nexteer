@@ -31,8 +31,6 @@ $.ajax({
     sync : false,
     dataType:"json",
     success:function (data) {
-        console.log(JSON.stringify(data));
-        console.log(data.status);
         switch(data.cellName) {
             case "ishaft1":{
                 targetOut[0]=data.targetOutput;

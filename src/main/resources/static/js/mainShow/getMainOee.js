@@ -24,8 +24,7 @@ function getMainOee() {
     var currTime = "2017-03-23 15:00:00";
     var cellName = "ISHAFT1";
     var mainOeeJson = new mainOeeInput(currTime,cellName);
-    console.log(mainOeeJson);
-    console.log("getMainOee开始");
+
     $.ajax({
         type: "POST",
         url: "http://10.1.0.40:8080/nexteer/dashboard/oee",
@@ -35,10 +34,8 @@ function getMainOee() {
         dataType: "json",
         success: function (data) {
             if(data.system_status ==false){
-                console.log(JSON.stringify(data));
             }
             else {
-                console.log(JSON.stringify(data));
                 console.log("获取"+cellName+"Oee成功");
                 IshaftOEEValue[0]=data.oee;
             }

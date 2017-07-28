@@ -49,7 +49,7 @@ function getnoComDay() {
     var curTime = judgeTime(year)+"-"+judgeTime(month)+"-"+judgeTime(day);
     $.get("http://10.1.0.40:8080/nexteer/quality-complain/day?date="+curTime,function (data) {
         if(data.system_status != false){
-            console.log(JSON.stringify(data));
+            // console.log(JSON.stringify(data));
 
             $("#noComDay").html($.parseJSON(data).count);
             console.log("获取无抱怨日期操作成功");
@@ -57,7 +57,6 @@ function getnoComDay() {
     });
     $.get("http://10.1.0.40:8080/nexteer/quality-complain/max",function (data) {
 
-        console.log(JSON.stringify(data));
         $("#noComHigh").html(data);
         console.log("获取无抱怨日期最大值操作成功");
     });

@@ -21,8 +21,7 @@ function change(n){
     $.get("http://10.1.0.40:8080/nexteer/dashboard/oee/"+IshaftTitle[n]+"?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
-                console.log(JSON.stringify(data));
-                console.log("获取Oee成功");
+                console.log("获取"+IshaftTitle[n]+"Oee成功");
 
                 $("#showIshaft1OeeValue").html($.parseJSON(data).oee.toFixed(1)+"%");
                 switch ($.parseJSON(data).status)
@@ -52,10 +51,9 @@ function change(n){
 
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
-                console.log(JSON.stringify(data));
 
                 $("#showMainIshaft1Hce").html($.parseJSON(data).hce.toFixed(1)+"%");
-                console.log("获取hce操作成功");
+                console.log("获取"+IshaftTitle[n]+"hce操作成功");
                 switch ($.parseJSON(data).status)
                 {
                     case -1:

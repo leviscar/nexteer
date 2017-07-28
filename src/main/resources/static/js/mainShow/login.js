@@ -15,9 +15,8 @@ $("#loginSub").bind("click",function () {
         sync : false,
         dataType: "json",
         success: function (data) {
-            console.log(JSON.stringify(data));
             if(data.valid==true){
-                window.location.assign("http://10.1.0.40:8080/nexteer/html/basicConf.html");
+                window.location.assign("http://10.1.0.40:8080/nexteer/html/basicConfTest.html");
             }
             else {
                 $("#loginStu").html("用户名或者密码错误")

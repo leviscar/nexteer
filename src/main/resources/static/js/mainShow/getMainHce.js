@@ -25,12 +25,9 @@ function getMainIshaft1Hce() {
     var currTime = judgeTime(year)+"-"+judgeTime(month)+"-"+judgeTime(day)+" "+judgeTime(date.getHours())+":"+judgeTime(date.getMinutes())+":"+judgeTime(date.getSeconds());
     var cellName = "ISHAFT1";
     var mainHceJson = new mainHceInput(currTime,cellName);
-    console.log(currTime);
-    console.log("getMainHce开始");
     $.get("http://10.1.0.40:8080/nexteer/dashboard/hce/ISHAFT1?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
-                console.log(JSON.stringify(data));
 
                 $("#showMainIshaft1Hce").html($.parseJSON(data).hce.toFixed(1)+"%");
                 console.log("获取hce操作成功");

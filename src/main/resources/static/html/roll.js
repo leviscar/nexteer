@@ -50,10 +50,10 @@ function urlObj() {
     this.BEPS2="../html/Unit/BEPS2Unit.html";
     this.BEPS3="../html/Unit/BEPS3Unit.html";
     this.CEPS1="../html/Unit/CEPS1Unit.html";
-    this.CEPS2="../html/Unit/CEPS1Unit.html";
-    this.CEPS3="../html/Unit/CEPS1Unit.html";
-    this.CEPS4="../html/Unit/CEPS1Unit.html";
-    this.CEPS5="../html/Unit/CEPS1Unit.html";
+    this.CEPS2="../html/Unit/CEPS2Unit.html";
+    this.CEPS3="../html/Unit/CEPS3Unit.html";
+    this.CEPS4="../html/Unit/CEPS4Unit.html";
+    this.CEPS5="../html/Unit/CEPS5Unit.html";
     this.ISHAFT1="../html/Unit/Ishaft1Unit.html";
     this.ISHAFT2="../html/Unit/Ishaft2Unit.html";
     this.ISHAFT3="../html/Unit/Ishaft3Unit.html";
@@ -145,12 +145,10 @@ function getRunStatus(cell) {
     }
     var curTime= year+"-"+judgeTime(month)+"-"+judgeTime(day)+" "+judgeTime(date.getHours())+":"+judgeTime(date.getMinutes())+":"+judgeTime(date.getSeconds());
     var urlString = "http://10.1.0.40:8080/nexteer/unit-status/"+cell+"?curr_time="+curTime;
-    console.log(urlString);
-    console.log(url);
+
     $.get(urlString,function (data) {
         localStorage.removeItem(cell);
         url.remove(cell);
-
         console.log("nice");
         console.log($.parseJSON(data).curr_shift_info);
         if($.parseJSON(data).id!=null){
@@ -168,7 +166,7 @@ function getRunStatus(cell) {
             console.log(localStorage.getItem(cell));
         }
 
-    })
+    });
 }
 
 function getPollStatus() {

@@ -58,7 +58,6 @@ function getMainOee() {
     $.get("http://10.1.0.40:8080/nexteer/dashboard/oee/ISHAFT1?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
-                console.log(JSON.stringify(data));
                 console.log("获取Oee成功");
                 $("#showIshaft1OeeValue").html($.parseJSON(data).oee.toFixed(1)+"%");
                 switch ($.parseJSON(data).status)
@@ -85,7 +84,6 @@ function getMainOee() {
     $.get("http://10.1.0.40:8080/nexteer/dashboard/oee/BEPS3?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
-                console.log(JSON.stringify(data));
 
                 $("#showBEPSOeeValue").html($.parseJSON(data).oee.toFixed(1)+"%");
                 console.log("获取oee BEPS3操作成功");
@@ -113,7 +111,6 @@ function getMainOee() {
     $.get("http://10.1.0.40:8080/nexteer/dashboard/oee/CEPS5?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
-                console.log(JSON.stringify(data));
 
                 $("#showCEPSOeeValue").html($.parseJSON(data).oee.toFixed(1)+"%");
                 console.log("获取oee CEPS5操作成功");
@@ -175,9 +172,7 @@ function getMainPro() {
     $.get("http://10.1.0.40:8080/nexteer/dashboard/output/ISHAFT1?time="+currTime,function (data) {
         if($.parseJSON(data).system_status != false){
             if($.parseJSON(data).open != false){
-                console.log(JSON.stringify(data));
                 console.log("获取ishaft1表单成功");
-                console.log(JSON.stringify(data));
                 // $("#shiftOut").html($.parseJSON(data).shift_type);
                 // $("#tarOut").html($.parseJSON(data).target);
                 // $("#curOut").html($.parseJSON(data).curr_output);

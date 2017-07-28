@@ -71,7 +71,7 @@ function getNowStatus() {
         console.log($.parseJSON(data));
         if($.parseJSON(data).system_status == false){
             console.log("当前时间不在班次内");
-        }else {
+        }else if($.parseJSON(data).curr_shift_info.open==true){
             {
                 console.log("操作正常");
                 console.log($.parseJSON(data).shiftType);
