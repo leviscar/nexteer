@@ -5,6 +5,7 @@ import com.example.model.ProductInfo;
 import com.example.repository.BepsProductInfoRepo;
 import com.example.repository.CepsProductInfoRepo;
 import com.example.repository.Ishaft1ProductInfoRepo;
+import com.example.repository.StationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +21,14 @@ public class CellService {
     private Ishaft1ProductInfoRepo ishaft1ProductInfoRepo;
     private CepsProductInfoRepo cepsProductInfoRepo;
     private BepsProductInfoRepo bepsProductInfoRepo;
+    private StationRepo stationRepo;
 
     @Autowired
-    public CellService(Ishaft1ProductInfoRepo ishaft1ProductInfoRepo, CepsProductInfoRepo cepsProductInfoRepo, BepsProductInfoRepo bepsProductInfoRepo) {
+    public CellService(Ishaft1ProductInfoRepo ishaft1ProductInfoRepo, CepsProductInfoRepo cepsProductInfoRepo, BepsProductInfoRepo bepsProductInfoRepo, StationRepo stationRepo) {
         this.ishaft1ProductInfoRepo = ishaft1ProductInfoRepo;
         this.cepsProductInfoRepo = cepsProductInfoRepo;
         this.bepsProductInfoRepo = bepsProductInfoRepo;
+        this.stationRepo = stationRepo;
     }
 
     /**
@@ -38,45 +41,39 @@ public class CellService {
      */
     public List<ProductInfo> getProducts(Date start, Date end, Cell cell) {
         List<ProductInfo> products = new ArrayList<>();
-        String stationId;
+        String stationId = stationRepo.getByCellName(cell.name()).get(0);
         switch (cell) {
             case ISHAFT1:
-                stationId = "SD000129X01";
                 products = ishaft1ProductInfoRepo.getByPeriod(start, end, stationId);
                 break;
             case ISHAFT2:
-                stationId = "SD000179X01";
                 products = ishaft1ProductInfoRepo.getByPeriod(start, end, stationId);
                 break;
             case ISHAFT3:
+                products = ishaft1ProductInfoRepo.getByPeriod(start, end, stationId);
                 break;
             case ISHAFT4:
+                products = ishaft1ProductInfoRepo.getByPeriod(start, end, stationId);
                 break;
             case BEPS1:
-                stationId = "SD001330X01";
                 products = bepsProductInfoRepo.getByPeriodAndStationId(start, end, stationId);
                 break;
             case BEPS2:
-                stationId = "SD001343X01";
                 products = bepsProductInfoRepo.getByPeriodAndStationId(start, end, stationId);
                 break;
             case BEPS3:
                 products = bepsProductInfoRepo.getCell5ByPeriod(start, end);
                 break;
             case CEPS1:
-                stationId = "SD000094X02";
                 products = cepsProductInfoRepo.getByPeriodAndStationId(start, end, stationId);
                 break;
             case CEPS2:
-                stationId = "SD000102X01";
                 products = cepsProductInfoRepo.getByPeriodAndStationId(start, end, stationId);
                 break;
             case CEPS3:
-                stationId = "SD000107X01";
                 products = cepsProductInfoRepo.getByPeriodAndStationId(start, end, stationId);
                 break;
             case CEPS4:
-                stationId = "SD000122X01";
                 products = cepsProductInfoRepo.getByPeriodAndStationId(start, end, stationId);
                 break;
             case CEPS5:
@@ -97,45 +94,40 @@ public class CellService {
      */
     public List<Date> getTopNProducts(Date start, Date end, int topN, Cell cell) {
         List<Date> topNProducts = new ArrayList<>();
-        String stationId;
+        String stationId = stationRepo.getByCellName(cell.name()).get(0);
+        ;
         switch (cell) {
             case ISHAFT1:
-                stationId = "SD000129X01";
                 topNProducts = ishaft1ProductInfoRepo.getCurBeats(start, end, stationId, topN);
                 break;
             case ISHAFT2:
-                stationId = "SD000179X01";
                 topNProducts = ishaft1ProductInfoRepo.getCurBeats(start, end, stationId, topN);
                 break;
             case ISHAFT3:
+                topNProducts = ishaft1ProductInfoRepo.getCurBeats(start, end, stationId, topN);
                 break;
             case ISHAFT4:
+                topNProducts = ishaft1ProductInfoRepo.getCurBeats(start, end, stationId, topN);
                 break;
             case BEPS1:
-                stationId = "SD001330X01";
                 topNProducts = bepsProductInfoRepo.getTopN(start, end, topN, stationId);
                 break;
             case BEPS2:
-                stationId = "SD001343X01";
                 topNProducts = bepsProductInfoRepo.getTopN(start, end, topN, stationId);
                 break;
             case BEPS3:
                 topNProducts = bepsProductInfoRepo.getCell5TopN(start, end, topN);
                 break;
             case CEPS1:
-                stationId = "SD000094X02";
                 topNProducts = cepsProductInfoRepo.getTopN(start, end, topN, stationId);
                 break;
             case CEPS2:
-                stationId = "SD000102X01";
                 topNProducts = cepsProductInfoRepo.getTopN(start, end, topN, stationId);
                 break;
             case CEPS3:
-                stationId = "SD000107X01";
                 topNProducts = cepsProductInfoRepo.getTopN(start, end, topN, stationId);
                 break;
             case CEPS4:
-                stationId = "SD000122X01";
                 topNProducts = cepsProductInfoRepo.getTopN(start, end, topN, stationId);
                 break;
             case CEPS5:

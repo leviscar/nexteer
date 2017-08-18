@@ -107,3 +107,9 @@ CREATE TABLE polling_page (
   interval   INT,
   PRIMARY KEY (cell_name)
 );
+CREATE TABLE station (
+  id         INT,
+  cell_name  VARCHAR(10),
+  station_id VARCHAR(40),
+  PRIMARY KEY (id, cell_name)
+);
