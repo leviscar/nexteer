@@ -144,7 +144,7 @@ function getRunStatus(cell) {
 
     }
     var curTime= year+"-"+judgeTime(month)+"-"+judgeTime(day)+" "+judgeTime(date.getHours())+":"+judgeTime(date.getMinutes())+":"+judgeTime(date.getSeconds());
-    var urlString = "http://10.1.0.40:8080/nexteer/unit-status/"+cell+"?curr_time="+curTime;
+    var urlString = "http://localhost:8080/nexteer/unit-status/"+cell+"?curr_time="+curTime;
 
     $.get(urlString,function (data) {
         localStorage.removeItem(cell);
@@ -170,15 +170,19 @@ function getRunStatus(cell) {
 }
 
 function getPollStatus() {
-    $.get("http://10.1.0.40:8080/nexteer/polling-page/",function (data) {
+    $.get("http://localhost:8080/nexteer/polling-page/",function (data) {
         url.remove('welcome');
+        url.remove('index');
         console.log(data[0]);
-        if(data[0]==undefined){
-        }
-        else if(data[0].cellName=="welcome"&&data[0].isPolling==true){
-            url.push('welcome');
+        $.each(data,function (i,model) {
+            if(data[i].cellName=="welcome"&&data[i].isPolling==true){
+                url.push('welcome');
+            }
+            if(data[i].cellName=="index"&&data[i].isPolling==true){
+                url.push('index');
+            }
 
-        }
+        });
 
     })
 

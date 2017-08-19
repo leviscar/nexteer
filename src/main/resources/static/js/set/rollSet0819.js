@@ -1,3 +1,6 @@
+/**
+ * Created by Administrator on 2017/8/19.
+ */
 $(document).ready(function () {
     /**
      * Created by Administrator on 2017/6/5.
@@ -23,16 +26,25 @@ $(document).ready(function () {
     }
     function getPollStatus() {
         $.get("http://localhost:8080/nexteer/polling-page/",function (data) {
-            console.log(data[0]);
-            if(data[0]==undefined){
-                $(".rollTbody").find("tr").eq(0).find("td").eq(1).replaceWith(" <td  class='switch switch-large' data-on='danger' data-off='primary' > <input id='mySwitch'type='checkbox' name='my-checkbox' /></td>");
-                $("[name='my-checkbox']").bootstrapSwitch();
-            }
-            else if(data[0].cellName=="welcome"&&data[0].isPolling==true){
-                console.log(data[0].isPolling==true);
-                $(".rollTbody").find("tr").eq(0).find("td").eq(1).replaceWith(" <td class='switch switch-large' data-on='danger' data-off='primary' > <input id='mySwitch' type='checkbox' name='my-checkbox' checked/></td>");
-                $("[name='my-checkbox']").bootstrapSwitch();
-            }
+            console.log(data);
+            $(".rollTbody").find("tr").eq(0).find("td").eq(1).replaceWith(" <td  class='switch switch-large' data-on='danger' data-off='primary' > <input id='mySwitch'type='checkbox' name='my-checkbox' /></td>");
+            $("[name='my-checkbox']").bootstrapSwitch();
+            $(".rollTbody").find("tr").eq(1).find("td").eq(1).replaceWith(" <td  class='switch switch-large' data-on='danger' data-off='primary' > <input id='myIndexSwitch'type='checkbox' name='my-checkbox' /></td>");
+            $("[name='my-checkbox']").bootstrapSwitch();
+            $.each(data,function (i,model) {
+
+                if(data[i].cellName=="welcome"&&data[i].isPolling==true){
+                    console.log(data[i].cellName+":"+data[i].isPolling);
+                    $(".rollTbody").find("tr").eq(0).find("td").eq(1).replaceWith(" <td class='switch switch-large' data-on='danger' data-off='primary' > <input id='mySwitch' type='checkbox' name='my-checkbox' checked/></td>");
+                    $("[name='my-checkbox']").bootstrapSwitch();
+                }
+                if(data[i].cellName=="index"&&data[i].isPolling==true){
+                    console.log(data[i].cellName+":"+data[i].isPolling);
+                    $(".rollTbody").find("tr").eq(1).find("td").eq(1).replaceWith(" <td class='switch switch-large' data-on='danger' data-off='primary' > <input id='myIndexSwitch' type='checkbox' name='my-checkbox' checked/></td>");
+                    $("[name='my-checkbox']").bootstrapSwitch();
+                }
+            });
+
 
         })
 
@@ -169,6 +181,44 @@ $(document).ready(function () {
         });
     });
 
+    $("#addMainSub").bind("click",function () {
+        var pollAdd=new pollInput("index",true,10);
+        console.log("添加Poll");
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "POST",
+            url: "http://localhost:8080/nexteer/polling-page/",
+            data: JSON.stringify(pollAdd),
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                getPollStatus();
+
+            },
+            failure: function (errMsg) {
+                console.log(errMsg);
+            }
+        });
+    });
+    $("#delMainSub").bind("click",function () {
+        var pollAdd=new pollInput("index",true,10);
+        console.log("添加Poll");
+        $.ajax({
+            type: "DELETE",
+            url: "http://localhost:8080/nexteer/polling-page/index",
+            success: function (data) {
+                console.log("删除成功");
+                getPollStatus();
+
+            },
+            failure: function (errMsg) {
+                console.log(errMsg);
+            }
+        });
+    });
     function ProcessFile( e ) {
         var file = document.getElementById('file').files[0];
         if ( file ) {

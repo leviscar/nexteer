@@ -66,7 +66,7 @@ function getNowStatus() {
         bottom:'2%'
     };
 // // 基于准备好的dom，初始化echarts实例
-    $.get("http://10.1.0.40:8080/nexteer/unit-status/BEPS2?curr_time="+curTime,function (data) {
+    $.get("http://localhost:8080/nexteer/unit-status/BEPS2?curr_time="+curTime,function (data) {
         console.log($.parseJSON(data));
         if($.parseJSON(data).system_status == false){
             console.log("当前时间不在班次内");
@@ -288,7 +288,7 @@ $("#EN").bind("click",function () {
     };
 // // 基于准备好的dom，初始化echarts实例
 // var myChart = echarts.init(document.getElementById('IshaftOneYieldDayChart'));
-    $.get("http://10.1.0.40:8080/nexteer/unit-status/BEPS2?curr_time="+curTime,function (data) {
+    $.get("http://localhost:8080/nexteer/unit-status/BEPS2?curr_time="+curTime,function (data) {
         console.log($.parseJSON(data));
         if($.parseJSON(data).system_status == false){
             console.log("当前时间不在班次内");
@@ -513,7 +513,7 @@ function getENStatus(){
         };
 // // 基于准备好的dom，初始化echarts实例
 // var myChart = echarts.init(document.getElementById('IshaftOneYieldDayChart'));
-        $.get("http://10.1.0.40:8080/nexteer/unit-status/BEPS2?curr_time="+curTime,function (data) {
+        $.get("http://localhost:8080/nexteer/unit-status/BEPS2?curr_time="+curTime,function (data) {
             console.log($.parseJSON(data));
             if($.parseJSON(data).system_status == false){
                 console.log("当前时间不在班次内");

@@ -59,7 +59,7 @@ $(document).ready(function () {
         var month=date.getMonth()+1;
         var day=date.getDate();
         var time=year+"-"+judgeMyTime(month)+"-"+judgeMyTime(day);
-        var url="http://10.1.0.40:8080/nexteer/scrap-amount/period?start=2017-01-01&end="+time;
+        var url="http://localhost:8080/nexteer/scrap-amount/period?start=2017-01-01&end="+time;
         $.get(url,function (data) {
             console.log(data);
             console.log(typeof data);
@@ -113,7 +113,7 @@ $(document).ready(function () {
                     'Content-Type': 'application/json'
                 },
                 type: "POST",
-                url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+                url: "http://localhost:8080/nexteer/scrap-amount",
                 data: JSON.stringify(addInputJson),
                 dataType: "json",
                 success: function (data) {
@@ -174,7 +174,7 @@ $(document).ready(function () {
                     'Content-Type': 'application/json'
                 },
                 type: "PATCH",
-                url: "http://10.1.0.40:8080/nexteer/scrap-amount",
+                url: "http://localhost:8080/nexteer/scrap-amount",
                 data: JSON.stringify(addInputJson),
                 dataType: "json",
                 success: function (data) {
