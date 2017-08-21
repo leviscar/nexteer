@@ -54,12 +54,12 @@ $(document).ready(function () {
     }
     function getScrapData() {
         console.log("报废金额");
-        var url1="http://localhost:8080/nexteer/scrap-amount/ISHAFT1/latest";
-        var url2="http://localhost:8080/nexteer/scrap-amount/ISHAFT2/latest";
-        var url3="http://localhost:8080/nexteer/scrap-amount/ISHAFT3/latest";
-        var url4="http://localhost:8080/nexteer/scrap-amount/ISHAFT4/latest";
-        var url5="http://localhost:8080/nexteer/scrap-amount/CEPS5/latest";
-        var url6="http://localhost:8080/nexteer/scrap-amount/BEPS3/latest";
+        var url1="http://10.1.0.40:8080/nexteer/scrap-amount/ISHAFT1/latest";
+        var url2="http://10.1.0.40:8080/nexteer/scrap-amount/ISHAFT2/latest";
+        var url3="http://10.1.0.40:8080/nexteer/scrap-amount/ISHAFT3/latest";
+        var url4="http://10.1.0.40:8080/nexteer/scrap-amount/ISHAFT4/latest";
+        var url5="http://10.1.0.40:8080/nexteer/scrap-amount/CEPS5/latest";
+        var url6="http://10.1.0.40:8080/nexteer/scrap-amount/BEPS3/latest";
         $.get(url1,function (data) {
                 var line;
                 switch (data.cellName){
@@ -185,7 +185,7 @@ $(document).ready(function () {
     }
     getScrapData();
 
-    $.get("http://localhost:8080/nexteer/scrap-amount/ISHAFT1/latest", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/scrap-amount/ISHAFT1/latest", function (data) {
         $("#scrapTable").find("tbody").find("td").eq(3).find("input").val(data.targetValue);
     });
 //添加按钮
@@ -208,7 +208,7 @@ $(document).ready(function () {
                     'Content-Type': 'application/json'
                 },
                 type: "POST",
-                url: "http://localhost:8080/nexteer/scrap-amount",
+                url: "http://10.1.0.40:8080/nexteer/scrap-amount",
                 data: JSON.stringify(addInputJson),
                 dataType: "json",
                 success: function (data) {
@@ -253,7 +253,7 @@ $(document).ready(function () {
                     'Content-Type': 'application/json'
                 },
                 type: "PATCH",
-                url: "http://localhost:8080/nexteer/scrap-amount",
+                url: "http://10.1.0.40:8080/nexteer/scrap-amount",
                 data: JSON.stringify(addInputJson),
                 dataType: "json",
                 success: function (data) {
@@ -288,7 +288,7 @@ function newScrap(self) {
     var cell=$(self).parent().find("select").val();
     console.log(cell) ;
     console.log("td开始工作");
-    $.get("http://localhost:8080/nexteer/scrap-amount/"+cell+"/latest", function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/scrap-amount/"+cell+"/latest", function (data) {
         $(self).parent().parent().find("td").eq(3).find("input").val(data.targetValue);
     });
 

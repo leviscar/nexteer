@@ -167,7 +167,7 @@ function showMonth() {
     }
     console.log("当前月份天数"+MonthDate);
 
-    $.get("http://localhost:8080/nexteer/scrap-amount/month?date="+MonthDate[d.getDate()-1], function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/scrap-amount/month?date="+MonthDate[d.getDate()-1], function (data) {
         console.log(data);
         var MonthDate = [];
         $.each($.parseJSON(data),function (i,model) {
@@ -467,7 +467,7 @@ $("#selectMonthSub").bind("click",function (){
         }
 
         console.log(MonthDate);
-        $.get("http://localhost:8080/nexteer/scrap-amount/month?date="+MonthDate[d.getDate()-1], function (data) {
+        $.get("http://10.1.0.40:8080/nexteer/scrap-amount/month?date="+MonthDate[d.getDate()-1], function (data) {
             console.log(data);
             $.each($.parseJSON(data), function (i, model) {
                 for(var monIndex=0;monIndex<MonthDate.length;monIndex++){

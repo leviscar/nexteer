@@ -1,3 +1,9 @@
+/**
+ * Created by Administrator on 2017/8/21.
+ */
+/**
+ * Created by Administrator on 2017/8/19.
+ */
 $(document).ready(function () {
     /**
      * Created by Administrator on 2017/6/5.
@@ -22,17 +28,39 @@ $(document).ready(function () {
         this.interval=interval;
     }
     function getPollStatus() {
-        $.get("http://localhost:8080/nexteer/polling-page/",function (data) {
-            console.log(data[0]);
-            if(data[0]==undefined){
-                $(".rollTbody").find("tr").eq(0).find("td").eq(1).replaceWith(" <td  class='switch switch-large' data-on='danger' data-off='primary' > <input id='mySwitch'type='checkbox' name='my-checkbox' /></td>");
+        $.get("http://10.1.0.40:8080/nexteer/polling-page/",function (data) {
+            console.log(data);
+
+            for(var len=0;len<$(".rollTbody").find("tr").length;len++){
+                $(".rollTbody").find("tr").eq(len).find("td").eq(1).replaceWith(" <td  class='switch switch-large' data-on='danger' data-off='primary' > <input id='myIndexSwitch'type='checkbox' name='my-checkbox' /></td>");
                 $("[name='my-checkbox']").bootstrapSwitch();
             }
-            else if(data[0].cellName=="welcome"&&data[0].isPolling==true){
-                console.log(data[0].isPolling==true);
-                $(".rollTbody").find("tr").eq(0).find("td").eq(1).replaceWith(" <td class='switch switch-large' data-on='danger' data-off='primary' > <input id='mySwitch' type='checkbox' name='my-checkbox' checked/></td>");
+            function showStatus(i) {
+                $(".rollTbody").find("tr").eq(i).find("td").eq(1).replaceWith(" <td class='switch switch-large' data-on='danger' data-off='primary' > <input  type='checkbox' name='my-checkbox' checked/></td>");
                 $("[name='my-checkbox']").bootstrapSwitch();
             }
+            $.each(data,function (i,model) {
+                if(data[i].isPolling==true){
+                    switch (data[i].cellName){
+                        case "welcome":showStatus(0);break;
+                        case "index":showStatus(1);break;
+                        case "ISHAFT1":showStatus(2);break;
+                        case "ISHAFT2":showStatus(3);break;
+                        case "ISHAFT3":showStatus(4);break;
+                        case "ISHAFT4":showStatus(5);break;
+                        case "BEPS1":showStatus(6);break;
+                        case "BEPS2":showStatus(7);break;
+                        case "BEPS3":showStatus(8);break;
+                        case "CEPS1":showStatus(9);break;
+                        case "CEPS2":showStatus(10);break;
+                        case "CEPS3":showStatus(11);break;
+                        case "CEPS4":showStatus(12);break;
+                        case "CEPS5":showStatus(13);break;
+
+                    }
+                }
+            });
+
 
         })
 
@@ -43,55 +71,6 @@ $(document).ready(function () {
         this.image=image;
     }
 
-    function checkButton() {
-        console.log($(".rollTbody").find("tr").eq(0).find("input").is(':checked'));
-        var pollAdd=new pollInput("welcome",true,10);
-
-        // var curTime="2017-03-23 19:00:00";
-        var curTime= year+"-"+judgeTime(month)+"-"+judgeTime(day)+" "+judgeTime(date.getHours())+":"+judgeTime(date.getMinutes())+":"+judgeTime(date.getSeconds());
-        var urlString = "http://localhost:8080/nexteer/unit-status/"+cell+"?curr_time="+curTime;
-        console.log(urlString);
-        $.get(urlString,function (data) {
-            if (data.curr_shift_info.id != null) {
-                if (data.curr_shift_info.open == true) {
-                    $(".rollTbody").find("tr").eq(index).find("td").eq(1).replaceWith("<td class='switch switch-large' data-on='danger' data-off='primrya' > <input type='checkbox' name='my-checkbox'  /></td>");
-
-                    if ($(".rollTbody").find("tr").eq(0).find("input").is(':checked') == true) {
-                        $.ajax({
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            },
-                            type: "POST",
-                            url: "http://localhost:8080/nexteer/polling-page/",
-                            data: JSON.stringify(pollAdd),
-                            dataType: "json",
-                            success: function (data) {
-                                console.log(data);
-
-                            },
-                            failure: function (errMsg) {
-                                console.log(errMsg);
-                            }
-                        });
-                    } else {
-                        $.ajax({
-                            type: "DELETE",
-                            url: "http://localhost:8080/nexteer/polling-page/WELCOME",
-                            success: function (data) {
-                                console.log("删除成功");
-
-                            },
-                            failure: function (errMsg) {
-                                console.log(errMsg);
-                            }
-                        });
-                    }
-
-                }
-            }
-        });
-    }
     function checkNew(status) {
         console.log("checkNew-Status:"+status);
         if(status==true){
@@ -101,7 +80,7 @@ $(document).ready(function () {
                     'Content-Type': 'application/json'
                 },
                 type: "POST",
-                url: "http://localhost:8080/nexteer/polling-page/",
+                url: "http://10.1.0.40:8080/nexteer/polling-page/",
                 data: JSON.stringify(pollAdd),
                 dataType: "json",
                 success: function (data) {
@@ -115,7 +94,7 @@ $(document).ready(function () {
         }else{
             $.ajax({
                 type: "DELETE",
-                url: "http://localhost:8080/nexteer/polling-page/WELCOME",
+                url: "http://10.1.0.40:8080/nexteer/polling-page/WELCOME",
                 success: function (data) {
                     console.log("删除成功");
 
@@ -126,20 +105,34 @@ $(document).ready(function () {
             });
         }
     }
-    $('#mySwitch').bind("click",function(){
-        console.log("switch");
-    }) ;
 
-    $("#addPollSub").bind("click",function () {
-        var pollAdd=new pollInput("welcome",true,10);
-        console.log("添加Poll");
+    $(".addRoll").bind("click",function () {
+        var name=$(this).parent().parent().find("td").eq(0).text();
+        var rollName;
+        switch (name){
+            case "欢迎页面":rollName="welcome";break;
+            case "主页面":rollName="index";break;
+            case "第一条中间轴产线实时数据看板":rollName="ISHAFT1"; break;
+            case "第二条中间轴产线实时数据看板":rollName="ISHAFT2"; break;
+            case "第三条中间轴产线实时数据看板":rollName="ISHAFT3"; break;
+            case "第四条中间轴产线实时数据看板":rollName="ISHAFT4"; break;
+            case "有刷助力器组装线实时数据看板":rollName="BEPS1"; break;
+            case "有刷传感器组装线实时数据看板":rollName="BEPS2"; break;
+            case "有刷总组装线实时数据看板":rollName="BEPS3"; break;
+            case "无刷助力轴组装线实时数据看板":rollName="CEPS1"; break;
+            case "无刷助力器组装线实时数据看板":rollName="CEPS2"; break;
+            case "无刷传感器组装线实时数据看板":rollName="CEPS3"; break;
+            case "无刷护管组装线实时数据看板":rollName="CEPS4"; break;
+            case "无刷总组装线实时数据看板":rollName="CEPS5"; break;
+        }
+        var pollAdd=new pollInput(rollName,true,10);
         $.ajax({
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             type: "POST",
-            url: "http://localhost:8080/nexteer/polling-page/",
+            url: "http://10.1.0.40:8080/nexteer/polling-page/",
             data: JSON.stringify(pollAdd),
             dataType: "json",
             success: function (data) {
@@ -152,12 +145,30 @@ $(document).ready(function () {
             }
         });
     });
-    $("#delPollSub").bind("click",function () {
-        var pollAdd=new pollInput("welcome",true,10);
+    $(".delRoll").bind("click",function () {
+        var name=$(this).parent().parent().find("td").eq(0).text();
+        var rollName;
+        switch (name){
+            case "欢迎页面":rollName="welcome";break;
+            case "主页面":rollName="index";break;
+            case "第一条中间轴产线实时数据看板":rollName="ISHAFT1"; break;
+            case "第二条中间轴产线实时数据看板":rollName="ISHAFT2"; break;
+            case "第三条中间轴产线实时数据看板":rollName="ISHAFT3"; break;
+            case "第四条中间轴产线实时数据看板":rollName="ISHAFT4"; break;
+            case "有刷助力器组装线实时数据看板":rollName="BEPS1"; break;
+            case "有刷传感器组装线实时数据看板":rollName="BEPS2"; break;
+            case "有刷总组装线实时数据看板":rollName="BEPS3"; break;
+            case "无刷助力轴组装线实时数据看板":rollName="CEPS1"; break;
+            case "无刷助力器组装线实时数据看板":rollName="CEPS2"; break;
+            case "无刷传感器组装线实时数据看板":rollName="CEPS3"; break;
+            case "无刷护管组装线实时数据看板":rollName="CEPS4"; break;
+            case "无刷总组装线实时数据看板":rollName="CEPS5"; break;
+        }
+        var pollAdd=new pollInput(rollName,true,10);
         console.log("添加Poll");
         $.ajax({
             type: "DELETE",
-            url: "http://localhost:8080/nexteer/polling-page/WELCOME",
+            url: "http://10.1.0.40:8080/nexteer/polling-page/"+rollName,
             success: function (data) {
                 console.log("删除成功");
                 getPollStatus();
@@ -188,7 +199,7 @@ $(document).ready(function () {
                         'Content-Type': 'application/json'
                     },
                     type: "POST",
-                    url: "http://localhost:8080/nexteer/welcome",
+                    url: "http://10.1.0.40:8080/nexteer/welcome",
                     data: JSON.stringify(welcome),
                     dataType: "json",
                     success: function (data) {
@@ -209,7 +220,7 @@ $(document).ready(function () {
     }
     window.addEventListener( "DOMContentLoaded" , contentLoaded , false );
     function getImage() {
-        $.get("http://localhost:8080/nexteer/welcome?name=welcome.png",function (data) {
+        $.get("http://10.1.0.40:8080/nexteer/welcome?name=welcome.png",function (data) {
             var img=document.createElement("img");
             var txt=data.toString();
             var txtData=txt.split("base64/");
