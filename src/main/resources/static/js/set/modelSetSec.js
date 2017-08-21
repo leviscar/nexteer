@@ -20,7 +20,6 @@ console.log("开始运行");
 //获取型号信息
 function getProduct(cell,id) {
     $.get("http://localhost:8080/nexteer/product-model/"+cell, function (data) {
-        console.log(JSON.stringify(data));
         $(id).find("tbody").empty();
         var line;
         // $("#productMessage").replaceWith("<thead><tr><th>行数</th><th>型号ID</th><th>型号名称</th><th>所属单元</th><th>STD</th></tr></thead>");
