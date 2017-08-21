@@ -117,4 +117,4 @@ $("#exitRoll").bind("click",function () {
     window.location.assign("../index.html");
 
 });
-setInterval( "changeSrc() ",2*1000);
+setInterval( "changeSrc() ",20*1000);
