@@ -430,7 +430,7 @@ function showShift() {
 }
 
 
-showShift();
+// showShift();
 //添加班次按钮
 $(document).ready(function(){
 
@@ -744,6 +744,8 @@ function showEvent(cell,idInput) {
     $.get("http://10.1.0.40:8080/nexteer/rest-event?work_shift_id="+idInput, function (data) {
 
         var title= "#show"+cell+"Event";
+        // $(title).find("tbody").remove();
+        console.log("showEvent"+idInput);
         $.each(data, function (i, model) {
 
             var line;

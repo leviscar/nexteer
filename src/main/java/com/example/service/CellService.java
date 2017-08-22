@@ -41,7 +41,12 @@ public class CellService {
      */
     public List<ProductInfo> getProducts(Date start, Date end, Cell cell) {
         List<ProductInfo> products = new ArrayList<>();
-        String stationId = stationRepo.getByCellName(cell.name()).get(0);
+//        String stationId = stationRepo.getByCellName(cell.name()).get(0);
+        List<String> stationIds = stationRepo.getByCellName(cell.name());
+        String stationId = "";
+        if(!stationIds.isEmpty()){
+            stationId=stationIds.get(0);
+        }
         switch (cell) {
             case ISHAFT1:
                 products = ishaft1ProductInfoRepo.getByPeriod(start, end, stationId);
@@ -94,8 +99,12 @@ public class CellService {
      */
     public List<Date> getTopNProducts(Date start, Date end, int topN, Cell cell) {
         List<Date> topNProducts = new ArrayList<>();
-        String stationId = stationRepo.getByCellName(cell.name()).get(0);
-        ;
+//        String stationId = stationRepo.getByCellName(cell.name()).get(0);
+        List<String> stationIds = stationRepo.getByCellName(cell.name());
+        String stationId = "";
+        if(!stationIds.isEmpty()){
+            stationId=stationIds.get(0);
+        }
         switch (cell) {
             case ISHAFT1:
                 topNProducts = ishaft1ProductInfoRepo.getCurBeats(start, end, stationId, topN);
