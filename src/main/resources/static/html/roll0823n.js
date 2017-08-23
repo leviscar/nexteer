@@ -1,4 +1,7 @@
 /**
+ * Created by Administrator on 2017/8/23.
+ */
+/**
  * Created by Administrator on 2017/5/15.
  */
 
@@ -144,26 +147,20 @@ function getRunStatus(cell) {
 
     }
     var curTime= year+"-"+judgeTime(month)+"-"+judgeTime(day)+" "+judgeTime(date.getHours())+":"+judgeTime(date.getMinutes())+":"+judgeTime(date.getSeconds());
-    var urlString = "http://localhost:8080/nexteer/unit-status/"+cell+"?curr_time="+curTime;
+    var urlString = "http://localhost:8080/nexteer/polling-page/status/"+cell+"?time="+curTime;
 
     $.get(urlString,function (data) {
         localStorage.removeItem(cell);
         url.remove(cell);
-        console.log("nice");
-        console.log($.parseJSON(data).curr_shift_info);
-        if($.parseJSON(data).id!=null){
-            if($.parseJSON(data).curr_shift_info.open==true){
+        if($.parseJSON(data)[1].id!=null){
+            if($.parseJSON(data)[1].open==true&&$.parseJSON(data)[0].isPolling==true){
                 localStorage.setItem(cell,urlIndex);
-                console.log("in");
-                console.log(urlIndex);
                 url.push(cell);
 
             }
             else {
                 localStorage.removeItem(cell);
             }
-            console.log(cell+":"+$.parseJSON(data).curr_shift_info.open);
-            console.log(localStorage.getItem(cell));
         }
 
     });
@@ -171,16 +168,23 @@ function getRunStatus(cell) {
 
 function getPollStatus() {
     $.get("http://localhost:8080/nexteer/polling-page/",function (data) {
+
         url.remove('welcome');
         url.remove('index');
         console.log(data[0]);
         $.each(data,function (i,model) {
-            if(data[i].cellName=="welcome"&&data[i].isPolling==true){
-                url.push('welcome');
+
+            if(data[i].isPolling==true){
+                switch (data[i].cellName){
+                    case "welcome":
+                        url.push('welcome');
+                        break;
+                    case "index":
+                        url.push('index');
+                        break;
+                }
             }
-            if(data[i].cellName=="index"&&data[i].isPolling==true){
-                url.push('index');
-            }
+
 
         });
 
@@ -217,4 +221,4 @@ $("#exitRoll").bind("click",function () {
     window.location.assign("../index.html");
 
 });
-setInterval( "changeSrc() ",20*1000);
+setInterval( "changeSrc() ",5*1000);

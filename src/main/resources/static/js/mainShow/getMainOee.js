@@ -3,7 +3,7 @@
  */
 var IshaftTitle=["Ishaft1","Ishaft2","Ishaft3","Ishaft4"];
 IshaftOEEValue=["00","00","00","00"];
-IshaftOEEHref = ["http://10.1.0.40:8080/nexteer/OEESecView.html","http://10.1.0.40:8080/nexteer/OEEIshaftTwoWeekView.html","http://10.1.0.40:8080/nexteer/OEEIshaftThrWeekView.html","http://10.1.0.40:8080/nexteer/OEEIshaftFouWeekView.html"];
+IshaftOEEHref = ["http://localhost:8080/nexteer/OEESecView.html","http://localhost:8080/nexteer/OEEIshaftTwoWeekView.html","http://localhost:8080/nexteer/OEEIshaftThrWeekView.html","http://localhost:8080/nexteer/OEEIshaftFouWeekView.html"];
 
 function judgeTime(time) {
     var timeStr="";
@@ -27,7 +27,7 @@ function getMainOee() {
 
     $.ajax({
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/dashboard/oee",
+        url: "http://localhost:8080/nexteer/dashboard/oee",
         data: JSON.stringify(mainOeeJson),
         contentType: "application/json; charset=utf-8",
         sync : false,

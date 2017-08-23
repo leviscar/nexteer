@@ -153,7 +153,7 @@ function showWeek() {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    $.get("http://10.1.0.40:8080/nexteer/scrap-amount/week?date="+WeekDate[6], function (data) {
+    $.get("http://localhost:8080/nexteer/scrap-amount/week?date="+WeekDate[6], function (data) {
         $.each($.parseJSON(data), function (i, model) {
             switch (model.addDate){
                 case WeekDate[0]:
