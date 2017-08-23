@@ -221,4 +221,4 @@ $("#exitRoll").bind("click",function () {
     window.location.assign("../index.html");
 
 });
-setInterval( "changeSrc() ",5*1000);
+setInterval( "changeSrc() ",20*1000);
