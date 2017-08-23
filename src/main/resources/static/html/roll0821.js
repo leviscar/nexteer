@@ -55,7 +55,7 @@ var count = 0;
 
 
 function getPollStatus() {
-    $.get("http://localhost:8080/nexteer/polling-page/",function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/polling-page/",function (data) {
         url.remove('welcome');
         url.remove('index');
         url.remove('ISHAFT1');

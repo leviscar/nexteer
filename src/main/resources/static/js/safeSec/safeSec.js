@@ -7,13 +7,13 @@ var circleDateTime=[];
 var safeCalendarTime=[];
 var logCalendarTime = [];
 var eventData = [];
-$.get("http://localhost:8080/nexteer/safety-date", function (data) {
+$.get("http://10.1.0.40:8080/nexteer/safety-date", function (data) {
     $.each(data, function (i, model) {
         safeCalendarTime[i]=new Date(model.year,model.month-1,model.day).getTime();
     })
 });
 
-$.get("http://localhost:8080/nexteer/safety-date/unsafe", function (data) {
+$.get("http://10.1.0.40:8080/nexteer/safety-date/unsafe", function (data) {
     var j =0,k=0;
     $.each(data, function (i, model) {
 
