@@ -71,7 +71,7 @@ function stdClick() {
     td.empty();
     //新建一个输入框
     var input = $("<select>");
-    $.get("http://localhost:8080/nexteer/std-info/standard-beat/"+cell, function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/std-info/standard-beat/"+cell, function (data) {
         console.log(data);
         $.each(data,function (i,model) {
             input.append("<option>"+data[i]+"</option>")
@@ -99,7 +99,7 @@ function newClick() {
     var input = $("<td><select class='form-control changeSelect' onchange='newSelect(this)'></td>");
 
 
-    $.get("http://localhost:8080/nexteer/std-info/standard-beat/"+cell, function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/std-info/standard-beat/"+cell, function (data) {
         $(this).empty();
         //新建一个输入框
         $.each(data,function (i,model) {
@@ -135,7 +135,7 @@ function newSelect(self) {
         cell="CEPS"
     }
     console.log("td开始工作");
-    $.get("http://localhost:8080/nexteer/std-info/worker-num/"+cell+"?standard-beat="+num, function (data) {
+    $.get("http://10.1.0.40:8080/nexteer/std-info/worker-num/"+cell+"?standard-beat="+num, function (data) {
         $(self).parent().parent().find("td").eq(5).html(data);
     });
 
