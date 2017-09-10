@@ -27,7 +27,7 @@ $(document).ready(function () {
         console.log(JSON.stringify(addOeeJson));
         $.ajax({
             type: "POST",
-            url: "http://10.1.0.40:8080/nexteer/oee/target",
+            url: "http://localhost:8080/nexteer/oee/target",
             data:JSON.stringify(addOeeJson),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -70,7 +70,7 @@ $(document).ready(function () {
         var day=date.getDate();
         var time=year+"-"+judgeMyTime(month)+"-"+judgeMyTime(day);
         var yesTime=year+"-"+judgeMyTime(month)+"-"+judgeMyTime(day-1);
-        var url="http://10.1.0.40:8080/nexteer/oee/period?start="+time+"&end="+time;
+        var url="http://localhost:8080/nexteer/oee/period?start="+time+"&end="+time;
         $.get(url,function (data) {
             console.log(data);
             console.log(typeof data);

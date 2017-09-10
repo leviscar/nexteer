@@ -11,7 +11,7 @@ $(document).ready(function () {
         var curTime = judgeTime(Uyear)+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
         $.ajax({
             type: "POST",
-            url: "http://10.1.0.40:8080/nexteer/safety-date",
+            url: "http://localhost:8080/nexteer/safety-date",
             data: JSON.stringify(jsonString),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -29,14 +29,14 @@ $(document).ready(function () {
     }
     function getSafeDay() {
 
-        $.get("http://10.1.0.40:8080/nexteer/safety-date/day?date="+curTime,function (data) {
+        $.get("http://localhost:8080/nexteer/safety-date/day?date="+curTime,function (data) {
             if(data.system_status != false){
                 console.log(JSON.stringify(data));
                 $("#safeDay").html(data.safe_dates);
                 console.log("获取安全日期操作成功");
             }
         });
-        $.get("http://10.1.0.40:8080/nexteer/safety-date/max",function (data) {
+        $.get("http://localhost:8080/nexteer/safety-date/max",function (data) {
 
             console.log(JSON.stringify(data));
             $("#safeHigh").html(data);
@@ -64,7 +64,7 @@ $(document).ready(function () {
         getNowData();
         $.ajax({
             type: "PATCH",
-            url: "http://10.1.0.40:8080/nexteer/safety-date",
+            url: "http://localhost:8080/nexteer/safety-date",
             data: JSON.stringify(getStartJson),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -102,7 +102,7 @@ $(document).ready(function () {
         var getResetJson=new resetDate(resetYear,resetMonth,resetDay,0,resetMessage);
         $.ajax({
             type: "PATCH",
-            url: "http://10.1.0.40:8080/nexteer/safety-date",
+            url: "http://localhost:8080/nexteer/safety-date",
             data: JSON.stringify(getResetJson),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -141,7 +141,7 @@ $(document).ready(function () {
         var getdesJson=new desDate(desYear,desMonth,desDay,-1,0,desMessage);
         $.ajax({
             type: "PATCH",
-            url: "http://10.1.0.40:8080/nexteer/safety-date",
+            url: "http://localhost:8080/nexteer/safety-date",
             data: JSON.stringify(getdesJson),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -181,7 +181,7 @@ $(document).ready(function () {
         console.log(getlogJson);
         $.ajax({
             type: "PATCH",
-            url: "http://10.1.0.40:8080/nexteer/safety-date",
+            url: "http://localhost:8080/nexteer/safety-date",
             data: JSON.stringify(getlogJson),
             contentType: "application/json; charset=utf-8",
             dataType: "json",

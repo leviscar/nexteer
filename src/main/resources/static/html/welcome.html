@@ -50,7 +50,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://10.1.0.40:8080/nexteer/index.html"><img src="../images/icon.png" alt="Nexteer"></a>
+            <a class="navbar-brand" href="http://localhost:8080/nexteer/index.html"><img src="../images/icon.png" alt="Nexteer"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -68,7 +68,7 @@
 <script type="text/javascript" src="../bower_components/jquery/jquery.js"></script>
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type = "text/javascript" >
-    $.get("http://10.1.0.40:8080/nexteer/welcome?name=welcome.png",function (data) {
+    $.get("http://localhost:8080/nexteer/welcome?name=welcome.png",function (data) {
         var img=document.createElement("img");
         var txt=data.toString();
         var txtData=txt.split("base64/");

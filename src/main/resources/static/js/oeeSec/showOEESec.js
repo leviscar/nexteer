@@ -96,7 +96,7 @@ function showWeek() {
     var BEPSOeeValueArr=[];
     var CEPSOeeValueArr=[];
     var OeeShowX=[];
-    var urlString = "http://10.1.0.40:8080/nexteer/oee/week/ISHAFT1?date="+curr_time;
+    var urlString = "http://localhost:8080/nexteer/oee/week/ISHAFT1?date="+curr_time;
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -273,7 +273,7 @@ $("#showWeek").bind("click",function () {
     window.location.assign("../../html/oeeSec/ishaft1OEESec.html");
     var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
     // var curr_time="2017-03-09";
-    var urlString = "http://10.1.0.40:8080/nexteer/oee/week/ISHAFT1?date="+curr_time;
+    var urlString = "http://localhost:8080/nexteer/oee/week/ISHAFT1?date="+curr_time;
     var showOeeJson = new oeeInput(curr_time,"ISHAFT1");
     var IshaftOneOeeValueArr=[];
     var IshaftOneOeeTarArr= [];
@@ -375,7 +375,7 @@ $("#showWeek").bind("click",function () {
             }
         }
     });
-    // $.get("http://10.1.0.40:8080/nexteer/oee/week/ISHAFT1?date="+curr_time,function (data) {
+    // $.get("http://localhost:8080/nexteer/oee/week/ISHAFT1?date="+curr_time,function (data) {
     //     {
     //         $.each($.parseJSON(data), function (i, model) {
     //             // oeeDate[i]=data[i].addDate;
@@ -476,7 +476,7 @@ $("#showMonth").bind("click",function (){
         var BEPSOeeValueArr=[];
         var CEPSOeeValueArr=[];
         var OeeShowX=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/oee/month/ISHAFT1?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/oee/month/ISHAFT1?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -669,7 +669,7 @@ $("#selectMonthSub").bind("click",function (){
         var BEPSOeeValueArr=[];
         var CEPSOeeValueArr=[];
         var OeeShowX=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/oee/month/ISHAFT1?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/oee/month/ISHAFT1?date="+curr_time;
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -862,7 +862,7 @@ $("#showYear").bind("click",function () {
         var BEPSOeeValueArr=[];
         var CEPSOeeValueArr=[];
         var OeeShowX=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/oee/year/ISHAFT1?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/oee/year/ISHAFT1?date="+curr_time;
 
         // $("#selection").replaceWith("<form class=\"navbar-form navbar-right\" id=\"selection\"><select  id=\"selectYear\"></select><button type=\"button\" class=\"btn btn-danger btn-xs \" id=\"selectYearSub\">年份选择</button></form>");
         // $("#selectYear").replaceWith("<select  id=\"selectYear\"><option>"+(Uyear-5)+"<option>"+(Uyear-4)+"</option>"+"<option>"+(Uyear-3)+"</option>"
@@ -1053,7 +1053,7 @@ $("#selectYearSub").bind("click",function () {
         var showOeeJson = new oeeInput(curr_time,"ISHAFT1");
         var IshaftOneOeeValueArr=[];
         var IshaftOneOeeTarArr=[];
-        var urlString = "http://10.1.0.40:8080/nexteer/oee/year/ISHAFT1?date="+curr_time;
+        var urlString = "http://localhost:8080/nexteer/oee/year/ISHAFT1?date="+curr_time;
         console.log("切换年份");
         $.ajax({
             headers: {
@@ -1263,7 +1263,7 @@ $("#showPeriod").bind("click",function () {
 
     $.ajax({
         type: "POST",
-        url: "http://10.1.0.40:8080/nexteer/Oee-amount/getByPeriod",
+        url: "http://localhost:8080/nexteer/Oee-amount/getByPeriod",
         data: JSON.stringify(showPeriodJson),
         contentType: "application/json; charset=utf-8",
         dataType: "json",

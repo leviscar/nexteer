@@ -151,7 +151,7 @@ function showWeek(event) {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    var urlString = "http://10.1.0.40:8080/nexteer/hce/week/"+event.data.cell+"?date="+curr_time;
+    var urlString = "http://localhost:8080/nexteer/hce/week/"+event.data.cell+"?date="+curr_time;
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -360,7 +360,7 @@ function showWeekMain(cell) {
     }
     var WeekDate=formOnload();
     console.log(WeekDate);
-    var urlString = "http://10.1.0.40:8080/nexteer/hce/week/"+cell+"?date="+curr_time;
+    var urlString = "http://localhost:8080/nexteer/hce/week/"+cell+"?date="+curr_time;
     $.ajax({
         headers: {
             'Accept': 'application/json',
@@ -578,7 +578,7 @@ function showMonth(event){
         {
             var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
             myMonthTitle.text = cellName+'人员利用率'+ Uyear+"-"+judgeTime(Umonth)+ '月视图';
-            var urlString = "http://10.1.0.40:8080/nexteer/hce/month/"+obj.cell+"?date="+curr_time;
+            var urlString = "http://localhost:8080/nexteer/hce/month/"+obj.cell+"?date="+curr_time;
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
@@ -779,7 +779,7 @@ function showSelectMonth(event){
             var curr_time=data[0]+"-"+data[1]+"-"+new Date(data[0],data[1],0).getDate();
             // var curr_time="2017-04-04";
             myMonthTitle.text = cellName+'人员利用率'+ data[0]+'-'+data[1]+ '月视图';
-            var urlString = "http://10.1.0.40:8080/nexteer/hce/month/"+obj.cell+"?date="+curr_time;
+            var urlString = "http://localhost:8080/nexteer/hce/month/"+obj.cell+"?date="+curr_time;
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
@@ -963,7 +963,7 @@ function showYear(event){
         {
             var curr_time=Uyear+"-"+judgeTime(Umonth)+"-"+judgeTime(Uday);
             myYearTitle.text = cellName+'人员利用率'+ Uyear+ '年视图';
-            var urlString = "http://10.1.0.40:8080/nexteer/hce/year/"+obj.cell+"?date="+curr_time;
+            var urlString = "http://localhost:8080/nexteer/hce/year/"+obj.cell+"?date="+curr_time;
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
@@ -1148,7 +1148,7 @@ function showSelectYear(event){
             var curr_time=$("#selectYear").val()+"-12-31";
             // var curr_time="2017-04-04";
             myYearTitle.text = cellName+'人员利用率'+ $("#selectYear").val() + '年视图';
-            var urlString = "http://10.1.0.40:8080/nexteer/hce/year/"+obj.cell+"?date="+curr_time;
+            var urlString = "http://localhost:8080/nexteer/hce/year/"+obj.cell+"?date="+curr_time;
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
