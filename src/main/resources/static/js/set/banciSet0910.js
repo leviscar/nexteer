@@ -209,6 +209,7 @@ function showShift() {
         $("#showIshaft3Table").find("tbody").find("tr").eq(0).find("td").eq(4).find("select").val(localStorage.ISHAFT3A);
         $("#showIshaft3Table").find("tbody").find("tr").eq(0).find("td").eq(2).find("input").val(data.startTime);
         $("#showIshaft3Table").find("tbody").find("tr").eq(0).find("td").eq(3).find("input").val(data.endTime);
+        $("#showIshaft3Table").find("tbody").find("tr").eq(0).find("td").eq(5).text(data.normalWorkerNum==0?"":data.normalWorkerNum);
         // $("#showIshaft3Table").find("tbody").find("tr").eq(0).find("td").eq(4).find("select").val(data.standardBeat==0?"":data.standardBeat);        $("#showIshaft3Table").find("tbody").find("tr").eq(0).find("td").eq(5).text(data.normalWorkerNum==0?"":data.normalWorkerNum);
         $("#showIshaft3Table").find("tbody").find("tr").eq(0).find("td").eq(6).text(data.overtimeWorkerNum==0?"":data.overtimeWorkerNum);
         $("#showIshaft3Table").find("tbody").find("tr").eq(0).find("td").eq(7).text(data.target==0?"":data.target);
@@ -230,6 +231,7 @@ function showShift() {
         $("#showIshaft3Table").find("tbody").find("tr").eq(1).find("td").eq(4).find("select").val(localStorage.ISHAFT3B);
         $("#showIshaft3Table").find("tbody").find("tr").eq(1).find("td").eq(2).find("input").val(data.startTime);
         $("#showIshaft3Table").find("tbody").find("tr").eq(1).find("td").eq(3).find("input").val(data.endTime);
+        $("#showIshaft3Table").find("tbody").find("tr").eq(1).find("td").eq(5).text(data.normalWorkerNum==0?"":data.normalWorkerNum);
         // $("#showIshaft3Table").find("tbody").find("tr").eq(1).find("td").eq(4).find("select").val(data.standardBeat==0?"":data.standardBeat);        $("#showIshaft3Table").find("tbody").find("tr").eq(1).find("td").eq(5).text(data.normalWorkerNum==0?"":data.normalWorkerNum);
         $("#showIshaft3Table").find("tbody").find("tr").eq(1).find("td").eq(6).text(data.overtimeWorkerNum==0?"":data.overtimeWorkerNum);
         $("#showIshaft3Table").find("tbody").find("tr").eq(1).find("td").eq(7).text(data.target==0?"":data.target);
@@ -251,6 +253,7 @@ function showShift() {
         $("#showIshaft3Table").find("tbody").find("tr").eq(2).find("td").eq(4).find("select").val(localStorage.ISHAFT3C);
         $("#showIshaft3Table").find("tbody").find("tr").eq(2).find("td").eq(2).find("input").val(data.startTime);
         $("#showIshaft3Table").find("tbody").find("tr").eq(2).find("td").eq(3).find("input").val(data.endTime);
+        $("#showIshaft3Table").find("tbody").find("tr").eq(2).find("td").eq(5).text(data.normalWorkerNum==0?"":data.normalWorkerNum);
         // $("#showIshaft3Table").find("tbody").find("tr").eq(2).find("td").eq(4).find("select").val(data.standardBeat==0?"":data.standardBeat);        $("#showIshaft3Table").find("tbody").find("tr").eq(2).find("td").eq(5).text(data.normalWorkerNum==0?"":data.normalWorkerNum);
         $("#showIshaft3Table").find("tbody").find("tr").eq(2).find("td").eq(6).text(data.overtimeWorkerNum==0?"":data.overtimeWorkerNum);
         $("#showIshaft3Table").find("tbody").find("tr").eq(2).find("td").eq(7).text(data.target==0?"":data.target);
@@ -273,6 +276,7 @@ function showShift() {
         $("#showIshaft4Table").find("tbody").find("tr").eq(0).find("td").eq(4).find("select").val(localStorage.ISHAFT4A);
         $("#showIshaft4Table").find("tbody").find("tr").eq(0).find("td").eq(2).find("input").val(data.startTime);
         $("#showIshaft4Table").find("tbody").find("tr").eq(0).find("td").eq(3).find("input").val(data.endTime);
+        $("#showIshaft4Table").find("tbody").find("tr").eq(0).find("td").eq(5).text(data.normalWorkerNum==0?"":data.normalWorkerNum);
         // $("#showIshaft4Table").find("tbody").find("tr").eq(0).find("td").eq(4).find("select").val(data.standardBeat==0?"":data.standardBeat);        $("#showIshaft4Table").find("tbody").find("tr").eq(0).find("td").eq(5).text(data.normalWorkerNum==0?"":data.normalWorkerNum);
         $("#showIshaft4Table").find("tbody").find("tr").eq(0).find("td").eq(6).text(data.overtimeWorkerNum==0?"":data.overtimeWorkerNum);
         $("#showIshaft4Table").find("tbody").find("tr").eq(0).find("td").eq(7).text(data.target==0?"":data.target);
@@ -294,6 +298,7 @@ function showShift() {
         $("#showIshaft4Table").find("tbody").find("tr").eq(1).find("td").eq(4).find("select").val(localStorage.ISHAFT4B);
         $("#showIshaft4Table").find("tbody").find("tr").eq(1).find("td").eq(2).find("input").val(data.startTime);
         $("#showIshaft4Table").find("tbody").find("tr").eq(1).find("td").eq(3).find("input").val(data.endTime);
+        $("#showIshaft4Table").find("tbody").find("tr").eq(1).find("td").eq(5).text(data.normalWorkerNum==0?"":data.normalWorkerNum);
         // $("#showIshaft4Table").find("tbody").find("tr").eq(1).find("td").eq(4).find("select").val(data.standardBeat==0?"":data.standardBeat);        $("#showIshaft4Table").find("tbody").find("tr").eq(1).find("td").eq(5).text(data.normalWorkerNum==0?"":data.normalWorkerNum);
         $("#showIshaft4Table").find("tbody").find("tr").eq(1).find("td").eq(6).text(data.overtimeWorkerNum==0?"":data.overtimeWorkerNum);
         $("#showIshaft4Table").find("tbody").find("tr").eq(1).find("td").eq(7).text(data.target==0?"":data.target);
@@ -315,6 +320,7 @@ function showShift() {
         $("#showIshaft4Table").find("tbody").find("tr").eq(2).find("td").eq(4).find("select").val(localStorage.ISHAFT4C);
         $("#showIshaft4Table").find("tbody").find("tr").eq(2).find("td").eq(2).find("input").val(data.startTime);
         $("#showIshaft4Table").find("tbody").find("tr").eq(2).find("td").eq(3).find("input").val(data.endTime);
+        $("#showIshaft4Table").find("tbody").find("tr").eq(2).find("td").eq(5).text(data.normalWorkerNum==0?"":data.normalWorkerNum);
         // $("#showIshaft4Table").find("tbody").find("tr").eq(2).find("td").eq(4).find("select").val(data.standardBeat==0?"":data.standardBeat);        $("#showIshaft4Table").find("tbody").find("tr").eq(2).find("td").eq(5).text(data.normalWorkerNum==0?"":data.normalWorkerNum);
         $("#showIshaft4Table").find("tbody").find("tr").eq(2).find("td").eq(6).text(data.overtimeWorkerNum==0?"":data.overtimeWorkerNum);
         $("#showIshaft4Table").find("tbody").find("tr").eq(2).find("td").eq(7).text(data.target==0?"":data.target);
