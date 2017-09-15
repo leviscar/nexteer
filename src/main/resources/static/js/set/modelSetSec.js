@@ -65,8 +65,8 @@ $(document).ready(function () {
                 console.log("nice");
                 getProduct("Ishaft1","#productIs1Message");
                 getProduct("Ishaft2","#productIs2Message");
-                getProduct("Ishaft3","#productIs4Message");
-                getProduct("Ishaft4","#productIs5Message");
+                getProduct("Ishaft3","#productIs3Message");
+                getProduct("Ishaft4","#productIs4Message");
                 getProduct("BEPS","#productBEPSMessage");
                 getProduct("CEPS","#productCEPSMessage");
             },
@@ -82,8 +82,8 @@ $(document).ready(function () {
 
     getProduct("Ishaft1","#productIs1Message");
     getProduct("Ishaft2","#productIs2Message");
-    getProduct("Ishaft3","#productIs4Message");
-    getProduct("Ishaft4","#productIs5Message");
+    getProduct("Ishaft3","#productIs3Message");
+    getProduct("Ishaft4","#productIs4Message");
     getProduct("BEPS","#productBEPSMessage");
     getProduct("CEPS","#productCEPSMessage");
 });
@@ -108,8 +108,8 @@ $(document).ready(function(){
                 console.log("删除成功");
                 getProduct("Ishaft1","#productIs1Message");
                 getProduct("Ishaft2","#productIs2Message");
-                getProduct("Ishaft3","#productIs4Message");
-                getProduct("Ishaft4","#productIs5Message");
+                getProduct("Ishaft3","#productIs3Message");
+                getProduct("Ishaft4","#productIs4Message");
                 getProduct("BEPS","#productBEPSMessage");
                 getProduct("CEPS","#productCEPSMessage");
             }
@@ -129,8 +129,8 @@ $(document).ready(function(){
                 console.log("删除成功");
                 getProduct("Ishaft1","#productIs1Message");
                 getProduct("Ishaft2","#productIs2Message");
-                getProduct("Ishaft3","#productIs4Message");
-                getProduct("Ishaft4","#productIs5Message");
+                getProduct("Ishaft3","#productIs3Message");
+                getProduct("Ishaft4","#productIs4Message");
                 getProduct("BEPS","#productBEPSMessage");
                 getProduct("CEPS","#productCEPSMessage");
             }
@@ -150,8 +150,8 @@ $(document).ready(function(){
                 console.log("删除成功");
                 getProduct("Ishaft1","#productIs1Message");
                 getProduct("Ishaft2","#productIs2Message");
-                getProduct("Ishaft3","#productIs4Message");
-                getProduct("Ishaft4","#productIs5Message");
+                getProduct("Ishaft3","#productIs3Message");
+                getProduct("Ishaft4","#productIs4Message");
                 getProduct("BEPS","#productBEPSMessage");
                 getProduct("CEPS","#productCEPSMessage");
             }
@@ -171,8 +171,8 @@ $(document).ready(function(){
                 console.log("删除成功");
                 getProduct("Ishaft1","#productIs1Message");
                 getProduct("Ishaft2","#productIs2Message");
-                getProduct("Ishaft3","#productIs4Message");
-                getProduct("Ishaft4","#productIs5Message");
+                getProduct("Ishaft3","#productIs3Message");
+                getProduct("Ishaft4","#productIs4Message");
                 getProduct("BEPS","#productBEPSMessage");
                 getProduct("CEPS","#productCEPSMessage");
             }
@@ -192,8 +192,8 @@ $(document).ready(function(){
                 console.log("删除成功");
                 getProduct("Ishaft1","#productIs1Message");
                 getProduct("Ishaft2","#productIs2Message");
-                getProduct("Ishaft3","#productIs4Message");
-                getProduct("Ishaft4","#productIs5Message");
+                getProduct("Ishaft3","#productIs3Message");
+                getProduct("Ishaft4","#productIs4Message");
                 getProduct("BEPS","#productBEPSMessage");
                 getProduct("CEPS","#productCEPSMessage");
             }
@@ -213,8 +213,8 @@ $(document).ready(function(){
                 console.log("删除成功");
                 getProduct("Ishaft1","#productIs1Message");
                 getProduct("Ishaft2","#productIs2Message");
-                getProduct("Ishaft3","#productIs4Message");
-                getProduct("Ishaft4","#productIs5Message");
+                getProduct("Ishaft3","#productIs3Message");
+                getProduct("Ishaft4","#productIs4Message");
                 getProduct("BEPS","#productBEPSMessage");
                 getProduct("CEPS","#productCEPSMessage");
             }

@@ -131,7 +131,7 @@ $(document).ready(function () {
                 var unitId=model.unitId;
                 for(var j=0;j<stdBeats.length;j++){
                     if(model.standardBeats==stdBeats[j]){
-                        $("#BEPSStd").find("li").eq(2).find("table").find("tbody").append("<tr> <td class='ISHAFT2'>第二条中间轴</td><td>"+model.standardBeats+"</td> <td>"+model.unitNum+"</td><td><button type='button' class='btn btn-primary' >删除</button></td> </tr>");
+                        $("#BEPSStd").find("li").eq(2).find("table").find("tbody").append("<tr> <td class='ISHAFT2'>第二条中间轴</td><td>"+model.standardBeats+"</td> <td>"+model.unitNum+"</td><td><button type='button' class='btn btn-primary deleteIShaftStd' >删除</button></td> </tr>");
                     }
                 }
             });
@@ -150,7 +150,7 @@ $(document).ready(function () {
                 var unitId=model.unitId;
                 for(var j=0;j<stdBeats.length;j++){
                     if(model.standardBeats==stdBeats[j]){
-                        $("#BEPSStd").find("li").eq(2).find("table").find("tbody").append("<tr> <td class='ISHAFT3'>第三条中间轴</td><td>"+model.standardBeats+"</td> <td>"+model.unitNum+"</td><td><button type='button' class='btn btn-primary' >删除</button></td> </tr>");
+                        $("#BEPSStd").find("li").eq(2).find("table").find("tbody").append("<tr> <td class='ISHAFT3'>第三条中间轴</td><td>"+model.standardBeats+"</td> <td>"+model.unitNum+"</td><td><button type='button' class='btn btn-primary deleteIShaftStd' >删除</button></td> </tr>");
                     }
                 }
             });
@@ -169,7 +169,7 @@ $(document).ready(function () {
                 var unitId=model.unitId;
                 for(var j=0;j<stdBeats.length;j++){
                     if(model.standardBeats==stdBeats[j]){
-                        $("#BEPSStd").find("li").eq(2).find("table").find("tbody").append("<tr> <td class='ISHAFT4'>第四条中间轴</td><td>"+model.standardBeats+"</td> <td>"+model.unitNum+"</td><td><button type='button' class='btn btn-primary' >删除</button></td> </tr>");
+                        $("#BEPSStd").find("li").eq(2).find("table").find("tbody").append("<tr> <td class='ISHAFT4'>第四条中间轴</td><td>"+model.standardBeats+"</td> <td>"+model.unitNum+"</td><td><button type='button' class='btn btn-primary deleteIShaftStd' >删除</button></td> </tr>");
                     }
                 }
             });
